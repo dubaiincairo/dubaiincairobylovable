@@ -6,6 +6,7 @@ const categories = [
   { label: "eCommerce", tools: ["Shopify", "WooCommerce", "Salesforce"] },
   { label: "AI Tools", tools: ["Midjourney", "DALL·E", "Jasper", "Runway", "Synthesia", "Notion", "Writesonic"] },
   { label: "Infrastructure", tools: ["AWS", "GoDaddy", "Infobip", "SurveyMonkey"] },
+  { label: "Design & Creative", tools: ["Figma", "Adobe Creative Suite", "Canva", "Lottie", "Blender"] },
 ];
 
 const TechStackSection = () => (
@@ -28,7 +29,7 @@ const TechStackSection = () => (
         {categories.map((cat, i) => (
           <motion.div
             key={cat.label}
-            className={`p-6 rounded-xl border border-border bg-card/50 ${i === categories.length - 1 ? "md:col-span-2 lg:col-span-1" : ""}`}
+            className="p-6 rounded-xl border border-border bg-card/50"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

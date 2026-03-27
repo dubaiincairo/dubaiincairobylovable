@@ -3,7 +3,9 @@ import { motion } from "framer-motion";
 const clients = [
   "Novartis", "Sanofi", "Roche", "Novo Nordisk", "Huawei", "Banque Misr",
   "Yorkshire Tea", "Beyond Meat", "Alpro", "Monin", "Berlitz",
-  "Shark Tank Egypt", "World Economic Forum",
+  "Shark Tank Egypt", "World Economic Forum", "AstraZeneca", "Pfizer",
+  "L'Oréal", "Unilever", "Samsung", "Vodafone", "Orange", "Nestlé",
+  "PepsiCo", "Johnson & Johnson", "Danone", "Bayer",
 ];
 
 const ClientsSection = () => (
