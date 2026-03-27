@@ -20,19 +20,18 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
         >
           <span className="inline-block px-4 py-1.5 mb-8 text-xs font-medium tracking-[0.2em] uppercase border border-gold-subtle rounded-full text-primary">
-            Digital Marketing Agency
+            Dubai's Quality · Cairo's Reach
           </span>
         </motion.div>
 
         <motion.h1
-          className="text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight leading-[0.95] mb-8"
+          className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight leading-[1.05] mb-6"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15 }}
         >
-          <span className="text-gradient-gold">Dubai</span>
-          <span className="text-foreground">in</span>
-          <span className="text-gradient-gold">Cairo</span>
+          Data-Powered Growth.{" "}
+          <span className="text-gradient-gold">Science-Fueled Success.</span>
         </motion.h1>
 
         <motion.p
@@ -41,7 +40,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          We craft bold marketing strategies that bridge markets, amplify brands, and drive measurable growth across the Middle East and beyond.
+          We help ambitious businesses grow through the internet — with proven systems, measurable results, and a commitment to doing things differently.
         </motion.p>
 
         <motion.div
@@ -51,17 +50,17 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.45 }}
         >
           <a
-            href="#contact"
+            href="#services"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-display font-semibold text-sm tracking-wide rounded-lg glow-gold transition-all hover:brightness-110"
           >
-            Start Your Strategy
+            Explore Our Services
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </a>
           <a
-            href="#services"
+            href="#contact"
             className="inline-flex items-center gap-2 px-8 py-4 border border-gold-subtle text-foreground font-display font-medium text-sm tracking-wide rounded-lg transition-colors hover:bg-secondary"
           >
-            Explore Services
+            Talk to Our Team
           </a>
         </motion.div>
       </div>
