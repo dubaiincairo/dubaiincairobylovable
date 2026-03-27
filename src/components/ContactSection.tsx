@@ -70,10 +70,10 @@ const ContactSection = () => {
         >
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">Get Started</span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            Ready to <span className="text-gradient-gold">Grow</span>?
+            Ready to <span className="text-gradient-gold">Grow</span>? Let's Build Something Real.
           </h2>
           <p className="text-muted-foreground text-lg mb-12 max-w-xl mx-auto">
-            Let's build a marketing strategy that puts your brand on the map. Book a free consultation today.
+            We're committed to delivering the best digital marketing and eCommerce services — with measurable impact, flexible execution, and competitive pricing.
           </p>
         </motion.div>
 
@@ -122,7 +122,7 @@ const ContactSection = () => {
             </div>
             <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto px-10 py-5 text-lg font-display font-semibold glow-gold">
               {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Mail className="w-5 h-5" />}
-              {isSubmitting ? "Sending..." : "Book a Consultation"}
+              {isSubmitting ? "Sending..." : "Start a Project"}
               {!isSubmitting && <ArrowRight className="w-5 h-5" />}
             </Button>
           </motion.form>

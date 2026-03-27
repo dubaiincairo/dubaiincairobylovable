@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
+const links = [
+  { href: "#about", label: "About" },
+  { href: "#services", label: "Services" },
+  { href: "#work", label: "Our Work" },
+  { href: "#team", label: "Team" },
+  { href: "#contact", label: "Contact" },
+];
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
@@ -14,8 +22,11 @@ const Navbar = () => {
         </a>
 
         <div className="hidden md:flex items-center gap-8 text-sm">
-          <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors">Services</a>
-          <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+          {links.map((l) => (
+            <a key={l.href} href={l.href} className="text-muted-foreground hover:text-foreground transition-colors">
+              {l.label}
+            </a>
+          ))}
           <a href="#contact" className="px-5 py-2 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg transition-all hover:brightness-110">
             Get Started
           </a>
@@ -28,8 +39,11 @@ const Navbar = () => {
 
       {open && (
         <div className="md:hidden bg-background border-b border-border px-6 py-6 flex flex-col gap-4">
-          <a href="#services" onClick={() => setOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">Services</a>
-          <a href="#contact" onClick={() => setOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+          {links.map((l) => (
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">
+              {l.label}
+            </a>
+          ))}
           <a href="#contact" onClick={() => setOpen(false)} className="px-5 py-2.5 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg text-center">
             Get Started
           </a>

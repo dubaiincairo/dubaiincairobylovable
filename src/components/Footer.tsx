@@ -1,10 +1,11 @@
 const Footer = () => (
   <footer className="py-12 px-6 border-t border-border">
-    <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-      <span className="font-display font-semibold text-foreground">
+    <div className="max-w-6xl mx-auto flex flex-col items-center gap-4 text-sm text-muted-foreground text-center">
+      <span className="font-display font-semibold text-foreground text-lg">
         <span className="text-gradient-gold">Dubai</span>in<span className="text-gradient-gold">Cairo</span>
       </span>
-      <span>© {new Date().getFullYear()} DubaiinCairo. All rights reserved.</span>
+      <p className="text-xs italic max-w-md">From Dubai to Cairo, we transferred the scope, the challenges, and the quality.</p>
+      <span className="text-xs">© {new Date().getFullYear()} Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC · All Rights Reserved</span>
     </div>
   </footer>
 );

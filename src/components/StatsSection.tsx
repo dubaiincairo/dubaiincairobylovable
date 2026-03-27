@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 const stats = [
-  { value: "150+", label: "Clients Served" },
-  { value: "3x", label: "Avg. ROI Increase" },
-  { value: "12+", label: "Markets Reached" },
-  { value: "98%", label: "Client Retention" },
+  { value: "216", label: "Successful Projects" },
+  { value: "36+", label: "Clients Served" },
+  { value: "4+", label: "Years of Growth" },
+  { value: "100%", label: "Digital Operation" },
 ];
 
 const StatsSection = () => {
