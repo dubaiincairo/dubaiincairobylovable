@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useSiteContent } from "@/hooks/useSiteContent";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -17,6 +18,7 @@ const contactSchema = z.object({
 
 const ContactSection = () => {
   const { toast } = useToast();
+  const { get } = useSiteContent();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
@@ -30,31 +32,19 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-
     const result = contactSchema.safeParse(form);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
-      result.error.errors.forEach((err) => {
-        if (err.path[0]) fieldErrors[err.path[0] as string] = err.message;
-      });
+      result.error.errors.forEach((err) => { if (err.path[0]) fieldErrors[err.path[0] as string] = err.message; });
       setErrors(fieldErrors);
       return;
     }
-
     setIsSubmitting(true);
     const { error } = await supabase.from("contact_submissions").insert({
-      name: result.data.name,
-      email: result.data.email,
-      phone: result.data.phone || null,
-      message: result.data.message,
+      name: result.data.name, email: result.data.email, phone: result.data.phone || null, message: result.data.message,
     });
     setIsSubmitting(false);
-
-    if (error) {
-      toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
-      return;
-    }
-
+    if (error) { toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" }); return; }
     setIsSubmitted(true);
     setForm({ name: "", email: "", phone: "", message: "" });
   };
@@ -62,43 +52,26 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-32 px-6">
       <div className="max-w-2xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">Get Started</span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            Ready to <span className="text-gradient-gold">Grow</span>? Let's Build Something Real.
+            {get("contact_headline", "Ready to Grow? Let's Build Something Real.").split("?")[0]}?{" "}
+            <span className="text-gradient-gold">{get("contact_headline", "Ready to Grow? Let's Build Something Real.").split("? ")[1] || "Let's Build Something Real."}</span>
           </h2>
           <p className="text-muted-foreground text-lg mb-12 max-w-xl mx-auto">
-            We're committed to delivering the best digital marketing and eCommerce services — with measurable impact, flexible execution, and competitive pricing.
+            {get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services — with measurable impact, flexible execution, and competitive pricing.")}
           </p>
         </motion.div>
 
         {isSubmitted ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex flex-col items-center gap-4 py-12"
-          >
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center gap-4 py-12">
             <CheckCircle className="w-12 h-12 text-primary" />
             <h3 className="text-2xl font-display font-semibold">Thank You!</h3>
             <p className="text-muted-foreground">We'll get back to you within 24 hours.</p>
-            <Button variant="outline" className="mt-4" onClick={() => setIsSubmitted(false)}>
-              Send Another Message
-            </Button>
+            <Button variant="outline" className="mt-4" onClick={() => setIsSubmitted(false)}>Send Another Message</Button>
           </motion.div>
         ) : (
-          <motion.form
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-left space-y-5"
-          >
+          <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} className="text-left space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">Name *</label>
