@@ -24,8 +24,7 @@ const HeroSection = () => {
           className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight leading-[1.05] mb-6"
           initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15 }}
         >
-          {get("hero_headline", "Data-Powered Growth.").split(".")[0]}.{" "}
-          <span className="text-gradient-gold">{get("hero_headline", "Science-Fueled Success.").split(". ")[1] || "Science-Fueled Success."}</span>
+          {get("hero_headline", "Data-Powered Growth. Science-Fueled Success.")}
         </motion.h1>
 
         <motion.p
@@ -40,11 +39,11 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.45 }}
         >
           <a href="#services" className="group inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-display font-semibold text-sm tracking-wide rounded-lg glow-gold transition-all hover:brightness-110">
-            Explore Our Services
+            {get("hero_cta_primary", "Explore Our Services")}
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </a>
           <a href="#contact" className="inline-flex items-center gap-2 px-8 py-4 border border-gold-subtle text-foreground font-display font-medium text-sm tracking-wide rounded-lg transition-colors hover:bg-secondary">
-            Talk to Our Team
+            {get("hero_cta_secondary", "Talk to Our Team")}
           </a>
         </motion.div>
       </div>
