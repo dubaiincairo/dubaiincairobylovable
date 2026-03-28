@@ -15,12 +15,18 @@ interface ContentRow {
   label: string;
 }
 
-const sectionOrder = ["hero", "stats", "about", "founder", "contact", "footer"];
+const sectionOrder = ["hero", "stats", "about", "edges", "values", "services", "founder", "clients", "tech", "legal", "contact", "footer"];
 const sectionLabels: Record<string, string> = {
   hero: "Hero Section",
   stats: "Statistics",
   about: "About Section",
+  edges: "Why We're Different",
+  values: "Our Values",
+  services: "Services / Studios",
   founder: "Founder Section",
+  clients: "Clients Section",
+  tech: "Tech Stack",
+  legal: "Legal & Registration",
   contact: "Contact Section",
   footer: "Footer",
 };
@@ -72,9 +78,14 @@ const Admin = () => {
         .eq("key", key);
     }
 
+    // Update local state to reflect saved values
+    setContent(prev => prev.map(item => 
+      edited[item.key] !== undefined ? { ...item, value: edited[item.key] } : item
+    ));
+
     setSaving(false);
     setEdited({});
-    toast({ title: "Content saved", description: `${updates.length} field(s) updated successfully.` });
+    toast({ title: "Content saved", description: `${updates.length} field(s) updated. Changes are live now!` });
   };
 
   const handleLogout = async () => {
@@ -136,7 +147,7 @@ const Admin = () => {
               <div className="space-y-5">
                 {items.map((item) => {
                   const currentValue = edited[item.key] ?? item.value;
-                  const isLong = item.value.length > 100;
+                  const isLong = currentValue.length > 80;
 
                   return (
                     <div key={item.key} className="p-4 rounded-xl border border-border bg-card">
@@ -148,7 +159,7 @@ const Admin = () => {
                         <Textarea
                           value={currentValue}
                           onChange={(e) => handleChange(item.key, e.target.value)}
-                          rows={4}
+                          rows={Math.min(8, Math.ceil(currentValue.length / 80))}
                           className="bg-background border-border"
                         />
                       ) : (
