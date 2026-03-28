@@ -10,7 +10,7 @@ const Footer = () => {
           <span className="text-gradient-gold">Dubai</span>in<span className="text-gradient-gold">Cairo</span>
         </span>
         <p className="text-xs italic max-w-md">{get("footer_tagline", "From Dubai to Cairo, we transferred the scope, the challenges, and the quality.")}</p>
-        <span className="text-xs">© {new Date().getFullYear()} Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC · All Rights Reserved</span>
+        <span className="text-xs">{get("footer_copyright", "© 2025 Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC · All Rights Reserved")}</span>
       </div>
     </footer>
   );

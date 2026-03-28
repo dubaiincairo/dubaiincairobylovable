@@ -53,10 +53,11 @@ const ContactSection = () => {
     <section id="contact" className="py-32 px-6">
       <div className="max-w-2xl mx-auto text-center">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">Get Started</span>
+          <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
+            {get("contact_subtitle", "Get Started")}
+          </span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            {get("contact_headline", "Ready to Grow? Let's Build Something Real.").split("?")[0]}?{" "}
-            <span className="text-gradient-gold">{get("contact_headline", "Ready to Grow? Let's Build Something Real.").split("? ")[1] || "Let's Build Something Real."}</span>
+            {get("contact_headline", "Ready to Grow? Let's Build Something Real.")}
           </h2>
           <p className="text-muted-foreground text-lg mb-12 max-w-xl mx-auto">
             {get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services — with measurable impact, flexible execution, and competitive pricing.")}
@@ -66,8 +67,8 @@ const ContactSection = () => {
         {isSubmitted ? (
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center gap-4 py-12">
             <CheckCircle className="w-12 h-12 text-primary" />
-            <h3 className="text-2xl font-display font-semibold">Thank You!</h3>
-            <p className="text-muted-foreground">We'll get back to you within 24 hours.</p>
+            <h3 className="text-2xl font-display font-semibold">{get("contact_success_title", "Thank You!")}</h3>
+            <p className="text-muted-foreground">{get("contact_success_msg", "We'll get back to you within 24 hours.")}</p>
             <Button variant="outline" className="mt-4" onClick={() => setIsSubmitted(false)}>Send Another Message</Button>
           </motion.div>
         ) : (
@@ -95,15 +96,15 @@ const ContactSection = () => {
             </div>
             <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto px-10 py-5 text-lg font-display font-semibold glow-gold">
               {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Mail className="w-5 h-5" />}
-              {isSubmitting ? "Sending..." : "Start a Project"}
+              {isSubmitting ? "Sending..." : get("contact_cta", "Start a Project")}
               {!isSubmitting && <ArrowRight className="w-5 h-5" />}
             </Button>
           </motion.form>
         )}
 
         <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-muted-foreground">
-          <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-primary" /> Cairo, Egypt</span>
-          <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-primary" /> Dubai, UAE</span>
+          <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-primary" /> {get("contact_location_1", "Cairo, Egypt")}</span>
+          <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-primary" /> {get("contact_location_2", "Dubai, UAE")}</span>
         </div>
       </div>
     </section>
