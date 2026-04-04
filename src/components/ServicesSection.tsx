@@ -20,7 +20,7 @@ const ServicesSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("services_subtitle", "Our Studios")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold">
+          <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("services_headline", "Six Specialized Studios. One Unified Vision.")}
           </h2>
         </motion.div>
@@ -31,8 +31,8 @@ const ServicesSection = () => {
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 transition-transform group-hover:scale-110">
                 <s.icon className="w-5 h-5 text-primary" />
               </div>
-              <h3 className="text-xl font-display font-semibold mb-3">{s.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
+              <h3 className="text-xl font-display font-semibold mb-3 whitespace-pre-line">{s.title}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">{s.desc}</p>
             </motion.div>
           ))}
         </div>

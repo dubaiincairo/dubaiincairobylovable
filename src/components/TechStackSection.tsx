@@ -6,7 +6,7 @@ const TechStackSection = () => {
 
   const categories = Array.from({ length: 6 }, (_, i) => ({
     label: get(`tech_${i + 1}_label`, `Category ${i + 1}`),
-    tools: get(`tech_${i + 1}_tools`, "").split(",").map(s => s.trim()).filter(Boolean),
+    tools: get(`tech_${i + 1}_tools`, "").split(/[,\n]/).map(s => s.trim()).filter(Boolean),
   }));
 
   return (
@@ -16,7 +16,7 @@ const TechStackSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("tech_subtitle", "Our Tech Stack")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold">
+          <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("tech_headline", "Integrated Solutions. Proven Tools.")}
           </h2>
         </motion.div>

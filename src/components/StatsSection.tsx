@@ -12,7 +12,7 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="py-24 px-6 border-y border-border">
+    <section className="py-24 px-6">
       <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12">
         {stats.map((stat, i) => (
           <motion.div key={i} className="text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}>

@@ -20,7 +20,7 @@ const ValuesSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("values_subtitle", "What We Stand For")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold">
+          <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("values_headline", "The Principles Behind Every Project")}
           </h2>
         </motion.div>
@@ -31,8 +31,8 @@ const ValuesSection = () => {
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                 <v.icon className="w-5 h-5 text-primary" />
               </div>
-              <h3 className="font-display font-semibold mb-2">{v.title}</h3>
-              <p className="text-muted-foreground text-sm">{v.desc}</p>
+              <h3 className="font-display font-semibold mb-2 whitespace-pre-line">{v.title}</h3>
+              <p className="text-muted-foreground text-sm whitespace-pre-line">{v.desc}</p>
             </motion.div>
           ))}
         </div>
