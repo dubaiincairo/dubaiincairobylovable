@@ -1,40 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Save, LogOut, ArrowLeft } from "lucide-react";
-
-interface ContentRow {
-  id: string;
-  section: string;
-  key: string;
-  value: string;
-  label: string;
-}
-
-const sectionOrder = ["hero", "stats", "about", "edges", "values", "services", "founder", "clients", "tech", "legal", "contact", "footer"];
-const sectionLabels: Record<string, string> = {
-  hero: "Hero Section",
-  stats: "Statistics",
-  about: "About Section",
-  edges: "Why We're Different",
-  values: "Our Values",
-  services: "Services / Studios",
-  founder: "Founder Section",
-  clients: "Clients Section",
-  tech: "Tech Stack",
-  legal: "Legal & Registration",
-  contact: "Contact Section",
-  footer: "Footer",
-};
+import { contentRegistry, sectionOrder, sectionLabels } from "@/lib/contentRegistry";
 
 const Admin = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [content, setContent] = useState<ContentRow[]>([]);
+  const [dbValues, setDbValues] = useState<Record<string, string>>({});
   const [edited, setEdited] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -56,8 +31,12 @@ const Admin = () => {
         return;
       }
 
-      const { data } = await supabase.from("site_content").select("*").order("section");
-      if (data) setContent(data as ContentRow[]);
+      const { data } = await supabase.from("site_content").select("key, value");
+      if (data) {
+        const map: Record<string, string> = {};
+        data.forEach((row) => (map[row.key] = row.value));
+        setDbValues(map);
+      }
       setLoading(false);
     };
     checkAuth();
@@ -70,33 +49,48 @@ const Admin = () => {
   const handleSave = async () => {
     setSaving(true);
     const updates = Object.entries(edited);
+    let successCount = 0;
+    let errorCount = 0;
 
     for (const [key, value] of updates) {
-      await supabase
-        .from("site_content")
-        .update({ value, updated_at: new Date().toISOString() })
-        .eq("key", key);
+      const existsInDb = dbValues[key] !== undefined;
+      const field = contentRegistry.find((f) => f.key === key);
+
+      if (existsInDb) {
+        const { error } = await supabase
+          .from("site_content")
+          .update({ value, updated_at: new Date().toISOString() })
+          .eq("key", key);
+        if (error) { errorCount++; } else { successCount++; }
+      } else if (field) {
+        const { error } = await supabase
+          .from("site_content")
+          .insert({ section: field.section, key, value, label: field.label });
+        if (error) { errorCount++; } else { successCount++; }
+      }
     }
 
-    // Update local state to reflect saved values
-    setContent(prev => prev.map(item => 
-      edited[item.key] !== undefined ? { ...item, value: edited[item.key] } : item
-    ));
+    // Update local state
+    setDbValues((prev) => {
+      const next = { ...prev };
+      updates.forEach(([k, v]) => (next[k] = v));
+      return next;
+    });
 
     setSaving(false);
     setEdited({});
-    toast({ title: "Content saved", description: `${updates.length} field(s) updated. Changes are live now!` });
+
+    if (errorCount > 0) {
+      toast({ title: "Partially saved", description: `${successCount} updated, ${errorCount} failed.`, variant: "destructive" });
+    } else {
+      toast({ title: "Content saved", description: `${successCount} field(s) updated. Changes are live now!` });
+    }
   };
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/login");
   };
-
-  const grouped = sectionOrder.reduce<Record<string, ContentRow[]>>((acc, section) => {
-    acc[section] = content.filter((c) => c.section === section);
-    return acc;
-  }, {});
 
   if (loading) {
     return (
@@ -107,6 +101,12 @@ const Admin = () => {
   }
 
   const hasEdits = Object.keys(edited).length > 0;
+
+  // Group registry fields by section
+  const grouped = sectionOrder.reduce<Record<string, typeof contentRegistry>>((acc, section) => {
+    acc[section] = contentRegistry.filter((f) => f.section === section);
+    return acc;
+  }, {});
 
   return (
     <div className="min-h-screen bg-background">
@@ -136,8 +136,8 @@ const Admin = () => {
 
       <main className="max-w-4xl mx-auto px-6 py-10 space-y-12">
         {sectionOrder.map((section) => {
-          const items = grouped[section];
-          if (!items || items.length === 0) return null;
+          const fields = grouped[section];
+          if (!fields || fields.length === 0) return null;
 
           return (
             <div key={section}>
@@ -145,30 +145,19 @@ const Admin = () => {
                 {sectionLabels[section] || section}
               </h2>
               <div className="space-y-5">
-                {items.map((item) => {
-                  const currentValue = edited[item.key] ?? item.value;
-                  const isLong = currentValue.length > 80;
+                {fields.map((field) => {
+                  const currentValue = edited[field.key] ?? dbValues[field.key] ?? field.defaultValue;
 
                   return (
-                    <div key={item.key} className="p-4 rounded-xl border border-border bg-card">
+                    <div key={field.key} className="p-4 rounded-xl border border-border bg-card">
                       <label className="block text-sm font-medium text-foreground mb-2">
-                        {item.label}
-                        <span className="text-xs text-muted-foreground ml-2">({item.key})</span>
+                        {field.label}
+                        <span className="text-xs text-muted-foreground ml-2">({field.key})</span>
                       </label>
-                      {isLong ? (
-                        <Textarea
-                          value={currentValue}
-                          onChange={(e) => handleChange(item.key, e.target.value)}
-                          rows={Math.min(8, Math.ceil(currentValue.length / 80))}
-                          className="bg-background border-border"
-                        />
-                      ) : (
-                        <Input
-                          value={currentValue}
-                          onChange={(e) => handleChange(item.key, e.target.value)}
-                          className="bg-background border-border"
-                        />
-                      )}
+                      <AutoResizeTextarea
+                        value={currentValue}
+                        onChange={(val) => handleChange(field.key, val)}
+                      />
                     </div>
                   );
                 })}
@@ -176,13 +165,34 @@ const Admin = () => {
             </div>
           );
         })}
-
-        {content.length === 0 && (
-          <p className="text-center text-muted-foreground py-20">No content entries found. Seed the database first.</p>
-        )}
       </main>
     </div>
   );
 };
+
+/** Auto-resizing textarea that supports Enter for new lines */
+function AutoResizeTextarea({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const ref = useRef<HTMLTextAreaElement>(null);
+
+  const resize = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = Math.max(40, el.scrollHeight) + "px";
+  }, []);
+
+  useEffect(() => { resize(); }, [value, resize]);
+
+  return (
+    <textarea
+      ref={ref}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      onInput={resize}
+      className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none overflow-hidden"
+      rows={1}
+    />
+  );
+}
 
 export default Admin;

@@ -56,11 +56,11 @@ const ContactSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("contact_subtitle", "Get Started")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 whitespace-pre-line">
             {get("contact_headline", "Ready to Grow? Let's Build Something Real.")}
           </h2>
-          <p className="text-muted-foreground text-lg mb-12 max-w-xl mx-auto">
-            {get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services — with measurable impact, flexible execution, and competitive pricing.")}
+          <p className="text-muted-foreground text-lg mb-12 max-w-xl mx-auto whitespace-pre-line">
+            {get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services.")}
           </p>
         </motion.div>
 
@@ -69,29 +69,39 @@ const ContactSection = () => {
             <CheckCircle className="w-12 h-12 text-primary" />
             <h3 className="text-2xl font-display font-semibold">{get("contact_success_title", "Thank You!")}</h3>
             <p className="text-muted-foreground">{get("contact_success_msg", "We'll get back to you within 24 hours.")}</p>
-            <Button variant="outline" className="mt-4" onClick={() => setIsSubmitted(false)}>Send Another Message</Button>
+            <Button variant="outline" className="mt-4" onClick={() => setIsSubmitted(false)}>
+              {get("contact_success_btn", "Send Another Message")}
+            </Button>
           </motion.div>
         ) : (
           <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} className="text-left space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">Name *</label>
-                <Input id="name" name="name" value={form.name} onChange={handleChange} placeholder="Your name" className="bg-card border-border" />
+                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">
+                  {get("contact_name_label", "Name *")}
+                </label>
+                <Input id="name" name="name" value={form.name} onChange={handleChange} placeholder={get("contact_name_placeholder", "Your name")} className="bg-card border-border" />
                 {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1.5">Email *</label>
-                <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} placeholder="you@company.com" className="bg-card border-border" />
+                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1.5">
+                  {get("contact_email_label", "Email *")}
+                </label>
+                <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} placeholder={get("contact_email_placeholder", "you@company.com")} className="bg-card border-border" />
                 {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
               </div>
             </div>
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1.5">Phone (optional)</label>
-              <Input id="phone" name="phone" value={form.phone} onChange={handleChange} placeholder="+1 234 567 890" className="bg-card border-border" />
+              <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1.5">
+                {get("contact_phone_label", "Phone (optional)")}
+              </label>
+              <Input id="phone" name="phone" value={form.phone} onChange={handleChange} placeholder={get("contact_phone_placeholder", "+1 234 567 890")} className="bg-card border-border" />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">Message *</label>
-              <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder="Tell us about your project and goals..." rows={5} className="bg-card border-border" />
+              <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">
+                {get("contact_message_label", "Message *")}
+              </label>
+              <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")} rows={5} className="bg-card border-border" />
               {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
             </div>
             <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto px-10 py-5 text-lg font-display font-semibold glow-gold">
