@@ -1,93 +1,58 @@
 
-Goal
 
-Make the website truly CMS-driven so every visible homepage text is editable, line breaks are supported, and saved changes appear on the live site immediately without refresh/redeploy.
+## Mobile UI Fixes
 
-What I found
+Two issues to address: excessive vertical spacing between sections on mobile, and an uneven client badge layout.
 
-- The two horizontal lines around the stats strip come from `border-y` in `StatsSection`.
-- The missing full stop is not a display/font issue. The stored `about_headline` value currently has no period, and the site content is fetched only once on app load, so updates are not reliably reflected live.
-- The admin editor only uses multiline inputs for long text. Short fields use single-line inputs, so pressing Enter cannot create a new line.
-- The current CMS shows only rows that already exist in the database. Several visible texts are still hardcoded in components, so they never appear in the admin panel.
-- Important hardcoded gaps include:
-  - Navbar labels and CTA
-  - Legal card labels like “Commercial Registration”
-  - Contact form labels/placeholders and “Send Another Message”
-  - Brand wordmark text in navbar/footer
-- `clients_list` exists, but it is managed as one comma-separated field, which is not ideal for editing brand names cleanly.
-- Save flow has no proper error handling, so a failed update can look like success.
+### Issue 1: Excessive spacing on mobile
 
-Implementation plan
+Every section uses `py-32` (128px top + 128px bottom) or `py-24` (96px each). On a 390px-wide mobile screen, this creates massive black gaps between sections. The fix is to reduce vertical padding on mobile using responsive Tailwind classes.
 
-1. Remove the stats borders
-- Update `StatsSection` to remove the top and bottom borders around the percentages section.
+**Changes across all section components:**
 
-2. Make the CMS schema-driven instead of row-driven
-- Create a single content registry in code that lists every editable homepage text:
-  - section
-  - key
-  - label
-  - default value
-  - whether it should support multiline/list input
-- Use this registry as the source of truth for the admin panel so fields appear even if a row is missing in the database.
+| Current | Mobile-optimized |
+|---------|-----------------|
+| `py-32` | `py-16 md:py-32` |
+| `py-24` | `py-12 md:py-24` |
+| `mb-20` (section headers) | `mb-10 md:mb-20` |
+| `mb-16` (clients header) | `mb-8 md:mb-16` |
+| `mb-12` (founder header, contact subtext) | `mb-6 md:mb-12` |
 
-3. Backfill all missing homepage text into the content table
-- Add missing keys for all hardcoded website strings, especially:
-  - navigation labels + nav CTA
-  - legal labels
-  - contact form labels/placeholders/success button text
-  - brand text reused in header/footer
-- Keep existing keys like `founder_attribution`, `clients_list`, and legal values, but make sure they are surfaced clearly in the admin.
+**Files to update:**
+- `StatsSection.tsx` -- `py-24` to `py-12 md:py-24`
+- `AboutSection.tsx` -- `py-32` to `py-16 md:py-32`
+- `WhyDifferentSection.tsx` -- `py-32` to `py-16 md:py-32`, `mb-20` to `mb-10 md:mb-20`
+- `ValuesSection.tsx` -- same pattern
+- `ServicesSection.tsx` -- same pattern
+- `FounderSection.tsx` -- `py-32` to `py-16 md:py-32`, `mb-12` to `mb-6 md:mb-12`
+- `ClientsSection.tsx` -- `py-32` to `py-16 md:py-32`, `mb-16` to `mb-8 md:mb-16`
+- `TechStackSection.tsx` -- same pattern as WhyDifferent
+- `ContactSection.tsx` -- `py-32` to `py-16 md:py-32`, `mb-12` to `mb-8 md:mb-12`
+- `LegalSection.tsx` -- `py-24` to `py-12 md:py-24`, `mb-10` to `mb-6 md:mb-10`
+- `Footer.tsx` -- `py-12` to `py-8 md:py-12`
+- `HeroSection.tsx` -- already uses `min-h-screen`, no change needed
 
-4. Upgrade the admin editor into a real multiline content manager
-- Replace the mixed `Input`/`Textarea` logic with textarea-based editing for content fields so Enter always creates a new line.
-- Add auto-resizing behavior so short fields still feel tidy.
-- For list fields like clients (and tool lists if needed), allow one item per line while still accepting commas for backward compatibility.
-- Improve save handling to show real success/error feedback per save operation.
+### Issue 2: Uneven client badges on mobile
 
-5. Make live updates truly instant
-- Extend `useSiteContent` so it no longer fetches once and goes stale.
-- Add live database subscription for `site_content` so saved edits are pushed to the website immediately.
-- Also update local content state right after save so the admin/public app reflects changes instantly in the current session.
+Currently uses `flex flex-wrap justify-center gap-4` which creates ragged rows on narrow screens. Fix: switch to a uniform 2-column grid on mobile that creates a clean, symmetrical layout, then revert to the flex-wrap flow on larger screens.
 
-6. Preserve punctuation and line breaks exactly as entered
-- Render CMS-managed text with line-break support where appropriate (`whitespace-pre-line` / equivalent).
-- Apply this to headings, paragraphs, founder attribution, legal/address text, footer text, and other text blocks that may contain manual line breaks.
-- For list-based fields, parse newline/comma-separated content safely so brand names and tools render as intended.
+**Change in `ClientsSection.tsx`:**
+- Replace the outer `flex flex-wrap` container with `grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3`
+- Make each badge `text-center` and consistent width (fills its grid cell)
+- Reduce badge padding slightly on mobile: `px-3 py-2 md:px-6 md:py-3`
 
-7. Update components so 100% of homepage text is editable
-- Review and connect remaining hardcoded homepage text in:
-  - `Navbar.tsx`
-  - `HeroSection.tsx`
-  - `StatsSection.tsx`
-  - `AboutSection.tsx`
-  - `WhyDifferentSection.tsx`
-  - `ValuesSection.tsx`
-  - `ServicesSection.tsx`
-  - `FounderSection.tsx`
-  - `ClientsSection.tsx`
-  - `TechStackSection.tsx`
-  - `ContactSection.tsx`
-  - `LegalSection.tsx`
-  - `Footer.tsx`
+This gives a clean 2-column layout on mobile with equal-width cells, scaling to 3/4/5 columns on wider screens.
 
-Technical details
+### Summary of files changed
+- `StatsSection.tsx`
+- `AboutSection.tsx`
+- `WhyDifferentSection.tsx`
+- `ValuesSection.tsx`
+- `ServicesSection.tsx`
+- `FounderSection.tsx`
+- `ClientsSection.tsx`
+- `TechStackSection.tsx`
+- `ContactSection.tsx`
+- `LegalSection.tsx`
+- `Footer.tsx`
 
-- Best robustness path:
-  - add a unique constraint on `site_content.key`
-  - allow admin insert on `site_content`
-  - use upsert for missing keys
-  - enable realtime for `site_content`
-- This avoids future “text exists on the page but not in admin” regressions.
-- `clients_list` should support both commas and new lines, so you can manage brands one per line without breaking existing data.
-- The period after “A Digital Agency Built on Science, Not Guesswork.” will display correctly once the save flow and live sync are fixed, because the component already renders the stored string verbatim.
-
-Acceptance checks
-
-- The stats strip has no horizontal lines above/below it.
-- Adding a period to the About headline appears on the live site after save.
-- Pressing Enter in admin creates a new line and that line break appears on the website where relevant.
-- `Abdullah Al-Fawali, CEO & Founder` is editable in admin and updates live.
-- Client names are editable in admin in a practical format and render correctly on the site.
-- All legal section text, including labels and values, is editable in admin.
-- No homepage text remains hardcoded outside the CMS.
