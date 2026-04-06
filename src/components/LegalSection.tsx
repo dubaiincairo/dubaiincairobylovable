@@ -13,7 +13,7 @@ const LegalSection = () => {
   ];
 
   return (
-    <section className="py-24 px-6 border-t border-border">
+    <section className="py-12 md:py-24 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="flex items-center justify-center gap-2 mb-4">
