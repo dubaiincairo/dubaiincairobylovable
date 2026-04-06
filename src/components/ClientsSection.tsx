@@ -24,9 +24,9 @@ const ClientsSection = () => {
           </p>
         </motion.div>
 
-        <motion.div className="flex flex-wrap items-center justify-center gap-4" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }}>
+        <motion.div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }}>
           {clients.map((name, i) => (
-            <motion.div key={name + i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }} className="px-6 py-3 rounded-lg border border-border bg-card text-sm font-display font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all">
+            <motion.div key={name + i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }} className="px-3 py-2 md:px-6 md:py-3 rounded-lg border border-border bg-card text-xs md:text-sm font-display font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all text-center">
               {name}
             </motion.div>
           ))}

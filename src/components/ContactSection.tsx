@@ -59,7 +59,7 @@ const ContactSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 whitespace-pre-line">
             {get("contact_headline", "Ready to Grow? Let's Build Something Real.")}
           </h2>
-          <p className="text-muted-foreground text-lg mb-12 max-w-xl mx-auto whitespace-pre-line">
+          <p className="text-muted-foreground text-lg mb-8 md:mb-12 max-w-xl mx-auto whitespace-pre-line">
             {get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services.")}
           </p>
         </motion.div>

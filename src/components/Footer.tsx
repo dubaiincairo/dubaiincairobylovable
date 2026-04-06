@@ -4,7 +4,7 @@ const Footer = () => {
   const { get } = useSiteContent();
 
   return (
-    <footer className="py-12 px-6 border-t border-border">
+    <footer className="py-8 md:py-12 px-6 border-t border-border">
       <div className="max-w-6xl mx-auto flex flex-col items-center gap-4 text-sm text-muted-foreground text-center">
         <span className="font-display font-semibold text-foreground text-lg">
           <span className="text-gradient-gold">{get("nav_brand_1", "Dubai")}</span>
