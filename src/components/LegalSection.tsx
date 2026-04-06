@@ -13,7 +13,7 @@ const LegalSection = () => {
   ];
 
   return (
-    <section className="py-24 px-6 border-t border-border">
+    <section className="py-12 md:py-24 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="flex items-center justify-center gap-2 mb-4">
@@ -30,7 +30,7 @@ const LegalSection = () => {
             {get("legal_company_type", "A Limited Liability Company")}
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 md:mb-8">
             {details.map((item, i) => (
               <motion.div key={i} className="flex flex-col items-center text-center p-5 rounded-xl border border-border bg-card" initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }}>
                 <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">

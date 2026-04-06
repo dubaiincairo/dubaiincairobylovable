@@ -5,7 +5,7 @@ const AboutSection = () => {
   const { get } = useSiteContent();
 
   return (
-    <section id="about" className="py-32 px-6">
+    <section id="about" className="py-16 md:py-32 px-6">
       <div className="max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
