@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Shield, MapPin, Building2, FileText, CreditCard, Globe } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { fadeUp, staggerContainer, cardFadeUp, fadeIn, viewportOnce } from "@/lib/animations";
 
 const LegalSection = () => {
   const { get } = useSiteContent();
@@ -15,7 +16,7 @@ const LegalSection = () => {
   return (
     <section className="py-12 md:py-24 px-6">
       <div className="max-w-5xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <div className="flex items-center justify-center gap-2 mb-4">
             <Shield className="w-5 h-5 text-primary" />
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary whitespace-pre-line">
@@ -29,23 +30,23 @@ const LegalSection = () => {
           <p className="text-center text-sm text-muted-foreground mb-10 whitespace-pre-line">
             {get("legal_company_type", "A Limited Liability Company")}
           </p>
+        </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 md:mb-8">
-            {details.map((item, i) => (
-              <motion.div key={i} className="flex flex-col items-center text-center p-5 rounded-xl border border-border bg-card" initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }}>
-                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                  <item.icon className="w-4 h-4 text-primary" />
-                </div>
-                <span className="text-xs text-muted-foreground mb-1">{item.label}</span>
-                <span className="text-sm font-display font-semibold">{item.value}</span>
-              </motion.div>
-            ))}
-          </div>
+        <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 md:mb-8" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+          {details.map((item, i) => (
+            <motion.div key={i} className="flex flex-col items-center text-center p-5 rounded-xl border border-border bg-card hover-lift transition-all" variants={cardFadeUp}>
+              <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                <item.icon className="w-4 h-4 text-primary" />
+              </div>
+              <span className="text-xs text-muted-foreground mb-1">{item.label}</span>
+              <span className="text-sm font-display font-semibold">{item.value}</span>
+            </motion.div>
+          ))}
+        </motion.div>
 
-          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-            <MapPin className="w-4 h-4 text-primary shrink-0" />
-            <span className="whitespace-pre-line">{get("legal_address", "100 Al-Mirghany Street, Abu Dhabi Bank Building, 1st Floor, Heliopolis, Cairo")}</span>
-          </div>
+        <motion.div className="flex items-center justify-center gap-2 text-sm text-muted-foreground" variants={fadeIn} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+          <MapPin className="w-4 h-4 text-primary shrink-0" />
+          <span className="whitespace-pre-line">{get("legal_address", "100 Al-Mirghany Street, Abu Dhabi Bank Building, 1st Floor, Heliopolis, Cairo")}</span>
         </motion.div>
       </div>
     </section>

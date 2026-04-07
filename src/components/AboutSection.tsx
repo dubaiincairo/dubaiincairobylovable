@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { fadeUp, fadeIn, staggerContainer, viewportOnce } from "@/lib/animations";
 
 const AboutSection = () => {
   const { get } = useSiteContent();
@@ -7,7 +8,7 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-16 md:py-32 px-6">
       <div className="max-w-4xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce} className="text-center mb-12">
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("about_subtitle", "Who We Are")}
           </span>
@@ -16,11 +17,19 @@ const AboutSection = () => {
           </h2>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.15 }} className="space-y-6 text-muted-foreground text-lg leading-relaxed text-center max-w-3xl mx-auto">
-          <p className="whitespace-pre-line">{get("about_body", "Founded in 2021, Dubai in Cairo is a Cairo-based digital marketing and eBusiness solutions agency.")}</p>
-          <p className="text-foreground font-medium whitespace-pre-line">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="space-y-6 text-lg leading-relaxed text-center max-w-3xl mx-auto"
+        >
+          <motion.p variants={fadeIn} className="text-muted-foreground whitespace-pre-line">
+            {get("about_body", "Founded in 2021, Dubai in Cairo is a Cairo-based digital marketing and eBusiness solutions agency.")}
+          </motion.p>
+          <motion.p variants={fadeIn} className="text-foreground font-medium whitespace-pre-line">
             {get("about_body_2", "We are 100% digital by design.")}
-          </p>
+          </motion.p>
         </motion.div>
       </div>
     </section>

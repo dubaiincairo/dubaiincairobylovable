@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { staggerContainer, scaleIn, viewportOnce } from "@/lib/animations";
 
 const StatsSection = () => {
   const { get } = useSiteContent();
@@ -13,14 +14,20 @@ const StatsSection = () => {
 
   return (
     <section className="py-12 md:py-24 px-6">
-      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12">
+      <motion.div
+        className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         {stats.map((stat, i) => (
-          <motion.div key={i} className="text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}>
+          <motion.div key={i} className="text-center" variants={scaleIn}>
             <div className="text-4xl md:text-5xl font-display font-bold text-gradient-gold mb-2">{stat.value}</div>
             <div className="text-sm text-muted-foreground tracking-wide">{stat.label}</div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };
