@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 
 const TechStackSection = () => {
   const { get } = useSiteContent();
@@ -12,7 +13,7 @@ const TechStackSection = () => {
   return (
     <section className="py-16 md:py-32 px-6">
       <div className="max-w-6xl mx-auto">
-        <motion.div className="text-center mb-10 md:mb-20" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+        <motion.div className="text-center mb-10 md:mb-20" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("tech_subtitle", "Our Tech Stack")}
           </span>
@@ -21,9 +22,9 @@ const TechStackSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           {categories.map((cat, i) => (
-            <motion.div key={i} className="p-6 rounded-xl border border-border bg-card/50" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}>
+            <motion.div key={i} className="p-6 rounded-xl border border-border bg-card/50 hover-lift transition-all" variants={cardFadeUp}>
               <h3 className="font-display font-semibold text-sm text-primary mb-4 tracking-wide uppercase">{cat.label}</h3>
               <div className="flex flex-wrap gap-2">
                 {cat.tools.map((tool) => (
@@ -32,7 +33,7 @@ const TechStackSection = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

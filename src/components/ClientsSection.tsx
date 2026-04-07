@@ -1,18 +1,18 @@
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { fadeUp, fadeIn, viewportOnce } from "@/lib/animations";
 
 const defaultClients = "Novartis,Sanofi,Roche,Novo Nordisk,Huawei,Banque Misr,Yorkshire Tea,Beyond Meat,Alpro,Monin,Berlitz,Shark Tank Egypt,World Economic Forum,AstraZeneca,Pfizer,L'Oréal,Unilever,Samsung,Vodafone,Orange,Nestlé,PepsiCo,Johnson & Johnson,Danone,Bayer";
 
 const ClientsSection = () => {
   const { get } = useSiteContent();
-  // Support both comma-separated and newline-separated
   const raw = get("clients_list", defaultClients);
   const clients = raw.split(/[,\n]/).map(s => s.trim()).filter(Boolean);
 
   return (
     <section id="work" className="py-16 md:py-32 px-6 bg-card/50">
       <div className="max-w-6xl mx-auto">
-        <motion.div className="text-center mb-8 md:mb-16" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+        <motion.div className="text-center mb-8 md:mb-16" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("clients_subtitle", "Success Partners")}
           </span>
@@ -24,11 +24,17 @@ const ClientsSection = () => {
           </p>
         </motion.div>
 
-        <motion.div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }}>
+        <motion.div
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           {clients.map((name, i) => (
-            <motion.div key={name + i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }} className="px-3 py-2 md:px-6 md:py-3 rounded-lg border border-border bg-card text-xs md:text-sm font-display font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all text-center">
+            <div key={name + i} className="px-3 py-2 md:px-6 md:py-3 rounded-lg border border-border bg-card text-xs md:text-sm font-display font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all text-center">
               {name}
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </div>

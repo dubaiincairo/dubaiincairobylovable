@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { slideDown } from "@/lib/animations";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -15,7 +17,12 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+    <motion.nav
+      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border"
+      variants={slideDown}
+      initial="hidden"
+      animate="visible"
+    >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#" className="font-display font-bold text-xl">
           <span className="text-gradient-gold">{get("nav_brand_1", "Dubai")}</span>
@@ -40,7 +47,12 @@ const Navbar = () => {
       </div>
 
       {open && (
-        <div className="md:hidden bg-background border-b border-border px-6 py-6 flex flex-col gap-4">
+        <motion.div
+          className="md:hidden bg-background border-b border-border px-6 py-6 flex flex-col gap-4"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25 }}
+        >
           {links.map((l) => (
             <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">
               {l.label}
@@ -49,9 +61,9 @@ const Navbar = () => {
           <a href="#contact" onClick={() => setOpen(false)} className="px-5 py-2.5 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg text-center">
             {get("nav_cta", "Get Started")}
           </a>
-        </div>
+        </motion.div>
       )}
-    </nav>
+    </motion.nav>
   );
 };
 

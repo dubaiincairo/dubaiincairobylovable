@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Search, Ruler, Handshake, Globe, Lightbulb, RefreshCw } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 
 const icons = [Search, Ruler, Handshake, Globe, Lightbulb, RefreshCw];
 
@@ -16,7 +17,7 @@ const ValuesSection = () => {
   return (
     <section className="py-16 md:py-32 px-6">
       <div className="max-w-6xl mx-auto">
-        <motion.div className="text-center mb-10 md:mb-20" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+        <motion.div className="text-center mb-10 md:mb-20" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("values_subtitle", "What We Stand For")}
           </span>
@@ -25,9 +26,9 @@ const ValuesSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div className="grid grid-cols-2 lg:grid-cols-3 gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           {values.map((v, i) => (
-            <motion.div key={i} className="text-center p-8 rounded-xl border border-border bg-card/50 hover:border-primary/20 transition-all" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08 }}>
+            <motion.div key={i} className="text-center p-8 rounded-xl border border-border bg-card/50 hover:border-primary/20 hover-lift transition-all" variants={cardFadeUp}>
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                 <v.icon className="w-5 h-5 text-primary" />
               </div>
@@ -35,7 +36,7 @@ const ValuesSection = () => {
               <p className="text-muted-foreground text-sm whitespace-pre-line">{v.desc}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

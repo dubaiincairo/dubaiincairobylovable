@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { z } from "zod";
+import { fadeUp, scaleIn, viewportOnce } from "@/lib/animations";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -52,7 +53,7 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-16 md:py-32 px-6">
       <div className="max-w-2xl mx-auto text-center">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("contact_subtitle", "Get Started")}
           </span>
@@ -65,7 +66,7 @@ const ContactSection = () => {
         </motion.div>
 
         {isSubmitted ? (
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center gap-4 py-12">
+          <motion.div variants={scaleIn} initial="hidden" animate="visible" className="flex flex-col items-center gap-4 py-12">
             <CheckCircle className="w-12 h-12 text-primary" />
             <h3 className="text-2xl font-display font-semibold">{get("contact_success_title", "Thank You!")}</h3>
             <p className="text-muted-foreground">{get("contact_success_msg", "We'll get back to you within 24 hours.")}</p>
@@ -74,7 +75,14 @@ const ContactSection = () => {
             </Button>
           </motion.div>
         ) : (
-          <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} className="text-left space-y-5">
+          <motion.form
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewportOnce}
+            transition={{ duration: 0.7, delay: 0.15, type: "spring", stiffness: 80, damping: 20 }}
+            className="text-left space-y-5"
+          >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">
