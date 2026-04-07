@@ -1,58 +1,91 @@
 
 
-## Mobile UI Fixes
+## Professional Animation Overhaul
 
-Two issues to address: excessive vertical spacing between sections on mobile, and an uneven client badge layout.
+The current animations are basic -- every element uses the same simple `opacity + translateY` fade-up pattern with identical easing. This creates a monotonous, flat feel. The plan upgrades to a polished, varied animation system.
 
-### Issue 1: Excessive spacing on mobile
+### Current problems
+- Every section uses identical `opacity: 0, y: 30` fade-up with `duration: 0.6`
+- No easing curves -- defaults to linear-ish Framer Motion defaults
+- Grid cards all animate individually with small staggered delays, creating a "popcorn" effect rather than a smooth cascade
+- No scroll-linked parallax or scale effects
+- Hero background glow is static
+- Navbar has no entrance animation
+- Client badges animate one-by-one (25+ items) which feels tedious
+- No hover micro-interactions beyond basic color transitions
 
-Every section uses `py-32` (128px top + 128px bottom) or `py-24` (96px each). On a 390px-wide mobile screen, this creates massive black gaps between sections. The fix is to reduce vertical padding on mobile using responsive Tailwind classes.
+### Animation strategy
 
-**Changes across all section components:**
+**Guiding principle**: Use 2-3 distinct animation patterns (not the same fade-up everywhere), professional cubic-bezier easing, and stagger containers for grouped elements.
 
-| Current | Mobile-optimized |
-|---------|-----------------|
-| `py-32` | `py-16 md:py-32` |
-| `py-24` | `py-12 md:py-24` |
-| `mb-20` (section headers) | `mb-10 md:mb-20` |
-| `mb-16` (clients header) | `mb-8 md:mb-16` |
-| `mb-12` (founder header, contact subtext) | `mb-6 md:mb-12` |
+### Changes by component
 
-**Files to update:**
-- `StatsSection.tsx` -- `py-24` to `py-12 md:py-24`
-- `AboutSection.tsx` -- `py-32` to `py-16 md:py-32`
-- `WhyDifferentSection.tsx` -- `py-32` to `py-16 md:py-32`, `mb-20` to `mb-10 md:mb-20`
-- `ValuesSection.tsx` -- same pattern
-- `ServicesSection.tsx` -- same pattern
-- `FounderSection.tsx` -- `py-32` to `py-16 md:py-32`, `mb-12` to `mb-6 md:mb-12`
-- `ClientsSection.tsx` -- `py-32` to `py-16 md:py-32`, `mb-16` to `mb-8 md:mb-16`
-- `TechStackSection.tsx` -- same pattern as WhyDifferent
-- `ContactSection.tsx` -- `py-32` to `py-16 md:py-32`, `mb-12` to `mb-8 md:mb-12`
-- `LegalSection.tsx` -- `py-24` to `py-12 md:py-24`, `mb-10` to `mb-6 md:mb-10`
-- `Footer.tsx` -- `py-12` to `py-8 md:py-12`
-- `HeroSection.tsx` -- already uses `min-h-screen`, no change needed
+**1. Shared animation variants (new file: `src/lib/animations.ts`)**
+- Define reusable Framer Motion variant objects: `fadeUp`, `fadeIn`, `scaleIn`, `slideInLeft`, `slideInRight`
+- Define a `staggerContainer` variant that orchestrates children with `staggerChildren: 0.08`
+- Use professional easing: `[0.25, 0.46, 0.45, 0.94]` (ease-out-quad)
 
-### Issue 2: Uneven client badges on mobile
+**2. HeroSection**
+- Add a slow pulsing scale animation to the background glow circle (CSS keyframe, `animate-pulse-glow`)
+- Increase hero element delays slightly for a more cinematic cascade
+- Add a subtle `scale: 0.97 -> 1` to the headline for depth
+- Animate the grid background opacity from 0 to 0.03
 
-Currently uses `flex flex-wrap justify-center gap-4` which creates ragged rows on narrow screens. Fix: switch to a uniform 2-column grid on mobile that creates a clean, symmetrical layout, then revert to the flex-wrap flow on larger screens.
+**3. Navbar**
+- Add `motion.nav` with a `y: -100% -> 0` slide-down on mount with spring physics
 
-**Change in `ClientsSection.tsx`:**
-- Replace the outer `flex flex-wrap` container with `grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3`
-- Make each badge `text-center` and consistent width (fills its grid cell)
-- Reduce badge padding slightly on mobile: `px-3 py-2 md:px-6 md:py-3`
+**4. StatsSection**
+- Use `staggerContainer` on the grid, each stat as a child with `scaleIn` variant (scale 0.8 -> 1 + fade)
+- Counter-style number reveal would be too complex; keep it clean with scale-in
 
-This gives a clean 2-column layout on mobile with equal-width cells, scaling to 3/4/5 columns on wider screens.
+**5. AboutSection**
+- Headline: `fadeUp` with slightly longer duration (0.7s)
+- Body paragraphs: staggered `fadeIn` (no Y movement, just opacity) for a calm read
 
-### Summary of files changed
-- `StatsSection.tsx`
-- `AboutSection.tsx`
-- `WhyDifferentSection.tsx`
-- `ValuesSection.tsx`
-- `ServicesSection.tsx`
-- `FounderSection.tsx`
-- `ClientsSection.tsx`
-- `TechStackSection.tsx`
-- `ContactSection.tsx`
-- `LegalSection.tsx`
-- `Footer.tsx`
+**6. WhyDifferentSection & ValuesSection & ServicesSection**
+- Section header: `fadeUp`
+- Card grid: wrap in `staggerContainer`, each card uses `fadeUp` child variant
+- Cards get a subtle `hover:translateY(-4px)` lift + shadow on hover via Tailwind
+
+**7. FounderSection**
+- Quote blockquote: `scaleIn` (scale 0.95 -> 1 + fade) for a dramatic reveal
+- Body text: simple `fadeIn`
+
+**8. ClientsSection**
+- Instead of animating each badge individually, animate the entire grid as one `fadeIn` block
+- Add a subtle CSS shimmer/marquee-like effect (optional, can be a simple opacity transition)
+
+**9. ContactSection**
+- Form slides in from bottom with spring physics
+- Success state: `scaleIn` with a bounce spring
+
+**10. LegalSection**
+- Cards use `staggerContainer` + `fadeUp` children
+- Address line: `fadeIn`
+
+**11. Footer**
+- Simple `fadeIn` on scroll
+
+**12. Global CSS additions in `index.css`**
+- Add `animate-pulse-glow` keyframe for the hero background
+- Add `.hover-lift` utility: `transition: transform 0.3s ease; &:hover { transform: translateY(-4px); }`
+
+### Files to create
+- `src/lib/animations.ts` -- shared motion variants
+
+### Files to edit
+- `src/index.css` -- add pulse-glow keyframe and hover-lift utility
+- `src/components/Navbar.tsx`
+- `src/components/HeroSection.tsx`
+- `src/components/StatsSection.tsx`
+- `src/components/AboutSection.tsx`
+- `src/components/WhyDifferentSection.tsx`
+- `src/components/ValuesSection.tsx`
+- `src/components/ServicesSection.tsx`
+- `src/components/FounderSection.tsx`
+- `src/components/ClientsSection.tsx`
+- `src/components/TechStackSection.tsx`
+- `src/components/ContactSection.tsx`
+- `src/components/LegalSection.tsx`
+- `src/components/Footer.tsx`
 
