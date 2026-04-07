@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { heroChild, heroHeadline } from "@/lib/animations";
 
-const ease = [0.25, 0.46, 0.45, 0.94];
+const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
 const HeroSection = () => {
   const { get } = useSiteContent();
