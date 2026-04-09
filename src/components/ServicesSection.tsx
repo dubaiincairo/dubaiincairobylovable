@@ -15,8 +15,13 @@ const ServicesSection = () => {
   }));
 
   return (
-    <section id="services" className="py-16 md:py-32 px-6 bg-card/50">
-      <div className="max-w-6xl mx-auto">
+    <section id="services" className="relative py-16 md:py-32 px-6 overflow-hidden">
+      {/* Diagonal pattern */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.02]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, hsl(38 80% 55%), hsl(38 80% 55%) 1px, transparent 1px, transparent 40px)' }} />
+      {/* Floating orb */}
+      <div className="absolute top-1/3 right-0 w-[350px] h-[350px] rounded-full bg-primary/5 blur-[120px] translate-x-1/3 pointer-events-none animate-float-reverse" />
+
+      <div className="relative max-w-6xl mx-auto">
         <motion.div className="text-center mb-10 md:mb-20" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("services_subtitle", "Our Studios")}
@@ -28,8 +33,8 @@ const ServicesSection = () => {
 
         <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           {studios.map((s, i) => (
-            <motion.div key={i} className="group p-8 rounded-xl bg-card border border-border hover:border-primary/30 hover-lift transition-all duration-300" variants={cardFadeUp}>
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 transition-transform group-hover:scale-110">
+            <motion.div key={i} className="group glass-card gradient-border p-8 rounded-xl hover-lift" variants={cardFadeUp}>
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
                 <s.icon className="w-5 h-5 text-primary" />
               </div>
               <h3 className="text-xl font-display font-semibold mb-3 whitespace-pre-line">{s.title}</h3>

@@ -1,14 +1,17 @@
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { fadeUp, fadeIn, staggerContainer, viewportOnce } from "@/lib/animations";
+import { slideInLeft, slideInRight, fadeIn, viewportOnce } from "@/lib/animations";
 
 const AboutSection = () => {
   const { get } = useSiteContent();
 
   return (
-    <section id="about" className="py-16 md:py-32 px-6">
-      <div className="max-w-4xl mx-auto">
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce} className="text-center mb-12">
+    <section id="about" className="relative py-16 md:py-32 px-6 overflow-hidden">
+      {/* Background orb */}
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+
+      <div className="relative max-w-4xl mx-auto">
+        <motion.div variants={slideInLeft} initial="hidden" whileInView="visible" viewport={viewportOnce} className="text-center mb-12">
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("about_subtitle", "Who We Are")}
           </span>
@@ -18,7 +21,7 @@ const AboutSection = () => {
         </motion.div>
 
         <motion.div
-          variants={staggerContainer}
+          variants={slideInRight}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}

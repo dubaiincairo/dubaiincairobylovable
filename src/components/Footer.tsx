@@ -7,12 +7,15 @@ const Footer = () => {
 
   return (
     <motion.footer
-      className="py-8 md:py-12 px-6 border-t border-border"
+      className="relative py-8 md:py-12 px-6 border-t border-border"
       variants={fadeIn}
       initial="hidden"
       whileInView="visible"
       viewport={viewportOnce}
     >
+      {/* Gold accent line */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38 80% 55% / 0.3), transparent)' }} />
+
       <div className="max-w-6xl mx-auto flex flex-col items-center gap-4 text-sm text-muted-foreground text-center">
         <span className="font-display font-semibold text-foreground text-lg">
           <span className="text-gradient-gold">{get("nav_brand_1", "Dubai")}</span>

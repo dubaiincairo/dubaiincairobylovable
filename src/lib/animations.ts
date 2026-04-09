@@ -1,4 +1,4 @@
-import type { Variants, Transition } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
@@ -20,6 +20,16 @@ export const scaleIn: Variants = {
 export const slideDown: Variants = {
   hidden: { y: -80, opacity: 0 },
   visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100, damping: 20 } },
+};
+
+export const slideInLeft: Variants = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease } },
+};
+
+export const slideInRight: Variants = {
+  hidden: { opacity: 0, x: 60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease } },
 };
 
 export const staggerContainer: Variants = {
@@ -49,6 +59,11 @@ export const heroChild = (delay: number): Variants => ({
 export const heroHeadline: Variants = {
   hidden: { opacity: 0, y: 40, scale: 0.97 },
   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.9, delay: 0.15, ease } },
+};
+
+export const springBounce: Variants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 120, damping: 14 } },
 };
 
 export const viewportOnce = { once: true, margin: "-60px" as any };

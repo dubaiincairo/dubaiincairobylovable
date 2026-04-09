@@ -51,8 +51,11 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-32 px-6">
-      <div className="max-w-2xl mx-auto text-center">
+    <section id="contact" className="relative py-16 md:py-32 px-6 overflow-hidden">
+      {/* Radial glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.04), transparent 70%)' }} />
+
+      <div className="relative max-w-2xl mx-auto text-center">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("contact_subtitle", "Get Started")}
@@ -112,7 +115,7 @@ const ContactSection = () => {
               <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")} rows={5} className="bg-card border-border" />
               {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
             </div>
-            <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto px-10 py-5 text-lg font-display font-semibold glow-gold">
+            <Button type="submit" disabled={isSubmitting} className="shimmer-btn w-full sm:w-auto px-10 py-5 text-lg font-display font-semibold glow-gold">
               {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Mail className="w-5 h-5" />}
               {isSubmitting ? "Sending..." : get("contact_cta", "Start a Project")}
               {!isSubmitting && <ArrowRight className="w-5 h-5" />}

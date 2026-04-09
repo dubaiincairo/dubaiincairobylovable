@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { slideDown } from "@/lib/animations";
@@ -7,6 +7,14 @@ import { slideDown } from "@/lib/animations";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { get } = useSiteContent();
+  const { scrollY } = useScroll();
+  const bgOpacity = useTransform(scrollY, [0, 100], [0.6, 0.9]);
+  const blur = useTransform(scrollY, [0, 100], [8, 20]);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    return scrollY.on("change", (v) => setScrolled(v > 50));
+  }, [scrollY]);
 
   const links = [
     { href: "#about", label: get("nav_link_1", "About") },
@@ -18,7 +26,11 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border"
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-300 ${scrolled ? 'border-border' : 'border-transparent'}`}
+      style={{
+        backgroundColor: `hsl(220 20% 4% / ${bgOpacity.get()})`,
+        backdropFilter: `blur(${blur.get()}px)`,
+      }}
       variants={slideDown}
       initial="hidden"
       animate="visible"
@@ -36,7 +48,7 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
-          <a href="#contact" className="px-5 py-2 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg transition-all hover:brightness-110">
+          <a href="#contact" className="shimmer-btn px-5 py-2 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg transition-all hover:brightness-110">
             {get("nav_cta", "Get Started")}
           </a>
         </div>
@@ -48,7 +60,7 @@ const Navbar = () => {
 
       {open && (
         <motion.div
-          className="md:hidden bg-background border-b border-border px-6 py-6 flex flex-col gap-4"
+          className="md:hidden glass px-6 py-6 flex flex-col gap-4"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25 }}
