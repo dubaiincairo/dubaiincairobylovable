@@ -15,8 +15,11 @@ const WhyDifferentSection = () => {
   }));
 
   return (
-    <section className="py-16 md:py-32 px-6 bg-card/50">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative py-16 md:py-32 px-6 overflow-hidden">
+      {/* Radial glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)' }} />
+
+      <div className="relative max-w-6xl mx-auto">
         <motion.div className="text-center mb-10 md:mb-20" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("edges_subtitle", "Why We're Different")}
@@ -28,8 +31,8 @@ const WhyDifferentSection = () => {
 
         <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           {edges.map((item, i) => (
-            <motion.div key={i} className="group p-8 rounded-xl border border-border bg-card hover:border-primary/30 hover-lift transition-all duration-300" variants={cardFadeUp}>
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5">
+            <motion.div key={i} className="group glass-card gradient-border p-8 rounded-xl hover-lift" variants={cardFadeUp}>
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 transition-transform duration-300 group-hover:rotate-12">
                 <item.icon className="w-5 h-5 text-primary" />
               </div>
               <h3 className="text-lg font-display font-semibold mb-3 whitespace-pre-line">{item.title}</h3>

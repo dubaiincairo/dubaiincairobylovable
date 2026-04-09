@@ -11,8 +11,10 @@ const TechStackSection = () => {
   }));
 
   return (
-    <section className="py-16 md:py-32 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative py-16 md:py-32 px-6 overflow-hidden">
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full bg-primary/3 blur-[130px] -translate-x-1/2 pointer-events-none" />
+
+      <div className="relative max-w-6xl mx-auto">
         <motion.div className="text-center mb-10 md:mb-20" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("tech_subtitle", "Our Tech Stack")}
@@ -24,7 +26,7 @@ const TechStackSection = () => {
 
         <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           {categories.map((cat, i) => (
-            <motion.div key={i} className="p-6 rounded-xl border border-border bg-card/50 hover-lift transition-all" variants={cardFadeUp}>
+            <motion.div key={i} className="glass-card gradient-border p-6 rounded-xl hover-lift" variants={cardFadeUp}>
               <h3 className="font-display font-semibold text-sm text-primary mb-4 tracking-wide uppercase">{cat.label}</h3>
               <div className="flex flex-wrap gap-2">
                 {cat.tools.map((tool) => (

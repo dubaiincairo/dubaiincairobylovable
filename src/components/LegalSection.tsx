@@ -14,8 +14,10 @@ const LegalSection = () => {
   ];
 
   return (
-    <section className="py-12 md:py-24 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section className="relative py-12 md:py-24 px-6 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, transparent, hsl(220 18% 6% / 0.5), transparent)' }} />
+
+      <div className="relative max-w-5xl mx-auto">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <div className="flex items-center justify-center gap-2 mb-4">
             <Shield className="w-5 h-5 text-primary" />
@@ -34,7 +36,7 @@ const LegalSection = () => {
 
         <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 md:mb-8" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           {details.map((item, i) => (
-            <motion.div key={i} className="flex flex-col items-center text-center p-5 rounded-xl border border-border bg-card hover-lift transition-all" variants={cardFadeUp}>
+            <motion.div key={i} className="glass-card flex flex-col items-center text-center p-5 rounded-xl hover-lift" variants={cardFadeUp}>
               <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
                 <item.icon className="w-4 h-4 text-primary" />
               </div>

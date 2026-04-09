@@ -10,8 +10,11 @@ const ClientsSection = () => {
   const clients = raw.split(/[,\n]/).map(s => s.trim()).filter(Boolean);
 
   return (
-    <section id="work" className="py-16 md:py-32 px-6 bg-card/50">
-      <div className="max-w-6xl mx-auto">
+    <section id="work" className="relative py-16 md:py-32 px-6 overflow-hidden">
+      {/* Mesh gradient bg */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 20% 50%, hsl(38 80% 55% / 0.03) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, hsl(220 40% 30% / 0.05) 0%, transparent 50%)' }} />
+
+      <div className="relative max-w-6xl mx-auto">
         <motion.div className="text-center mb-8 md:mb-16" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("clients_subtitle", "Success Partners")}
@@ -32,7 +35,7 @@ const ClientsSection = () => {
           viewport={viewportOnce}
         >
           {clients.map((name, i) => (
-            <div key={name + i} className="px-3 py-2 md:px-6 md:py-3 rounded-lg border border-border bg-card text-xs md:text-sm font-display font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all text-center">
+            <div key={name + i} className="glass-card px-3 py-2 md:px-6 md:py-3 rounded-lg text-xs md:text-sm font-display font-medium text-muted-foreground hover:text-foreground text-center">
               {name}
             </div>
           ))}

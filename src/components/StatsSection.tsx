@@ -1,10 +1,36 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { staggerContainer, scaleIn, viewportOnce } from "@/lib/animations";
 
+const AnimatedNumber = ({ value }: { value: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const [display, setDisplay] = useState(value);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const numMatch = value.match(/^(\d+)/);
+    if (!numMatch) { setDisplay(value); return; }
+    const target = parseInt(numMatch[1]);
+    const suffix = value.slice(numMatch[1].length);
+    const duration = 1200;
+    const start = Date.now();
+    const tick = () => {
+      const elapsed = Date.now() - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Math.round(target * eased) + suffix);
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [isInView, value]);
+
+  return <div ref={ref} className="text-4xl md:text-5xl font-display font-bold text-gradient-gold mb-2">{display}</div>;
+};
+
 const StatsSection = () => {
   const { get } = useSiteContent();
-
   const stats = [
     { value: get("stat_projects", "216"), label: get("stat_projects_label", "Successful Projects") },
     { value: get("stat_clients", "36+"), label: get("stat_clients_label", "Clients Served") },
@@ -13,7 +39,9 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="py-12 md:py-24 px-6">
+    <section className="relative py-12 md:py-24 px-6">
+      {/* Connecting glow line */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38 80% 55% / 0.2), transparent)' }} />
       <motion.div
         className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12"
         variants={staggerContainer}
@@ -23,7 +51,7 @@ const StatsSection = () => {
       >
         {stats.map((stat, i) => (
           <motion.div key={i} className="text-center" variants={scaleIn}>
-            <div className="text-4xl md:text-5xl font-display font-bold text-gradient-gold mb-2">{stat.value}</div>
+            <AnimatedNumber value={stat.value} />
             <div className="text-sm text-muted-foreground tracking-wide">{stat.label}</div>
           </motion.div>
         ))}
