@@ -82,12 +82,14 @@ const MarqueeRow = ({ items, direction, gold = false }: { items: string[]; direc
             <LogoChip key={i} name={name} gold={gold} gap={GAP} />
           ))}
         </div>
-        {/* copy 2 — seamless repeat */}
-        <div className="flex flex-shrink-0" aria-hidden>
-          {items.map((name, i) => (
-            <LogoChip key={`d${i}`} name={name} gold={gold} gap={GAP} />
-          ))}
-        </div>
+        {/* copies 2–6 — ensures track is always full, loop never visible */}
+        {[2,3,4,5,6].map(n => (
+          <div key={n} className="flex flex-shrink-0" aria-hidden>
+            {items.map((name, i) => (
+              <LogoChip key={`${n}-${i}`} name={name} gold={gold} gap={GAP} />
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );
