@@ -11,9 +11,9 @@ const GoogleBusinessWidget = () => (
 
     <div className="relative max-w-6xl mx-auto">
       <motion.div className="text-center mb-10" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-        <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">Find Us</span>
+        <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">We're on Google</span>
         <h2 className="text-3xl md:text-4xl font-display font-bold mb-3">We're on Google</h2>
-        <p className="text-muted-foreground">Heliopolis, Cairo — visit us or find us on Google Maps</p>
+        <p className="text-muted-foreground">At the heart of Cairo where movement never stops and ideas move faster.</p>
       </motion.div>
 
       <motion.div
