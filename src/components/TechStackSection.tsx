@@ -11,11 +11,11 @@ const TechStackSection = () => {
   }));
 
   return (
-    <section className="relative py-16 md:py-32 px-6 overflow-hidden">
+    <section className="relative py-10 md:py-16 px-6 overflow-hidden">
       <div className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full bg-primary/3 blur-[130px] -translate-x-1/2 pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
-        <motion.div className="text-center mb-10 md:mb-20" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="text-center mb-6 md:mb-10" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("tech_subtitle", "Our Tech Stack")}
           </span>

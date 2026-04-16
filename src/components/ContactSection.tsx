@@ -51,7 +51,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="relative py-16 md:py-32 px-6 overflow-hidden">
+    <section id="contact" className="relative py-10 md:py-16 px-6 overflow-hidden">
       {/* Radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.04), transparent 70%)' }} />
 

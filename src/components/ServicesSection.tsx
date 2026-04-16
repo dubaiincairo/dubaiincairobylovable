@@ -15,14 +15,14 @@ const ServicesSection = () => {
   }));
 
   return (
-    <section id="services" className="relative py-16 md:py-32 px-6 overflow-hidden">
+    <section id="services" className="relative py-10 md:py-16 px-6 overflow-hidden">
       {/* Diagonal pattern */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.02]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, hsl(38 80% 55%), hsl(38 80% 55%) 1px, transparent 1px, transparent 40px)' }} />
       {/* Floating orb */}
       <div className="absolute top-1/3 right-0 w-[350px] h-[350px] rounded-full bg-primary/5 blur-[120px] translate-x-1/3 pointer-events-none animate-float-reverse" />
 
       <div className="relative max-w-6xl mx-auto">
-        <motion.div className="text-center mb-10 md:mb-20" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="text-center mb-6 md:mb-10" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("services_subtitle", "Our Studios")}
           </span>

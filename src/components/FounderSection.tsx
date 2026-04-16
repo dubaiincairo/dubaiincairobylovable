@@ -7,14 +7,14 @@ const FounderSection = () => {
   const { get } = useSiteContent();
 
   return (
-    <section id="team" className="relative py-16 md:py-32 px-6 overflow-hidden">
+    <section id="team" className="relative py-10 md:py-16 px-6 overflow-hidden">
       {/* Cinematic gradient */}
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)' }} />
       {/* Gold accent lines */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24" style={{ background: 'linear-gradient(180deg, transparent, hsl(38 80% 55% / 0.2), transparent)' }} />
 
       <div className="relative max-w-4xl mx-auto">
-        <motion.div className="text-center mb-6 md:mb-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="text-center mb-4 md:mb-8" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("founder_subtitle", "A Message from Our Founder")}
           </span>
@@ -28,7 +28,7 @@ const FounderSection = () => {
           <p className="whitespace-pre-line">{get("founder_education", "His foundation is built on dual academic distinctions from the Arab Academy.")}</p>
         </motion.div>
 
-        <motion.blockquote variants={springBounce} initial="hidden" whileInView="visible" viewport={viewportOnce} className="mt-12 relative p-8 rounded-xl glass-card text-center" style={{ borderColor: 'hsl(38 80% 55% / 0.2)', background: 'hsl(38 80% 55% / 0.03)' }}>
+        <motion.blockquote variants={springBounce} initial="hidden" whileInView="visible" viewport={viewportOnce} className="mt-6 relative p-8 rounded-xl glass-card text-center" style={{ borderColor: 'hsl(38 80% 55% / 0.2)', background: 'hsl(38 80% 55% / 0.03)' }}>
           <Quote className="w-8 h-8 text-primary/30 mx-auto mb-4" />
           <p className="text-foreground text-lg md:text-xl font-display italic leading-relaxed mb-4 whitespace-pre-line">
             "{get("founder_quote", "I believe that continuous learning is the key to success in business.")}"

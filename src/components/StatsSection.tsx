@@ -39,7 +39,7 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="relative py-12 md:py-24 px-6">
+    <section className="relative py-8 md:py-14 px-6">
       {/* Connecting glow line */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38 80% 55% / 0.2), transparent)' }} />
       <motion.div

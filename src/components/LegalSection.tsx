@@ -14,7 +14,7 @@ const LegalSection = () => {
   ];
 
   return (
-    <section className="relative py-12 md:py-24 px-6 overflow-hidden">
+    <section className="relative py-8 md:py-14 px-6 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, transparent, hsl(220 18% 6% / 0.5), transparent)' }} />
 
       <div className="relative max-w-5xl mx-auto">

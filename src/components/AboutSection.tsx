@@ -6,7 +6,7 @@ const AboutSection = () => {
   const { get } = useSiteContent();
 
   return (
-    <section id="about" className="relative py-16 md:py-32 px-6 overflow-hidden">
+    <section id="about" className="relative py-10 md:py-16 px-6 overflow-hidden">
       {/* Background orb */}
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 

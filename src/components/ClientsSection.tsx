@@ -17,11 +17,11 @@ const ClientsSection = () => {
   const row2 = clients.slice(half);
 
   return (
-    <section id="work" className="relative py-16 md:py-32 overflow-hidden">
+    <section id="work" className="relative py-10 md:py-16 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 20% 50%, hsl(38 80% 55% / 0.03) 0%, transparent 50%)' }} />
 
       <div className="relative max-w-6xl mx-auto px-6">
-        <motion.div className="text-center mb-10 md:mb-16" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="text-center mb-6 md:mb-10" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("clients_subtitle", "Success Partners")}
           </span>

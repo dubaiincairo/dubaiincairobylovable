@@ -6,7 +6,7 @@ const MAPS_EMBED = "https://maps.google.com/maps?q=Dubai+in+Cairo+Marketing+Stud
 const MAPS_LINK = "https://maps.app.goo.gl/BVYf5XUFXJyoW1gQ9";
 
 const GoogleBusinessWidget = () => (
-  <section className="relative py-16 md:py-24 px-6 overflow-hidden">
+  <section className="relative py-8 md:py-14 px-6 overflow-hidden">
     <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 100%, hsl(38 80% 55% / 0.04) 0%, transparent 60%)' }} />
 
     <div className="relative max-w-6xl mx-auto">
