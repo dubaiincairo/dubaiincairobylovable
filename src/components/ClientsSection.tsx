@@ -1,22 +1,24 @@
+import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 
 const defaultClients = "Novartis,Sanofi,Roche,Novo Nordisk,Huawei,Banque Misr,Yorkshire Tea,Beyond Meat,Alpro,Monin,Berlitz,Shark Tank Egypt,World Economic Forum,AstraZeneca,Pfizer,L'Oréal,Unilever,Samsung,Vodafone,Orange,Nestlé,PepsiCo,Johnson & Johnson,Danone,Bayer";
 
+const GAP = 12; // px — space between chips
+
 const ClientsSection = () => {
   const { get } = useSiteContent();
   const raw = get("clients_list", defaultClients);
   const clients = raw.split(/[,\n]/).map(s => s.trim()).filter(Boolean);
 
-  // Split into two rows for the two marquee tracks
   const half = Math.ceil(clients.length / 2);
   const row1 = clients.slice(0, half);
   const row2 = clients.slice(half);
 
   return (
     <section id="work" className="relative py-16 md:py-32 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 20% 50%, hsl(38 80% 55% / 0.03) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, hsl(220 40% 30% / 0.05) 0%, transparent 50%)' }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 20% 50%, hsl(38 80% 55% / 0.03) 0%, transparent 50%)' }} />
 
       <div className="relative max-w-6xl mx-auto px-6">
         <motion.div className="text-center mb-10 md:mb-16" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
@@ -32,43 +34,74 @@ const ClientsSection = () => {
         </motion.div>
       </div>
 
-      {/* Marquee Row 1 — left */}
-      <div className="relative mb-3 overflow-hidden">
-        {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, hsl(var(--background)), transparent)' }} />
-        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, hsl(var(--background)), transparent)' }} />
-
-        <div className="flex animate-marquee-left w-max">
-          {[...row1, ...row1].map((name, i) => (
-            <LogoChip key={`r1-${i}`} name={name} />
-          ))}
-        </div>
-      </div>
-
-      {/* Marquee Row 2 — right */}
-      <div className="relative overflow-hidden">
-        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, hsl(var(--background)), transparent)' }} />
-        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, hsl(var(--background)), transparent)' }} />
-
-        <div className="flex animate-marquee-right w-max">
-          {[...row2, ...row2].map((name, i) => (
-            <LogoChip key={`r2-${i}`} name={name} gold />
-          ))}
-        </div>
+      <div className="space-y-3">
+        <MarqueeRow items={row1} direction="left" />
+        <MarqueeRow items={row2} direction="right" gold />
       </div>
     </section>
   );
 };
 
-const LogoChip = ({ name, gold = false }: { name: string; gold?: boolean }) => (
-  <div className={`
-    flex-shrink-0 px-6 py-3 mr-3 rounded-full border text-sm font-display font-semibold
-    transition-colors duration-200 cursor-default
-    ${gold
-      ? "border-primary/30 text-primary/80 bg-primary/5 hover:bg-primary/10 hover:text-primary"
-      : "border-border text-muted-foreground bg-card hover:border-primary/30 hover:text-foreground"
-    }
-  `}>
+const MarqueeRow = ({ items, direction, gold = false }: { items: string[]; direction: "left" | "right"; gold?: boolean }) => {
+  const copyRef = useRef<HTMLDivElement>(null);
+  const [copyWidth, setCopyWidth] = useState(0);
+
+  useEffect(() => {
+    if (!copyRef.current) return;
+    setCopyWidth(copyRef.current.scrollWidth + GAP);
+    const ro = new ResizeObserver(() => {
+      if (copyRef.current) setCopyWidth(copyRef.current.scrollWidth + GAP);
+    });
+    ro.observe(copyRef.current);
+    return () => ro.disconnect();
+  }, [items]);
+
+  const from = direction === "left" ? 0 : -copyWidth;
+  const to   = direction === "left" ? -copyWidth : 0;
+
+  return (
+    <div className="relative overflow-hidden">
+      {/* fade edges */}
+      <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+        style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
+      <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+        style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
+
+      <div
+        className="flex"
+        style={copyWidth ? {
+          willChange: "transform",
+          animation: `marquee-${direction} 30s linear infinite`,
+          ["--from" as string]: `${from}px`,
+          ["--to"   as string]: `${to}px`,
+        } : { visibility: "hidden" }}
+      >
+        {/* copy 1 — measured */}
+        <div ref={copyRef} className="flex flex-shrink-0">
+          {items.map((name, i) => (
+            <LogoChip key={i} name={name} gold={gold} gap={GAP} />
+          ))}
+        </div>
+        {/* copy 2 — seamless repeat */}
+        <div className="flex flex-shrink-0" aria-hidden>
+          {items.map((name, i) => (
+            <LogoChip key={`d${i}`} name={name} gold={gold} gap={GAP} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const LogoChip = ({ name, gold, gap }: { name: string; gold: boolean; gap: number }) => (
+  <div
+    className={`flex-shrink-0 px-6 py-3 rounded-full border text-sm font-display font-semibold cursor-default transition-colors duration-200
+      ${gold
+        ? "border-primary/30 text-primary/80 bg-primary/5 hover:bg-primary/10 hover:text-primary"
+        : "border-border text-muted-foreground bg-card hover:border-primary/30 hover:text-foreground"
+      }`}
+    style={{ marginRight: gap }}
+  >
     {name}
   </div>
 );

@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
+@keyframes marquee-left {
+  from { transform: translate3d(var(--from), 0, 0); }
+  to   { transform: translate3d(var(--to),   0, 0); }
+}
+@keyframes marquee-right {
+  from { transform: translate3d(var(--from), 0, 0); }
+  to   { transform: translate3d(var(--to),   0, 0); }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
