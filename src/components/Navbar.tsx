@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { slideDown } from "@/lib/animations";
@@ -8,9 +8,12 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { get } = useSiteContent();
   const { scrollY } = useScroll();
-  const bgOpacity = useTransform(scrollY, [0, 100], [0.6, 0.9]);
-  const blur = useTransform(scrollY, [0, 100], [8, 20]);
+  const bgOpacity = useTransform(scrollY, [0, 100], [0.6, 0.95]);
+  const blurVal = useTransform(scrollY, [0, 100], [8, 20]);
   const [scrolled, setScrolled] = useState(false);
+
+  const backgroundColor = useMotionTemplate`hsl(220 20% 4% / ${bgOpacity})`;
+  const backdropFilter = useMotionTemplate`blur(${blurVal}px)`;
 
   useEffect(() => {
     return scrollY.on("change", (v) => setScrolled(v > 50));
@@ -26,10 +29,11 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-300 ${scrolled ? 'border-border' : 'border-transparent'}`}
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-500 will-change-transform ${scrolled ? 'border-border' : 'border-transparent'}`}
       style={{
-        backgroundColor: `hsl(220 20% 4% / ${bgOpacity.get()})`,
-        backdropFilter: `blur(${blur.get()}px)`,
+        backgroundColor,
+        backdropFilter,
+        WebkitBackdropFilter: backdropFilter,
       }}
       variants={slideDown}
       initial="hidden"
@@ -44,7 +48,7 @@ const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-8 text-sm">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="text-muted-foreground hover:text-foreground transition-colors">
+            <a key={l.href} href={l.href} className="text-muted-foreground hover:text-foreground transition-colors duration-300">
               {l.label}
             </a>
           ))}

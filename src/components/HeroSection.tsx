@@ -8,14 +8,14 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
-      {/* Floating gradient orbs */}
+      {/* Floating gradient orbs — GPU accelerated */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/8 blur-[140px] animate-float-slow" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/10 blur-[120px] animate-float-reverse" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px]" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.06), transparent 70%)' }} />
       </div>
 
-      {/* Dot grid */}
+      {/* Dot grid — fade in once on load */}
       <motion.div
         className="absolute inset-0"
         style={{
@@ -24,7 +24,7 @@ const HeroSection = () => {
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.4 }}
-        transition={{ duration: 2 }}
+        transition={{ duration: 2.5, ease: "easeOut" }}
       />
 
       {/* Vignette */}
@@ -61,11 +61,11 @@ const HeroSection = () => {
           initial="hidden"
           animate="visible"
         >
-          <a href="#services" className="group shimmer-btn inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-display font-semibold text-sm tracking-wide rounded-lg glow-gold transition-all hover:brightness-110">
+          <a href="#services" className="group shimmer-btn inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-display font-semibold text-sm tracking-wide rounded-lg glow-gold transition-all duration-300 hover:brightness-110">
             {get("hero_cta_primary", "Explore Our Services")}
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
-          <a href="#contact" className="inline-flex items-center gap-2 px-8 py-4 border border-gold-subtle text-foreground font-display font-medium text-sm tracking-wide rounded-lg transition-all hover:bg-secondary hover:border-primary/30">
+          <a href="#contact" className="inline-flex items-center gap-2 px-8 py-4 border border-gold-subtle text-foreground font-display font-medium text-sm tracking-wide rounded-lg transition-all duration-300 hover:bg-secondary hover:border-primary/30">
             {get("hero_cta_secondary", "Talk to Our Team")}
           </a>
         </motion.div>
