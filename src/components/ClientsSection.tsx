@@ -38,7 +38,7 @@ const ClientsSection = () => {
         <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, hsl(var(--background)), transparent)' }} />
         <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, hsl(var(--background)), transparent)' }} />
 
-        <div className="flex animate-marquee-left gap-3 w-max">
+        <div className="flex animate-marquee-left w-max">
           {[...row1, ...row1].map((name, i) => (
             <LogoChip key={`r1-${i}`} name={name} />
           ))}
@@ -50,7 +50,7 @@ const ClientsSection = () => {
         <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, hsl(var(--background)), transparent)' }} />
         <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, hsl(var(--background)), transparent)' }} />
 
-        <div className="flex animate-marquee-right gap-3 w-max">
+        <div className="flex animate-marquee-right w-max">
           {[...row2, ...row2].map((name, i) => (
             <LogoChip key={`r2-${i}`} name={name} gold />
           ))}
@@ -62,7 +62,7 @@ const ClientsSection = () => {
 
 const LogoChip = ({ name, gold = false }: { name: string; gold?: boolean }) => (
   <div className={`
-    flex-shrink-0 px-6 py-3 rounded-full border text-sm font-display font-semibold
+    flex-shrink-0 px-6 py-3 mr-3 rounded-full border text-sm font-display font-semibold
     transition-colors duration-200 cursor-default
     ${gold
       ? "border-primary/30 text-primary/80 bg-primary/5 hover:bg-primary/10 hover:text-primary"
