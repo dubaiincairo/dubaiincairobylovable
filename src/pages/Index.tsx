@@ -11,6 +11,7 @@ import TechStackSection from "@/components/TechStackSection";
 import ContactSection from "@/components/ContactSection";
 import LegalSection from "@/components/LegalSection";
 import Footer from "@/components/Footer";
+import GoogleBusinessWidget from "@/components/GoogleBusinessWidget";
 
 const Index = () => {
   return (
@@ -26,6 +27,7 @@ const Index = () => {
       <ClientsSection />
       <TechStackSection />
       <ContactSection />
+      <GoogleBusinessWidget />
       <LegalSection />
       <Footer />
     </div>
