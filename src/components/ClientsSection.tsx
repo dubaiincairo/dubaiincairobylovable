@@ -39,7 +39,7 @@ const ClientsSection = () => {
         <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, hsl(var(--background)), transparent)' }} />
 
         <div className="flex animate-marquee-left gap-3 w-max">
-          {[...row1, ...row1, ...row1].map((name, i) => (
+          {[...row1, ...row1].map((name, i) => (
             <LogoChip key={`r1-${i}`} name={name} />
           ))}
         </div>
@@ -51,7 +51,7 @@ const ClientsSection = () => {
         <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, hsl(var(--background)), transparent)' }} />
 
         <div className="flex animate-marquee-right gap-3 w-max">
-          {[...row2, ...row2, ...row2].map((name, i) => (
+          {[...row2, ...row2].map((name, i) => (
             <LogoChip key={`r2-${i}`} name={name} gold />
           ))}
         </div>
