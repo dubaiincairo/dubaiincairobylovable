@@ -83,7 +83,7 @@ const HeroSection = () => {
   const float4Label  = get("hero_float_4_label", "Digital-First");
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden px-6">
+    <section className="relative md:min-h-screen flex md:items-center overflow-hidden px-6 pt-28 pb-16 md:pt-0 md:pb-0">
 
       {/* Background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -110,7 +110,7 @@ const HeroSection = () => {
         style={{ background: 'radial-gradient(ellipse at center, transparent 40%, hsl(220 20% 4%) 100%)' }} />
 
       {/* ── Split grid ── */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 lg:gap-20 items-center pt-20">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 lg:gap-20 items-center md:pt-20">
 
         {/* LEFT — copy */}
         <div className="text-left">
@@ -221,7 +221,7 @@ const HeroSection = () => {
       {/* Scroll indicator */}
       <motion.a
         href="#about"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors duration-300"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors duration-300"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.8, duration: 0.6 }}

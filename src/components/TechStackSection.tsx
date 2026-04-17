@@ -11,7 +11,7 @@ const TechStackSection = () => {
   }));
 
   return (
-    <section className="relative py-14 md:py-20 px-6 overflow-hidden">
+    <section className="relative py-8 md:py-20 px-6 overflow-hidden">
       <div className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full bg-primary/3 blur-[130px] -translate-x-1/2 pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
