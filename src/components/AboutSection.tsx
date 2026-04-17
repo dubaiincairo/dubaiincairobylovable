@@ -3,195 +3,235 @@ import { useRef } from "react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 
-// ── Animated performance chart ────────────────────────────────────────────
-const PerformanceChart = ({ inView }: { inView: boolean }) => (
-  <svg viewBox="0 0 260 80" className="w-full h-full">
+// ── Funnel geometry helpers ──────────────────────────────────────────────────
+const CX    = 220;   // horizontal centre
+const TOP_Y = 52;    // top of funnel
+const BOT_Y = 250;   // bottom of funnel body
+const TOP_HW = 136;  // half-width at top
+const BOT_HW = 15;   // half-width at bottom (narrow tip)
+const FH = BOT_Y - TOP_Y;
+
+const fL = (y: number) => CX - TOP_HW + ((y - TOP_Y) / FH) * (TOP_HW - BOT_HW);
+const fR = (y: number) => CX + TOP_HW - ((y - TOP_Y) / FH) * (TOP_HW - BOT_HW);
+const trap = (y0: number, y1: number) =>
+  `M ${fL(y0)} ${y0} L ${fR(y0)} ${y0} L ${fR(y1)} ${y1} L ${fL(y1)} ${y1} Z`;
+
+// Stage divider y-values
+const DIVS = [104, 157, 205];
+
+const STAGES = [
+  { label: "Awareness",  y0: TOP_Y, y1: 104, fill: "hsl(38 22% 13%)" },
+  { label: "Engagement", y0: 104,   y1: 157, fill: "hsl(38 38% 16%)" },
+  { label: "Conversion", y0: 157,   y1: 205, fill: "hsl(38 55% 19%)" },
+  { label: "Retention",  y0: 205,   y1: BOT_Y, fill: "hsl(38 68% 22%)" },
+];
+const MIDS = STAGES.map(s => (s.y0 + s.y1) / 2);
+
+// Side item circles
+const L_CX = 32, R_CX = 408, CR = 15;
+
+const LEFT_ITEMS = [
+  { abbr: "AD",  label: "Paid Ads"      },
+  { abbr: "SEO", label: "Content & SEO" },
+  { abbr: "EM",  label: "Email Flows"   },
+  { abbr: "CRM", label: "CRM System"    },
+];
+const RIGHT_ITEMS = [
+  { abbr: "TGT", label: "Audience Data" },
+  { abbr: "AI",  label: "Predictive AI" },
+  { abbr: "A/B", label: "A/B Testing"   },
+  { abbr: "ANL", label: "Attribution"   },
+];
+
+// ── SVG Funnel ───────────────────────────────────────────────────────────────
+const FunnelSVG = ({ inView }: { inView: boolean }) => (
+  <svg viewBox="0 0 440 295" className="w-full h-auto select-none">
     <defs>
-      <linearGradient id="o2ChartFill" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"   stopColor="hsl(38 80% 55%)" stopOpacity="0.3" />
-        <stop offset="100%" stopColor="hsl(38 80% 55%)" stopOpacity="0"   />
-      </linearGradient>
-      <filter id="o2Glow">
+      <filter id="fGlow" x="-40%" y="-40%" width="180%" height="180%">
         <feGaussianBlur stdDeviation="1.8" result="b"/>
         <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
       </filter>
+      <linearGradient id="fBorderGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stopColor="hsl(38 80% 55%)" stopOpacity="0.6"/>
+        <stop offset="100%" stopColor="hsl(38 80% 55%)" stopOpacity="0.15"/>
+      </linearGradient>
     </defs>
-    {/* Grid lines */}
-    {[20, 40, 60].map(y => (
-      <line key={y} x1="0" y1={y} x2="260" y2={y}
-        stroke="hsl(38 80% 55%)" strokeOpacity="0.07" strokeWidth="0.5" />
+
+    {/* ── Column headers ── */}
+    {([ ["INPUTS", L_CX], ["MARKETING FUNNEL", CX], ["INTELLIGENCE", R_CX] ] as [string, number][]).map(([lbl, x]) => (
+      <motion.text key={lbl} x={x} y={30} textAnchor="middle"
+        fontSize={x === CX ? "7.5" : "6.5"} fontWeight="700" letterSpacing="0.14em"
+        fill={x === CX ? "hsl(38 80% 58%)" : "hsl(0 0% 48%)"}
+        initial={{ opacity: 0 }} animate={inView ? { opacity: x === CX ? 0.9 : 0.6 } : {}}
+        transition={{ delay: 0.05, duration: 0.4 }}
+      >{lbl}</motion.text>
     ))}
-    {/* Area fill */}
+
+    {/* ── Stage trapezoids ── */}
+    {STAGES.map((s, i) => (
+      <motion.path key={s.label} d={trap(s.y0, s.y1)}
+        fill={s.fill}
+        stroke="url(#fBorderGrad)" strokeWidth="0.6"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ delay: 0.18 + i * 0.13, duration: 0.55 }}
+      />
+    ))}
+
+    {/* Outer funnel border */}
     <motion.path
-      d="M 0 72 C 30 68 55 58 80 50 C 105 42 125 34 150 26 C 175 18 200 14 230 9 L 260 6 L 260 80 L 0 80 Z"
-      fill="url(#o2ChartFill)"
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : {}}
-      transition={{ delay: 0.8, duration: 0.8 }}
-    />
-    {/* Chart line */}
-    <motion.path
-      d="M 0 72 C 30 68 55 58 80 50 C 105 42 125 34 150 26 C 175 18 200 14 230 9 L 260 6"
-      stroke="hsl(38 85% 60%)" strokeWidth="2" fill="none" strokeLinecap="round"
-      filter="url(#o2Glow)"
+      d={`M ${fL(TOP_Y)} ${TOP_Y} L ${fR(TOP_Y)} ${TOP_Y} L ${fR(BOT_Y)} ${BOT_Y} L ${fL(BOT_Y)} ${BOT_Y} Z`}
+      fill="none" stroke="hsl(38 75% 55%)" strokeWidth="0.7" strokeOpacity="0.35"
       initial={{ pathLength: 0, opacity: 0 }}
       animate={inView ? { pathLength: 1, opacity: 1 } : {}}
-      transition={{ delay: 0.5, duration: 1.6, ease: "easeOut" }}
+      transition={{ delay: 0.1, duration: 1.0, ease: "easeOut" }}
     />
-    {/* End dot */}
-    <motion.circle cx="260" cy="6" r="3.5"
-      fill="hsl(38 85% 60%)" filter="url(#o2Glow)"
-      initial={{ scale: 0, opacity: 0 }}
-      animate={inView ? { scale: 1, opacity: 1 } : {}}
-      transition={{ delay: 2.1, duration: 0.4, type: "spring" }}
+
+    {/* ── Stage dividers ── */}
+    {DIVS.map((y, i) => (
+      <motion.path key={`dv${y}`} d={`M ${fL(y)} ${y} L ${fR(y)} ${y}`}
+        stroke="hsl(38 70% 55%)" strokeWidth="0.55" strokeOpacity="0.22" fill="none"
+        initial={{ pathLength: 0 }}
+        animate={inView ? { pathLength: 1 } : {}}
+        transition={{ delay: 0.35 + i * 0.1, duration: 0.4 }}
+      />
+    ))}
+
+    {/* ── Stage labels ── */}
+    {STAGES.map((s, i) => (
+      <motion.text key={`sl${i}`} x={CX} y={MIDS[i] + 4.5}
+        textAnchor="middle" fontSize="10.5" fontWeight="700"
+        fill="hsl(38 88% 74%)" letterSpacing="0.02em"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ delay: 0.5 + i * 0.13, duration: 0.4 }}
+      >{s.label}</motion.text>
+    ))}
+
+    {/* ── Left side items ── */}
+    {LEFT_ITEMS.map((item, i) => {
+      const y  = MIDS[i];
+      const fx = fL(y);
+      return (
+        <g key={`L${i}`}>
+          {/* Edge dot */}
+          <motion.circle cx={fx} cy={y} r="2.8" fill="hsl(38 82% 58%)"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.78 + i * 0.12, duration: 0.3 }}
+          />
+          {/* Dashed connector */}
+          <motion.path d={`M ${fx - 4} ${y} L ${L_CX + CR + 4} ${y}`}
+            stroke="hsl(38 75% 55%)" strokeWidth="0.55" strokeDasharray="3.5,2.5"
+            strokeOpacity="0.38" fill="none"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.9 + i * 0.12, duration: 0.35 }}
+          />
+          {/* Circle ring */}
+          <motion.circle cx={L_CX} cy={y} r={CR}
+            fill="hsl(38 75% 55% / 0.07)" stroke="hsl(38 72% 52%)"
+            strokeWidth="0.8" strokeOpacity="0.55"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 1.0 + i * 0.12, duration: 0.4 }}
+          />
+          {/* Abbreviation */}
+          <motion.text x={L_CX} y={y + 3.5} textAnchor="middle"
+            fontSize="7" fontWeight="800" fill="hsl(38 88% 68%)"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 1.08 + i * 0.12 }}
+          >{item.abbr}</motion.text>
+          {/* Label */}
+          <motion.text x={L_CX} y={y + CR + 10} textAnchor="middle"
+            fontSize="6.2" fill="hsl(0 0% 58%)"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 0.8 } : {}}
+            transition={{ delay: 1.12 + i * 0.12 }}
+          >{item.label}</motion.text>
+        </g>
+      );
+    })}
+
+    {/* ── Right side items ── */}
+    {RIGHT_ITEMS.map((item, i) => {
+      const y  = MIDS[i];
+      const fx = fR(y);
+      return (
+        <g key={`R${i}`}>
+          <motion.circle cx={fx} cy={y} r="2.8" fill="hsl(38 82% 58%)"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.78 + i * 0.12, duration: 0.3 }}
+          />
+          <motion.path d={`M ${fx + 4} ${y} L ${R_CX - CR - 4} ${y}`}
+            stroke="hsl(38 75% 55%)" strokeWidth="0.55" strokeDasharray="3.5,2.5"
+            strokeOpacity="0.38" fill="none"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.9 + i * 0.12, duration: 0.35 }}
+          />
+          <motion.circle cx={R_CX} cy={y} r={CR}
+            fill="hsl(38 75% 55% / 0.07)" stroke="hsl(38 72% 52%)"
+            strokeWidth="0.8" strokeOpacity="0.55"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 1.0 + i * 0.12, duration: 0.4 }}
+          />
+          <motion.text x={R_CX} y={y + 3.5} textAnchor="middle"
+            fontSize="7" fontWeight="800" fill="hsl(38 88% 68%)"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 1.08 + i * 0.12 }}
+          >{item.abbr}</motion.text>
+          <motion.text x={R_CX} y={y + CR + 10} textAnchor="middle"
+            fontSize="6.2" fill="hsl(0 0% 58%)"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 0.8 } : {}}
+            transition={{ delay: 1.12 + i * 0.12 }}
+          >{item.label}</motion.text>
+        </g>
+      );
+    })}
+
+    {/* ── Bottom pill ── */}
+    <motion.rect x={CX - 76} y={BOT_Y + 6} width={152} height={23} rx={11.5}
+      fill="hsl(38 78% 55% / 0.12)" stroke="hsl(38 80% 55%)"
+      strokeWidth="0.8" filter="url(#fGlow)"
+      initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+      transition={{ delay: 1.65, duration: 0.5 }}
     />
+    <motion.text x={CX} y={BOT_Y + 21.5} textAnchor="middle"
+      fontSize="8.8" fontWeight="700" fill="hsl(38 90% 66%)" filter="url(#fGlow)"
+      initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+      transition={{ delay: 1.8 }}
+    >Predictive Revenue Growth</motion.text>
+
+    {/* ── Top entry arrows (left & right) ── */}
+    {[
+      { d: `M ${CX - 60} ${TOP_Y} L ${CX - 30} ${TOP_Y - 12}`, anchor: "end",   label: "Data In" },
+      { d: `M ${CX + 60} ${TOP_Y} L ${CX + 30} ${TOP_Y - 12}`, anchor: "start", label: "Signals In" },
+    ].map(({ d, anchor, label }, i) => (
+      <g key={`entry${i}`}>
+        <motion.path d={d}
+          stroke="hsl(38 70% 55%)" strokeWidth="0.8" strokeOpacity="0.35"
+          fill="none" markerEnd="url(#arrowDown)"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={inView ? { pathLength: 1, opacity: 1 } : {}}
+          transition={{ delay: 0.08, duration: 0.5 }}
+        />
+        <motion.text
+          x={i === 0 ? CX - 63 : CX + 63} y={TOP_Y - 14}
+          textAnchor={anchor as "end" | "start"}
+          fontSize="6" fill="hsl(0 0% 52%)" fillOpacity="0.7"
+          initial={{ opacity: 0 }} animate={inView ? { opacity: 0.7 } : {}}
+          transition={{ delay: 0.2 }}
+        >{label}</motion.text>
+      </g>
+    ))}
   </svg>
 );
 
-// ── Metric chip ───────────────────────────────────────────────────────────
-const MetricChip = ({
-  label, value, sub, delay, inView, highlight = false,
-}: {
-  label: string; value: string; sub: string;
-  delay: number; inView: boolean; highlight?: boolean;
-}) => (
-  <motion.div
-    className={`flex-1 rounded-xl border p-3 text-center ${
-      highlight
-        ? "border-primary/40 bg-primary/5"
-        : "border-border bg-card/50"
-    }`}
-    initial={{ opacity: 0, y: 10 }}
-    animate={inView ? { opacity: 1, y: 0 } : {}}
-    transition={{ delay, duration: 0.5 }}
-  >
-    <div className={`text-xs uppercase tracking-widest mb-1 ${highlight ? "text-primary" : "text-muted-foreground"}`}>
-      {label}
-    </div>
-    <div className={`text-xl font-display font-bold ${highlight ? "text-gradient-gold" : "text-foreground"}`}>
-      {value}
-    </div>
-    <div className="text-[10px] text-muted-foreground mt-0.5">{sub}</div>
-  </motion.div>
-);
-
-// ── Dashboard visual ──────────────────────────────────────────────────────
-interface DashProps {
-  header: string; title: string;
-  funnel: string; funnelTag: string;
-  footerLeft: string; footerRight: string;
-  badge: string;
-  m1Label: string; m1Value: string; m1Sub: string;
-  m2Label: string; m2Value: string; m2Sub: string;
-  m3Label: string; m3Value: string; m3Sub: string;
-}
-
-const GrowthIntelligenceVisual = (p: DashProps) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-
-  return (
-    <div ref={ref} className="relative w-full max-w-lg">
-      {/* Ambient glow */}
-      <div className="absolute -inset-8 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 60% 40%, hsl(38 80% 55% / 0.06) 0%, transparent 65%)", filter: "blur(20px)" }} />
-
-      <motion.div
-        className="relative rounded-2xl border border-border bg-card/60 backdrop-blur-sm overflow-hidden shadow-2xl"
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={inView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 0.6 }}
-      >
-        {/* ── Header ── */}
-        <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-border/60">
-          <div>
-            <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{p.header}</span>
-            <p className="text-sm font-display font-semibold text-foreground mt-0.5">{p.title}</p>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <motion.span
-              className="w-1.5 h-1.5 rounded-full bg-green-400"
-              animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ duration: 1.6, repeat: Infinity }}
-            />
-            <span className="text-[10px] text-green-400 font-medium">Live</span>
-          </div>
-        </div>
-
-        {/* ── Chart ── */}
-        <div className="px-4 pt-4 pb-2 h-28">
-          <PerformanceChart inView={inView} />
-        </div>
-
-        {/* ── Funnel + label overlay ── */}
-        <div className="relative px-5 pb-3">
-          <div className="flex items-center gap-2 mb-3">
-            {/* Mini funnel */}
-            <svg viewBox="0 0 22 30" className="w-5 h-7 shrink-0">
-              <motion.path d="M 1 1 L 21 1 L 14 10 L 14 24 L 8 28 L 8 10 Z"
-                fill="hsl(38 80% 55%)" fillOpacity="0.15"
-                stroke="hsl(38 80% 55%)" strokeOpacity="0.5" strokeWidth="0.8"
-                initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-                transition={{ delay: 1.4 }}
-              />
-            </svg>
-            <span className="text-[10px] text-muted-foreground tracking-wide">{p.funnel}</span>
-            <span className="ml-auto text-[10px] text-primary font-semibold">{p.funnelTag}</span>
-          </div>
-
-          {/* ── Metric chips ── */}
-          <div className="flex gap-2">
-            <MetricChip label={p.m1Label} value={p.m1Value} sub={p.m1Sub} delay={1.6} inView={inView} highlight />
-            <MetricChip label={p.m2Label} value={p.m2Value} sub={p.m2Sub} delay={1.8} inView={inView} />
-            <MetricChip label={p.m3Label} value={p.m3Value} sub={p.m3Sub} delay={2.0} inView={inView} />
-          </div>
-        </div>
-
-        {/* ── Footer bar ── */}
-        <div className="px-5 py-2.5 border-t border-border/60 flex items-center justify-between">
-          <span className="text-[10px] text-muted-foreground">{p.footerLeft}</span>
-          <span className="text-[10px] text-primary font-medium">{p.footerRight}</span>
-        </div>
-      </motion.div>
-
-      {/* Floating badge */}
-      <motion.div
-        className="absolute -top-3 -right-3 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-lg"
-        initial={{ opacity: 0, scale: 0.8, rotate: -6 }}
-        animate={inView ? { opacity: 1, scale: 1, rotate: -3 } : {}}
-        transition={{ delay: 2.4, duration: 0.4, type: "spring" }}
-      >
-        {p.badge}
-      </motion.div>
-    </div>
-  );
-};
-
-// ── Section ───────────────────────────────────────────────────────────────
+// ── Section ───────────────────────────────────────────────────────────────────
 const AboutSection = () => {
   const { get } = useSiteContent();
-
-  const dashHeader      = get("about_dash_header",       "Growth Intelligence");
-  const dashTitle       = get("about_dash_title",        "Performance Overview");
-  const dashFunnel      = get("about_dash_funnel",       "Conversion Funnel Analysis");
-  const dashFunnelTag   = get("about_dash_funnel_tag",   "↑ Optimised");
-  const dashFooterLeft  = get("about_dash_footer_left",  "216 campaigns analysed");
-  const dashFooterRight = get("about_dash_footer_right", "Data-Driven · Always On");
-  const dashBadge       = get("about_dash_badge",        "Science-Fueled");
-
-  const m1Label = get("about_metric_1_label", "ROAS");
-  const m1Value = get("about_metric_1_value", "3.8×");
-  const m1Sub   = get("about_metric_1_sub",   "Avg. return");
-  const m2Label = get("about_metric_2_label", "CVR");
-  const m2Value = get("about_metric_2_value", "4.2%");
-  const m2Sub   = get("about_metric_2_sub",   "Conv. rate");
-  const m3Label = get("about_metric_3_label", "Growth");
-  const m3Value = get("about_metric_3_value", "+127%");
-  const m3Sub   = get("about_metric_3_sub",   "YoY revenue");
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section id="about" className="relative py-16 md:py-24 px-6 overflow-hidden">
-      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full bg-primary/4 blur-[140px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-[420px] h-[420px] rounded-full bg-primary/4 blur-[140px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-14 lg:gap-20 items-center">
 
@@ -211,23 +251,15 @@ const AboutSection = () => {
           </p>
         </motion.div>
 
-        {/* RIGHT — Control interface visual */}
+        {/* RIGHT — Funnel visual */}
         <motion.div
-          className="flex justify-center md:justify-end"
+          ref={ref}
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={viewportOnce}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <GrowthIntelligenceVisual
-            header={dashHeader} title={dashTitle}
-            funnel={dashFunnel} funnelTag={dashFunnelTag}
-            footerLeft={dashFooterLeft} footerRight={dashFooterRight}
-            badge={dashBadge}
-            m1Label={m1Label} m1Value={m1Value} m1Sub={m1Sub}
-            m2Label={m2Label} m2Value={m2Value} m2Sub={m2Sub}
-            m3Label={m3Label} m3Value={m3Value} m3Sub={m3Sub}
-          />
+          <FunnelSVG inView={inView} />
         </motion.div>
       </div>
     </section>
