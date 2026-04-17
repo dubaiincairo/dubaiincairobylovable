@@ -3,223 +3,137 @@ import { useRef } from "react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 
-// ── Funnel geometry helpers ──────────────────────────────────────────────────
-const CX    = 220;   // horizontal centre
-const TOP_Y = 52;    // top of funnel
-const BOT_Y = 250;   // bottom of funnel body
-const TOP_HW = 136;  // half-width at top
-const BOT_HW = 15;   // half-width at bottom (narrow tip)
+// ── Funnel geometry ───────────────────────────────────────────────────────────
+const CX = 200, TOP_Y = 44, BOT_Y = 244, TOP_HW = 116, BOT_HW = 13;
 const FH = BOT_Y - TOP_Y;
-
 const fL = (y: number) => CX - TOP_HW + ((y - TOP_Y) / FH) * (TOP_HW - BOT_HW);
 const fR = (y: number) => CX + TOP_HW - ((y - TOP_Y) / FH) * (TOP_HW - BOT_HW);
 const trap = (y0: number, y1: number) =>
   `M ${fL(y0)} ${y0} L ${fR(y0)} ${y0} L ${fR(y1)} ${y1} L ${fL(y1)} ${y1} Z`;
 
-// Stage divider y-values
-const DIVS = [104, 157, 205];
-
 const STAGES = [
-  { label: "Awareness",  y0: TOP_Y, y1: 104, fill: "hsl(38 22% 13%)" },
-  { label: "Engagement", y0: 104,   y1: 157, fill: "hsl(38 38% 16%)" },
-  { label: "Conversion", y0: 157,   y1: 205, fill: "hsl(38 55% 19%)" },
-  { label: "Retention",  y0: 205,   y1: BOT_Y, fill: "hsl(38 68% 22%)" },
+  { label: "Awareness",  y0: TOP_Y, y1: 104 },
+  { label: "Engagement", y0: 104,   y1: 156 },
+  { label: "Conversion", y0: 156,   y1: 203 },
+  { label: "Retention",  y0: 203,   y1: BOT_Y },
 ];
 const MIDS = STAGES.map(s => (s.y0 + s.y1) / 2);
+const DIVS = [104, 156, 203];
 
-// Side item circles
-const L_CX = 32, R_CX = 408, CR = 15;
+// Side labels — plain text only, no icons, no circles
+const LEFT  = ["Paid Ads", "Content & SEO", "Email Flows", "CRM System"];
+const RIGHT = ["Audience Data", "Predictive AI", "A/B Testing", "Attribution"];
 
-const LEFT_ITEMS = [
-  { abbr: "AD",  label: "Paid Ads"      },
-  { abbr: "SEO", label: "Content & SEO" },
-  { abbr: "EM",  label: "Email Flows"   },
-  { abbr: "CRM", label: "CRM System"    },
-];
-const RIGHT_ITEMS = [
-  { abbr: "TGT", label: "Audience Data" },
-  { abbr: "AI",  label: "Predictive AI" },
-  { abbr: "A/B", label: "A/B Testing"   },
-  { abbr: "ANL", label: "Attribution"   },
-];
-
-// ── SVG Funnel ───────────────────────────────────────────────────────────────
+// ── SVG ───────────────────────────────────────────────────────────────────────
 const FunnelSVG = ({ inView }: { inView: boolean }) => (
-  <svg viewBox="0 0 440 295" className="w-full h-auto select-none">
+  <svg viewBox="0 0 400 276" className="w-full h-auto select-none">
     <defs>
-      <filter id="fGlow" x="-40%" y="-40%" width="180%" height="180%">
-        <feGaussianBlur stdDeviation="1.8" result="b"/>
+      <linearGradient id="fFill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stopColor="hsl(38 60% 50%)" stopOpacity="0.06" />
+        <stop offset="100%" stopColor="hsl(38 80% 55%)" stopOpacity="0.18" />
+      </linearGradient>
+      <filter id="pillGlow" x="-30%" y="-50%" width="160%" height="200%">
+        <feGaussianBlur stdDeviation="1.5" result="b"/>
         <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
       </filter>
-      <linearGradient id="fBorderGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"   stopColor="hsl(38 80% 55%)" stopOpacity="0.6"/>
-        <stop offset="100%" stopColor="hsl(38 80% 55%)" stopOpacity="0.15"/>
-      </linearGradient>
     </defs>
 
-    {/* ── Column headers ── */}
-    {([ ["INPUTS", L_CX], ["MARKETING FUNNEL", CX], ["INTELLIGENCE", R_CX] ] as [string, number][]).map(([lbl, x]) => (
-      <motion.text key={lbl} x={x} y={30} textAnchor="middle"
-        fontSize={x === CX ? "7.5" : "6.5"} fontWeight="700" letterSpacing="0.14em"
-        fill={x === CX ? "hsl(38 80% 58%)" : "hsl(0 0% 48%)"}
-        initial={{ opacity: 0 }} animate={inView ? { opacity: x === CX ? 0.9 : 0.6 } : {}}
-        transition={{ delay: 0.05, duration: 0.4 }}
-      >{lbl}</motion.text>
-    ))}
+    {/* ── Funnel fill (single gradient shape) ── */}
+    <motion.path
+      d={trap(TOP_Y, BOT_Y)}
+      fill="url(#fFill)"
+      initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+      transition={{ delay: 0.1, duration: 0.8 }}
+    />
 
-    {/* ── Stage trapezoids ── */}
-    {STAGES.map((s, i) => (
-      <motion.path key={s.label} d={trap(s.y0, s.y1)}
-        fill={s.fill}
-        stroke="url(#fBorderGrad)" strokeWidth="0.6"
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ delay: 0.18 + i * 0.13, duration: 0.55 }}
-      />
-    ))}
-
-    {/* Outer funnel border */}
+    {/* ── Funnel outer border ── */}
     <motion.path
       d={`M ${fL(TOP_Y)} ${TOP_Y} L ${fR(TOP_Y)} ${TOP_Y} L ${fR(BOT_Y)} ${BOT_Y} L ${fL(BOT_Y)} ${BOT_Y} Z`}
-      fill="none" stroke="hsl(38 75% 55%)" strokeWidth="0.7" strokeOpacity="0.35"
-      initial={{ pathLength: 0, opacity: 0 }}
-      animate={inView ? { pathLength: 1, opacity: 1 } : {}}
-      transition={{ delay: 0.1, duration: 1.0, ease: "easeOut" }}
+      fill="none" stroke="hsl(38 75% 55%)" strokeWidth="0.75" strokeOpacity="0.45"
+      initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : {}}
+      transition={{ delay: 0.15, duration: 1.0, ease: "easeOut" }}
     />
 
     {/* ── Stage dividers ── */}
     {DIVS.map((y, i) => (
-      <motion.path key={`dv${y}`} d={`M ${fL(y)} ${y} L ${fR(y)} ${y}`}
-        stroke="hsl(38 70% 55%)" strokeWidth="0.55" strokeOpacity="0.22" fill="none"
-        initial={{ pathLength: 0 }}
-        animate={inView ? { pathLength: 1 } : {}}
-        transition={{ delay: 0.35 + i * 0.1, duration: 0.4 }}
+      <motion.path key={y}
+        d={`M ${fL(y)} ${y} L ${fR(y)} ${y}`}
+        stroke="hsl(38 70% 55%)" strokeWidth="0.45" strokeOpacity="0.2" fill="none"
+        initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : {}}
+        transition={{ delay: 0.4 + i * 0.1, duration: 0.5 }}
       />
     ))}
 
     {/* ── Stage labels ── */}
     {STAGES.map((s, i) => (
-      <motion.text key={`sl${i}`} x={CX} y={MIDS[i] + 4.5}
-        textAnchor="middle" fontSize="10.5" fontWeight="700"
-        fill="hsl(38 88% 74%)" letterSpacing="0.02em"
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ delay: 0.5 + i * 0.13, duration: 0.4 }}
+      <motion.text key={s.label}
+        x={CX} y={MIDS[i] + 4.5}
+        textAnchor="middle" fontSize="10.5" fontWeight="600"
+        fill="hsl(38 85% 72%)"
+        initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+        transition={{ delay: 0.55 + i * 0.12, duration: 0.4 }}
       >{s.label}</motion.text>
     ))}
 
-    {/* ── Left side items ── */}
-    {LEFT_ITEMS.map((item, i) => {
-      const y  = MIDS[i];
-      const fx = fL(y);
+    {/* ── Left labels + thin connector ── */}
+    {LEFT.map((label, i) => {
+      const y = MIDS[i];
       return (
         <g key={`L${i}`}>
-          {/* Edge dot */}
-          <motion.circle cx={fx} cy={y} r="2.8" fill="hsl(38 82% 58%)"
+          <motion.path
+            d={`M ${fL(y) - 3} ${y} L 72 ${y}`}
+            stroke="hsl(38 60% 55%)" strokeWidth="0.4" strokeOpacity="0.18" fill="none"
             initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.78 + i * 0.12, duration: 0.3 }}
+            transition={{ delay: 0.75 + i * 0.1, duration: 0.35 }}
           />
-          {/* Dashed connector */}
-          <motion.path d={`M ${fx - 4} ${y} L ${L_CX + CR + 4} ${y}`}
-            stroke="hsl(38 75% 55%)" strokeWidth="0.55" strokeDasharray="3.5,2.5"
-            strokeOpacity="0.38" fill="none"
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.9 + i * 0.12, duration: 0.35 }}
-          />
-          {/* Circle ring */}
-          <motion.circle cx={L_CX} cy={y} r={CR}
-            fill="hsl(38 75% 55% / 0.07)" stroke="hsl(38 72% 52%)"
-            strokeWidth="0.8" strokeOpacity="0.55"
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 1.0 + i * 0.12, duration: 0.4 }}
-          />
-          {/* Abbreviation */}
-          <motion.text x={L_CX} y={y + 3.5} textAnchor="middle"
-            fontSize="7" fontWeight="800" fill="hsl(38 88% 68%)"
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 1.08 + i * 0.12 }}
-          >{item.abbr}</motion.text>
-          {/* Label */}
-          <motion.text x={L_CX} y={y + CR + 10} textAnchor="middle"
-            fontSize="6.2" fill="hsl(0 0% 58%)"
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 0.8 } : {}}
-            transition={{ delay: 1.12 + i * 0.12 }}
-          >{item.label}</motion.text>
+          <motion.text
+            x={68} y={y + 3.5}
+            textAnchor="end" fontSize="8.5"
+            fill="hsl(0 0% 58%)"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 0.85 } : {}}
+            transition={{ delay: 0.8 + i * 0.1, duration: 0.35 }}
+          >{label}</motion.text>
         </g>
       );
     })}
 
-    {/* ── Right side items ── */}
-    {RIGHT_ITEMS.map((item, i) => {
-      const y  = MIDS[i];
-      const fx = fR(y);
+    {/* ── Right labels + thin connector ── */}
+    {RIGHT.map((label, i) => {
+      const y = MIDS[i];
       return (
         <g key={`R${i}`}>
-          <motion.circle cx={fx} cy={y} r="2.8" fill="hsl(38 82% 58%)"
+          <motion.path
+            d={`M ${fR(y) + 3} ${y} L 328 ${y}`}
+            stroke="hsl(38 60% 55%)" strokeWidth="0.4" strokeOpacity="0.18" fill="none"
             initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.78 + i * 0.12, duration: 0.3 }}
+            transition={{ delay: 0.75 + i * 0.1, duration: 0.35 }}
           />
-          <motion.path d={`M ${fx + 4} ${y} L ${R_CX - CR - 4} ${y}`}
-            stroke="hsl(38 75% 55%)" strokeWidth="0.55" strokeDasharray="3.5,2.5"
-            strokeOpacity="0.38" fill="none"
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.9 + i * 0.12, duration: 0.35 }}
-          />
-          <motion.circle cx={R_CX} cy={y} r={CR}
-            fill="hsl(38 75% 55% / 0.07)" stroke="hsl(38 72% 52%)"
-            strokeWidth="0.8" strokeOpacity="0.55"
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 1.0 + i * 0.12, duration: 0.4 }}
-          />
-          <motion.text x={R_CX} y={y + 3.5} textAnchor="middle"
-            fontSize="7" fontWeight="800" fill="hsl(38 88% 68%)"
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 1.08 + i * 0.12 }}
-          >{item.abbr}</motion.text>
-          <motion.text x={R_CX} y={y + CR + 10} textAnchor="middle"
-            fontSize="6.2" fill="hsl(0 0% 58%)"
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 0.8 } : {}}
-            transition={{ delay: 1.12 + i * 0.12 }}
-          >{item.label}</motion.text>
+          <motion.text
+            x={332} y={y + 3.5}
+            textAnchor="start" fontSize="8.5"
+            fill="hsl(0 0% 58%)"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 0.85 } : {}}
+            transition={{ delay: 0.8 + i * 0.1, duration: 0.35 }}
+          >{label}</motion.text>
         </g>
       );
     })}
 
-    {/* ── Bottom pill ── */}
-    <motion.rect x={CX - 76} y={BOT_Y + 6} width={152} height={23} rx={11.5}
-      fill="hsl(38 78% 55% / 0.12)" stroke="hsl(38 80% 55%)"
-      strokeWidth="0.8" filter="url(#fGlow)"
+    {/* ── Bottom output pill ── */}
+    <motion.rect
+      x={CX - 66} y={BOT_Y + 7} width={132} height={21} rx={10.5}
+      fill="hsl(38 80% 55% / 0.08)" stroke="hsl(38 78% 55%)"
+      strokeWidth="0.7" filter="url(#pillGlow)"
       initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-      transition={{ delay: 1.65, duration: 0.5 }}
+      transition={{ delay: 1.4, duration: 0.5 }}
     />
-    <motion.text x={CX} y={BOT_Y + 21.5} textAnchor="middle"
-      fontSize="8.8" fontWeight="700" fill="hsl(38 90% 66%)" filter="url(#fGlow)"
+    <motion.text
+      x={CX} y={BOT_Y + 21.5}
+      textAnchor="middle" fontSize="8.5" fontWeight="700"
+      fill="hsl(38 88% 66%)" filter="url(#pillGlow)"
       initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-      transition={{ delay: 1.8 }}
-    >Predictive Revenue Growth</motion.text>
-
-    {/* ── Top entry arrows (left & right) ── */}
-    {[
-      { d: `M ${CX - 60} ${TOP_Y} L ${CX - 30} ${TOP_Y - 12}`, anchor: "end",   label: "Data In" },
-      { d: `M ${CX + 60} ${TOP_Y} L ${CX + 30} ${TOP_Y - 12}`, anchor: "start", label: "Signals In" },
-    ].map(({ d, anchor, label }, i) => (
-      <g key={`entry${i}`}>
-        <motion.path d={d}
-          stroke="hsl(38 70% 55%)" strokeWidth="0.8" strokeOpacity="0.35"
-          fill="none" markerEnd="url(#arrowDown)"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={inView ? { pathLength: 1, opacity: 1 } : {}}
-          transition={{ delay: 0.08, duration: 0.5 }}
-        />
-        <motion.text
-          x={i === 0 ? CX - 63 : CX + 63} y={TOP_Y - 14}
-          textAnchor={anchor as "end" | "start"}
-          fontSize="6" fill="hsl(0 0% 52%)" fillOpacity="0.7"
-          initial={{ opacity: 0 }} animate={inView ? { opacity: 0.7 } : {}}
-          transition={{ delay: 0.2 }}
-        >{label}</motion.text>
-      </g>
-    ))}
+      transition={{ delay: 1.55 }}
+    >Revenue Growth</motion.text>
   </svg>
 );
 
@@ -251,10 +165,10 @@ const AboutSection = () => {
           </p>
         </motion.div>
 
-        {/* RIGHT — Funnel visual */}
+        {/* RIGHT — Funnel */}
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, x: 30 }}
+          initial={{ opacity: 0, x: 24 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={viewportOnce}
           transition={{ duration: 0.7, ease: "easeOut" }}
