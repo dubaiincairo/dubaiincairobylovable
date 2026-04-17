@@ -118,7 +118,7 @@ const GoogleBusinessWidget = () => {
             <span className="text-sm font-display font-semibold text-foreground">{companyName}</span>
           </div>
 
-          {/* Bottom row: legal items + address */}
+          {/* Bottom row: legal items */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {legalItems.map((item, i) => (
               <div key={i} className="flex items-center gap-1.5">
@@ -126,10 +126,6 @@ const GoogleBusinessWidget = () => {
                 <span className="text-xs font-semibold text-foreground">{item.value}</span>
               </div>
             ))}
-            <div className="flex items-center gap-1.5 ml-auto">
-              <MapPin className="w-3 h-3 text-primary shrink-0" />
-              <span className="text-xs text-muted-foreground">{legalAddress}</span>
-            </div>
           </div>
         </motion.div>
 
