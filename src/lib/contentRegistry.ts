@@ -10,7 +10,7 @@ export interface ContentField {
 
 export const sectionOrder = [
   "nav", "hero", "stats", "about", "edges", "values", "services",
-  "founder", "clients", "tech", "legal", "contact", "footer",
+  "founder", "clients", "tech", "google", "legal", "contact", "footer",
 ];
 
 export const sectionLabels: Record<string, string> = {
@@ -24,6 +24,7 @@ export const sectionLabels: Record<string, string> = {
   founder: "Founder Section",
   clients: "Clients Section",
   tech: "Tech Stack",
+  google: "We're on Google",
   legal: "Legal & Registration",
   contact: "Contact Section",
   footer: "Footer",
@@ -109,6 +110,18 @@ export const contentRegistry: ContentField[] = [
     { section: "tech", key: `tech_${i+1}_label`, label: `Category ${i+1} Label`, defaultValue: `Category ${i+1}` },
     { section: "tech", key: `tech_${i+1}_tools`, label: `Category ${i+1} Tools (comma-separated)`, defaultValue: "" },
   ]).flat(),
+
+  // ── Google ──
+  { section: "google", key: "google_badge",         label: "Section Badge",           defaultValue: "We're on Google" },
+  { section: "google", key: "google_headline",      label: "Section Headline",        defaultValue: "We're on Google" },
+  { section: "google", key: "google_subtext",       label: "Section Subtext",         defaultValue: "At the heart of Cairo where movement never stops and ideas move faster." },
+  { section: "google", key: "google_biz_name",      label: "Business Name",           defaultValue: "Dubai in Cairo" },
+  { section: "google", key: "google_biz_category",  label: "Business Category",       defaultValue: "Marketing Studios" },
+  { section: "google", key: "google_rating",        label: "Rating (number)",         defaultValue: "5.0" },
+  { section: "google", key: "google_address",       label: "Address",                 defaultValue: "100 Al-Mirghany Street, Abu Dhabi Bank Building, 1st Floor, Heliopolis, Cairo" },
+  { section: "google", key: "google_maps_link",     label: "Google Maps URL",         defaultValue: "https://maps.app.goo.gl/BVYf5XUFXJyoW1gQ9" },
+  { section: "google", key: "google_maps_embed",    label: "Maps Embed URL",          defaultValue: "https://maps.google.com/maps?q=Dubai+in+Cairo+Marketing+Studios,+100+El-Sayed+El-Merghany,+Heliopolis,+Cairo,+Egypt&output=embed&z=16" },
+  { section: "google", key: "google_cta",           label: "Open Maps Button Text",   defaultValue: "Open in Google Maps" },
 
   // ── Legal ──
   { section: "legal", key: "legal_subtitle", label: "Section Subtitle", defaultValue: "Registered, Licensed & Ready to Operate" },
