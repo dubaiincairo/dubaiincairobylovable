@@ -74,10 +74,28 @@ export const contentRegistry: ContentField[] = [
   { section: "stats", key: "stat_digital_label", label: "Stat 4 Label", defaultValue: "Digital Operation" },
 
   // ── About ──
-  { section: "about", key: "about_subtitle", label: "Section Subtitle", defaultValue: "Who We Are" },
-  { section: "about", key: "about_headline", label: "Section Headline", defaultValue: "A Digital Agency Built on Science, Not Guesswork" },
-  { section: "about", key: "about_body", label: "Body Paragraph 1", defaultValue: "Since March 2021, Dubai'nCairo has been helping brands grow online through data-driven marketing and eBusiness solutions." },
-  { section: "about", key: "about_body_2", label: "Body Paragraph 2", defaultValue: "We are 100% digital by design. No physical overhead. No wasted time. Just a focused, talented team — available to you from anywhere." },
+  { section: "about", key: "about_subtitle",          label: "Section Subtitle",            defaultValue: "Who We Are" },
+  { section: "about", key: "about_headline",          label: "Section Headline",            defaultValue: "A Digital Agency Built on Science, Not Guesswork" },
+  { section: "about", key: "about_body",              label: "Body Paragraph 1",            defaultValue: "Since March 2021, Dubai'nCairo has been helping brands grow online through data-driven marketing and eBusiness solutions." },
+  { section: "about", key: "about_body_2",            label: "Body Paragraph 2",            defaultValue: "We are 100% digital by design. No physical overhead. No wasted time. Just a focused, talented team — available to you from anywhere." },
+  // Dashboard visual
+  { section: "about", key: "about_dash_header",       label: "Dashboard — Header Label",    defaultValue: "Growth Intelligence" },
+  { section: "about", key: "about_dash_title",        label: "Dashboard — Title",           defaultValue: "Performance Overview" },
+  { section: "about", key: "about_dash_funnel",       label: "Dashboard — Funnel Label",    defaultValue: "Conversion Funnel Analysis" },
+  { section: "about", key: "about_dash_funnel_tag",   label: "Dashboard — Funnel Tag",      defaultValue: "↑ Optimised" },
+  { section: "about", key: "about_dash_footer_left",  label: "Dashboard — Footer Left",     defaultValue: "216 campaigns analysed" },
+  { section: "about", key: "about_dash_footer_right", label: "Dashboard — Footer Right",    defaultValue: "Data-Driven · Always On" },
+  { section: "about", key: "about_dash_badge",        label: "Dashboard — Floating Badge",  defaultValue: "Science-Fueled" },
+  // Metric chips (grouped as Metric 1 / 2 / 3 in admin)
+  { section: "about", key: "about_metric_1_label", label: "Metric 1 — Label", defaultValue: "ROAS" },
+  { section: "about", key: "about_metric_1_value", label: "Metric 1 — Value", defaultValue: "3.8×" },
+  { section: "about", key: "about_metric_1_sub",   label: "Metric 1 — Sub",   defaultValue: "Avg. return" },
+  { section: "about", key: "about_metric_2_label", label: "Metric 2 — Label", defaultValue: "CVR" },
+  { section: "about", key: "about_metric_2_value", label: "Metric 2 — Value", defaultValue: "4.2%" },
+  { section: "about", key: "about_metric_2_sub",   label: "Metric 2 — Sub",   defaultValue: "Conv. rate" },
+  { section: "about", key: "about_metric_3_label", label: "Metric 3 — Label", defaultValue: "Growth" },
+  { section: "about", key: "about_metric_3_value", label: "Metric 3 — Value", defaultValue: "+127%" },
+  { section: "about", key: "about_metric_3_sub",   label: "Metric 3 — Sub",   defaultValue: "YoY revenue" },
 
   // ── Edges ──
   { section: "edges", key: "edges_subtitle", label: "Section Subtitle", defaultValue: "Why We're Different" },

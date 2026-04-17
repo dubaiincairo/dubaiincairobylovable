@@ -76,7 +76,17 @@ const MetricChip = ({
 );
 
 // ── Dashboard visual ──────────────────────────────────────────────────────
-const GrowthIntelligenceVisual = () => {
+interface DashProps {
+  header: string; title: string;
+  funnel: string; funnelTag: string;
+  footerLeft: string; footerRight: string;
+  badge: string;
+  m1Label: string; m1Value: string; m1Sub: string;
+  m2Label: string; m2Value: string; m2Sub: string;
+  m3Label: string; m3Value: string; m3Sub: string;
+}
+
+const GrowthIntelligenceVisual = (p: DashProps) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
@@ -95,8 +105,8 @@ const GrowthIntelligenceVisual = () => {
         {/* ── Header ── */}
         <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-border/60">
           <div>
-            <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Growth Intelligence</span>
-            <p className="text-sm font-display font-semibold text-foreground mt-0.5">Performance Overview</p>
+            <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{p.header}</span>
+            <p className="text-sm font-display font-semibold text-foreground mt-0.5">{p.title}</p>
           </div>
           <div className="flex items-center gap-1.5">
             <motion.span
@@ -125,22 +135,22 @@ const GrowthIntelligenceVisual = () => {
                 transition={{ delay: 1.4 }}
               />
             </svg>
-            <span className="text-[10px] text-muted-foreground tracking-wide">Conversion Funnel Analysis</span>
-            <span className="ml-auto text-[10px] text-primary font-semibold">↑ Optimised</span>
+            <span className="text-[10px] text-muted-foreground tracking-wide">{p.funnel}</span>
+            <span className="ml-auto text-[10px] text-primary font-semibold">{p.funnelTag}</span>
           </div>
 
           {/* ── Metric chips ── */}
           <div className="flex gap-2">
-            <MetricChip label="ROAS"     value="3.8×"   sub="Avg. return"     delay={1.6} inView={inView} highlight />
-            <MetricChip label="CVR"      value="4.2%"   sub="Conv. rate"      delay={1.8} inView={inView} />
-            <MetricChip label="Growth"   value="+127%"  sub="YoY revenue"     delay={2.0} inView={inView} />
+            <MetricChip label={p.m1Label} value={p.m1Value} sub={p.m1Sub} delay={1.6} inView={inView} highlight />
+            <MetricChip label={p.m2Label} value={p.m2Value} sub={p.m2Sub} delay={1.8} inView={inView} />
+            <MetricChip label={p.m3Label} value={p.m3Value} sub={p.m3Sub} delay={2.0} inView={inView} />
           </div>
         </div>
 
         {/* ── Footer bar ── */}
         <div className="px-5 py-2.5 border-t border-border/60 flex items-center justify-between">
-          <span className="text-[10px] text-muted-foreground">216 campaigns analysed</span>
-          <span className="text-[10px] text-primary font-medium">Data-Driven · Always On</span>
+          <span className="text-[10px] text-muted-foreground">{p.footerLeft}</span>
+          <span className="text-[10px] text-primary font-medium">{p.footerRight}</span>
         </div>
       </motion.div>
 
@@ -151,7 +161,7 @@ const GrowthIntelligenceVisual = () => {
         animate={inView ? { opacity: 1, scale: 1, rotate: -3 } : {}}
         transition={{ delay: 2.4, duration: 0.4, type: "spring" }}
       >
-        Science-Fueled
+        {p.badge}
       </motion.div>
     </div>
   );
@@ -160,6 +170,24 @@ const GrowthIntelligenceVisual = () => {
 // ── Section ───────────────────────────────────────────────────────────────
 const AboutSection = () => {
   const { get } = useSiteContent();
+
+  const dashHeader      = get("about_dash_header",       "Growth Intelligence");
+  const dashTitle       = get("about_dash_title",        "Performance Overview");
+  const dashFunnel      = get("about_dash_funnel",       "Conversion Funnel Analysis");
+  const dashFunnelTag   = get("about_dash_funnel_tag",   "↑ Optimised");
+  const dashFooterLeft  = get("about_dash_footer_left",  "216 campaigns analysed");
+  const dashFooterRight = get("about_dash_footer_right", "Data-Driven · Always On");
+  const dashBadge       = get("about_dash_badge",        "Science-Fueled");
+
+  const m1Label = get("about_metric_1_label", "ROAS");
+  const m1Value = get("about_metric_1_value", "3.8×");
+  const m1Sub   = get("about_metric_1_sub",   "Avg. return");
+  const m2Label = get("about_metric_2_label", "CVR");
+  const m2Value = get("about_metric_2_value", "4.2%");
+  const m2Sub   = get("about_metric_2_sub",   "Conv. rate");
+  const m3Label = get("about_metric_3_label", "Growth");
+  const m3Value = get("about_metric_3_value", "+127%");
+  const m3Sub   = get("about_metric_3_sub",   "YoY revenue");
 
   return (
     <section id="about" className="relative py-16 md:py-24 px-6 overflow-hidden">
@@ -191,7 +219,15 @@ const AboutSection = () => {
           viewport={viewportOnce}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <GrowthIntelligenceVisual />
+          <GrowthIntelligenceVisual
+            header={dashHeader} title={dashTitle}
+            funnel={dashFunnel} funnelTag={dashFunnelTag}
+            footerLeft={dashFooterLeft} footerRight={dashFooterRight}
+            badge={dashBadge}
+            m1Label={m1Label} m1Value={m1Value} m1Sub={m1Sub}
+            m2Label={m2Label} m2Value={m2Value} m2Sub={m2Sub}
+            m3Label={m3Label} m3Value={m3Value} m3Sub={m3Sub}
+          />
         </motion.div>
       </div>
     </section>

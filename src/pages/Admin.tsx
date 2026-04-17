@@ -22,7 +22,7 @@ const sectionDescriptions: Record<string, string> = {
   nav: "Logo name, nav links, CTA button",
   hero: "Headline, sub-headline, CTA buttons, right-side visual card",
   stats: "Key numbers shown below the hero",
-  about: "Who we are — text block",
+  about: "Text copy + dashboard visual (header, metrics, badge)",
   edges: "Why we're different — 6 cards",
   values: "Our core values — 6 cards",
   services: "Six specialised studios",
@@ -37,6 +37,7 @@ const sectionDescriptions: Record<string, string> = {
 
 const subItemLabels: Record<string, string> = {
   hero: "Chip",
+  about: "Metric",
   services: "Studio",
   edges: "Edge",
   values: "Value",
