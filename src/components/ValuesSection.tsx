@@ -15,7 +15,7 @@ const ValuesSection = () => {
   }));
 
   return (
-    <section className="relative py-16 md:py-24 px-6 overflow-hidden">
+    <section className="relative py-14 md:py-20 px-6 overflow-hidden">
       <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">

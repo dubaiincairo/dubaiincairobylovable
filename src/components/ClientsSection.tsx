@@ -17,7 +17,7 @@ const ClientsSection = () => {
   const row2 = clients.slice(half);
 
   return (
-    <section id="work" className="relative py-12 md:py-20 overflow-hidden">
+    <section id="work" className="relative py-8 md:py-12 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 20% 50%, hsl(38 80% 55% / 0.03) 0%, transparent 50%)' }} />
 
       <div className="relative max-w-6xl mx-auto px-6">

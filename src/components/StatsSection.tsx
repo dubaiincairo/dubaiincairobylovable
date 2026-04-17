@@ -42,7 +42,7 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="relative py-10 md:py-16 px-6">
+    <section className="relative py-8 md:py-12 px-6">
       <motion.div
         className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12"
         variants={staggerContainer}

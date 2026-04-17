@@ -7,7 +7,7 @@ const FounderSection = () => {
   const { get } = useSiteContent();
 
   return (
-    <section id="team" className="relative py-16 md:py-24 px-6 overflow-hidden">
+    <section id="team" className="relative py-14 md:py-20 px-6 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)' }} />
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-primary/4 blur-[140px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 

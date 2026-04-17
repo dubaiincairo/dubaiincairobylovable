@@ -24,7 +24,7 @@ const AboutSection = () => {
   const { get } = useSiteContent();
 
   return (
-    <section id="about" className="relative py-16 md:py-24 px-6 overflow-hidden">
+    <section id="about" className="relative py-14 md:py-20 px-6 overflow-hidden">
       <div className="absolute top-1/2 right-0 w-[480px] h-[480px] rounded-full bg-primary/4 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-14 lg:gap-24 items-start">
