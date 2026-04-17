@@ -23,8 +23,8 @@ const Index = () => {
       <WhyDifferentSection />
       <ClientsSection />
       <ValuesSection />
-      <ServicesSection />
       <FounderSection />
+      <ServicesSection />
       <TechStackSection />
       <ContactSection />
       <GoogleBusinessWidget />

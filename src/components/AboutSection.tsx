@@ -69,7 +69,7 @@ const AboutSection = () => {
               </div>
 
               {/* Content */}
-              <div className="pb-10 pt-2">
+              <div className="pb-10 group-last:pb-0 pt-2">
                 <h3 className="font-display font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                   {step.title}
                 </h3>
