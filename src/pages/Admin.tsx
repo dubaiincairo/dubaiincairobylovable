@@ -36,6 +36,7 @@ const sectionDescriptions: Record<string, string> = {
 };
 
 const subItemLabels: Record<string, string> = {
+  hero: "Chip",
   services: "Studio",
   edges: "Edge",
   values: "Value",

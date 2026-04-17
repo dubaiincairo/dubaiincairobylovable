@@ -48,8 +48,20 @@ export const contentRegistry: ContentField[] = [
   { section: "hero", key: "hero_subheadline", label: "Sub-headline", defaultValue: "We help ambitious businesses grow through the internet — with proven systems, measurable results, and a commitment to doing things differently." },
   { section: "hero", key: "hero_cta_primary", label: "Primary CTA Button", defaultValue: "Explore Our Services" },
   { section: "hero", key: "hero_cta_secondary", label: "Secondary CTA Button", defaultValue: "Talk to Our Team" },
-  { section: "hero", key: "hero_visual_label", label: "Visual Card Label", defaultValue: "Growth Analytics" },
-  { section: "hero", key: "hero_visual_trend", label: "Visual Trend Badge", defaultValue: "+34% ↑" },
+  // Dashboard card (centre of visual)
+  { section: "hero", key: "hero_card_label",    label: "Visual Card — Label",       defaultValue: "Growth Analytics" },
+  { section: "hero", key: "hero_card_trend",    label: "Visual Card — Trend Badge", defaultValue: "+34% ↑" },
+  { section: "hero", key: "hero_card_value",    label: "Visual Card — Number",      defaultValue: "216+" },
+  { section: "hero", key: "hero_card_sublabel", label: "Visual Card — Sub-label",   defaultValue: "Projects Delivered" },
+  // Floating stat chips (4 independent chips around the card)
+  { section: "hero", key: "hero_float_1_value", label: "Chip 1 — Number", defaultValue: "5.0 ★" },
+  { section: "hero", key: "hero_float_1_label", label: "Chip 1 — Label",  defaultValue: "Google Rating" },
+  { section: "hero", key: "hero_float_2_value", label: "Chip 2 — Number", defaultValue: "50+" },
+  { section: "hero", key: "hero_float_2_label", label: "Chip 2 — Label",  defaultValue: "Happy Clients" },
+  { section: "hero", key: "hero_float_3_value", label: "Chip 3 — Number", defaultValue: "5 Yrs" },
+  { section: "hero", key: "hero_float_3_label", label: "Chip 3 — Label",  defaultValue: "In Business" },
+  { section: "hero", key: "hero_float_4_value", label: "Chip 4 — Number", defaultValue: "100%" },
+  { section: "hero", key: "hero_float_4_label", label: "Chip 4 — Label",  defaultValue: "Digital-First" },
 
   // ── Stats ──
   { section: "stats", key: "stat_projects", label: "Stat 1 Value", defaultValue: "216" },

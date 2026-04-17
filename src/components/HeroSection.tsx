@@ -68,17 +68,19 @@ const FloatCard = ({
 const HeroSection = () => {
   const { get } = useSiteContent();
 
-  const visualLabel = get("hero_visual_label", "Growth Analytics");
-  const visualTrend = get("hero_visual_trend", "+34% ↑");
-  const statProjects      = get("stat_projects",       "216");
-  const statProjectsLabel = get("stat_projects_label", "Successful Projects");
-  const statClients      = get("stat_clients",       "36+");
-  const statClientsLabel = get("stat_clients_label", "Clients Served");
-  const statYears      = get("stat_years",       "5+");
-  const statYearsLabel = get("stat_years_label", "Years Active");
-  const statDigital      = get("stat_digital",       "100%");
-  const statDigitalLabel = get("stat_digital_label", "Digital");
-  const googleRating = get("google_rating", "5.0");
+  // Hero visual — fully independent from the stats counter section
+  const cardLabel    = get("hero_card_label",    "Growth Analytics");
+  const cardTrend    = get("hero_card_trend",    "+34% ↑");
+  const cardValue    = get("hero_card_value",    "216+");
+  const cardSublabel = get("hero_card_sublabel", "Projects Delivered");
+  const float1Value  = get("hero_float_1_value", "5.0 ★");
+  const float1Label  = get("hero_float_1_label", "Google Rating");
+  const float2Value  = get("hero_float_2_value", "50+");
+  const float2Label  = get("hero_float_2_label", "Happy Clients");
+  const float3Value  = get("hero_float_3_value", "5 Yrs");
+  const float3Label  = get("hero_float_3_label", "In Business");
+  const float4Value  = get("hero_float_4_value", "100%");
+  const float4Label  = get("hero_float_4_label", "Digital-First");
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden px-6">
@@ -195,11 +197,11 @@ const HeroSection = () => {
             >
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">{visualLabel}</span>
-                  <span className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded-full font-medium">{visualTrend}</span>
+                  <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">{cardLabel}</span>
+                  <span className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded-full font-medium">{cardTrend}</span>
                 </div>
-                <div className="text-2xl font-display font-bold text-gradient-gold">{statProjects}</div>
-                <div className="text-xs text-muted-foreground">{statProjectsLabel}</div>
+                <div className="text-2xl font-display font-bold text-gradient-gold">{cardValue}</div>
+                <div className="text-xs text-muted-foreground">{cardSublabel}</div>
               </div>
               <div className="mt-3">
                 <ChartVisual />
@@ -207,10 +209,10 @@ const HeroSection = () => {
             </motion.div>
 
             {/* Floating cards */}
-            <FloatCard icon={Star}       value={`${googleRating} ★`}  label="Google Rating"      delay={0.9}  className="top-4 right-0" />
-            <FloatCard icon={Users}      value={statClients}          label={statClientsLabel}   delay={1.1}  className="bottom-16 left-0" />
-            <FloatCard icon={Briefcase}  value={statYears}            label={statYearsLabel}     delay={1.3}  className="top-1/2 -translate-y-1/2 -right-2" />
-            <FloatCard icon={TrendingUp} value={statDigital}          label={statDigitalLabel}   delay={1.5}  className="bottom-4 right-8" />
+            <FloatCard icon={Star}       value={float1Value} label={float1Label} delay={0.9}  className="top-4 right-0" />
+            <FloatCard icon={Users}      value={float2Value} label={float2Label} delay={1.1}  className="bottom-16 left-0" />
+            <FloatCard icon={Briefcase}  value={float3Value} label={float3Label} delay={1.3}  className="top-1/2 -translate-y-1/2 -right-2" />
+            <FloatCard icon={TrendingUp} value={float4Value} label={float4Label} delay={1.5}  className="bottom-4 right-8" />
 
           </div>
         </motion.div>
