@@ -14,12 +14,15 @@ const AnimatedNumber = ({ value }: { value: string }) => {
     if (!numMatch) { setDisplay(value); return; }
     const target = parseInt(numMatch[1]);
     const suffix = value.slice(numMatch[1].length);
-    const duration = 1200;
+    const duration = 3200;
     const start = Date.now();
     const tick = () => {
       const elapsed = Date.now() - start;
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
+      // Slow linear climb then dramatic ease-out at the end
+      const eased = progress < 0.75
+        ? progress * 0.85                          // steady climb for first 75%
+        : 0.6375 + (1 - Math.pow(1 - ((progress - 0.75) / 0.25), 4)) * 0.3625; // snap to final
       setDisplay(Math.round(target * eased) + suffix);
       if (progress < 1) requestAnimationFrame(tick);
     };
