@@ -48,6 +48,8 @@ export const contentRegistry: ContentField[] = [
   { section: "hero", key: "hero_subheadline", label: "Sub-headline", defaultValue: "We help ambitious businesses grow through the internet — with proven systems, measurable results, and a commitment to doing things differently." },
   { section: "hero", key: "hero_cta_primary", label: "Primary CTA Button", defaultValue: "Explore Our Services" },
   { section: "hero", key: "hero_cta_secondary", label: "Secondary CTA Button", defaultValue: "Talk to Our Team" },
+  { section: "hero", key: "hero_visual_label", label: "Visual Card Label", defaultValue: "Growth Analytics" },
+  { section: "hero", key: "hero_visual_trend", label: "Visual Trend Badge", defaultValue: "+34% ↑" },
 
   // ── Stats ──
   { section: "stats", key: "stat_projects", label: "Stat 1 Value", defaultValue: "216" },

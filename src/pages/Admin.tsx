@@ -20,7 +20,7 @@ const sectionIcons: Record<string, string> = {
 
 const sectionDescriptions: Record<string, string> = {
   nav: "Logo name, nav links, CTA button",
-  hero: "Headline, sub-headline, CTA buttons",
+  hero: "Headline, sub-headline, CTA buttons, right-side visual card",
   stats: "Key numbers shown below the hero",
   about: "Who we are — text block",
   edges: "Why we're different — 6 cards",
