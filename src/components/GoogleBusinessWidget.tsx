@@ -23,16 +23,10 @@ const GoogleBusinessWidget = () => {
   const ratingNum = Math.min(5, Math.max(0, parseFloat(rating) || 5));
 
   return (
-    <section className="relative py-8 md:py-14 px-6 overflow-hidden">
+    <section className="relative py-8 md:py-12 px-6 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 100%, hsl(38 80% 55% / 0.04) 0%, transparent 60%)' }} />
 
       <div className="relative max-w-6xl mx-auto">
-        <motion.div className="text-center mb-10" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-          <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">{badge}</span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-3">{headline}</h2>
-          <p className="text-muted-foreground">{subtext}</p>
-        </motion.div>
-
         <motion.div
           className="grid md:grid-cols-3 gap-6"
           variants={fadeUp}
