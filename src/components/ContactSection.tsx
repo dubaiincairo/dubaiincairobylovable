@@ -61,7 +61,7 @@ const ContactSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("contact_subtitle", "Get Started")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
             {get("contact_headline", "Ready to Grow?\nLet's Build.")}
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed mb-10 whitespace-pre-line">
@@ -73,13 +73,13 @@ const ContactSection = () => {
               <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                 <Clock className="w-4 h-4 text-primary" />
               </div>
-              <span>Response within 24 hours</span>
+              <span>{get("contact_trust_1", "Response within 24 hours")}</span>
             </div>
             <div className="flex items-center gap-3 text-sm text-muted-foreground">
               <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                 <MessageSquare className="w-4 h-4 text-primary" />
               </div>
-              <span>Free consultation call</span>
+              <span>{get("contact_trust_2", "Free consultation call")}</span>
             </div>
           </div>
         </motion.div>

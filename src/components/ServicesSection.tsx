@@ -33,7 +33,7 @@ const ServicesSection = () => {
 
         <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           {studios.map((s, i) => (
-            <motion.div key={i} className="group glass-card gradient-border p-8 rounded-xl hover-lift" variants={cardFadeUp}>
+            <motion.div key={i} className="group glass-card gradient-border p-5 md:p-8 rounded-xl hover-lift" variants={cardFadeUp}>
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
                 <s.icon className="w-5 h-5 text-primary" />
               </div>

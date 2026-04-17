@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { fadeUp, fadeIn, springBounce, viewportOnce } from "@/lib/animations";
+import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
 
 const FounderSection = () => {
   const { get } = useSiteContent();
@@ -11,7 +11,7 @@ const FounderSection = () => {
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)' }} />
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-primary/4 blur-[140px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-14 lg:gap-24 items-center">
+      <div className="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-20 items-start">
 
         {/* LEFT — copy */}
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
@@ -21,14 +21,12 @@ const FounderSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
             {get("founder_headline", "Built by Someone Who's Been in the Trenches.")}
           </h2>
-          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={viewportOnce} className="space-y-5 text-muted-foreground text-lg leading-relaxed">
-            <p className="whitespace-pre-line">{get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")}</p>
-          </motion.div>
+          <p className="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")}</p>
         </motion.div>
 
         {/* RIGHT — Quote visual */}
         <motion.div
-          variants={springBounce}
+          variants={cardFadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}

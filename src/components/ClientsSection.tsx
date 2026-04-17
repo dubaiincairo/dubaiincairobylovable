@@ -21,14 +21,14 @@ const ClientsSection = () => {
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 20% 50%, hsl(38 80% 55% / 0.03) 0%, transparent 50%)' }} />
 
       <div className="relative max-w-6xl mx-auto px-6">
-        <motion.div className="text-center mb-6 md:mb-10" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-          <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
+        <motion.div className="text-center mb-6" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+          <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
             {get("clients_subtitle", "Success Partners")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+          <h2 className="text-2xl md:text-3xl font-display font-bold mb-2">
             {get("clients_headline", "Trusted by Brands That Mean Business")}
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-sm max-w-xl mx-auto">
             {get("clients_description", "From global pharmaceutical giants to beloved local names.")}
           </p>
         </motion.div>

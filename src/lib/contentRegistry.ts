@@ -78,6 +78,16 @@ export const contentRegistry: ContentField[] = [
   { section: "about", key: "about_headline",          label: "Section Headline",            defaultValue: "A Digital Agency Built on Science, Not Guesswork" },
   { section: "about", key: "about_body",              label: "Body Paragraph 1",            defaultValue: "Since March 2021, Dubai'nCairo has been helping brands grow online through data-driven marketing and eBusiness solutions." },
   { section: "about", key: "about_body_2",            label: "Body Paragraph 2",            defaultValue: "We are 100% digital by design. No physical overhead. No wasted time. Just a focused, talented team — available to you from anywhere." },
+  // Process steps (right column)
+  { section: "about", key: "about_step_1_num",   label: "Step 1 — Number",      defaultValue: "01" },
+  { section: "about", key: "about_step_1_title", label: "Step 1 — Title",       defaultValue: "Strategy & Research" },
+  { section: "about", key: "about_step_1_desc",  label: "Step 1 — Description", defaultValue: "We start with data — auditing your market, competitors, and audience before writing a single line of copy or launching a single campaign." },
+  { section: "about", key: "about_step_2_num",   label: "Step 2 — Number",      defaultValue: "02" },
+  { section: "about", key: "about_step_2_title", label: "Step 2 — Title",       defaultValue: "Build & Execute" },
+  { section: "about", key: "about_step_2_desc",  label: "Step 2 — Description", defaultValue: "Every channel, every creative, every system is built with precision — designed to work together as one growth engine, not isolated experiments." },
+  { section: "about", key: "about_step_3_num",   label: "Step 3 — Number",      defaultValue: "03" },
+  { section: "about", key: "about_step_3_title", label: "Step 3 — Title",       defaultValue: "Optimise & Scale" },
+  { section: "about", key: "about_step_3_desc",  label: "Step 3 — Description", defaultValue: "Continuous testing, real-time analytics, and ruthless focus on what moves the needle. When something works, we scale it fast." },
   // Dashboard visual
   { section: "about", key: "about_dash_header",       label: "Dashboard — Header Label",    defaultValue: "Growth Intelligence" },
   { section: "about", key: "about_dash_title",        label: "Dashboard — Title",           defaultValue: "Performance Overview" },
@@ -184,6 +194,8 @@ export const contentRegistry: ContentField[] = [
   { section: "contact", key: "contact_success_title", label: "Success Title", defaultValue: "Thank You!" },
   { section: "contact", key: "contact_success_msg", label: "Success Message", defaultValue: "We'll get back to you within 24 hours." },
   { section: "contact", key: "contact_success_btn", label: "Send Another Button", defaultValue: "Send Another Message" },
+  { section: "contact", key: "contact_trust_1", label: "Trust Signal 1", defaultValue: "Response within 24 hours" },
+  { section: "contact", key: "contact_trust_2", label: "Trust Signal 2", defaultValue: "Free consultation call" },
   { section: "contact", key: "contact_location_1", label: "Location 1", defaultValue: "Cairo, Egypt" },
   { section: "contact", key: "contact_location_2", label: "Location 2", defaultValue: "Dubai, UAE" },
 

@@ -28,9 +28,9 @@ const ValuesSection = () => {
           </h2>
         </motion.div>
 
-        <motion.div className="grid grid-cols-2 lg:grid-cols-3 gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           {values.map((v, i) => (
-            <motion.div key={i} className="group glass-card gradient-border text-center p-8 rounded-xl hover-lift" variants={cardFadeUp}>
+            <motion.div key={i} className="group glass-card gradient-border text-center p-5 md:p-8 rounded-xl hover-lift" variants={cardFadeUp}>
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:rotate-12">
                 <v.icon className="w-5 h-5 text-primary" />
               </div>
