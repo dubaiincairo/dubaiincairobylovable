@@ -125,7 +125,6 @@ export const contentRegistry: ContentField[] = [
   { section: "founder", key: "founder_subtitle", label: "Section Subtitle", defaultValue: "A Message from Our Founder" },
   { section: "founder", key: "founder_headline", label: "Section Headline", defaultValue: "Built by Someone Who's Been in the Trenches" },
   { section: "founder", key: "founder_body", label: "Founder Body", defaultValue: "Abdullah Hassan Al-Fawali founded Dubai in Cairo with a bold vision." },
-  { section: "founder", key: "founder_education", label: "Founder Education", defaultValue: "His foundation is built on dual academic distinctions from the Arab Academy." },
   { section: "founder", key: "founder_quote", label: "Founder Quote", defaultValue: "I believe that continuous learning is the key to success in business." },
   { section: "founder", key: "founder_attribution", label: "Quote Attribution", defaultValue: "— Abdullah Al-Fawali, CEO & Founder" },
 

@@ -23,7 +23,6 @@ const FounderSection = () => {
           </h2>
           <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={viewportOnce} className="space-y-5 text-muted-foreground text-lg leading-relaxed">
             <p className="whitespace-pre-line">{get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")}</p>
-            <p className="whitespace-pre-line">{get("founder_education", "His foundation is built on dual academic distinctions from the Arab Academy for Science, Technology and Maritime Transport: a Bachelor's in Mechatronics & Robotics Engineering, and an MBA in Business Administration & Marketing.")}</p>
           </motion.div>
         </motion.div>
 
