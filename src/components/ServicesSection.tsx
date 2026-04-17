@@ -15,7 +15,7 @@ const ServicesSection = () => {
   }));
 
   return (
-    <section id="services" className="relative py-10 md:py-16 px-6 overflow-hidden">
+    <section id="services" className="relative py-16 md:py-24 px-6 overflow-hidden">
       {/* Diagonal pattern */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.02]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, hsl(38 80% 55%), hsl(38 80% 55%) 1px, transparent 1px, transparent 40px)' }} />
       {/* Floating orb */}

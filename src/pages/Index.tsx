@@ -21,10 +21,10 @@ const Index = () => {
       <StatsSection />
       <AboutSection />
       <WhyDifferentSection />
+      <ClientsSection />
       <ValuesSection />
       <ServicesSection />
       <FounderSection />
-      <ClientsSection />
       <TechStackSection />
       <ContactSection />
       <GoogleBusinessWidget />

@@ -15,7 +15,7 @@ const WhyDifferentSection = () => {
   }));
 
   return (
-    <section className="relative py-10 md:py-16 px-6 overflow-hidden">
+    <section className="relative py-16 md:py-24 px-6 overflow-hidden">
       {/* Radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)' }} />
 
