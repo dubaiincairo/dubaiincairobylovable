@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, MapPin, CheckCircle, Loader2, MessageSquare, Clock, Shield } from "lucide-react";
+import { ArrowRight, Mail, CheckCircle, Loader2, MessageSquare, Clock, Shield } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -86,12 +86,6 @@ const ContactSection = () => {
                 <Shield className="w-4 h-4 text-primary" />
               </div>
               <span>No commitment required</span>
-            </div>
-            <div className="flex items-center gap-3 text-sm text-muted-foreground">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <MapPin className="w-4 h-4 text-primary" />
-              </div>
-              <span>{get("contact_location_1", "Cairo, Egypt")} · {get("contact_location_2", "Dubai, UAE")}</span>
             </div>
           </div>
         </motion.div>
