@@ -14,6 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
+      case_studies: {
+        Row: {
+          id: string
+          slug: string
+          client_name: string
+          industry: string
+          tagline: string
+          challenge: string
+          solution: string
+          results: string
+          metric_1_value: string | null
+          metric_1_label: string | null
+          metric_2_value: string | null
+          metric_2_label: string | null
+          metric_3_value: string | null
+          metric_3_label: string | null
+          tags: string[] | null
+          featured: boolean
+          published: boolean
+          sort_order: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          slug: string
+          client_name?: string
+          industry?: string
+          tagline?: string
+          challenge?: string
+          solution?: string
+          results?: string
+          metric_1_value?: string | null
+          metric_1_label?: string | null
+          metric_2_value?: string | null
+          metric_2_label?: string | null
+          metric_3_value?: string | null
+          metric_3_label?: string | null
+          tags?: string[] | null
+          featured?: boolean
+          published?: boolean
+          sort_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          slug?: string
+          client_name?: string
+          industry?: string
+          tagline?: string
+          challenge?: string
+          solution?: string
+          results?: string
+          metric_1_value?: string | null
+          metric_1_label?: string | null
+          metric_2_value?: string | null
+          metric_2_label?: string | null
+          metric_3_value?: string | null
+          metric_3_label?: string | null
+          tags?: string[] | null
+          featured?: boolean
+          published?: boolean
+          sort_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string

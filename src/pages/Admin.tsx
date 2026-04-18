@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import {
   Loader2, Save, LogOut, ArrowLeft, ChevronDown, Search, X,
   Type, AlignLeft, MousePointer, Hash, LayoutList,
+  Plus, Trash2, Pencil, Star, Eye, EyeOff, BookOpen,
 } from "lucide-react";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
 import { cn } from "@/lib/utils";
@@ -100,6 +101,7 @@ const Admin = () => {
   const [openSubGroups, setOpenSubGroups] = useState<Record<string, boolean>>({});
   const [search, setSearch]         = useState("");
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [adminTab, setAdminTab]     = useState<"content" | "case-studies">("content");
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   // ── Auth & data load ──
@@ -244,6 +246,16 @@ const Admin = () => {
           <p className="text-xs text-muted-foreground mt-1">{contentRegistry.length} editable fields across {sectionOrder.length} sections</p>
         </div>
 
+        {/* Tab switcher */}
+        <div className="px-3 pt-3 pb-1 flex gap-1 border-b border-border">
+          <button onClick={() => setAdminTab("content")} className={cn("flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors", adminTab === "content" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground")}>
+            Content
+          </button>
+          <button onClick={() => setAdminTab("case-studies")} className={cn("flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center justify-center gap-1", adminTab === "case-studies" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground")}>
+            <BookOpen className="w-3 h-3" /> Cases
+          </button>
+        </div>
+
         <nav className="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
           {sectionOrder.map((section) => {
             const fields = grouped[section];
@@ -342,8 +354,10 @@ const Admin = () => {
           </div>
         </header>
 
+        {adminTab === "case-studies" && <CaseStudiesPanel />}
+
         {/* Sections */}
-        <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 space-y-4">
+        {adminTab === "content" && <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 space-y-4">
           {filteredSections.map((section) => {
             const fields = grouped[section];
             if (!fields || fields.length === 0) return null;
@@ -486,7 +500,7 @@ const Admin = () => {
               <button onClick={() => setSearch("")} className="mt-2 text-xs text-primary hover:underline">Clear search</button>
             </div>
           )}
-        </main>
+        </main>}
       </div>
     </div>
   );
@@ -548,6 +562,240 @@ function AutoResizeTextarea({ value, onChange }: { value: string; onChange: (v: 
       className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none overflow-hidden"
       rows={1}
     />
+  );
+}
+
+// ─── CaseStudiesPanel ─────────────────────────────────────────────────────────
+
+type CS = {
+  id: string; slug: string; client_name: string; industry: string;
+  tagline: string; challenge: string; solution: string; results: string;
+  metric_1_value: string; metric_1_label: string;
+  metric_2_value: string; metric_2_label: string;
+  metric_3_value: string; metric_3_label: string;
+  tags: string[]; featured: boolean; published: boolean; sort_order: number;
+};
+
+const EMPTY_CS: Omit<CS, "id"> = {
+  slug: "", client_name: "", industry: "", tagline: "",
+  challenge: "", solution: "", results: "",
+  metric_1_value: "", metric_1_label: "",
+  metric_2_value: "", metric_2_label: "",
+  metric_3_value: "", metric_3_label: "",
+  tags: [], featured: false, published: true, sort_order: 0,
+};
+
+function CaseStudiesPanel() {
+  const { toast } = useToast();
+  const [list, setList]       = useState<CS[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState<Partial<CS> | null>(null);
+  const [saving, setSaving]   = useState(false);
+  const [isNew, setIsNew]     = useState(false);
+
+  const load = async () => {
+    const { data } = await supabase.from("case_studies").select("*").order("sort_order");
+    if (data) setList(data as CS[]);
+    setLoading(false);
+  };
+
+  useEffect(() => { load(); }, []);
+
+  const openNew = () => { setEditing({ ...EMPTY_CS }); setIsNew(true); };
+  const openEdit = (cs: CS) => { setEditing({ ...cs }); setIsNew(false); };
+  const closeForm = () => { setEditing(null); setIsNew(false); };
+
+  const handleSave = async () => {
+    if (!editing) return;
+    setSaving(true);
+
+    const tagsArr = typeof editing.tags === "string"
+      ? (editing.tags as string).split(",").map((t: string) => t.trim()).filter(Boolean)
+      : editing.tags ?? [];
+
+    const payload = { ...editing, tags: tagsArr };
+
+    if (isNew) {
+      if (!payload.slug) {
+        payload.slug = (payload.client_name || "case-study")
+          .toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+      }
+      const { error } = await supabase.from("case_studies").insert(payload);
+      if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
+      else { toast({ title: "Case study created!" }); closeForm(); load(); }
+    } else {
+      const { error } = await supabase.from("case_studies").update(payload).eq("id", editing.id!);
+      if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
+      else { toast({ title: "Saved!" }); closeForm(); load(); }
+    }
+    setSaving(false);
+  };
+
+  const toggleField = async (id: string, field: "published" | "featured", val: boolean) => {
+    await supabase.from("case_studies").update({ [field]: val }).eq("id", id);
+    setList((prev) => prev.map((cs) => cs.id === id ? { ...cs, [field]: val } : cs));
+  };
+
+  const handleDelete = async (id: string, name: string) => {
+    if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
+    await supabase.from("case_studies").delete().eq("id", id);
+    setList((prev) => prev.filter((cs) => cs.id !== id));
+    toast({ title: "Deleted" });
+  };
+
+  const set = (key: string, val: string | boolean) =>
+    setEditing((prev) => prev ? { ...prev, [key]: val } : prev);
+
+  if (loading) return (
+    <div className="flex-1 flex items-center justify-center py-20">
+      <Loader2 className="w-6 h-6 animate-spin text-primary" />
+    </div>
+  );
+
+  if (editing) return (
+    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6">
+      <div className="flex items-center gap-3 mb-6">
+        <button onClick={closeForm} className="text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="w-4 h-4" />
+        </button>
+        <h2 className="font-display font-bold text-lg">{isNew ? "New Case Study" : `Edit — ${editing.client_name}`}</h2>
+      </div>
+
+      <div className="space-y-5">
+        {/* Identity */}
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Identity</p>
+          <Field label="Client Name *" value={editing.client_name || ""} onChange={(v) => set("client_name", v)} />
+          <Field label="Industry" value={editing.industry || ""} onChange={(v) => set("industry", v)} placeholder="e.g. Pharma, FMCG, eCommerce" />
+          <Field label="Tagline (one-line summary for cards)" value={editing.tagline || ""} onChange={(v) => set("tagline", v)} long />
+          <Field label="URL Slug" value={editing.slug || ""} onChange={(v) => set("slug", v)} placeholder="auto-generated if empty" />
+          <Field label="Tags (comma-separated)" value={Array.isArray(editing.tags) ? editing.tags.join(", ") : (editing.tags || "")} onChange={(v) => set("tags", v)} placeholder="Social Media, eCommerce, Branding" />
+        </div>
+
+        {/* Metrics */}
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Key Metrics (shown on cards)</p>
+          {[1, 2, 3].map((n) => (
+            <div key={n} className="grid grid-cols-2 gap-3">
+              <Field label={`Metric ${n} — Value`} value={(editing as any)[`metric_${n}_value`] || ""} onChange={(v) => set(`metric_${n}_value`, v)} placeholder="+127%" />
+              <Field label={`Metric ${n} — Label`} value={(editing as any)[`metric_${n}_label`] || ""} onChange={(v) => set(`metric_${n}_label`, v)} placeholder="Revenue Growth" />
+            </div>
+          ))}
+        </div>
+
+        {/* Narrative */}
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Case Study Narrative</p>
+          <Field label="The Challenge" value={editing.challenge || ""} onChange={(v) => set("challenge", v)} long />
+          <Field label="Our Approach / Solution" value={editing.solution || ""} onChange={(v) => set("solution", v)} long />
+          <Field label="The Results" value={editing.results || ""} onChange={(v) => set("results", v)} long />
+        </div>
+
+        {/* Settings */}
+        <div className="rounded-xl border border-border bg-card p-5 space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Settings</p>
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" checked={!!editing.published} onChange={(e) => set("published", e.target.checked)} className="w-4 h-4 accent-primary" />
+            <span className="text-sm">Published (visible on site)</span>
+          </label>
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" checked={!!editing.featured} onChange={(e) => set("featured", e.target.checked)} className="w-4 h-4 accent-primary" />
+            <span className="text-sm">Featured on homepage</span>
+          </label>
+          <Field label="Sort Order (lower = first)" value={String(editing.sort_order ?? 0)} onChange={(v) => set("sort_order", parseInt(v) || 0)} placeholder="0" />
+        </div>
+
+        <div className="flex gap-3">
+          <Button onClick={handleSave} disabled={saving} className="glow-gold font-display">
+            {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
+            {isNew ? "Create Case Study" : "Save Changes"}
+          </Button>
+          <Button variant="outline" onClick={closeForm}>Cancel</Button>
+        </div>
+      </div>
+    </main>
+  );
+
+  return (
+    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="font-display font-bold text-lg">Case Studies</h2>
+          <p className="text-xs text-muted-foreground mt-0.5">{list.length} total · {list.filter(c => c.featured).length} featured on homepage</p>
+        </div>
+        <Button onClick={openNew} size="sm" className="glow-gold font-display">
+          <Plus className="w-4 h-4 mr-1.5" /> New Case Study
+        </Button>
+      </div>
+
+      {list.length === 0 ? (
+        <div className="text-center py-20 border border-dashed border-border rounded-xl">
+          <BookOpen className="w-10 h-10 mx-auto mb-3 text-muted-foreground opacity-40" />
+          <p className="text-sm text-muted-foreground mb-4">No case studies yet.</p>
+          <Button onClick={openNew} size="sm" variant="outline">
+            <Plus className="w-4 h-4 mr-1.5" /> Add your first case study
+          </Button>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {list.map((cs) => (
+            <div key={cs.id} className="rounded-xl border border-border bg-card p-4 flex items-center gap-4">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-display font-semibold text-sm text-foreground truncate">{cs.client_name || "Untitled"}</span>
+                  {cs.featured && <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-semibold">Featured</span>}
+                  {!cs.published && <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded font-semibold">Draft</span>}
+                </div>
+                <p className="text-xs text-muted-foreground mt-0.5 truncate">{cs.industry}{cs.tagline ? ` · ${cs.tagline}` : ""}</p>
+              </div>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button onClick={() => toggleField(cs.id, "featured", !cs.featured)} title={cs.featured ? "Unfeature" : "Feature on homepage"} className={cn("w-7 h-7 rounded-md flex items-center justify-center transition-colors", cs.featured ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-muted")}>
+                  <Star className="w-3.5 h-3.5" />
+                </button>
+                <button onClick={() => toggleField(cs.id, "published", !cs.published)} title={cs.published ? "Unpublish" : "Publish"} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+                  {cs.published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+                </button>
+                <button onClick={() => openEdit(cs)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+                  <Pencil className="w-3.5 h-3.5" />
+                </button>
+                <button onClick={() => handleDelete(cs.id, cs.client_name)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </main>
+  );
+}
+
+function Field({ label, value, onChange, placeholder, long }: {
+  label: string; value: string; onChange: (v: string) => void;
+  placeholder?: string; long?: boolean;
+}) {
+  const ref = useRef<HTMLTextAreaElement>(null);
+  const resize = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = Math.max(long ? 80 : 36, el.scrollHeight) + "px";
+  }, [long]);
+  useEffect(() => { resize(); }, [value, resize]);
+
+  return (
+    <div>
+      <label className="block text-xs font-semibold text-foreground mb-1.5">{label}</label>
+      <textarea
+        ref={ref}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        onInput={resize}
+        rows={long ? 3 : 1}
+        className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none overflow-hidden"
+      />
+    </div>
   );
 }
 
