@@ -16,70 +16,70 @@ export type Database = {
     Tables: {
       case_studies: {
         Row: {
-          id: string
-          slug: string
-          client_name: string
-          industry: string
-          tagline: string
           challenge: string
-          solution: string
-          results: string
-          metric_1_value: string | null
+          client_name: string
+          created_at: string | null
+          featured: boolean | null
+          id: string
+          industry: string
           metric_1_label: string | null
-          metric_2_value: string | null
+          metric_1_value: string | null
           metric_2_label: string | null
-          metric_3_value: string | null
+          metric_2_value: string | null
           metric_3_label: string | null
+          metric_3_value: string | null
+          published: boolean | null
+          results: string
+          slug: string
+          solution: string
+          sort_order: number | null
+          tagline: string
           tags: string[] | null
-          featured: boolean
-          published: boolean
-          sort_order: number
-          created_at: string
-          updated_at: string
+          updated_at: string | null
         }
         Insert: {
-          id?: string
-          slug: string
-          client_name?: string
-          industry?: string
-          tagline?: string
           challenge?: string
-          solution?: string
-          results?: string
-          metric_1_value?: string | null
+          client_name?: string
+          created_at?: string | null
+          featured?: boolean | null
+          id?: string
+          industry?: string
           metric_1_label?: string | null
-          metric_2_value?: string | null
+          metric_1_value?: string | null
           metric_2_label?: string | null
-          metric_3_value?: string | null
+          metric_2_value?: string | null
           metric_3_label?: string | null
+          metric_3_value?: string | null
+          published?: boolean | null
+          results?: string
+          slug: string
+          solution?: string
+          sort_order?: number | null
+          tagline?: string
           tags?: string[] | null
-          featured?: boolean
-          published?: boolean
-          sort_order?: number
-          created_at?: string
-          updated_at?: string
+          updated_at?: string | null
         }
         Update: {
-          id?: string
-          slug?: string
-          client_name?: string
-          industry?: string
-          tagline?: string
           challenge?: string
-          solution?: string
-          results?: string
-          metric_1_value?: string | null
+          client_name?: string
+          created_at?: string | null
+          featured?: boolean | null
+          id?: string
+          industry?: string
           metric_1_label?: string | null
-          metric_2_value?: string | null
+          metric_1_value?: string | null
           metric_2_label?: string | null
-          metric_3_value?: string | null
+          metric_2_value?: string | null
           metric_3_label?: string | null
+          metric_3_value?: string | null
+          published?: boolean | null
+          results?: string
+          slug?: string
+          solution?: string
+          sort_order?: number | null
+          tagline?: string
           tags?: string[] | null
-          featured?: boolean
-          published?: boolean
-          sort_order?: number
-          created_at?: string
-          updated_at?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
