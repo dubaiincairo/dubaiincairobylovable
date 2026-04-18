@@ -35,11 +35,11 @@ export const contentRegistry: ContentField[] = [
   { section: "nav", key: "nav_brand_1", label: "Brand Word 1", defaultValue: "Dubai" },
   { section: "nav", key: "nav_brand_2", label: "Brand Word 2 (connector)", defaultValue: "in" },
   { section: "nav", key: "nav_brand_3", label: "Brand Word 3", defaultValue: "Cairo" },
-  { section: "nav", key: "nav_link_1", label: "Nav Link 1", defaultValue: "About" },
-  { section: "nav", key: "nav_link_2", label: "Nav Link 2", defaultValue: "Services" },
-  { section: "nav", key: "nav_link_3", label: "Nav Link 3", defaultValue: "Our Work" },
-  { section: "nav", key: "nav_link_4", label: "Nav Link 4", defaultValue: "Team" },
-  { section: "nav", key: "nav_link_5", label: "Nav Link 5", defaultValue: "Contact" },
+  { section: "nav", key: "nav_link_1", label: "Nav Link 1 (→ About)",    defaultValue: "About" },
+  { section: "nav", key: "nav_link_2", label: "Nav Link 2 (→ Our Work)", defaultValue: "Our Work" },
+  { section: "nav", key: "nav_link_3", label: "Nav Link 3 (→ Team)",     defaultValue: "Team" },
+  { section: "nav", key: "nav_link_4", label: "Nav Link 4 (→ Services)", defaultValue: "Services" },
+  { section: "nav", key: "nav_link_5", label: "Nav Link 5 (→ Contact)",  defaultValue: "Contact" },
   { section: "nav", key: "nav_cta", label: "Nav CTA Button", defaultValue: "Get Started" },
 
   // ── Hero ──

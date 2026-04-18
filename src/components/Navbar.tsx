@@ -20,11 +20,11 @@ const Navbar = () => {
   }, [scrollY]);
 
   const links = [
-    { href: "#about", label: get("nav_link_1", "About") },
-    { href: "#services", label: get("nav_link_2", "Services") },
-    { href: "#work", label: get("nav_link_3", "Our Work") },
-    { href: "#team", label: get("nav_link_4", "Team") },
-    { href: "#contact", label: get("nav_link_5", "Contact") },
+    { href: "#about",    label: get("nav_link_1", "About") },
+    { href: "#work",     label: get("nav_link_2", "Our Work") },
+    { href: "#team",     label: get("nav_link_3", "Team") },
+    { href: "#services", label: get("nav_link_4", "Services") },
+    { href: "#contact",  label: get("nav_link_5", "Contact") },
   ];
 
   return (
