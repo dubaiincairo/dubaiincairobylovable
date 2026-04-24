@@ -1,42 +1,40 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, Check, MapPin, Landmark } from "lucide-react";
+import { Copy, Check, MapPin, Landmark, Building2 } from "lucide-react";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+
+// ── Data ──────────────────────────────────────────────────────────────────────
 
 const banks = [
   {
-    nameAr: "البنك العربي الإفريقي الدولي",
-    nameEn: "Arab African International Bank",
     abbr: "AAIB",
-    branchAr: "فرع أركان بلازا – الشيخ زايد",
-    branchEn: "Arkan Plaza – Sheikh Zayed",
+    name: "Arab African International Bank",
+    branch: "Arkan Plaza Branch — Sheikh Zayed",
     account: "1144817810010201",
     iban: "EG730057028001144817810010201",
     currencies: ["USD", "EGP"],
   },
   {
-    nameAr: "البنك الأهلي المصري",
-    nameEn: "National Bank of Egypt",
     abbr: "NBE",
-    branchAr: "فرع القرية الذكية – السادس من أكتوبر",
-    branchEn: "Smart Village – 6th of October",
+    name: "National Bank of Egypt",
+    branch: "Smart Village Branch — 6th of October",
     account: "1923071255410401013",
     iban: "EG410003019230712554104010130",
     currencies: ["USD", "EGP"],
   },
   {
-    nameAr: "البنك التجاري الدولي",
-    nameEn: "Commercial International Bank",
     abbr: "CIB",
-    branchAr: "فرع أركان بلازا – الشيخ زايد",
-    branchEn: "Arkan Plaza – Sheikh Zayed",
+    name: "Commercial International Bank",
+    branch: "Arkan Plaza Branch — Sheikh Zayed",
     account: "100059074754",
     iban: "EG160010026000000100059074754",
     currencies: ["USD"],
   },
 ];
 
-function CopyButton({ value }: { value: string }) {
+// ── Copy button ───────────────────────────────────────────────────────────────
+
+function CopyField({ label, value }: { label: string; value: string }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -47,56 +45,68 @@ function CopyButton({ value }: { value: string }) {
   };
 
   return (
-    <button
-      onClick={handleCopy}
-      title="Copy"
-      className="ml-2 p-1 rounded-md text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors shrink-0"
-    >
-      {copied ? (
-        <Check className="w-3.5 h-3.5 text-primary" />
-      ) : (
-        <Copy className="w-3.5 h-3.5" />
-      )}
-    </button>
+    <div>
+      <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-1.5">
+        {label}
+      </p>
+      <button
+        onClick={handleCopy}
+        className="w-full flex items-center justify-between gap-3 bg-secondary/60 hover:bg-secondary border border-border/60 hover:border-primary/30 rounded-lg px-3 py-2.5 transition-all duration-200 group text-left"
+      >
+        <span className="font-mono text-xs font-medium text-foreground tracking-wide break-all leading-relaxed">
+          {value}
+        </span>
+        <span className="shrink-0 w-6 h-6 rounded-md flex items-center justify-center bg-background/60 border border-border/60 group-hover:border-primary/40 group-hover:text-primary transition-colors">
+          {copied
+            ? <Check className="w-3 h-3 text-primary" />
+            : <Copy className="w-3 h-3 text-muted-foreground group-hover:text-primary transition-colors" />
+          }
+        </span>
+      </button>
+    </div>
   );
 }
 
+// ── Section ───────────────────────────────────────────────────────────────────
+
 const BankAccountsSection = () => {
   return (
-    <section id="bank-accounts" className="relative py-16 md:py-24 px-6 overflow-hidden">
-      {/* Ambient glow */}
+    <section id="bank-accounts" className="relative py-8 md:py-20 px-6 overflow-hidden">
+
+      {/* Ambient radial glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, hsl(38 80% 55% / 0.05), transparent 70%)" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)" }}
       />
 
       <div className="relative max-w-6xl mx-auto">
 
-        {/* Header */}
+        {/* ── Header ── */}
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-6 md:mb-12"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
         >
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Landmark className="w-4 h-4 text-primary" />
-            <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
-              Banking Details
-            </span>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-3">
-            الحسابات المصرفية
+          <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
+            Payment & Banking
+          </span>
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 whitespace-pre-line">
+            Bank Account Details
           </h2>
-          <p className="text-muted-foreground text-sm md:text-base">
-            جمهورية مصر العربية &nbsp;·&nbsp; Arab Republic of Egypt
+          <p className="text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
+            All accounts are registered under{" "}
+            <span className="text-foreground font-medium">
+              Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC
+            </span>{" "}
+            — Arab Republic of Egypt.
           </p>
         </motion.div>
 
-        {/* Bank cards */}
+        {/* ── Bank cards ── */}
         <motion.div
-          className="grid md:grid-cols-3 gap-5"
+          className="grid md:grid-cols-3 gap-5 lg:gap-6"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -106,92 +116,66 @@ const BankAccountsSection = () => {
             <motion.div
               key={i}
               variants={cardFadeUp}
-              className="glass-card gradient-border rounded-2xl p-6 hover-lift flex flex-col gap-5"
+              className="group glass-card gradient-border rounded-xl p-6 hover-lift flex flex-col gap-5"
             >
-              {/* Bank name */}
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-[10px] font-semibold tracking-widest uppercase text-primary bg-primary/10 px-2 py-0.5 rounded-full">
-                    {bank.abbr}
-                  </span>
-                  {/* Currency pills */}
-                  <div className="flex gap-1 ml-auto">
-                    {bank.currencies.map((c) => (
-                      <span
-                        key={c}
-                        className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-secondary text-muted-foreground"
-                      >
-                        {c}
-                      </span>
-                    ))}
-                  </div>
-                </div>
 
-                <h3
-                  className="text-lg font-display font-bold text-foreground leading-snug text-right"
-                  dir="rtl"
-                >
-                  {bank.nameAr}
-                </h3>
-                <p className="text-xs text-muted-foreground mt-0.5">{bank.nameEn}</p>
+              {/* Bank header */}
+              <div className="flex items-start justify-between gap-3">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:rotate-12">
+                  <Building2 className="w-5 h-5 text-primary" />
+                </div>
+                <div className="flex gap-1.5 mt-1 shrink-0">
+                  {bank.currencies.map((c) => (
+                    <span
+                      key={c}
+                      className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border border-primary/25 text-primary/80 bg-primary/5"
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              {/* Branch */}
-              <div className="flex items-start gap-2 text-xs text-muted-foreground">
-                <MapPin className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
-                <span dir="rtl" className="text-right leading-relaxed">
-                  {bank.branchAr}
-                  <br />
-                  <span className="text-[11px] opacity-70">{bank.branchEn}</span>
+              {/* Bank identity */}
+              <div>
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-primary/70 mb-1 block">
+                  {bank.abbr}
                 </span>
+                <h3 className="text-base font-display font-semibold text-foreground leading-snug">
+                  {bank.name}
+                </h3>
+                <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
+                  <MapPin className="w-3 h-3 text-primary/60 shrink-0" />
+                  <span>{bank.branch}</span>
+                </div>
               </div>
 
               {/* Divider */}
               <div className="h-px bg-border/60" />
 
-              {/* Account number */}
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-1.5">
-                  Account No. <span className="text-primary/60">(شركات)</span>
-                </p>
-                <div className="flex items-center justify-between bg-secondary/50 rounded-lg px-3 py-2">
-                  <span className="font-mono text-sm font-semibold text-foreground tracking-wide">
-                    {bank.account}
-                  </span>
-                  <CopyButton value={bank.account} />
-                </div>
+              {/* Account fields */}
+              <div className="flex flex-col gap-4">
+                <CopyField label="Account Number — Companies" value={bank.account} />
+                <CopyField label="IBAN" value={bank.iban} />
               </div>
 
-              {/* IBAN */}
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-1.5">
-                  IBAN
-                </p>
-                <div className="flex items-center justify-between bg-secondary/50 rounded-lg px-3 py-2 gap-2">
-                  <span className="font-mono text-xs text-foreground tracking-wide break-all leading-relaxed">
-                    {bank.iban}
-                  </span>
-                  <CopyButton value={bank.iban} />
-                </div>
-              </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Footer note */}
-        <motion.p
-          className="text-center text-xs text-muted-foreground mt-8"
+        {/* ── Footer note ── */}
+        <motion.div
+          className="flex items-center justify-center gap-2 mt-10 text-sm text-muted-foreground"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
         >
-          All accounts are registered under{" "}
-          <span className="text-foreground font-medium">
-            Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC
+          <Landmark className="w-4 h-4 text-primary/60 shrink-0" />
+          <span>
+            For wire transfers, always include the IBAN and specify the transfer currency.
           </span>
-          . For transfers, use the IBAN and specify the currency clearly.
-        </motion.p>
+        </motion.div>
 
       </div>
     </section>
