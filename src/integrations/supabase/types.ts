@@ -125,6 +125,69 @@ export type Database = {
         }
         Relationships: []
       }
+      job_applications: {
+        Row: {
+          id: string
+          job_id: string | null
+          job_title: string | null
+          first_name: string
+          last_name: string
+          date_of_birth: string | null
+          email: string
+          country: string | null
+          city: string | null
+          mobile: string
+          address: string | null
+          bachelor_degree: string | null
+          linkedin_url: string | null
+          instapay_link: string | null
+          graduation_year: string | null
+          id_front_url: string | null
+          id_back_url: string | null
+          created_at: string | null
+        }
+        Insert: {
+          id?: string
+          job_id?: string | null
+          job_title?: string | null
+          first_name: string
+          last_name: string
+          date_of_birth?: string | null
+          email: string
+          country?: string | null
+          city?: string | null
+          mobile: string
+          address?: string | null
+          bachelor_degree?: string | null
+          linkedin_url?: string | null
+          instapay_link?: string | null
+          graduation_year?: string | null
+          id_front_url?: string | null
+          id_back_url?: string | null
+          created_at?: string | null
+        }
+        Update: {
+          id?: string
+          job_id?: string | null
+          job_title?: string | null
+          first_name?: string
+          last_name?: string
+          date_of_birth?: string | null
+          email?: string
+          country?: string | null
+          city?: string | null
+          mobile?: string
+          address?: string | null
+          bachelor_degree?: string | null
+          linkedin_url?: string | null
+          instapay_link?: string | null
+          graduation_year?: string | null
+          id_front_url?: string | null
+          id_back_url?: string | null
+          created_at?: string | null
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string

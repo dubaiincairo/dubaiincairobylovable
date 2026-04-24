@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ApplyModal from "@/components/ApplyModal";
 
 type Job = {
   id: string;
@@ -53,6 +54,7 @@ const parseList = (text: string | null): string[] => {
 const Careers = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
+  const [applyJob, setApplyJob] = useState<{ id: string; title: string } | null>(null);
 
   useEffect(() => {
     supabase
@@ -254,15 +256,15 @@ const Careers = () => {
                         </AccordionPrimitive.Trigger>
 
                         {/* Apply Now — sibling to trigger, not nested inside */}
-                        <a
-                          href={`mailto:careers@dubaicairo.com?subject=${encodeURIComponent(
-                            job.title + " – Your Name"
-                          )}`}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setApplyJob({ id: job.id, title: job.title });
+                          }}
                           className="shrink-0 px-4 py-2 bg-primary text-primary-foreground font-display font-semibold text-xs rounded-lg hover:brightness-110 transition-all shimmer-btn hidden sm:inline-flex items-center gap-1.5"
                         >
-                          <Mail className="w-3 h-3" />
                           Apply Now
-                        </a>
+                        </button>
                       </AccordionPrimitive.Header>
 
                       {/* ── Expanded content ── */}
@@ -344,15 +346,12 @@ const Careers = () => {
 
                           {/* Mobile Apply button */}
                           <div className="sm:hidden pt-1">
-                            <a
-                              href={`mailto:careers@dubaicairo.com?subject=${encodeURIComponent(
-                                job.title + " – Your Name"
-                              )}`}
+                            <button
+                              onClick={() => setApplyJob({ id: job.id, title: job.title })}
                               className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-display font-semibold text-sm rounded-lg hover:brightness-110 transition-all"
                             >
-                              <Mail className="w-4 h-4" />
                               Apply Now
-                            </a>
+                            </button>
                           </div>
                         </div>
                       </AccordionPrimitive.Content>
@@ -407,6 +406,15 @@ const Careers = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* ── Apply Modal ──────────────────────────────────────────────────── */}
+      {applyJob && (
+        <ApplyModal
+          jobId={applyJob.id}
+          jobTitle={applyJob.title}
+          onClose={() => setApplyJob(null)}
+        />
+      )}
 
       <Footer />
     </div>
