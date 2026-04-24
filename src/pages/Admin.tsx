@@ -6,7 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import {
   Loader2, Save, LogOut, ArrowLeft, ChevronDown, Search, X,
   Type, AlignLeft, MousePointer, Hash, LayoutList,
-  Plus, Trash2, Pencil, Star, Eye, EyeOff, BookOpen,
+  Plus, Trash2, Pencil, Star, Eye, EyeOff, BookOpen, Briefcase,
 } from "lucide-react";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
 import { cn } from "@/lib/utils";
@@ -101,7 +101,7 @@ const Admin = () => {
   const [openSubGroups, setOpenSubGroups] = useState<Record<string, boolean>>({});
   const [search, setSearch]         = useState("");
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [adminTab, setAdminTab]     = useState<"content" | "case-studies">("content");
+  const [adminTab, setAdminTab]     = useState<"content" | "case-studies" | "jobs">("content");
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   // ── Auth & data load ──
@@ -254,6 +254,9 @@ const Admin = () => {
           <button onClick={() => setAdminTab("case-studies")} className={cn("flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center justify-center gap-1", adminTab === "case-studies" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground")}>
             <BookOpen className="w-3 h-3" /> Cases
           </button>
+          <button onClick={() => setAdminTab("jobs")} className={cn("flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center justify-center gap-1", adminTab === "jobs" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground")}>
+            <Briefcase className="w-3 h-3" /> Jobs
+          </button>
         </div>
 
         <nav className="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
@@ -355,6 +358,7 @@ const Admin = () => {
         </header>
 
         {adminTab === "case-studies" && <CaseStudiesPanel />}
+        {adminTab === "jobs" && <JobsPanel />}
 
         {/* Sections */}
         {adminTab === "content" && <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 space-y-4">
@@ -769,6 +773,245 @@ function CaseStudiesPanel() {
     </main>
   );
 }
+
+// ─── JobsPanel ────────────────────────────────────────────────────────────────
+
+type Job = {
+  id: string; title: string; role_overview: string; responsibilities: string;
+  requirements: string; notes: string; experience: string;
+  sort_order: number; published: boolean;
+};
+
+const EMPTY_JOB: Omit<Job, "id"> = {
+  title: "", role_overview: "", responsibilities: "", requirements: "",
+  notes: "", experience: "", sort_order: 0, published: true,
+};
+
+function JobsPanel() {
+  const { toast } = useToast();
+  const [list, setList]       = useState<Job[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState<Partial<Job> | null>(null);
+  const [saving, setSaving]   = useState(false);
+  const [isNew, setIsNew]     = useState(false);
+
+  const load = async () => {
+    const { data } = await supabase.from("job_listings").select("*").order("sort_order");
+    if (data) setList(data as Job[]);
+    setLoading(false);
+  };
+
+  useEffect(() => { load(); }, []);
+
+  const openNew  = () => { setEditing({ ...EMPTY_JOB }); setIsNew(true); };
+  const openEdit = (job: Job) => { setEditing({ ...job }); setIsNew(false); };
+  const closeForm = () => { setEditing(null); setIsNew(false); };
+
+  const handleSave = async () => {
+    if (!editing) return;
+    setSaving(true);
+    const payload = { ...editing };
+    if (isNew) {
+      const { error } = await supabase.from("job_listings").insert(payload);
+      if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
+      else { toast({ title: "Job listing created!" }); closeForm(); load(); }
+    } else {
+      const { error } = await supabase.from("job_listings").update(payload).eq("id", editing.id!);
+      if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
+      else { toast({ title: "Saved!" }); closeForm(); load(); }
+    }
+    setSaving(false);
+  };
+
+  const togglePublished = async (id: string, val: boolean) => {
+    await supabase.from("job_listings").update({ published: val }).eq("id", id);
+    setList((prev) => prev.map((j) => j.id === id ? { ...j, published: val } : j));
+  };
+
+  const handleDelete = async (id: string, title: string) => {
+    if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
+    await supabase.from("job_listings").delete().eq("id", id);
+    setList((prev) => prev.filter((j) => j.id !== id));
+    toast({ title: "Deleted" });
+  };
+
+  const set = (key: string, val: string | boolean | number) =>
+    setEditing((prev) => prev ? { ...prev, [key]: val } : prev);
+
+  if (loading) return (
+    <div className="flex-1 flex items-center justify-center py-20">
+      <Loader2 className="w-6 h-6 animate-spin text-primary" />
+    </div>
+  );
+
+  if (editing) return (
+    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6">
+      <div className="flex items-center gap-3 mb-6">
+        <button onClick={closeForm} className="text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="w-4 h-4" />
+        </button>
+        <h2 className="font-display font-bold text-lg">
+          {isNew ? "New Job Listing" : `Edit — ${editing.title}`}
+        </h2>
+      </div>
+
+      <div className="space-y-5">
+        {/* Position Details */}
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Position Details</p>
+          <Field
+            label="Job Title *"
+            value={editing.title || ""}
+            onChange={(v) => set("title", v)}
+            placeholder="e.g. AI-Focused Senior Graphic Designer"
+          />
+          <Field
+            label="Experience Required"
+            value={editing.experience || ""}
+            onChange={(v) => set("experience", v)}
+            placeholder="e.g. 5+ Years"
+          />
+          <Field
+            label="Special Notes (optional)"
+            value={editing.notes || ""}
+            onChange={(v) => set("notes", v)}
+            placeholder="e.g. Females Only – English Fluency Required"
+          />
+        </div>
+
+        {/* Role Content */}
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Role Content</p>
+          <Field
+            label="Role Overview"
+            value={editing.role_overview || ""}
+            onChange={(v) => set("role_overview", v)}
+            long
+            placeholder="Brief 1–2 sentence description of the role and its purpose."
+          />
+          <Field
+            label="Key Responsibilities (one per line)"
+            value={editing.responsibilities || ""}
+            onChange={(v) => set("responsibilities", v)}
+            long
+            placeholder={"Develop high-end visual concepts\nUse AI tools to accelerate production\nCollaborate with marketing teams"}
+          />
+          <Field
+            label="Requirements (one per line)"
+            value={editing.requirements || ""}
+            onChange={(v) => set("requirements", v)}
+            long
+            placeholder={"5+ years of professional experience\nStrong portfolio showcasing your work\nProficiency in relevant tools"}
+          />
+        </div>
+
+        {/* Settings */}
+        <div className="rounded-xl border border-border bg-card p-5 space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Settings</p>
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={!!editing.published}
+              onChange={(e) => set("published", e.target.checked)}
+              className="w-4 h-4 accent-primary"
+            />
+            <span className="text-sm">Published (visible on /careers page)</span>
+          </label>
+          <Field
+            label="Sort Order (lower number = appears first)"
+            value={String(editing.sort_order ?? 0)}
+            onChange={(v) => set("sort_order", parseInt(v) || 0)}
+            placeholder="0"
+          />
+        </div>
+
+        <div className="flex gap-3">
+          <Button onClick={handleSave} disabled={saving} className="glow-gold font-display">
+            {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
+            {isNew ? "Create Job Listing" : "Save Changes"}
+          </Button>
+          <Button variant="outline" onClick={closeForm}>Cancel</Button>
+        </div>
+      </div>
+    </main>
+  );
+
+  return (
+    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="font-display font-bold text-lg">Job Listings</h2>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            {list.length} total · {list.filter((j) => j.published).length} published on /careers
+          </p>
+        </div>
+        <Button onClick={openNew} size="sm" className="glow-gold font-display">
+          <Plus className="w-4 h-4 mr-1.5" /> New Job
+        </Button>
+      </div>
+
+      {list.length === 0 ? (
+        <div className="text-center py-20 border border-dashed border-border rounded-xl">
+          <Briefcase className="w-10 h-10 mx-auto mb-3 text-muted-foreground opacity-40" />
+          <p className="text-sm text-muted-foreground mb-4">No job listings yet.</p>
+          <Button onClick={openNew} size="sm" variant="outline">
+            <Plus className="w-4 h-4 mr-1.5" /> Add your first job
+          </Button>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {list.map((job) => (
+            <div key={job.id} className="rounded-xl border border-border bg-card p-4 flex items-center gap-4">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-display font-semibold text-sm text-foreground truncate">
+                    {job.title || "Untitled"}
+                  </span>
+                  {job.experience && (
+                    <span className="text-[10px] bg-secondary text-secondary-foreground px-1.5 py-0.5 rounded font-semibold">
+                      {job.experience}
+                    </span>
+                  )}
+                  {!job.published && (
+                    <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded font-semibold">
+                      Draft
+                    </span>
+                  )}
+                </div>
+                {job.notes && (
+                  <p className="text-xs text-muted-foreground mt-0.5 truncate">{job.notes}</p>
+                )}
+              </div>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  onClick={() => togglePublished(job.id, !job.published)}
+                  title={job.published ? "Unpublish" : "Publish"}
+                  className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                >
+                  {job.published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+                </button>
+                <button
+                  onClick={() => openEdit(job)}
+                  className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                >
+                  <Pencil className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => handleDelete(job.id, job.title)}
+                  className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </main>
+  );
+}
+
+// ─── Field ────────────────────────────────────────────────────────────────────
 
 function Field({ label, value, onChange, placeholder, long }: {
   label: string; value: string; onChange: (v: string) => void;

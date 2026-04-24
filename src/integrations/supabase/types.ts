@@ -83,6 +83,48 @@ export type Database = {
         }
         Relationships: []
       }
+      job_listings: {
+        Row: {
+          id: string
+          title: string
+          role_overview: string | null
+          responsibilities: string | null
+          requirements: string | null
+          notes: string | null
+          experience: string | null
+          sort_order: number | null
+          published: boolean | null
+          created_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          title: string
+          role_overview?: string | null
+          responsibilities?: string | null
+          requirements?: string | null
+          notes?: string | null
+          experience?: string | null
+          sort_order?: number | null
+          published?: boolean | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          title?: string
+          role_overview?: string | null
+          responsibilities?: string | null
+          requirements?: string | null
+          notes?: string | null
+          experience?: string | null
+          sort_order?: number | null
+          published?: boolean | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
