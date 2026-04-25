@@ -6,7 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import {
   Loader2, Save, LogOut, ArrowLeft, ChevronDown, Search, X,
   Type, AlignLeft, MousePointer, Hash, LayoutList,
-  Plus, Trash2, Pencil, Star, Eye, EyeOff, BookOpen, Briefcase,
+  Plus, Trash2, Pencil, Star, Eye, EyeOff, BookOpen, Briefcase, Landmark,
 } from "lucide-react";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
 import { cn } from "@/lib/utils";
@@ -101,7 +101,7 @@ const Admin = () => {
   const [openSubGroups, setOpenSubGroups] = useState<Record<string, boolean>>({});
   const [search, setSearch]         = useState("");
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [adminTab, setAdminTab]     = useState<"content" | "case-studies" | "jobs">("content");
+  const [adminTab, setAdminTab]     = useState<"content" | "case-studies" | "jobs" | "banks">("content");
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   // ── Auth & data load ──
@@ -257,6 +257,9 @@ const Admin = () => {
           <button onClick={() => setAdminTab("jobs")} className={cn("flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center justify-center gap-1", adminTab === "jobs" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground")}>
             <Briefcase className="w-3 h-3" /> Jobs
           </button>
+          <button onClick={() => setAdminTab("banks")} className={cn("flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center justify-center gap-1", adminTab === "banks" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground")}>
+            <Landmark className="w-3 h-3" /> Banks
+          </button>
         </div>
 
         <nav className="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
@@ -359,6 +362,7 @@ const Admin = () => {
 
         {adminTab === "case-studies" && <CaseStudiesPanel />}
         {adminTab === "jobs" && <JobsPanel />}
+        {adminTab === "banks" && <BanksPanel />}
 
         {/* Sections */}
         {adminTab === "content" && <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 space-y-4">
@@ -998,6 +1002,246 @@ function JobsPanel() {
                 </button>
                 <button
                   onClick={() => handleDelete(job.id, job.title)}
+                  className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </main>
+  );
+}
+
+// ─── BanksPanel ───────────────────────────────────────────────────────────────
+
+type BankAccount = {
+  id: string; title: string; abbr: string; branch: string;
+  account_number: string; iban: string; currencies: string;
+  sort_order: number; published: boolean;
+};
+
+const EMPTY_BANK: Omit<BankAccount, "id"> = {
+  title: "", abbr: "", branch: "",
+  account_number: "", iban: "", currencies: "",
+  sort_order: 0, published: true,
+};
+
+function BanksPanel() {
+  const { toast } = useToast();
+  const [list, setList]       = useState<BankAccount[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState<Partial<BankAccount> | null>(null);
+  const [saving, setSaving]   = useState(false);
+  const [isNew, setIsNew]     = useState(false);
+
+  const load = async () => {
+    const { data } = await supabase.from("bank_accounts").select("*").order("sort_order");
+    if (data) setList(data as BankAccount[]);
+    setLoading(false);
+  };
+
+  useEffect(() => { load(); }, []);
+
+  const openNew   = () => { setEditing({ ...EMPTY_BANK }); setIsNew(true); };
+  const openEdit  = (bank: BankAccount) => { setEditing({ ...bank }); setIsNew(false); };
+  const closeForm = () => { setEditing(null); setIsNew(false); };
+
+  const handleSave = async () => {
+    if (!editing) return;
+    setSaving(true);
+    const payload = { ...editing };
+    if (isNew) {
+      const { error } = await supabase.from("bank_accounts").insert(payload);
+      if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
+      else { toast({ title: "Bank account created!" }); closeForm(); load(); }
+    } else {
+      const { error } = await supabase.from("bank_accounts").update(payload).eq("id", editing.id!);
+      if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
+      else { toast({ title: "Saved!" }); closeForm(); load(); }
+    }
+    setSaving(false);
+  };
+
+  const togglePublished = async (id: string, val: boolean) => {
+    await supabase.from("bank_accounts").update({ published: val }).eq("id", id);
+    setList((prev) => prev.map((b) => b.id === id ? { ...b, published: val } : b));
+  };
+
+  const handleDelete = async (id: string, title: string) => {
+    if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
+    await supabase.from("bank_accounts").delete().eq("id", id);
+    setList((prev) => prev.filter((b) => b.id !== id));
+    toast({ title: "Deleted" });
+  };
+
+  const set = (key: string, val: string | boolean | number) =>
+    setEditing((prev) => prev ? { ...prev, [key]: val } : prev);
+
+  if (loading) return (
+    <div className="flex-1 flex items-center justify-center py-20">
+      <Loader2 className="w-6 h-6 animate-spin text-primary" />
+    </div>
+  );
+
+  if (editing) return (
+    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6">
+      <div className="flex items-center gap-3 mb-6">
+        <button onClick={closeForm} className="text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="w-4 h-4" />
+        </button>
+        <h2 className="font-display font-bold text-lg">
+          {isNew ? "New Bank Account" : `Edit — ${editing.title}`}
+        </h2>
+      </div>
+
+      <div className="space-y-5">
+        {/* Bank Identity */}
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Bank Identity</p>
+          <Field
+            label="Bank Full Name *"
+            value={editing.title || ""}
+            onChange={(v) => set("title", v)}
+            placeholder="e.g. Arab African International Bank"
+          />
+          <Field
+            label="Abbreviation"
+            value={editing.abbr || ""}
+            onChange={(v) => set("abbr", v)}
+            placeholder="e.g. AAIB"
+          />
+          <Field
+            label="Branch Name"
+            value={editing.branch || ""}
+            onChange={(v) => set("branch", v)}
+            placeholder="e.g. Arkan Plaza Branch — Sheikh Zayed"
+          />
+        </div>
+
+        {/* Account Details */}
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Account Details</p>
+          <Field
+            label="Account Number"
+            value={editing.account_number || ""}
+            onChange={(v) => set("account_number", v)}
+            placeholder="e.g. 1144817810010201"
+          />
+          <Field
+            label="IBAN"
+            value={editing.iban || ""}
+            onChange={(v) => set("iban", v)}
+            placeholder="e.g. EG730057028001144817810010201"
+          />
+          <Field
+            label="Currencies (comma-separated)"
+            value={editing.currencies || ""}
+            onChange={(v) => set("currencies", v)}
+            placeholder="e.g. USD,EGP"
+          />
+        </div>
+
+        {/* Settings */}
+        <div className="rounded-xl border border-border bg-card p-5 space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Settings</p>
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={!!editing.published}
+              onChange={(e) => set("published", e.target.checked)}
+              className="w-4 h-4 accent-primary"
+            />
+            <span className="text-sm">Published (visible on homepage)</span>
+          </label>
+          <Field
+            label="Sort Order (lower number = appears first)"
+            value={String(editing.sort_order ?? 0)}
+            onChange={(v) => set("sort_order", parseInt(v) || 0)}
+            placeholder="0"
+          />
+        </div>
+
+        <div className="flex gap-3">
+          <Button onClick={handleSave} disabled={saving} className="glow-gold font-display">
+            {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
+            {isNew ? "Create Bank Account" : "Save Changes"}
+          </Button>
+          <Button variant="outline" onClick={closeForm}>Cancel</Button>
+        </div>
+      </div>
+    </main>
+  );
+
+  return (
+    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="font-display font-bold text-lg">Bank Accounts</h2>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            {list.length} total · {list.filter((b) => b.published).length} published on homepage
+          </p>
+        </div>
+        <Button onClick={openNew} size="sm" className="glow-gold font-display">
+          <Plus className="w-4 h-4 mr-1.5" /> New Bank
+        </Button>
+      </div>
+
+      {list.length === 0 ? (
+        <div className="text-center py-20 border border-dashed border-border rounded-xl">
+          <Landmark className="w-10 h-10 mx-auto mb-3 text-muted-foreground opacity-40" />
+          <p className="text-sm text-muted-foreground mb-4">No bank accounts yet.</p>
+          <Button onClick={openNew} size="sm" variant="outline">
+            <Plus className="w-4 h-4 mr-1.5" /> Add your first bank
+          </Button>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {list.map((bank) => (
+            <div key={bank.id} className="rounded-xl border border-border bg-card p-4 flex items-center gap-4">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-display font-semibold text-sm text-foreground truncate">
+                    {bank.title || "Untitled"}
+                  </span>
+                  {bank.abbr && (
+                    <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-semibold">
+                      {bank.abbr}
+                    </span>
+                  )}
+                  {bank.currencies && (
+                    <span className="text-[10px] bg-secondary text-secondary-foreground px-1.5 py-0.5 rounded font-semibold">
+                      {bank.currencies}
+                    </span>
+                  )}
+                  {!bank.published && (
+                    <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded font-semibold">
+                      Draft
+                    </span>
+                  )}
+                </div>
+                {bank.branch && (
+                  <p className="text-xs text-muted-foreground mt-0.5 truncate">{bank.branch}</p>
+                )}
+              </div>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  onClick={() => togglePublished(bank.id, !bank.published)}
+                  title={bank.published ? "Unpublish" : "Publish"}
+                  className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                >
+                  {bank.published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+                </button>
+                <button
+                  onClick={() => openEdit(bank)}
+                  className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                >
+                  <Pencil className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => handleDelete(bank.id, bank.title)}
                   className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
                 >
                   <Trash2 className="w-3.5 h-3.5" />

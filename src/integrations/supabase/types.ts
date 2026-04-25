@@ -125,6 +125,48 @@ export type Database = {
         }
         Relationships: []
       }
+      bank_accounts: {
+        Row: {
+          id: string
+          title: string
+          abbr: string | null
+          branch: string | null
+          account_number: string | null
+          iban: string | null
+          currencies: string | null
+          sort_order: number | null
+          published: boolean | null
+          created_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          title: string
+          abbr?: string | null
+          branch?: string | null
+          account_number?: string | null
+          iban?: string | null
+          currencies?: string | null
+          sort_order?: number | null
+          published?: boolean | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          title?: string
+          abbr?: string | null
+          branch?: string | null
+          account_number?: string | null
+          iban?: string | null
+          currencies?: string | null
+          sort_order?: number | null
+          published?: boolean | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       job_applications: {
         Row: {
           id: string

@@ -1,38 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, MapPin, Landmark, Building2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 
-// ── Data ──────────────────────────────────────────────────────────────────────
+// ── Type ──────────────────────────────────────────────────────────────────────
 
-const banks = [
-  {
-    abbr: "AAIB",
-    name: "Arab African International Bank",
-    branch: "Arkan Plaza Branch — Sheikh Zayed",
-    account: "1144817810010201",
-    iban: "EG730057028001144817810010201",
-    currencies: ["USD", "EGP"],
-  },
-  {
-    abbr: "NBE",
-    name: "National Bank of Egypt",
-    branch: "Smart Village Branch — 6th of October",
-    account: "1923071255410401013",
-    iban: "EG410003019230712554104010130",
-    currencies: ["USD", "EGP"],
-  },
-  {
-    abbr: "CIB",
-    name: "Commercial International Bank",
-    branch: "Arkan Plaza Branch — Sheikh Zayed",
-    account: "100059074754",
-    iban: "EG160010026000000100059074754",
-    currencies: ["USD"],
-  },
-];
+type BankAccount = {
+  id: string;
+  title: string;
+  abbr: string | null;
+  branch: string | null;
+  account_number: string | null;
+  iban: string | null;
+  currencies: string | null; // comma-separated e.g. "USD,EGP"
+  sort_order: number | null;
+};
 
-// ── Copy button ───────────────────────────────────────────────────────────────
+// ── Copy field ────────────────────────────────────────────────────────────────
 
 function CopyField({ label, value }: { label: string; value: string }) {
   const [copied, setCopied] = useState(false);
@@ -70,6 +55,21 @@ function CopyField({ label, value }: { label: string; value: string }) {
 // ── Section ───────────────────────────────────────────────────────────────────
 
 const BankAccountsSection = () => {
+  const [banks, setBanks] = useState<BankAccount[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    supabase
+      .from("bank_accounts")
+      .select("id,title,abbr,branch,account_number,iban,currencies,sort_order")
+      .eq("published", true)
+      .order("sort_order", { ascending: true })
+      .then(({ data }) => {
+        if (data) setBanks(data as BankAccount[]);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <section id="bank-accounts" className="relative py-8 md:py-20 px-6 overflow-hidden">
 
@@ -104,78 +104,111 @@ const BankAccountsSection = () => {
           </p>
         </motion.div>
 
+        {/* ── Loading ── */}
+        {loading && (
+          <div className="flex justify-center py-20">
+            <div className="w-6 h-6 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+          </div>
+        )}
+
+        {/* ── Empty ── */}
+        {!loading && banks.length === 0 && (
+          <div className="text-center py-20 border border-dashed border-border rounded-xl text-muted-foreground">
+            <p className="text-sm">No bank accounts available at the moment.</p>
+          </div>
+        )}
+
         {/* ── Bank cards ── */}
-        <motion.div
-          className="grid md:grid-cols-3 gap-5 lg:gap-6"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-        >
-          {banks.map((bank, i) => (
-            <motion.div
-              key={i}
-              variants={cardFadeUp}
-              className="group glass-card gradient-border rounded-xl p-6 hover-lift flex flex-col gap-5"
-            >
+        {!loading && banks.length > 0 && (
+          <motion.div
+            className="grid md:grid-cols-3 gap-5 lg:gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+          >
+            {banks.map((bank) => {
+              const currencyList = (bank.currencies || "")
+                .split(",")
+                .map((c) => c.trim())
+                .filter(Boolean);
 
-              {/* Bank header */}
-              <div className="flex items-start justify-between gap-3">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:rotate-12">
-                  <Building2 className="w-5 h-5 text-primary" />
-                </div>
-                <div className="flex gap-1.5 mt-1 shrink-0">
-                  {bank.currencies.map((c) => (
-                    <span
-                      key={c}
-                      className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border border-primary/25 text-primary/80 bg-primary/5"
-                    >
-                      {c}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              return (
+                <motion.div
+                  key={bank.id}
+                  variants={cardFadeUp}
+                  className="group glass-card gradient-border rounded-xl p-6 hover-lift flex flex-col gap-5"
+                >
+                  {/* Bank header */}
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:rotate-12">
+                      <Building2 className="w-5 h-5 text-primary" />
+                    </div>
+                    {currencyList.length > 0 && (
+                      <div className="flex gap-1.5 mt-1 shrink-0">
+                        {currencyList.map((c) => (
+                          <span
+                            key={c}
+                            className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border border-primary/25 text-primary/80 bg-primary/5"
+                          >
+                            {c}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
 
-              {/* Bank identity */}
-              <div>
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-primary/70 mb-1 block">
-                  {bank.abbr}
-                </span>
-                <h3 className="text-base font-display font-semibold text-foreground leading-snug">
-                  {bank.name}
-                </h3>
-                <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
-                  <MapPin className="w-3 h-3 text-primary/60 shrink-0" />
-                  <span>{bank.branch}</span>
-                </div>
-              </div>
+                  {/* Bank identity */}
+                  <div>
+                    {bank.abbr && (
+                      <span className="text-[10px] font-semibold uppercase tracking-widest text-primary/70 mb-1 block">
+                        {bank.abbr}
+                      </span>
+                    )}
+                    <h3 className="text-base font-display font-semibold text-foreground leading-snug">
+                      {bank.title}
+                    </h3>
+                    {bank.branch && (
+                      <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
+                        <MapPin className="w-3 h-3 text-primary/60 shrink-0" />
+                        <span>{bank.branch}</span>
+                      </div>
+                    )}
+                  </div>
 
-              {/* Divider */}
-              <div className="h-px bg-border/60" />
+                  {/* Divider */}
+                  <div className="h-px bg-border/60" />
 
-              {/* Account fields */}
-              <div className="flex flex-col gap-4">
-                <CopyField label="Account Number — Companies" value={bank.account} />
-                <CopyField label="IBAN" value={bank.iban} />
-              </div>
-
-            </motion.div>
-          ))}
-        </motion.div>
+                  {/* Account fields */}
+                  <div className="flex flex-col gap-4">
+                    {bank.account_number && (
+                      <CopyField label="Account Number — Companies" value={bank.account_number} />
+                    )}
+                    {bank.iban && (
+                      <CopyField label="IBAN" value={bank.iban} />
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        )}
 
         {/* ── Footer note ── */}
-        <motion.div
-          className="flex items-center justify-center gap-2 mt-10 text-sm text-muted-foreground"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-        >
-          <Landmark className="w-4 h-4 text-primary/60 shrink-0" />
-          <span>
-            For wire transfers, always include the IBAN and specify the transfer currency.
-          </span>
-        </motion.div>
+        {!loading && banks.length > 0 && (
+          <motion.div
+            className="flex items-center justify-center gap-2 mt-10 text-sm text-muted-foreground"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+          >
+            <Landmark className="w-4 h-4 text-primary/60 shrink-0" />
+            <span>
+              For wire transfers, always include the IBAN and specify the transfer currency.
+            </span>
+          </motion.div>
+        )}
 
       </div>
     </section>
