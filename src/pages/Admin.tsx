@@ -17,6 +17,7 @@ const sectionIcons: Record<string, string> = {
   nav: "🧭", hero: "🏠", stats: "📊", about: "ℹ️", edges: "⚡",
   values: "💎", services: "🎯", founder: "👤", clients: "🤝",
   tech: "🛠️", google: "📍", legal: "📜", contact: "✉️", footer: "🔗",
+  careers: "💼",
 };
 
 const sectionDescriptions: Record<string, string> = {
@@ -34,6 +35,7 @@ const sectionDescriptions: Record<string, string> = {
   legal: "Company registration details",
   contact: "Contact form labels & copy",
   footer: "Footer tagline & copyright",
+  careers: "Hero, Why Join cards, job section labels, how to apply copy",
 };
 
 const subItemLabels: Record<string, string> = {

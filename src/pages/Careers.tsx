@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ChevronDown, Mail, Briefcase, Globe, TrendingUp, Cpu } from "lucide-react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { supabase } from "@/integrations/supabase/client";
+import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,28 +21,7 @@ type Job = {
   sort_order: number | null;
 };
 
-const WHY_JOIN = [
-  {
-    icon: Globe,
-    title: "Regional & International Brands",
-    desc: "Work on campaigns that reach audiences across the Middle East and beyond.",
-  },
-  {
-    icon: Cpu,
-    title: "AI-First Culture",
-    desc: "We deploy AI tools across every workflow — you'll work at the frontier of marketing technology.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Real Career Growth",
-    desc: "High-growth environment with mentorship, real ownership, and tangible progression paths.",
-  },
-  {
-    icon: Briefcase,
-    title: "Cutting-Edge Toolkit",
-    desc: "Access to the latest marketing, analytics, and creative technology platforms.",
-  },
-];
+const WHY_ICONS = [Globe, Cpu, TrendingUp, Briefcase];
 
 const parseList = (text: string | null): string[] => {
   if (!text) return [];
@@ -52,6 +32,7 @@ const parseList = (text: string | null): string[] => {
 };
 
 const Careers = () => {
+  const { get } = useSiteContent();
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [applyJob, setApplyJob] = useState<{ id: string; title: string } | null>(null);
@@ -70,6 +51,9 @@ const Careers = () => {
       });
   }, []);
 
+  const applyEmail = get("careers_apply_email", "careers@dubaicairo.com");
+  const applySubject = get("careers_apply_subject", "[Position Title] – Your Name");
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -78,10 +62,7 @@ const Careers = () => {
       <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 px-6 overflow-hidden">
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)",
-          }}
+          style={{ background: "radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)" }}
         />
         <div className="relative max-w-6xl mx-auto">
           <motion.div variants={fadeUp} initial="hidden" animate="visible">
@@ -93,29 +74,27 @@ const Careers = () => {
             </Link>
 
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
-              We're Hiring
+              {get("careers_hero_badge", "We're Hiring")}
             </span>
 
             <h1 className="text-4xl md:text-6xl font-display font-bold mb-4 leading-tight">
-              Build the Future of
+              {get("careers_hero_headline_1", "Build the Future of")}
               <br />
-              <span className="text-gradient-gold">Marketing with AI</span>
+              <span className="text-gradient-gold">
+                {get("careers_hero_headline_2", "Marketing with AI")}
+              </span>
             </h1>
 
             <p className="text-muted-foreground text-lg max-w-2xl mb-8 leading-relaxed">
-              At Dubai in Cairo, we don't just deliver marketing solutions — we
-              engineer growth using data, creativity, and AI-powered innovation.
-              We're looking for ambitious, forward-thinking professionals who
-              operate at the intersection of strategy, creativity, and
-              technology.
+              {get("careers_hero_body", "At Dubai in Cairo, we don't just deliver marketing solutions — we engineer growth using data, creativity, and AI-powered innovation.")}
             </p>
 
             <div className="flex flex-wrap gap-2">
               <span className="px-3 py-1.5 rounded-full text-xs font-semibold border border-primary/30 text-primary/80 bg-primary/5">
-                ✦ AUS Graduates Preferred
+                {get("careers_hero_pill_1", "✦ AUS Graduates Preferred")}
               </span>
               <span className="px-3 py-1.5 rounded-full text-xs font-semibold border border-primary/30 text-primary/80 bg-primary/5">
-                ✦ Gulf Experience Required
+                {get("careers_hero_pill_2", "✦ Gulf Experience Required")}
               </span>
             </div>
           </motion.div>
@@ -133,11 +112,13 @@ const Careers = () => {
             viewport={viewportOnce}
           >
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
-              Why Dubai in Cairo
+              {get("careers_why_badge", "Why Dubai in Cairo")}
             </span>
             <h2 className="text-2xl md:text-3xl font-display font-bold">
-              More Than a Job.{" "}
-              <span className="text-gradient-gold">A Career Accelerator.</span>
+              {get("careers_why_headline", "More Than a Job.")}{" "}
+              <span className="text-gradient-gold">
+                {get("careers_why_headline_accent", "A Career Accelerator.")}
+              </span>
             </h2>
           </motion.div>
 
@@ -148,9 +129,9 @@ const Careers = () => {
             whileInView="visible"
             viewport={viewportOnce}
           >
-            {WHY_JOIN.map(({ icon: Icon, title, desc }) => (
+            {WHY_ICONS.map((Icon, i) => (
               <motion.div
-                key={title}
+                key={i}
                 variants={cardFadeUp}
                 className="glass-card gradient-border rounded-xl p-5 hover-lift"
               >
@@ -158,10 +139,15 @@ const Careers = () => {
                   <Icon className="w-4 h-4 text-primary" />
                 </div>
                 <h3 className="font-display font-semibold text-sm text-foreground mb-1.5">
-                  {title}
+                  {get(`careers_why_${i + 1}_title`, ["Regional & International Brands", "AI-First Culture", "Real Career Growth", "Cutting-Edge Toolkit"][i])}
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  {desc}
+                  {get(`careers_why_${i + 1}_desc`, [
+                    "Work on campaigns that reach audiences across the Middle East and beyond.",
+                    "We deploy AI tools across every workflow — you'll work at the frontier of marketing technology.",
+                    "High-growth environment with mentorship, real ownership, and tangible progression paths.",
+                    "Access to the latest marketing, analytics, and creative technology platforms.",
+                  ][i])}
                 </p>
               </motion.div>
             ))}
@@ -180,13 +166,13 @@ const Careers = () => {
             viewport={viewportOnce}
           >
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
-              Open Positions
+              {get("careers_jobs_badge", "Open Positions")}
             </span>
             <h2 className="text-2xl md:text-3xl font-display font-bold">
-              Find Your Role
+              {get("careers_jobs_headline", "Find Your Role")}
             </h2>
             <p className="text-muted-foreground text-sm mt-2">
-              Click any position to view full details
+              {get("careers_jobs_subtext", "Click any position to view full details")}
             </p>
           </motion.div>
 
@@ -200,11 +186,8 @@ const Careers = () => {
               <p className="text-sm">No open positions at the moment.</p>
               <p className="text-xs mt-1">
                 Check back soon or send your CV to{" "}
-                <a
-                  href="mailto:careers@dubaicairo.com"
-                  className="text-primary hover:underline"
-                >
-                  careers@dubaicairo.com
+                <a href={`mailto:${applyEmail}`} className="text-primary hover:underline">
+                  {applyEmail}
                 </a>
               </p>
             </div>
@@ -215,11 +198,7 @@ const Careers = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              <AccordionPrimitive.Root
-                type="single"
-                collapsible
-                className="space-y-3"
-              >
+              <AccordionPrimitive.Root type="single" collapsible className="space-y-3">
                 {jobs.map((job, i) => (
                   <motion.div key={job.id} variants={cardFadeUp}>
                     <AccordionPrimitive.Item
@@ -228,12 +207,10 @@ const Careers = () => {
                     >
                       {/* ── Row: number · trigger · apply button ── */}
                       <AccordionPrimitive.Header className="flex items-center gap-3 px-5 py-4">
-                        {/* Position number */}
                         <span className="shrink-0 w-8 h-8 rounded-lg bg-primary/10 text-primary text-xs font-bold font-display flex items-center justify-center">
                           {String(i + 1).padStart(2, "0")}
                         </span>
 
-                        {/* Trigger — title + chevron only */}
                         <AccordionPrimitive.Trigger className="flex-1 flex items-center justify-between gap-3 text-left outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-lg [&[data-state=open]_.job-title]:text-primary [&[data-state=open]>svg]:rotate-180 cursor-pointer py-0.5">
                           <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-center gap-2">
@@ -255,7 +232,7 @@ const Careers = () => {
                           <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300" />
                         </AccordionPrimitive.Trigger>
 
-                        {/* Apply Now — sibling to trigger, not nested inside */}
+                        {/* Apply Now — sibling to trigger */}
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -287,19 +264,12 @@ const Careers = () => {
                                 Key Responsibilities
                               </h4>
                               <ul className="space-y-1.5">
-                                {parseList(job.responsibilities).map(
-                                  (item, idx) => (
-                                    <li
-                                      key={idx}
-                                      className="flex items-start gap-2.5 text-muted-foreground text-sm"
-                                    >
-                                      <span className="text-primary mt-0.5 shrink-0 text-xs">
-                                        ▸
-                                      </span>
-                                      {item}
-                                    </li>
-                                  )
-                                )}
+                                {parseList(job.responsibilities).map((item, idx) => (
+                                  <li key={idx} className="flex items-start gap-2.5 text-muted-foreground text-sm">
+                                    <span className="text-primary mt-0.5 shrink-0 text-xs">▸</span>
+                                    {item}
+                                  </li>
+                                ))}
                               </ul>
                             </div>
                           )}
@@ -310,36 +280,29 @@ const Careers = () => {
                                 Requirements
                               </h4>
                               <ul className="space-y-1.5">
-                                {parseList(job.requirements).map(
-                                  (item, idx) => (
-                                    <li
-                                      key={idx}
-                                      className="flex items-start gap-2.5 text-muted-foreground text-sm"
-                                    >
-                                      <span className="text-primary mt-0.5 shrink-0 text-xs">
-                                        ▸
-                                      </span>
-                                      {item}
-                                    </li>
-                                  )
-                                )}
+                                {parseList(job.requirements).map((item, idx) => (
+                                  <li key={idx} className="flex items-start gap-2.5 text-muted-foreground text-sm">
+                                    <span className="text-primary mt-0.5 shrink-0 text-xs">▸</span>
+                                    {item}
+                                  </li>
+                                ))}
                               </ul>
                             </div>
                           )}
 
-                          {/* Preferred Qualifications — shown on every job */}
+                          {/* Preferred Qualifications */}
                           <div className="rounded-lg border border-primary/20 bg-primary/5 px-4 py-3">
                             <h4 className="text-[10px] font-semibold uppercase tracking-widest text-primary mb-1.5">
-                              Preferred Qualifications
+                              {get("careers_pref_title", "Preferred Qualifications")}
                             </h4>
                             <ul className="space-y-1">
                               <li className="flex items-start gap-2 text-muted-foreground text-xs">
                                 <span className="text-primary shrink-0">✦</span>
-                                AUS graduates are preferred
+                                {get("careers_pref_1", "AUS graduates are preferred")}
                               </li>
                               <li className="flex items-start gap-2 text-muted-foreground text-xs">
                                 <span className="text-primary shrink-0">✦</span>
-                                Gulf experience is a must
+                                {get("careers_pref_2", "Gulf experience is a must")}
                               </li>
                             </ul>
                           </div>
@@ -379,28 +342,27 @@ const Careers = () => {
             viewport={viewportOnce}
           >
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
-              How to Apply
+              {get("careers_apply_badge", "How to Apply")}
             </span>
             <h2 className="text-2xl md:text-3xl font-display font-bold mb-3">
-              Ready to Join Us?
+              {get("careers_apply_headline", "Ready to Join Us?")}
             </h2>
             <p className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed">
-              Send your CV and portfolio (if applicable) to our careers inbox.
-              Include the position title and your name in the subject line.
+              {get("careers_apply_body", "Send your CV and portfolio (if applicable) to our careers inbox. Include the position title and your name in the subject line.")}
             </p>
 
             <a
-              href="mailto:careers@dubaicairo.com?subject=Application – [Position Title] – Your Name"
+              href={`mailto:${applyEmail}?subject=Application – ${applySubject}`}
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-display font-semibold rounded-lg hover:brightness-110 transition-all glow-gold shimmer-btn text-sm"
             >
               <Mail className="w-4 h-4" />
-              careers@dubaicairo.com
+              {applyEmail}
             </a>
 
             <p className="text-xs text-muted-foreground mt-5">
               Subject line:{" "}
               <span className="text-foreground font-mono bg-secondary px-2 py-0.5 rounded">
-                [Position Title] – Your Name
+                {applySubject}
               </span>
             </p>
           </motion.div>

@@ -11,6 +11,7 @@ export interface ContentField {
 export const sectionOrder = [
   "nav", "hero", "stats", "about", "edges", "values", "services",
   "founder", "clients", "tech", "google", "legal", "contact", "footer",
+  "careers",
 ];
 
 export const sectionLabels: Record<string, string> = {
@@ -28,6 +29,7 @@ export const sectionLabels: Record<string, string> = {
   legal: "Legal & Registration",
   contact: "Contact Section",
   footer: "Footer",
+  careers: "Careers Page",
 };
 
 export const contentRegistry: ContentField[] = [
@@ -202,4 +204,39 @@ export const contentRegistry: ContentField[] = [
   // ── Footer ──
   { section: "footer", key: "footer_tagline", label: "Footer Tagline", defaultValue: "From Dubai to Cairo, we transferred the scope, the challenges, and the quality." },
   { section: "footer", key: "footer_copyright", label: "Copyright Text", defaultValue: "© 2025 Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC · All Rights Reserved" },
+
+  // ── Careers Page ──
+  // Hero
+  { section: "careers", key: "careers_hero_badge",      label: "Hero — Badge",           defaultValue: "We're Hiring" },
+  { section: "careers", key: "careers_hero_headline_1", label: "Hero — Headline Line 1", defaultValue: "Build the Future of" },
+  { section: "careers", key: "careers_hero_headline_2", label: "Hero — Headline Line 2 (gold)", defaultValue: "Marketing with AI" },
+  { section: "careers", key: "careers_hero_body",       label: "Hero — Body Text",       defaultValue: "At Dubai in Cairo, we don't just deliver marketing solutions — we engineer growth using data, creativity, and AI-powered innovation. We're looking for ambitious, forward-thinking professionals who operate at the intersection of strategy, creativity, and technology." },
+  { section: "careers", key: "careers_hero_pill_1",     label: "Hero — Pill Badge 1",    defaultValue: "✦ AUS Graduates Preferred" },
+  { section: "careers", key: "careers_hero_pill_2",     label: "Hero — Pill Badge 2",    defaultValue: "✦ Gulf Experience Required" },
+  // Why Join
+  { section: "careers", key: "careers_why_badge",           label: "Why Join — Badge",            defaultValue: "Why Dubai in Cairo" },
+  { section: "careers", key: "careers_why_headline",        label: "Why Join — Headline",         defaultValue: "More Than a Job." },
+  { section: "careers", key: "careers_why_headline_accent", label: "Why Join — Headline (gold)",  defaultValue: "A Career Accelerator." },
+  { section: "careers", key: "careers_why_1_title", label: "Why Join Card 1 — Title", defaultValue: "Regional & International Brands" },
+  { section: "careers", key: "careers_why_1_desc",  label: "Why Join Card 1 — Desc",  defaultValue: "Work on campaigns that reach audiences across the Middle East and beyond." },
+  { section: "careers", key: "careers_why_2_title", label: "Why Join Card 2 — Title", defaultValue: "AI-First Culture" },
+  { section: "careers", key: "careers_why_2_desc",  label: "Why Join Card 2 — Desc",  defaultValue: "We deploy AI tools across every workflow — you'll work at the frontier of marketing technology." },
+  { section: "careers", key: "careers_why_3_title", label: "Why Join Card 3 — Title", defaultValue: "Real Career Growth" },
+  { section: "careers", key: "careers_why_3_desc",  label: "Why Join Card 3 — Desc",  defaultValue: "High-growth environment with mentorship, real ownership, and tangible progression paths." },
+  { section: "careers", key: "careers_why_4_title", label: "Why Join Card 4 — Title", defaultValue: "Cutting-Edge Toolkit" },
+  { section: "careers", key: "careers_why_4_desc",  label: "Why Join Card 4 — Desc",  defaultValue: "Access to the latest marketing, analytics, and creative technology platforms." },
+  // Open Positions
+  { section: "careers", key: "careers_jobs_badge",   label: "Open Positions — Badge",   defaultValue: "Open Positions" },
+  { section: "careers", key: "careers_jobs_headline", label: "Open Positions — Headline", defaultValue: "Find Your Role" },
+  { section: "careers", key: "careers_jobs_subtext",  label: "Open Positions — Subtext", defaultValue: "Click any position to view full details" },
+  // Preferred Qualifications (shown inside every job accordion)
+  { section: "careers", key: "careers_pref_title", label: "Preferred Quals — Title", defaultValue: "Preferred Qualifications" },
+  { section: "careers", key: "careers_pref_1",     label: "Preferred Quals — Item 1", defaultValue: "AUS graduates are preferred" },
+  { section: "careers", key: "careers_pref_2",     label: "Preferred Quals — Item 2", defaultValue: "Gulf experience is a must" },
+  // How to Apply CTA
+  { section: "careers", key: "careers_apply_badge",    label: "How to Apply — Badge",    defaultValue: "How to Apply" },
+  { section: "careers", key: "careers_apply_headline", label: "How to Apply — Headline", defaultValue: "Ready to Join Us?" },
+  { section: "careers", key: "careers_apply_body",     label: "How to Apply — Body",     defaultValue: "Send your CV and portfolio (if applicable) to our careers inbox. Include the position title and your name in the subject line." },
+  { section: "careers", key: "careers_apply_email",    label: "How to Apply — Email",    defaultValue: "careers@dubaicairo.com" },
+  { section: "careers", key: "careers_apply_subject",  label: "How to Apply — Subject Hint", defaultValue: "[Position Title] – Your Name" },
 ];
