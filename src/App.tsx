@@ -13,6 +13,7 @@ import CaseStudies from "./pages/CaseStudies";
 import CaseStudy from "./pages/CaseStudy";
 import Careers from "./pages/Careers";
 import WhatsAppButton from "./components/WhatsAppButton";
+import FaviconUpdater from "./components/FaviconUpdater";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
       <Sonner />
       <WhatsAppButton />
       <SiteContentProvider>
+        <FaviconUpdater />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
