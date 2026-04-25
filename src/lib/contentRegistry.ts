@@ -6,6 +6,7 @@ export interface ContentField {
   key: string;
   label: string;
   defaultValue: string;
+  type?: "text" | "upload"; // "upload" renders a file-picker instead of a textarea
 }
 
 export const sectionOrder = [
@@ -34,7 +35,7 @@ export const sectionLabels: Record<string, string> = {
 
 export const contentRegistry: ContentField[] = [
   // ── Nav ──
-  { section: "nav", key: "nav_favicon_url", label: "Favicon URL (browser tab icon)", defaultValue: "/favicon.svg" },
+  { section: "nav", key: "nav_favicon_url", label: "Favicon (browser tab icon)", defaultValue: "/favicon.svg", type: "upload" },
   { section: "nav", key: "nav_brand_1", label: "Brand Word 1", defaultValue: "Dubai" },
   { section: "nav", key: "nav_brand_2", label: "Brand Word 2 (connector)", defaultValue: "in" },
   { section: "nav", key: "nav_brand_3", label: "Brand Word 3", defaultValue: "Cairo" },

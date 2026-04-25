@@ -7,6 +7,7 @@ import {
   Loader2, Save, LogOut, ArrowLeft, ChevronDown, Search, X,
   Type, AlignLeft, MousePointer, Hash, LayoutList,
   Plus, Trash2, Pencil, Star, Eye, EyeOff, BookOpen, Briefcase, Landmark,
+  Upload, ImageIcon,
 } from "lucide-react";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
 import { cn } from "@/lib/utils";
@@ -534,17 +535,126 @@ function FieldRow({
     <div className={cn("py-3.5 transition-colors", indent ? "px-6" : "px-5", isEdited && "bg-primary/[0.03]")}>
       <div className="flex items-center gap-2 mb-1.5">
         <label className="text-xs font-semibold text-foreground">{field.label}</label>
-        <span className={cn("inline-flex items-center gap-1 text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded", typeColor)}>
-          <TypeIcon className="w-2.5 h-2.5" />
-          {typeLabel}
-        </span>
+        {field.type === "upload" ? (
+          <span className="inline-flex items-center gap-1 text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded text-primary bg-primary/10">
+            <ImageIcon className="w-2.5 h-2.5" /> Image
+          </span>
+        ) : (
+          <span className={cn("inline-flex items-center gap-1 text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded", typeColor)}>
+            <TypeIcon className="w-2.5 h-2.5" />
+            {typeLabel}
+          </span>
+        )}
         {isEdited && (
           <span className="text-[9px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded ml-auto">
             unsaved
           </span>
         )}
       </div>
-      <AutoResizeTextarea value={value} onChange={(val) => onChange(field.key, val)} />
+      {field.type === "upload" ? (
+        <ImageUploadField value={value} onChange={(val) => onChange(field.key, val)} />
+      ) : (
+        <AutoResizeTextarea value={value} onChange={(val) => onChange(field.key, val)} />
+      )}
+    </div>
+  );
+}
+
+// ─── ImageUploadField ─────────────────────────────────────────────────────────
+
+function ImageUploadField({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const { toast } = useToast();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate type
+    const allowed = ["image/svg+xml", "image/png", "image/x-icon", "image/jpeg", "image/webp"];
+    if (!allowed.includes(file.type)) {
+      toast({ title: "Unsupported file type", description: "Please upload an SVG, PNG, ICO, or WebP file.", variant: "destructive" });
+      return;
+    }
+    // Max 512 KB
+    if (file.size > 512 * 1024) {
+      toast({ title: "File too large", description: "Max size is 512 KB.", variant: "destructive" });
+      return;
+    }
+
+    setUploading(true);
+    const ext = file.name.split(".").pop() ?? "png";
+    const path = `favicon/favicon-${Date.now()}.${ext}`;
+
+    const { error } = await supabase.storage.from("assets").upload(path, file, { upsert: true });
+    if (error) {
+      toast({ title: "Upload failed", description: error.message, variant: "destructive" });
+      setUploading(false);
+      return;
+    }
+
+    const { data: urlData } = supabase.storage.from("assets").getPublicUrl(path);
+    onChange(urlData.publicUrl);
+    toast({ title: "Favicon uploaded!" });
+    setUploading(false);
+    // Reset so same file can be re-selected
+    e.target.value = "";
+  };
+
+  const isExternal = value.startsWith("http");
+  const previewSrc = value || "/favicon.svg";
+
+  return (
+    <div className="flex items-center gap-3">
+      {/* Preview box */}
+      <div className="w-12 h-12 rounded-lg border border-border bg-background flex items-center justify-center shrink-0 overflow-hidden">
+        {value ? (
+          <img
+            src={previewSrc}
+            alt="favicon preview"
+            className="w-8 h-8 object-contain"
+            onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+          />
+        ) : (
+          <ImageIcon className="w-5 h-5 text-muted-foreground" />
+        )}
+      </div>
+
+      <div className="flex-1 min-w-0 space-y-1.5">
+        {/* URL display (read-only, still editable manually) */}
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="/favicon.svg or https://..."
+          className="w-full rounded-md border border-input bg-background px-3 py-1.5 text-xs font-mono text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        />
+
+        {/* Upload button */}
+        <button
+          type="button"
+          onClick={() => inputRef.current?.click()}
+          disabled={uploading}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary/10 hover:bg-primary/20 text-primary text-xs font-semibold transition-colors disabled:opacity-50"
+        >
+          {uploading
+            ? <Loader2 className="w-3 h-3 animate-spin" />
+            : <Upload className="w-3 h-3" />}
+          {uploading ? "Uploading…" : "Upload SVG / PNG / ICO"}
+        </button>
+        {isExternal && (
+          <p className="text-[10px] text-muted-foreground">Hosted at: {value.slice(0, 60)}{value.length > 60 ? "…" : ""}</p>
+        )}
+      </div>
+
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/svg+xml,image/png,image/x-icon,image/jpeg,image/webp"
+        className="hidden"
+        onChange={handleFile}
+      />
     </div>
   );
 }
