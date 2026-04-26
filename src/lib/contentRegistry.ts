@@ -274,10 +274,24 @@ export const contentRegistry: ContentField[] = [
   { section: "odoo", key: "odoo_suites_h2_accent",label: "Suites — Headline (gold)", defaultValue: "One Unified Platform." },
 
   // ── Odoo — 9 Suites ──
-  ...Array.from({ length: 9 }, (_, i) => [
-    { section: "odoo", key: `odoo_suite_${i+1}_title`, label: `Suite ${i+1} — Title`, defaultValue: ["Odoo eCommerce & Website Suite","Odoo Marketing Automation Suite","Odoo Sales & CRM Suite","Odoo Inventory & Supply Chain Suite","Odoo Accounting Suite","Odoo POS & Retail Suite","Odoo Project & Services Suite","Odoo HR & Workforce Suite","Odoo Manufacturing Suite"][i] },
-    { section: "odoo", key: `odoo_suite_${i+1}_desc`,  label: `Suite ${i+1} — Description`, defaultValue: "" },
-  ]).flat(),
+  { section: "odoo", key: "odoo_suite_1_title", label: "Suite 1 — Title",       defaultValue: "Odoo eCommerce & Website Suite" },
+  { section: "odoo", key: "odoo_suite_1_desc",  label: "Suite 1 — Description", defaultValue: "The Odoo eCommerce & Website Suite provides a fully integrated platform to build, manage, and scale online stores and websites, seamlessly connected with backend operations such as inventory, sales, and customer data—making it the core foundation for any digital commerce strategy." },
+  { section: "odoo", key: "odoo_suite_2_title", label: "Suite 2 — Title",       defaultValue: "Odoo Marketing Automation Suite" },
+  { section: "odoo", key: "odoo_suite_2_desc",  label: "Suite 2 — Description", defaultValue: "The Odoo Marketing Suite empowers businesses to design, automate, and analyze multi-channel campaigns—including email, SMS, and social marketing—turning traffic into conversions through data-driven engagement and lifecycle automation." },
+  { section: "odoo", key: "odoo_suite_3_title", label: "Suite 3 — Title",       defaultValue: "Odoo Sales & CRM Suite" },
+  { section: "odoo", key: "odoo_suite_3_desc",  label: "Suite 3 — Description", defaultValue: "The Odoo Sales & CRM Suite manages the full customer journey from lead acquisition to deal closure, enabling precise pipeline tracking, customer segmentation, and revenue forecasting—critical for aligning marketing efforts with actual sales outcomes." },
+  { section: "odoo", key: "odoo_suite_4_title", label: "Suite 4 — Title",       defaultValue: "Odoo Inventory & Supply Chain Suite" },
+  { section: "odoo", key: "odoo_suite_4_desc",  label: "Suite 4 — Description", defaultValue: "The Odoo Inventory & Supply Chain Suite ensures real-time stock visibility and efficient order fulfillment, directly impacting customer experience, delivery performance, and the scalability of eCommerce operations." },
+  { section: "odoo", key: "odoo_suite_5_title", label: "Suite 5 — Title",       defaultValue: "Odoo Accounting Suite" },
+  { section: "odoo", key: "odoo_suite_5_desc",  label: "Suite 5 — Description", defaultValue: "The Odoo Accounting Suite provides real-time financial tracking, invoicing, and reconciliation, enabling accurate measurement of marketing ROI, profitability, and overall business performance." },
+  { section: "odoo", key: "odoo_suite_6_title", label: "Suite 6 — Title",       defaultValue: "Odoo POS & Retail Suite" },
+  { section: "odoo", key: "odoo_suite_6_desc",  label: "Suite 6 — Description", defaultValue: "The Odoo POS & Retail Suite connects offline and online sales channels, creating an omnichannel experience where customer data, inventory, and transactions are fully synchronized." },
+  { section: "odoo", key: "odoo_suite_7_title", label: "Suite 7 — Title",       defaultValue: "Odoo Project & Services Suite" },
+  { section: "odoo", key: "odoo_suite_7_desc",  label: "Suite 7 — Description", defaultValue: "The Odoo Project Suite supports execution and delivery of digital services, campaigns, and internal workflows, ensuring structured project management and operational efficiency." },
+  { section: "odoo", key: "odoo_suite_8_title", label: "Suite 8 — Title",       defaultValue: "Odoo HR & Workforce Suite" },
+  { section: "odoo", key: "odoo_suite_8_desc",  label: "Suite 8 — Description", defaultValue: "The Odoo HR Suite manages recruitment, performance, and team operations, supporting the human infrastructure behind marketing, sales, and eCommerce execution." },
+  { section: "odoo", key: "odoo_suite_9_title", label: "Suite 9 — Title",       defaultValue: "Odoo Manufacturing Suite" },
+  { section: "odoo", key: "odoo_suite_9_desc",  label: "Suite 9 — Description", defaultValue: "The Odoo Manufacturing Suite enables production planning and control, becoming relevant in eCommerce businesses that rely on in-house manufacturing or custom product workflows." },
 
   // ── Odoo — CTA ──
   { section: "odoo", key: "odoo_cta_badge", label: "CTA — Badge",    defaultValue: "Start the Conversation" },
@@ -304,10 +318,22 @@ export const contentRegistry: ContentField[] = [
   { section: "yanolja", key: "yan_suites_h2_accent",label: "Suites — Headline (gold)", defaultValue: "One Hospitality Platform." },
 
   // ── Yanolja — 8 Products ──
-  ...Array.from({ length: 8 }, (_, i) => [
-    { section: "yanolja", key: `yan_suite_${i+1}_title`, label: `Product ${i+1} — Title`, defaultValue: ["eZee Absolute (Cloud PMS)","eZee Centrix (Channel Manager)","eZee Reservation (Booking Engine)","Central Reservation System (CRS)","eZee Optimus (Restaurant POS)","Hotel Website Builder","Revenue Management System (RMS)","Payment Solutions"][i] },
-    { section: "yanolja", key: `yan_suite_${i+1}_desc`,  label: `Product ${i+1} — Description`, defaultValue: "" },
-  ]).flat(),
+  { section: "yanolja", key: "yan_suite_1_title", label: "Product 1 — Title",       defaultValue: "eZee Absolute (Cloud PMS)" },
+  { section: "yanolja", key: "yan_suite_1_desc",  label: "Product 1 — Description", defaultValue: "eZee Absolute is a comprehensive cloud-based Property Management System that centralizes all hotel operations—from reservations and front office to housekeeping, billing, and reporting—enabling properties to operate efficiently through a single, fully integrated digital platform." },
+  { section: "yanolja", key: "yan_suite_2_title", label: "Product 2 — Title",       defaultValue: "eZee Centrix (Channel Manager)" },
+  { section: "yanolja", key: "yan_suite_2_desc",  label: "Product 2 — Description", defaultValue: "eZee Centrix is a real-time channel management solution that connects hospitality properties to global OTAs, synchronizing rates and inventory across all platforms to eliminate overbookings, maintain rate parity, and maximize online visibility." },
+  { section: "yanolja", key: "yan_suite_3_title", label: "Product 3 — Title",       defaultValue: "eZee Reservation (Booking Engine)" },
+  { section: "yanolja", key: "yan_suite_3_desc",  label: "Product 3 — Description", defaultValue: "eZee Reservation is a direct booking engine that empowers hotels to capture commission-free reservations through their own website, offering a seamless user experience fully synchronized with live availability and pricing." },
+  { section: "yanolja", key: "yan_suite_4_title", label: "Product 4 — Title",       defaultValue: "Central Reservation System (CRS)" },
+  { section: "yanolja", key: "yan_suite_4_desc",  label: "Product 4 — Description", defaultValue: "The Central Reservation System acts as a unified control layer for managing bookings, rates, and inventory across multiple properties and channels, ensuring consistency, scalability, and centralized operational control." },
+  { section: "yanolja", key: "yan_suite_5_title", label: "Product 5 — Title",       defaultValue: "eZee Optimus (Restaurant POS)" },
+  { section: "yanolja", key: "yan_suite_5_desc",  label: "Product 5 — Description", defaultValue: "eZee Optimus is a cloud-based POS solution designed for hospitality F&B operations, streamlining order management, billing, and reporting while seamlessly integrating with the PMS for a unified guest experience." },
+  { section: "yanolja", key: "yan_suite_6_title", label: "Product 6 — Title",       defaultValue: "Hotel Website Builder" },
+  { section: "yanolja", key: "yan_suite_6_desc",  label: "Product 6 — Description", defaultValue: "The Hotel Website Builder is a purpose-built platform for creating high-performance hospitality websites, combining modern design, SEO optimization, and direct booking capabilities to strengthen digital presence and increase direct revenue." },
+  { section: "yanolja", key: "yan_suite_7_title", label: "Product 7 — Title",       defaultValue: "Revenue Management System (RMS)" },
+  { section: "yanolja", key: "yan_suite_7_desc",  label: "Product 7 — Description", defaultValue: "The Revenue Management System leverages data-driven insights and demand forecasting to dynamically optimize pricing strategies, helping properties maximize occupancy, revenue, and overall profitability." },
+  { section: "yanolja", key: "yan_suite_8_title", label: "Product 8 — Title",       defaultValue: "Payment Solutions" },
+  { section: "yanolja", key: "yan_suite_8_desc",  label: "Product 8 — Description", defaultValue: "Integrated payment solutions enable secure, seamless transactions across all touchpoints—from online bookings to on-site billing—ensuring efficient financial operations and a frictionless guest payment experience." },
 
   // ── Yanolja — CTA ──
   { section: "yanolja", key: "yan_cta_badge", label: "CTA — Badge",    defaultValue: "Scale Your Hospitality Tech" },
