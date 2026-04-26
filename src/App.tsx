@@ -35,6 +35,7 @@ const App = () => (
             <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/case-studies/:slug" element={<CaseStudy />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/partnerships" element={<OdooPartner />} />
             <Route path="/odoo-partner" element={<OdooPartner />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

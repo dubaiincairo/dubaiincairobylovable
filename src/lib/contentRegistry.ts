@@ -12,7 +12,7 @@ export interface ContentField {
 export const sectionOrder = [
   "nav", "hero", "stats", "about", "edges", "values", "services",
   "founder", "clients", "tech", "google", "legal", "contact", "footer",
-  "careers",
+  "careers", "odoo", "yanolja",
 ];
 
 export const sectionLabels: Record<string, string> = {
@@ -31,6 +31,8 @@ export const sectionLabels: Record<string, string> = {
   contact: "Contact Section",
   footer: "Footer",
   careers: "Careers Page",
+  odoo: "Partnerships — Odoo",
+  yanolja: "Partnerships — Yanolja Cloud",
 };
 
 export const contentRegistry: ContentField[] = [
@@ -241,4 +243,75 @@ export const contentRegistry: ContentField[] = [
   { section: "careers", key: "careers_apply_body",     label: "How to Apply — Body",     defaultValue: "Send your CV and portfolio (if applicable) to our careers inbox. Include the position title and your name in the subject line." },
   { section: "careers", key: "careers_apply_email",    label: "How to Apply — Email",    defaultValue: "careers@dubaicairo.com" },
   { section: "careers", key: "careers_apply_subject",  label: "How to Apply — Subject Hint", defaultValue: "[Position Title] – Your Name" },
+
+  // ── Partnerships page — shared header ──
+  { section: "odoo", key: "partnerships_badge",    label: "Page Badge",    defaultValue: "Strategic Partnerships" },
+  { section: "odoo", key: "partnerships_headline", label: "Page Headline", defaultValue: "Our Technology Partners" },
+  { section: "odoo", key: "partnerships_subtext",  label: "Page Subtext",  defaultValue: "We have built deep implementation expertise across two technology ecosystems — Odoo for ERP and business automation, and Yanolja Cloud for hospitality management." },
+
+  // ── Odoo — Hero ──
+  { section: "odoo", key: "odoo_hero_badge",    label: "Hero — Badge",              defaultValue: "ERP Partnership" },
+  { section: "odoo", key: "odoo_hero_h1",       label: "Hero — Headline Line 1",    defaultValue: "We are a" },
+  { section: "odoo", key: "odoo_hero_h1_accent",label: "Hero — Headline Gold",      defaultValue: "Verified Odoo" },
+  { section: "odoo", key: "odoo_hero_h1_end",   label: "Hero — Headline Line 3",    defaultValue: "Partner" },
+  { section: "odoo", key: "odoo_hero_body_1",   label: "Hero — Paragraph 1",        defaultValue: "We are now a verified Odoo partner, enabling our clients to operate within a fully integrated, closed-loop ecosystem that connects eCommerce, digital marketing, and backend operations. We believe that impactful marketing cannot exist in isolation — real, scalable results require a robust ERP system that digitally manages and synchronizes all operational processes." },
+  { section: "odoo", key: "odoo_hero_body_2",   label: "Hero — Paragraph 2",        defaultValue: "That's why we've established a dedicated Odoo studio, specializing in implementation, customization, and API development, ensuring seamless integration between your business operations and your marketing engine." },
+  { section: "odoo", key: "odoo_badge_label",   label: "Logo Card — Badge Label",   defaultValue: "Verified Partner" },
+
+  // ── Odoo — Service Tags (logo card chips) ──
+  { section: "odoo", key: "odoo_tag_1", label: "Service Tag 1", defaultValue: "ERP Architecture & Solution Design" },
+  { section: "odoo", key: "odoo_tag_2", label: "Service Tag 2", defaultValue: "Training & Enablement Programs" },
+  { section: "odoo", key: "odoo_tag_3", label: "Service Tag 3", defaultValue: "Business Analysis & Process Re-engineering" },
+  { section: "odoo", key: "odoo_tag_4", label: "Service Tag 4", defaultValue: "Data Migration & Structuring" },
+  { section: "odoo", key: "odoo_tag_5", label: "Service Tag 5", defaultValue: "Go-Live Support & Change Management" },
+  { section: "odoo", key: "odoo_tag_6", label: "Service Tag 6", defaultValue: "Performance Optimization & Audits" },
+  { section: "odoo", key: "odoo_tag_7", label: "Service Tag 7", defaultValue: "Reporting & BI Dashboards" },
+  { section: "odoo", key: "odoo_tag_8", label: "Service Tag 8", defaultValue: "Productization & Module Development" },
+
+  // ── Odoo — Suites section header ──
+  { section: "odoo", key: "odoo_suites_badge",    label: "Suites — Badge",           defaultValue: "Odoo Studio" },
+  { section: "odoo", key: "odoo_suites_h2",       label: "Suites — Headline",        defaultValue: "Nine Integrated Suites." },
+  { section: "odoo", key: "odoo_suites_h2_accent",label: "Suites — Headline (gold)", defaultValue: "One Unified Platform." },
+
+  // ── Odoo — 9 Suites ──
+  ...Array.from({ length: 9 }, (_, i) => [
+    { section: "odoo", key: `odoo_suite_${i+1}_title`, label: `Suite ${i+1} — Title`, defaultValue: ["Odoo eCommerce & Website Suite","Odoo Marketing Automation Suite","Odoo Sales & CRM Suite","Odoo Inventory & Supply Chain Suite","Odoo Accounting Suite","Odoo POS & Retail Suite","Odoo Project & Services Suite","Odoo HR & Workforce Suite","Odoo Manufacturing Suite"][i] },
+    { section: "odoo", key: `odoo_suite_${i+1}_desc`,  label: `Suite ${i+1} — Description`, defaultValue: "" },
+  ]).flat(),
+
+  // ── Odoo — CTA ──
+  { section: "odoo", key: "odoo_cta_badge", label: "CTA — Badge",    defaultValue: "Start the Conversation" },
+  { section: "odoo", key: "odoo_cta_h2",    label: "CTA — Headline", defaultValue: "Ready to Build Your Integrated Ecosystem?" },
+  { section: "odoo", key: "odoo_cta_body",  label: "CTA — Body",     defaultValue: "Let's connect your marketing engine to a fully synchronized ERP backend. Our Odoo studio handles everything from initial scoping to go-live." },
+  { section: "odoo", key: "odoo_cta_btn",   label: "CTA — Button",   defaultValue: "Get in Touch" },
+
+  // ── Yanolja — Hero ──
+  { section: "yanolja", key: "yan_hero_badge",    label: "Hero — Badge",           defaultValue: "Hospitality Technology" },
+  { section: "yanolja", key: "yan_hero_h2",       label: "Hero — Headline",        defaultValue: "Yanolja Cloud" },
+  { section: "yanolja", key: "yan_hero_h2_accent",label: "Hero — Headline (gold)", defaultValue: "Partnership" },
+  { section: "yanolja", key: "yan_hero_body",     label: "Hero — Paragraph",       defaultValue: "We have also expanded our capabilities into the hospitality technology sector through our work with Yanolja Cloud and its suite of cloud-based management solutions. Over the past 12 months, we have built extensive hands-on experience implementing and integrating these systems across hospitality properties in Saudi Arabia, enabling fully digital, streamlined operations aligned with modern guest experiences. This practical exposure has positioned us as specialized implementors in hospitality tech, and we are now actively scaling these capabilities into new markets beyond Saudi Arabia." },
+  { section: "yanolja", key: "yan_badge_label",   label: "Logo Card — Badge Label",defaultValue: "Specialized Implementor" },
+
+  // ── Yanolja — Tags ──
+  { section: "yanolja", key: "yan_tag_1", label: "Tag 1", defaultValue: "12 Months Hands-On Experience" },
+  { section: "yanolja", key: "yan_tag_2", label: "Tag 2", defaultValue: "Saudi Arabia Market" },
+  { section: "yanolja", key: "yan_tag_3", label: "Tag 3", defaultValue: "Cloud-Based Implementation" },
+  { section: "yanolja", key: "yan_tag_4", label: "Tag 4", defaultValue: "Hospitality Tech Integration" },
+
+  // ── Yanolja — Suites section header ──
+  { section: "yanolja", key: "yan_suites_badge",    label: "Suites — Badge",           defaultValue: "eZee Suite" },
+  { section: "yanolja", key: "yan_suites_h2",       label: "Suites — Headline",        defaultValue: "Eight Integrated Solutions." },
+  { section: "yanolja", key: "yan_suites_h2_accent",label: "Suites — Headline (gold)", defaultValue: "One Hospitality Platform." },
+
+  // ── Yanolja — 8 Products ──
+  ...Array.from({ length: 8 }, (_, i) => [
+    { section: "yanolja", key: `yan_suite_${i+1}_title`, label: `Product ${i+1} — Title`, defaultValue: ["eZee Absolute (Cloud PMS)","eZee Centrix (Channel Manager)","eZee Reservation (Booking Engine)","Central Reservation System (CRS)","eZee Optimus (Restaurant POS)","Hotel Website Builder","Revenue Management System (RMS)","Payment Solutions"][i] },
+    { section: "yanolja", key: `yan_suite_${i+1}_desc`,  label: `Product ${i+1} — Description`, defaultValue: "" },
+  ]).flat(),
+
+  // ── Yanolja — CTA ──
+  { section: "yanolja", key: "yan_cta_badge", label: "CTA — Badge",    defaultValue: "Scale Your Hospitality Tech" },
+  { section: "yanolja", key: "yan_cta_h2",    label: "CTA — Headline", defaultValue: "Ready to Digitize Your Hospitality Operations?" },
+  { section: "yanolja", key: "yan_cta_body",  label: "CTA — Body",     defaultValue: "Our hospitality tech team brings 12 months of hands-on implementation experience across Saudi Arabia. Let's bring that expertise to your property." },
+  { section: "yanolja", key: "yan_cta_btn",   label: "CTA — Button",   defaultValue: "Get in Touch" },
 ];
