@@ -42,7 +42,7 @@ const Navbar = () => {
       animate="visible"
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="font-display font-bold text-xl">
+        <a href="/" className="font-display font-bold text-xl">
           <span className="text-gradient-gold">{get("nav_brand_1", "Dubai")}</span>
           <span className="text-foreground">{get("nav_brand_2", "in")}</span>
           <span className="text-gradient-gold">{get("nav_brand_3", "Cairo")}</span>
