@@ -10,12 +10,14 @@ export interface ContentField {
 }
 
 export const sectionOrder = [
+  "seo",
   "nav", "hero", "stats", "about", "edges", "values", "services",
   "founder", "clients", "tech", "google", "legal", "contact", "footer",
   "careers", "odoo", "yanolja",
 ];
 
 export const sectionLabels: Record<string, string> = {
+  seo: "SEO & Meta Tags",
   nav: "Navigation",
   hero: "Hero Section",
   stats: "Statistics",
@@ -36,6 +38,18 @@ export const sectionLabels: Record<string, string> = {
 };
 
 export const contentRegistry: ContentField[] = [
+  // ── SEO ──
+  { section: "seo", key: "seo_home_title",           label: "Home — Meta Title",           defaultValue: "Dubai in Cairo | Data-Powered Digital Marketing" },
+  { section: "seo", key: "seo_home_description",     label: "Home — Meta Description",     defaultValue: "Dubai in Cairo helps ambitious businesses grow online through data-driven marketing, eCommerce, and AI-powered solutions." },
+  { section: "seo", key: "seo_home_og_image",        label: "Home — OG Image URL",         defaultValue: "" },
+  { section: "seo", key: "seo_careers_title",        label: "Careers — Meta Title",        defaultValue: "Careers | Dubai in Cairo" },
+  { section: "seo", key: "seo_careers_description",  label: "Careers — Meta Description",  defaultValue: "Join Dubai in Cairo. We're hiring talented professionals in digital marketing, AI, and eCommerce." },
+  { section: "seo", key: "seo_cases_title",          label: "Case Studies — Meta Title",   defaultValue: "Case Studies | Dubai in Cairo" },
+  { section: "seo", key: "seo_cases_description",    label: "Case Studies — Meta Description", defaultValue: "Real clients. Measurable results. Explore our case studies." },
+  { section: "seo", key: "seo_odoo_title",           label: "Odoo Partner — Meta Title",   defaultValue: "Verified Odoo Partner | Dubai in Cairo" },
+  { section: "seo", key: "seo_odoo_description",     label: "Odoo Partner — Meta Description", defaultValue: "Dubai in Cairo is a verified Odoo partner offering ERP implementation, customization, and API development." },
+  { section: "seo", key: "seo_twitter_handle",       label: "Twitter / X Handle",          defaultValue: "@dubaiincairo" },
+
   // ── Nav ──
   { section: "nav", key: "nav_favicon_url", label: "Favicon (browser tab icon)", defaultValue: "/favicon.svg", type: "upload" },
   { section: "nav", key: "nav_brand_1", label: "Brand Word 1", defaultValue: "Dubai" },

@@ -18,6 +18,7 @@ export type Database = {
         Row: {
           challenge: string
           client_name: string
+          cover_image_url: string | null
           created_at: string | null
           featured: boolean | null
           id: string
@@ -227,6 +228,78 @@ export type Database = {
           id_front_url?: string | null
           id_back_url?: string | null
           created_at?: string | null
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          id: string
+          client_name: string
+          role: string | null
+          company: string | null
+          content: string
+          rating: number | null
+          avatar_url: string | null
+          sort_order: number | null
+          published: boolean | null
+          created_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          client_name: string
+          role?: string | null
+          company?: string | null
+          content: string
+          rating?: number | null
+          avatar_url?: string | null
+          sort_order?: number | null
+          published?: boolean | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          client_name?: string
+          role?: string | null
+          company?: string | null
+          content?: string
+          rating?: number | null
+          avatar_url?: string | null
+          sort_order?: number | null
+          published?: boolean | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      admin_activity_log: {
+        Row: {
+          id: string
+          user_email: string | null
+          action: string
+          entity_type: string
+          entity_label: string | null
+          fields_changed: number | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_email?: string | null
+          action: string
+          entity_type: string
+          entity_label?: string | null
+          fields_changed?: number | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_email?: string | null
+          action?: string
+          entity_type?: string
+          entity_label?: string | null
+          fields_changed?: number | null
+          created_at?: string
         }
         Relationships: []
       }

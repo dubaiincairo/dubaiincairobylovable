@@ -2,19 +2,32 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
 import {
   Loader2, Save, LogOut, ArrowLeft, ChevronDown, Search, X,
   Type, AlignLeft, MousePointer, Hash, LayoutList,
   Plus, Trash2, Pencil, Star, Eye, EyeOff, BookOpen, Briefcase, Landmark,
-  Upload, ImageIcon,
+  Upload, ImageIcon, GripVertical, Mail, Menu, LayoutDashboard, MessageSquare,
 } from "lucide-react";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
 import { cn } from "@/lib/utils";
+import {
+  DndContext, closestCenter, PointerSensor, useSensor, useSensors, type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  SortableContext, verticalListSortingStrategy, useSortable, arrayMove,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { RichTextEditor } from "@/components/admin/RichTextEditor";
+import { DashboardPanel } from "@/components/admin/DashboardPanel";
+import { ContactSubmissionsPanel } from "@/components/admin/ContactSubmissionsPanel";
+import { TestimonialsPanel } from "@/components/admin/TestimonialsPanel";
 
 // ─── Icons & labels ──────────────────────────────────────────────────────────
 
 const sectionIcons: Record<string, string> = {
+  seo: "🔍",
   nav: "🧭", hero: "🏠", stats: "📊", about: "ℹ️", edges: "⚡",
   values: "💎", services: "🎯", founder: "👤", clients: "🤝",
   tech: "🛠️", google: "📍", legal: "📜", contact: "✉️", footer: "🔗",
@@ -104,7 +117,8 @@ const Admin = () => {
   const [openSubGroups, setOpenSubGroups] = useState<Record<string, boolean>>({});
   const [search, setSearch]         = useState("");
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [adminTab, setAdminTab]     = useState<"content" | "case-studies" | "jobs" | "banks">("content");
+  const [adminTab, setAdminTab]     = useState<"dashboard" | "content" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts">("dashboard");
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   // ── Auth & data load ──
@@ -132,6 +146,23 @@ const Admin = () => {
     };
     checkAuth();
   }, [navigate]);
+
+  // ── Activity logger ──
+  const logActivity = useCallback(async (
+    action: string,
+    entityType: string,
+    entityLabel: string,
+    fieldsChanged?: number,
+  ) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    await supabase.from("admin_activity_log").insert({
+      user_email: user?.email ?? null,
+      action,
+      entity_type: entityType,
+      entity_label: entityLabel,
+      fields_changed: fieldsChanged ?? null,
+    });
+  }, []);
 
   // ── Cmd+S / Ctrl+S shortcut ──
   useEffect(() => {
@@ -175,6 +206,10 @@ const Admin = () => {
     });
     setSaving(false);
     setEdited({});
+
+    if (successCount > 0) {
+      logActivity("updated", "content", "Site Content", successCount);
+    }
 
     if (errorCount > 0) {
       toast({ title: "Partially saved", description: `${successCount} updated, ${errorCount} failed.`, variant: "destructive" });
@@ -236,88 +271,45 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-background flex">
 
-      {/* ── Sidebar ─────────────────────────────────────────────────────── */}
+      {/* ── Sidebar (desktop) ───────────────────────────────────────────── */}
       <aside className="hidden lg:flex flex-col w-72 border-r border-border bg-card/50 sticky top-0 h-screen overflow-y-auto shrink-0">
-        <div className="p-5 border-b border-border">
-          <a href="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4">
-            <ArrowLeft className="w-4 h-4" />
-            <span className="text-xs">Back to website</span>
-          </a>
-          <h1 className="font-display font-bold text-xl">
-            <span className="text-gradient-gold">Content</span> Manager
-          </h1>
-          <p className="text-xs text-muted-foreground mt-1">{contentRegistry.length} editable fields across {sectionOrder.length} sections</p>
-        </div>
-
-        {/* Tab switcher */}
-        <div className="px-3 pt-3 pb-1 flex gap-1 border-b border-border">
-          <button onClick={() => setAdminTab("content")} className={cn("flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors", adminTab === "content" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground")}>
-            Content
-          </button>
-          <button onClick={() => setAdminTab("case-studies")} className={cn("flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center justify-center gap-1", adminTab === "case-studies" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground")}>
-            <BookOpen className="w-3 h-3" /> Cases
-          </button>
-          <button onClick={() => setAdminTab("jobs")} className={cn("flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center justify-center gap-1", adminTab === "jobs" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground")}>
-            <Briefcase className="w-3 h-3" /> Jobs
-          </button>
-          <button onClick={() => setAdminTab("banks")} className={cn("flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center justify-center gap-1", adminTab === "banks" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground")}>
-            <Landmark className="w-3 h-3" /> Banks
-          </button>
-        </div>
-
-        <nav className="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
-          {sectionOrder.map((section) => {
-            const fields = grouped[section];
-            const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
-            const isActive = activeSection === section;
-            const { numbered } = groupSectionFields(fields);
-            const subCount = Object.keys(numbered).length;
-
-            return (
-              <button
-                key={section}
-                onClick={() => scrollToSection(section)}
-                className={cn(
-                  "w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-colors text-left group",
-                  isActive
-                    ? "bg-primary/10 text-primary font-medium"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                )}
-              >
-                <span className="text-lg leading-none shrink-0">{sectionIcons[section] || "📄"}</span>
-                <div className="flex-1 min-w-0">
-                  <div className="truncate font-medium text-sm">{sectionLabels[section] || section}</div>
-                  {subCount > 0 && (
-                    <div className="text-[10px] text-muted-foreground truncate mt-0.5">
-                      {subCount} {subItemLabels[section]?.toLowerCase() || "item"}s
-                    </div>
-                  )}
-                </div>
-                {editCount > 0 && (
-                  <span className="shrink-0 w-5 h-5 flex items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold">
-                    {editCount}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </nav>
-
-        <div className="p-4 border-t border-border space-y-2">
-          {hasEdits ? (
-            <Button onClick={handleSave} disabled={saving} size="sm" className="w-full glow-gold font-display">
-              {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
-              Save {Object.keys(edited).length} Change{Object.keys(edited).length !== 1 ? "s" : ""}
-            </Button>
-          ) : (
-            <div className="text-center text-xs text-muted-foreground py-1">No unsaved changes</div>
-          )}
-          <Button variant="outline" size="sm" className="w-full" onClick={handleLogout}>
-            <LogOut className="w-4 h-4 mr-1.5" /> Logout
-          </Button>
-          <p className="text-center text-[10px] text-muted-foreground">⌘S to save</p>
-        </div>
+        <SidebarContent
+          adminTab={adminTab}
+          setAdminTab={(tab) => setAdminTab(tab)}
+          grouped={grouped}
+          editedKeys={editedKeys}
+          activeSection={activeSection}
+          scrollToSection={scrollToSection}
+          hasEdits={hasEdits}
+          saving={saving}
+          edited={edited}
+          handleSave={handleSave}
+          handleLogout={handleLogout}
+          contentRegistry={contentRegistry}
+          sectionOrder={sectionOrder}
+        />
       </aside>
+
+      {/* ── Mobile sidebar (sheet) ───────────────────────────────────────── */}
+      <Sheet open={mobileSidebarOpen} onOpenChange={setMobileSidebarOpen}>
+        <SheetContent side="left" className="w-72 p-0 flex flex-col">
+          <SidebarContent
+            adminTab={adminTab}
+            setAdminTab={(tab) => { setAdminTab(tab); setMobileSidebarOpen(false); }}
+            grouped={grouped}
+            editedKeys={editedKeys}
+            activeSection={activeSection}
+            scrollToSection={(s) => { scrollToSection(s); setMobileSidebarOpen(false); }}
+            hasEdits={hasEdits}
+            saving={saving}
+            edited={edited}
+            handleSave={handleSave}
+            handleLogout={handleLogout}
+            contentRegistry={contentRegistry}
+            sectionOrder={sectionOrder}
+          />
+        </SheetContent>
+      </Sheet>
 
       {/* ── Main ────────────────────────────────────────────────────────── */}
       <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
@@ -325,10 +317,13 @@ const Admin = () => {
         {/* Top bar */}
         <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-lg border-b border-border">
           <div className="max-w-3xl mx-auto px-4 md:px-6 h-14 flex items-center gap-3">
-            <div className="flex items-center gap-3 lg:hidden">
-              <a href="/" className="text-muted-foreground hover:text-foreground transition-colors">
-                <ArrowLeft className="w-4 h-4" />
-              </a>
+            <div className="flex items-center gap-2 lg:hidden">
+              <button
+                onClick={() => setMobileSidebarOpen(true)}
+                className="w-8 h-8 flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              >
+                <Menu className="w-4 h-4" />
+              </button>
               <h1 className="font-display font-bold text-sm">
                 <span className="text-gradient-gold">Content</span> Manager
               </h1>
@@ -363,9 +358,12 @@ const Admin = () => {
           </div>
         </header>
 
-        {adminTab === "case-studies" && <CaseStudiesPanel />}
-        {adminTab === "jobs" && <JobsPanel />}
-        {adminTab === "banks" && <BanksPanel />}
+        {adminTab === "dashboard"    && <DashboardPanel />}
+        {adminTab === "contacts"     && <ContactSubmissionsPanel />}
+        {adminTab === "testimonials" && <TestimonialsPanel logActivity={(action, label) => logActivity(action, "testimonial", label)} />}
+        {adminTab === "case-studies" && <CaseStudiesPanel logActivity={logActivity} />}
+        {adminTab === "jobs"         && <JobsPanel logActivity={logActivity} />}
+        {adminTab === "banks"        && <BanksPanel logActivity={logActivity} />}
 
         {/* Sections */}
         {adminTab === "content" && <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 space-y-4">
@@ -516,6 +514,125 @@ const Admin = () => {
     </div>
   );
 };
+
+// ─── SidebarContent ───────────────────────────────────────────────────────────
+
+type AdminTab = "dashboard" | "content" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts";
+
+const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen }[] = [
+  { id: "dashboard",    label: "Dashboard",    icon: LayoutDashboard },
+  { id: "content",      label: "Content",      icon: Type },
+  { id: "case-studies", label: "Cases",        icon: BookOpen },
+  { id: "jobs",         label: "Jobs",         icon: Briefcase },
+  { id: "banks",        label: "Banks",        icon: Landmark },
+  { id: "testimonials", label: "Testimonials", icon: Star },
+  { id: "contacts",     label: "Messages",     icon: Mail },
+];
+
+function SidebarContent({
+  adminTab, setAdminTab, grouped, editedKeys, activeSection,
+  scrollToSection, hasEdits, saving, edited, handleSave, handleLogout,
+  contentRegistry: _cr, sectionOrder,
+}: {
+  adminTab: AdminTab;
+  setAdminTab: (t: AdminTab) => void;
+  grouped: Record<string, ContentField[]>;
+  editedKeys: Set<string>;
+  activeSection: string | null;
+  scrollToSection: (s: string) => void;
+  hasEdits: boolean;
+  saving: boolean;
+  edited: Record<string, string>;
+  handleSave: () => void;
+  handleLogout: () => void;
+  contentRegistry: ContentField[];
+  sectionOrder: string[];
+}) {
+  return (
+    <>
+      <div className="p-5 border-b border-border">
+        <a href="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4">
+          <ArrowLeft className="w-4 h-4" />
+          <span className="text-xs">Back to website</span>
+        </a>
+        <h1 className="font-display font-bold text-xl">
+          <span className="text-gradient-gold">Content</span> Manager
+        </h1>
+        <p className="text-xs text-muted-foreground mt-1">Dubai in Cairo CMS</p>
+      </div>
+
+      {/* Tab switcher */}
+      <div className="px-3 pt-3 pb-1 border-b border-border space-y-0.5">
+        {TAB_ITEMS.map(({ id, label, icon: Icon }) => (
+          <button
+            key={id}
+            onClick={() => setAdminTab(id)}
+            className={cn(
+              "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+              adminTab === id ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+            )}
+          >
+            <Icon className="w-4 h-4 shrink-0" />
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {/* Section nav (content tab only) */}
+      {adminTab === "content" && (
+        <nav className="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
+          {sectionOrder.map((section) => {
+            const fields = grouped[section] ?? [];
+            const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
+            const isActive = activeSection === section;
+            const { numbered } = groupSectionFields(fields);
+            const subCount = Object.keys(numbered).length;
+            return (
+              <button
+                key={section}
+                onClick={() => scrollToSection(section)}
+                className={cn(
+                  "w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-colors text-left",
+                  isActive ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                )}
+              >
+                <span className="text-lg leading-none shrink-0">{sectionIcons[section] || "📄"}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="truncate font-medium text-sm">{sectionLabels[section] || section}</div>
+                  {subCount > 0 && (
+                    <div className="text-[10px] text-muted-foreground truncate mt-0.5">
+                      {subCount} {subItemLabels[section]?.toLowerCase() || "item"}s
+                    </div>
+                  )}
+                </div>
+                {editCount > 0 && (
+                  <span className="shrink-0 w-5 h-5 flex items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold">
+                    {editCount}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </nav>
+      )}
+
+      <div className="p-4 border-t border-border space-y-2 mt-auto">
+        {hasEdits && adminTab === "content" ? (
+          <Button onClick={handleSave} disabled={saving} size="sm" className="w-full glow-gold font-display">
+            {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
+            Save {Object.keys(edited).length} Change{Object.keys(edited).length !== 1 ? "s" : ""}
+          </Button>
+        ) : adminTab === "content" ? (
+          <div className="text-center text-xs text-muted-foreground py-1">No unsaved changes</div>
+        ) : null}
+        <Button variant="outline" size="sm" className="w-full" onClick={handleLogout}>
+          <LogOut className="w-4 h-4 mr-1.5" /> Logout
+        </Button>
+        {adminTab === "content" && <p className="text-center text-[10px] text-muted-foreground">⌘S to save</p>}
+      </div>
+    </>
+  );
+}
 
 // ─── FieldRow ─────────────────────────────────────────────────────────────────
 
@@ -685,6 +802,49 @@ function AutoResizeTextarea({ value, onChange }: { value: string; onChange: (v: 
   );
 }
 
+// ─── Sortable row helpers ─────────────────────────────────────────────────────
+
+function SortableCSRow({ cs, onEdit, onToggle, onDelete }: {
+  cs: CS;
+  onEdit: (cs: CS) => void;
+  onToggle: (id: string, field: "published" | "featured", val: boolean) => void;
+  onDelete: (id: string, name: string) => void;
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: cs.id });
+  return (
+    <div ref={setNodeRef} style={{ transform: CSS.Transform.toString(transform), transition }}
+      className={cn("rounded-xl border border-border bg-card p-4 flex items-center gap-3", isDragging && "opacity-50 shadow-lg")}>
+      <button {...attributes} {...listeners} className="text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing shrink-0">
+        <GripVertical className="w-4 h-4" />
+      </button>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="font-display font-semibold text-sm text-foreground truncate">{cs.client_name || "Untitled"}</span>
+          {cs.featured && <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-semibold">Featured</span>}
+          {!cs.published && <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded font-semibold">Draft</span>}
+        </div>
+        <p className="text-xs text-muted-foreground mt-0.5 truncate">{cs.industry}{cs.tagline ? ` · ${cs.tagline}` : ""}</p>
+      </div>
+      <div className="flex items-center gap-1.5 shrink-0">
+        <button onClick={() => onToggle(cs.id, "featured", !cs.featured)} title={cs.featured ? "Unfeature" : "Feature on homepage"}
+          className={cn("w-7 h-7 rounded-md flex items-center justify-center transition-colors", cs.featured ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-muted")}>
+          <Star className="w-3.5 h-3.5" />
+        </button>
+        <button onClick={() => onToggle(cs.id, "published", !cs.published)} title={cs.published ? "Unpublish" : "Publish"}
+          className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+          {cs.published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+        </button>
+        <button onClick={() => onEdit(cs)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+          <Pencil className="w-3.5 h-3.5" />
+        </button>
+        <button onClick={() => onDelete(cs.id, cs.client_name)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
+          <Trash2 className="w-3.5 h-3.5" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ─── CaseStudiesPanel ─────────────────────────────────────────────────────────
 
 type CS = {
@@ -705,13 +865,14 @@ const EMPTY_CS: Omit<CS, "id"> = {
   tags: [], featured: false, published: true, sort_order: 0,
 };
 
-function CaseStudiesPanel() {
+function CaseStudiesPanel({ logActivity }: { logActivity: (action: string, entityType: string, label: string) => void }) {
   const { toast } = useToast();
   const [list, setList]       = useState<CS[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<Partial<CS> | null>(null);
   const [saving, setSaving]   = useState(false);
   const [isNew, setIsNew]     = useState(false);
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
 
   const load = async () => {
     const { data } = await supabase.from("case_studies").select("*").order("sort_order");
@@ -742,24 +903,39 @@ function CaseStudiesPanel() {
       }
       const { error } = await supabase.from("case_studies").insert(payload);
       if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
-      else { toast({ title: "Case study created!" }); closeForm(); load(); }
+      else { toast({ title: "Case study created!" }); logActivity("created", "case_study", payload.client_name || "New Case Study"); closeForm(); load(); }
     } else {
       const { error } = await supabase.from("case_studies").update(payload).eq("id", editing.id!);
       if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
-      else { toast({ title: "Saved!" }); closeForm(); load(); }
+      else { toast({ title: "Saved!" }); logActivity("updated", "case_study", payload.client_name || "Case Study"); closeForm(); load(); }
     }
     setSaving(false);
+  };
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    const oldIdx = list.findIndex((cs) => cs.id === active.id);
+    const newIdx = list.findIndex((cs) => cs.id === over.id);
+    const reordered = arrayMove(list, oldIdx, newIdx);
+    setList(reordered);
+    await Promise.all(reordered.map((cs, i) =>
+      supabase.from("case_studies").update({ sort_order: i }).eq("id", cs.id)
+    ));
   };
 
   const toggleField = async (id: string, field: "published" | "featured", val: boolean) => {
     await supabase.from("case_studies").update({ [field]: val }).eq("id", id);
     setList((prev) => prev.map((cs) => cs.id === id ? { ...cs, [field]: val } : cs));
+    const cs = list.find((cs) => cs.id === id);
+    logActivity(val ? field === "featured" ? "featured" : "published" : field === "featured" ? "unfeatured" : "unpublished", "case_study", cs?.client_name ?? "Case Study");
   };
 
   const handleDelete = async (id: string, name: string) => {
     if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
     await supabase.from("case_studies").delete().eq("id", id);
     setList((prev) => prev.filter((cs) => cs.id !== id));
+    logActivity("deleted", "case_study", name);
     toast({ title: "Deleted" });
   };
 
@@ -806,9 +982,18 @@ function CaseStudiesPanel() {
         {/* Narrative */}
         <div className="rounded-xl border border-border bg-card p-5 space-y-4">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Case Study Narrative</p>
-          <Field label="The Challenge" value={editing.challenge || ""} onChange={(v) => set("challenge", v)} long />
-          <Field label="Our Approach / Solution" value={editing.solution || ""} onChange={(v) => set("solution", v)} long />
-          <Field label="The Results" value={editing.results || ""} onChange={(v) => set("results", v)} long />
+          <div>
+            <label className="block text-xs font-semibold text-foreground mb-1.5">The Challenge</label>
+            <RichTextEditor value={editing.challenge || ""} onChange={(v) => set("challenge", v)} placeholder="Describe the client's challenge..." />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-foreground mb-1.5">Our Approach / Solution</label>
+            <RichTextEditor value={editing.solution || ""} onChange={(v) => set("solution", v)} placeholder="Describe your approach..." />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-foreground mb-1.5">The Results</label>
+            <RichTextEditor value={editing.results || ""} onChange={(v) => set("results", v)} placeholder="What results were achieved?" />
+          </div>
         </div>
 
         {/* Settings */}
@@ -841,7 +1026,7 @@ function CaseStudiesPanel() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="font-display font-bold text-lg">Case Studies</h2>
-          <p className="text-xs text-muted-foreground mt-0.5">{list.length} total · {list.filter(c => c.featured).length} featured on homepage</p>
+          <p className="text-xs text-muted-foreground mt-0.5">{list.length} total · {list.filter(c => c.featured).length} featured · drag to reorder</p>
         </div>
         <Button onClick={openNew} size="sm" className="glow-gold font-display">
           <Plus className="w-4 h-4 mr-1.5" /> New Case Study
@@ -857,36 +1042,56 @@ function CaseStudiesPanel() {
           </Button>
         </div>
       ) : (
-        <div className="space-y-3">
-          {list.map((cs) => (
-            <div key={cs.id} className="rounded-xl border border-border bg-card p-4 flex items-center gap-4">
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-display font-semibold text-sm text-foreground truncate">{cs.client_name || "Untitled"}</span>
-                  {cs.featured && <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-semibold">Featured</span>}
-                  {!cs.published && <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded font-semibold">Draft</span>}
-                </div>
-                <p className="text-xs text-muted-foreground mt-0.5 truncate">{cs.industry}{cs.tagline ? ` · ${cs.tagline}` : ""}</p>
-              </div>
-              <div className="flex items-center gap-1.5 shrink-0">
-                <button onClick={() => toggleField(cs.id, "featured", !cs.featured)} title={cs.featured ? "Unfeature" : "Feature on homepage"} className={cn("w-7 h-7 rounded-md flex items-center justify-center transition-colors", cs.featured ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-muted")}>
-                  <Star className="w-3.5 h-3.5" />
-                </button>
-                <button onClick={() => toggleField(cs.id, "published", !cs.published)} title={cs.published ? "Unpublish" : "Publish"} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
-                  {cs.published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-                </button>
-                <button onClick={() => openEdit(cs)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
-                  <Pencil className="w-3.5 h-3.5" />
-                </button>
-                <button onClick={() => handleDelete(cs.id, cs.client_name)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
-                  <Trash2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+          <SortableContext items={list.map((cs) => cs.id)} strategy={verticalListSortingStrategy}>
+            <div className="space-y-3">
+              {list.map((cs) => (
+                <SortableCSRow key={cs.id} cs={cs} onEdit={openEdit} onToggle={toggleField} onDelete={handleDelete} />
+              ))}
             </div>
-          ))}
-        </div>
+          </SortableContext>
+        </DndContext>
       )}
     </main>
+  );
+}
+
+// ─── Sortable Job / Bank rows ─────────────────────────────────────────────────
+
+function SortableJobRow({ job, onEdit, onToggle, onDelete }: {
+  job: Job;
+  onEdit: (j: Job) => void;
+  onToggle: (id: string, val: boolean) => void;
+  onDelete: (id: string, title: string) => void;
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: job.id });
+  return (
+    <div ref={setNodeRef} style={{ transform: CSS.Transform.toString(transform), transition }}
+      className={cn("rounded-xl border border-border bg-card p-4 flex items-center gap-3", isDragging && "opacity-50 shadow-lg")}>
+      <button {...attributes} {...listeners} className="text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing shrink-0">
+        <GripVertical className="w-4 h-4" />
+      </button>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="font-display font-semibold text-sm text-foreground truncate">{job.title || "Untitled"}</span>
+          {job.experience && <span className="text-[10px] bg-secondary text-secondary-foreground px-1.5 py-0.5 rounded font-semibold">{job.experience}</span>}
+          {!job.published && <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded font-semibold">Draft</span>}
+        </div>
+        {job.notes && <p className="text-xs text-muted-foreground mt-0.5 truncate">{job.notes}</p>}
+      </div>
+      <div className="flex items-center gap-1.5 shrink-0">
+        <button onClick={() => onToggle(job.id, !job.published)} title={job.published ? "Unpublish" : "Publish"}
+          className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+          {job.published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+        </button>
+        <button onClick={() => onEdit(job)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+          <Pencil className="w-3.5 h-3.5" />
+        </button>
+        <button onClick={() => onDelete(job.id, job.title)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
+          <Trash2 className="w-3.5 h-3.5" />
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -903,13 +1108,14 @@ const EMPTY_JOB: Omit<Job, "id"> = {
   notes: "", experience: "", sort_order: 0, published: true,
 };
 
-function JobsPanel() {
+function JobsPanel({ logActivity }: { logActivity: (action: string, entityType: string, label: string) => void }) {
   const { toast } = useToast();
   const [list, setList]       = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<Partial<Job> | null>(null);
   const [saving, setSaving]   = useState(false);
   const [isNew, setIsNew]     = useState(false);
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
 
   const load = async () => {
     const { data } = await supabase.from("job_listings").select("*").order("sort_order");
@@ -930,24 +1136,39 @@ function JobsPanel() {
     if (isNew) {
       const { error } = await supabase.from("job_listings").insert(payload);
       if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
-      else { toast({ title: "Job listing created!" }); closeForm(); load(); }
+      else { toast({ title: "Job listing created!" }); logActivity("created", "job", payload.title || "New Job"); closeForm(); load(); }
     } else {
       const { error } = await supabase.from("job_listings").update(payload).eq("id", editing.id!);
       if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
-      else { toast({ title: "Saved!" }); closeForm(); load(); }
+      else { toast({ title: "Saved!" }); logActivity("updated", "job", payload.title || "Job"); closeForm(); load(); }
     }
     setSaving(false);
+  };
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    const oldIdx = list.findIndex((j) => j.id === active.id);
+    const newIdx = list.findIndex((j) => j.id === over.id);
+    const reordered = arrayMove(list, oldIdx, newIdx);
+    setList(reordered);
+    await Promise.all(reordered.map((j, i) =>
+      supabase.from("job_listings").update({ sort_order: i }).eq("id", j.id)
+    ));
   };
 
   const togglePublished = async (id: string, val: boolean) => {
     await supabase.from("job_listings").update({ published: val }).eq("id", id);
     setList((prev) => prev.map((j) => j.id === id ? { ...j, published: val } : j));
+    const j = list.find((j) => j.id === id);
+    logActivity(val ? "published" : "unpublished", "job", j?.title ?? "Job");
   };
 
   const handleDelete = async (id: string, title: string) => {
     if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
     await supabase.from("job_listings").delete().eq("id", id);
     setList((prev) => prev.filter((j) => j.id !== id));
+    logActivity("deleted", "job", title);
     toast({ title: "Deleted" });
   };
 
@@ -1058,7 +1279,7 @@ function JobsPanel() {
         <div>
           <h2 className="font-display font-bold text-lg">Job Listings</h2>
           <p className="text-xs text-muted-foreground mt-0.5">
-            {list.length} total · {list.filter((j) => j.published).length} published on /careers
+            {list.length} total · {list.filter((j) => j.published).length} published · drag to reorder
           </p>
         </div>
         <Button onClick={openNew} size="sm" className="glow-gold font-display">
@@ -1075,55 +1296,57 @@ function JobsPanel() {
           </Button>
         </div>
       ) : (
-        <div className="space-y-3">
-          {list.map((job) => (
-            <div key={job.id} className="rounded-xl border border-border bg-card p-4 flex items-center gap-4">
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-display font-semibold text-sm text-foreground truncate">
-                    {job.title || "Untitled"}
-                  </span>
-                  {job.experience && (
-                    <span className="text-[10px] bg-secondary text-secondary-foreground px-1.5 py-0.5 rounded font-semibold">
-                      {job.experience}
-                    </span>
-                  )}
-                  {!job.published && (
-                    <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded font-semibold">
-                      Draft
-                    </span>
-                  )}
-                </div>
-                {job.notes && (
-                  <p className="text-xs text-muted-foreground mt-0.5 truncate">{job.notes}</p>
-                )}
-              </div>
-              <div className="flex items-center gap-1.5 shrink-0">
-                <button
-                  onClick={() => togglePublished(job.id, !job.published)}
-                  title={job.published ? "Unpublish" : "Publish"}
-                  className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                >
-                  {job.published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-                </button>
-                <button
-                  onClick={() => openEdit(job)}
-                  className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                >
-                  <Pencil className="w-3.5 h-3.5" />
-                </button>
-                <button
-                  onClick={() => handleDelete(job.id, job.title)}
-                  className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
-                >
-                  <Trash2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+          <SortableContext items={list.map((j) => j.id)} strategy={verticalListSortingStrategy}>
+            <div className="space-y-3">
+              {list.map((job) => (
+                <SortableJobRow key={job.id} job={job} onEdit={openEdit} onToggle={togglePublished} onDelete={handleDelete} />
+              ))}
             </div>
-          ))}
-        </div>
+          </SortableContext>
+        </DndContext>
       )}
     </main>
+  );
+}
+
+// ─── SortableBankRow ──────────────────────────────────────────────────────────
+
+function SortableBankRow({ bank, onEdit, onToggle, onDelete }: {
+  bank: BankAccount;
+  onEdit: (b: BankAccount) => void;
+  onToggle: (id: string, val: boolean) => void;
+  onDelete: (id: string, title: string) => void;
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: bank.id });
+  return (
+    <div ref={setNodeRef} style={{ transform: CSS.Transform.toString(transform), transition }}
+      className={cn("rounded-xl border border-border bg-card p-4 flex items-center gap-3", isDragging && "opacity-50 shadow-lg")}>
+      <button {...attributes} {...listeners} className="text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing shrink-0">
+        <GripVertical className="w-4 h-4" />
+      </button>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="font-display font-semibold text-sm text-foreground truncate">{bank.title || "Untitled"}</span>
+          {bank.abbr && <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-semibold">{bank.abbr}</span>}
+          {bank.currencies && <span className="text-[10px] bg-secondary text-secondary-foreground px-1.5 py-0.5 rounded font-semibold">{bank.currencies}</span>}
+          {!bank.published && <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded font-semibold">Draft</span>}
+        </div>
+        {bank.branch && <p className="text-xs text-muted-foreground mt-0.5 truncate">{bank.branch}</p>}
+      </div>
+      <div className="flex items-center gap-1.5 shrink-0">
+        <button onClick={() => onToggle(bank.id, !bank.published)} title={bank.published ? "Unpublish" : "Publish"}
+          className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+          {bank.published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+        </button>
+        <button onClick={() => onEdit(bank)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+          <Pencil className="w-3.5 h-3.5" />
+        </button>
+        <button onClick={() => onDelete(bank.id, bank.title)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
+          <Trash2 className="w-3.5 h-3.5" />
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -1141,13 +1364,14 @@ const EMPTY_BANK: Omit<BankAccount, "id"> = {
   sort_order: 0, published: true,
 };
 
-function BanksPanel() {
+function BanksPanel({ logActivity }: { logActivity: (action: string, entityType: string, label: string) => void }) {
   const { toast } = useToast();
   const [list, setList]       = useState<BankAccount[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<Partial<BankAccount> | null>(null);
   const [saving, setSaving]   = useState(false);
   const [isNew, setIsNew]     = useState(false);
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
 
   const load = async () => {
     const { data } = await supabase.from("bank_accounts").select("*").order("sort_order");
@@ -1168,24 +1392,39 @@ function BanksPanel() {
     if (isNew) {
       const { error } = await supabase.from("bank_accounts").insert(payload);
       if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
-      else { toast({ title: "Bank account created!" }); closeForm(); load(); }
+      else { toast({ title: "Bank account created!" }); logActivity("created", "bank", payload.title || "New Bank"); closeForm(); load(); }
     } else {
       const { error } = await supabase.from("bank_accounts").update(payload).eq("id", editing.id!);
       if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
-      else { toast({ title: "Saved!" }); closeForm(); load(); }
+      else { toast({ title: "Saved!" }); logActivity("updated", "bank", payload.title || "Bank"); closeForm(); load(); }
     }
     setSaving(false);
+  };
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    const oldIdx = list.findIndex((b) => b.id === active.id);
+    const newIdx = list.findIndex((b) => b.id === over.id);
+    const reordered = arrayMove(list, oldIdx, newIdx);
+    setList(reordered);
+    await Promise.all(reordered.map((b, i) =>
+      supabase.from("bank_accounts").update({ sort_order: i }).eq("id", b.id)
+    ));
   };
 
   const togglePublished = async (id: string, val: boolean) => {
     await supabase.from("bank_accounts").update({ published: val }).eq("id", id);
     setList((prev) => prev.map((b) => b.id === id ? { ...b, published: val } : b));
+    const b = list.find((b) => b.id === id);
+    logActivity(val ? "published" : "unpublished", "bank", b?.title ?? "Bank");
   };
 
   const handleDelete = async (id: string, title: string) => {
     if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
     await supabase.from("bank_accounts").delete().eq("id", id);
     setList((prev) => prev.filter((b) => b.id !== id));
+    logActivity("deleted", "bank", title);
     toast({ title: "Deleted" });
   };
 
@@ -1293,7 +1532,7 @@ function BanksPanel() {
         <div>
           <h2 className="font-display font-bold text-lg">Bank Accounts</h2>
           <p className="text-xs text-muted-foreground mt-0.5">
-            {list.length} total · {list.filter((b) => b.published).length} published on homepage
+            {list.length} total · {list.filter((b) => b.published).length} published · drag to reorder
           </p>
         </div>
         <Button onClick={openNew} size="sm" className="glow-gold font-display">
@@ -1310,58 +1549,15 @@ function BanksPanel() {
           </Button>
         </div>
       ) : (
-        <div className="space-y-3">
-          {list.map((bank) => (
-            <div key={bank.id} className="rounded-xl border border-border bg-card p-4 flex items-center gap-4">
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-display font-semibold text-sm text-foreground truncate">
-                    {bank.title || "Untitled"}
-                  </span>
-                  {bank.abbr && (
-                    <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-semibold">
-                      {bank.abbr}
-                    </span>
-                  )}
-                  {bank.currencies && (
-                    <span className="text-[10px] bg-secondary text-secondary-foreground px-1.5 py-0.5 rounded font-semibold">
-                      {bank.currencies}
-                    </span>
-                  )}
-                  {!bank.published && (
-                    <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded font-semibold">
-                      Draft
-                    </span>
-                  )}
-                </div>
-                {bank.branch && (
-                  <p className="text-xs text-muted-foreground mt-0.5 truncate">{bank.branch}</p>
-                )}
-              </div>
-              <div className="flex items-center gap-1.5 shrink-0">
-                <button
-                  onClick={() => togglePublished(bank.id, !bank.published)}
-                  title={bank.published ? "Unpublish" : "Publish"}
-                  className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                >
-                  {bank.published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-                </button>
-                <button
-                  onClick={() => openEdit(bank)}
-                  className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                >
-                  <Pencil className="w-3.5 h-3.5" />
-                </button>
-                <button
-                  onClick={() => handleDelete(bank.id, bank.title)}
-                  className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
-                >
-                  <Trash2 className="w-3.5 h-3.5" />
-                </button>
-              </div>
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+          <SortableContext items={list.map((b) => b.id)} strategy={verticalListSortingStrategy}>
+            <div className="space-y-3">
+              {list.map((bank) => (
+                <SortableBankRow key={bank.id} bank={bank} onEdit={openEdit} onToggle={togglePublished} onDelete={handleDelete} />
+              ))}
             </div>
-          ))}
-        </div>
+          </SortableContext>
+        </DndContext>
       )}
     </main>
   );
