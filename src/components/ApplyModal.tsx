@@ -274,6 +274,24 @@ const ApplyModal = ({ jobTitle, jobId, onClose }: Props) => {
       }]);
 
       if (error) throw error;
+      // Fire email notification (non-blocking)
+      supabase.functions.invoke("send-notification", {
+        body: {
+          type: "application",
+          data: {
+            job_title:  jobTitle,
+            first_name: form.firstName.trim(),
+            last_name:  form.lastName.trim(),
+            email:      form.email.trim(),
+            mobile:     form.mobile.trim(),
+            country:    form.country,
+            city:       form.city.trim(),
+            degree:     form.degree.trim(),
+            grad_year:  form.gradYear,
+            linkedin:   form.linkedin.trim(),
+          },
+        },
+      }).catch(() => {});
       setSuccess(true);
 
     } catch (err) {

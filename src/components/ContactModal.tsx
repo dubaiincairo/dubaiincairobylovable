@@ -52,6 +52,10 @@ export const ContactModal = () => {
       toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
       return;
     }
+    // Fire email notification (non-blocking)
+    supabase.functions.invoke("send-notification", {
+      body: { type: "contact", data: { name: result.data.name, email: result.data.email, phone: result.data.phone || "", message: result.data.message } },
+    }).catch(() => {});
     setIsSubmitted(true);
     setForm({ name: "", email: "", phone: "", message: "" });
   };
