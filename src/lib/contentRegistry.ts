@@ -167,10 +167,25 @@ export const contentRegistry: ContentField[] = [
   // ── Tech ──
   { section: "tech", key: "tech_subtitle", label: "Section Subtitle", defaultValue: "Our Tech Stack" },
   { section: "tech", key: "tech_headline", label: "Section Headline", defaultValue: "Integrated Solutions. Proven Tools." },
-  ...Array.from({ length: 6 }, (_, i) => [
-    { section: "tech", key: `tech_${i+1}_label`, label: `Category ${i+1} Label`, defaultValue: `Category ${i+1}` },
-    { section: "tech", key: `tech_${i+1}_tools`, label: `Category ${i+1} Tools (comma-separated)`, defaultValue: "" },
-  ]).flat(),
+  { section: "tech", key: "tech_desc",     label: "Section Description", defaultValue: "Three intelligent layers — each purpose-built to cover a critical domain of your digital operation." },
+
+  // Category 1 — Growth & Customer Intelligence
+  { section: "tech", key: "tech_1_title", label: "Category 1 — Title", defaultValue: "Growth & Customer Intelligence" },
+  { section: "tech", key: "tech_1_tools", label: "Category 1 — Tools (comma-separated)", defaultValue: "Google Analytics,Looker Studio,HubSpot,Salesforce Cloud,Semrush,Salesforce Einstein,Adobe Sensei,ChatGPT,Perplexity AI,Optimizely,Hotjar" },
+
+  // Category 2 — Commerce & Business Operations
+  { section: "tech", key: "tech_2_title",   label: "Category 2 — Title",                        defaultValue: "Commerce & Business Operations" },
+  { section: "tech", key: "tech_2a_label",  label: "Category 2 — Sub-group A Label",             defaultValue: "Ecommerce Ecosystem" },
+  { section: "tech", key: "tech_2a_tools",  label: "Category 2 — Sub-group A Tools",             defaultValue: "Shopify Magic,Adobe Commerce,Wix eCommerce,Odoo,Zoho Books" },
+  { section: "tech", key: "tech_2b_label",  label: "Category 2 — Sub-group B Label",             defaultValue: "Operations & Workflow" },
+  { section: "tech", key: "tech_2b_tools",  label: "Category 2 — Sub-group B Tools",             defaultValue: "ClickUp,Asana,Monday.com,Notion AI,Zapier,Make,UiPath" },
+
+  // Category 3 — Creative, AI & Digital Infrastructure
+  { section: "tech", key: "tech_3_title",   label: "Category 3 — Title",                        defaultValue: "Creative, AI & Digital Infrastructure" },
+  { section: "tech", key: "tech_3a_label",  label: "Category 3 — Sub-group A Label",             defaultValue: "Design & Creative Tools" },
+  { section: "tech", key: "tech_3a_tools",  label: "Category 3 — Sub-group A Tools",             defaultValue: "Figma,Adobe Creative Suite,Canva,Blender,Lottie,Midjourney,Runway,Synthesia,Jasper,Writesonic" },
+  { section: "tech", key: "tech_3b_label",  label: "Category 3 — Sub-group B Label",             defaultValue: "AI & Cloud Infrastructure" },
+  { section: "tech", key: "tech_3b_tools",  label: "Category 3 — Sub-group B Tools",             defaultValue: "OpenAI API,AWS,Google Cloud AI,Microsoft Azure AI,Infobip,LangChain,Pinecone,Replicate" },
 
   // ── Google ──
   { section: "google", key: "google_badge",         label: "Section Badge",           defaultValue: "We're on Google" },
