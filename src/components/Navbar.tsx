@@ -27,6 +27,7 @@ const Navbar = () => {
     { href: "#contact",  label: get("nav_link_5", "Contact") },
     { href: "/careers",  label: "Careers" },
     { href: "/partnerships", label: "Partnerships" },
+    { href: "/tech", label: "Tech Stack" },
   ];
 
   return (

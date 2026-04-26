@@ -13,6 +13,7 @@ import CaseStudies from "./pages/CaseStudies";
 import CaseStudy from "./pages/CaseStudy";
 import Careers from "./pages/Careers";
 import OdooPartner from "./pages/OdooPartner";
+import Tech from "./pages/Tech";
 import WhatsAppButton from "./components/WhatsAppButton";
 import FaviconUpdater from "./components/FaviconUpdater";
 
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/careers" element={<Careers />} />
             <Route path="/partnerships" element={<OdooPartner />} />
             <Route path="/odoo-partner" element={<OdooPartner />} />
+            <Route path="/tech" element={<Tech />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

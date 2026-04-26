@@ -8,7 +8,7 @@ import ServicesSection from "@/components/ServicesSection";
 import FounderSection from "@/components/FounderSection";
 import ClientsSection from "@/components/ClientsSection";
 import HighlightsSection from "@/components/HighlightsSection";
-import TechStackSection from "@/components/TechStackSection";
+import TechStackTeaser from "@/components/TechStackTeaser";
 import ContactSection from "@/components/ContactSection";
 import BankAccountsSection from "@/components/BankAccountsSection";
 import Footer from "@/components/Footer";
@@ -27,7 +27,7 @@ const Index = () => {
       <ValuesSection />
       <FounderSection />
       <ServicesSection />
-      <TechStackSection />
+      <TechStackTeaser />
       <BankAccountsSection />
       <ContactSection />
       <GoogleBusinessWidget />

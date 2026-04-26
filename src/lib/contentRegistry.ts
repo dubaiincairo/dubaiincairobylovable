@@ -164,28 +164,55 @@ export const contentRegistry: ContentField[] = [
   { section: "clients", key: "clients_description", label: "Section Description", defaultValue: "From global pharmaceutical giants to beloved local names." },
   { section: "clients", key: "clients_list", label: "Client Names (one per line or comma-separated)", defaultValue: "Novartis,Sanofi,Roche" },
 
-  // ── Tech ──
-  { section: "tech", key: "tech_subtitle", label: "Section Subtitle", defaultValue: "Our Tech Stack" },
-  { section: "tech", key: "tech_headline", label: "Section Headline", defaultValue: "Integrated Solutions. Proven Tools." },
-  { section: "tech", key: "tech_desc",     label: "Section Description", defaultValue: "Three intelligent layers — each purpose-built to cover a critical domain of your digital operation." },
+  // ── Tech Stack (section headers + teaser) ──
+  { section: "tech", key: "tech_subtitle",     label: "Section Badge",              defaultValue: "Our Tech Stack" },
+  { section: "tech", key: "tech_headline",     label: "Section Headline",           defaultValue: "Integrated Solutions. Proven Tools." },
+  { section: "tech", key: "tech_desc",         label: "Section Description",        defaultValue: "Three intelligent layers — each purpose-built to cover a critical domain of your digital operation." },
+  { section: "tech", key: "tech_teaser_desc",  label: "Homepage Teaser Description",defaultValue: "41 industry-leading tools across 3 intelligent layers — purpose-built to drive growth, operations, and innovation." },
+
+  // Tech page hero
+  { section: "tech", key: "tech_page_headline",    label: "Page Headline (line 1)", defaultValue: "The Technology Behind" },
+  { section: "tech", key: "tech_page_subheadline", label: "Page Headline (line 2)", defaultValue: "Every Result We Deliver" },
+  { section: "tech", key: "tech_page_desc",        label: "Page Description",       defaultValue: "We don't just use tools — we architect intelligent stacks. Three purpose-built layers that cover acquisition, execution, and innovation across your entire digital operation." },
+
+  // Tech page CTA
+  { section: "tech", key: "tech_cta_title", label: "CTA Title",       defaultValue: "Want to know which stack fits your business?" },
+  { section: "tech", key: "tech_cta_desc",  label: "CTA Description", defaultValue: "We'll audit your current tools and recommend the right combination." },
+  { section: "tech", key: "tech_cta_btn",   label: "CTA Button Text", defaultValue: "Get a Free Stack Audit" },
 
   // Category 1 — Growth & Customer Intelligence
-  { section: "tech", key: "tech_1_title", label: "Category 1 — Title", defaultValue: "Growth & Customer Intelligence" },
-  { section: "tech", key: "tech_1_tools", label: "Category 1 — Tools (comma-separated)", defaultValue: "Google Analytics,Looker Studio,HubSpot,Salesforce Cloud,Semrush,Salesforce Einstein,Adobe Sensei,ChatGPT,Perplexity AI,Optimizely,Hotjar" },
+  { section: "tech", key: "tech_1_title",   label: "Category 1 — Title",        defaultValue: "Growth & Customer Intelligence" },
+  { section: "tech", key: "tech_1_role",    label: "Category 1 — Strategic Role", defaultValue: "Transforms data into revenue. This is your decision-making engine." },
+  { section: "tech", key: "tech_1_g1_label",label: "Category 1 — Group 1 Label", defaultValue: "Core Platforms" },
+  { section: "tech", key: "tech_1_g1_tools",label: "Category 1 — Group 1 Tools", defaultValue: "Google Analytics,Looker Studio,HubSpot,Salesforce Cloud,Semrush" },
+  { section: "tech", key: "tech_1_g2_label",label: "Category 1 — Group 2 Label", defaultValue: "AI-Driven Intelligence" },
+  { section: "tech", key: "tech_1_g2_tools",label: "Category 1 — Group 2 Tools", defaultValue: "Salesforce Einstein,Adobe Sensei,ChatGPT,Perplexity AI" },
+  { section: "tech", key: "tech_1_g3_label",label: "Category 1 — Group 3 Label", defaultValue: "Growth & Experimentation" },
+  { section: "tech", key: "tech_1_g3_tools",label: "Category 1 — Group 3 Tools", defaultValue: "Optimizely,Hotjar" },
 
   // Category 2 — Commerce & Business Operations
-  { section: "tech", key: "tech_2_title",   label: "Category 2 — Title",                        defaultValue: "Commerce & Business Operations" },
-  { section: "tech", key: "tech_2a_label",  label: "Category 2 — Sub-group A Label",             defaultValue: "Ecommerce Ecosystem" },
-  { section: "tech", key: "tech_2a_tools",  label: "Category 2 — Sub-group A Tools",             defaultValue: "Shopify Magic,Adobe Commerce,Wix eCommerce,Odoo,Zoho Books" },
-  { section: "tech", key: "tech_2b_label",  label: "Category 2 — Sub-group B Label",             defaultValue: "Operations & Workflow" },
-  { section: "tech", key: "tech_2b_tools",  label: "Category 2 — Sub-group B Tools",             defaultValue: "ClickUp,Asana,Monday.com,Notion AI,Zapier,Make,UiPath" },
+  { section: "tech", key: "tech_2_title",   label: "Category 2 — Title",          defaultValue: "Commerce & Business Operations" },
+  { section: "tech", key: "tech_2_role",    label: "Category 2 — Strategic Role",  defaultValue: "This is your execution backbone — where revenue is processed and operations are optimized." },
+  { section: "tech", key: "tech_2_g1_label",label: "Category 2 — Group 1 Label",  defaultValue: "Ecommerce Ecosystem" },
+  { section: "tech", key: "tech_2_g1_tools",label: "Category 2 — Group 1 Tools",  defaultValue: "Shopify Magic,Adobe Commerce,Wix eCommerce" },
+  { section: "tech", key: "tech_2_g2_label",label: "Category 2 — Group 2 Label",  defaultValue: "ERP & Financial Systems" },
+  { section: "tech", key: "tech_2_g2_tools",label: "Category 2 — Group 2 Tools",  defaultValue: "Odoo,Zoho Books" },
+  { section: "tech", key: "tech_2_g3_label",label: "Category 2 — Group 3 Label",  defaultValue: "Workflow & Project Management" },
+  { section: "tech", key: "tech_2_g3_tools",label: "Category 2 — Group 3 Tools",  defaultValue: "ClickUp,Asana,Monday.com,Notion AI" },
+  { section: "tech", key: "tech_2_g4_label",label: "Category 2 — Group 4 Label",  defaultValue: "AI for Operations" },
+  { section: "tech", key: "tech_2_g4_tools",label: "Category 2 — Group 4 Tools",  defaultValue: "Zapier,Make (Integromat),UiPath" },
 
   // Category 3 — Creative, AI & Digital Infrastructure
-  { section: "tech", key: "tech_3_title",   label: "Category 3 — Title",                        defaultValue: "Creative, AI & Digital Infrastructure" },
-  { section: "tech", key: "tech_3a_label",  label: "Category 3 — Sub-group A Label",             defaultValue: "Design & Creative Tools" },
-  { section: "tech", key: "tech_3a_tools",  label: "Category 3 — Sub-group A Tools",             defaultValue: "Figma,Adobe Creative Suite,Canva,Blender,Lottie,Midjourney,Runway,Synthesia,Jasper,Writesonic" },
-  { section: "tech", key: "tech_3b_label",  label: "Category 3 — Sub-group B Label",             defaultValue: "AI & Cloud Infrastructure" },
-  { section: "tech", key: "tech_3b_tools",  label: "Category 3 — Sub-group B Tools",             defaultValue: "OpenAI API,AWS,Google Cloud AI,Microsoft Azure AI,Infobip,LangChain,Pinecone,Replicate" },
+  { section: "tech", key: "tech_3_title",   label: "Category 3 — Title",           defaultValue: "Creative, AI & Digital Infrastructure" },
+  { section: "tech", key: "tech_3_role",    label: "Category 3 — Strategic Role",   defaultValue: "This is your innovation layer — where brand, AI, and scalability intersect." },
+  { section: "tech", key: "tech_3_g1_label",label: "Category 3 — Group 1 Label",   defaultValue: "Design & Creative Tools" },
+  { section: "tech", key: "tech_3_g1_tools",label: "Category 3 — Group 1 Tools",   defaultValue: "Figma,Adobe Creative Suite,Canva,Blender,Lottie" },
+  { section: "tech", key: "tech_3_g2_label",label: "Category 3 — Group 2 Label",   defaultValue: "AI Content & Media Generation" },
+  { section: "tech", key: "tech_3_g2_tools",label: "Category 3 — Group 2 Tools",   defaultValue: "Midjourney,Runway,Synthesia,Jasper,Writesonic" },
+  { section: "tech", key: "tech_3_g3_label",label: "Category 3 — Group 3 Label",   defaultValue: "AI & Cloud Infrastructure" },
+  { section: "tech", key: "tech_3_g3_tools",label: "Category 3 — Group 3 Tools",   defaultValue: "OpenAI API,AWS,Google Cloud AI,Microsoft Azure AI,Infobip" },
+  { section: "tech", key: "tech_3_g4_label",label: "Category 3 — Group 4 Label",   defaultValue: "Emerging AI Stack" },
+  { section: "tech", key: "tech_3_g4_tools",label: "Category 3 — Group 4 Tools",   defaultValue: "LangChain,Pinecone,Replicate" },
 
   // ── Google ──
   { section: "google", key: "google_badge",         label: "Section Badge",           defaultValue: "We're on Google" },
