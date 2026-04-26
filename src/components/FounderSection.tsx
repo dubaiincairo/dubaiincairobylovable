@@ -1,7 +1,13 @@
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
+import { Quote, Facebook, Linkedin, Instagram } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
+
+const SOCIALS = [
+  { key: "founder_facebook",  Icon: Facebook,  label: "Facebook"  },
+  { key: "founder_linkedin",  Icon: Linkedin,  label: "LinkedIn"  },
+  { key: "founder_instagram", Icon: Instagram, label: "Instagram" },
+] as const;
 
 const FounderSection = () => {
   const { get } = useSiteContent();
@@ -21,16 +27,33 @@ const FounderSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
             {get("founder_headline", "Built by Someone Who's Been in the Trenches.")}
           </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">{get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")}</p>
+          <p className="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">
+            {get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")}
+          </p>
+
+          {/* Social icons */}
+          <div className="flex items-center gap-3 mt-8">
+            {SOCIALS.map(({ key, Icon, label }) => {
+              const url = get(key, "");
+              if (!url) return null;
+              return (
+                <a
+                  key={key}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-10 h-10 rounded-xl border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/8 transition-all duration-200"
+                >
+                  <Icon className="w-4 h-4" />
+                </a>
+              );
+            })}
+          </div>
         </motion.div>
 
         {/* RIGHT — Quote visual */}
-        <motion.div
-          variants={cardFadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-        >
+        <motion.div variants={cardFadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <blockquote
             className="relative p-8 rounded-xl glass-card"
             style={{ borderColor: 'hsl(38 80% 55% / 0.2)', background: 'hsl(38 80% 55% / 0.03)' }}

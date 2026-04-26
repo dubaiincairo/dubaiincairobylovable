@@ -16,6 +16,8 @@ import OdooPartner from "./pages/OdooPartner";
 import Tech from "./pages/Tech";
 import WhatsAppButton from "./components/WhatsAppButton";
 import FaviconUpdater from "./components/FaviconUpdater";
+import { ContactModalProvider } from "./context/ContactModalContext";
+import { ContactModal } from "./components/ContactModal";
 
 const queryClient = new QueryClient();
 
@@ -26,7 +28,9 @@ const App = () => (
       <Sonner />
       <WhatsAppButton />
       <SiteContentProvider>
-        <FaviconUpdater />
+        <ContactModalProvider>
+          <ContactModal />
+          <FaviconUpdater />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
@@ -43,6 +47,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        </ContactModalProvider>
       </SiteContentProvider>
     </TooltipProvider>
   </QueryClientProvider>

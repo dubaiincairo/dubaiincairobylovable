@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useContactModal } from "@/context/ContactModalContext";
 import {
   ArrowLeft,
   Globe,
@@ -109,6 +110,7 @@ const yanIcons = [Building2, Wifi, BookOpen, LayoutDashboard, Monitor, Globe, Ba
    ───────────────────────────────────────────────────────────── */
 const OdooPartner = () => {
   const { get } = useSiteContent();
+  const { openContactModal } = useContactModal();
 
   const odooTags  = Array.from({ length: 8 }, (_, i) => get(`odoo_tag_${i + 1}`, [
     "ERP Architecture & Solution Design",
@@ -354,12 +356,12 @@ const OdooPartner = () => {
             <p className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed text-sm">
               {get("odoo_cta_body", "Let's connect your marketing engine to a fully synchronized ERP backend. Our Odoo studio handles everything from initial scoping to go-live.")}
             </p>
-            <Link
-              to="/#contact"
+            <button
+              onClick={openContactModal}
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-display font-semibold rounded-lg hover:brightness-110 transition-all glow-gold shimmer-btn text-sm"
             >
               {get("odoo_cta_btn", "Get in Touch")}
-            </Link>
+            </button>
           </motion.div>
         </div>
       </section>
@@ -509,12 +511,12 @@ const OdooPartner = () => {
             <p className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed text-sm">
               {get("yan_cta_body", "Our hospitality tech team brings 12 months of hands-on implementation experience across Saudi Arabia. Let's bring that expertise to your property.")}
             </p>
-            <Link
-              to="/#contact"
+            <button
+              onClick={openContactModal}
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-display font-semibold rounded-lg hover:brightness-110 transition-all glow-gold shimmer-btn text-sm"
             >
               {get("yan_cta_btn", "Get in Touch")}
-            </Link>
+            </button>
           </motion.div>
         </div>
       </section>

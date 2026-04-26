@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useContactModal } from "@/context/ContactModalContext";
 import { slideDown } from "@/lib/animations";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { get } = useSiteContent();
+  const { openContactModal } = useContactModal();
   const { scrollY } = useScroll();
   const bgOpacity = useTransform(scrollY, [0, 100], [0.6, 0.95]);
   const blurVal = useTransform(scrollY, [0, 100], [8, 20]);
@@ -20,24 +22,20 @@ const Navbar = () => {
   }, [scrollY]);
 
   const links = [
-    { href: "#about",    label: get("nav_link_1", "About") },
-    { href: "#work",     label: get("nav_link_2", "Our Work") },
-    { href: "#team",     label: get("nav_link_3", "Team") },
-    { href: "#services", label: get("nav_link_4", "Services") },
-    { href: "#contact",  label: get("nav_link_5", "Contact") },
-    { href: "/careers",  label: "Careers" },
+    { href: "#about",        label: get("nav_link_1", "About") },
+    { href: "#work",         label: get("nav_link_2", "Our Work") },
+    { href: "#team",         label: get("nav_link_3", "Team") },
+    { href: "#services",     label: get("nav_link_4", "Services") },
+    { href: "#contact",      label: get("nav_link_5", "Contact") },
+    { href: "/careers",      label: "Careers" },
     { href: "/partnerships", label: "Partnerships" },
-    { href: "/tech", label: "Tech Stack" },
+    { href: "/tech",         label: "Tech Stack" },
   ];
 
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-500 will-change-transform ${scrolled ? 'border-border' : 'border-transparent'}`}
-      style={{
-        backgroundColor,
-        backdropFilter,
-        WebkitBackdropFilter: backdropFilter,
-      }}
+      style={{ backgroundColor, backdropFilter, WebkitBackdropFilter: backdropFilter }}
       variants={slideDown}
       initial="hidden"
       animate="visible"
@@ -55,9 +53,12 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
-          <a href="#contact" className="shimmer-btn px-5 py-2 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg transition-all hover:brightness-110">
+          <button
+            onClick={openContactModal}
+            className="shimmer-btn px-5 py-2 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg transition-all hover:brightness-110"
+          >
             {get("nav_cta", "Get Started")}
-          </a>
+          </button>
         </div>
 
         <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
@@ -77,9 +78,12 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
-          <a href="#contact" onClick={() => setOpen(false)} className="px-5 py-2.5 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg text-center">
+          <button
+            onClick={() => { setOpen(false); openContactModal(); }}
+            className="px-5 py-2.5 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg text-center"
+          >
             {get("nav_cta", "Get Started")}
-          </a>
+          </button>
         </motion.div>
       )}
     </motion.nav>

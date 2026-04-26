@@ -155,8 +155,11 @@ export const contentRegistry: ContentField[] = [
   { section: "founder", key: "founder_subtitle", label: "Section Subtitle", defaultValue: "A Message from Our Founder" },
   { section: "founder", key: "founder_headline", label: "Section Headline", defaultValue: "Built by Someone Who's Been in the Trenches" },
   { section: "founder", key: "founder_body", label: "Founder Body", defaultValue: "Abdullah Hassan Al-Fawali founded Dubai in Cairo with a bold vision." },
-  { section: "founder", key: "founder_quote", label: "Founder Quote", defaultValue: "I believe that continuous learning is the key to success in business." },
-  { section: "founder", key: "founder_attribution", label: "Quote Attribution", defaultValue: "— Abdullah Al-Fawali, CEO & Founder" },
+  { section: "founder", key: "founder_quote",        label: "Founder Quote",        defaultValue: "I believe that continuous learning is the key to success in business." },
+  { section: "founder", key: "founder_attribution",  label: "Quote Attribution",     defaultValue: "— Abdullah Al-Fawali, CEO & Founder" },
+  { section: "founder", key: "founder_facebook",     label: "Facebook URL",          defaultValue: "" },
+  { section: "founder", key: "founder_linkedin",     label: "LinkedIn URL",          defaultValue: "" },
+  { section: "founder", key: "founder_instagram",    label: "Instagram URL",         defaultValue: "" },
 
   // ── Clients ──
   { section: "clients", key: "clients_subtitle", label: "Section Subtitle", defaultValue: "Success Partners" },
@@ -252,7 +255,8 @@ export const contentRegistry: ContentField[] = [
   { section: "contact", key: "contact_phone_placeholder", label: "Phone Placeholder", defaultValue: "+1 234 567 890" },
   { section: "contact", key: "contact_message_label", label: "Message Field Label", defaultValue: "Message *" },
   { section: "contact", key: "contact_message_placeholder", label: "Message Placeholder", defaultValue: "Tell us about your project and goals..." },
-  { section: "contact", key: "contact_cta", label: "Submit Button Text", defaultValue: "Start a Project" },
+  { section: "contact", key: "contact_cta",         label: "Submit Button Text",   defaultValue: "Start a Project" },
+  { section: "contact", key: "contact_modal_title", label: "Popup Modal Title",    defaultValue: "Let's Build Together" },
   { section: "contact", key: "contact_success_title", label: "Success Title", defaultValue: "Thank You!" },
   { section: "contact", key: "contact_success_msg", label: "Success Message", defaultValue: "We'll get back to you within 24 hours." },
   { section: "contact", key: "contact_success_btn", label: "Send Another Button", defaultValue: "Send Another Message" },
