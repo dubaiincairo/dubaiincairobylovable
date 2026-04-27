@@ -376,6 +376,9 @@ export const contentRegistry: ContentField[] = [
   { section: "odoo", key: "odoo_cta_body",  label: "CTA — Body",     defaultValue: "Let's connect your marketing engine to a fully synchronized ERP backend. Our Odoo studio handles everything from initial scoping to go-live." },
   { section: "odoo", key: "odoo_cta_btn",   label: "CTA — Button",   defaultValue: "Get in Touch" },
 
+  // ── Yanolja — Brand ──
+  { section: "yanolja", key: "yan_logo_url", label: "Logo Image URL (upload or paste)", defaultValue: "https://yanoljacloud.com/static/media/logo_ycs_white.c5f61f77.svg", type: "upload" },
+
   // ── Yanolja — Hero ──
   { section: "yanolja", key: "yan_hero_badge",    label: "Hero — Badge",           defaultValue: "Hospitality Technology" },
   { section: "yanolja", key: "yan_hero_h2",       label: "Hero — Headline",        defaultValue: "Yanolja Cloud" },

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { BookOpen, Briefcase, Landmark, Mail, MessageSquare, Star, Clock, TrendingUp } from "lucide-react";
+import { BookOpen, Briefcase, Landmark, Mail, MessageSquare, Star, Clock, TrendingUp, UserCheck } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
 type ActivityEntry = {
@@ -15,6 +15,7 @@ type ActivityEntry = {
 
 type Stats = {
   contacts: number;
+  applications: number;
   caseStudies: number;
   jobs: number;
   banks: number;
@@ -46,6 +47,7 @@ export function DashboardPanel() {
     const load = async () => {
       const [
         { count: contacts },
+        { count: applications },
         { count: caseStudies },
         { count: jobs },
         { count: banks },
@@ -53,6 +55,7 @@ export function DashboardPanel() {
         { data: activity },
       ] = await Promise.all([
         supabase.from("contact_submissions").select("*", { count: "exact", head: true }),
+        supabase.from("job_applications").select("*", { count: "exact", head: true }),
         supabase.from("case_studies").select("*", { count: "exact", head: true }),
         supabase.from("job_listings").select("*", { count: "exact", head: true }),
         supabase.from("bank_accounts").select("*", { count: "exact", head: true }),
@@ -62,6 +65,7 @@ export function DashboardPanel() {
 
       setStats({
         contacts: contacts ?? 0,
+        applications: applications ?? 0,
         caseStudies: caseStudies ?? 0,
         jobs: jobs ?? 0,
         banks: banks ?? 0,
@@ -84,6 +88,7 @@ export function DashboardPanel() {
   );
 
   const statCards = [
+    { label: "Job Applications", value: stats!.applications, icon: UserCheck,   color: "text-orange-500 bg-orange-500/10", href: "applications" },
     { label: "Contact Messages", value: stats!.contacts,     icon: Mail,        color: "text-blue-500  bg-blue-500/10",   href: "contacts" },
     { label: "Case Studies",     value: stats!.caseStudies,  icon: BookOpen,    color: "text-amber-500 bg-amber-500/10",  href: "case-studies" },
     { label: "Job Listings",     value: stats!.jobs,         icon: Briefcase,   color: "text-green-500 bg-green-500/10",  href: "jobs" },

@@ -69,34 +69,30 @@ const OdooLogo = () => (
 );
 
 /* ─────────────────────────────────────────────────────────────
-   Yanolja Cloud logo — geometric Y mark + wordmark
+   Yanolja Cloud Solution logo — official brand image
    ───────────────────────────────────────────────────────────── */
-const YanoljaLogo = () => (
-  <div className="flex items-center gap-4">
-    <svg
-      viewBox="0 0 40 44"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-11 w-auto flex-shrink-0"
-      aria-label="Yanolja Cloud logo"
-    >
-      {/* Stylised Y — two angled arms + vertical stem, bold rounded strokes */}
-      <line x1="4"  y1="4"  x2="20" y2="24" stroke="hsl(38 80% 55%)" strokeWidth="5.5" strokeLinecap="round" />
-      <line x1="36" y1="4"  x2="20" y2="24" stroke="hsl(38 80% 55%)" strokeWidth="5.5" strokeLinecap="round" />
-      <line x1="20" y1="24" x2="20" y2="42" stroke="hsl(38 80% 55%)" strokeWidth="5.5" strokeLinecap="round" />
-      {/* Three dots suggesting cloud/digital connectivity */}
-      <circle cx="4"  cy="4"  r="3" fill="hsl(38 80% 55%)" opacity="0.45" />
-      <circle cx="36" cy="4"  r="3" fill="hsl(38 80% 55%)" opacity="0.45" />
-      <circle cx="20" cy="42" r="3" fill="hsl(38 80% 55%)" opacity="0.45" />
-    </svg>
-    <div className="flex flex-col gap-0.5">
-      <span className="font-display font-bold text-[1.65rem] leading-none tracking-tight text-primary select-none">
-        Yanolja Cloud
-      </span>
-      <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-primary/55 select-none">
-        eZee Suite
-      </span>
-    </div>
+const YANOLJA_LOGO_URL =
+  "https://yanoljacloud.com/static/media/logo_ycs_white.c5f61f77.svg";
+
+const YanoljaLogo = ({ logoUrl }: { logoUrl?: string }) => (
+  <div className="flex items-center justify-start">
+    <img
+      src={logoUrl || YANOLJA_LOGO_URL}
+      alt="Yanolja Cloud Solution"
+      className="h-14 w-auto object-contain"
+      onError={(e) => {
+        /* fallback: text-based wordmark if image fails to load */
+        const el = e.currentTarget;
+        el.style.display = "none";
+        const fallback = document.createElement("div");
+        fallback.innerHTML =
+          `<div style="display:flex;flex-direction:column;gap:2px">` +
+          `<span style="font-size:1.65rem;font-weight:700;color:hsl(38 80% 55%);line-height:1;letter-spacing:-0.02em">yanolja</span>` +
+          `<span style="font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:hsl(38 80% 55% / 0.6)">Cloud Solution</span>` +
+          `</div>`;
+        el.parentElement?.appendChild(fallback.firstElementChild!);
+      }}
+    />
   </div>
 );
 
@@ -411,7 +407,7 @@ const OdooPartner = () => {
               <div className="relative w-full max-w-sm">
                 <div className="absolute inset-0 rounded-2xl bg-primary/6 blur-3xl scale-110 pointer-events-none" />
                 <div className="relative rounded-2xl border border-primary/20 bg-card/60 backdrop-blur-sm p-7 flex flex-col gap-5">
-                  <YanoljaLogo />
+                  <YanoljaLogo logoUrl={get("yan_logo_url", YANOLJA_LOGO_URL)} />
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/8 self-start">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                     <span className="text-[10px] font-semibold tracking-widest uppercase text-primary">

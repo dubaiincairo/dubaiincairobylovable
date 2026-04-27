@@ -273,17 +273,11 @@ const Admin = () => {
         <SidebarContent
           adminTab={adminTab}
           setAdminTab={(tab) => setAdminTab(tab)}
-          grouped={grouped}
-          editedKeys={editedKeys}
-          activeSection={activeSection}
-          selectSection={selectSection}
           hasEdits={hasEdits}
           saving={saving}
           edited={edited}
           handleSave={handleSave}
           handleLogout={handleLogout}
-          contentRegistry={contentRegistry}
-          sectionOrder={sectionOrder}
         />
       </aside>
 
@@ -293,17 +287,11 @@ const Admin = () => {
           <SidebarContent
             adminTab={adminTab}
             setAdminTab={(tab) => { setAdminTab(tab); setMobileSidebarOpen(false); }}
-            grouped={grouped}
-            editedKeys={editedKeys}
-            activeSection={activeSection}
-            selectSection={(s) => { selectSection(s); setMobileSidebarOpen(false); }}
             hasEdits={hasEdits}
             saving={saving}
             edited={edited}
             handleSave={handleSave}
             handleLogout={handleLogout}
-            contentRegistry={contentRegistry}
-            sectionOrder={sectionOrder}
           />
         </SheetContent>
       </Sheet>
@@ -326,25 +314,21 @@ const Admin = () => {
               </h1>
             </div>
 
-            {adminTab === "content" ? (
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input
-                  type="text"
-                  value={search}
-                  onChange={(e) => { setSearch(e.target.value); }}
-                  placeholder="Search any word from the site…"
-                  className="w-full h-9 pl-9 pr-8 rounded-lg border border-input bg-background text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                />
-                {search && (
-                  <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
-                    <X className="w-3.5 h-3.5" />
-                  </button>
-                )}
-              </div>
-            ) : (
-              <div className="flex-1" />
-            )}
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => { setSearch(e.target.value); if (adminTab !== "content") setAdminTab("content"); }}
+                placeholder="Search any word from the site…"
+                className="w-full h-9 pl-9 pr-8 rounded-lg border border-input bg-background text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              />
+              {search && (
+                <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
 
             <div className="flex items-center gap-2 lg:hidden">
               {hasEdits && (
@@ -605,23 +589,15 @@ const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen; dividerBe
 ];
 
 function SidebarContent({
-  adminTab, setAdminTab, grouped, editedKeys, activeSection,
-  selectSection, hasEdits, saving, edited, handleSave, handleLogout,
-  contentRegistry: _cr, sectionOrder,
+  adminTab, setAdminTab, hasEdits, saving, edited, handleSave, handleLogout,
 }: {
   adminTab: AdminTab;
   setAdminTab: (t: AdminTab) => void;
-  grouped: Record<string, ContentField[]>;
-  editedKeys: Set<string>;
-  activeSection: string | null;
-  selectSection: (s: string | null) => void;
   hasEdits: boolean;
   saving: boolean;
   edited: Record<string, string>;
   handleSave: () => void;
   handleLogout: () => void;
-  contentRegistry: ContentField[];
-  sectionOrder: string[];
 }) {
   return (
     <>
@@ -655,59 +631,8 @@ function SidebarContent({
         ))}
       </div>
 
-      {/* Section nav (content tab only) */}
-      {adminTab === "content" && (
-        <nav className="flex-1 py-3 px-3 space-y-0.5 overflow-y-auto">
-          {/* All Sections entry */}
-          <button
-            onClick={() => selectSection(null)}
-            className={cn(
-              "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
-              activeSection === null
-                ? "bg-primary/10 text-primary font-semibold"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-            )}
-          >
-            <span className="text-base leading-none shrink-0">🗂️</span>
-            <span className="font-medium">All Sections</span>
-          </button>
-
-          <div className="my-1 border-t border-border/50" />
-
-          {sectionOrder.map((section) => {
-            const fields = grouped[section] ?? [];
-            const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
-            const isActive = activeSection === section;
-            const { numbered } = groupSectionFields(fields);
-            const subCount = Object.keys(numbered).length;
-            return (
-              <button
-                key={section}
-                onClick={() => selectSection(section)}
-                className={cn(
-                  "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
-                  isActive ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                )}
-              >
-                <span className="text-base leading-none shrink-0">{sectionIcons[section] || "📄"}</span>
-                <div className="flex-1 min-w-0">
-                  <div className="truncate font-medium text-sm">{sectionLabels[section] || section}</div>
-                  {subCount > 0 && (
-                    <div className="text-[10px] text-muted-foreground truncate mt-0.5">
-                      {subCount} {subItemLabels[section]?.toLowerCase() || "item"}s
-                    </div>
-                  )}
-                </div>
-                {editCount > 0 && (
-                  <span className="shrink-0 w-5 h-5 flex items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold">
-                    {editCount}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </nav>
-      )}
+      {/* flex-1 spacer keeps footer pinned to bottom */}
+      <div className="flex-1" />
 
       <div className="p-4 border-t border-border space-y-2 mt-auto">
         {hasEdits && adminTab === "content" ? (
