@@ -8,7 +8,7 @@ import {
   Loader2, Save, LogOut, ArrowLeft, ChevronDown, Search, X,
   Type, AlignLeft, MousePointer, Hash, LayoutList,
   Plus, Trash2, Pencil, Star, Eye, EyeOff, BookOpen, Briefcase, Landmark,
-  Upload, ImageIcon, GripVertical, Mail, Menu, LayoutDashboard, MessageSquare,
+  Upload, ImageIcon, GripVertical, Mail, Menu, LayoutDashboard, MessageSquare, RotateCcw, Filter,
 } from "lucide-react";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
 import { cn } from "@/lib/utils";
@@ -104,6 +104,10 @@ function groupSectionFields(fields: ContentField[]): SectionGroups {
   return { headerFields, numbered };
 }
 
+function groupedHasEdited(fields: ContentField[], editedKeys: Set<string>) {
+  return fields.some((field) => editedKeys.has(field.key));
+}
+
 // ─── Component ───────────────────────────────────────────────────────────────
 
 const Admin = () => {
@@ -119,6 +123,8 @@ const Admin = () => {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [adminTab, setAdminTab]     = useState<"dashboard" | "content" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts">("dashboard");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [showUnsavedOnly, setShowUnsavedOnly] = useState(false);
+  const [lastSavedAt, setLastSavedAt] = useState<string | null>(null);
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   // ── Auth & data load ──
@@ -176,6 +182,16 @@ const Admin = () => {
     return () => window.removeEventListener("keydown", handler);
   });
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (Object.keys(edited).length === 0) return;
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [edited]);
+
   const handleChange = (key: string, value: string) =>
     setEdited((prev) => ({ ...prev, [key]: value }));
 
@@ -206,6 +222,7 @@ const Admin = () => {
     });
     setSaving(false);
     setEdited({});
+    setLastSavedAt(new Date().toISOString());
 
     if (successCount > 0) {
       logActivity("updated", "content", "Site Content", successCount);
@@ -219,9 +236,21 @@ const Admin = () => {
   };
 
   const handleLogout = async () => {
+    if (Object.keys(edited).length > 0 && !window.confirm("You have unsaved CMS changes. Logout anyway?")) {
+      return;
+    }
     await supabase.auth.signOut();
     navigate("/login");
   };
+
+  const handleResetAllEdits = () => setEdited({});
+
+  const handleResetField = (key: string) =>
+    setEdited((prev) => {
+      const next = { ...prev };
+      delete next[key];
+      return next;
+    });
 
   const toggleSection = (section: string) =>
     setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
@@ -247,6 +276,9 @@ const Admin = () => {
 
   const hasEdits   = Object.keys(edited).length > 0;
   const editedKeys = new Set(Object.keys(edited));
+  const editedSectionsCount = sectionOrder.filter((section) =>
+    groupedHasEdited(contentRegistry.filter((f) => f.section === section), editedKeys)
+  ).length;
   const searchLower = search.toLowerCase();
 
   const grouped = sectionOrder.reduce<Record<string, typeof contentRegistry>>((acc, section) => {
@@ -255,6 +287,10 @@ const Admin = () => {
   }, {});
 
   const filteredSections = sectionOrder.filter((section) => {
+    if (showUnsavedOnly) {
+      const hasEditedInSection = grouped[section]?.some((f) => editedKeys.has(f.key));
+      if (!hasEditedInSection) return false;
+    }
     if (!search) return true;
     const fields = grouped[section];
     return (
@@ -345,6 +381,22 @@ const Admin = () => {
               )}
             </div>
 
+            {adminTab === "content" && (
+              <button
+                onClick={() => setShowUnsavedOnly((prev) => !prev)}
+                className={cn(
+                  "h-9 px-3 rounded-lg border text-xs font-semibold transition-colors hidden md:inline-flex items-center gap-1.5",
+                  showUnsavedOnly
+                    ? "bg-primary/10 border-primary/30 text-primary"
+                    : "border-input text-muted-foreground hover:text-foreground hover:bg-muted"
+                )}
+                title="Show only sections with unsaved edits"
+              >
+                <Filter className="w-3.5 h-3.5" />
+                Unsaved only
+              </button>
+            )}
+
             <div className="flex items-center gap-2 lg:hidden">
               {hasEdits && (
                 <Button onClick={handleSave} disabled={saving} size="sm" className="glow-gold font-display h-9 px-3">
@@ -367,6 +419,28 @@ const Admin = () => {
 
         {/* Sections */}
         {adminTab === "content" && <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 space-y-4">
+          <div className="rounded-xl border border-border bg-card px-4 py-3 flex flex-wrap items-center gap-2 text-xs">
+            <span className={cn("font-semibold", hasEdits ? "text-primary" : "text-muted-foreground")}>
+              {hasEdits
+                ? `${Object.keys(edited).length} unsaved change${Object.keys(edited).length !== 1 ? "s" : ""} across ${editedSectionsCount} section${editedSectionsCount !== 1 ? "s" : ""}`
+                : "All CMS content is saved"}
+            </span>
+            {lastSavedAt && !hasEdits && (
+              <span className="text-muted-foreground">· Last saved at {new Date(lastSavedAt).toLocaleTimeString()}</span>
+            )}
+            {hasEdits && (
+              <>
+                <Button onClick={handleSave} disabled={saving} size="sm" className="ml-auto h-7 px-2.5 text-[11px]">
+                  {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin mr-1" /> : <Save className="w-3.5 h-3.5 mr-1" />}
+                  Save now
+                </Button>
+                <Button onClick={handleResetAllEdits} size="sm" variant="outline" className="h-7 px-2.5 text-[11px]">
+                  <RotateCcw className="w-3.5 h-3.5 mr-1" />
+                  Discard all
+                </Button>
+              </>
+            )}
+          </div>
           {filteredSections.map((section) => {
             const fields = grouped[section];
             if (!fields || fields.length === 0) return null;
@@ -439,6 +513,7 @@ const Admin = () => {
                             value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
                             isEdited={editedKeys.has(field.key)}
                             onChange={handleChange}
+                            onReset={handleResetField}
                           />
                         ))}
                       </div>
@@ -488,6 +563,7 @@ const Admin = () => {
                                   value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
                                   isEdited={editedKeys.has(field.key)}
                                   onChange={handleChange}
+                                  onReset={handleResetField}
                                   indent
                                 />
                               ))}
@@ -502,11 +578,22 @@ const Admin = () => {
             );
           })}
 
-          {filteredSections.length === 0 && search && (
+          {filteredSections.length === 0 && (search || showUnsavedOnly) && (
             <div className="text-center py-16 text-muted-foreground">
               <Search className="w-8 h-8 mx-auto mb-3 opacity-40" />
-              <p className="text-sm">No fields match "<strong>{search}</strong>"</p>
-              <button onClick={() => setSearch("")} className="mt-2 text-xs text-primary hover:underline">Clear search</button>
+              <p className="text-sm">
+                {search
+                  ? <>No fields match "<strong>{search}</strong>"</>
+                  : "No unsaved sections right now."}
+              </p>
+              <div className="mt-2 flex items-center justify-center gap-3">
+                {search && (
+                  <button onClick={() => setSearch("")} className="text-xs text-primary hover:underline">Clear search</button>
+                )}
+                {showUnsavedOnly && (
+                  <button onClick={() => setShowUnsavedOnly(false)} className="text-xs text-primary hover:underline">Show all sections</button>
+                )}
+              </div>
             </div>
           )}
         </main>}
@@ -637,12 +724,13 @@ function SidebarContent({
 // ─── FieldRow ─────────────────────────────────────────────────────────────────
 
 function FieldRow({
-  field, value, isEdited, onChange, indent = false,
+  field, value, isEdited, onChange, onReset, indent = false,
 }: {
   field: ContentField;
   value: string;
   isEdited: boolean;
   onChange: (key: string, val: string) => void;
+  onReset: (key: string) => void;
   indent?: boolean;
 }) {
   const type = detectFieldType(field.key);
@@ -663,9 +751,19 @@ function FieldRow({
           </span>
         )}
         {isEdited && (
-          <span className="text-[9px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded ml-auto">
-            unsaved
-          </span>
+          <div className="ml-auto flex items-center gap-1.5">
+            <span className="text-[9px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded">
+              unsaved
+            </span>
+            <button
+              type="button"
+              onClick={() => onReset(field.key)}
+              className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded border border-input text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            >
+              <RotateCcw className="w-2.5 h-2.5" />
+              Revert
+            </button>
+          </div>
         )}
       </div>
       {field.type === "upload" ? (
