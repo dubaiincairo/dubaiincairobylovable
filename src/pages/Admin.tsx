@@ -113,13 +113,11 @@ const Admin = () => {
   const [edited, setEdited]         = useState<Record<string, string>>({});
   const [loading, setLoading]       = useState(true);
   const [saving, setSaving]         = useState(false);
-  const [openSections, setOpenSections]   = useState<Record<string, boolean>>({});
   const [openSubGroups, setOpenSubGroups] = useState<Record<string, boolean>>({});
   const [search, setSearch]         = useState("");
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [adminTab, setAdminTab]     = useState<"dashboard" | "content" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts">("dashboard");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   // ── Auth & data load ──
   useEffect(() => {
@@ -223,18 +221,16 @@ const Admin = () => {
     navigate("/login");
   };
 
-  const toggleSection = (section: string) =>
-    setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
-
   const toggleSubGroup = (key: string) =>
     setOpenSubGroups((prev) => ({ ...prev, [key]: !prev[key] }));
 
-  const scrollToSection = (section: string) => {
-    setOpenSections((prev) => ({ ...prev, [section]: true }));
+  const selectSection = (section: string | null) => {
     setActiveSection(section);
+    setOpenSubGroups({});   // reset sub-group states on each section switch
+    // scroll main panel back to top
     setTimeout(() => {
-      sectionRefs.current[section]?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
+      document.querySelector("main")?.scrollTo({ top: 0 });
+    }, 0);
   };
 
   if (loading) {
@@ -279,7 +275,7 @@ const Admin = () => {
           grouped={grouped}
           editedKeys={editedKeys}
           activeSection={activeSection}
-          scrollToSection={scrollToSection}
+          selectSection={selectSection}
           hasEdits={hasEdits}
           saving={saving}
           edited={edited}
@@ -299,7 +295,7 @@ const Admin = () => {
             grouped={grouped}
             editedKeys={editedKeys}
             activeSection={activeSection}
-            scrollToSection={(s) => { scrollToSection(s); setMobileSidebarOpen(false); }}
+            selectSection={(s) => { selectSection(s); setMobileSidebarOpen(false); }}
             hasEdits={hasEdits}
             saving={saving}
             edited={edited}
@@ -365,151 +361,221 @@ const Admin = () => {
         {adminTab === "jobs"         && <JobsPanel logActivity={logActivity} />}
         {adminTab === "banks"        && <BanksPanel logActivity={logActivity} />}
 
-        {/* Sections */}
-        {adminTab === "content" && <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 space-y-4">
-          {filteredSections.map((section) => {
-            const fields = grouped[section];
-            if (!fields || fields.length === 0) return null;
+        {/* Content tab */}
+        {adminTab === "content" && (() => {
 
-            const isOpen = openSections[section] ?? false;
-            const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
-
-            const visibleFields = search
-              ? fields.filter(
-                  (f) =>
-                    f.label.toLowerCase().includes(searchLower) ||
-                    f.key.toLowerCase().includes(searchLower) ||
-                    (edited[f.key] ?? dbValues[f.key] ?? f.defaultValue).toLowerCase().includes(searchLower)
-                )
-              : fields;
-
-            const shouldOpen = isOpen || (search.length > 0 && visibleFields.length > 0);
-            const { headerFields, numbered } = groupSectionFields(visibleFields);
-            const numberedEntries = Object.entries(numbered).sort(([a], [b]) => Number(a) - Number(b));
-            const subLabel = subItemLabels[section] || "Item";
-
+          // ── Search mode: show all matching sections expanded ──────────────
+          if (search) {
             return (
-              <div
-                key={section}
-                ref={(el) => { sectionRefs.current[section] = el; }}
-                className="rounded-xl border border-border bg-card overflow-hidden scroll-mt-20"
-              >
-                {/* ── Section header ── */}
-                <button
-                  onClick={() => toggleSection(section)}
-                  className="w-full flex items-center gap-3 px-5 py-4 hover:bg-muted/30 transition-colors text-left"
-                >
-                  <span className="text-2xl leading-none">{sectionIcons[section] || "📄"}</span>
-                  <div className="flex-1 min-w-0">
-                    <h2 className="text-sm font-display font-bold text-foreground">
-                      {sectionLabels[section] || section}
-                    </h2>
-                    <p className="text-[11px] text-muted-foreground mt-0.5">
-                      {sectionDescriptions[section]}
-                      {editCount > 0 && (
-                        <span className="text-primary ml-1.5 font-semibold">· {editCount} unsaved</span>
-                      )}
-                    </p>
+              <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 space-y-4 overflow-y-auto">
+                {filteredSections.length === 0 ? (
+                  <div className="text-center py-16 text-muted-foreground">
+                    <Search className="w-8 h-8 mx-auto mb-3 opacity-40" />
+                    <p className="text-sm">No fields match "<strong>{search}</strong>"</p>
+                    <button onClick={() => setSearch("")} className="mt-2 text-xs text-primary hover:underline">Clear search</button>
                   </div>
-                  {numberedEntries.length > 0 && (
-                    <span className="shrink-0 text-[10px] text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-                      {numberedEntries.length} {subLabel.toLowerCase()}s
-                    </span>
-                  )}
-                  <ChevronDown className={cn("w-4 h-4 text-muted-foreground transition-transform shrink-0", shouldOpen && "rotate-180")} />
-                </button>
-
-                {shouldOpen && (
-                  <div className="border-t border-border">
-
-                    {/* ── Section-level fields (subtitle, headline, etc.) ── */}
-                    {headerFields.length > 0 && (
-                      <div className="divide-y divide-border">
-                        {numberedEntries.length > 0 && (
-                          <div className="px-5 py-2 bg-muted/30">
-                            <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                              Section Settings
-                            </span>
-                          </div>
-                        )}
-                        {headerFields.map((field) => (
-                          <FieldRow
-                            key={field.key}
-                            field={field}
-                            value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
-                            isEdited={editedKeys.has(field.key)}
-                            onChange={handleChange}
-                          />
-                        ))}
+                ) : filteredSections.map((section) => {
+                  const fields = grouped[section];
+                  if (!fields || fields.length === 0) return null;
+                  const visibleFields = fields.filter(
+                    (f) =>
+                      f.label.toLowerCase().includes(searchLower) ||
+                      f.key.toLowerCase().includes(searchLower) ||
+                      (edited[f.key] ?? dbValues[f.key] ?? f.defaultValue).toLowerCase().includes(searchLower)
+                  );
+                  if (visibleFields.length === 0) return null;
+                  const { headerFields, numbered } = groupSectionFields(visibleFields);
+                  const numberedEntries = Object.entries(numbered).sort(([a], [b]) => Number(a) - Number(b));
+                  const subLabel = subItemLabels[section] || "Item";
+                  return (
+                    <div key={section} className="rounded-xl border border-border bg-card overflow-hidden">
+                      <div className="flex items-center gap-3 px-5 py-3 bg-muted/30">
+                        <span className="text-lg leading-none">{sectionIcons[section] || "📄"}</span>
+                        <span className="text-sm font-display font-bold text-foreground">{sectionLabels[section] || section}</span>
+                        <button onClick={() => { setSearch(""); selectSection(section); }}
+                          className="ml-auto text-[10px] text-primary hover:underline">Open section →</button>
                       </div>
-                    )}
-
-                    {/* ── Numbered sub-groups (Studio 1, Edge 2, …) ── */}
-                    {numberedEntries.map(([num, groupFields]) => {
-                      const subKey = `${section}:${num}`;
-                      const isSubOpen = openSubGroups[subKey] ?? true;
-                      const subEditCount = groupFields.filter((f) => editedKeys.has(f.key)).length;
-                      const titleField = groupFields.find((f) => f.key.includes("_title") || f.key.includes("_label"));
-                      const subTitle = titleField
-                        ? (edited[titleField.key] ?? dbValues[titleField.key] ?? titleField.defaultValue)
-                        : "";
-
-                      return (
-                        <div key={subKey} className="border-t border-border">
-                          <button
-                            onClick={() => toggleSubGroup(subKey)}
-                            className="w-full flex items-center gap-3 px-5 py-3 bg-muted/20 hover:bg-muted/40 transition-colors text-left"
-                          >
-                            <span className="w-6 h-6 rounded-md bg-primary/10 text-primary text-xs font-bold flex items-center justify-center shrink-0">
-                              {num}
-                            </span>
-                            <div className="flex-1 min-w-0">
-                              <span className="text-xs font-semibold text-foreground">
+                      <div className="border-t border-border divide-y divide-border">
+                        {headerFields.map((field) => (
+                          <FieldRow key={field.key} field={field}
+                            value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
+                            isEdited={editedKeys.has(field.key)} onChange={handleChange} />
+                        ))}
+                        {numberedEntries.map(([num, groupFields]) => (
+                          <div key={num}>
+                            <div className="px-5 py-2 bg-muted/20">
+                              <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
                                 {subLabel} {num}
                               </span>
-                              {subTitle && (
-                                <span className="text-muted-foreground text-xs ml-2 truncate">— {subTitle}</span>
-                              )}
                             </div>
-                            {subEditCount > 0 && (
-                              <span className="shrink-0 text-[9px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded">
-                                {subEditCount} edited
-                              </span>
-                            )}
-                            <ChevronDown className={cn("w-3.5 h-3.5 text-muted-foreground transition-transform shrink-0", isSubOpen && "rotate-180")} />
-                          </button>
-
-                          {isSubOpen && (
                             <div className="divide-y divide-border">
                               {groupFields.map((field) => (
-                                <FieldRow
-                                  key={field.key}
-                                  field={field}
+                                <FieldRow key={field.key} field={field}
                                   value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
-                                  isEdited={editedKeys.has(field.key)}
-                                  onChange={handleChange}
-                                  indent
-                                />
+                                  isEdited={editedKeys.has(field.key)} onChange={handleChange} indent />
                               ))}
                             </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </main>
+            );
+          }
+
+          // ── Overview: no section selected ─────────────────────────────────
+          if (!activeSection) {
+            return (
+              <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto">
+                <div className="mb-5">
+                  <h2 className="font-display font-bold text-lg">Content Sections</h2>
+                  <p className="text-xs text-muted-foreground mt-0.5">Pick a section to edit its fields</p>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  {sectionOrder.map((section) => {
+                    const fields = grouped[section] ?? [];
+                    if (fields.length === 0) return null;
+                    const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
+                    const { numbered } = groupSectionFields(fields);
+                    const subCount = Object.keys(numbered).length;
+                    const subLabel = subItemLabels[section];
+                    return (
+                      <button
+                        key={section}
+                        onClick={() => selectSection(section)}
+                        className="text-left rounded-xl border border-border bg-card hover:bg-muted/30 hover:border-primary/30 transition-all p-4 group"
+                      >
+                        <div className="flex items-start justify-between gap-2 mb-2">
+                          <span className="text-2xl leading-none">{sectionIcons[section] || "📄"}</span>
+                          {editCount > 0 && (
+                            <span className="shrink-0 w-5 h-5 flex items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold">
+                              {editCount}
+                            </span>
                           )}
                         </div>
-                      );
-                    })}
-                  </div>
+                        <p className="font-display font-semibold text-sm text-foreground group-hover:text-primary transition-colors leading-tight">
+                          {sectionLabels[section] || section}
+                        </p>
+                        <p className="text-[11px] text-muted-foreground mt-1 leading-tight line-clamp-2">
+                          {subCount > 0
+                            ? `${subCount} ${(subLabel || "item").toLowerCase()}s · ${fields.length} fields`
+                            : `${fields.length} field${fields.length !== 1 ? "s" : ""}`}
+                        </p>
+                      </button>
+                    );
+                  })}
+                </div>
+              </main>
+            );
+          }
+
+          // ── Single-section drill-in view ──────────────────────────────────
+          const fields = grouped[activeSection] ?? [];
+          const { headerFields, numbered } = groupSectionFields(fields);
+          const numberedEntries = Object.entries(numbered).sort(([a], [b]) => Number(a) - Number(b));
+          const subLabel = subItemLabels[activeSection] || "Item";
+          const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
+
+          return (
+            <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto">
+              {/* Breadcrumb */}
+              <div className="flex items-center gap-2 mb-5">
+                <button
+                  onClick={() => selectSection(null)}
+                  className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4" /> All Sections
+                </button>
+                <span className="text-muted-foreground/40">/</span>
+                <span className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
+                  <span className="text-lg leading-none">{sectionIcons[activeSection] || "📄"}</span>
+                  {sectionLabels[activeSection] || activeSection}
+                </span>
+                {editCount > 0 && (
+                  <span className="ml-auto text-xs font-semibold text-primary">{editCount} unsaved</span>
                 )}
               </div>
-            );
-          })}
 
-          {filteredSections.length === 0 && search && (
-            <div className="text-center py-16 text-muted-foreground">
-              <Search className="w-8 h-8 mx-auto mb-3 opacity-40" />
-              <p className="text-sm">No fields match "<strong>{search}</strong>"</p>
-              <button onClick={() => setSearch("")} className="mt-2 text-xs text-primary hover:underline">Clear search</button>
-            </div>
-          )}
-        </main>}
+              <div className="rounded-xl border border-border bg-card overflow-hidden space-y-0">
+
+                {/* Section-level header fields */}
+                {headerFields.length > 0 && (
+                  <div className="divide-y divide-border">
+                    {numberedEntries.length > 0 && (
+                      <div className="px-5 py-2.5 bg-muted/30">
+                        <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                          Section Settings
+                        </span>
+                      </div>
+                    )}
+                    {headerFields.map((field) => (
+                      <FieldRow
+                        key={field.key}
+                        field={field}
+                        value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
+                        isEdited={editedKeys.has(field.key)}
+                        onChange={handleChange}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Numbered sub-groups (Studio 1, Edge 2, …) */}
+                {numberedEntries.map(([num, groupFields]) => {
+                  const subKey = `${activeSection}:${num}`;
+                  const isSubOpen = openSubGroups[subKey] ?? false;
+                  const subEditCount = groupFields.filter((f) => editedKeys.has(f.key)).length;
+                  const titleField = groupFields.find((f) => f.key.includes("_title") || f.key.includes("_label"));
+                  const subTitle = titleField
+                    ? (edited[titleField.key] ?? dbValues[titleField.key] ?? titleField.defaultValue)
+                    : "";
+
+                  return (
+                    <div key={subKey} className="border-t border-border">
+                      <button
+                        onClick={() => toggleSubGroup(subKey)}
+                        className="w-full flex items-center gap-3 px-5 py-3 bg-muted/20 hover:bg-muted/40 transition-colors text-left"
+                      >
+                        <span className="w-6 h-6 rounded-md bg-primary/10 text-primary text-xs font-bold flex items-center justify-center shrink-0">
+                          {num}
+                        </span>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-xs font-semibold text-foreground">{subLabel} {num}</span>
+                          {subTitle && (
+                            <span className="text-muted-foreground text-xs ml-2 truncate">— {subTitle}</span>
+                          )}
+                        </div>
+                        {subEditCount > 0 && (
+                          <span className="shrink-0 text-[9px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded">
+                            {subEditCount} edited
+                          </span>
+                        )}
+                        <ChevronDown className={cn("w-3.5 h-3.5 text-muted-foreground transition-transform shrink-0", isSubOpen && "rotate-180")} />
+                      </button>
+
+                      {isSubOpen && (
+                        <div className="divide-y divide-border">
+                          {groupFields.map((field) => (
+                            <FieldRow
+                              key={field.key}
+                              field={field}
+                              value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
+                              isEdited={editedKeys.has(field.key)}
+                              onChange={handleChange}
+                              indent
+                            />
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </main>
+          );
+        })()}
       </div>
     </div>
   );
@@ -531,7 +597,7 @@ const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen }[] = [
 
 function SidebarContent({
   adminTab, setAdminTab, grouped, editedKeys, activeSection,
-  scrollToSection, hasEdits, saving, edited, handleSave, handleLogout,
+  selectSection, hasEdits, saving, edited, handleSave, handleLogout,
   contentRegistry: _cr, sectionOrder,
 }: {
   adminTab: AdminTab;
@@ -539,7 +605,7 @@ function SidebarContent({
   grouped: Record<string, ContentField[]>;
   editedKeys: Set<string>;
   activeSection: string | null;
-  scrollToSection: (s: string) => void;
+  selectSection: (s: string | null) => void;
   hasEdits: boolean;
   saving: boolean;
   edited: Record<string, string>;
@@ -580,7 +646,23 @@ function SidebarContent({
 
       {/* Section nav (content tab only) */}
       {adminTab === "content" && (
-        <nav className="flex-1 py-4 px-3 space-y-0.5 overflow-y-auto">
+        <nav className="flex-1 py-3 px-3 space-y-0.5 overflow-y-auto">
+          {/* All Sections entry */}
+          <button
+            onClick={() => selectSection(null)}
+            className={cn(
+              "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+              activeSection === null
+                ? "bg-primary/10 text-primary font-semibold"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+            )}
+          >
+            <span className="text-base leading-none shrink-0">🗂️</span>
+            <span className="font-medium">All Sections</span>
+          </button>
+
+          <div className="my-1 border-t border-border/50" />
+
           {sectionOrder.map((section) => {
             const fields = grouped[section] ?? [];
             const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
@@ -590,13 +672,13 @@ function SidebarContent({
             return (
               <button
                 key={section}
-                onClick={() => scrollToSection(section)}
+                onClick={() => selectSection(section)}
                 className={cn(
-                  "w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-colors text-left",
+                  "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
                   isActive ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                 )}
               >
-                <span className="text-lg leading-none shrink-0">{sectionIcons[section] || "📄"}</span>
+                <span className="text-base leading-none shrink-0">{sectionIcons[section] || "📄"}</span>
                 <div className="flex-1 min-w-0">
                   <div className="truncate font-medium text-sm">{sectionLabels[section] || section}</div>
                   {subCount > 0 && (
