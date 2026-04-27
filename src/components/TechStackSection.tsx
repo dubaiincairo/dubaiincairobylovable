@@ -28,11 +28,11 @@ const CATEGORIES = [
   {
     num: "02",
     Icon: ShoppingCart,
-    accentClass:  "text-blue-400",
-    accentBg:     "bg-blue-400/10",
-    accentBorder: "border-blue-400/20",
-    pillBg:       "bg-blue-400/8",
-    gradFrom:     "from-blue-400/15",
+    accentClass:  "text-primary",
+    accentBg:     "bg-primary/10",
+    accentBorder: "border-primary/20",
+    pillBg:       "bg-primary/8",
+    gradFrom:     "from-primary/15",
     titleKey:      "tech_2_title",
     titleDef:      "Commerce & Business Operations",
     subtitleDef:   "Ecommerce, Finance, Workflows, and Execution Systems",
@@ -49,11 +49,11 @@ const CATEGORIES = [
   {
     num: "03",
     Icon: Cpu,
-    accentClass:  "text-violet-400",
-    accentBg:     "bg-violet-400/10",
-    accentBorder: "border-violet-400/20",
-    pillBg:       "bg-violet-400/8",
-    gradFrom:     "from-violet-400/15",
+    accentClass:  "text-primary",
+    accentBg:     "bg-primary/10",
+    accentBorder: "border-primary/20",
+    pillBg:       "bg-primary/8",
+    gradFrom:     "from-primary/15",
     titleKey:      "tech_3_title",
     titleDef:      "Creative, AI & Digital Infrastructure",
     subtitleDef:   "Content Creation, AI Production, and Technical Foundations",
@@ -74,7 +74,7 @@ const TechStackSection = () => {
   const { get } = useSiteContent();
 
   return (
-    <section className="relative py-12 md:py-20 px-6 overflow-hidden">
+    <section className="relative py-8 md:py-12 px-6 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[260px] rounded-full bg-primary/4 blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">

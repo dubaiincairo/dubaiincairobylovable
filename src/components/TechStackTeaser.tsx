@@ -5,9 +5,9 @@ import { fadeUp, viewportOnce } from "@/lib/animations";
 import { useSiteContent } from "@/hooks/useSiteContent";
 
 const LAYERS = [
-  { Icon: TrendingUp, color: "text-primary",      bg: "bg-primary/10",      border: "border-primary/20",      label: "Growth & Customer Intelligence" },
-  { Icon: ShoppingCart, color: "text-blue-400",   bg: "bg-blue-400/10",     border: "border-blue-400/20",     label: "Commerce & Business Operations" },
-  { Icon: Cpu,          color: "text-violet-400", bg: "bg-violet-400/10",   border: "border-violet-400/20",   label: "Creative, AI & Infrastructure" },
+  { Icon: TrendingUp,   color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", label: "Growth & Customer Intelligence" },
+  { Icon: ShoppingCart, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", label: "Commerce & Business Operations" },
+  { Icon: Cpu,          color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", label: "Creative, AI & Infrastructure" },
 ];
 
 const TechStackTeaser = () => {
@@ -23,7 +23,7 @@ const TechStackTeaser = () => {
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}
         >
           {/* top accent */}
-          <div className="h-px bg-gradient-to-r from-primary/30 via-blue-400/20 to-violet-400/30" />
+          <div className="h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
           <div className="px-6 md:px-8 py-7 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
 
