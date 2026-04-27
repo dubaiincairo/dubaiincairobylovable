@@ -17,7 +17,7 @@ const LegalSection = () => {
     <section className="relative py-8 md:py-14 px-6 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, transparent, hsl(220 18% 6% / 0.5), transparent)' }} />
 
-      <div className="relative max-w-5xl mx-auto">
+      <div className="relative max-w-6xl mx-auto">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <div className="flex items-center justify-center gap-2 mb-4">
             <Shield className="w-5 h-5 text-primary" />

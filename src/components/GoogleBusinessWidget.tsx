@@ -85,17 +85,19 @@ const GoogleBusinessWidget = () => {
           </div>
 
           {/* Map embed */}
-          <div className="md:col-span-2 rounded-2xl overflow-hidden border border-border h-64 md:h-72 bg-background">
-            <iframe
-              title="Dubai in Cairo on Google Maps"
-              src={mapsEmbed}
-              width="100%"
-              height="100%"
-              style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)", display: "block" }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <div className="md:col-span-2 rounded-2xl overflow-hidden border border-border h-64 md:h-72 bg-[hsl(220,20%,4%)]">
+            <div style={{ width: "100%", height: "100%", filter: "invert(90%) hue-rotate(180deg)" }}>
+              <iframe
+                title="Dubai in Cairo on Google Maps"
+                src={mapsEmbed}
+                width="100%"
+                height="100%"
+                style={{ border: 0, display: "block" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </div>
         </motion.div>
 

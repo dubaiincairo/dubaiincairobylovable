@@ -14,6 +14,7 @@ import CaseStudy from "./pages/CaseStudy";
 import Careers from "./pages/Careers";
 import OdooPartner from "./pages/OdooPartner";
 import Tech from "./pages/Tech";
+import Studios from "./pages/Studios";
 import WhatsAppButton from "./components/WhatsAppButton";
 import FaviconUpdater from "./components/FaviconUpdater";
 import { ContactModalProvider } from "./context/ContactModalContext";
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/careers" element={<Careers />} />
             <Route path="/partnerships" element={<OdooPartner />} />
             <Route path="/odoo-partner" element={<OdooPartner />} />
+            <Route path="/studios" element={<Studios />} />
             <Route path="/tech" element={<Tech />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

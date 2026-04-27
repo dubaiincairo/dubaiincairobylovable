@@ -22,14 +22,11 @@ const Navbar = () => {
   }, [scrollY]);
 
   const links = [
-    { href: "#about",        label: get("nav_link_1", "About") },
-    { href: "#work",         label: get("nav_link_2", "Our Work") },
-    { href: "#team",         label: get("nav_link_3", "Team") },
-    { href: "#services",     label: get("nav_link_4", "Services") },
-    { href: "#contact",      label: get("nav_link_5", "Contact") },
-    { href: "/careers",      label: "Careers" },
-    { href: "/partnerships", label: "Partnerships" },
-    { href: "/tech",         label: "Tech Stack" },
+    { href: "/",             label: get("nav_link_home", "Home") },
+    { href: "/studios",      label: get("nav_link_studios", "Studios") },
+    { href: "/careers",      label: get("nav_link_careers", "Careers") },
+    { href: "/partnerships", label: get("nav_link_partnerships", "Partnerships") },
+    { href: "/tech",         label: get("nav_link_tech", "Tech Stack") },
   ];
 
   return (

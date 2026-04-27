@@ -110,7 +110,7 @@ const HeroSection = () => {
         style={{ background: 'radial-gradient(ellipse at center, transparent 40%, hsl(220 20% 4%) 100%)' }} />
 
       {/* ── Split grid ── */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 lg:gap-20 items-center md:pt-20">
+      <div className="relative z-10 max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 lg:gap-20 items-center md:pt-20">
 
         {/* LEFT — copy */}
         <div className="text-left">

@@ -11,7 +11,7 @@ export interface ContentField {
 
 export const sectionOrder = [
   "seo",
-  "nav", "hero", "stats", "about", "edges", "values", "services",
+  "nav", "hero", "stats", "about", "edges", "values", "services", "studios",
   "founder", "clients", "tech", "google", "legal", "contact", "footer",
   "careers", "odoo", "yanolja",
 ];
@@ -55,11 +55,11 @@ export const contentRegistry: ContentField[] = [
   { section: "nav", key: "nav_brand_1", label: "Brand Word 1", defaultValue: "Dubai" },
   { section: "nav", key: "nav_brand_2", label: "Brand Word 2 (connector)", defaultValue: "in" },
   { section: "nav", key: "nav_brand_3", label: "Brand Word 3", defaultValue: "Cairo" },
-  { section: "nav", key: "nav_link_1", label: "Nav Link 1 (→ About)",    defaultValue: "About" },
-  { section: "nav", key: "nav_link_2", label: "Nav Link 2 (→ Our Work)", defaultValue: "Our Work" },
-  { section: "nav", key: "nav_link_3", label: "Nav Link 3 (→ Team)",     defaultValue: "Team" },
-  { section: "nav", key: "nav_link_4", label: "Nav Link 4 (→ Services)", defaultValue: "Services" },
-  { section: "nav", key: "nav_link_5", label: "Nav Link 5 (→ Contact)",  defaultValue: "Contact" },
+  { section: "nav", key: "nav_link_home",         label: "Nav Link — Home",         defaultValue: "Home" },
+  { section: "nav", key: "nav_link_studios",      label: "Nav Link — Studios",      defaultValue: "Studios" },
+  { section: "nav", key: "nav_link_careers",      label: "Nav Link — Careers",      defaultValue: "Careers" },
+  { section: "nav", key: "nav_link_partnerships", label: "Nav Link — Partnerships", defaultValue: "Partnerships" },
+  { section: "nav", key: "nav_link_tech",         label: "Nav Link — Tech Stack",   defaultValue: "Tech Stack" },
   { section: "nav", key: "nav_cta", label: "Nav CTA Button", defaultValue: "Get Started" },
 
   // ── Hero ──
@@ -143,9 +143,16 @@ export const contentRegistry: ContentField[] = [
     { section: "values", key: `value_${i+1}_desc`, label: `Value ${i+1} Description`, defaultValue: "" },
   ]).flat(),
 
-  // ── Services ──
-  { section: "services", key: "services_subtitle", label: "Section Subtitle", defaultValue: "Our Studios" },
-  { section: "services", key: "services_headline", label: "Section Headline", defaultValue: "Six Specialized Studios. One Unified Vision." },
+  // ── Services / Studios ──
+  { section: "services", key: "studios_page_eyebrow",    label: "Studios Page — Eyebrow",    defaultValue: "Our Studios" },
+  { section: "services", key: "studios_page_headline",   label: "Studios Page — Headline",   defaultValue: "Six Specialized Studios." },
+  { section: "services", key: "studios_page_subheadline",label: "Studios Page — Subheadline", defaultValue: "One Unified Vision." },
+  { section: "services", key: "studios_page_desc",       label: "Studios Page — Description", defaultValue: "Each studio is a focused center of excellence — handpicked specialists working in their native domain, all aligned behind a single goal: measurable growth for your business." },
+  { section: "services", key: "studios_cta_title",       label: "Studios CTA — Title",       defaultValue: "Not sure which studio fits your goal?" },
+  { section: "services", key: "studios_cta_desc",        label: "Studios CTA — Description", defaultValue: "Tell us about your project and we'll match you with the right team." },
+  { section: "services", key: "studios_cta_btn",         label: "Studios CTA — Button",      defaultValue: "Start a Project" },
+  { section: "services", key: "services_subtitle", label: "Grid Section Subtitle", defaultValue: "Our Studios" },
+  { section: "services", key: "services_headline", label: "Grid Section Headline", defaultValue: "Six Specialized Studios. One Unified Vision." },
   ...Array.from({ length: 6 }, (_, i) => [
     { section: "services", key: `service_${i+1}_title`, label: `Studio ${i+1} Title`, defaultValue: `Service ${i+1}` },
     { section: "services", key: `service_${i+1}_desc`, label: `Studio ${i+1} Description`, defaultValue: "" },

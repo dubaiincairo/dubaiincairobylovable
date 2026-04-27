@@ -58,7 +58,7 @@ const ContactSection = () => {
     <section id="contact" className="relative py-8 md:py-20 px-6 overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.04), transparent 70%)' }} />
 
-      <div className="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-8 lg:gap-20 items-start">
+      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-8 lg:gap-20 items-start">
 
         {/* LEFT — copy */}
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
