@@ -32,7 +32,7 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
       {/* Gold top accent */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
-      <div className="p-6 md:p-7 flex flex-col h-full">
+      <div className="p-6 md:p-7 flex flex-col">
 
         {/* Quote icon */}
         <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 shrink-0">
@@ -160,7 +160,7 @@ const TestimonialsSection = () => {
 
         {/* Cards grid */}
         <motion.div
-          className="grid md:grid-cols-3 gap-6"
+          className="grid md:grid-cols-3 gap-6 items-start"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
