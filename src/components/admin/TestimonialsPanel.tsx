@@ -23,11 +23,14 @@ type Testimonial = {
   avatar_url: string | null;
   sort_order: number | null;
   published: boolean | null;
+  relation: string | null;
+  linkedin_url: string | null;
 };
 
 const EMPTY: Omit<Testimonial, "id"> = {
   client_name: "", role: "", company: "", content: "",
   rating: 5, avatar_url: "", sort_order: 0, published: true,
+  relation: "", linkedin_url: "",
 };
 
 function SortableRow({ t, onEdit, onToggle, onDelete }: {
@@ -186,6 +189,8 @@ export function TestimonialsPanel({ logActivity }: { logActivity: (action: strin
           <Field label="Role / Title" value={editing.role || ""} onChange={(v) => set("role", v)} placeholder="e.g. Marketing Director" />
           <Field label="Company" value={editing.company || ""} onChange={(v) => set("company", v)} placeholder="e.g. Novartis Egypt" />
           <Field label="Avatar URL (optional)" value={editing.avatar_url || ""} onChange={(v) => set("avatar_url", v)} placeholder="https://..." />
+          <Field label="Relation / Date" value={editing.relation || ""} onChange={(v) => set("relation", v)} placeholder="e.g. March 2024 · Nouran was Abdalla's client" />
+          <Field label="LinkedIn Profile URL" value={editing.linkedin_url || ""} onChange={(v) => set("linkedin_url", v)} placeholder="https://linkedin.com/in/..." />
         </div>
         <div className="rounded-xl border border-border bg-card p-5 space-y-4">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Testimonial</p>
