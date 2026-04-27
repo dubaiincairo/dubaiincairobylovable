@@ -71,7 +71,7 @@ const BankAccountsSection = () => {
   }, []);
 
   return (
-    <section id="bank-accounts" className="relative py-8 md:py-20 px-6 overflow-hidden">
+    <section id="bank-accounts" className="relative py-8 md:py-16 px-6 overflow-hidden">
 
       {/* Ambient radial glow */}
       <div
@@ -83,7 +83,7 @@ const BankAccountsSection = () => {
 
         {/* ── Header ── */}
         <motion.div
-          className="text-center mb-6 md:mb-12"
+          className="text-center mb-6 md:mb-8"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"

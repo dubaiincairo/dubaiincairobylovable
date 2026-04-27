@@ -37,7 +37,7 @@ const HighlightsSection = () => {
   if (studies.length === 0) return null;
 
   return (
-    <section id="highlights" className="relative py-8 md:py-20 px-6 overflow-hidden">
+    <section id="highlights" className="relative py-8 md:py-16 px-6 overflow-hidden">
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-primary/4 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">

@@ -59,7 +59,7 @@ const Careers = () => {
       <Navbar />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 px-6 overflow-hidden">
+      <section className="relative pt-28 pb-8 md:pt-32 md:pb-10 px-6 overflow-hidden">
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)" }}
@@ -102,7 +102,7 @@ const Careers = () => {
       </section>
 
       {/* ── Why Join ─────────────────────────────────────────────────────── */}
-      <section className="relative px-6 py-12 md:py-16">
+      <section className="relative px-6 py-10 md:py-12">
         <div className="relative max-w-6xl mx-auto">
           <motion.div
             className="text-center mb-10"
@@ -156,7 +156,7 @@ const Careers = () => {
       </section>
 
       {/* ── Open Positions ───────────────────────────────────────────────── */}
-      <section className="relative px-6 pb-16">
+      <section className="relative px-6 pb-12">
         <div className="relative max-w-4xl mx-auto">
           <motion.div
             className="text-center mb-10"
@@ -328,7 +328,7 @@ const Careers = () => {
       </section>
 
       {/* ── How to Apply CTA ─────────────────────────────────────────────── */}
-      <section className="relative px-6 pb-20">
+      <section className="relative px-6 pb-14">
         <div className="relative max-w-4xl mx-auto">
           <motion.div
             className="rounded-2xl border border-border/60 p-8 md:p-12 text-center"

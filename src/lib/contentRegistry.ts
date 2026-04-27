@@ -326,6 +326,10 @@ export const contentRegistry: ContentField[] = [
   { section: "odoo", key: "partnerships_headline", label: "Page Headline", defaultValue: "Our Technology Partners" },
   { section: "odoo", key: "partnerships_subtext",  label: "Page Subtext",  defaultValue: "We have built deep implementation expertise across two technology ecosystems — Odoo for ERP and business automation, and Yanolja Cloud for hospitality management." },
 
+  // ── Odoo — Brand ──
+  { section: "odoo", key: "odoo_logo_url",      label: "Odoo Logo Image URL (leave blank to use built-in logo)", defaultValue: "", type: "upload" },
+  { section: "odoo", key: "odoo_partner_name",  label: "Partner Display Name (used in logo alt & fallback)", defaultValue: "Odoo" },
+
   // ── Odoo — Hero ──
   { section: "odoo", key: "odoo_hero_badge",    label: "Hero — Badge",              defaultValue: "ERP Partnership" },
   { section: "odoo", key: "odoo_hero_h1",       label: "Hero — Headline Line 1",    defaultValue: "We are a" },
@@ -377,7 +381,8 @@ export const contentRegistry: ContentField[] = [
   { section: "odoo", key: "odoo_cta_btn",   label: "CTA — Button",   defaultValue: "Get in Touch" },
 
   // ── Yanolja — Brand ──
-  { section: "yanolja", key: "yan_logo_url", label: "Logo Image URL (upload or paste)", defaultValue: "https://yanoljacloud.com/static/media/logo_ycs_white.c5f61f77.svg", type: "upload" },
+  { section: "yanolja", key: "yan_logo_url",      label: "Logo Image URL (upload or paste)", defaultValue: "https://yanoljacloud.com/static/media/logo_ycs_white.c5f61f77.svg", type: "upload" },
+  { section: "yanolja", key: "yan_partner_name",  label: "Partner Display Name (used in logo alt & fallback text)", defaultValue: "Yanolja Cloud Solution" },
 
   // ── Yanolja — Hero ──
   { section: "yanolja", key: "yan_hero_badge",    label: "Hero — Badge",           defaultValue: "Hospitality Technology" },

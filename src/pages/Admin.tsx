@@ -32,7 +32,7 @@ const sectionIcons: Record<string, string> = {
   nav: "🧭", hero: "🏠", stats: "📊", about: "ℹ️", edges: "⚡",
   values: "💎", services: "🎯", founder: "👤", clients: "🤝",
   tech: "🛠️", google: "📍", legal: "📜", contact: "✉️", footer: "🔗",
-  careers: "💼",
+  careers: "💼", odoo: "🔶", yanolja: "🏨",
 };
 
 const sectionDescriptions: Record<string, string> = {
@@ -51,6 +51,8 @@ const sectionDescriptions: Record<string, string> = {
   contact: "Contact form labels & copy",
   footer: "Footer tagline & copyright",
   careers: "Hero, Why Join cards, job section labels, how to apply copy",
+  odoo: "Page header, hero copy, service tags, 9 suites, CTA — plus Odoo logo upload",
+  yanolja: "Hero copy, partner name, logo upload, service tags, 8 products, CTA",
 };
 
 const subItemLabels: Record<string, string> = {
@@ -184,18 +186,15 @@ const Admin = () => {
     let successCount = 0, errorCount = 0;
 
     for (const [key, value] of updates) {
-      const existsInDb = dbValues[key] !== undefined;
       const field = contentRegistry.find((f) => f.key === key);
+      const section = field?.section ?? "unknown";
+      const label   = field?.label   ?? key;
 
-      if (existsInDb) {
-        const { error } = await supabase.from("site_content")
-          .update({ value, updated_at: new Date().toISOString() }).eq("key", key);
-        if (error) errorCount++; else successCount++;
-      } else if (field) {
-        const { error } = await supabase.from("site_content")
-          .insert({ section: field.section, key, value, label: field.label });
-        if (error) errorCount++; else successCount++;
-      }
+      // Upsert: insert on first save, update on subsequent saves.
+      // Avoids dependency on an updated_at column and race conditions.
+      const { error } = await supabase.from("site_content")
+        .upsert({ key, value, section, label }, { onConflict: "key" });
+      if (error) errorCount++; else successCount++;
     }
 
     setDbValues((prev) => {
@@ -710,7 +709,7 @@ function FieldRow({
       </div>
       {showSnippet && <MatchSnippet text={value} term={highlight} />}
       {field.type === "upload" ? (
-        <ImageUploadField value={value} onChange={(val) => onChange(field.key, val)} />
+        <ImageUploadField value={value} onChange={(val) => onChange(field.key, val)} fieldKey={field.key} />
       ) : (
         <AutoResizeTextarea value={value} onChange={(val) => onChange(field.key, val)} />
       )}
@@ -720,7 +719,7 @@ function FieldRow({
 
 // ─── ImageUploadField ─────────────────────────────────────────────────────────
 
-function ImageUploadField({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+function ImageUploadField({ value, onChange, fieldKey }: { value: string; onChange: (v: string) => void; fieldKey?: string }) {
   const { toast } = useToast();
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
@@ -735,15 +734,17 @@ function ImageUploadField({ value, onChange }: { value: string; onChange: (v: st
       toast({ title: "Unsupported file type", description: "Please upload an SVG, PNG, ICO, or WebP file.", variant: "destructive" });
       return;
     }
-    // Max 512 KB
-    if (file.size > 512 * 1024) {
-      toast({ title: "File too large", description: "Max size is 512 KB.", variant: "destructive" });
+    // Max 2 MB
+    if (file.size > 2 * 1024 * 1024) {
+      toast({ title: "File too large", description: "Max size is 2 MB.", variant: "destructive" });
       return;
     }
 
     setUploading(true);
     const ext = file.name.split(".").pop() ?? "png";
-    const path = `favicon/favicon-${Date.now()}.${ext}`;
+    // Use the field key as a folder hint so uploads are organized in storage
+    const folder = fieldKey ? fieldKey.replace(/_url$/, "").replace(/_/g, "-") : "uploads";
+    const path = `${folder}/${Date.now()}.${ext}`;
 
     const { error } = await supabase.storage.from("assets").upload(path, file, { upsert: true });
     if (error) {
@@ -754,7 +755,7 @@ function ImageUploadField({ value, onChange }: { value: string; onChange: (v: st
 
     const { data: urlData } = supabase.storage.from("assets").getPublicUrl(path);
     onChange(urlData.publicUrl);
-    toast({ title: "Favicon uploaded!" });
+    toast({ title: "Image uploaded!", description: "Save to apply the change to the site." });
     setUploading(false);
     // Reset so same file can be re-selected
     e.target.value = "";

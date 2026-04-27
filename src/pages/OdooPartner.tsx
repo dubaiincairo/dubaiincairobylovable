@@ -36,65 +36,100 @@ import {
 
 /* ─────────────────────────────────────────────────────────────
    Official Odoo logo — 7 overlapping circles (hexagonal flower)
-   Monochrome gold: opacity stacking creates petal intersections
+   When a custom logoUrl is set via CMS it replaces the SVG.
    ───────────────────────────────────────────────────────────── */
-const OdooLogo = () => (
-  <div className="flex items-center gap-4">
-    <svg
-      viewBox="0 0 40 40"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-11 w-auto flex-shrink-0"
-      aria-label="Odoo logo"
-    >
-      {/* Center */}
-      <circle cx="20" cy="20" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
-      {/* Right */}
-      <circle cx="30" cy="20" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
-      {/* Upper-right */}
-      <circle cx="25" cy="11.1" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
-      {/* Upper-left */}
-      <circle cx="15" cy="11.1" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
-      {/* Left */}
-      <circle cx="10" cy="20" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
-      {/* Lower-left */}
-      <circle cx="15" cy="28.9" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
-      {/* Lower-right */}
-      <circle cx="25" cy="28.9" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
-    </svg>
-    <span className="font-display font-bold text-[2rem] leading-none tracking-tight text-primary select-none">
-      Odoo
-    </span>
-  </div>
-);
+const OdooLogo = ({ logoUrl, name }: { logoUrl?: string; name?: string }) => {
+  const displayName = name || "Odoo";
+  if (logoUrl) {
+    return (
+      <div className="flex items-center justify-start">
+        <img
+          src={logoUrl}
+          alt={displayName}
+          className="h-12 w-auto object-contain"
+          onError={(e) => {
+            const el = e.currentTarget;
+            el.style.display = "none";
+            const fallback = document.createElement("span");
+            fallback.style.cssText = "font-size:2rem;font-weight:700;color:hsl(38 80% 55%);line-height:1;letter-spacing:-0.02em";
+            fallback.textContent = displayName;
+            el.parentElement?.appendChild(fallback);
+          }}
+        />
+      </div>
+    );
+  }
+  return (
+    <div className="flex items-center gap-4">
+      <svg
+        viewBox="0 0 40 40"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-11 w-auto flex-shrink-0"
+        aria-label={displayName}
+      >
+        {/* Center */}
+        <circle cx="20" cy="20" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
+        {/* Right */}
+        <circle cx="30" cy="20" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
+        {/* Upper-right */}
+        <circle cx="25" cy="11.1" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
+        {/* Upper-left */}
+        <circle cx="15" cy="11.1" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
+        {/* Left */}
+        <circle cx="10" cy="20" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
+        {/* Lower-left */}
+        <circle cx="15" cy="28.9" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
+        {/* Lower-right */}
+        <circle cx="25" cy="28.9" r="8" fill="hsl(38 80% 55%)" opacity="0.55" />
+      </svg>
+      <span className="font-display font-bold text-[2rem] leading-none tracking-tight text-primary select-none">
+        {displayName}
+      </span>
+    </div>
+  );
+};
 
 /* ─────────────────────────────────────────────────────────────
-   Yanolja Cloud Solution logo — official brand image
+   Partner logo — displays CMS-uploaded image.
+   Falls back to a text wordmark using the CMS partner name so
+   renaming the partner in the admin is immediately reflected.
    ───────────────────────────────────────────────────────────── */
 const YANOLJA_LOGO_URL =
   "https://yanoljacloud.com/static/media/logo_ycs_white.c5f61f77.svg";
 
-const YanoljaLogo = ({ logoUrl }: { logoUrl?: string }) => (
-  <div className="flex items-center justify-start">
-    <img
-      src={logoUrl || YANOLJA_LOGO_URL}
-      alt="Yanolja Cloud Solution"
-      className="h-14 w-auto object-contain"
-      onError={(e) => {
-        /* fallback: text-based wordmark if image fails to load */
-        const el = e.currentTarget;
-        el.style.display = "none";
-        const fallback = document.createElement("div");
-        fallback.innerHTML =
-          `<div style="display:flex;flex-direction:column;gap:2px">` +
-          `<span style="font-size:1.65rem;font-weight:700;color:hsl(38 80% 55%);line-height:1;letter-spacing:-0.02em">yanolja</span>` +
-          `<span style="font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:hsl(38 80% 55% / 0.6)">Cloud Solution</span>` +
-          `</div>`;
-        el.parentElement?.appendChild(fallback.firstElementChild!);
-      }}
-    />
-  </div>
-);
+const YanoljaLogo = ({ logoUrl, name }: { logoUrl?: string; name?: string }) => {
+  const displayName = name || "Yanolja Cloud Solution";
+  return (
+    <div className="flex items-center justify-start">
+      <img
+        src={logoUrl || YANOLJA_LOGO_URL}
+        alt={displayName}
+        className="h-14 w-auto object-contain"
+        onError={(e) => {
+          /* fallback: text-based wordmark using CMS-controlled name */
+          const el = e.currentTarget;
+          el.style.display = "none";
+          const [line1, ...rest] = displayName.split(" ");
+          const line2 = rest.join(" ") || "";
+          const fallback = document.createElement("div");
+          fallback.style.cssText = "display:flex;flex-direction:column;gap:2px";
+          const s1 = document.createElement("span");
+          s1.style.cssText = "font-size:1.65rem;font-weight:700;color:hsl(38 80% 55%);line-height:1;letter-spacing:-0.02em";
+          s1.textContent = line1;
+          fallback.appendChild(s1);
+          if (line2) {
+            const s2 = document.createElement("span");
+            s2.style.cssText = "font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:hsl(38 80% 55% / 0.6)";
+            s2.textContent = line2;
+            fallback.appendChild(s2);
+          }
+          el.parentElement?.appendChild(fallback);
+        }}
+      />
+    </div>
+  );
+};
 
 /* ─── Odoo suite icons ─── */
 const odooIcons = [Globe, Megaphone, TrendingUp, Package, Receipt, ShoppingBag, FolderKanban, Users, Factory];
@@ -208,7 +243,7 @@ const OdooPartner = () => {
       ══════════════════════════════════════════════════════════════════ */}
 
       {/* ── Odoo Hero ───────────────────────────────────────────────────── */}
-      <section className="relative py-10 md:py-16 px-6 overflow-hidden">
+      <section className="relative py-8 md:py-12 px-6 overflow-hidden">
         <div
           className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 65%)" }}
@@ -251,7 +286,10 @@ const OdooPartner = () => {
               <div className="relative w-full max-w-sm">
                 <div className="absolute inset-0 rounded-2xl bg-primary/6 blur-3xl scale-110 pointer-events-none" />
                 <div className="relative rounded-2xl border border-primary/20 bg-card/60 backdrop-blur-sm p-7 flex flex-col gap-5">
-                  <OdooLogo />
+                  <OdooLogo
+                    logoUrl={get("odoo_logo_url", "") || undefined}
+                    name={get("odoo_partner_name", "Odoo")}
+                  />
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/8 self-start">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                     <span className="text-[10px] font-semibold tracking-widest uppercase text-primary">
@@ -277,7 +315,7 @@ const OdooPartner = () => {
       </section>
 
       {/* ── Odoo Suites Grid ─────────────────────────────────────────────── */}
-      <section className="relative px-6 pb-10 md:pb-16 overflow-hidden">
+      <section className="relative px-6 pb-8 md:pb-12 overflow-hidden">
         <div className="absolute top-0 right-0 w-[350px] h-[350px] rounded-full bg-primary/4 blur-[120px] translate-x-1/3 pointer-events-none" />
         <div className="relative max-w-6xl mx-auto">
           <motion.div
@@ -333,7 +371,7 @@ const OdooPartner = () => {
       </section>
 
       {/* ── Odoo CTA ─────────────────────────────────────────────────────── */}
-      <section className="relative px-6 pb-10 md:pb-16">
+      <section className="relative px-6 pb-8 md:pb-12">
         <div className="relative max-w-4xl mx-auto">
           <motion.div
             className="rounded-2xl border border-border/60 p-8 md:p-12 text-center"
@@ -372,7 +410,7 @@ const OdooPartner = () => {
       ══════════════════════════════════════════════════════════════════ */}
 
       {/* ── Yanolja Hero ─────────────────────────────────────────────────── */}
-      <section className="relative py-10 md:py-16 px-6 overflow-hidden">
+      <section className="relative py-8 md:py-12 px-6 overflow-hidden">
         <div
           className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 65%)" }}
@@ -407,7 +445,10 @@ const OdooPartner = () => {
               <div className="relative w-full max-w-sm">
                 <div className="absolute inset-0 rounded-2xl bg-primary/6 blur-3xl scale-110 pointer-events-none" />
                 <div className="relative rounded-2xl border border-primary/20 bg-card/60 backdrop-blur-sm p-7 flex flex-col gap-5">
-                  <YanoljaLogo logoUrl={get("yan_logo_url", YANOLJA_LOGO_URL)} />
+                  <YanoljaLogo
+                    logoUrl={get("yan_logo_url", YANOLJA_LOGO_URL)}
+                    name={get("yan_partner_name", "Yanolja Cloud Solution")}
+                  />
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/8 self-start">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                     <span className="text-[10px] font-semibold tracking-widest uppercase text-primary">
@@ -432,7 +473,7 @@ const OdooPartner = () => {
       </section>
 
       {/* ── Yanolja Products Grid ─────────────────────────────────────────── */}
-      <section className="relative px-6 pb-10 md:pb-16 overflow-hidden">
+      <section className="relative px-6 pb-8 md:pb-12 overflow-hidden">
         <div className="absolute top-0 left-0 w-[350px] h-[350px] rounded-full bg-primary/4 blur-[120px] -translate-x-1/3 pointer-events-none" />
         <div className="relative max-w-6xl mx-auto">
           <motion.div
@@ -488,7 +529,7 @@ const OdooPartner = () => {
       </section>
 
       {/* ── Yanolja CTA ──────────────────────────────────────────────────── */}
-      <section className="relative px-6 pb-20">
+      <section className="relative px-6 pb-14">
         <div className="relative max-w-4xl mx-auto">
           <motion.div
             className="rounded-2xl border border-border/60 p-8 md:p-12 text-center"
