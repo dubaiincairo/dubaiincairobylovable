@@ -135,7 +135,7 @@ const TechStackSection = () => {
                       const tools = get(g.tk, g.td).split(/[,\n]/).map((s: string) => s.trim()).filter(Boolean);
                       return (
                         <div key={g.tk}>
-                          <p className={`text-[10px] font-bold uppercase tracking-widest mb-1.5 ${cat.accentClass}`}>{label}</p>
+                          <p className="text-[10px] font-bold uppercase tracking-widest mb-1.5 text-foreground/70">{label}</p>
                           <div className="flex flex-wrap gap-1.5">
                             {tools.map((tool: string) => (
                               <span
