@@ -23,6 +23,7 @@ import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { DashboardPanel } from "@/components/admin/DashboardPanel";
 import { ContactSubmissionsPanel } from "@/components/admin/ContactSubmissionsPanel";
 import { TestimonialsPanel } from "@/components/admin/TestimonialsPanel";
+import { JobApplicationsPanel } from "@/components/admin/JobApplicationsPanel";
 
 // ─── Icons & labels ──────────────────────────────────────────────────────────
 
@@ -116,7 +117,7 @@ const Admin = () => {
   const [openSubGroups, setOpenSubGroups] = useState<Record<string, boolean>>({});
   const [search, setSearch]         = useState("");
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [adminTab, setAdminTab]     = useState<"dashboard" | "content" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts">("dashboard");
+  const [adminTab, setAdminTab]     = useState<"dashboard" | "content" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications">("dashboard");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // ── Auth & data load ──
@@ -325,21 +326,25 @@ const Admin = () => {
               </h1>
             </div>
 
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search sections, fields, or content…"
-                className="w-full h-9 pl-9 pr-8 rounded-lg border border-input bg-background text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              />
-              {search && (
-                <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
+            {adminTab === "content" ? (
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => { setSearch(e.target.value); }}
+                  placeholder="Search any word from the site…"
+                  className="w-full h-9 pl-9 pr-8 rounded-lg border border-input bg-background text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                />
+                {search && (
+                  <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div className="flex-1" />
+            )}
 
             <div className="flex items-center gap-2 lg:hidden">
               {hasEdits && (
@@ -356,6 +361,7 @@ const Admin = () => {
 
         {adminTab === "dashboard"    && <DashboardPanel />}
         {adminTab === "contacts"     && <ContactSubmissionsPanel />}
+        {adminTab === "applications" && <JobApplicationsPanel />}
         {adminTab === "testimonials" && <TestimonialsPanel logActivity={(action, label) => logActivity(action, "testimonial", label)} />}
         {adminTab === "case-studies" && <CaseStudiesPanel logActivity={logActivity} />}
         {adminTab === "jobs"         && <JobsPanel logActivity={logActivity} />}
@@ -399,7 +405,8 @@ const Admin = () => {
                         {headerFields.map((field) => (
                           <FieldRow key={field.key} field={field}
                             value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
-                            isEdited={editedKeys.has(field.key)} onChange={handleChange} />
+                            isEdited={editedKeys.has(field.key)} onChange={handleChange}
+                            highlight={search} />
                         ))}
                         {numberedEntries.map(([num, groupFields]) => (
                           <div key={num}>
@@ -412,7 +419,8 @@ const Admin = () => {
                               {groupFields.map((field) => (
                                 <FieldRow key={field.key} field={field}
                                   value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
-                                  isEdited={editedKeys.has(field.key)} onChange={handleChange} indent />
+                                  isEdited={editedKeys.has(field.key)} onChange={handleChange}
+                                  indent highlight={search} />
                               ))}
                             </div>
                           </div>
@@ -583,16 +591,17 @@ const Admin = () => {
 
 // ─── SidebarContent ───────────────────────────────────────────────────────────
 
-type AdminTab = "dashboard" | "content" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts";
+type AdminTab = "dashboard" | "content" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications";
 
-const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen }[] = [
-  { id: "dashboard",    label: "Dashboard",    icon: LayoutDashboard },
-  { id: "content",      label: "Content",      icon: Type },
-  { id: "case-studies", label: "Cases",        icon: BookOpen },
-  { id: "jobs",         label: "Jobs",         icon: Briefcase },
-  { id: "banks",        label: "Banks",        icon: Landmark },
-  { id: "testimonials", label: "Testimonials", icon: Star },
-  { id: "contacts",     label: "Messages",     icon: Mail },
+const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen; dividerBefore?: boolean }[] = [
+  { id: "dashboard",    label: "Dashboard",       icon: LayoutDashboard },
+  { id: "content",      label: "Content",         icon: Type },
+  { id: "case-studies", label: "Cases",           icon: BookOpen },
+  { id: "jobs",         label: "Job Listings",    icon: Briefcase },
+  { id: "banks",        label: "Banks",           icon: Landmark },
+  { id: "testimonials", label: "Testimonials",    icon: Star },
+  { id: "applications", label: "Applications",    icon: MessageSquare, dividerBefore: true },
+  { id: "contacts",     label: "Messages",        icon: Mail },
 ];
 
 function SidebarContent({
@@ -629,18 +638,20 @@ function SidebarContent({
 
       {/* Tab switcher */}
       <div className="px-3 pt-3 pb-1 border-b border-border space-y-0.5">
-        {TAB_ITEMS.map(({ id, label, icon: Icon }) => (
-          <button
-            key={id}
-            onClick={() => setAdminTab(id)}
-            className={cn(
-              "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
-              adminTab === id ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-            )}
-          >
-            <Icon className="w-4 h-4 shrink-0" />
-            {label}
-          </button>
+        {TAB_ITEMS.map(({ id, label, icon: Icon, dividerBefore }) => (
+          <div key={id}>
+            {dividerBefore && <div className="my-1 border-t border-border/50" />}
+            <button
+              onClick={() => setAdminTab(id)}
+              className={cn(
+                "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+                adminTab === id ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+              )}
+            >
+              <Icon className="w-4 h-4 shrink-0" />
+              {label}
+            </button>
+          </div>
         ))}
       </div>
 
@@ -718,17 +729,39 @@ function SidebarContent({
 
 // ─── FieldRow ─────────────────────────────────────────────────────────────────
 
+/** Renders a short snippet of `text` with `term` highlighted. */
+function MatchSnippet({ text, term }: { text: string; term: string }) {
+  if (!term || !text) return null;
+  const idx = text.toLowerCase().indexOf(term.toLowerCase());
+  if (idx === -1) return null;
+  const start  = Math.max(0, idx - 30);
+  const end    = Math.min(text.length, idx + term.length + 40);
+  const before = (start > 0 ? "…" : "") + text.slice(start, idx);
+  const match  = text.slice(idx, idx + term.length);
+  const after  = text.slice(idx + term.length, end) + (end < text.length ? "…" : "");
+  return (
+    <p className="text-[11px] text-muted-foreground mt-1 mb-1.5 leading-relaxed">
+      {before}<mark className="bg-primary/20 text-primary font-semibold rounded px-0.5">{match}</mark>{after}
+    </p>
+  );
+}
+
 function FieldRow({
-  field, value, isEdited, onChange, indent = false,
+  field, value, isEdited, onChange, indent = false, highlight = "",
 }: {
   field: ContentField;
   value: string;
   isEdited: boolean;
   onChange: (key: string, val: string) => void;
   indent?: boolean;
+  highlight?: string;
 }) {
   const type = detectFieldType(field.key);
   const { label: typeLabel, icon: TypeIcon, color: typeColor } = fieldTypeConfig[type];
+
+  const showSnippet = highlight &&
+    value.toLowerCase().includes(highlight.toLowerCase()) &&
+    !field.label.toLowerCase().includes(highlight.toLowerCase());
 
   return (
     <div className={cn("py-3.5 transition-colors", indent ? "px-6" : "px-5", isEdited && "bg-primary/[0.03]")}>
@@ -750,6 +783,7 @@ function FieldRow({
           </span>
         )}
       </div>
+      {showSnippet && <MatchSnippet text={value} term={highlight} />}
       {field.type === "upload" ? (
         <ImageUploadField value={value} onChange={(val) => onChange(field.key, val)} />
       ) : (
