@@ -255,22 +255,22 @@ const ApplyModal = ({ jobTitle, jobId, onClose }: Props) => {
           : null;
 
       const { error } = await supabase.from("job_applications").insert([{
-        job_id:                  jobId || null,
-        job_title:               jobTitle,
-        first_name:              form.firstName.trim(),
-        last_name:               form.lastName.trim(),
-        date_of_birth:           dob,
-        email:                   form.email.trim(),
-        mobile_number:           form.mobile.trim(),
-        country:                 form.country,
-        city:                    form.city.trim(),
-        address:                 form.address.trim(),
-        bachelor_degree:         form.degree.trim(),
-        graduation_year:         form.gradYear ? parseInt(form.gradYear) : null,
-        linkedin_url:            form.linkedin.trim(),
-        instapay_link:           form.instapay.trim(),
-        national_id_front_path:  frontPath,
-        national_id_back_path:   backPath,
+        job_id:          jobId || null,
+        job_title:       jobTitle,
+        first_name:      form.firstName.trim(),
+        last_name:       form.lastName.trim(),
+        date_of_birth:   dob,
+        email:           form.email.trim(),
+        mobile:          form.mobile.trim(),
+        country:         form.country,
+        city:            form.city.trim(),
+        address:         form.address.trim(),
+        bachelor_degree: form.degree.trim(),
+        graduation_year: form.gradYear || null,
+        linkedin_url:    form.linkedin.trim(),
+        instapay_link:   form.instapay.trim(),
+        id_front_url:    frontPath,
+        id_back_url:     backPath,
       }]);
 
       if (error) throw error;
