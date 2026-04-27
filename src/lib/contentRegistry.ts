@@ -24,7 +24,8 @@ export const sectionLabels: Record<string, string> = {
   about: "About Section",
   edges: "Why We're Different",
   values: "Our Values",
-  services: "Services / Studios",
+  services: "Studios — Grid Cards",
+  studios: "Studios — Page Content",
   founder: "Founder Section",
   clients: "Clients Section",
   tech: "Tech Stack",
@@ -143,19 +144,22 @@ export const contentRegistry: ContentField[] = [
     { section: "values", key: `value_${i+1}_desc`, label: `Value ${i+1} Description`, defaultValue: "" },
   ]).flat(),
 
-  // ── Services / Studios ──
-  { section: "services", key: "studios_page_eyebrow",    label: "Studios Page — Eyebrow",    defaultValue: "Our Studios" },
-  { section: "services", key: "studios_page_headline",   label: "Studios Page — Headline",   defaultValue: "Six Specialized Studios." },
-  { section: "services", key: "studios_page_subheadline",label: "Studios Page — Subheadline", defaultValue: "One Unified Vision." },
-  { section: "services", key: "studios_page_desc",       label: "Studios Page — Description", defaultValue: "Each studio is a focused center of excellence — handpicked specialists working in their native domain, all aligned behind a single goal: measurable growth for your business." },
-  { section: "services", key: "studios_cta_title",       label: "Studios CTA — Title",       defaultValue: "Not sure which studio fits your goal?" },
-  { section: "services", key: "studios_cta_desc",        label: "Studios CTA — Description", defaultValue: "Tell us about your project and we'll match you with the right team." },
-  { section: "services", key: "studios_cta_btn",         label: "Studios CTA — Button",      defaultValue: "Start a Project" },
+  // ── Studios — Page Content (section: "studios") ──
+  { section: "studios", key: "studios_back_link",        label: "Back Link Text",            defaultValue: "Back to Home" },
+  { section: "studios", key: "studios_page_eyebrow",     label: "Page Eyebrow",              defaultValue: "Our Studios" },
+  { section: "studios", key: "studios_page_headline",    label: "Page Headline",             defaultValue: "Six Specialized Studios." },
+  { section: "studios", key: "studios_page_subheadline", label: "Page Subheadline (gold)",   defaultValue: "One Unified Vision." },
+  { section: "studios", key: "studios_page_desc",        label: "Page Description",          defaultValue: "Each studio is a focused center of excellence — handpicked specialists working in their native domain, all aligned behind a single goal: measurable growth for your business." },
+  { section: "studios", key: "studios_cta_title",        label: "CTA Title",                 defaultValue: "Not sure which studio fits your goal?" },
+  { section: "studios", key: "studios_cta_desc",         label: "CTA Description",           defaultValue: "Tell us about your project and we'll match you with the right team." },
+  { section: "studios", key: "studios_cta_btn",          label: "CTA Button Text",           defaultValue: "Start a Project" },
+
+  // ── Studios — Grid Cards (section: "services") ──
   { section: "services", key: "services_subtitle", label: "Grid Section Subtitle", defaultValue: "Our Studios" },
   { section: "services", key: "services_headline", label: "Grid Section Headline", defaultValue: "Six Specialized Studios. One Unified Vision." },
   ...Array.from({ length: 6 }, (_, i) => [
-    { section: "services", key: `service_${i+1}_title`, label: `Studio ${i+1} Title`, defaultValue: `Service ${i+1}` },
-    { section: "services", key: `service_${i+1}_desc`, label: `Studio ${i+1} Description`, defaultValue: "" },
+    { section: "services", key: `service_${i+1}_title`, label: `Studio ${i+1} — Title`,       defaultValue: `Studio ${i+1}` },
+    { section: "services", key: `service_${i+1}_desc`,  label: `Studio ${i+1} — Description`, defaultValue: "" },
   ]).flat(),
 
   // ── Founder ──
