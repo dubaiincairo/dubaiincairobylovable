@@ -12,7 +12,7 @@ export interface ContentField {
 export const sectionOrder = [
   "seo",
   "nav", "hero", "stats", "about", "edges", "values", "services", "studios",
-  "founder", "clients", "tech", "google", "legal", "contact", "footer",
+  "founder", "clients", "testimonials", "tech", "google", "legal", "contact", "footer",
   "careers", "odoo", "yanolja",
 ];
 
@@ -28,6 +28,7 @@ export const sectionLabels: Record<string, string> = {
   studios: "Studios — Page Content",
   founder: "Founder Section",
   clients: "Clients Section",
+  testimonials: "Testimonials",
   tech: "Tech Stack",
   google: "We're on Google",
   legal: "Legal & Registration",
@@ -177,6 +178,35 @@ export const contentRegistry: ContentField[] = [
   { section: "clients", key: "clients_headline", label: "Section Headline", defaultValue: "Trusted by Brands That Mean Business" },
   { section: "clients", key: "clients_description", label: "Section Description", defaultValue: "From global pharmaceutical giants to beloved local names." },
   { section: "clients", key: "clients_list", label: "Client Names (one per line or comma-separated)", defaultValue: "Novartis,Sanofi,Roche" },
+
+  // ── Testimonials ──
+  { section: "testimonials", key: "testimonials_subtitle", label: "Section Subtitle",  defaultValue: "What Clients Say" },
+  { section: "testimonials", key: "testimonials_headline", label: "Section Headline",  defaultValue: "Trusted by Leaders.\nRecommended by Peers." },
+  { section: "testimonials", key: "testimonials_subtext",  label: "Section Subtext",   defaultValue: "Real recommendations from clients and colleagues — pulled directly from LinkedIn." },
+
+  // Testimonial 1 — Marwa Shaker Salama
+  { section: "testimonials", key: "testimonial_1_photo",    label: "Client 1 — Photo URL",    defaultValue: "", type: "upload" },
+  { section: "testimonials", key: "testimonial_1_name",     label: "Client 1 — Name",         defaultValue: "Marwa Shaker Salama" },
+  { section: "testimonials", key: "testimonial_1_title",    label: "Client 1 — Job Title",    defaultValue: "Co-founder & CEO | Marketing Communication Consultant | Certified Facilitator of Horse Guided Empowerment | Corporate Storyteller" },
+  { section: "testimonials", key: "testimonial_1_relation", label: "Client 1 — Relation/Date",defaultValue: "March 7, 2022 · Marwa was Abdalla's client" },
+  { section: "testimonials", key: "testimonial_1_linkedin", label: "Client 1 — LinkedIn URL", defaultValue: "" },
+  { section: "testimonials", key: "testimonial_1_quote",    label: "Client 1 — Quote",        defaultValue: "You are a bright example of ambition, resilience and learning agility. The world of digital marketing has become very challenging and full of phonies. Abdallah managed to crack the code through continuous learning and dedication and he is capable of delivering tangible results. I highly recommend Abdallah and his company." },
+
+  // Testimonial 2 — Nouran Khaled
+  { section: "testimonials", key: "testimonial_2_photo",    label: "Client 2 — Photo URL",    defaultValue: "", type: "upload" },
+  { section: "testimonials", key: "testimonial_2_name",     label: "Client 2 — Name",         defaultValue: "Nouran Khaled" },
+  { section: "testimonials", key: "testimonial_2_title",    label: "Client 2 — Job Title",    defaultValue: "Brand Manager | 360° Brand Builder | B2C & B2B Strategist | HORECA | F&B | Trade Marketing" },
+  { section: "testimonials", key: "testimonial_2_relation", label: "Client 2 — Relation/Date",defaultValue: "October 19, 2024 · Nouran was Abdalla's client" },
+  { section: "testimonials", key: "testimonial_2_linkedin", label: "Client 2 — LinkedIn URL", defaultValue: "" },
+  { section: "testimonials", key: "testimonial_2_quote",    label: "Client 2 — Quote",        defaultValue: "While working at Quanta, a leading exclusive distributor of renowned brands such as Monin, Bristot, Alpro, and Taylors, I had the opportunity to collaborate with Abdalla and his team on three comprehensive marketing projects. Throughout the year, we achieved significant milestones in media production, digital advertising, and e-commerce.\n\nAbdalla's team demonstrated exceptional professionalism, effectively aligning efforts and delivering outstanding results. Their careful documentation and reporting fostered a seamless working relationship with my team. I wish Abdalla and his team continued success in their future projects." },
+
+  // Testimonial 3 — Ahmad AFIFI
+  { section: "testimonials", key: "testimonial_3_photo",    label: "Client 3 — Photo URL",    defaultValue: "", type: "upload" },
+  { section: "testimonials", key: "testimonial_3_name",     label: "Client 3 — Name",         defaultValue: "Ahmad AFIFI" },
+  { section: "testimonials", key: "testimonial_3_title",    label: "Client 3 — Job Title",    defaultValue: "MBA | SAFe PM | SDV Software Product Manager at Valeo" },
+  { section: "testimonials", key: "testimonial_3_relation", label: "Client 3 — Relation/Date",defaultValue: "March 24, 2023 · Ahmad and Abdalla studied together" },
+  { section: "testimonials", key: "testimonial_3_linkedin", label: "Client 3 — LinkedIn URL", defaultValue: "" },
+  { section: "testimonials", key: "testimonial_3_quote",    label: "Client 3 — Quote",        defaultValue: "I had the pleasure of working with Abdallah during our time together in the MBA program on several projects and research papers. He is an exceptional marketing professional with a unique set of skills that make him an asset to any team.\n\nAbdallah is a skilled market researcher and data analyst, which allows him to gain a deep understanding of the market and consumer behavior. He is also an excellent communicator with outstanding presentation and linguistic skills, making complex ideas easy to understand and engage with. He has a convincing personality and is able to connect with people, which helps him to build strong relationships with clients and team members.\n\nAbdallah is an entrepreneur at heart and has started his own marketing agency, which is a testament to his passion for the industry. I have no doubt that he will continue to be successful in everything he does, and I would highly recommend him to anyone looking for a marketing expert." },
 
   // ── Tech Stack (section headers + teaser) ──
   { section: "tech", key: "tech_subtitle",     label: "Section Badge",              defaultValue: "Our Tech Stack" },
