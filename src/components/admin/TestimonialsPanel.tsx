@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Plus, Pencil, Trash2, Eye, EyeOff, ArrowLeft, Save, Star } from "lucide-react";
+import { Loader2, Plus, Pencil, Trash2, Eye, EyeOff, ArrowLeft, Save, Star, Upload, X, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   DndContext, closestCenter, PointerSensor, useSensor, useSensors, DragEndEvent,
@@ -49,6 +49,16 @@ function SortableRow({ t, onEdit, onToggle, onDelete }: {
       <button {...attributes} {...listeners} className="text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing shrink-0">
         <GripVertical className="w-4 h-4" />
       </button>
+
+      {/* Avatar thumbnail */}
+      <div className="w-9 h-9 rounded-full border border-border bg-muted flex items-center justify-center shrink-0 overflow-hidden">
+        {t.avatar_url ? (
+          <img src={t.avatar_url} alt={t.client_name} className="w-full h-full object-cover" />
+        ) : (
+          <span className="text-xs font-bold text-muted-foreground">{t.client_name.charAt(0)}</span>
+        )}
+      </div>
+
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="font-display font-semibold text-sm">{t.client_name || "Untitled"}</span>
@@ -76,6 +86,105 @@ function SortableRow({ t, onEdit, onToggle, onDelete }: {
           className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
           <Trash2 className="w-3.5 h-3.5" />
         </button>
+      </div>
+    </div>
+  );
+}
+
+// ── Avatar photo uploader ────────────────────────────────────────────────────
+function AvatarUploader({ name, value, onChange }: {
+  name: string;
+  value: string;
+  onChange: (url: string) => void;
+}) {
+  const { toast } = useToast();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const allowed = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    if (!allowed.includes(file.type)) {
+      toast({ title: "Unsupported file type", description: "Please upload a JPG, PNG, WebP or GIF.", variant: "destructive" });
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      toast({ title: "File too large", description: "Max size is 2 MB.", variant: "destructive" });
+      return;
+    }
+
+    setUploading(true);
+    const ext  = file.name.split(".").pop() ?? "jpg";
+    const slug = name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "") || "client";
+    const path = `testimonials/${slug}-${Date.now()}.${ext}`;
+
+    const { error } = await supabase.storage.from("assets").upload(path, file, { upsert: true });
+    if (error) {
+      toast({ title: "Upload failed", description: error.message, variant: "destructive" });
+      setUploading(false);
+      return;
+    }
+    const { data } = supabase.storage.from("assets").getPublicUrl(path);
+    onChange(data.publicUrl);
+    toast({ title: "Photo uploaded!" });
+    setUploading(false);
+    e.target.value = "";
+  };
+
+  return (
+    <div>
+      <label className="block text-xs font-semibold text-foreground mb-2">Client Photo</label>
+      <div className="flex items-center gap-4">
+
+        {/* Circular preview */}
+        <div className="w-16 h-16 rounded-full border-2 border-border bg-muted flex items-center justify-center shrink-0 overflow-hidden">
+          {value ? (
+            <img src={value} alt="Avatar preview" className="w-full h-full object-cover" />
+          ) : (
+            <User className="w-7 h-7 text-muted-foreground/40" />
+          )}
+        </div>
+
+        <div className="flex flex-col gap-2 flex-1">
+          {/* Upload button */}
+          <input ref={inputRef} type="file" accept="image/jpeg,image/png,image/webp,image/gif" className="hidden" onChange={handleFile} />
+          <button
+            type="button"
+            onClick={() => inputRef.current?.click()}
+            disabled={uploading}
+            className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg border border-border bg-muted hover:bg-muted/80 text-foreground transition-colors disabled:opacity-50"
+          >
+            {uploading
+              ? <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading…</>
+              : <><Upload className="w-3.5 h-3.5" /> Upload Photo</>
+            }
+          </button>
+
+          {/* Clear button — only shown when a photo exists */}
+          {value && (
+            <button
+              type="button"
+              onClick={() => onChange("")}
+              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-destructive transition-colors self-start"
+            >
+              <X className="w-3 h-3" /> Remove photo
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Optional: paste a URL directly */}
+      <div className="mt-3">
+        <label className="block text-[11px] text-muted-foreground mb-1">Or paste a URL directly</label>
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="https://..."
+          className="flex w-full rounded-md border border-input bg-background px-3 py-1.5 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        />
       </div>
     </div>
   );
@@ -188,7 +297,7 @@ export function TestimonialsPanel({ logActivity }: { logActivity: (action: strin
           <Field label="Client Name *" value={editing.client_name || ""} onChange={(v) => set("client_name", v)} />
           <Field label="Role / Title" value={editing.role || ""} onChange={(v) => set("role", v)} placeholder="e.g. Marketing Director" />
           <Field label="Company" value={editing.company || ""} onChange={(v) => set("company", v)} placeholder="e.g. Novartis Egypt" />
-          <Field label="Avatar URL (optional)" value={editing.avatar_url || ""} onChange={(v) => set("avatar_url", v)} placeholder="https://..." />
+          <AvatarUploader name={editing.client_name || ""} value={editing.avatar_url || ""} onChange={(v) => set("avatar_url", v)} />
           <Field label="Relation / Date" value={editing.relation || ""} onChange={(v) => set("relation", v)} placeholder="e.g. March 2024 · Nouran was Abdalla's client" />
           <Field label="LinkedIn Profile URL" value={editing.linkedin_url || ""} onChange={(v) => set("linkedin_url", v)} placeholder="https://linkedin.com/in/..." />
         </div>
