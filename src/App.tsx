@@ -19,6 +19,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import FaviconUpdater from "./components/FaviconUpdater";
 import { ContactModalProvider } from "./context/ContactModalContext";
 import { ContactModal } from "./components/ContactModal";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <SpeedInsights />
       <WhatsAppButton />
       <SiteContentProvider>
         <ContactModalProvider>
