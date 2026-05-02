@@ -1,3 +1,4 @@
+import { useSEO } from "@/hooks/useSEO";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
@@ -15,6 +16,12 @@ import Footer from "@/components/Footer";
 import GoogleBusinessWidget from "@/components/GoogleBusinessWidget";
 
 const Index = () => {
+  useSEO({
+    title: "Dubai in Cairo — Digital Marketing & eBusiness Agency in Cairo, Egypt",
+    description: "Dubai in Cairo is Cairo's leading digital marketing and eBusiness solutions agency. Data-driven growth, eCommerce, branding, and Odoo ERP across Egypt and the Middle East. شركة دبي في القاهرة للتسويق الرقمي.",
+    canonical: "/",
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />

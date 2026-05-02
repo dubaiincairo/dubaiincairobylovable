@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Cpu } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import TechStackSection from "@/components/TechStackSection";
@@ -11,6 +12,12 @@ import { useContactModal } from "@/context/ContactModalContext";
 const Tech = () => {
   const { get } = useSiteContent();
   const { openContactModal } = useContactModal();
+
+  useSEO({
+    title: "Our Technology Stack — Tools That Power Every Result | Dubai in Cairo",
+    description: "Discover the intelligent technology stack behind Dubai in Cairo's digital marketing results — from acquisition and automation tools to AI-powered analytics, eCommerce platforms, and Odoo ERP.",
+    canonical: "/tech",
+  });
 
   return (
     <div className="min-h-screen bg-background">

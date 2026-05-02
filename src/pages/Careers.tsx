@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ChevronDown, Mail, Briefcase, Globe, TrendingUp, Cpu } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
@@ -34,6 +35,12 @@ const parseList = (text: string | null): string[] => {
 const Careers = () => {
   const { get } = useSiteContent();
   const [jobs, setJobs] = useState<Job[]>([]);
+
+  useSEO({
+    title: "Careers at Dubai in Cairo — Join Our Team in Egypt",
+    description: "Explore job opportunities at Dubai in Cairo, Cairo's leading digital marketing agency. We're hiring talented marketers, designers, developers, and strategists passionate about driving real results.",
+    canonical: "/careers",
+  });
   const [loading, setLoading] = useState(true);
   const [applyJob, setApplyJob] = useState<{ id: string; title: string } | null>(null);
 

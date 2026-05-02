@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 import { supabase } from "@/integrations/supabase/client";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import Navbar from "@/components/Navbar";
@@ -27,6 +28,12 @@ const CaseStudies = () => {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>("All");
   const [industries, setIndustries] = useState<string[]>([]);
+
+  useSEO({
+    title: "Case Studies — Real Results for Real Clients | Dubai in Cairo",
+    description: "Browse Dubai in Cairo's client case studies. See how we've driven measurable growth for brands across Egypt and the Middle East through data-driven marketing, eCommerce, and digital strategy.",
+    canonical: "/case-studies",
+  });
 
   useEffect(() => {
     supabase

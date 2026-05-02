@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { fadeUp, fadeIn, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { useSEO } from "@/hooks/useSEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -55,6 +56,16 @@ const CaseStudy = () => {
   }
 
   if (!cs) return null;
+
+  return <CaseStudyView cs={cs} />;
+};
+
+const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
+  useSEO({
+    title: `${cs.client_name} — ${cs.tagline || cs.industry} | Dubai in Cairo`,
+    description: `Case study: How Dubai in Cairo helped ${cs.client_name} achieve measurable results through data-driven digital marketing and eBusiness strategy in Egypt.`,
+    canonical: `/case-studies/${cs.slug}`,
+  });
 
   const metrics = [
     { v: cs.metric_1_value, l: cs.metric_1_label },
