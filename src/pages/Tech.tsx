@@ -6,9 +6,11 @@ import Footer from "@/components/Footer";
 import TechStackSection from "@/components/TechStackSection";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
+import { useContactModal } from "@/context/ContactModalContext";
 
 const Tech = () => {
   const { get } = useSiteContent();
+  const { openContactModal } = useContactModal();
 
   return (
     <div className="min-h-screen bg-background">
@@ -62,12 +64,13 @@ const Tech = () => {
                 {get("tech_cta_desc", "We'll audit your current tools and recommend the right combination.")}
               </p>
             </div>
-            <Link
-              to="/#contact"
+            <button
+              type="button"
+              onClick={openContactModal}
               className="shrink-0 shimmer-btn px-6 py-3 bg-primary text-primary-foreground font-display font-semibold text-sm rounded-xl hover:brightness-110 transition-all"
             >
               {get("tech_cta_btn", "Get a Free Stack Audit")}
-            </Link>
+            </button>
           </div>
         </div>
       </section>

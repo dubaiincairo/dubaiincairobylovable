@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown, TrendingUp, Users, Star, Briefcase } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
@@ -151,13 +152,13 @@ const HeroSection = () => {
             initial="hidden"
             animate="visible"
           >
-            <a
-              href="#services"
+            <Link
+              to="/studios"
               className="group shimmer-btn inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-display font-semibold text-sm tracking-wide rounded-lg glow-gold transition-all duration-300 hover:brightness-110"
             >
               {get("hero_cta_primary", "Explore Our Services")}
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
+            </Link>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 px-8 py-4 border border-gold-subtle text-foreground font-display font-medium text-sm tracking-wide rounded-lg transition-all duration-300 hover:bg-secondary hover:border-primary/30"
