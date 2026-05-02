@@ -103,14 +103,14 @@ const CaseStudy = () => {
         <section className="px-6 pb-12">
           <div className="max-w-4xl mx-auto">
             <motion.div
-              className={`grid gap-px bg-border rounded-2xl overflow-hidden ${metrics.length === 3 ? 'grid-cols-3' : metrics.length === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}
+              className={`grid gap-px bg-border rounded-2xl overflow-hidden ${metrics.length === 3 ? 'grid-cols-1 sm:grid-cols-3' : metrics.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'}`}
               variants={staggerContainer} initial="hidden" animate="visible"
             >
               {metrics.map((m, i) => (
                 <motion.div
                   key={i}
                   variants={cardFadeUp}
-                  className="bg-card px-8 py-8 text-center"
+                  className="bg-card px-4 py-6 sm:px-8 sm:py-8 text-center"
                 >
                   <div className="text-4xl md:text-5xl font-display font-bold text-gradient-gold mb-2">{m.v}</div>
                   <div className="text-sm text-muted-foreground">{m.l}</div>

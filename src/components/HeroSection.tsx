@@ -83,7 +83,7 @@ const HeroSection = () => {
   const float4Label  = get("hero_float_4_label", "Digital-First");
 
   return (
-    <section className="relative md:min-h-screen flex md:items-center overflow-hidden px-6 pt-24 pb-10 md:pt-0 md:pb-0">
+    <section className="relative md:min-h-screen flex md:items-center overflow-hidden px-6 pt-24 pb-16 md:pt-0 md:pb-0">
 
       {/* Background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

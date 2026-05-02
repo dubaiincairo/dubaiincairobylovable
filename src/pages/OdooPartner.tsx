@@ -216,7 +216,7 @@ const OdooPartner = () => {
       <Navbar />
 
       {/* ── Page intro ──────────────────────────────────────────────────── */}
-      <section className="relative pt-28 pb-6 md:pt-32 md:pb-8 px-6">
+      <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 px-6">
         <div className="relative max-w-6xl mx-auto">
           <motion.div variants={fadeUp} initial="hidden" animate="visible">
             <Link

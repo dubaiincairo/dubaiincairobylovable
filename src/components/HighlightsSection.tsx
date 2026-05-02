@@ -37,7 +37,7 @@ const HighlightsSection = () => {
   if (studies.length === 0) return null;
 
   return (
-    <section id="highlights" className="relative py-8 md:py-16 px-6 overflow-hidden">
+    <section id="highlights" className="relative py-12 md:py-20 px-6 overflow-hidden">
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-primary/4 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
@@ -63,7 +63,7 @@ const HighlightsSection = () => {
         </motion.div>
 
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
           variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}
         >
           {studies.map((cs) => (

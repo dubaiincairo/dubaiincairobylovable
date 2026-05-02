@@ -74,13 +74,13 @@ const TechStackSection = () => {
   const { get } = useSiteContent();
 
   return (
-    <section className="relative py-8 md:py-12 px-6 overflow-hidden">
+    <section className="relative py-10 md:py-14 px-6 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[260px] rounded-full bg-primary/4 blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
 
         {/* Header */}
-        <motion.div className="text-center mb-10 md:mb-14" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="text-center mb-8 md:mb-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
             {get("tech_subtitle", "Our Tech Stack")}
           </span>
