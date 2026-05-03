@@ -13,11 +13,7 @@ const Tech = () => {
   const { get } = useSiteContent();
   const { openContactModal } = useContactModal();
 
-  useSEO({
-    title: "Our Technology Stack — Tools That Power Every Result | Dubai in Cairo",
-    description: "Discover the intelligent technology stack behind Dubai in Cairo's digital marketing results — from acquisition and automation tools to AI-powered analytics, eCommerce platforms, and Odoo ERP.",
-    canonical: "/tech",
-  });
+  useSEO({ titleKey: "seo_tech_title", descriptionKey: "seo_tech_description", canonical: "/tech" });
 
   return (
     <div className="min-h-screen bg-background">

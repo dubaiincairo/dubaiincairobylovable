@@ -36,11 +36,7 @@ const Careers = () => {
   const { get } = useSiteContent();
   const [jobs, setJobs] = useState<Job[]>([]);
 
-  useSEO({
-    title: "Careers at Dubai in Cairo — Join Our Team in Egypt",
-    description: "Explore job opportunities at Dubai in Cairo, Cairo's leading digital marketing agency. We're hiring talented marketers, designers, developers, and strategists passionate about driving real results.",
-    canonical: "/careers",
-  });
+  useSEO({ titleKey: "seo_careers_title", descriptionKey: "seo_careers_description", canonical: "/careers" });
   const [loading, setLoading] = useState(true);
   const [applyJob, setApplyJob] = useState<{ id: string; title: string } | null>(null);
 

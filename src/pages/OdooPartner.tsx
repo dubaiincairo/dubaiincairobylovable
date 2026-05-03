@@ -144,11 +144,7 @@ const OdooPartner = () => {
   const { get } = useSiteContent();
   const { openContactModal } = useContactModal();
 
-  useSEO({
-    title: "Odoo ERP Partner in Egypt — Certified Implementation & Support | Dubai in Cairo",
-    description: "Dubai in Cairo is a certified Odoo ERP partner in Egypt. We implement, customize, and support Odoo for businesses across manufacturing, retail, services, and eCommerce in Egypt and the Middle East.",
-    canonical: "/partnerships",
-  });
+  useSEO({ titleKey: "seo_odoo_title", descriptionKey: "seo_odoo_description", canonical: "/partnerships" });
 
   const odooTags  = Array.from({ length: 8 }, (_, i) => get(`odoo_tag_${i + 1}`, [
     "ERP Architecture & Solution Design",

@@ -16,11 +16,7 @@ import Footer from "@/components/Footer";
 import GoogleBusinessWidget from "@/components/GoogleBusinessWidget";
 
 const Index = () => {
-  useSEO({
-    title: "Dubai in Cairo — Digital Marketing & eBusiness Agency in Cairo, Egypt",
-    description: "Dubai in Cairo is Cairo's leading digital marketing and eBusiness solutions agency. Data-driven growth, eCommerce, branding, and Odoo ERP across Egypt and the Middle East. شركة دبي في القاهرة للتسويق الرقمي.",
-    canonical: "/",
-  });
+  useSEO({ titleKey: "seo_home_title", descriptionKey: "seo_home_description", canonical: "/", ogImageKey: "seo_home_og_image" });
 
   return (
     <div className="min-h-screen bg-background">

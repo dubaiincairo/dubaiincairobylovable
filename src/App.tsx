@@ -19,6 +19,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import FaviconUpdater from "./components/FaviconUpdater";
 import { ContactModalProvider } from "./context/ContactModalContext";
 import { ContactModal } from "./components/ContactModal";
+import GoogleIntegrations from "./components/GoogleIntegrations";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
       <Sonner />
       <WhatsAppButton />
       <SiteContentProvider>
+        <GoogleIntegrations />
         <ContactModalProvider>
           <ContactModal />
           <FaviconUpdater />

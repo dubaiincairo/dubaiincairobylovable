@@ -13,11 +13,7 @@ const Studios = () => {
   const { get } = useSiteContent();
   const { openContactModal } = useContactModal();
 
-  useSEO({
-    title: "Dubai in Cairo Marketing Studios — Creative & Digital Services in Egypt",
-    description: "Explore Dubai in Cairo's full range of digital marketing services: social media, SEO, performance marketing, eCommerce, branding, content creation, and more for businesses in Egypt and the Middle East.",
-    canonical: "/studios",
-  });
+  useSEO({ titleKey: "seo_studios_title", descriptionKey: "seo_studios_description", canonical: "/studios" });
 
   return (
     <div className="min-h-screen bg-background">
