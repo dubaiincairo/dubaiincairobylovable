@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ChevronDown, Mail, Briefcase, Globe, TrendingUp, Cpu } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
@@ -34,6 +35,8 @@ const parseList = (text: string | null): string[] => {
 const Careers = () => {
   const { get } = useSiteContent();
   const [jobs, setJobs] = useState<Job[]>([]);
+
+  useSEO({ titleKey: "seo_careers_title", descriptionKey: "seo_careers_description", canonical: "/careers" });
   const [loading, setLoading] = useState(true);
   const [applyJob, setApplyJob] = useState<{ id: string; title: string } | null>(null);
 
@@ -59,7 +62,7 @@ const Careers = () => {
       <Navbar />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative pt-28 pb-8 md:pt-32 md:pb-10 px-6 overflow-hidden">
+      <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 px-6 overflow-hidden">
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)" }}

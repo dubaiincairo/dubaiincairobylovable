@@ -187,6 +187,7 @@ export type Database = {
           graduation_year: string | null
           id_front_url: string | null
           id_back_url: string | null
+          resume_url: string | null
           created_at: string | null
         }
         Insert: {
@@ -207,6 +208,7 @@ export type Database = {
           graduation_year?: string | null
           id_front_url?: string | null
           id_back_url?: string | null
+          resume_url?: string | null
           created_at?: string | null
         }
         Update: {
@@ -227,6 +229,7 @@ export type Database = {
           graduation_year?: string | null
           id_front_url?: string | null
           id_back_url?: string | null
+          resume_url?: string | null
           created_at?: string | null
         }
         Relationships: []

@@ -1,21 +1,26 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Cpu } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import TechStackSection from "@/components/TechStackSection";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
+import { useContactModal } from "@/context/ContactModalContext";
 
 const Tech = () => {
   const { get } = useSiteContent();
+  const { openContactModal } = useContactModal();
+
+  useSEO({ titleKey: "seo_tech_title", descriptionKey: "seo_tech_description", canonical: "/tech" });
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
       {/* Hero */}
-      <section className="relative pt-28 pb-6 px-6 overflow-hidden">
+      <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 px-6 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-primary/5 blur-[120px]" />
         </div>
@@ -62,12 +67,13 @@ const Tech = () => {
                 {get("tech_cta_desc", "We'll audit your current tools and recommend the right combination.")}
               </p>
             </div>
-            <Link
-              to="/#contact"
+            <button
+              type="button"
+              onClick={openContactModal}
               className="shrink-0 shimmer-btn px-6 py-3 bg-primary text-primary-foreground font-display font-semibold text-sm rounded-xl hover:brightness-110 transition-all"
             >
               {get("tech_cta_btn", "Get a Free Stack Audit")}
-            </Link>
+            </button>
           </div>
         </div>
       </section>

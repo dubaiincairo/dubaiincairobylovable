@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 
 const Login = () => {
+  useSEO({ title: "Admin Login", description: "", noindex: true });
   const navigate = useNavigate();
   const { toast } = useToast();
   const [email, setEmail] = useState("");

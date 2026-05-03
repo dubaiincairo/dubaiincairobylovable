@@ -41,16 +41,25 @@ export const sectionLabels: Record<string, string> = {
 
 export const contentRegistry: ContentField[] = [
   // ── SEO ──
-  { section: "seo", key: "seo_home_title",           label: "Home — Meta Title",           defaultValue: "Dubai in Cairo | Data-Powered Digital Marketing" },
-  { section: "seo", key: "seo_home_description",     label: "Home — Meta Description",     defaultValue: "Dubai in Cairo helps ambitious businesses grow online through data-driven marketing, eCommerce, and AI-powered solutions." },
-  { section: "seo", key: "seo_home_og_image",        label: "Home — OG Image URL",         defaultValue: "" },
-  { section: "seo", key: "seo_careers_title",        label: "Careers — Meta Title",        defaultValue: "Careers | Dubai in Cairo" },
-  { section: "seo", key: "seo_careers_description",  label: "Careers — Meta Description",  defaultValue: "Join Dubai in Cairo. We're hiring talented professionals in digital marketing, AI, and eCommerce." },
-  { section: "seo", key: "seo_cases_title",          label: "Case Studies — Meta Title",   defaultValue: "Case Studies | Dubai in Cairo" },
-  { section: "seo", key: "seo_cases_description",    label: "Case Studies — Meta Description", defaultValue: "Real clients. Measurable results. Explore our case studies." },
-  { section: "seo", key: "seo_odoo_title",           label: "Odoo Partner — Meta Title",   defaultValue: "Verified Odoo Partner | Dubai in Cairo" },
-  { section: "seo", key: "seo_odoo_description",     label: "Odoo Partner — Meta Description", defaultValue: "Dubai in Cairo is a verified Odoo partner offering ERP implementation, customization, and API development." },
+  // Global
+  { section: "seo", key: "seo_global_og_image",      label: "Global OG / Social Share Image (1200×630 px recommended)", defaultValue: "", type: "upload" },
   { section: "seo", key: "seo_twitter_handle",       label: "Twitter / X Handle",          defaultValue: "@dubaiincairo" },
+  { section: "seo", key: "seo_ga4_id",               label: "Google Analytics 4 — Measurement ID (e.g. G-XXXXXXXXXX)", defaultValue: "" },
+  { section: "seo", key: "seo_gsc_verification",     label: "Google Search Console — Verification Code (content value only)", defaultValue: "" },
+  // Per-page titles & descriptions
+  { section: "seo", key: "seo_home_title",           label: "Home — Meta Title",           defaultValue: "Dubai in Cairo — Digital Marketing & eBusiness Agency in Cairo, Egypt" },
+  { section: "seo", key: "seo_home_description",     label: "Home — Meta Description",     defaultValue: "Dubai in Cairo is Cairo's leading digital marketing and eBusiness solutions agency. Data-driven growth, eCommerce, branding, and Odoo ERP across Egypt and the Middle East. شركة دبي في القاهرة للتسويق الرقمي." },
+  { section: "seo", key: "seo_home_og_image",        label: "Home — OG Image (leave blank to use Global OG Image)", defaultValue: "", type: "upload" },
+  { section: "seo", key: "seo_studios_title",        label: "Studios — Meta Title",        defaultValue: "Dubai in Cairo Marketing Studios — Creative & Digital Services in Egypt" },
+  { section: "seo", key: "seo_studios_description",  label: "Studios — Meta Description",  defaultValue: "Explore Dubai in Cairo's full range of digital marketing services: social media, SEO, performance marketing, eCommerce, branding, and content creation for businesses in Egypt and the Middle East." },
+  { section: "seo", key: "seo_tech_title",           label: "Tech Stack — Meta Title",     defaultValue: "Our Technology Stack — Tools That Power Every Result | Dubai in Cairo" },
+  { section: "seo", key: "seo_tech_description",     label: "Tech Stack — Meta Description", defaultValue: "Discover the intelligent technology stack behind Dubai in Cairo's digital marketing results — acquisition, automation, AI analytics, eCommerce platforms, and Odoo ERP." },
+  { section: "seo", key: "seo_careers_title",        label: "Careers — Meta Title",        defaultValue: "Careers at Dubai in Cairo — Join Our Team in Egypt" },
+  { section: "seo", key: "seo_careers_description",  label: "Careers — Meta Description",  defaultValue: "Explore job opportunities at Dubai in Cairo, Cairo's leading digital marketing agency. We're hiring talented marketers, designers, developers, and strategists." },
+  { section: "seo", key: "seo_cases_title",          label: "Case Studies — Meta Title",   defaultValue: "Case Studies — Real Results for Real Clients | Dubai in Cairo" },
+  { section: "seo", key: "seo_cases_description",    label: "Case Studies — Meta Description", defaultValue: "Browse Dubai in Cairo's client case studies. See how we've driven measurable growth for brands across Egypt and the Middle East." },
+  { section: "seo", key: "seo_odoo_title",           label: "Odoo Partner — Meta Title",   defaultValue: "Odoo ERP Partner in Egypt — Certified Implementation & Support | Dubai in Cairo" },
+  { section: "seo", key: "seo_odoo_description",     label: "Odoo Partner — Meta Description", defaultValue: "Dubai in Cairo is a certified Odoo ERP partner in Egypt. We implement, customize, and support Odoo for businesses across manufacturing, retail, services, and eCommerce." },
 
   // ── Nav ──
   { section: "nav", key: "nav_favicon_url", label: "Favicon (browser tab icon)", defaultValue: "/favicon.svg", type: "upload" },

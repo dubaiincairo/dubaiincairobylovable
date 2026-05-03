@@ -14,7 +14,7 @@ const TechStackTeaser = () => {
   const { get } = useSiteContent();
 
   return (
-    <section className="relative py-8 md:py-12 px-6 overflow-hidden">
+    <section className="relative py-10 md:py-14 px-6 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] rounded-full bg-primary/3 blur-[100px] pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">

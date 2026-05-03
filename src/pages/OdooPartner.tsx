@@ -25,6 +25,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useSEO } from "@/hooks/useSEO";
 import {
   fadeUp,
   staggerContainer,
@@ -143,6 +144,8 @@ const OdooPartner = () => {
   const { get } = useSiteContent();
   const { openContactModal } = useContactModal();
 
+  useSEO({ titleKey: "seo_odoo_title", descriptionKey: "seo_odoo_description", canonical: "/partnerships" });
+
   const odooTags  = Array.from({ length: 8 }, (_, i) => get(`odoo_tag_${i + 1}`, [
     "ERP Architecture & Solution Design",
     "Training & Enablement Programs",
@@ -216,7 +219,7 @@ const OdooPartner = () => {
       <Navbar />
 
       {/* ── Page intro ──────────────────────────────────────────────────── */}
-      <section className="relative pt-28 pb-6 md:pt-32 md:pb-8 px-6">
+      <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 px-6">
         <div className="relative max-w-6xl mx-auto">
           <motion.div variants={fadeUp} initial="hidden" animate="visible">
             <Link

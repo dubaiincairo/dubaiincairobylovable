@@ -1005,7 +1005,7 @@ function CaseStudiesPanel({ logActivity }: { logActivity: (action: string, entit
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Identity</p>
           <Field label="Client Name *" value={editing.client_name || ""} onChange={(v) => set("client_name", v)} />
           <Field label="Industry" value={editing.industry || ""} onChange={(v) => set("industry", v)} placeholder="e.g. Pharma, FMCG, eCommerce" />
-          <Field label="Tagline (one-line summary for cards)" value={editing.tagline || ""} onChange={(v) => set("tagline", v)} long />
+          <Field label="Tagline (one-line summary for cards)" value={editing.tagline || ""} onChange={(v) => set("tagline", v)} />
           <Field label="URL Slug" value={editing.slug || ""} onChange={(v) => set("slug", v)} placeholder="auto-generated if empty" />
           <Field label="Tags (comma-separated)" value={Array.isArray(editing.tags) ? editing.tags.join(", ") : (editing.tags || "")} onChange={(v) => set("tags", v)} placeholder="Social Media, eCommerce, Branding" />
         </div>

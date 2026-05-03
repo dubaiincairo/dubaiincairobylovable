@@ -48,7 +48,7 @@ const capabilities = [
 ];
 
 const OdooPartnerSection = () => (
-  <section className="relative py-8 md:py-20 px-6 overflow-hidden">
+  <section className="relative py-12 md:py-20 px-6 overflow-hidden">
     {/* Background orbs */}
     <div className="absolute top-1/2 left-0 w-[450px] h-[450px] rounded-full bg-primary/5 blur-[150px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
     <div className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-primary/4 blur-[120px] translate-x-1/3 pointer-events-none" />
@@ -61,7 +61,7 @@ const OdooPartnerSection = () => (
     <div className="relative max-w-6xl mx-auto">
       {/* Header */}
       <motion.div
-        className="text-center mb-10 md:mb-14"
+        className="text-center mb-8 md:mb-12"
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
@@ -83,7 +83,7 @@ const OdooPartnerSection = () => (
 
           {/* Left panel — logo + badge */}
           <motion.div
-            className="md:col-span-2 flex flex-col items-center justify-center gap-6 p-8 md:p-12 border-b md:border-b-0 md:border-r border-border/50"
+            className="md:col-span-2 flex flex-col items-center justify-center gap-6 p-6 md:p-12 border-b md:border-b-0 md:border-r border-border/50"
             variants={slideInLeft}
             initial="hidden"
             whileInView="visible"

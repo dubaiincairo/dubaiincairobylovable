@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { fadeUp, fadeIn, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { useSEO } from "@/hooks/useSEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -56,6 +57,16 @@ const CaseStudy = () => {
 
   if (!cs) return null;
 
+  return <CaseStudyView cs={cs} />;
+};
+
+const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
+  useSEO({
+    title: `${cs.client_name} — ${cs.tagline || cs.industry} | Dubai in Cairo`,
+    description: `Case study: How Dubai in Cairo helped ${cs.client_name} achieve measurable results through data-driven digital marketing and eBusiness strategy in Egypt.`,
+    canonical: `/case-studies/${cs.slug}`,
+  });
+
   const metrics = [
     { v: cs.metric_1_value, l: cs.metric_1_label },
     { v: cs.metric_2_value, l: cs.metric_2_label },
@@ -103,14 +114,14 @@ const CaseStudy = () => {
         <section className="px-6 pb-12">
           <div className="max-w-4xl mx-auto">
             <motion.div
-              className={`grid gap-px bg-border rounded-2xl overflow-hidden ${metrics.length === 3 ? 'grid-cols-3' : metrics.length === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}
+              className={`grid gap-px bg-border rounded-2xl overflow-hidden ${metrics.length === 3 ? 'grid-cols-1 sm:grid-cols-3' : metrics.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'}`}
               variants={staggerContainer} initial="hidden" animate="visible"
             >
               {metrics.map((m, i) => (
                 <motion.div
                   key={i}
                   variants={cardFadeUp}
-                  className="bg-card px-8 py-8 text-center"
+                  className="bg-card px-4 py-6 sm:px-8 sm:py-8 text-center"
                 >
                   <div className="text-4xl md:text-5xl font-display font-bold text-gradient-gold mb-2">{m.v}</div>
                   <div className="text-sm text-muted-foreground">{m.l}</div>

@@ -14,7 +14,7 @@ const LegalSection = () => {
   ];
 
   return (
-    <section className="relative py-8 md:py-14 px-6 overflow-hidden">
+    <section className="relative py-10 md:py-14 px-6 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, transparent, hsl(220 18% 6% / 0.5), transparent)' }} />
 
       <div className="relative max-w-6xl mx-auto">
@@ -34,7 +34,7 @@ const LegalSection = () => {
           </p>
         </motion.div>
 
-        <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 md:mb-8" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 mb-6 md:mb-8" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           {details.map((item, i) => (
             <motion.div key={i} className="glass-card flex flex-col items-center text-center p-5 rounded-xl hover-lift" variants={cardFadeUp}>
               <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">

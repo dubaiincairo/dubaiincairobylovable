@@ -71,7 +71,7 @@ const BankAccountsSection = () => {
   }, []);
 
   return (
-    <section id="bank-accounts" className="relative py-8 md:py-16 px-6 overflow-hidden">
+    <section id="bank-accounts" className="relative py-12 md:py-20 px-6 overflow-hidden">
 
       {/* Ambient radial glow */}
       <div
@@ -83,7 +83,7 @@ const BankAccountsSection = () => {
 
         {/* ── Header ── */}
         <motion.div
-          className="text-center mb-6 md:mb-8"
+          className="text-center mb-8 md:mb-12"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -121,7 +121,7 @@ const BankAccountsSection = () => {
         {/* ── Bank cards ── */}
         {!loading && banks.length > 0 && (
           <motion.div
-            className="grid md:grid-cols-3 gap-5 lg:gap-6"
+            className="grid md:grid-cols-3 gap-5 md:gap-6"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"

@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <motion.footer
-      className="relative py-8 md:py-12 px-6 border-t border-border"
+      className="relative py-10 md:py-12 px-6 border-t border-border"
       variants={fadeIn}
       initial="hidden"
       whileInView="visible"

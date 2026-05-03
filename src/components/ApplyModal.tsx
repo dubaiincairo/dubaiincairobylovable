@@ -187,6 +187,7 @@ const ApplyModal = ({ jobTitle, jobId, onClose }: Props) => {
   const [form, setForm] = useState<FormState>(EMPTY);
   const [idFront, setIdFront] = useState<File | null>(null);
   const [idBack, setIdBack]   = useState<File | null>(null);
+  const [resume, setResume]   = useState<File | null>(null);
   const [errors, setErrors]   = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -221,6 +222,7 @@ const ApplyModal = ({ jobTitle, jobId, onClose }: Props) => {
     const path = `${jobId || "general"}/${Date.now()}-${suffix}.${ext}`;
     const { data, error } = await supabase.storage.from("applications").upload(path, file);
     if (error) throw error;
+    // Store the storage path so the admin can generate signed URLs for secure preview
     return data.path;
   };
 
@@ -243,9 +245,10 @@ const ApplyModal = ({ jobTitle, jobId, onClose }: Props) => {
     setErrors({});
 
     try {
-      const [frontPath, backPath] = await Promise.all([
+      const [frontPath, backPath, resumePath] = await Promise.all([
         idFront ? uploadFile(idFront, "id-front") : Promise.resolve(""),
         idBack  ? uploadFile(idBack,  "id-back")  : Promise.resolve(""),
+        resume  ? uploadFile(resume,  "resume")   : Promise.resolve(""),
       ]);
 
       const monthIndex = MONTHS.indexOf(form.birthMonth) + 1;
@@ -269,8 +272,9 @@ const ApplyModal = ({ jobTitle, jobId, onClose }: Props) => {
         graduation_year: form.gradYear || null,
         linkedin_url:    form.linkedin.trim(),
         instapay_link:   form.instapay.trim(),
-        id_front_url:    frontPath,
-        id_back_url:     backPath,
+        id_front_url:    frontPath || null,
+        id_back_url:     backPath  || null,
+        resume_url:      resumePath || null,
       }]);
 
       if (error) throw error;
@@ -634,9 +638,9 @@ const ApplyModal = ({ jobTitle, jobId, onClose }: Props) => {
                     </div>
                   </div>
 
-                  {/* ── Section 4: Identity Documents ── */}
+                  {/* ── Section 4: Documents ── */}
                   <p className={sectionCls}>
-                    <FileText className="w-3 h-3" /> Identity Documents
+                    <FileText className="w-3 h-3" /> Documents
                   </p>
 
                   <div className="space-y-3 pb-2">
@@ -659,6 +663,15 @@ const ApplyModal = ({ jobTitle, jobId, onClose }: Props) => {
                         setErrors(prev => ({ ...prev, idBack: "" }));
                       }}
                       error={errors.idBack}
+                    />
+                    <FileZone
+                      label="CV / Resume"
+                      file={resume}
+                      onFile={f => {
+                        setResume(f);
+                        setErrors(prev => ({ ...prev, resume: "" }));
+                      }}
+                      error={errors.resume}
                     />
                   </div>
 
