@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
-import { Search, Ruler, Handshake, Globe, Lightbulb, RefreshCw } from "lucide-react";
+import { Search, Ruler, Handshake } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 
-const icons = [Search, Ruler, Handshake, Globe, Lightbulb, RefreshCw];
+const icons = [Search, Ruler, Handshake];
 
 const ValuesSection = () => {
   const { get } = useSiteContent();
 
-  const values = Array.from({ length: 6 }, (_, i) => ({
+  const values = Array.from({ length: 3 }, (_, i) => ({
     icon: icons[i],
     title: get(`value_${i + 1}_title`, `Value ${i + 1}`),
     desc: get(`value_${i + 1}_desc`, ""),
