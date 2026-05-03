@@ -86,6 +86,15 @@ const fieldTypeConfig: Record<FieldType, { label: string; icon: typeof Type; col
   text:    { label: "Text",     icon: LayoutList,     color: "text-muted-foreground bg-muted"  },
 };
 
+// ─── Content section groups (for overview page) ──────────────────────────────
+
+const CONTENT_SECTION_GROUPS: { label: string; sections: string[] }[] = [
+  { label: "Global",       sections: ["nav", "footer"] },
+  { label: "Home Page",    sections: ["hero", "stats", "about", "edges", "values", "services", "studios", "founder", "clients", "tech", "google", "legal", "contact"] },
+  { label: "Sub Pages",    sections: ["careers"] },
+  { label: "Partnerships", sections: ["odoo", "yanolja", "zoho"] },
+];
+
 // ─── Grouping within a section ───────────────────────────────────────────────
 
 interface SectionGroups {
@@ -422,45 +431,68 @@ const Admin = () => {
           // ── Overview: no section selected ─────────────────────────────────
           if (!activeSection) {
             return (
-              <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto">
-                <div className="mb-5">
+              <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto space-y-6">
+                <div>
                   <h2 className="font-display font-bold text-lg">Content Sections</h2>
                   <p className="text-xs text-muted-foreground mt-0.5">Pick a section to edit its fields</p>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
-                  {sectionOrder.map((section) => {
-                    const fields = grouped[section] ?? [];
-                    if (fields.length === 0) return null;
-                    const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
-                    const { numbered } = groupSectionFields(fields);
-                    const subCount = Object.keys(numbered).length;
-                    const subLabel = subItemLabels[section];
-                    return (
-                      <button
-                        key={section}
-                        onClick={() => selectSection(section)}
-                        className="text-left rounded-xl border border-border bg-card hover:bg-muted/30 hover:border-primary/30 transition-all p-4 group"
-                      >
-                        <div className="flex items-start justify-between gap-2 mb-2">
-                          <span className="text-2xl leading-none">{sectionIcons[section] || "📄"}</span>
-                          {editCount > 0 && (
-                            <span className="shrink-0 w-5 h-5 flex items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold">
-                              {editCount}
-                            </span>
-                          )}
-                        </div>
-                        <p className="font-display font-semibold text-sm text-foreground group-hover:text-primary transition-colors leading-tight">
-                          {sectionLabels[section] || section}
-                        </p>
-                        <p className="text-[11px] text-muted-foreground mt-1 leading-tight line-clamp-2">
-                          {subCount > 0
-                            ? `${subCount} ${(subLabel || "item").toLowerCase()}s · ${fields.length} fields`
-                            : `${fields.length} field${fields.length !== 1 ? "s" : ""}`}
-                        </p>
-                      </button>
-                    );
-                  })}
-                </div>
+
+                {CONTENT_SECTION_GROUPS.map(({ label: groupLabel, sections: groupSections }) => {
+                  const visibleSections = groupSections.filter((section) => (grouped[section] ?? []).length > 0);
+                  if (visibleSections.length === 0) return null;
+                  return (
+                    <div key={groupLabel}>
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground px-1 mb-2">
+                        {groupLabel}
+                      </p>
+                      <div className="rounded-xl border border-border bg-card overflow-hidden divide-y divide-border">
+                        {visibleSections.map((section) => {
+                          const fields = grouped[section] ?? [];
+                          if (fields.length === 0) return null;
+                          const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
+                          const { numbered } = groupSectionFields(fields);
+                          const subCount = Object.keys(numbered).length;
+                          const subLabel = subItemLabels[section];
+                          const description = sectionDescriptions[section];
+                          return (
+                            <button
+                              key={section}
+                              onClick={() => selectSection(section)}
+                              className="w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-muted/30 hover:text-primary transition-colors group"
+                            >
+                              <span className="text-xl leading-none shrink-0 w-7 text-center">
+                                {sectionIcons[section] || "📄"}
+                              </span>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <span className="font-display font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
+                                    {sectionLabels[section] || section}
+                                  </span>
+                                  {editCount > 0 && (
+                                    <span className="shrink-0 w-4 h-4 flex items-center justify-center rounded-full bg-primary text-primary-foreground text-[9px] font-bold">
+                                      {editCount}
+                                    </span>
+                                  )}
+                                </div>
+                                {description && (
+                                  <p className="text-[11px] text-muted-foreground mt-0.5 leading-tight truncate">
+                                    {description}
+                                  </p>
+                                )}
+                              </div>
+                              <span className="text-[11px] text-muted-foreground shrink-0 tabular-nums">
+                                {subCount > 0
+                                  ? `${subCount} ${(subLabel || "item").toLowerCase()}s`
+                                  : `${fields.length} field${fields.length !== 1 ? "s" : ""}`}
+                              </span>
+                              <ChevronDown className="w-3.5 h-3.5 text-muted-foreground shrink-0 -rotate-90 opacity-40 group-hover:opacity-100 group-hover:text-primary transition-all" />
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
               </main>
             );
           }
@@ -475,7 +507,7 @@ const Admin = () => {
           return (
             <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto">
               {/* Breadcrumb */}
-              <div className="flex items-center gap-2 mb-5">
+              <div className="flex items-center gap-2 mb-4">
                 <button
                   onClick={() => selectSection(null)}
                   className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -491,6 +523,14 @@ const Admin = () => {
                   <span className="ml-auto text-xs font-semibold text-primary">{editCount} unsaved</span>
                 )}
               </div>
+
+              {/* Section description */}
+              {sectionDescriptions[activeSection] && (
+                <div className="mb-4 flex items-start gap-2 px-4 py-3 rounded-lg bg-muted/50 border border-border">
+                  <span className="text-base leading-none mt-0.5 shrink-0">{sectionIcons[activeSection] || "📄"}</span>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{sectionDescriptions[activeSection]}</p>
+                </div>
+              )}
 
               <div className="rounded-xl border border-border bg-card overflow-hidden space-y-0">
 
@@ -579,23 +619,43 @@ const Admin = () => {
 
 type AdminTab = "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications";
 
-const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen; dividerBefore?: boolean }[] = [
-  { id: "dashboard",    label: "Dashboard",       icon: LayoutDashboard },
-  { id: "content",      label: "Content",         icon: Type },
-  { id: "seo",          label: "SEO & Meta",      icon: Globe, dividerBefore: true },
-  { id: "case-studies", label: "Cases",           icon: BookOpen },
-  { id: "jobs",         label: "Job Listings",    icon: Briefcase },
-  { id: "banks",        label: "Banks",           icon: Landmark },
-  { id: "testimonials", label: "Testimonials",    icon: Star },
-  { id: "applications", label: "Applications",    icon: MessageSquare, dividerBefore: true },
-  { id: "contacts",     label: "Messages",        icon: Mail },
+const SIDEBAR_GROUPS: { label: string; items: { id: AdminTab; label: string; icon: typeof BookOpen }[] }[] = [
+  {
+    label: "Overview",
+    items: [
+      { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+    ],
+  },
+  {
+    label: "Site Content",
+    items: [
+      { id: "content", label: "Content",  icon: Type },
+      { id: "seo",     label: "SEO & Meta", icon: Globe },
+    ],
+  },
+  {
+    label: "CMS Records",
+    items: [
+      { id: "case-studies",  label: "Cases",        icon: BookOpen  },
+      { id: "jobs",          label: "Job Listings", icon: Briefcase },
+      { id: "banks",         label: "Banks",        icon: Landmark  },
+      { id: "testimonials",  label: "Testimonials", icon: Star      },
+    ],
+  },
+  {
+    label: "Inbox",
+    items: [
+      { id: "applications", label: "Applications", icon: MessageSquare },
+      { id: "contacts",     label: "Messages",     icon: Mail         },
+    ],
+  },
 ];
 
 function SidebarContent({
   adminTab, setAdminTab, hasEdits, saving, edited, handleSave, handleLogout,
 }: {
-  adminTab: "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications";
-  setAdminTab: (t: "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications") => void;
+  adminTab: AdminTab;
+  setAdminTab: (t: AdminTab) => void;
   hasEdits: boolean;
   saving: boolean;
   edited: Record<string, string>;
@@ -615,24 +675,33 @@ function SidebarContent({
         <p className="text-xs text-muted-foreground mt-1">Dubai in Cairo CMS</p>
       </div>
 
-      {/* Tab switcher */}
-      <div className="px-3 pt-3 pb-1 border-b border-border space-y-0.5">
-        {TAB_ITEMS.map(({ id, label, icon: Icon, dividerBefore }) => (
-          <div key={id}>
-            {dividerBefore && <div className="my-1 border-t border-border/50" />}
-            <button
-              onClick={() => setAdminTab(id)}
-              className={cn(
-                "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
-                adminTab === id ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-              )}
-            >
-              <Icon className="w-4 h-4 shrink-0" />
-              {label}
-            </button>
+      {/* Tab switcher — grouped */}
+      <nav className="px-3 py-3 border-b border-border space-y-4">
+        {SIDEBAR_GROUPS.map(({ label: groupLabel, items }) => (
+          <div key={groupLabel}>
+            <p className="px-3 mb-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60">
+              {groupLabel}
+            </p>
+            <div className="space-y-0.5">
+              {items.map(({ id, label, icon: Icon }) => (
+                <button
+                  key={id}
+                  onClick={() => setAdminTab(id)}
+                  className={cn(
+                    "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+                    adminTab === id
+                      ? "bg-primary/10 text-primary font-semibold"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  )}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
         ))}
-      </div>
+      </nav>
 
       {/* flex-1 spacer keeps footer pinned to bottom */}
       <div className="flex-1" />
