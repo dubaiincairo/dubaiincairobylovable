@@ -74,6 +74,9 @@ export const contentRegistry: ContentField[] = [
   { section: "nav", key: "nav_link_studios",      label: "Nav Link — Studios",      defaultValue: "Studios" },
   { section: "nav", key: "nav_link_careers",      label: "Nav Link — Careers",      defaultValue: "Careers" },
   { section: "nav", key: "nav_link_partnerships", label: "Nav Link — Partnerships", defaultValue: "Partnerships" },
+  { section: "nav", key: "nav_partner_odoo",    label: "Partnerships Dropdown — Odoo label",    defaultValue: "Odoo ERP" },
+  { section: "nav", key: "nav_partner_yanolja", label: "Partnerships Dropdown — Yanolja label", defaultValue: "Yanolja Cloud" },
+  { section: "nav", key: "nav_partner_zoho",    label: "Partnerships Dropdown — Zoho label",    defaultValue: "Zoho" },
   { section: "nav", key: "nav_link_tech",         label: "Nav Link — Tech Stack",   defaultValue: "Tech Stack" },
   { section: "nav", key: "nav_cta", label: "Nav CTA Button", defaultValue: "Get Started" },
 

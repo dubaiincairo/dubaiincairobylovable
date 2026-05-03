@@ -5,17 +5,17 @@ import { useSiteContent } from "@/hooks/useSiteContent";
 import { useContactModal } from "@/context/ContactModalContext";
 import { slideDown } from "@/lib/animations";
 
-const partnerLinks = [
-  { href: "/partnerships/odoo",     label: "Odoo ERP" },
-  { href: "/partnerships/yanolja",  label: "Yanolja Cloud" },
-  { href: "/partnerships/zoho",     label: "Zoho" },
-];
-
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [partnerOpen, setPartnerOpen] = useState(false);
   const partnerTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { get } = useSiteContent();
+
+  const partnerLinks = [
+    { href: "/partnerships/odoo",    label: get("nav_partner_odoo",    "Odoo ERP") },
+    { href: "/partnerships/yanolja", label: get("nav_partner_yanolja", "Yanolja Cloud") },
+    { href: "/partnerships/zoho",    label: get("nav_partner_zoho",    "Zoho") },
+  ];
   const { openContactModal } = useContactModal();
   const { scrollY } = useScroll();
   const bgOpacity = useTransform(scrollY, [0, 100], [0.6, 0.95]);
