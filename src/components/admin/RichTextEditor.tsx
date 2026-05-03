@@ -1,6 +1,7 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { Bold, Italic, List, ListOrdered, Heading2, Minus } from "lucide-react";
+import TextAlign from "@tiptap/extension-text-align";
+import { Bold, Italic, List, ListOrdered, Heading2, Minus, AlignLeft, AlignCenter, AlignRight, AlignJustify } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RichTextEditorProps {
@@ -12,7 +13,10 @@ interface RichTextEditorProps {
 
 export function RichTextEditor({ value, onChange, placeholder, minHeight = 120 }: RichTextEditorProps) {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      TextAlign.configure({ types: ["heading", "paragraph"] }),
+    ],
     content: value,
     editorProps: {
       attributes: {
@@ -48,7 +52,7 @@ export function RichTextEditor({ value, onChange, placeholder, minHeight = 120 }
   return (
     <div className="rounded-md border border-input bg-background overflow-hidden focus-within:ring-2 focus-within:ring-ring">
       {/* Toolbar */}
-      <div className="flex items-center gap-0.5 px-2 py-1.5 border-b border-border bg-muted/30">
+      <div className="flex items-center gap-0.5 px-2 py-1.5 border-b border-border bg-muted/30 flex-wrap">
         <ToolBtn title="Bold" active={editor.isActive("bold")} onClick={() => editor.chain().focus().toggleBold().run()}>
           <Bold className="w-3.5 h-3.5" />
         </ToolBtn>
@@ -68,6 +72,19 @@ export function RichTextEditor({ value, onChange, placeholder, minHeight = 120 }
         <div className="w-px h-4 bg-border mx-1" />
         <ToolBtn title="Divider" active={false} onClick={() => editor.chain().focus().setHorizontalRule().run()}>
           <Minus className="w-3.5 h-3.5" />
+        </ToolBtn>
+        <div className="w-px h-4 bg-border mx-1" />
+        <ToolBtn title="Align left" active={editor.isActive({ textAlign: "left" })} onClick={() => editor.chain().focus().setTextAlign("left").run()}>
+          <AlignLeft className="w-3.5 h-3.5" />
+        </ToolBtn>
+        <ToolBtn title="Align center" active={editor.isActive({ textAlign: "center" })} onClick={() => editor.chain().focus().setTextAlign("center").run()}>
+          <AlignCenter className="w-3.5 h-3.5" />
+        </ToolBtn>
+        <ToolBtn title="Align right" active={editor.isActive({ textAlign: "right" })} onClick={() => editor.chain().focus().setTextAlign("right").run()}>
+          <AlignRight className="w-3.5 h-3.5" />
+        </ToolBtn>
+        <ToolBtn title="Justify" active={editor.isActive({ textAlign: "justify" })} onClick={() => editor.chain().focus().setTextAlign("justify").run()}>
+          <AlignJustify className="w-3.5 h-3.5" />
         </ToolBtn>
       </div>
       <EditorContent

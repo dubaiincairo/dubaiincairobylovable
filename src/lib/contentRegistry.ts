@@ -149,7 +149,7 @@ export const contentRegistry: ContentField[] = [
   // ── Values ──
   { section: "values", key: "values_subtitle", label: "Section Subtitle", defaultValue: "What We Stand For" },
   { section: "values", key: "values_headline", label: "Section Headline", defaultValue: "The Principles Behind Every Project" },
-  ...Array.from({ length: 6 }, (_, i) => [
+  ...Array.from({ length: 3 }, (_, i) => [
     { section: "values", key: `value_${i+1}_title`, label: `Value ${i+1} Title`, defaultValue: `Value ${i+1}` },
     { section: "values", key: `value_${i+1}_desc`, label: `Value ${i+1} Description`, defaultValue: "" },
   ]).flat(),

@@ -41,7 +41,7 @@ const sectionDescriptions: Record<string, string> = {
   stats: "Key numbers shown below the hero",
   about: "Text copy + dashboard visual (header, metrics, badge)",
   edges: "Why we're different — 6 cards",
-  values: "Our core values — 6 cards",
+  values: "Our core values — 3 cards",
   services: "Six specialised studios",
   founder: "Founder quote & bio",
   clients: "Client names marquee",
@@ -710,6 +710,8 @@ function FieldRow({
       {showSnippet && <MatchSnippet text={value} term={highlight} />}
       {field.type === "upload" ? (
         <ImageUploadField value={value} onChange={(val) => onChange(field.key, val)} fieldKey={field.key} />
+      ) : type === "body" ? (
+        <RichTextEditor value={value} onChange={(val) => onChange(field.key, val)} minHeight={80} />
       ) : (
         <AutoResizeTextarea value={value} onChange={(val) => onChange(field.key, val)} />
       )}
