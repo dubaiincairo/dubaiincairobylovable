@@ -9,6 +9,7 @@ import {
   Type, AlignLeft, MousePointer, Hash, LayoutList,
   Plus, Trash2, Pencil, Star, Eye, EyeOff, BookOpen, Briefcase, Landmark,
   Upload, ImageIcon, GripVertical, Mail, Menu, LayoutDashboard, MessageSquare,
+  Globe, Check,
 } from "lucide-react";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
 import { cn } from "@/lib/utils";
@@ -32,7 +33,7 @@ const sectionIcons: Record<string, string> = {
   nav: "🧭", hero: "🏠", stats: "📊", about: "ℹ️", edges: "⚡",
   values: "💎", services: "🎯", founder: "👤", clients: "🤝",
   tech: "🛠️", google: "📍", legal: "📜", contact: "✉️", footer: "🔗",
-  careers: "💼", odoo: "🔶", yanolja: "🏨",
+  careers: "💼", odoo: "🔶", yanolja: "🏨", zoho: "🟣",
 };
 
 const sectionDescriptions: Record<string, string> = {
@@ -53,6 +54,7 @@ const sectionDescriptions: Record<string, string> = {
   careers: "Hero, Why Join cards, job section labels, how to apply copy",
   odoo: "Page header, hero copy, service tags, 9 suites, CTA — plus Odoo logo upload",
   yanolja: "Hero copy, partner name, logo upload, service tags, 8 products, CTA",
+  zoho: "Page header, hero copy, capability tags, 6 suites, CTA — plus Zoho logo upload",
 };
 
 const subItemLabels: Record<string, string> = {
@@ -119,7 +121,7 @@ const Admin = () => {
   const [openSubGroups, setOpenSubGroups] = useState<Record<string, boolean>>({});
   const [search, setSearch]         = useState("");
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [adminTab, setAdminTab]     = useState<"dashboard" | "content" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications">("dashboard");
+  const [adminTab, setAdminTab]     = useState<"dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications">("dashboard");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // ── Auth & data load ──
@@ -343,6 +345,7 @@ const Admin = () => {
         </header>
 
         {adminTab === "dashboard"    && <DashboardPanel />}
+        {adminTab === "seo"          && <SEOPanel dbValues={dbValues} edited={edited} onChange={handleChange} onSave={handleSave} saving={saving} />}
         {adminTab === "contacts"     && <ContactSubmissionsPanel />}
         {adminTab === "applications" && <JobApplicationsPanel />}
         {adminTab === "testimonials" && <TestimonialsPanel logActivity={(action, label) => logActivity(action, "testimonial", label)} />}
@@ -574,11 +577,12 @@ const Admin = () => {
 
 // ─── SidebarContent ───────────────────────────────────────────────────────────
 
-type AdminTab = "dashboard" | "content" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications";
+type AdminTab = "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications";
 
 const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen; dividerBefore?: boolean }[] = [
   { id: "dashboard",    label: "Dashboard",       icon: LayoutDashboard },
   { id: "content",      label: "Content",         icon: Type },
+  { id: "seo",          label: "SEO & Meta",      icon: Globe, dividerBefore: true },
   { id: "case-studies", label: "Cases",           icon: BookOpen },
   { id: "jobs",         label: "Job Listings",    icon: Briefcase },
   { id: "banks",        label: "Banks",           icon: Landmark },
@@ -590,8 +594,8 @@ const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen; dividerBe
 function SidebarContent({
   adminTab, setAdminTab, hasEdits, saving, edited, handleSave, handleLogout,
 }: {
-  adminTab: AdminTab;
-  setAdminTab: (t: AdminTab) => void;
+  adminTab: "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications";
+  setAdminTab: (t: "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications") => void;
   hasEdits: boolean;
   saving: boolean;
   edited: Record<string, string>;
@@ -634,20 +638,180 @@ function SidebarContent({
       <div className="flex-1" />
 
       <div className="p-4 border-t border-border space-y-2 mt-auto">
-        {hasEdits && adminTab === "content" ? (
+        {hasEdits && (adminTab === "content" || adminTab === "seo") ? (
           <Button onClick={handleSave} disabled={saving} size="sm" className="w-full glow-gold font-display">
             {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
             Save {Object.keys(edited).length} Change{Object.keys(edited).length !== 1 ? "s" : ""}
           </Button>
-        ) : adminTab === "content" ? (
+        ) : (adminTab === "content" || adminTab === "seo") ? (
           <div className="text-center text-xs text-muted-foreground py-1">No unsaved changes</div>
         ) : null}
         <Button variant="outline" size="sm" className="w-full" onClick={handleLogout}>
           <LogOut className="w-4 h-4 mr-1.5" /> Logout
         </Button>
-        {adminTab === "content" && <p className="text-center text-[10px] text-muted-foreground">⌘S to save</p>}
+        {(adminTab === "content" || adminTab === "seo") && <p className="text-center text-[10px] text-muted-foreground">⌘S to save</p>}
       </div>
     </>
+  );
+}
+
+// ─── SEOPanel ─────────────────────────────────────────────────────────────────
+
+const SEO_PAGES = [
+  { label: "Home", keys: ["seo_home_title", "seo_home_description", "seo_home_og_image"] },
+  { label: "Studios", keys: ["seo_studios_title", "seo_studios_description"] },
+  { label: "Tech Stack", keys: ["seo_tech_title", "seo_tech_description"] },
+  { label: "Careers", keys: ["seo_careers_title", "seo_careers_description"] },
+  { label: "Case Studies", keys: ["seo_cases_title", "seo_cases_description"] },
+  { label: "Odoo Partner", keys: ["seo_odoo_title", "seo_odoo_description"] },
+  { label: "Yanolja Partner", keys: ["seo_yanolja_title", "seo_yanolja_description"] },
+  { label: "Zoho Partner", keys: ["seo_zoho_title", "seo_zoho_description"] },
+];
+
+function SEOPanel({
+  dbValues, edited, onChange, onSave, saving,
+}: {
+  dbValues: Record<string, string>;
+  edited: Record<string, string>;
+  onChange: (key: string, val: string) => void;
+  onSave: () => void;
+  saving: boolean;
+}) {
+  const val = (key: string) => edited[key] ?? dbValues[key] ?? "";
+  const isEdited = (key: string) => key in edited;
+  const hasEdits = Object.keys(edited).length > 0;
+
+  const globalKeys = ["seo_global_og_image", "seo_twitter_handle", "seo_ga4_id", "seo_gsc_verification"];
+  const allSeoFields = contentRegistry.filter((f) => f.section === "seo");
+  const fieldMap = Object.fromEntries(allSeoFields.map((f) => [f.key, f]));
+
+  return (
+    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto space-y-6">
+      {/* Header */}
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h2 className="font-display font-bold text-lg flex items-center gap-2">
+            <Globe className="w-5 h-5 text-primary" /> SEO & Meta Settings
+          </h2>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            Control page titles, descriptions, and social sharing for every route.
+          </p>
+        </div>
+        {hasEdits && (
+          <Button onClick={onSave} disabled={saving} size="sm" className="glow-gold font-display shrink-0">
+            {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
+            Save
+          </Button>
+        )}
+      </div>
+
+      {/* Global Settings */}
+      <section className="rounded-xl border border-border bg-card overflow-hidden">
+        <div className="flex items-center gap-3 px-5 py-3 bg-muted/30 border-b border-border">
+          <Globe className="w-4 h-4 text-primary" />
+          <span className="text-sm font-display font-bold">Global Settings</span>
+          <span className="text-[10px] text-muted-foreground ml-1">— applies site-wide unless overridden per page</span>
+        </div>
+        <div className="divide-y divide-border">
+          {globalKeys.map((key) => {
+            const field = fieldMap[key];
+            if (!field) return null;
+            return (
+              <SEOFieldRow
+                key={key}
+                label={field.label}
+                fieldKey={key}
+                value={val(key)}
+                isEdited={isEdited(key)}
+                type={field.type === "upload" ? "upload" : key.includes("description") ? "textarea" : "text"}
+                onChange={onChange}
+              />
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Per-page meta */}
+      <div className="space-y-4">
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground px-1">Per-Page Meta</h3>
+        {SEO_PAGES.map(({ label, keys }) => {
+          const pageEdited = keys.filter((k) => isEdited(k)).length;
+          return (
+            <section key={label} className="rounded-xl border border-border bg-card overflow-hidden">
+              <div className="flex items-center gap-3 px-5 py-3 bg-muted/20 border-b border-border">
+                <span className="text-sm font-display font-semibold">{label}</span>
+                {pageEdited > 0 && (
+                  <span className="text-[9px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded ml-auto">
+                    {pageEdited} unsaved
+                  </span>
+                )}
+              </div>
+              <div className="divide-y divide-border">
+                {keys.map((key) => {
+                  const field = fieldMap[key];
+                  if (!field) return null;
+                  const isTitle = key.includes("_title");
+                  const isOg    = key.includes("_og_image");
+                  return (
+                    <SEOFieldRow
+                      key={key}
+                      label={isTitle ? "Meta Title" : isOg ? "OG Image" : "Meta Description"}
+                      fieldKey={key}
+                      value={val(key)}
+                      isEdited={isEdited(key)}
+                      type={isOg ? "upload" : isTitle ? "text" : "textarea"}
+                      onChange={onChange}
+                      hint={isTitle ? "Recommended: 50–60 characters" : isOg ? undefined : "Recommended: 150–160 characters"}
+                      charCount={!isOg}
+                    />
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+    </main>
+  );
+}
+
+function SEOFieldRow({
+  label, fieldKey, value, isEdited, type, onChange, hint, charCount,
+}: {
+  label: string;
+  fieldKey: string;
+  value: string;
+  isEdited: boolean;
+  type: "text" | "textarea" | "upload";
+  onChange: (key: string, val: string) => void;
+  hint?: string;
+  charCount?: boolean;
+}) {
+  const len = value.replace(/<[^>]+>/g, "").length;
+  return (
+    <div className={cn("px-5 py-3.5 transition-colors", isEdited && "bg-primary/[0.03]")}>
+      <div className="flex items-center gap-2 mb-1.5">
+        <label className="text-xs font-semibold text-foreground">{label}</label>
+        {isEdited && (
+          <span className="text-[9px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded ml-auto">
+            unsaved
+          </span>
+        )}
+        {charCount && !isEdited && (
+          <span className={cn("text-[10px] ml-auto font-mono", len > (label === "Meta Title" ? 60 : 160) ? "text-destructive" : "text-muted-foreground")}>
+            {len} chars
+          </span>
+        )}
+      </div>
+      {hint && <p className="text-[10px] text-muted-foreground mb-1.5">{hint}</p>}
+      {type === "upload" ? (
+        <ImageUploadField value={value} onChange={(v) => onChange(fieldKey, v)} fieldKey={fieldKey} />
+      ) : type === "textarea" ? (
+        <AutoResizeTextarea value={value} onChange={(v) => onChange(fieldKey, v)} />
+      ) : (
+        <AutoResizeTextarea value={value} onChange={(v) => onChange(fieldKey, v)} />
+      )}
+    </div>
   );
 }
 

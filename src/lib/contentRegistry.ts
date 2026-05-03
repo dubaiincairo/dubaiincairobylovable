@@ -10,10 +10,9 @@ export interface ContentField {
 }
 
 export const sectionOrder = [
-  "seo",
   "nav", "hero", "stats", "about", "edges", "values", "services", "studios",
   "founder", "clients", "testimonials", "tech", "google", "legal", "contact", "footer",
-  "careers", "odoo", "yanolja",
+  "careers", "odoo", "yanolja", "zoho",
 ];
 
 export const sectionLabels: Record<string, string> = {
@@ -37,6 +36,7 @@ export const sectionLabels: Record<string, string> = {
   careers: "Careers Page",
   odoo: "Partnerships — Odoo",
   yanolja: "Partnerships — Yanolja Cloud",
+  zoho: "Partnerships — Zoho",
 };
 
 export const contentRegistry: ContentField[] = [
@@ -58,8 +58,12 @@ export const contentRegistry: ContentField[] = [
   { section: "seo", key: "seo_careers_description",  label: "Careers — Meta Description",  defaultValue: "Explore job opportunities at Dubai in Cairo, Cairo's leading digital marketing agency. We're hiring talented marketers, designers, developers, and strategists." },
   { section: "seo", key: "seo_cases_title",          label: "Case Studies — Meta Title",   defaultValue: "Case Studies — Real Results for Real Clients | Dubai in Cairo" },
   { section: "seo", key: "seo_cases_description",    label: "Case Studies — Meta Description", defaultValue: "Browse Dubai in Cairo's client case studies. See how we've driven measurable growth for brands across Egypt and the Middle East." },
-  { section: "seo", key: "seo_odoo_title",           label: "Odoo Partner — Meta Title",   defaultValue: "Odoo ERP Partner in Egypt — Certified Implementation & Support | Dubai in Cairo" },
+  { section: "seo", key: "seo_odoo_title",           label: "Odoo Partner — Meta Title",       defaultValue: "Odoo ERP Partner in Egypt — Certified Implementation & Support | Dubai in Cairo" },
   { section: "seo", key: "seo_odoo_description",     label: "Odoo Partner — Meta Description", defaultValue: "Dubai in Cairo is a certified Odoo ERP partner in Egypt. We implement, customize, and support Odoo for businesses across manufacturing, retail, services, and eCommerce." },
+  { section: "seo", key: "seo_yanolja_title",        label: "Yanolja Partner — Meta Title",    defaultValue: "Yanolja Cloud Partner — Hospitality Technology Implementation | Dubai in Cairo" },
+  { section: "seo", key: "seo_yanolja_description",  label: "Yanolja Partner — Meta Description", defaultValue: "Dubai in Cairo is a specialized implementor of Yanolja Cloud's eZee hospitality suite. We deploy cloud PMS, channel managers, and booking engines for properties in Saudi Arabia and beyond." },
+  { section: "seo", key: "seo_zoho_title",           label: "Zoho Partner — Meta Title",       defaultValue: "Zoho Enablement Experts in Egypt — CRM & Marketing Automation | Dubai in Cairo" },
+  { section: "seo", key: "seo_zoho_description",     label: "Zoho Partner — Meta Description", defaultValue: "Dubai in Cairo specializes in Zoho CRM implementation, marketing automation, and workflow integration — connecting marketing, sales, and operations for businesses in Egypt and the Middle East." },
 
   // ── Nav ──
   { section: "nav", key: "nav_favicon_url", label: "Favicon (browser tab icon)", defaultValue: "/favicon.svg", type: "upload" },
@@ -434,4 +438,55 @@ export const contentRegistry: ContentField[] = [
   { section: "yanolja", key: "yan_cta_h2",    label: "CTA — Headline", defaultValue: "Ready to Digitize Your Hospitality Operations?" },
   { section: "yanolja", key: "yan_cta_body",  label: "CTA — Body",     defaultValue: "Our hospitality tech team brings 12 months of hands-on implementation experience across Saudi Arabia. Let's bring that expertise to your property." },
   { section: "yanolja", key: "yan_cta_btn",   label: "CTA — Button",   defaultValue: "Get in Touch" },
+
+  // ── Zoho ──
+  { section: "zoho", key: "zoho_page_badge",     label: "Page — Badge",      defaultValue: "Strategic Partnership" },
+  { section: "zoho", key: "zoho_page_headline",  label: "Page — Headline",   defaultValue: "Zoho Enablement Experts" },
+  { section: "zoho", key: "zoho_page_subtext",   label: "Page — Subtext",    defaultValue: "We specialize in implementing Zoho applications and integrating them directly into your existing business and operational workflows." },
+  { section: "zoho", key: "zoho_logo_url",       label: "Logo — URL (upload to override SVG)", defaultValue: "", type: "upload" },
+  { section: "zoho", key: "zoho_partner_name",   label: "Logo — Partner Name",defaultValue: "Zoho" },
+
+  { section: "zoho", key: "zoho_hero_badge",   label: "Hero — Badge",              defaultValue: "CRM Partnership" },
+  { section: "zoho", key: "zoho_hero_h1",      label: "Hero — Headline Line 1",    defaultValue: "We are" },
+  { section: "zoho", key: "zoho_hero_h1_accent",label: "Hero — Headline (Gold)",   defaultValue: "Zoho Enablement" },
+  { section: "zoho", key: "zoho_hero_h1_end",  label: "Hero — Headline Line 3",    defaultValue: "Experts" },
+  { section: "zoho", key: "zoho_hero_body_1",  label: "Hero — Paragraph 1",        defaultValue: "With over five years of hands-on experience, we help organizations deploy Zoho systems in a way that connects marketing, sales, and operations — ensuring that tools are not only installed, but fully adopted and operationalized." },
+  { section: "zoho", key: "zoho_hero_body_2",  label: "Hero — Paragraph 2",        defaultValue: "Our focus is on execution: configuring systems, aligning them with real business processes, and enabling teams to use them effectively to support day-to-day operations and growth activities." },
+  { section: "zoho", key: "zoho_badge_label",  label: "Logo Card — Badge Label",   defaultValue: "Enablement Expert" },
+  { section: "zoho", key: "zoho_value_body",   label: "Value Statement — Body",    defaultValue: "Zoho's value lies in how well it is implemented and integrated into actual workflows. We ensure that each application works within your business environment — from lead management and campaign execution to sales tracking and reporting — while providing the training needed for teams to operate independently and efficiently." },
+
+  // ── Zoho — Tags ──
+  { section: "zoho", key: "zoho_tag_1", label: "Tag 1", defaultValue: "Zoho CRM Implementation & Configuration" },
+  { section: "zoho", key: "zoho_tag_2", label: "Tag 2", defaultValue: "Marketing Automation Setup & Deployment" },
+  { section: "zoho", key: "zoho_tag_3", label: "Tag 3", defaultValue: "Lead Management & Pipeline Configuration" },
+  { section: "zoho", key: "zoho_tag_4", label: "Tag 4", defaultValue: "Workflow Automation & Process Alignment" },
+  { section: "zoho", key: "zoho_tag_5", label: "Tag 5", defaultValue: "Omnichannel Communication Setup (Email, SMS, WhatsApp)" },
+  { section: "zoho", key: "zoho_tag_6", label: "Tag 6", defaultValue: "Reporting & Dashboard Configuration" },
+  { section: "zoho", key: "zoho_tag_7", label: "Tag 7", defaultValue: "System Integration with Existing Tools & Operations" },
+  { section: "zoho", key: "zoho_tag_8", label: "Tag 8", defaultValue: "Team Training & User Enablement" },
+
+  // ── Zoho — Suites section header ──
+  { section: "zoho", key: "zoho_suites_badge",     label: "Suites — Badge",           defaultValue: "Zoho Ecosystem" },
+  { section: "zoho", key: "zoho_suites_h2",        label: "Suites — Headline",        defaultValue: "Six Integrated Suites." },
+  { section: "zoho", key: "zoho_suites_h2_accent", label: "Suites — Headline (gold)", defaultValue: "One Unified Growth Engine." },
+
+  // ── Zoho — 6 Suites ──
+  { section: "zoho", key: "zoho_suite_1_title", label: "Suite 1 — Title",       defaultValue: "Zoho CRM Suite" },
+  { section: "zoho", key: "zoho_suite_1_desc",  label: "Suite 1 — Description", defaultValue: "Implements a centralized system for managing customer data, interactions, and sales pipelines — ensuring clear visibility and structured management of leads and opportunities." },
+  { section: "zoho", key: "zoho_suite_2_title", label: "Suite 2 — Title",       defaultValue: "Zoho Marketing Automation Suite" },
+  { section: "zoho", key: "zoho_suite_2_desc",  label: "Suite 2 — Description", defaultValue: "Supports the setup and execution of automated marketing campaigns, including lead capture, segmentation, and nurturing across multiple channels." },
+  { section: "zoho", key: "zoho_suite_3_title", label: "Suite 3 — Title",       defaultValue: "Zoho Sales & Pipeline Management Suite" },
+  { section: "zoho", key: "zoho_suite_3_desc",  label: "Suite 3 — Description", defaultValue: "Configures structured sales processes with pipeline tracking, lead qualification, and performance monitoring to support consistent revenue generation." },
+  { section: "zoho", key: "zoho_suite_4_title", label: "Suite 4 — Title",       defaultValue: "Zoho Customer Experience (CX) Suite" },
+  { section: "zoho", key: "zoho_suite_4_desc",  label: "Suite 4 — Description", defaultValue: "Integrates customer interactions across channels, enabling teams to manage communication, support, and engagement within a unified system." },
+  { section: "zoho", key: "zoho_suite_5_title", label: "Suite 5 — Title",       defaultValue: "Zoho Finance & Operations Suite" },
+  { section: "zoho", key: "zoho_suite_5_desc",  label: "Suite 5 — Description", defaultValue: "Connects financial workflows such as invoicing and transaction tracking with sales and customer data for improved operational visibility." },
+  { section: "zoho", key: "zoho_suite_6_title", label: "Suite 6 — Title",       defaultValue: "Zoho Analytics & Business Intelligence Suite" },
+  { section: "zoho", key: "zoho_suite_6_desc",  label: "Suite 6 — Description", defaultValue: "Enables the setup of dashboards and reporting systems that provide insights into marketing, sales, and operational performance." },
+
+  // ── Zoho — CTA ──
+  { section: "zoho", key: "zoho_cta_badge", label: "CTA — Badge",    defaultValue: "Start the Conversation" },
+  { section: "zoho", key: "zoho_cta_h2",    label: "CTA — Headline", defaultValue: "Ready to Operationalize Zoho for Your Business?" },
+  { section: "zoho", key: "zoho_cta_body",  label: "CTA — Body",     defaultValue: "Let's connect your Zoho environment to your actual business workflows. Our enablement team handles implementation, integration, and team training end to end." },
+  { section: "zoho", key: "zoho_cta_btn",   label: "CTA — Button",   defaultValue: "Get in Touch" },
 ];
