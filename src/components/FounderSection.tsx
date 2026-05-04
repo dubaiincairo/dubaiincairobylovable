@@ -27,9 +27,10 @@ const FounderSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
             {get("founder_headline", "Built by Someone Who's Been in the Trenches.")}
           </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">
-            {get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")}
-          </p>
+          <div
+            className="text-muted-foreground text-lg leading-relaxed [&>p]:whitespace-pre-line [&>p]:mb-0"
+            dangerouslySetInnerHTML={{ __html: get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.") }}
+          />
 
           {/* Social icons */}
           <div className="flex items-center gap-3 mt-8">
@@ -64,9 +65,10 @@ const FounderSection = () => {
               </div>
             </div>
 
-            <p className="text-foreground text-lg md:text-xl font-display italic leading-relaxed mb-6 text-center whitespace-pre-line">
-              "{get("founder_quote", "I believe that continuous learning is the key to success in business. That's why I've completed 50+ specialized training courses in eBusiness, and I will never stop growing, nor will we.")}"
-            </p>
+            <div
+              className="text-foreground text-lg md:text-xl font-display italic leading-relaxed mb-6 text-center [&>p]:whitespace-pre-line [&>p]:mb-0 before:content-['“'] after:content-['”']"
+              dangerouslySetInnerHTML={{ __html: get("founder_quote", "I believe that continuous learning is the key to success in business. That's why I've completed 50+ specialized training courses in eBusiness, and I will never stop growing, nor will we.") }}
+            />
 
             <div className="w-12 h-px bg-primary/30 mx-auto mb-4" />
 

@@ -37,12 +37,14 @@ const AboutSection = () => {
           <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
             {get("about_headline", "A Digital Agency Built on Science, Not Guesswork")}
           </h2>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-5 whitespace-pre-line">
-            {get("about_body", "Founded in 2021, Dubai in Cairo is a Cairo-based digital marketing and eBusiness solutions agency.")}
-          </p>
-          <p className="text-foreground font-medium text-base md:text-lg leading-relaxed whitespace-pre-line">
-            {get("about_body_2", "We are 100% digital by design — no overhead, no guesswork. Just a focused team turning data into strategy.")}
-          </p>
+          <div
+            className="text-muted-foreground text-base md:text-lg leading-relaxed mb-5 [&>p]:whitespace-pre-line [&>p]:mb-0"
+            dangerouslySetInnerHTML={{ __html: get("about_body", "Founded in 2021, Dubai in Cairo is a Cairo-based digital marketing and eBusiness solutions agency.") }}
+          />
+          <div
+            className="text-foreground font-medium text-base md:text-lg leading-relaxed [&>p]:whitespace-pre-line [&>p]:mb-0"
+            dangerouslySetInnerHTML={{ __html: get("about_body_2", "We are 100% digital by design — no overhead, no guesswork. Just a focused team turning data into strategy.") }}
+          />
         </motion.div>
 
         {/* RIGHT — Process steps */}
@@ -73,9 +75,10 @@ const AboutSection = () => {
                 <h3 className="font-display font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {step.desc}
-                </p>
+                <div
+                  className="text-muted-foreground text-sm leading-relaxed [&>p]:mb-0"
+                  dangerouslySetInnerHTML={{ __html: step.desc }}
+                />
               </div>
             </motion.div>
           ))}

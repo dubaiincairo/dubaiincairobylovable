@@ -35,7 +35,10 @@ const ValuesSection = () => {
                 <v.icon className="w-5 h-5 text-primary" />
               </div>
               <h3 className="font-display font-semibold mb-2 whitespace-pre-line">{v.title}</h3>
-              <p className="text-muted-foreground text-sm whitespace-pre-line">{v.desc}</p>
+              <div
+                className="text-muted-foreground text-sm [&>p]:whitespace-pre-line [&>p]:mb-0"
+                dangerouslySetInnerHTML={{ __html: v.desc }}
+              />
             </motion.div>
           ))}
         </motion.div>

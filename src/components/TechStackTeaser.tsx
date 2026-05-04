@@ -35,9 +35,10 @@ const TechStackTeaser = () => {
               <h2 className="font-display font-bold text-xl md:text-2xl text-foreground mb-1">
                 {get("tech_headline", "Integrated Solutions. Proven Tools.")}
               </h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {get("tech_teaser_desc", "41 industry-leading tools across 3 intelligent layers — purpose-built to drive growth, operations, and innovation.")}
-              </p>
+              <div
+                className="text-sm text-muted-foreground leading-relaxed [&>p]:mb-0"
+                dangerouslySetInnerHTML={{ __html: get("tech_teaser_desc", "41 industry-leading tools across 3 intelligent layers — purpose-built to drive growth, operations, and innovation.") }}
+              />
             </div>
 
             {/* middle — 3 layer pills */}
