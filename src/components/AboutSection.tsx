@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { richText } from "@/lib/richText";
 
 const AboutSection = () => {
   const { get } = useSiteContent();
@@ -39,11 +40,11 @@ const AboutSection = () => {
           </h2>
           <div
             className="text-muted-foreground text-base md:text-lg leading-relaxed mb-5 [&>p]:whitespace-pre-line [&>p]:mb-0"
-            dangerouslySetInnerHTML={{ __html: get("about_body", "Founded in 2021, Dubai in Cairo is a Cairo-based digital marketing and eBusiness solutions agency.") }}
+            dangerouslySetInnerHTML={{ __html: richText(get("about_body", "Founded in 2021, Dubai in Cairo is a Cairo-based digital marketing and eBusiness solutions agency.")) }}
           />
           <div
             className="text-foreground font-medium text-base md:text-lg leading-relaxed [&>p]:whitespace-pre-line [&>p]:mb-0"
-            dangerouslySetInnerHTML={{ __html: get("about_body_2", "We are 100% digital by design — no overhead, no guesswork. Just a focused team turning data into strategy.") }}
+            dangerouslySetInnerHTML={{ __html: richText(get("about_body_2", "We are 100% digital by design — no overhead, no guesswork. Just a focused team turning data into strategy.")) }}
           />
         </motion.div>
 
@@ -77,7 +78,7 @@ const AboutSection = () => {
                 </h3>
                 <div
                   className="text-muted-foreground text-sm leading-relaxed [&>p]:mb-0"
-                  dangerouslySetInnerHTML={{ __html: step.desc }}
+                  dangerouslySetInnerHTML={{ __html: richText(step.desc) }}
                 />
               </div>
             </motion.div>

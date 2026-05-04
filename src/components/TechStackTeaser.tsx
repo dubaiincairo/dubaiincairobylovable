@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { richText } from "@/lib/richText";
 import { TrendingUp, ShoppingCart, Cpu, ArrowRight } from "lucide-react";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 import { useSiteContent } from "@/hooks/useSiteContent";
@@ -37,7 +38,7 @@ const TechStackTeaser = () => {
               </h2>
               <div
                 className="text-sm text-muted-foreground leading-relaxed [&>p]:mb-0"
-                dangerouslySetInnerHTML={{ __html: get("tech_teaser_desc", "41 industry-leading tools across 3 intelligent layers — purpose-built to drive growth, operations, and innovation.") }}
+                dangerouslySetInnerHTML={{ __html: richText(get("tech_teaser_desc", "41 industry-leading tools across 3 intelligent layers — purpose-built to drive growth, operations, and innovation.")) }}
               />
             </div>
 

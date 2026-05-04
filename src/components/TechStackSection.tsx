@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { richText } from "@/lib/richText";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { TrendingUp, ShoppingCart, Cpu, ArrowRight } from "lucide-react";
@@ -89,7 +90,7 @@ const TechStackSection = () => {
           </h2>
           <div
             className="mt-3 text-muted-foreground text-sm max-w-lg mx-auto leading-relaxed [&>p]:mb-0"
-            dangerouslySetInnerHTML={{ __html: get("tech_desc", "Three intelligent layers — each purpose-built to cover a critical domain of your digital operation.") }}
+            dangerouslySetInnerHTML={{ __html: richText(get("tech_desc", "Three intelligent layers — each purpose-built to cover a critical domain of your digital operation.")) }}
           />
         </motion.div>
 

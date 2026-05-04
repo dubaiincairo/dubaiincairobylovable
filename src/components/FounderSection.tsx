@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Quote, Facebook, Linkedin, Instagram } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { richText } from "@/lib/richText";
 
 const SOCIALS = [
   { key: "founder_facebook",  Icon: Facebook,  label: "Facebook"  },
@@ -29,7 +30,7 @@ const FounderSection = () => {
           </h2>
           <div
             className="text-muted-foreground text-lg leading-relaxed [&>p]:whitespace-pre-line [&>p]:mb-0"
-            dangerouslySetInnerHTML={{ __html: get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.") }}
+            dangerouslySetInnerHTML={{ __html: richText(get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")) }}
           />
 
           {/* Social icons */}
@@ -67,7 +68,7 @@ const FounderSection = () => {
 
             <div
               className="text-foreground text-lg md:text-xl font-display italic leading-relaxed mb-6 text-center [&>p]:whitespace-pre-line [&>p]:mb-0 before:content-['“'] after:content-['”']"
-              dangerouslySetInnerHTML={{ __html: get("founder_quote", "I believe that continuous learning is the key to success in business. That's why I've completed 50+ specialized training courses in eBusiness, and I will never stop growing, nor will we.") }}
+              dangerouslySetInnerHTML={{ __html: richText(get("founder_quote", "I believe that continuous learning is the key to success in business. That's why I've completed 50+ specialized training courses in eBusiness, and I will never stop growing, nor will we.")) }}
             />
 
             <div className="w-12 h-px bg-primary/30 mx-auto mb-4" />

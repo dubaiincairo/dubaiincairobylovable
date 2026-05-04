@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Search, Ruler, Handshake } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { richText } from "@/lib/richText";
 
 const icons = [Search, Ruler, Handshake];
 
@@ -37,7 +38,7 @@ const ValuesSection = () => {
               <h3 className="font-display font-semibold mb-2 whitespace-pre-line">{v.title}</h3>
               <div
                 className="text-muted-foreground text-sm [&>p]:whitespace-pre-line [&>p]:mb-0"
-                dangerouslySetInnerHTML={{ __html: v.desc }}
+                dangerouslySetInnerHTML={{ __html: richText(v.desc) }}
               />
             </motion.div>
           ))}
