@@ -39,7 +39,7 @@ const entityIcon: Record<string, typeof BookOpen> = {
   testimonial: Star,
 };
 
-export function DashboardPanel() {
+export function DashboardPanel({ onNavigate }: { onNavigate?: (tab: string) => void }) {
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -107,8 +107,13 @@ export function DashboardPanel() {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {statCards.map((s) => {
           const Icon = s.icon;
+          const Wrapper = onNavigate ? "button" : "div";
           return (
-            <div key={s.label} className="rounded-xl border border-border bg-card p-4 flex items-center gap-3">
+            <Wrapper
+              key={s.label}
+              {...(onNavigate ? { onClick: () => onNavigate(s.href) } : {})}
+              className={`rounded-xl border border-border bg-card p-4 flex items-center gap-3 w-full text-left transition-colors${onNavigate ? " hover:border-primary/30 hover:bg-muted/30 cursor-pointer" : ""}`}
+            >
               <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${s.color}`}>
                 <Icon className="w-5 h-5" />
               </div>
@@ -116,7 +121,7 @@ export function DashboardPanel() {
                 <div className="text-2xl font-display font-bold">{s.value}</div>
                 <div className="text-[11px] text-muted-foreground leading-tight">{s.label}</div>
               </div>
-            </div>
+            </Wrapper>
           );
         })}
       </div>

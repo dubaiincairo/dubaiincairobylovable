@@ -312,6 +312,8 @@ const Admin = () => {
         {/* Top bar */}
         <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-lg border-b border-border">
           <div className="max-w-3xl mx-auto px-4 md:px-6 h-14 flex items-center gap-3">
+
+            {/* Mobile: hamburger + current tab label */}
             <div className="flex items-center gap-2 lg:hidden">
               <button
                 onClick={() => setMobileSidebarOpen(true)}
@@ -319,29 +321,36 @@ const Admin = () => {
               >
                 <Menu className="w-4 h-4" />
               </button>
-              <h1 className="font-display font-bold text-sm">
-                <span className="text-gradient-gold">Content</span> Manager
-              </h1>
-            </div>
-
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => { setSearch(e.target.value); if (adminTab !== "content") setAdminTab("content"); }}
-                placeholder="Search any word from the site…"
-                className="w-full h-9 pl-9 pr-8 rounded-lg border border-input bg-background text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              />
-              {search && (
-                <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
-                  <X className="w-3.5 h-3.5" />
-                </button>
+              {adminTab !== "content" && (
+                <h1 className="font-display font-bold text-sm">
+                  <span className="text-gradient-gold">Content</span> Manager
+                </h1>
               )}
             </div>
 
+            {/* Search — only on the content tab */}
+            {adminTab === "content" ? (
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search any word from the site…"
+                  className="w-full h-9 pl-9 pr-8 rounded-lg border border-input bg-background text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                />
+                {search && (
+                  <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div className="flex-1" />
+            )}
+
             <div className="flex items-center gap-2 lg:hidden">
-              {hasEdits && (
+              {hasEdits && (adminTab === "content" || adminTab === "seo") && (
                 <Button onClick={handleSave} disabled={saving} size="sm" className="glow-gold font-display h-9 px-3">
                   {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                 </Button>
@@ -353,7 +362,7 @@ const Admin = () => {
           </div>
         </header>
 
-        {adminTab === "dashboard"    && <DashboardPanel />}
+        {adminTab === "dashboard"    && <DashboardPanel onNavigate={(tab) => setAdminTab(tab as AdminTab)} />}
         {adminTab === "seo"          && <SEOPanel dbValues={dbValues} edited={edited} onChange={handleChange} onSave={handleSave} saving={saving} />}
         {adminTab === "contacts"     && <ContactSubmissionsPanel />}
         {adminTab === "applications" && <JobApplicationsPanel />}
