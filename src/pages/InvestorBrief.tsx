@@ -3,9 +3,24 @@ import { motion } from "framer-motion";
 import { ArrowLeft, TrendingUp, Globe, Layers, DollarSign, BarChart2, Clock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useSiteContent } from "@/hooks/useSiteContent";
+import { useSEO } from "@/hooks/useSEO";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 
 const InvestorBrief = () => {
+  const { get } = useSiteContent();
+
+  useSEO({
+    titleKey: "seo_investor_brief_title",
+    descriptionKey: "seo_investor_brief_description",
+    canonical: "/investor-brief",
+  });
+
+  const markets = get("ib_markets", "Riyadh,Doha,Kuwait City,Manama,Baghdad,Accra,Johannesburg")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -26,14 +41,14 @@ const InvestorBrief = () => {
             </Link>
 
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
-              Investor Brief · 2025
+              {get("ib_hero_eyebrow", "Investor Brief · 2025")}
             </span>
             <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight">
-              <span className="text-gradient-gold">Dubai in Cairo</span>
-              <br />Business Model
+              <span className="text-gradient-gold">{get("ib_hero_headline_1", "Dubai in Cairo")}</span>
+              <br />{get("ib_hero_headline_2", "Business Model")}
             </h1>
             <p className="text-muted-foreground text-lg md:text-xl max-w-2xl leading-relaxed">
-              A marketing intelligence firm rejecting the traditional agency model — fusing strategy with implementation across Middle Eastern and African markets.
+              {get("ib_hero_body", "A marketing intelligence firm rejecting the traditional agency model — fusing strategy with implementation across Middle Eastern and African markets.")}
             </p>
           </motion.div>
         </div>
@@ -50,10 +65,10 @@ const InvestorBrief = () => {
             viewport={viewportOnce}
           >
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
-              Core Proposition
+              {get("ib_prop_badge", "Core Proposition")}
             </span>
             <p className="text-foreground text-lg md:text-xl leading-relaxed">
-              DubaiInCity operates as a marketing intelligence firm rejecting the traditional agency model. The company fuses strategy with implementation, refusing to separate these functions that most competitors handle independently.
+              {get("ib_prop_body", "DubaiInCity operates as a marketing intelligence firm rejecting the traditional agency model. The company fuses strategy with implementation, refusing to separate these functions that most competitors handle independently.")}
             </p>
           </motion.div>
         </div>
@@ -64,10 +79,10 @@ const InvestorBrief = () => {
         <div className="max-w-4xl mx-auto">
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
-              The Problem We Solve
+              {get("ib_problem_badge", "The Problem We Solve")}
             </span>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-6 leading-tight">
-              Fragmented Marketing.<br />AI Without Direction.
+              {get("ib_problem_headline_1", "Fragmented Marketing.")}<br />{get("ib_problem_headline_2", "AI Without Direction.")}
             </h2>
           </motion.div>
 
@@ -81,17 +96,21 @@ const InvestorBrief = () => {
             {[
               {
                 icon: Layers,
-                title: "Fragmented Vendors",
-                desc: "Organizations in target markets typically fragment their marketing across disconnected vendors, creating gaps between strategy and execution.",
+                titleKey: "ib_problem_1_title",
+                titleDef: "Fragmented Vendors",
+                descKey: "ib_problem_1_desc",
+                descDef: "Organizations in target markets typically fragment their marketing across disconnected vendors, creating gaps between strategy and execution.",
               },
               {
                 icon: TrendingUp,
-                title: "AI Without Guidance",
-                desc: "Businesses recognize AI's importance but lack guidance on selecting appropriate tools and integrating them effectively into existing workflows.",
+                titleKey: "ib_problem_2_title",
+                titleDef: "AI Without Guidance",
+                descKey: "ib_problem_2_desc",
+                descDef: "Businesses recognize AI's importance but lack guidance on selecting appropriate tools and integrating them effectively into existing workflows.",
               },
             ].map((item) => (
               <motion.div
-                key={item.title}
+                key={item.titleKey}
                 variants={cardFadeUp}
                 className="glass-card rounded-xl p-6 flex gap-4"
               >
@@ -99,8 +118,8 @@ const InvestorBrief = () => {
                   <item.icon className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold text-foreground mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+                  <h3 className="font-display font-semibold text-foreground mb-2">{get(item.titleKey, item.titleDef)}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{get(item.descKey, item.descDef)}</p>
                 </div>
               </motion.div>
             ))}
@@ -113,10 +132,10 @@ const InvestorBrief = () => {
         <div className="max-w-4xl mx-auto">
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
-              Operational Approach
+              {get("ib_ops_badge", "Operational Approach")}
             </span>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-8 leading-tight">
-              Three Sequential Stages
+              {get("ib_ops_headline", "Three Sequential Stages")}
             </h2>
           </motion.div>
 
@@ -129,34 +148,34 @@ const InvestorBrief = () => {
           >
             {[
               {
-                num: "01",
-                title: "Understand",
-                desc: "Study how a client's business operates and identify where marketing intelligence generates the highest returns.",
+                numKey: "ib_stage_1_num", numDef: "01",
+                titleKey: "ib_stage_1_title", titleDef: "Understand",
+                descKey: "ib_stage_1_desc", descDef: "Study how a client's business operates and identify where marketing intelligence generates the highest returns.",
               },
               {
-                num: "02",
-                title: "Strategise & Select",
-                desc: "Combine strategy development with AI tool selection, ensuring both decisions reflect the specific client situation rather than generic trends.",
+                numKey: "ib_stage_2_num", numDef: "02",
+                titleKey: "ib_stage_2_title", titleDef: "Strategise & Select",
+                descKey: "ib_stage_2_desc", descDef: "Combine strategy development with AI tool selection, ensuring both decisions reflect the specific client situation rather than generic trends.",
               },
               {
-                num: "03",
-                title: "Implement & Sustain",
-                desc: "Supervised implementation, training, real-time monitoring, and accountability until client teams operate independently.",
+                numKey: "ib_stage_3_num", numDef: "03",
+                titleKey: "ib_stage_3_title", titleDef: "Implement & Sustain",
+                descKey: "ib_stage_3_desc", descDef: "Supervised implementation, training, real-time monitoring, and accountability until client teams operate independently.",
               },
             ].map((step, i) => (
-              <motion.div key={step.num} variants={cardFadeUp} className="relative flex gap-5 group">
+              <motion.div key={step.numKey} variants={cardFadeUp} className="relative flex gap-5 group">
                 <div className="flex flex-col items-center">
                   <div className="w-px flex-1 bg-border group-first:mt-2" />
                   <div className="w-9 h-9 rounded-full border border-primary/30 bg-primary/5 flex items-center justify-center shrink-0 my-3 transition-colors duration-300 group-hover:border-primary/60 group-hover:bg-primary/10">
-                    <span className="text-[10px] font-bold text-primary tracking-wider">{step.num}</span>
+                    <span className="text-[10px] font-bold text-primary tracking-wider">{get(step.numKey, step.numDef)}</span>
                   </div>
                   <div className="w-px flex-1 bg-border group-last:opacity-0" />
                 </div>
                 <div className="pb-8 group-last:pb-0 pt-2">
                   <h3 className="font-display font-semibold text-foreground mb-1.5 group-hover:text-primary transition-colors">
-                    {step.title}
+                    {get(step.titleKey, step.titleDef)}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{get(step.descKey, step.descDef)}</p>
                 </div>
               </motion.div>
             ))}
@@ -169,13 +188,13 @@ const InvestorBrief = () => {
         <div className="max-w-4xl mx-auto">
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
-              Franchise Opportunity
+              {get("ib_franchise_badge", "Franchise Opportunity")}
             </span>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 leading-tight">
-              Seven Licensed Markets
+              {get("ib_franchise_headline", "Seven Licensed Markets")}
             </h2>
             <p className="text-muted-foreground text-base mb-8 leading-relaxed">
-              Investors provide local infrastructure while the central team manages all operations and client relationships.
+              {get("ib_franchise_subtext", "Investors provide local infrastructure while the central team manages all operations and client relationships.")}
             </p>
           </motion.div>
 
@@ -187,7 +206,7 @@ const InvestorBrief = () => {
             whileInView="visible"
             viewport={viewportOnce}
           >
-            {["Riyadh", "Doha", "Kuwait City", "Manama", "Baghdad", "Accra", "Johannesburg"].map((city) => (
+            {markets.map((city) => (
               <motion.span
                 key={city}
                 variants={cardFadeUp}
@@ -211,22 +230,22 @@ const InvestorBrief = () => {
               <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
                 <DollarSign className="w-4.5 h-4.5 text-primary" />
               </div>
-              <span className="font-display font-semibold text-foreground">Financial Structure</span>
+              <span className="font-display font-semibold text-foreground">{get("ib_fin_badge", "Financial Structure")}</span>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-5">
-                <div className="text-4xl font-display font-bold text-green-400 mb-1">30%</div>
-                <p className="text-sm font-semibold text-foreground mb-1">Investor Revenue Share</p>
+                <div className="text-4xl font-display font-bold text-green-400 mb-1">{get("ib_investor_pct", "30%")}</div>
+                <p className="text-sm font-semibold text-foreground mb-1">{get("ib_investor_title", "Investor Revenue Share")}</p>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Complete real-time financial transparency. Investors provide local infrastructure only.
+                  {get("ib_investor_desc", "Complete real-time financial transparency. Investors provide local infrastructure only.")}
                 </p>
               </div>
               <div className="rounded-xl border border-primary/20 bg-primary/5 p-5">
-                <div className="text-4xl font-display font-bold text-primary mb-1">70%</div>
-                <p className="text-sm font-semibold text-foreground mb-1">DubaiInCity Operating Share</p>
+                <div className="text-4xl font-display font-bold text-primary mb-1">{get("ib_company_pct", "70%")}</div>
+                <p className="text-sm font-semibold text-foreground mb-1">{get("ib_company_title", "DubaiInCity Operating Share")}</p>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Handles all operational responsibilities, client relationships, and team management.
+                  {get("ib_company_desc", "Handles all operational responsibilities, client relationships, and team management.")}
                 </p>
               </div>
             </div>
@@ -239,10 +258,10 @@ const InvestorBrief = () => {
         <div className="max-w-4xl mx-auto">
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
-              Revenue Streams
+              {get("ib_revenue_badge", "Revenue Streams")}
             </span>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-8 leading-tight">
-              Three Income Channels
+              {get("ib_revenue_headline", "Three Income Channels")}
             </h2>
           </motion.div>
 
@@ -256,18 +275,18 @@ const InvestorBrief = () => {
             {[
               {
                 num: "1",
-                title: "Complete Engagements",
-                desc: "Full packages combining strategy and implementation for clients requiring end-to-end support.",
+                titleKey: "ib_revenue_1_title", titleDef: "Complete Engagements",
+                descKey: "ib_revenue_1_desc", descDef: "Full packages combining strategy and implementation for clients requiring end-to-end support.",
               },
               {
                 num: "2",
-                title: "Monthly Retainers",
-                desc: "Ongoing optimization and supervision for clients who need continuous performance management.",
+                titleKey: "ib_revenue_2_title", titleDef: "Monthly Retainers",
+                descKey: "ib_revenue_2_desc", descDef: "Ongoing optimization and supervision for clients who need continuous performance management.",
               },
               {
                 num: "3",
-                title: "Franchise Fees",
-                desc: "Licensing and royalty fees from market operators across the seven licensed territories.",
+                titleKey: "ib_revenue_3_title", titleDef: "Franchise Fees",
+                descKey: "ib_revenue_3_desc", descDef: "Licensing and royalty fees from market operators across the seven licensed territories.",
               },
             ].map((item) => (
               <motion.div
@@ -278,8 +297,8 @@ const InvestorBrief = () => {
                 <div className="w-10 h-10 rounded-full border border-primary/30 bg-primary/5 flex items-center justify-center mx-auto mb-4 group-hover:border-primary/60 group-hover:bg-primary/10 transition-colors">
                   <span className="text-xs font-bold text-primary">{item.num}</span>
                 </div>
-                <h3 className="font-display font-semibold text-foreground mb-2 text-sm">{item.title}</h3>
-                <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
+                <h3 className="font-display font-semibold text-foreground mb-2 text-sm">{get(item.titleKey, item.titleDef)}</h3>
+                <p className="text-muted-foreground text-xs leading-relaxed">{get(item.descKey, item.descDef)}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -304,13 +323,13 @@ const InvestorBrief = () => {
               </div>
               <div>
                 <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-2 block">
-                  Market Timing
+                  {get("ib_timing_badge", "Market Timing")}
                 </span>
                 <h3 className="font-display font-bold text-xl md:text-2xl text-foreground mb-3">
-                  An 18–24 Month Window
+                  {get("ib_timing_headline", "An 18–24 Month Window")}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Before AI tools become commoditised, a critical window exists to establish market leadership. Early positioning now narrows the competitive advantage gap that later entrants will be unable to close.
+                  {get("ib_timing_body", "Before AI tools become commoditised, a critical window exists to establish market leadership. Early positioning now narrows the competitive advantage gap that later entrants will be unable to close.")}
                 </p>
               </div>
             </div>

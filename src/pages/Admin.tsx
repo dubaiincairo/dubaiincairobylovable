@@ -33,7 +33,7 @@ const sectionIcons: Record<string, string> = {
   nav: "🧭", hero: "🏠", stats: "📊", about: "ℹ️", edges: "⚡",
   values: "💎", services: "🎯", founder: "👤", clients: "🤝",
   tech: "🛠️", google: "📍", legal: "📜", contact: "✉️", footer: "🔗",
-  careers: "💼", odoo: "🔶", yanolja: "🏨", zoho: "🟣",
+  careers: "💼", investor_brief: "📈", odoo: "🔶", yanolja: "🏨", zoho: "🟣",
 };
 
 const sectionDescriptions: Record<string, string> = {
@@ -52,6 +52,7 @@ const sectionDescriptions: Record<string, string> = {
   contact: "Contact form labels & copy",
   footer: "Footer tagline & copyright",
   careers: "Hero, Why Join cards, job section labels, how to apply copy",
+  investor_brief: "Hero, core proposition, problem cards, 3 operational stages, franchise markets, financial split, revenue streams, market timing",
   odoo: "Page header, hero copy, service tags, 9 suites, CTA — plus Odoo logo upload",
   yanolja: "Hero copy, partner name, logo upload, service tags, 8 products, CTA",
   zoho: "Page header, hero copy, capability tags, 6 suites, CTA — plus Zoho logo upload",
@@ -91,7 +92,7 @@ const fieldTypeConfig: Record<FieldType, { label: string; icon: typeof Type; col
 const CONTENT_SECTION_GROUPS: { label: string; sections: string[] }[] = [
   { label: "Global",       sections: ["nav", "footer"] },
   { label: "Home Page",    sections: ["hero", "stats", "about", "edges", "values", "services", "studios", "founder", "clients", "tech", "google", "legal", "contact"] },
-  { label: "Sub Pages",    sections: ["careers"] },
+  { label: "Sub Pages",    sections: ["careers", "investor_brief"] },
   { label: "Partnerships", sections: ["odoo", "yanolja", "zoho"] },
 ];
 
@@ -744,6 +745,7 @@ const SEO_PAGES = [
   { label: "Odoo Partner", keys: ["seo_odoo_title", "seo_odoo_description"] },
   { label: "Yanolja Partner", keys: ["seo_yanolja_title", "seo_yanolja_description"] },
   { label: "Zoho Partner", keys: ["seo_zoho_title", "seo_zoho_description"] },
+  { label: "Investor Brief", keys: ["seo_investor_brief_title", "seo_investor_brief_description"] },
 ];
 
 function SEOPanel({

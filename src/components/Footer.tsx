@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeIn, viewportOnce } from "@/lib/animations";
@@ -24,11 +23,6 @@ const Footer = () => {
           <span className="text-gradient-gold">{get("nav_brand_3", "Cairo")}</span>
         </span>
         <p className="text-xs italic max-w-md whitespace-pre-line">{get("footer_tagline", "From Dubai to Cairo, we transferred the scope, the challenges, and the quality.")}</p>
-        <nav className="flex items-center gap-5 flex-wrap justify-center">
-          <Link to="/investor-brief" className="text-xs text-muted-foreground hover:text-primary transition-colors">
-            Investor Brief
-          </Link>
-        </nav>
         <span className="text-xs whitespace-pre-line">{get("footer_copyright", "© 2025 Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC · All Rights Reserved")}</span>
       </div>
     </motion.footer>

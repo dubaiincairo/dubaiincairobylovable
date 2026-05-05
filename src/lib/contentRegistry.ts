@@ -12,7 +12,7 @@ export interface ContentField {
 export const sectionOrder = [
   "nav", "hero", "stats", "about", "edges", "values", "services", "studios",
   "founder", "clients", "testimonials", "tech", "google", "legal", "contact", "footer",
-  "careers", "odoo", "yanolja", "zoho",
+  "careers", "investor_brief", "odoo", "yanolja", "zoho",
 ];
 
 export const sectionLabels: Record<string, string> = {
@@ -34,6 +34,7 @@ export const sectionLabels: Record<string, string> = {
   contact: "Contact Section",
   footer: "Footer",
   careers: "Careers Page",
+  investor_brief: "Investor Brief",
   odoo: "Partnerships — Odoo",
   yanolja: "Partnerships — Yanolja Cloud",
   zoho: "Partnerships — Zoho",
@@ -64,6 +65,8 @@ export const contentRegistry: ContentField[] = [
   { section: "seo", key: "seo_yanolja_description",  label: "Yanolja Partner — Meta Description", defaultValue: "Dubai in Cairo is a specialized implementor of Yanolja Cloud's eZee hospitality suite. We deploy cloud PMS, channel managers, and booking engines for properties in Saudi Arabia and beyond." },
   { section: "seo", key: "seo_zoho_title",           label: "Zoho Partner — Meta Title",       defaultValue: "Zoho Enablement Experts in Egypt — CRM & Marketing Automation | Dubai in Cairo" },
   { section: "seo", key: "seo_zoho_description",     label: "Zoho Partner — Meta Description", defaultValue: "Dubai in Cairo specializes in Zoho CRM implementation, marketing automation, and workflow integration — connecting marketing, sales, and operations for businesses in Egypt and the Middle East." },
+  { section: "seo", key: "seo_investor_brief_title",       label: "Investor Brief — Meta Title",       defaultValue: "Investor Brief 2025 — Dubai in Cairo Business Model & Franchise Opportunity" },
+  { section: "seo", key: "seo_investor_brief_description", label: "Investor Brief — Meta Description", defaultValue: "Explore the Dubai in Cairo investment opportunity: a marketing intelligence firm operating across Middle Eastern and African markets with a franchise model and three revenue streams." },
 
   // ── Nav ──
   { section: "nav", key: "nav_favicon_url", label: "Favicon (browser tab icon)", defaultValue: "/favicon.svg", type: "upload" },
@@ -77,7 +80,8 @@ export const contentRegistry: ContentField[] = [
   { section: "nav", key: "nav_partner_odoo",    label: "Partnerships Dropdown — Odoo label",    defaultValue: "Odoo ERP" },
   { section: "nav", key: "nav_partner_yanolja", label: "Partnerships Dropdown — Yanolja label", defaultValue: "Yanolja Cloud" },
   { section: "nav", key: "nav_partner_zoho",    label: "Partnerships Dropdown — Zoho label",    defaultValue: "Zoho" },
-  { section: "nav", key: "nav_link_tech",         label: "Nav Link — Tech Stack",   defaultValue: "Tech Stack" },
+  { section: "nav", key: "nav_link_tech",             label: "Nav Link — Tech Stack",      defaultValue: "Tech Stack" },
+  { section: "nav", key: "nav_link_investor_brief",   label: "Nav Link — Investor Brief",  defaultValue: "Investor Brief" },
   { section: "nav", key: "nav_cta", label: "Nav CTA Button", defaultValue: "Get Started" },
 
   // ── Hero ──
@@ -336,6 +340,61 @@ export const contentRegistry: ContentField[] = [
   { section: "careers", key: "careers_apply_body",     label: "How to Apply — Body",     defaultValue: "Send your CV and portfolio (if applicable) to our careers inbox. Include the position title and your name in the subject line." },
   { section: "careers", key: "careers_apply_email",    label: "How to Apply — Email",    defaultValue: "careers@dubaicairo.com" },
   { section: "careers", key: "careers_apply_subject",  label: "How to Apply — Subject Hint", defaultValue: "[Position Title] – Your Name" },
+
+  // ── Investor Brief Page ──
+  // Hero
+  { section: "investor_brief", key: "ib_hero_eyebrow",    label: "Hero — Eyebrow",         defaultValue: "Investor Brief · 2025" },
+  { section: "investor_brief", key: "ib_hero_headline_1", label: "Hero — Headline (gold)",  defaultValue: "Dubai in Cairo" },
+  { section: "investor_brief", key: "ib_hero_headline_2", label: "Hero — Headline Line 2",  defaultValue: "Business Model" },
+  { section: "investor_brief", key: "ib_hero_body",       label: "Hero — Body",             defaultValue: "A marketing intelligence firm rejecting the traditional agency model — fusing strategy with implementation across Middle Eastern and African markets." },
+  // Core Proposition
+  { section: "investor_brief", key: "ib_prop_badge",      label: "Core Proposition — Badge",defaultValue: "Core Proposition" },
+  { section: "investor_brief", key: "ib_prop_body",       label: "Core Proposition — Body", defaultValue: "DubaiInCity operates as a marketing intelligence firm rejecting the traditional agency model. The company fuses strategy with implementation, refusing to separate these functions that most competitors handle independently." },
+  // Problem We Solve
+  { section: "investor_brief", key: "ib_problem_badge",      label: "Problem — Badge",              defaultValue: "The Problem We Solve" },
+  { section: "investor_brief", key: "ib_problem_headline_1", label: "Problem — Headline Line 1",    defaultValue: "Fragmented Marketing." },
+  { section: "investor_brief", key: "ib_problem_headline_2", label: "Problem — Headline Line 2",    defaultValue: "AI Without Direction." },
+  { section: "investor_brief", key: "ib_problem_1_title",    label: "Problem Card 1 — Title",       defaultValue: "Fragmented Vendors" },
+  { section: "investor_brief", key: "ib_problem_1_desc",     label: "Problem Card 1 — Description", defaultValue: "Organizations in target markets typically fragment their marketing across disconnected vendors, creating gaps between strategy and execution." },
+  { section: "investor_brief", key: "ib_problem_2_title",    label: "Problem Card 2 — Title",       defaultValue: "AI Without Guidance" },
+  { section: "investor_brief", key: "ib_problem_2_desc",     label: "Problem Card 2 — Description", defaultValue: "Businesses recognize AI's importance but lack guidance on selecting appropriate tools and integrating them effectively into existing workflows." },
+  // Operational Approach
+  { section: "investor_brief", key: "ib_ops_badge",     label: "Ops — Badge",    defaultValue: "Operational Approach" },
+  { section: "investor_brief", key: "ib_ops_headline",  label: "Ops — Headline", defaultValue: "Three Sequential Stages" },
+  { section: "investor_brief", key: "ib_stage_1_num",   label: "Stage 1 — Number",      defaultValue: "01" },
+  { section: "investor_brief", key: "ib_stage_1_title", label: "Stage 1 — Title",       defaultValue: "Understand" },
+  { section: "investor_brief", key: "ib_stage_1_desc",  label: "Stage 1 — Description", defaultValue: "Study how a client's business operates and identify where marketing intelligence generates the highest returns." },
+  { section: "investor_brief", key: "ib_stage_2_num",   label: "Stage 2 — Number",      defaultValue: "02" },
+  { section: "investor_brief", key: "ib_stage_2_title", label: "Stage 2 — Title",       defaultValue: "Strategise & Select" },
+  { section: "investor_brief", key: "ib_stage_2_desc",  label: "Stage 2 — Description", defaultValue: "Combine strategy development with AI tool selection, ensuring both decisions reflect the specific client situation rather than generic trends." },
+  { section: "investor_brief", key: "ib_stage_3_num",   label: "Stage 3 — Number",      defaultValue: "03" },
+  { section: "investor_brief", key: "ib_stage_3_title", label: "Stage 3 — Title",       defaultValue: "Implement & Sustain" },
+  { section: "investor_brief", key: "ib_stage_3_desc",  label: "Stage 3 — Description", defaultValue: "Supervised implementation, training, real-time monitoring, and accountability until client teams operate independently." },
+  // Franchise Opportunity
+  { section: "investor_brief", key: "ib_franchise_badge",    label: "Franchise — Badge",       defaultValue: "Franchise Opportunity" },
+  { section: "investor_brief", key: "ib_franchise_headline", label: "Franchise — Headline",    defaultValue: "Seven Licensed Markets" },
+  { section: "investor_brief", key: "ib_franchise_subtext",  label: "Franchise — Subtext",     defaultValue: "Investors provide local infrastructure while the central team manages all operations and client relationships." },
+  { section: "investor_brief", key: "ib_markets",            label: "Markets (comma-separated)",defaultValue: "Riyadh,Doha,Kuwait City,Manama,Baghdad,Accra,Johannesburg" },
+  { section: "investor_brief", key: "ib_fin_badge",          label: "Financial Structure — Badge", defaultValue: "Financial Structure" },
+  { section: "investor_brief", key: "ib_investor_pct",       label: "Investor Revenue — Percentage", defaultValue: "30%" },
+  { section: "investor_brief", key: "ib_investor_title",     label: "Investor Revenue — Title",      defaultValue: "Investor Revenue Share" },
+  { section: "investor_brief", key: "ib_investor_desc",      label: "Investor Revenue — Description", defaultValue: "Complete real-time financial transparency. Investors provide local infrastructure only." },
+  { section: "investor_brief", key: "ib_company_pct",        label: "Company Share — Percentage",    defaultValue: "70%" },
+  { section: "investor_brief", key: "ib_company_title",      label: "Company Share — Title",         defaultValue: "DubaiInCity Operating Share" },
+  { section: "investor_brief", key: "ib_company_desc",       label: "Company Share — Description",   defaultValue: "Handles all operational responsibilities, client relationships, and team management." },
+  // Revenue Streams
+  { section: "investor_brief", key: "ib_revenue_badge",   label: "Revenue — Badge",    defaultValue: "Revenue Streams" },
+  { section: "investor_brief", key: "ib_revenue_headline",label: "Revenue — Headline", defaultValue: "Three Income Channels" },
+  { section: "investor_brief", key: "ib_revenue_1_title", label: "Revenue Stream 1 — Title",       defaultValue: "Complete Engagements" },
+  { section: "investor_brief", key: "ib_revenue_1_desc",  label: "Revenue Stream 1 — Description", defaultValue: "Full packages combining strategy and implementation for clients requiring end-to-end support." },
+  { section: "investor_brief", key: "ib_revenue_2_title", label: "Revenue Stream 2 — Title",       defaultValue: "Monthly Retainers" },
+  { section: "investor_brief", key: "ib_revenue_2_desc",  label: "Revenue Stream 2 — Description", defaultValue: "Ongoing optimization and supervision for clients who need continuous performance management." },
+  { section: "investor_brief", key: "ib_revenue_3_title", label: "Revenue Stream 3 — Title",       defaultValue: "Franchise Fees" },
+  { section: "investor_brief", key: "ib_revenue_3_desc",  label: "Revenue Stream 3 — Description", defaultValue: "Licensing and royalty fees from market operators across the seven licensed territories." },
+  // Market Timing
+  { section: "investor_brief", key: "ib_timing_badge",   label: "Market Timing — Badge",    defaultValue: "Market Timing" },
+  { section: "investor_brief", key: "ib_timing_headline",label: "Market Timing — Headline", defaultValue: "An 18–24 Month Window" },
+  { section: "investor_brief", key: "ib_timing_body",    label: "Market Timing — Body",     defaultValue: "Before AI tools become commoditised, a critical window exists to establish market leadership. Early positioning now narrows the competitive advantage gap that later entrants will be unable to close." },
 
   // ── Partnerships page — shared header ──
   { section: "odoo", key: "partnerships_badge",    label: "Page Badge",    defaultValue: "Strategic Partnerships" },
