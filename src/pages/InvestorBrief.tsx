@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useSEO } from "@/hooks/useSEO";
+import { richText } from "@/lib/richText";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 
 const InvestorBrief = () => {
@@ -47,9 +48,10 @@ const InvestorBrief = () => {
               <span className="text-gradient-gold">{get("ib_hero_headline_1", "Dubai in Cairo")}</span>
               <br />{get("ib_hero_headline_2", "Business Model")}
             </h1>
-            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl leading-relaxed">
-              {get("ib_hero_body", "A marketing intelligence firm rejecting the traditional agency model — fusing strategy with implementation across Middle Eastern and African markets.")}
-            </p>
+            <div
+              className="text-muted-foreground text-lg md:text-xl max-w-2xl leading-relaxed [&>p]:mb-0"
+              dangerouslySetInnerHTML={{ __html: richText(get("ib_hero_body", "A marketing intelligence firm rejecting the traditional agency model — fusing strategy with implementation across Middle Eastern and African markets.")) }}
+            />
           </motion.div>
         </div>
       </section>
@@ -67,9 +69,10 @@ const InvestorBrief = () => {
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
               {get("ib_prop_badge", "Core Proposition")}
             </span>
-            <p className="text-foreground text-lg md:text-xl leading-relaxed">
-              {get("ib_prop_body", "DubaiInCity operates as a marketing intelligence firm rejecting the traditional agency model. The company fuses strategy with implementation, refusing to separate these functions that most competitors handle independently.")}
-            </p>
+            <div
+              className="text-foreground text-lg md:text-xl leading-relaxed [&>p]:mb-0"
+              dangerouslySetInnerHTML={{ __html: richText(get("ib_prop_body", "DubaiInCity operates as a marketing intelligence firm rejecting the traditional agency model. The company fuses strategy with implementation, refusing to separate these functions that most competitors handle independently.")) }}
+            />
           </motion.div>
         </div>
       </section>
@@ -119,7 +122,10 @@ const InvestorBrief = () => {
                 </div>
                 <div>
                   <h3 className="font-display font-semibold text-foreground mb-2">{get(item.titleKey, item.titleDef)}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{get(item.descKey, item.descDef)}</p>
+                  <div
+                    className="text-muted-foreground text-sm leading-relaxed [&>p]:mb-0"
+                    dangerouslySetInnerHTML={{ __html: richText(get(item.descKey, item.descDef)) }}
+                  />
                 </div>
               </motion.div>
             ))}
@@ -175,7 +181,10 @@ const InvestorBrief = () => {
                   <h3 className="font-display font-semibold text-foreground mb-1.5 group-hover:text-primary transition-colors">
                     {get(step.titleKey, step.titleDef)}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{get(step.descKey, step.descDef)}</p>
+                  <div
+                    className="text-muted-foreground text-sm leading-relaxed [&>p]:mb-0"
+                    dangerouslySetInnerHTML={{ __html: richText(get(step.descKey, step.descDef)) }}
+                  />
                 </div>
               </motion.div>
             ))}
@@ -193,9 +202,10 @@ const InvestorBrief = () => {
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 leading-tight">
               {get("ib_franchise_headline", "Seven Licensed Markets")}
             </h2>
-            <p className="text-muted-foreground text-base mb-8 leading-relaxed">
-              {get("ib_franchise_subtext", "Investors provide local infrastructure while the central team manages all operations and client relationships.")}
-            </p>
+            <div
+              className="text-muted-foreground text-base mb-8 leading-relaxed [&>p]:mb-0"
+              dangerouslySetInnerHTML={{ __html: richText(get("ib_franchise_subtext", "Investors provide local infrastructure while the central team manages all operations and client relationships.")) }}
+            />
           </motion.div>
 
           {/* Markets */}
@@ -237,16 +247,18 @@ const InvestorBrief = () => {
               <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-5">
                 <div className="text-4xl font-display font-bold text-green-400 mb-1">{get("ib_investor_pct", "30%")}</div>
                 <p className="text-sm font-semibold text-foreground mb-1">{get("ib_investor_title", "Investor Revenue Share")}</p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {get("ib_investor_desc", "Complete real-time financial transparency. Investors provide local infrastructure only.")}
-                </p>
+                <div
+                  className="text-xs text-muted-foreground leading-relaxed [&>p]:mb-0"
+                  dangerouslySetInnerHTML={{ __html: richText(get("ib_investor_desc", "Complete real-time financial transparency. Investors provide local infrastructure only.")) }}
+                />
               </div>
               <div className="rounded-xl border border-primary/20 bg-primary/5 p-5">
                 <div className="text-4xl font-display font-bold text-primary mb-1">{get("ib_company_pct", "70%")}</div>
                 <p className="text-sm font-semibold text-foreground mb-1">{get("ib_company_title", "DubaiInCity Operating Share")}</p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {get("ib_company_desc", "Handles all operational responsibilities, client relationships, and team management.")}
-                </p>
+                <div
+                  className="text-xs text-muted-foreground leading-relaxed [&>p]:mb-0"
+                  dangerouslySetInnerHTML={{ __html: richText(get("ib_company_desc", "Handles all operational responsibilities, client relationships, and team management.")) }}
+                />
               </div>
             </div>
           </motion.div>
@@ -298,7 +310,10 @@ const InvestorBrief = () => {
                   <span className="text-xs font-bold text-primary">{item.num}</span>
                 </div>
                 <h3 className="font-display font-semibold text-foreground mb-2 text-sm">{get(item.titleKey, item.titleDef)}</h3>
-                <p className="text-muted-foreground text-xs leading-relaxed">{get(item.descKey, item.descDef)}</p>
+                <div
+                  className="text-muted-foreground text-xs leading-relaxed [&>p]:mb-0"
+                  dangerouslySetInnerHTML={{ __html: richText(get(item.descKey, item.descDef)) }}
+                />
               </motion.div>
             ))}
           </motion.div>
@@ -328,9 +343,10 @@ const InvestorBrief = () => {
                 <h3 className="font-display font-bold text-xl md:text-2xl text-foreground mb-3">
                   {get("ib_timing_headline", "An 18–24 Month Window")}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {get("ib_timing_body", "Before AI tools become commoditised, a critical window exists to establish market leadership. Early positioning now narrows the competitive advantage gap that later entrants will be unable to close.")}
-                </p>
+                <div
+                  className="text-muted-foreground leading-relaxed [&>p]:mb-0"
+                  dangerouslySetInnerHTML={{ __html: richText(get("ib_timing_body", "Before AI tools become commoditised, a critical window exists to establish market leadership. Early positioning now narrows the competitive advantage gap that later entrants will be unable to close.")) }}
+                />
               </div>
             </div>
           </motion.div>
