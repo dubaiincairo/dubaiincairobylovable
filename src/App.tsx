@@ -18,6 +18,7 @@ import YanoljaPartnerPage from "./pages/YanoljaPartnerPage";
 import ZohoPartnerPage from "./pages/ZohoPartnerPage";
 import Tech from "./pages/Tech";
 import Studios from "./pages/Studios";
+import InvestorBrief from "./pages/InvestorBrief";
 import WhatsAppButton from "./components/WhatsAppButton";
 import FaviconUpdater from "./components/FaviconUpdater";
 import { ContactModalProvider } from "./context/ContactModalContext";
@@ -54,6 +55,7 @@ const App = () => (
             <Route path="/partnerships/zoho" element={<ZohoPartnerPage />} />
             <Route path="/studios" element={<Studios />} />
             <Route path="/tech" element={<Tech />} />
+            <Route path="/investor-brief" element={<InvestorBrief />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
