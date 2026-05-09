@@ -20,6 +20,7 @@ import Tech from "./pages/Tech";
 import Studios from "./pages/Studios";
 import WhatsAppButton from "./components/WhatsAppButton";
 import FaviconUpdater from "./components/FaviconUpdater";
+import SkipToMain from "./components/SkipToMain";
 import { ContactModalProvider } from "./context/ContactModalContext";
 import { ContactModal } from "./components/ContactModal";
 import GoogleIntegrations from "./components/GoogleIntegrations";
@@ -38,6 +39,7 @@ const App = () => (
           <ContactModal />
           <FaviconUpdater />
         <BrowserRouter>
+          <SkipToMain />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />

@@ -76,6 +76,7 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <main id="main-content">
 
       {/* Hero */}
       <section className="relative pt-28 pb-12 md:pt-36 md:pb-20 px-6 overflow-hidden">
@@ -188,6 +189,7 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );

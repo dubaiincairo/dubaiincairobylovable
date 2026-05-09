@@ -12,6 +12,7 @@ import TechStackTeaser from "@/components/TechStackTeaser";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import BankAccountsSection from "@/components/BankAccountsSection";
+import PartnersStrip from "@/components/PartnersStrip";
 import Footer from "@/components/Footer";
 import GoogleBusinessWidget from "@/components/GoogleBusinessWidget";
 
@@ -21,19 +22,22 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <HeroSection />
-      <StatsSection />
-      <AboutSection />
-      <WhyDifferentSection />
-      <ClientsSection />
-      <HighlightsSection />
-      <ValuesSection />
-      <FounderSection />
-      <TestimonialsSection />
-      <TechStackTeaser />
-      <BankAccountsSection />
-      <ContactSection />
-      <GoogleBusinessWidget />
+      <main id="main-content">
+        <HeroSection />
+        <PartnersStrip />
+        <StatsSection />
+        <AboutSection />
+        <WhyDifferentSection />
+        <ClientsSection />
+        <HighlightsSection />
+        <ValuesSection />
+        <FounderSection />
+        <TestimonialsSection />
+        <TechStackTeaser />
+        <BankAccountsSection />
+        <ContactSection />
+        <GoogleBusinessWidget />
+      </main>
       <Footer />
     </div>
   );

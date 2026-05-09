@@ -18,6 +18,7 @@ const Tech = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <main id="main-content">
 
       {/* Hero */}
       <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 px-6 overflow-hidden">
@@ -78,6 +79,7 @@ const Tech = () => {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );

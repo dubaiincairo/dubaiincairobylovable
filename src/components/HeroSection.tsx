@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown, TrendingUp, Users, Star, Briefcase } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { heroChild, heroHeadline } from "@/lib/animations";
+import { FloatCard } from "@/components/ui/float-card";
 
 // ── Animated SVG chart path ────────────────────────────────────────────────
 const ChartVisual = () => (
@@ -41,28 +42,6 @@ const ChartVisual = () => (
       transition={{ delay: 2, duration: 0.3 }}
     />
   </svg>
-);
-
-// ── Floating stat card ─────────────────────────────────────────────────────
-const FloatCard = ({
-  icon: Icon, value, label, delay, className,
-}: {
-  icon: typeof Star; value: string; label: string; delay: number; className?: string;
-}) => (
-  <motion.div
-    className={`absolute flex items-center gap-2.5 bg-card/80 backdrop-blur-md border border-border rounded-xl px-3.5 py-2.5 shadow-lg ${className}`}
-    initial={{ opacity: 0, y: 16 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay, duration: 0.6, ease: "easeOut" }}
-  >
-    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-      <Icon className="w-3.5 h-3.5 text-primary" />
-    </div>
-    <div>
-      <div className="text-sm font-bold text-foreground leading-none">{value}</div>
-      <div className="text-[10px] text-muted-foreground mt-0.5">{label}</div>
-    </div>
-  </motion.div>
 );
 
 // ── Main component ─────────────────────────────────────────────────────────
@@ -119,7 +98,8 @@ const HeroSection = () => {
             <span
               className="inline-block px-4 py-1.5 mb-8 text-xs font-medium tracking-[0.2em] uppercase border border-gold-subtle rounded-full text-primary whitespace-pre-line animate-shimmer-badge"
               style={{
-                backgroundImage: 'linear-gradient(90deg, hsl(38 80% 55%), hsl(38 90% 70%), hsl(38 80% 55%))',
+                color: 'hsl(38 80% 60%)',
+                backgroundImage: 'linear-gradient(90deg, hsl(38 80% 60%), hsl(38 90% 75%), hsl(38 80% 60%))',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}
