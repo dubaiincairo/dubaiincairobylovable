@@ -12,7 +12,6 @@ import TechStackTeaser from "@/components/TechStackTeaser";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import BankAccountsSection from "@/components/BankAccountsSection";
-import PartnersStrip from "@/components/PartnersStrip";
 import Footer from "@/components/Footer";
 import GoogleBusinessWidget from "@/components/GoogleBusinessWidget";
 
@@ -24,7 +23,6 @@ const Index = () => {
       <Navbar />
       <main id="main-content">
         <HeroSection />
-        <PartnersStrip />
         <StatsSection />
         <AboutSection />
         <WhyDifferentSection />
