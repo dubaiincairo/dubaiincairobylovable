@@ -3,18 +3,38 @@ import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 
-const defaultClients = "Novartis,Sanofi,Roche,Novo Nordisk,Huawei,Banque Misr,Yorkshire Tea,Beyond Meat,Alpro,Monin,Berlitz,Shark Tank Egypt,World Economic Forum,AstraZeneca,Pfizer,L'Oréal,Unilever,Samsung,Vodafone,Orange,Nestlé,PepsiCo,Johnson & Johnson,Danone,Bayer";
+const MAX_SLOTS = 12;
+const GAP = 12;
 
-const GAP = 12; // px — space between chips
+interface Logo {
+  name: string;
+  url: string;
+}
 
 const ClientsSection = () => {
   const { get } = useSiteContent();
-  const raw = get("clients_list", defaultClients);
-  const clients = raw.split(/[,\n]/).map(s => s.trim()).filter(Boolean);
 
-  const half = Math.ceil(clients.length / 2);
-  const row1 = clients.slice(0, half);
-  const row2 = clients.slice(half);
+  // Collect logo slots that have a URL set; blank slots are skipped.
+  const logos: Logo[] = [];
+  for (let i = 1; i <= MAX_SLOTS; i++) {
+    const url = get(`client_logo_${i}_url`).trim();
+    if (!url) continue;
+    const name = get(`client_logo_${i}_name`).trim() || `Client ${i}`;
+    logos.push({ name, url });
+  }
+
+  // Fallback to text-based clients_list if no logos are uploaded yet.
+  const fallbackRaw = get("clients_list", "");
+  const fallbackClients = fallbackRaw
+    ? fallbackRaw.split(/[,\n]/).map((s) => s.trim()).filter(Boolean)
+    : [];
+
+  const useLogos = logos.length > 0;
+  const half = Math.ceil((useLogos ? logos.length : fallbackClients.length) / 2);
+  const row1Logos = useLogos ? logos.slice(0, half) : [];
+  const row2Logos = useLogos ? logos.slice(half) : [];
+  const row1Names = !useLogos ? fallbackClients.slice(0, half) : [];
+  const row2Names = !useLogos ? fallbackClients.slice(half) : [];
 
   return (
     <section id="work" className="relative py-10 md:py-14 overflow-hidden">
@@ -35,14 +55,25 @@ const ClientsSection = () => {
       </div>
 
       <div className="space-y-3">
-        <MarqueeRow items={row1} direction="left" />
-        <MarqueeRow items={row2} direction="right" gold />
+        {useLogos ? (
+          <>
+            <LogoMarquee items={row1Logos} direction="left" />
+            <LogoMarquee items={row2Logos} direction="right" />
+          </>
+        ) : (
+          <>
+            <NameMarquee items={row1Names} direction="left" />
+            <NameMarquee items={row2Names} direction="right" gold />
+          </>
+        )}
       </div>
     </section>
   );
 };
 
-const MarqueeRow = ({ items, direction, gold = false }: { items: string[]; direction: "left" | "right"; gold?: boolean }) => {
+/* ─────────────────── Logo marquee (image cells) ─────────────────── */
+
+const LogoMarquee = ({ items, direction }: { items: Logo[]; direction: "left" | "right" }) => {
   const copyRef = useRef<HTMLDivElement>(null);
   const [copyWidth, setCopyWidth] = useState(0);
 
@@ -57,11 +88,91 @@ const MarqueeRow = ({ items, direction, gold = false }: { items: string[]; direc
   }, [items]);
 
   const from = direction === "left" ? 0 : -copyWidth;
-  const to   = direction === "left" ? -copyWidth : 0;
+  const to = direction === "left" ? -copyWidth : 0;
 
   return (
     <div className="relative overflow-hidden">
-      {/* fade edges */}
+      <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+        style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
+      <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+        style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
+
+      <div
+        className="flex items-center"
+        style={copyWidth ? {
+          willChange: "transform",
+          animation: `marquee-${direction} 30s linear infinite`,
+          ["--from" as string]: `${from}px`,
+          ["--to" as string]: `${to}px`,
+        } : { visibility: "hidden" }}
+      >
+        <div ref={copyRef} className="flex flex-shrink-0 items-center">
+          {items.map((logo, i) => (
+            <LogoCell key={i} logo={logo} />
+          ))}
+        </div>
+        {[2, 3, 4, 5, 6].map((n) => (
+          <div key={n} className="flex flex-shrink-0 items-center" aria-hidden>
+            {items.map((logo, i) => (
+              <LogoCell key={`${n}-${i}`} logo={logo} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const LogoCell = ({ logo }: { logo: Logo }) => (
+  <div
+    className="flex-shrink-0 flex items-center justify-center h-16 w-40"
+    style={{ marginRight: GAP }}
+  >
+    <img
+      src={logo.url}
+      alt={logo.name}
+      loading="lazy"
+      decoding="async"
+      title={logo.name}
+      className="max-h-10 max-w-[140px] w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+      style={{ filter: "brightness(0) invert(1)" }}
+      onError={(e) => {
+        // Fall back to brand name text if the image fails to load
+        const el = e.currentTarget;
+        el.style.display = "none";
+        const parent = el.parentElement;
+        if (parent && !parent.querySelector(".logo-fallback")) {
+          const span = document.createElement("span");
+          span.className = "logo-fallback text-sm font-display font-semibold text-muted-foreground";
+          span.textContent = logo.name;
+          parent.appendChild(span);
+        }
+      }}
+    />
+  </div>
+);
+
+/* ─────────────────── Name marquee (legacy fallback) ─────────────────── */
+
+const NameMarquee = ({ items, direction, gold = false }: { items: string[]; direction: "left" | "right"; gold?: boolean }) => {
+  const copyRef = useRef<HTMLDivElement>(null);
+  const [copyWidth, setCopyWidth] = useState(0);
+
+  useEffect(() => {
+    if (!copyRef.current) return;
+    setCopyWidth(copyRef.current.scrollWidth + GAP);
+    const ro = new ResizeObserver(() => {
+      if (copyRef.current) setCopyWidth(copyRef.current.scrollWidth + GAP);
+    });
+    ro.observe(copyRef.current);
+    return () => ro.disconnect();
+  }, [items]);
+
+  const from = direction === "left" ? 0 : -copyWidth;
+  const to = direction === "left" ? -copyWidth : 0;
+
+  return (
+    <div className="relative overflow-hidden">
       <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
         style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
       <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
@@ -73,20 +184,18 @@ const MarqueeRow = ({ items, direction, gold = false }: { items: string[]; direc
           willChange: "transform",
           animation: `marquee-${direction} 30s linear infinite`,
           ["--from" as string]: `${from}px`,
-          ["--to"   as string]: `${to}px`,
+          ["--to" as string]: `${to}px`,
         } : { visibility: "hidden" }}
       >
-        {/* copy 1 — measured */}
         <div ref={copyRef} className="flex flex-shrink-0">
           {items.map((name, i) => (
-            <LogoChip key={i} name={name} gold={gold} gap={GAP} />
+            <NameChip key={i} name={name} gold={gold} />
           ))}
         </div>
-        {/* copies 2–6 — ensures track is always full, loop never visible */}
-        {[2,3,4,5,6].map(n => (
+        {[2, 3, 4, 5, 6].map((n) => (
           <div key={n} className="flex flex-shrink-0" aria-hidden>
             {items.map((name, i) => (
-              <LogoChip key={`${n}-${i}`} name={name} gold={gold} gap={GAP} />
+              <NameChip key={`${n}-${i}`} name={name} gold={gold} />
             ))}
           </div>
         ))}
@@ -95,14 +204,14 @@ const MarqueeRow = ({ items, direction, gold = false }: { items: string[]; direc
   );
 };
 
-const LogoChip = ({ name, gold, gap }: { name: string; gold: boolean; gap: number }) => (
+const NameChip = ({ name, gold }: { name: string; gold: boolean }) => (
   <div
     className={`flex-shrink-0 px-6 py-3 rounded-full border text-sm font-display font-semibold cursor-default transition-colors duration-200
       ${gold
         ? "border-primary/30 text-primary/80 bg-primary/5 hover:bg-primary/10 hover:text-primary"
         : "border-border text-muted-foreground bg-card hover:border-primary/30 hover:text-foreground"
       }`}
-    style={{ marginRight: gap }}
+    style={{ marginRight: GAP }}
   >
     {name}
   </div>

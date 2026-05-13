@@ -193,7 +193,35 @@ export const contentRegistry: ContentField[] = [
   { section: "clients", key: "clients_subtitle", label: "Section Subtitle", defaultValue: "Success Partners" },
   { section: "clients", key: "clients_headline", label: "Section Headline", defaultValue: "Trusted by Brands That Mean Business" },
   { section: "clients", key: "clients_description", label: "Section Description", defaultValue: "From global pharmaceutical giants to beloved local names." },
-  { section: "clients", key: "clients_list", label: "Client Names (one per line or comma-separated)", defaultValue: "Novartis,Sanofi,Roche" },
+  { section: "clients", key: "clients_list", label: "Fallback — Client Names (used only if no logos are uploaded below)", defaultValue: "" },
+  // ── Client logo slots — leave a slot blank to skip it ───────────────────────
+  // Tip: upload SVG or PNG with transparent background. The site automatically
+  // converts every logo to a white monochrome silhouette so any brand colour
+  // works.
+  { section: "clients", key: "client_logo_1_name",  label: "Logo 1 — Brand Name (alt text)",  defaultValue: "" },
+  { section: "clients", key: "client_logo_1_url",   label: "Logo 1 — File (SVG or transparent PNG recommended)",   defaultValue: "", type: "upload" },
+  { section: "clients", key: "client_logo_2_name",  label: "Logo 2 — Brand Name (alt text)",  defaultValue: "" },
+  { section: "clients", key: "client_logo_2_url",   label: "Logo 2 — File",   defaultValue: "", type: "upload" },
+  { section: "clients", key: "client_logo_3_name",  label: "Logo 3 — Brand Name (alt text)",  defaultValue: "" },
+  { section: "clients", key: "client_logo_3_url",   label: "Logo 3 — File",   defaultValue: "", type: "upload" },
+  { section: "clients", key: "client_logo_4_name",  label: "Logo 4 — Brand Name (alt text)",  defaultValue: "" },
+  { section: "clients", key: "client_logo_4_url",   label: "Logo 4 — File",   defaultValue: "", type: "upload" },
+  { section: "clients", key: "client_logo_5_name",  label: "Logo 5 — Brand Name (alt text)",  defaultValue: "" },
+  { section: "clients", key: "client_logo_5_url",   label: "Logo 5 — File",   defaultValue: "", type: "upload" },
+  { section: "clients", key: "client_logo_6_name",  label: "Logo 6 — Brand Name (alt text)",  defaultValue: "" },
+  { section: "clients", key: "client_logo_6_url",   label: "Logo 6 — File",   defaultValue: "", type: "upload" },
+  { section: "clients", key: "client_logo_7_name",  label: "Logo 7 — Brand Name (alt text)",  defaultValue: "" },
+  { section: "clients", key: "client_logo_7_url",   label: "Logo 7 — File",   defaultValue: "", type: "upload" },
+  { section: "clients", key: "client_logo_8_name",  label: "Logo 8 — Brand Name (alt text)",  defaultValue: "" },
+  { section: "clients", key: "client_logo_8_url",   label: "Logo 8 — File",   defaultValue: "", type: "upload" },
+  { section: "clients", key: "client_logo_9_name",  label: "Logo 9 — Brand Name (alt text)",  defaultValue: "" },
+  { section: "clients", key: "client_logo_9_url",   label: "Logo 9 — File",   defaultValue: "", type: "upload" },
+  { section: "clients", key: "client_logo_10_name", label: "Logo 10 — Brand Name (alt text)", defaultValue: "" },
+  { section: "clients", key: "client_logo_10_url",  label: "Logo 10 — File",  defaultValue: "", type: "upload" },
+  { section: "clients", key: "client_logo_11_name", label: "Logo 11 — Brand Name (alt text)", defaultValue: "" },
+  { section: "clients", key: "client_logo_11_url",  label: "Logo 11 — File",  defaultValue: "", type: "upload" },
+  { section: "clients", key: "client_logo_12_name", label: "Logo 12 — Brand Name (alt text)", defaultValue: "" },
+  { section: "clients", key: "client_logo_12_url",  label: "Logo 12 — File",  defaultValue: "", type: "upload" },
 
   // ── Testimonials — section header only (cards managed in Admin → Testimonials tab) ──
   { section: "testimonials", key: "testimonials_subtitle", label: "Section Subtitle", defaultValue: "What Clients Say" },
