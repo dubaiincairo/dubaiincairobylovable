@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 const AboutSection = () => {
   const { get } = useSiteContent();
@@ -35,9 +36,10 @@ const AboutSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("about_subtitle", "Who We Are")}
           </span>
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold leading-tight whitespace-pre-line">
             {get("about_headline", "A Digital Agency Built on Science, Not Guesswork")}
           </h2>
+          <AnimatedUnderline align="left" className="mb-5" />
           <RichText
             html={get("about_body", "Founded in 2021, Dubai in Cairo is a Cairo-based digital marketing and eBusiness solutions agency.")}
             className="text-muted-foreground text-base md:text-lg leading-relaxed mb-5"

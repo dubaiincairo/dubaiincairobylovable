@@ -3,6 +3,7 @@ import { Search, Ruler, Handshake } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 const icons = [Search, Ruler, Handshake];
 
@@ -27,6 +28,7 @@ const ValuesSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("values_headline", "The Principles Behind Every Project")}
           </h2>
+          <AnimatedUnderline />
         </motion.div>
 
         <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>

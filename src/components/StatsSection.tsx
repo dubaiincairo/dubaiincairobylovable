@@ -1,35 +1,57 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { staggerContainer, scaleIn, viewportOnce } from "@/lib/animations";
+import { staggerContainer, scaleIn, useMotionPref, viewportOnce } from "@/lib/animations";
 
 const AnimatedNumber = ({ value }: { value: string }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const { shouldReduce } = useMotionPref();
   const [display, setDisplay] = useState(value);
+  const [landed, setLanded] = useState(false);
 
   useEffect(() => {
     if (!isInView) return;
+    if (shouldReduce) {
+      setDisplay(value);
+      setLanded(true);
+      return;
+    }
     const numMatch = value.match(/^(\d+)/);
-    if (!numMatch) { setDisplay(value); return; }
+    if (!numMatch) {
+      setDisplay(value);
+      setLanded(true);
+      return;
+    }
     const target = parseInt(numMatch[1]);
     const suffix = value.slice(numMatch[1].length);
-    const duration = 3200;
+    const duration = 2200;
     const start = Date.now();
     const tick = () => {
       const elapsed = Date.now() - start;
       const progress = Math.min(elapsed / duration, 1);
-      // Slow linear climb then dramatic ease-out at the end
-      const eased = progress < 0.75
-        ? progress * 0.85                          // steady climb for first 75%
-        : 0.6375 + (1 - Math.pow(1 - ((progress - 0.75) / 0.25), 4)) * 0.3625; // snap to final
+      // ease-out quart: confident climb, gentle landing
+      const eased = 1 - Math.pow(1 - progress, 4);
       setDisplay(Math.round(target * eased) + suffix);
-      if (progress < 1) requestAnimationFrame(tick);
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        setLanded(true);
+      }
     };
     requestAnimationFrame(tick);
-  }, [isInView, value]);
+  }, [isInView, value, shouldReduce]);
 
-  return <div ref={ref} className="text-4xl md:text-5xl font-display font-bold text-gradient-gold mb-2">{display}</div>;
+  return (
+    <motion.div
+      ref={ref}
+      className="text-4xl md:text-5xl font-display font-bold text-gradient-gold mb-2"
+      animate={landed && !shouldReduce ? { scale: [1, 1.06, 1] } : { scale: 1 }}
+      transition={{ duration: 0.55, ease: "easeOut" }}
+    >
+      {display}
+    </motion.div>
+  );
 };
 
 const StatsSection = () => {

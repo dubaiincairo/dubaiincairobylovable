@@ -3,6 +3,7 @@ import { Briefcase, Palette, Code, Fingerprint, Camera, Award } from "lucide-rea
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 const icons = [Briefcase, Palette, Code, Fingerprint, Camera, Award];
 
@@ -30,6 +31,7 @@ const ServicesSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("services_headline", "Six Specialized Studios. One Unified Vision.")}
           </h2>
+          <AnimatedUnderline />
         </motion.div>
 
         <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>

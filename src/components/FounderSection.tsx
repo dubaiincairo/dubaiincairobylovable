@@ -3,6 +3,7 @@ import { Quote, Facebook, Linkedin, Instagram } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 const SOCIALS = [
   { key: "founder_facebook",  Icon: Facebook,  label: "Facebook"  },
@@ -25,9 +26,10 @@ const FounderSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("founder_subtitle", "A Message from Our Founder")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
+          <h2 className="text-4xl md:text-5xl font-display font-bold leading-tight whitespace-pre-line">
             {get("founder_headline", "Built by Someone Who's Been in the Trenches.")}
           </h2>
+          <AnimatedUnderline align="left" className="mb-5" />
           <RichText
             html={get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")}
             className="text-muted-foreground text-lg leading-relaxed"

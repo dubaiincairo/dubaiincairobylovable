@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { z } from "zod";
 import { fadeUp, scaleIn, viewportOnce } from "@/lib/animations";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -65,9 +66,10 @@ const ContactSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("contact_subtitle", "Get Started")}
           </span>
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold leading-tight whitespace-pre-line">
             {get("contact_headline", "Ready to Grow?\nLet's Build.")}
           </h2>
+          <AnimatedUnderline align="left" className="mb-5" />
           <p className="text-muted-foreground text-lg leading-relaxed mb-10 whitespace-pre-line">
             {get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services with measurable impact, flexible execution, and competitive pricing.")}
           </p>

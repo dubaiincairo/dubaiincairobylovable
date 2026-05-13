@@ -3,6 +3,7 @@ import { Cpu, ListChecks, Handshake, Users, BadgeDollarSign, BarChart3 } from "l
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 const icons = [Cpu, ListChecks, Handshake, Users, BadgeDollarSign, BarChart3];
 
@@ -28,6 +29,7 @@ const WhyDifferentSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("edges_headline", "A Smarter Way to Grow Your Business Online")}
           </h2>
+          <AnimatedUnderline />
         </motion.div>
 
         <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>

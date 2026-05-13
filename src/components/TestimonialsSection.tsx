@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 type Testimonial = {
   id: string;
@@ -153,6 +154,7 @@ const TestimonialsSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("testimonials_headline", "Trusted by Leaders.\nRecommended by Peers.")}
           </h2>
+          <AnimatedUnderline />
           <p className="mt-4 text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
             {get("testimonials_subtext", "Real recommendations from clients and colleagues — pulled directly from LinkedIn.")}
           </p>
