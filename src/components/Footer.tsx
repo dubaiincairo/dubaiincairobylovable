@@ -1,6 +1,13 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Phone } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeIn, viewportOnce } from "@/lib/animations";
+
+const PHONES = [
+  { display: "+20 120 200 0068", href: "tel:+20120200068" },
+  { display: "+966 059 597 9064", href: "tel:+966595979064" },
+];
 
 const Footer = () => {
   const { get } = useSiteContent();
@@ -22,7 +29,34 @@ const Footer = () => {
           {get("nav_brand_2", "in")}
           <span className="text-gradient-gold">{get("nav_brand_3", "Cairo")}</span>
         </span>
+
         <p className="text-xs italic max-w-md whitespace-pre-line">{get("footer_tagline", "From Dubai to Cairo, we transferred the scope, the challenges, and the quality.")}</p>
+
+        {/* Phone numbers */}
+        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5">
+          {PHONES.map((p) => (
+            <a
+              key={p.href}
+              href={p.href}
+              className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors duration-200"
+            >
+              <Phone className="w-3 h-3 text-primary/60" />
+              {p.display}
+            </a>
+          ))}
+        </div>
+
+        {/* Legal links */}
+        <div className="flex items-center gap-4 text-xs">
+          <Link to="/privacy" className="hover:text-primary transition-colors duration-200">
+            Privacy Policy
+          </Link>
+          <span className="text-border">·</span>
+          <Link to="/faq" className="hover:text-primary transition-colors duration-200">
+            FAQ
+          </Link>
+        </div>
+
         <span className="text-xs whitespace-pre-line">{get("footer_copyright", "© 2025 Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC · All Rights Reserved")}</span>
       </div>
     </motion.footer>
