@@ -5,7 +5,6 @@ import { ArrowRight, TrendingUp, Users, Star, Briefcase } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { heroChild, MOTION, useMotionPref } from "@/lib/animations";
 import { FloatCard } from "@/components/ui/float-card";
-import { MagneticButton } from "@/components/ui/magnetic-button";
 import HeroHeadline from "@/components/HeroHeadline";
 
 // ── Animated SVG chart path ────────────────────────────────────────────────
@@ -201,23 +200,19 @@ const HeroSection = () => {
             initial="hidden"
             animate="visible"
           >
-            <MagneticButton>
-              <Link
-                to="/studios"
-                className="group shimmer-btn inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-display font-semibold text-sm tracking-wide rounded-lg glow-gold transition-all duration-300 hover:brightness-110"
-              >
-                {get("hero_cta_primary", "Explore Our Services")}
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </MagneticButton>
-            <MagneticButton strength={0.18}>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 px-8 py-4 border border-gold-subtle text-foreground font-display font-medium text-sm tracking-wide rounded-lg transition-all duration-300 hover:bg-secondary hover:border-primary/30"
-              >
-                {get("hero_cta_secondary", "Talk to Our Team")}
-              </a>
-            </MagneticButton>
+            <Link
+              to="/studios"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 bg-primary text-primary-foreground font-display font-semibold text-sm tracking-wide rounded-lg transition-colors duration-300 hover:bg-primary/90"
+            >
+              {get("hero_cta_primary", "Explore Our Services")}
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+            </Link>
+            <a
+              href="#contact"
+              className="inline-flex items-center px-8 py-4 border border-border text-foreground font-display font-medium text-sm tracking-wide rounded-lg transition-colors duration-300 hover:border-primary/40 hover:bg-foreground/[0.02]"
+            >
+              {get("hero_cta_secondary", "Talk to Our Team")}
+            </a>
           </motion.div>
         </div>
 
