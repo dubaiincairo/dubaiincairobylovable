@@ -145,21 +145,25 @@ export const contentRegistry: ContentField[] = [
   { section: "about", key: "about_metric_3_value", label: "Metric 3 — Value", defaultValue: "+127%" },
   { section: "about", key: "about_metric_3_sub",   label: "Metric 3 — Sub",   defaultValue: "YoY revenue" },
 
-  // ── Edges ──
+  // ── Edges (3 cards) ──
   { section: "edges", key: "edges_subtitle", label: "Section Subtitle", defaultValue: "Why We're Different" },
   { section: "edges", key: "edges_headline", label: "Section Headline", defaultValue: "A Smarter Way to Grow Your Business Online" },
-  ...Array.from({ length: 6 }, (_, i) => [
-    { section: "edges", key: `edge_${i+1}_title`, label: `Card ${i+1} Title`, defaultValue: `Edge ${i+1}` },
-    { section: "edges", key: `edge_${i+1}_desc`, label: `Card ${i+1} Description`, defaultValue: "" },
-  ]).flat(),
+  { section: "edges", key: "edge_1_title", label: "Card 1 Title", defaultValue: "Intelligence-Powered Operations" },
+  { section: "edges", key: "edge_1_desc",  label: "Card 1 Description", defaultValue: "We leverage the latest AI tools and a rigorous electronic management system to streamline workflows. By combining emerging technology with automated tracking, we deliver high-quality projects faster and ensure that no detail ever slips through the cracks." },
+  { section: "edges", key: "edge_2_title", label: "Card 2 Title", defaultValue: "Elite Global Expertise" },
+  { section: "edges", key: "edge_2_desc",  label: "Card 2 Description", defaultValue: "Our unique model connects you with a vetted network of more than 80 project-based specialists across the digital marketing and eCommerce fields. This flexible structure allows us to maintain expert-level quality while keeping costs lean, offering you high-tier talent without the traditional agency overhead." },
+  { section: "edges", key: "edge_3_title", label: "Card 3 Title", defaultValue: "Performance-Based Value" },
+  { section: "edges", key: "edge_3_desc",  label: "Card 3 Description", defaultValue: "We believe in complete transparency, from our competitive pricing to our data-backed reporting. Every initiative is tied to clear KPIs and actionable insights, passing significant operational savings directly to you while ensuring you know exactly how your investment is driving growth." },
 
-  // ── Values ──
+  // ── Values (3 cards) ──
   { section: "values", key: "values_subtitle", label: "Section Subtitle", defaultValue: "What We Stand For" },
-  { section: "values", key: "values_headline", label: "Section Headline", defaultValue: "The Principles Behind Every Project" },
-  ...Array.from({ length: 3 }, (_, i) => [
-    { section: "values", key: `value_${i+1}_title`, label: `Value ${i+1} Title`, defaultValue: `Value ${i+1}` },
-    { section: "values", key: `value_${i+1}_desc`, label: `Value ${i+1} Description`, defaultValue: "" },
-  ]).flat(),
+  { section: "values", key: "values_headline", label: "Section Headline", defaultValue: "Core beliefs shaping our approach" },
+  { section: "values", key: "value_1_title", label: "Value 1 Title", defaultValue: "Clarity as a Foundation" },
+  { section: "values", key: "value_1_desc",  label: "Value 1 Description", defaultValue: "We believe impactful marketing is rooted in clear thinking and shared understanding. By championing open communication and continuous alignment on your core objectives, we ensure every strategy is built on a foundation of truth and transparency." },
+  { section: "values", key: "value_2_title", label: "Value 2 Title", defaultValue: "Partners, Not Providers" },
+  { section: "values", key: "value_2_desc",  label: "Value 2 Description", defaultValue: "The most profound results emerge from genuine partnership, not transactional service delivery. Our philosophy is to integrate deeply with your vision. We don't just execute tasks; we take shared, personal responsibility for your sustained growth." },
+  { section: "values", key: "value_3_title", label: "Value 3 Title", defaultValue: "Evolution Through Agility" },
+  { section: "values", key: "value_3_desc",  label: "Value 3 Description", defaultValue: "We believe sustainable growth demands a culture of testing, adapting, and embracing change. By valuing the agility to explore new channels and evolving market trends, we maintain the freedom to scale what works and intelligently refine what doesn't." },
 
   // ── Studios — Page Content (section: "studios") ──
   { section: "studios", key: "studios_back_link",        label: "Back Link Text",            defaultValue: "Back to Home" },
