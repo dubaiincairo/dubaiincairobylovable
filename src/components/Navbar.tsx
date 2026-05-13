@@ -41,6 +41,7 @@ const Navbar = () => {
     { href: "/studios", label: get("nav_link_studios", "Studios") },
     { href: "/careers", label: get("nav_link_careers", "Careers") },
     { href: "/tech",    label: get("nav_link_tech", "Tech Stack") },
+    { href: "/faq",     label: get("nav_link_faq", "FAQ") },
   ];
 
   return (
