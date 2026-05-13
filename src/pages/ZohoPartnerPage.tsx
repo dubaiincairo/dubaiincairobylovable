@@ -11,6 +11,7 @@ import {
   BarChart2,
 } from "lucide-react";
 import PageTransition from "@/components/PageTransition";
+import { RichText } from "@/components/ui/rich-text";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useSEO } from "@/hooks/useSEO";
 import {
@@ -173,18 +174,20 @@ const ZohoPartnerPage = () => {
                 <br />
                 {get("zoho_hero_h1_end", "Experts")}
               </h2>
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4 max-w-lg">
-                {get(
+              <RichText
+                html={get(
                   "zoho_hero_body_1",
                   "With over five years of hands-on experience, we help organizations deploy Zoho systems in a way that connects marketing, sales, and operations — ensuring that tools are not only installed, but fully adopted and operationalized."
                 )}
-              </p>
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-lg">
-                {get(
+                className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4 max-w-lg"
+              />
+              <RichText
+                html={get(
                   "zoho_hero_body_2",
                   "Our focus is on execution: configuring systems, aligning them with real business processes, and enabling teams to use them effectively to support day-to-day operations and growth activities."
                 )}
-              </p>
+                className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-lg"
+              />
             </motion.div>
 
             {/* Right: logo card */}
@@ -232,12 +235,13 @@ const ZohoPartnerPage = () => {
             whileInView="visible"
             viewport={viewportOnce}
           >
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-              {get(
+            <RichText
+              html={get(
                 "zoho_value_body",
                 "Zoho's value lies in how well it is implemented and integrated into actual workflows. We ensure that each application works within your business environment — from lead management and campaign execution to sales tracking and reporting — while providing the training needed for teams to operate independently and efficiently."
               )}
-            </p>
+              className="text-muted-foreground text-sm md:text-base leading-relaxed"
+            />
           </motion.div>
         </div>
       </section>
@@ -290,7 +294,7 @@ const ZohoPartnerPage = () => {
                 </div>
                 <div>
                   <h3 className="font-display font-semibold text-sm md:text-base mb-2 leading-snug">{title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
+                  <RichText html={desc} className="text-muted-foreground text-sm leading-relaxed" />
                 </div>
               </motion.div>
             ))}
@@ -318,12 +322,13 @@ const ZohoPartnerPage = () => {
             <h2 className="text-2xl md:text-3xl font-display font-bold mb-3">
               {get("zoho_cta_h2", "Ready to Operationalize Zoho for Your Business?")}
             </h2>
-            <p className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed text-sm">
-              {get(
+            <RichText
+              html={get(
                 "zoho_cta_body",
                 "Let's connect your Zoho environment to your actual business workflows. Our enablement team handles implementation, integration, and team training end to end."
               )}
-            </p>
+              className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed text-sm"
+            />
             <button
               onClick={openContactModal}
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-display font-semibold rounded-lg hover:brightness-110 transition-all glow-gold shimmer-btn text-sm"

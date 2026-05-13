@@ -4,6 +4,7 @@ import { Quote, Linkedin, ChevronDown, ChevronUp } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { RichText } from "@/components/ui/rich-text";
 
 type Testimonial = {
   id: string;
@@ -41,13 +42,12 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
 
         {/* Quote text — fixed height with fade + expand */}
         <div className="relative flex-1 mb-1">
-          <div
-            className={`text-foreground/90 text-sm leading-relaxed italic whitespace-pre-line overflow-hidden transition-all duration-300 ${
+          <RichText
+            html={t.content}
+            className={`text-foreground/90 text-sm leading-relaxed italic overflow-hidden transition-all duration-300 ${
               expanded ? "max-h-[2000px]" : "max-h-[6.5rem]"
             }`}
-          >
-            "{t.content}"
-          </div>
+          />
 
           {/* Fade gradient when collapsed */}
           {!expanded && (

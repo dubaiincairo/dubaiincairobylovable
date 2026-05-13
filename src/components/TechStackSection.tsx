@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { TrendingUp, ShoppingCart, Cpu, ArrowRight } from "lucide-react";
+import { RichText } from "@/components/ui/rich-text";
 
 /* ─── Category definition ─── */
 const CATEGORIES = [
@@ -87,9 +88,10 @@ const TechStackSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold">
             {get("tech_headline", "Integrated Solutions. Proven Tools.")}
           </h2>
-          <p className="mt-3 text-muted-foreground text-sm max-w-lg mx-auto leading-relaxed">
-            {get("tech_desc", "Three intelligent layers — each purpose-built to cover a critical domain of your digital operation.")}
-          </p>
+          <RichText
+            html={get("tech_desc", "Three intelligent layers — each purpose-built to cover a critical domain of your digital operation.")}
+            className="mt-3 text-muted-foreground text-sm max-w-lg mx-auto leading-relaxed"
+          />
         </motion.div>
 
         {/* Cards */}

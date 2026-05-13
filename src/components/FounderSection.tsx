@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Quote, Facebook, Linkedin, Instagram } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { RichText } from "@/components/ui/rich-text";
 
 const SOCIALS = [
   { key: "founder_facebook",  Icon: Facebook,  label: "Facebook"  },
@@ -27,9 +28,10 @@ const FounderSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
             {get("founder_headline", "Built by Someone Who's Been in the Trenches.")}
           </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">
-            {get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")}
-          </p>
+          <RichText
+            html={get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")}
+            className="text-muted-foreground text-lg leading-relaxed"
+          />
 
           {/* Social icons */}
           <div className="flex items-center gap-3 mt-8">
@@ -64,9 +66,10 @@ const FounderSection = () => {
               </div>
             </div>
 
-            <p className="text-foreground text-lg md:text-xl font-display italic leading-relaxed mb-6 text-center whitespace-pre-line">
-              "{get("founder_quote", "I believe that continuous learning is the key to success in business. That's why I've completed 50+ specialized training courses in eBusiness, and I will never stop growing, nor will we.")}"
-            </p>
+            <RichText
+              html={get("founder_quote", "I believe that continuous learning is the key to success in business. That's why I've completed 50+ specialized training courses in eBusiness, and I will never stop growing, nor will we.")}
+              className="text-foreground text-lg md:text-xl font-display italic leading-relaxed mb-6 text-center"
+            />
 
             <div className="w-12 h-px bg-primary/30 mx-auto mb-4" />
 

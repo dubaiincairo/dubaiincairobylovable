@@ -13,6 +13,7 @@ import {
   Monitor,
 } from "lucide-react";
 import PageTransition from "@/components/PageTransition";
+import { RichText } from "@/components/ui/rich-text";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useSEO } from "@/hooks/useSEO";
 import {
@@ -155,12 +156,13 @@ const YanoljaPartnerPage = () => {
                 <br />
                 <span className="text-gradient-gold">{get("yan_hero_h2_accent", "Partnership")}</span>
               </h2>
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-lg">
-                {get(
+              <RichText
+                html={get(
                   "yan_hero_body",
                   "We have also expanded our capabilities into the hospitality technology sector through our work with Yanolja Cloud and its suite of cloud-based management solutions. Over the past 12 months, we have built extensive hands-on experience implementing and integrating these systems across hospitality properties in Saudi Arabia, enabling fully digital, streamlined operations aligned with modern guest experiences. This practical exposure has positioned us as specialized implementors in hospitality tech, and we are now actively scaling these capabilities into new markets beyond Saudi Arabia."
                 )}
-              </p>
+                className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-lg"
+              />
             </motion.div>
 
             <motion.div
@@ -245,7 +247,7 @@ const YanoljaPartnerPage = () => {
                 </div>
                 <div>
                   <h3 className="font-display font-semibold text-sm md:text-base mb-2 leading-snug">{title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
+                  <RichText html={desc} className="text-muted-foreground text-sm leading-relaxed" />
                 </div>
               </motion.div>
             ))}
@@ -270,12 +272,13 @@ const YanoljaPartnerPage = () => {
             <h2 className="text-2xl md:text-3xl font-display font-bold mb-3">
               {get("yan_cta_h2", "Ready to Digitize Your Hospitality Operations?")}
             </h2>
-            <p className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed text-sm">
-              {get(
+            <RichText
+              html={get(
                 "yan_cta_body",
                 "Our hospitality tech team brings 12 months of hands-on implementation experience across Saudi Arabia. Let's bring that expertise to your property."
               )}
-            </p>
+              className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed text-sm"
+            />
             <button
               onClick={openContactModal}
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-display font-semibold rounded-lg hover:brightness-110 transition-all glow-gold shimmer-btn text-sm"

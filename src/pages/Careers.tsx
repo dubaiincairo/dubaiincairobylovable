@@ -9,6 +9,7 @@ import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import PageTransition from "@/components/PageTransition";
 import ApplyModal from "@/components/ApplyModal";
+import { RichText } from "@/components/ui/rich-text";
 
 type Job = {
   id: string;
@@ -87,9 +88,10 @@ const Careers = () => {
               </span>
             </h1>
 
-            <p className="text-muted-foreground text-lg max-w-2xl mb-8 leading-relaxed">
-              {get("careers_hero_body", "At Dubai in Cairo, we don't just deliver marketing solutions — we engineer growth using data, creativity, and AI-powered innovation.")}
-            </p>
+            <RichText
+              html={get("careers_hero_body", "At Dubai in Cairo, we don't just deliver marketing solutions — we engineer growth using data, creativity, and AI-powered innovation.")}
+              className="text-muted-foreground text-lg max-w-2xl mb-8 leading-relaxed"
+            />
 
             <div className="flex flex-wrap gap-2">
               <span className="px-3 py-1.5 rounded-full text-xs font-semibold border border-primary/30 text-primary/80 bg-primary/5">
@@ -143,14 +145,15 @@ const Careers = () => {
                 <h3 className="font-display font-semibold text-sm text-foreground mb-1.5">
                   {get(`careers_why_${i + 1}_title`, ["Regional & International Brands", "AI-First Culture", "Real Career Growth", "Cutting-Edge Toolkit"][i])}
                 </h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {get(`careers_why_${i + 1}_desc`, [
+                <RichText
+                  html={get(`careers_why_${i + 1}_desc`, [
                     "Work on campaigns that reach audiences across the Middle East and beyond.",
                     "We deploy AI tools across every workflow — you'll work at the frontier of marketing technology.",
                     "High-growth environment with mentorship, real ownership, and tangible progression paths.",
                     "Access to the latest marketing, analytics, and creative technology platforms.",
                   ][i])}
-                </p>
+                  className="text-xs text-muted-foreground leading-relaxed"
+                />
               </motion.div>
             ))}
           </motion.div>
@@ -349,9 +352,10 @@ const Careers = () => {
             <h2 className="text-2xl md:text-3xl font-display font-bold mb-3">
               {get("careers_apply_headline", "Ready to Join Us?")}
             </h2>
-            <p className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed">
-              {get("careers_apply_body", "Send your CV and portfolio (if applicable) to our careers inbox. Include the position title and your name in the subject line.")}
-            </p>
+            <RichText
+              html={get("careers_apply_body", "Send your CV and portfolio (if applicable) to our careers inbox. Include the position title and your name in the subject line.")}
+              className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed"
+            />
 
             <a
               href={`mailto:${applyEmail}?subject=Application – ${applySubject}`}

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Briefcase, Palette, Code, Fingerprint, Camera, Award } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { RichText } from "@/components/ui/rich-text";
 
 const icons = [Briefcase, Palette, Code, Fingerprint, Camera, Award];
 
@@ -38,7 +39,7 @@ const ServicesSection = () => {
                 <s.icon className="w-5 h-5 text-primary" />
               </div>
               <h3 className="text-xl font-display font-semibold mb-3 whitespace-pre-line">{s.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">{s.desc}</p>
+              <RichText html={s.desc} className="text-muted-foreground text-sm leading-relaxed" />
             </motion.div>
           ))}
         </motion.div>

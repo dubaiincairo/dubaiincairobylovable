@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { fadeUp, fadeIn, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { useSEO } from "@/hooks/useSEO";
 import PageTransition from "@/components/PageTransition";
+import { RichText } from "@/components/ui/rich-text";
 
 type CaseStudy = {
   id: string;
@@ -141,7 +142,7 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
                 <div className="w-1 h-6 bg-primary rounded-full" />
                 <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-primary">The Challenge</h2>
               </div>
-              <p className="text-foreground text-lg leading-relaxed whitespace-pre-line pl-4">{cs.challenge}</p>
+              <RichText html={cs.challenge} className="text-foreground text-lg leading-relaxed pl-4" />
             </motion.div>
           )}
 
@@ -151,7 +152,7 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
                 <div className="w-1 h-6 bg-primary rounded-full" />
                 <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-primary">Our Approach</h2>
               </div>
-              <p className="text-foreground text-lg leading-relaxed whitespace-pre-line pl-4">{cs.solution}</p>
+              <RichText html={cs.solution} className="text-foreground text-lg leading-relaxed pl-4" />
             </motion.div>
           )}
 
@@ -161,7 +162,7 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
                 <div className="w-1 h-6 bg-primary rounded-full" />
                 <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-primary">The Results</h2>
               </div>
-              <p className="text-foreground text-lg leading-relaxed whitespace-pre-line pl-4">{cs.results}</p>
+              <RichText html={cs.results} className="text-foreground text-lg leading-relaxed pl-4" />
             </motion.div>
           )}
 

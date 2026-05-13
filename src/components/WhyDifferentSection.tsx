@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Cpu, ListChecks, Handshake, Users, BadgeDollarSign, BarChart3 } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { RichText } from "@/components/ui/rich-text";
 
 const icons = [Cpu, ListChecks, Handshake, Users, BadgeDollarSign, BarChart3];
 
@@ -36,7 +37,7 @@ const WhyDifferentSection = () => {
                 <item.icon className="w-5 h-5 text-primary" />
               </div>
               <h3 className="text-lg font-display font-semibold mb-3 whitespace-pre-line">{item.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">{item.desc}</p>
+              <RichText html={item.desc} className="text-muted-foreground text-sm leading-relaxed" />
             </motion.div>
           ))}
         </motion.div>

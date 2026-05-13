@@ -14,6 +14,7 @@ import {
   Factory,
 } from "lucide-react";
 import PageTransition from "@/components/PageTransition";
+import { RichText } from "@/components/ui/rich-text";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useSEO } from "@/hooks/useSEO";
 import {
@@ -176,12 +177,14 @@ const OdooPartnerPage = () => {
                 <br />
                 {get("odoo_hero_h1_end", "Partner")}
               </h2>
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4 max-w-lg">
-                {get("odoo_hero_body_1", "We are now a verified Odoo partner, enabling our clients to operate within a fully integrated, closed-loop ecosystem that connects eCommerce, digital marketing, and backend operations. We believe that impactful marketing cannot exist in isolation — real, scalable results require a robust ERP system that digitally manages and synchronizes all operational processes.")}
-              </p>
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-lg">
-                {get("odoo_hero_body_2", "That's why we've established a dedicated Odoo studio, specializing in implementation, customization, and API development, ensuring seamless integration between your business operations and your marketing engine.")}
-              </p>
+              <RichText
+                html={get("odoo_hero_body_1", "We are now a verified Odoo partner, enabling our clients to operate within a fully integrated, closed-loop ecosystem that connects eCommerce, digital marketing, and backend operations. We believe that impactful marketing cannot exist in isolation — real, scalable results require a robust ERP system that digitally manages and synchronizes all operational processes.")}
+                className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4 max-w-lg"
+              />
+              <RichText
+                html={get("odoo_hero_body_2", "That's why we've established a dedicated Odoo studio, specializing in implementation, customization, and API development, ensuring seamless integration between your business operations and your marketing engine.")}
+                className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-lg"
+              />
             </motion.div>
 
             <motion.div
@@ -266,7 +269,7 @@ const OdooPartnerPage = () => {
                 </div>
                 <div>
                   <h3 className="font-display font-semibold text-sm md:text-base mb-2 leading-snug">{title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
+                  <RichText html={desc} className="text-muted-foreground text-sm leading-relaxed" />
                 </div>
               </motion.div>
             ))}
@@ -291,9 +294,10 @@ const OdooPartnerPage = () => {
             <h2 className="text-2xl md:text-3xl font-display font-bold mb-3">
               {get("odoo_cta_h2", "Ready to Build Your Integrated Ecosystem?")}
             </h2>
-            <p className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed text-sm">
-              {get("odoo_cta_body", "Let's connect your marketing engine to a fully synchronized ERP backend. Our Odoo studio handles everything from initial scoping to go-live.")}
-            </p>
+            <RichText
+              html={get("odoo_cta_body", "Let's connect your marketing engine to a fully synchronized ERP backend. Our Odoo studio handles everything from initial scoping to go-live.")}
+              className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed text-sm"
+            />
             <button
               onClick={openContactModal}
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-display font-semibold rounded-lg hover:brightness-110 transition-all glow-gold shimmer-btn text-sm"
