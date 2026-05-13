@@ -15,9 +15,34 @@ const SiteContentContext = createContext<SiteContentContextType>({
   get: () => "",
 });
 
+const CACHE_KEY = "site_content_cache_v1";
+
+const readCache = (): ContentMap => {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = window.localStorage.getItem(CACHE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+};
+
+const writeCache = (map: ContentMap) => {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(CACHE_KEY, JSON.stringify(map));
+  } catch {
+    // Storage quota or privacy mode — non-fatal
+  }
+};
+
 export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
-  const [content, setContent] = useState<ContentMap>({});
-  const [loading, setLoading] = useState(true);
+  // Hydrate from localStorage synchronously so returning visitors render real
+  // content on first paint instead of flashing hardcoded defaults.
+  const [content, setContent] = useState<ContentMap>(() => readCache());
+  const [loading, setLoading] = useState<boolean>(() => Object.keys(readCache()).length === 0);
 
   useEffect(() => {
     // Initial fetch
@@ -29,6 +54,7 @@ export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
           const map: ContentMap = {};
           data.forEach((row) => (map[row.key] = row.value));
           setContent(map);
+          writeCache(map);
         }
         setLoading(false);
       });
@@ -46,13 +72,18 @@ export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
               setContent((prev) => {
                 const next = { ...prev };
                 delete next[old.key!];
+                writeCache(next);
                 return next;
               });
             }
           } else {
             const row = payload.new as { key: string; value: string };
             if (row.key) {
-              setContent((prev) => ({ ...prev, [row.key]: row.value }));
+              setContent((prev) => {
+                const next = { ...prev, [row.key]: row.value };
+                writeCache(next);
+                return next;
+              });
             }
           }
         }

@@ -25,6 +25,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import FaviconUpdater from "./components/FaviconUpdater";
 import SkipToMain from "./components/SkipToMain";
 import ScrollToTop from "./components/ScrollToTop";
+import ContentGate from "./components/ContentGate";
 import { ContactModalProvider } from "./context/ContactModalContext";
 import { ContactModal } from "./components/ContactModal";
 import GoogleIntegrations from "./components/GoogleIntegrations";
@@ -80,7 +81,9 @@ const App = () => (
           <FaviconUpdater />
           <BrowserRouter>
             <SkipToMain />
-            <AnimatedRoutes />
+            <ContentGate>
+              <AnimatedRoutes />
+            </ContentGate>
           </BrowserRouter>
         </ContactModalProvider>
       </SiteContentProvider>
