@@ -1,6 +1,7 @@
 import { motion, Variants } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AnimatedNumber } from "@/components/ui/animated-number";
 
 export interface FloatCardProps {
   icon: LucideIcon;
@@ -26,10 +27,16 @@ const FloatCard = ({ icon: Icon, value, label, className, variants }: FloatCardP
       <Icon className="w-3.5 h-3.5 text-primary" />
     </div>
     <div>
-      <div className="text-sm font-bold text-foreground leading-none">{value}</div>
+      <AnimatedNumber
+        value={value}
+        duration={1800}
+        disablePulse
+        className="text-sm font-bold text-foreground leading-none"
+      />
       <div className="text-[10px] text-muted-foreground mt-0.5">{label}</div>
     </div>
   </motion.div>
 );
 
 export { FloatCard };
+
