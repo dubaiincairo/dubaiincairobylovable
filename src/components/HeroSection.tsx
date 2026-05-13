@@ -1,9 +1,12 @@
+import { MouseEvent, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronDown, TrendingUp, Users, Star, Briefcase } from "lucide-react";
+import { ArrowRight, TrendingUp, Users, Star, Briefcase } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { heroChild, heroHeadline, useMotionPref } from "@/lib/animations";
+import { heroChild, useMotionPref } from "@/lib/animations";
 import { FloatCard } from "@/components/ui/float-card";
+import { MagneticButton } from "@/components/ui/magnetic-button";
+import HeroHeadline from "@/components/HeroHeadline";
 
 // ── Animated SVG chart path ────────────────────────────────────────────────
 const ChartVisual = () => (
@@ -14,7 +17,6 @@ const ChartVisual = () => (
         <stop offset="100%" stopColor="hsl(38 80% 55%)" stopOpacity="0" />
       </linearGradient>
     </defs>
-    {/* Area fill */}
     <motion.path
       d="M0 70 C30 65 50 55 70 45 C90 35 110 25 130 20 C150 15 170 18 190 12 C210 6 225 8 240 5 L240 80 L0 80 Z"
       fill="url(#chartGrad)"
@@ -22,7 +24,6 @@ const ChartVisual = () => (
       animate={{ opacity: 1 }}
       transition={{ delay: 0.8, duration: 1 }}
     />
-    {/* Line */}
     <motion.path
       d="M0 70 C30 65 50 55 70 45 C90 35 110 25 130 20 C150 15 170 18 190 12 C210 6 225 8 240 5"
       stroke="hsl(38 80% 55%)"
@@ -33,7 +34,6 @@ const ChartVisual = () => (
       animate={{ pathLength: 1, opacity: 1 }}
       transition={{ delay: 0.6, duration: 1.4, ease: "easeOut" }}
     />
-    {/* End dot */}
     <motion.circle
       cx="240" cy="5" r="3"
       fill="hsl(38 80% 55%)"
@@ -44,12 +44,42 @@ const ChartVisual = () => (
   </svg>
 );
 
+// ── Refined scroll cue ─────────────────────────────────────────────────────
+const ScrollCue = ({ label }: { label: string }) => {
+  const { shouldReduce } = useMotionPref();
+  return (
+    <motion.a
+      href="#about"
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3 text-muted-foreground hover:text-primary transition-colors duration-300 group"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1.8, duration: 0.6 }}
+      aria-label={label}
+    >
+      <span className="text-[10px] tracking-[0.25em] uppercase font-medium">{label}</span>
+      <div className="relative h-10 w-px overflow-hidden bg-border">
+        <motion.div
+          className="absolute left-0 right-0 h-4 bg-primary"
+          initial={{ y: "-100%" }}
+          animate={shouldReduce ? { y: "-100%" } : { y: ["-100%", "300%"] }}
+          transition={
+            shouldReduce
+              ? { duration: 0 }
+              : { duration: 2.2, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.4 }
+          }
+        />
+      </div>
+    </motion.a>
+  );
+};
+
 // ── Main component ─────────────────────────────────────────────────────────
 const HeroSection = () => {
   const { get } = useSiteContent();
   const { shouldReduce } = useMotionPref();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [spotlight, setSpotlight] = useState<{ x: number; y: number } | null>(null);
 
-  // Hero visual — fully independent from the stats counter section
   const cardLabel    = get("hero_card_label",    "Growth Analytics");
   const cardTrend    = get("hero_card_trend",    "+34% ↑");
   const cardValue    = get("hero_card_value",    "216+");
@@ -63,8 +93,21 @@ const HeroSection = () => {
   const float4Value  = get("hero_float_4_value", "100%");
   const float4Label  = get("hero_float_4_label", "Digital-First");
 
+  const handleSpotlightMove = (e: MouseEvent<HTMLElement>) => {
+    if (shouldReduce || !sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const handleSpotlightLeave = () => setSpotlight(null);
+
   return (
-    <section className="relative md:min-h-screen flex md:items-center overflow-hidden px-6 pt-24 pb-16 md:pt-0 md:pb-0">
+    <section
+      ref={sectionRef}
+      onMouseMove={handleSpotlightMove}
+      onMouseLeave={handleSpotlightLeave}
+      className="relative md:min-h-screen flex md:items-center overflow-hidden px-6 pt-24 pb-16 md:pt-0 md:pb-0"
+    >
 
       {/* Background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -85,6 +128,22 @@ const HeroSection = () => {
         animate={{ opacity: 0.28 }}
         transition={{ duration: 2.5, ease: "easeOut" }}
       />
+
+      {/* Spotlight cursor — desktop only, disabled when reduced-motion */}
+      {spotlight && !shouldReduce && (
+        <div
+          className="absolute pointer-events-none hidden md:block transition-opacity duration-200"
+          style={{
+            left: spotlight.x - 200,
+            top: spotlight.y - 200,
+            width: 400,
+            height: 400,
+            background:
+              'radial-gradient(circle, hsl(38 80% 55% / 0.10), hsl(38 80% 55% / 0.04) 40%, transparent 70%)',
+            mixBlendMode: 'screen',
+          }}
+        />
+      )}
 
       {/* Vignette */}
       <div className="absolute inset-0 pointer-events-none"
@@ -109,18 +168,11 @@ const HeroSection = () => {
             </span>
           </motion.div>
 
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.05] mb-6 whitespace-pre-line"
-            variants={heroHeadline}
-            initial="hidden"
-            animate="visible"
-          >
-            {get("hero_headline", "Data-Powered Growth. Science-Fueled Success.")}
-          </motion.h1>
+          <HeroHeadline text={get("hero_headline", "Data-Powered Growth. Science-Fueled Success.")} />
 
           <motion.p
             className="text-lg text-muted-foreground max-w-lg mb-10 font-light leading-relaxed whitespace-pre-line"
-            variants={heroChild(0.35)}
+            variants={heroChild(0.45)}
             initial="hidden"
             animate="visible"
           >
@@ -129,23 +181,27 @@ const HeroSection = () => {
 
           <motion.div
             className="flex flex-col sm:flex-row items-start gap-4"
-            variants={heroChild(0.5)}
+            variants={heroChild(0.6)}
             initial="hidden"
             animate="visible"
           >
-            <Link
-              to="/studios"
-              className="group shimmer-btn inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-display font-semibold text-sm tracking-wide rounded-lg glow-gold transition-all duration-300 hover:brightness-110"
-            >
-              {get("hero_cta_primary", "Explore Our Services")}
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-8 py-4 border border-gold-subtle text-foreground font-display font-medium text-sm tracking-wide rounded-lg transition-all duration-300 hover:bg-secondary hover:border-primary/30"
-            >
-              {get("hero_cta_secondary", "Talk to Our Team")}
-            </a>
+            <MagneticButton>
+              <Link
+                to="/studios"
+                className="group shimmer-btn inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-display font-semibold text-sm tracking-wide rounded-lg glow-gold transition-all duration-300 hover:brightness-110"
+              >
+                {get("hero_cta_primary", "Explore Our Services")}
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </MagneticButton>
+            <MagneticButton strength={0.18}>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-8 py-4 border border-gold-subtle text-foreground font-display font-medium text-sm tracking-wide rounded-lg transition-all duration-300 hover:bg-secondary hover:border-primary/30"
+              >
+                {get("hero_cta_secondary", "Talk to Our Team")}
+              </a>
+            </MagneticButton>
           </motion.div>
         </div>
 
@@ -200,22 +256,7 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.a
-        href="#about"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors duration-300"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.8, duration: 0.6 }}
-      >
-        <span className="text-[10px] tracking-[0.2em] uppercase font-medium">Scroll</span>
-        <motion.div
-          animate={shouldReduce ? { y: 0 } : { y: [0, 4, 0] }}
-          transition={shouldReduce ? { duration: 0 } : { duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown className="w-5 h-5" />
-        </motion.div>
-      </motion.a>
+      <ScrollCue label="Scroll" />
     </section>
   );
 };
