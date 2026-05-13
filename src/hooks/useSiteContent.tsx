@@ -95,9 +95,18 @@ export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
+  // Treat empty strings the same as missing rows — so an editor clearing a
+  // field in /admin (which saves "" to Supabase) surfaces the code-level
+  // fallback again instead of leaving the page blank. Optional fields that
+  // intentionally render nothing when blank (e.g. founder social URLs)
+  // already pass "" as their fallback, so this change is a no-op for them.
   const get = useCallback(
-    (key: string, fallback = "") => content[key] ?? fallback,
-    [content]
+    (key: string, fallback = "") => {
+      const v = content[key];
+      if (v === undefined || v === null || v === "") return fallback;
+      return v;
+    },
+    [content],
   );
 
   return (
