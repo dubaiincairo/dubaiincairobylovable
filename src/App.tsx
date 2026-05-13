@@ -23,6 +23,7 @@ import FAQ from "./pages/FAQ";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
+import CookieBanner from "./components/CookieBanner";
 import FaviconUpdater from "./components/FaviconUpdater";
 import SkipToMain from "./components/SkipToMain";
 import ScrollToTop from "./components/ScrollToTop";
@@ -76,6 +77,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <WhatsAppButton />
+      <CookieBanner />
       <SiteContentProvider>
         <GoogleIntegrations />
         <ContactModalProvider>
