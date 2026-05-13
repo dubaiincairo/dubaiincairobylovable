@@ -1,58 +1,7 @@
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { staggerContainer, scaleIn, useMotionPref, viewportOnce } from "@/lib/animations";
-
-const AnimatedNumber = ({ value }: { value: string }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
-  const { shouldReduce } = useMotionPref();
-  const [display, setDisplay] = useState(value);
-  const [landed, setLanded] = useState(false);
-
-  useEffect(() => {
-    if (!isInView) return;
-    if (shouldReduce) {
-      setDisplay(value);
-      setLanded(true);
-      return;
-    }
-    const numMatch = value.match(/^(\d+)/);
-    if (!numMatch) {
-      setDisplay(value);
-      setLanded(true);
-      return;
-    }
-    const target = parseInt(numMatch[1]);
-    const suffix = value.slice(numMatch[1].length);
-    const duration = 2200;
-    const start = Date.now();
-    const tick = () => {
-      const elapsed = Date.now() - start;
-      const progress = Math.min(elapsed / duration, 1);
-      // ease-out quart: confident climb, gentle landing
-      const eased = 1 - Math.pow(1 - progress, 4);
-      setDisplay(Math.round(target * eased) + suffix);
-      if (progress < 1) {
-        requestAnimationFrame(tick);
-      } else {
-        setLanded(true);
-      }
-    };
-    requestAnimationFrame(tick);
-  }, [isInView, value, shouldReduce]);
-
-  return (
-    <motion.div
-      ref={ref}
-      className="text-4xl md:text-5xl font-display font-bold text-gradient-gold mb-2"
-      animate={landed && !shouldReduce ? { scale: [1, 1.06, 1] } : { scale: 1 }}
-      transition={{ duration: 0.55, ease: "easeOut" }}
-    >
-      {display}
-    </motion.div>
-  );
-};
+import { staggerContainer, scaleIn, viewportOnce } from "@/lib/animations";
+import { AnimatedNumber } from "@/components/ui/animated-number";
 
 const StatsSection = () => {
   const { get } = useSiteContent();
@@ -74,7 +23,10 @@ const StatsSection = () => {
       >
         {stats.map((stat, i) => (
           <motion.div key={i} className="text-center" variants={scaleIn}>
-            <AnimatedNumber value={stat.value} />
+            <AnimatedNumber
+              value={stat.value}
+              className="text-4xl md:text-5xl font-display font-bold text-gradient-gold mb-2"
+            />
             <div className="text-sm text-muted-foreground tracking-wide">{stat.label}</div>
           </motion.div>
         ))}

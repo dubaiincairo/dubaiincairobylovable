@@ -5,6 +5,7 @@ import { ArrowRight, TrendingUp, Users, Star, Briefcase } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { heroChild, MOTION, useMotionPref } from "@/lib/animations";
 import { FloatCard } from "@/components/ui/float-card";
+import { AnimatedNumber } from "@/components/ui/animated-number";
 import HeroHeadline from "@/components/HeroHeadline";
 
 // ── Animated SVG chart path ────────────────────────────────────────────────
@@ -245,9 +246,19 @@ const HeroSection = () => {
               <div>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">{cardLabel}</span>
-                  <span className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded-full font-medium">{cardTrend}</span>
+                  <AnimatedNumber
+                    value={cardTrend}
+                    as="span"
+                    duration={1800}
+                    disablePulse
+                    className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded-full font-medium inline-block"
+                  />
                 </div>
-                <div className="text-2xl font-display font-bold text-gradient-gold">{cardValue}</div>
+                <AnimatedNumber
+                  value={cardValue}
+                  duration={2000}
+                  className="text-2xl font-display font-bold text-gradient-gold"
+                />
                 <div className="text-xs text-muted-foreground">{cardSublabel}</div>
               </div>
               <div className="mt-3">
