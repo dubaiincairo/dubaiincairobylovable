@@ -112,7 +112,7 @@ const YanoljaPartnerPage = () => {
       <main id="main-content">
 
       {/* ── Page intro ──────────────────────────────────────────────────── */}
-      <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 px-6">
+      <section className="relative pt-24 pb-8 md:pt-28 md:pb-10 px-6">
         <div className="relative max-w-6xl mx-auto">
           <motion.div variants={fadeUp} initial="hidden" animate="visible">
             <Link

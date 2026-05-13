@@ -131,7 +131,7 @@ const TestimonialsSection = () => {
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="relative py-12 md:py-20 px-6 overflow-hidden">
+    <section className="relative py-8 md:py-14 px-6 overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)" }}

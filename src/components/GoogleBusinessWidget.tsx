@@ -84,21 +84,38 @@ const GoogleBusinessWidget = () => {
             </div>
           </div>
 
-          {/* Map embed */}
-          <div className="md:col-span-2 rounded-2xl overflow-hidden border border-border h-64 md:h-72 bg-[hsl(220,20%,4%)]">
-            <div style={{ width: "100%", height: "100%", filter: "invert(90%) hue-rotate(180deg)" }}>
+          {/* Map embed — pointer-events disabled to suppress Google's native
+              white hover tooltips; the CTA button below opens the full
+              interactive map in a new tab. */}
+          <a
+            href={mapsLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${bizName} on Google Maps`}
+            className="md:col-span-2 relative rounded-2xl overflow-hidden border border-border h-64 md:h-72 bg-[hsl(220,20%,4%)] block group"
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                filter: "invert(100%) hue-rotate(180deg) brightness(0.95)",
+                pointerEvents: "none",
+              }}
+            >
               <iframe
                 title="Dubai in Cairo on Google Maps"
                 src={mapsEmbed}
                 width="100%"
                 height="100%"
                 style={{ border: 0, display: "block" }}
-                allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                tabIndex={-1}
+                aria-hidden="true"
               />
             </div>
-          </div>
+            <div className="absolute inset-0 pointer-events-none transition-colors duration-300 group-hover:bg-primary/[0.04]" />
+          </a>
         </motion.div>
 
         {/* Legal strip */}

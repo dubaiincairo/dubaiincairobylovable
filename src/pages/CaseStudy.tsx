@@ -78,7 +78,7 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
       <main id="main-content">
 
       {/* Hero */}
-      <section className="relative pt-28 pb-12 md:pt-36 md:pb-20 px-6 overflow-hidden">
+      <section className="relative pt-24 pb-8 md:pt-28 md:pb-10 px-6 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 30% 50%, hsl(38 80% 55% / 0.05), transparent 60%)' }} />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32" style={{ background: 'linear-gradient(180deg, transparent, hsl(38 80% 55% / 0.2), transparent)' }} />
 
