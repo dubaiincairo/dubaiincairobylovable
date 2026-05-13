@@ -79,7 +79,6 @@ const App = () => (
       <Toaster />
       <Sonner />
       <WhatsAppButton />
-      <CookieBanner />
       <SiteContentProvider>
         <GoogleIntegrations />
         <ContactModalProvider>
@@ -87,6 +86,7 @@ const App = () => (
           <FaviconUpdater />
           <BrowserRouter>
             <SkipToMain />
+            <CookieBanner />
             <ContentGate>
               <AnimatedRoutes />
             </ContentGate>
