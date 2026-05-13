@@ -26,8 +26,8 @@ const SECTIONS = [
     Icon: Shield,
     title: "Who We Are",
     body: [
-      "This Privacy Policy applies to Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC ("Dubai in Cairo", "we", "our", or "us"), registered under Commercial Registration No. 163772 issued by the General Authority for Investment and Free Zones in Cairo, with registered offices at 100 Al-Mirgani Street, Abu Dhabi Bank Tower, 1st Floor, Heliopolis, Cairo, Egypt.",
-      "We operate the website dubaiincairo.com and all subdomains and pages associated with it (the "Site"). This Policy explains what personal data we collect, why we collect it, how we use it, and what rights you have in relation to it.",
+      "This Privacy Policy applies to Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC (\"Dubai in Cairo\", \"we\", \"our\", or \"us\"), registered under Commercial Registration No. 163772 issued by the General Authority for Investment and Free Zones in Cairo, with registered offices at 100 Al-Mirgani Street, Abu Dhabi Bank Tower, 1st Floor, Heliopolis, Cairo, Egypt.",
+      "We operate the website dubaiincairo.com and all subdomains and pages associated with it (the \"Site\"). This Policy explains what personal data we collect, why we collect it, how we use it, and what rights you have in relation to it.",
       "If you have any questions about this Policy or our data practices, the right place to start is info@dubaiincairo.com. We will respond within five business days.",
     ],
   },
