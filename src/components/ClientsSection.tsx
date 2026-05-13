@@ -11,15 +11,29 @@ interface Logo {
   url: string;
 }
 
+// First-paint defaults — used when the CMS row doesn't exist yet. Once an
+// editor saves or uploads in the admin, the CMS value overrides. Setting a
+// slot to an empty string in the admin removes it from the wall.
+const DEFAULT_LOGOS: Array<Logo | null> = [
+  { name: "Samsung",  url: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/samsung.svg" },
+  { name: "Unilever", url: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/unilever.svg" },
+  { name: "Vodafone", url: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vodafone.svg" },
+  { name: "Huawei",   url: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/huawei.svg" },
+  { name: "PepsiCo",  url: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/pepsi.svg" },
+  { name: "Orange",   url: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/orange.svg" },
+  null, null, null, null, null, null,
+];
+
 const ClientsSection = () => {
   const { get } = useSiteContent();
 
   // Collect logo slots that have a URL set; blank slots are skipped.
   const logos: Logo[] = [];
   for (let i = 1; i <= MAX_SLOTS; i++) {
-    const url = get(`client_logo_${i}_url`).trim();
+    const fallback = DEFAULT_LOGOS[i - 1];
+    const url = get(`client_logo_${i}_url`, fallback?.url ?? "").trim();
     if (!url) continue;
-    const name = get(`client_logo_${i}_name`).trim() || `Client ${i}`;
+    const name = get(`client_logo_${i}_name`, fallback?.name ?? `Client ${i}`).trim() || `Client ${i}`;
     logos.push({ name, url });
   }
 
