@@ -1,20 +1,39 @@
 import { motion } from "framer-motion";
-import { Cpu, ListChecks, Handshake, Users, BadgeDollarSign, BarChart3 } from "lucide-react";
+import { BrainCircuit, Globe, Target } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
 import AnimatedUnderline from "@/components/ui/animated-underline";
 
-const icons = [Cpu, ListChecks, Handshake, Users, BadgeDollarSign, BarChart3];
-
 const WhyDifferentSection = () => {
   const { get } = useSiteContent();
 
-  const edges = Array.from({ length: 6 }, (_, i) => ({
-    icon: icons[i],
-    title: get(`edge_${i + 1}_title`, `Edge ${i + 1}`),
-    desc: get(`edge_${i + 1}_desc`, ""),
-  }));
+  const edges = [
+    {
+      icon: BrainCircuit,
+      title: get("edge_1_title", "Intelligence-Powered Operations"),
+      desc: get(
+        "edge_1_desc",
+        "We leverage the latest AI tools and a rigorous electronic management system to streamline workflows. By combining emerging technology with automated tracking, we deliver high-quality projects faster and ensure that no detail ever slips through the cracks.",
+      ),
+    },
+    {
+      icon: Globe,
+      title: get("edge_2_title", "Elite Global Expertise"),
+      desc: get(
+        "edge_2_desc",
+        "Our unique model connects you with a vetted network of more than 80 project-based specialists across the digital marketing and eCommerce fields. This flexible structure allows us to maintain expert-level quality while keeping costs lean, offering you high-tier talent without the traditional agency overhead.",
+      ),
+    },
+    {
+      icon: Target,
+      title: get("edge_3_title", "Performance-Based Value"),
+      desc: get(
+        "edge_3_desc",
+        "We believe in complete transparency, from our competitive pricing to our data-backed reporting. Every initiative is tied to clear KPIs and actionable insights, passing significant operational savings directly to you while ensuring you know exactly how your investment is driving growth.",
+      ),
+    },
+  ];
 
   return (
     <section className="relative py-8 md:py-14 px-6 overflow-hidden">
@@ -32,7 +51,7 @@ const WhyDifferentSection = () => {
           <AnimatedUnderline />
         </motion.div>
 
-        <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           {edges.map((item, i) => (
             <motion.div key={i} className="group glass-card gradient-border p-5 md:p-8 rounded-xl hover-lift" variants={cardFadeUp}>
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 transition-transform duration-300 group-hover:rotate-12">
