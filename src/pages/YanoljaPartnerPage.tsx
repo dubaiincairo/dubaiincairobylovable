@@ -12,8 +12,7 @@ import {
   DollarSign,
   Monitor,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useSEO } from "@/hooks/useSEO";
 import {
@@ -108,8 +107,7 @@ const YanoljaPartnerPage = () => {
   }));
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <PageTransition>
       <main id="main-content">
 
       {/* ── Page intro ──────────────────────────────────────────────────── */}
@@ -289,8 +287,7 @@ const YanoljaPartnerPage = () => {
       </section>
 
       </main>
-      <Footer />
-    </div>
+    </PageTransition>
   );
 };
 

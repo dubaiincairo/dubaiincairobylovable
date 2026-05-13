@@ -13,8 +13,7 @@ import {
   Users,
   Factory,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useSEO } from "@/hooks/useSEO";
 import {
@@ -120,8 +119,7 @@ const OdooPartnerPage = () => {
   }));
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <PageTransition>
       <main id="main-content">
 
       {/* ── Page intro ──────────────────────────────────────────────────── */}
@@ -307,8 +305,7 @@ const OdooPartnerPage = () => {
       </section>
 
       </main>
-      <Footer />
-    </div>
+    </PageTransition>
   );
 };
 

@@ -5,8 +5,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { fadeUp, fadeIn, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { useSEO } from "@/hooks/useSEO";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 
 type CaseStudy = {
   id: string;
@@ -49,9 +48,9 @@ const CaseStudy = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <PageTransition className="flex items-center justify-center">
         <div className="w-6 h-6 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-      </div>
+      </PageTransition>
     );
   }
 
@@ -74,8 +73,7 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
   ].filter((m) => m.v);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <PageTransition>
       <main id="main-content">
 
       {/* Hero */}
@@ -190,8 +188,7 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
       </section>
 
       </main>
-      <Footer />
-    </div>
+    </PageTransition>
   );
 };
 

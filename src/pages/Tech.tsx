@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Cpu } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 import TechStackSection from "@/components/TechStackSection";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
@@ -16,8 +15,7 @@ const Tech = () => {
   useSEO({ titleKey: "seo_tech_title", descriptionKey: "seo_tech_description", canonical: "/tech" });
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <PageTransition>
       <main id="main-content">
 
       {/* Hero */}
@@ -80,8 +78,7 @@ const Tech = () => {
       </section>
 
       </main>
-      <Footer />
-    </div>
+    </PageTransition>
   );
 };
 

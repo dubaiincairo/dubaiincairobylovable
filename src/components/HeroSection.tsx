@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown, TrendingUp, Users, Star, Briefcase } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { heroChild, heroHeadline } from "@/lib/animations";
+import { heroChild, heroHeadline, useMotionPref } from "@/lib/animations";
 import { FloatCard } from "@/components/ui/float-card";
 
 // ── Animated SVG chart path ────────────────────────────────────────────────
@@ -47,6 +47,7 @@ const ChartVisual = () => (
 // ── Main component ─────────────────────────────────────────────────────────
 const HeroSection = () => {
   const { get } = useSiteContent();
+  const { shouldReduce } = useMotionPref();
 
   // Hero visual — fully independent from the stats counter section
   const cardLabel    = get("hero_card_label",    "Growth Analytics");
@@ -81,7 +82,7 @@ const HeroSection = () => {
           backgroundSize: '40px 40px',
         }}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.4 }}
+        animate={{ opacity: 0.28 }}
         transition={{ duration: 2.5, ease: "easeOut" }}
       />
 
@@ -209,8 +210,8 @@ const HeroSection = () => {
       >
         <span className="text-[10px] tracking-[0.2em] uppercase font-medium">Scroll</span>
         <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+          animate={shouldReduce ? { y: 0 } : { y: [0, 4, 0] }}
+          transition={shouldReduce ? { duration: 0 } : { duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
         >
           <ChevronDown className="w-5 h-5" />
         </motion.div>

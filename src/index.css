@@ -163,12 +163,12 @@
 }
 
 .animate-float-slow {
-  animation: float-slow 12s ease-in-out infinite;
+  animation: float-slow 28s ease-in-out infinite;
   will-change: transform;
   transform: translateZ(0);
 }
 .animate-float-reverse {
-  animation: float-reverse 15s ease-in-out infinite;
+  animation: float-reverse 34s ease-in-out infinite;
   will-change: transform;
   transform: translateZ(0);
 }
@@ -176,4 +176,24 @@
   background-size: 200% auto;
   animation: shimmer-badge 4s linear infinite;
   will-change: background-position;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-float-slow,
+  .animate-float-reverse,
+  .animate-shimmer-badge,
+  .animate-marquee-left,
+  .animate-marquee-right,
+  .animate-ping,
+  .animate-float {
+    animation: none !important;
+  }
 }

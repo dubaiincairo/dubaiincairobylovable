@@ -7,8 +7,7 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 import ApplyModal from "@/components/ApplyModal";
 
 type Job = {
@@ -58,8 +57,7 @@ const Careers = () => {
   const applySubject = get("careers_apply_subject", "[Position Title] – Your Name");
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <PageTransition>
       <main id="main-content">
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
@@ -383,8 +381,7 @@ const Careers = () => {
       )}
 
       </main>
-      <Footer />
-    </div>
+    </PageTransition>
   );
 };
 

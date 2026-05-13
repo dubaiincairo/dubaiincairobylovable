@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Layers } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 import ServicesSection from "@/components/ServicesSection";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
@@ -16,8 +15,7 @@ const Studios = () => {
   useSEO({ titleKey: "seo_studios_title", descriptionKey: "seo_studios_description", canonical: "/studios" });
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <PageTransition>
       <main id="main-content">
 
       {/* Hero */}
@@ -86,8 +84,7 @@ const Studios = () => {
       </section>
 
       </main>
-      <Footer />
-    </div>
+    </PageTransition>
   );
 };
 

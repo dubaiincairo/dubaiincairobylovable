@@ -1,5 +1,5 @@
 import { useSEO } from "@/hooks/useSEO";
-import Navbar from "@/components/Navbar";
+import PageTransition from "@/components/PageTransition";
 import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
 import AboutSection from "@/components/AboutSection";
@@ -12,15 +12,13 @@ import TechStackTeaser from "@/components/TechStackTeaser";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import BankAccountsSection from "@/components/BankAccountsSection";
-import Footer from "@/components/Footer";
 import GoogleBusinessWidget from "@/components/GoogleBusinessWidget";
 
 const Index = () => {
   useSEO({ titleKey: "seo_home_title", descriptionKey: "seo_home_description", canonical: "/", ogImageKey: "seo_home_og_image" });
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <PageTransition>
       <main id="main-content">
         <HeroSection />
         <StatsSection />
@@ -36,8 +34,7 @@ const Index = () => {
         <ContactSection />
         <GoogleBusinessWidget />
       </main>
-      <Footer />
-    </div>
+    </PageTransition>
   );
 };
 
