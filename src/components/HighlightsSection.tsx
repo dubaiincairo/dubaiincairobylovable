@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 type CaseStudy = {
   id: string;
@@ -37,7 +38,7 @@ const HighlightsSection = () => {
   if (studies.length === 0) return null;
 
   return (
-    <section id="highlights" className="relative py-12 md:py-20 px-6 overflow-hidden">
+    <section id="highlights" className="relative py-8 md:py-14 px-6 overflow-hidden">
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-primary/4 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
@@ -52,6 +53,7 @@ const HighlightsSection = () => {
             <h2 className="text-3xl md:text-5xl font-display font-bold leading-tight">
               Real Clients.<br />Measurable Results.
             </h2>
+            <AnimatedUnderline align="left" />
           </div>
           <Link
             to="/case-studies"

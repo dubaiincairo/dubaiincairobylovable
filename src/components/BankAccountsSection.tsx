@@ -71,7 +71,7 @@ const BankAccountsSection = () => {
   }, []);
 
   return (
-    <section id="bank-accounts" className="relative py-12 md:py-20 px-6 overflow-hidden">
+    <section id="bank-accounts" className="relative py-8 md:py-14 px-6 overflow-hidden">
 
       {/* Ambient radial glow */}
       <div

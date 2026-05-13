@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Briefcase, Palette, Code, Fingerprint, Camera, Award } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { RichText } from "@/components/ui/rich-text";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 const icons = [Briefcase, Palette, Code, Fingerprint, Camera, Award];
 
@@ -15,7 +17,7 @@ const ServicesSection = () => {
   }));
 
   return (
-    <section id="services" className="relative py-12 md:py-20 px-6 overflow-hidden">
+    <section id="services" className="relative py-8 md:py-14 px-6 overflow-hidden">
       {/* Diagonal pattern */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.02]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, hsl(38 80% 55%), hsl(38 80% 55%) 1px, transparent 1px, transparent 40px)' }} />
       {/* Floating orb */}
@@ -29,6 +31,7 @@ const ServicesSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("services_headline", "Six Specialized Studios. One Unified Vision.")}
           </h2>
+          <AnimatedUnderline />
         </motion.div>
 
         <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
@@ -38,7 +41,7 @@ const ServicesSection = () => {
                 <s.icon className="w-5 h-5 text-primary" />
               </div>
               <h3 className="text-xl font-display font-semibold mb-3 whitespace-pre-line">{s.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">{s.desc}</p>
+              <RichText html={s.desc} className="text-muted-foreground text-sm leading-relaxed" />
             </motion.div>
           ))}
         </motion.div>

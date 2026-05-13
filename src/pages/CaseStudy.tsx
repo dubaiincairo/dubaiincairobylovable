@@ -5,8 +5,8 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { fadeUp, fadeIn, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { useSEO } from "@/hooks/useSEO";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
+import { RichText } from "@/components/ui/rich-text";
 
 type CaseStudy = {
   id: string;
@@ -49,9 +49,9 @@ const CaseStudy = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <PageTransition className="flex items-center justify-center">
         <div className="w-6 h-6 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-      </div>
+      </PageTransition>
     );
   }
 
@@ -74,11 +74,11 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
   ].filter((m) => m.v);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <PageTransition>
+      <main id="main-content">
 
       {/* Hero */}
-      <section className="relative pt-28 pb-12 md:pt-36 md:pb-20 px-6 overflow-hidden">
+      <section className="relative pt-24 pb-8 md:pt-28 md:pb-10 px-6 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 30% 50%, hsl(38 80% 55% / 0.05), transparent 60%)' }} />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32" style={{ background: 'linear-gradient(180deg, transparent, hsl(38 80% 55% / 0.2), transparent)' }} />
 
@@ -142,7 +142,7 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
                 <div className="w-1 h-6 bg-primary rounded-full" />
                 <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-primary">The Challenge</h2>
               </div>
-              <p className="text-foreground text-lg leading-relaxed whitespace-pre-line pl-4">{cs.challenge}</p>
+              <RichText html={cs.challenge} className="text-foreground text-lg leading-relaxed pl-4" />
             </motion.div>
           )}
 
@@ -152,7 +152,7 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
                 <div className="w-1 h-6 bg-primary rounded-full" />
                 <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-primary">Our Approach</h2>
               </div>
-              <p className="text-foreground text-lg leading-relaxed whitespace-pre-line pl-4">{cs.solution}</p>
+              <RichText html={cs.solution} className="text-foreground text-lg leading-relaxed pl-4" />
             </motion.div>
           )}
 
@@ -162,7 +162,7 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
                 <div className="w-1 h-6 bg-primary rounded-full" />
                 <h2 className="text-xs font-medium tracking-[0.2em] uppercase text-primary">The Results</h2>
               </div>
-              <p className="text-foreground text-lg leading-relaxed whitespace-pre-line pl-4">{cs.results}</p>
+              <RichText html={cs.results} className="text-foreground text-lg leading-relaxed pl-4" />
             </motion.div>
           )}
 
@@ -188,8 +188,8 @@ const CaseStudyView = ({ cs }: { cs: CaseStudy }) => {
         </div>
       </section>
 
-      <Footer />
-    </div>
+      </main>
+    </PageTransition>
   );
 };
 

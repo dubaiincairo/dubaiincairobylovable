@@ -41,10 +41,11 @@ const Navbar = () => {
     { href: "/studios", label: get("nav_link_studios", "Studios") },
     { href: "/careers", label: get("nav_link_careers", "Careers") },
     { href: "/tech",    label: get("nav_link_tech", "Tech Stack") },
+    { href: "/faq",     label: get("nav_link_faq", "FAQ") },
   ];
 
   return (
-    <motion.nav
+    <motion.header
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-500 will-change-transform ${scrolled ? "border-border" : "border-transparent"}`}
       style={{ backgroundColor, backdropFilter, WebkitBackdropFilter: backdropFilter }}
       variants={slideDown}
@@ -52,15 +53,19 @@ const Navbar = () => {
       animate="visible"
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="/" className="font-display font-bold text-xl">
+        <a href="/" className="font-display font-bold text-xl inline-flex items-center min-h-[44px]">
           <span className="text-gradient-gold">{get("nav_brand_1", "Dubai")}</span>
           <span className="text-foreground">{get("nav_brand_2", "in")}</span>
           <span className="text-gradient-gold">{get("nav_brand_3", "Cairo")}</span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8 text-sm">
+        <nav aria-label="Primary" className="hidden md:flex items-center gap-8 text-sm">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="text-muted-foreground hover:text-foreground transition-colors duration-300">
+            <a
+              key={l.href}
+              href={l.href}
+              className="inline-flex items-center min-h-[44px] text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
               {l.label}
             </a>
           ))}
@@ -71,13 +76,22 @@ const Navbar = () => {
             onMouseEnter={handlePartnerEnter}
             onMouseLeave={handlePartnerLeave}
           >
-            <button className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors duration-300">
+            <button
+              type="button"
+              aria-haspopup="menu"
+              aria-expanded={partnerOpen}
+              onClick={() => setPartnerOpen((v) => !v)}
+              onFocus={handlePartnerEnter}
+              onBlur={handlePartnerLeave}
+              className="inline-flex items-center min-h-[44px] gap-1 text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
               {get("nav_link_partnerships", "Partnerships")}
               <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${partnerOpen ? "rotate-180" : ""}`} />
             </button>
 
             {partnerOpen && (
               <motion.div
+                role="menu"
                 initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.15 }}
@@ -89,7 +103,8 @@ const Navbar = () => {
                   <a
                     key={pl.href}
                     href={pl.href}
-                    className="block px-4 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors border-b border-border/50 last:border-0"
+                    role="menuitem"
+                    className="block px-4 py-3 min-h-[44px] text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors border-b border-border/50 last:border-0"
                   >
                     {pl.label}
                   </a>
@@ -100,27 +115,41 @@ const Navbar = () => {
 
           <button
             onClick={openContactModal}
-            className="shimmer-btn px-5 py-2 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg transition-all hover:brightness-110"
+            className="shimmer-btn inline-flex items-center min-h-[44px] px-5 py-2 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg transition-all hover:brightness-110"
           >
             {get("nav_cta", "Get Started")}
           </button>
-        </div>
+        </nav>
 
-        <button className="md:hidden text-foreground w-10 h-10 flex items-center justify-center" onClick={() => setOpen(!open)}>
+        <button
+          type="button"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          className="md:hidden text-foreground w-11 h-11 flex items-center justify-center"
+          onClick={() => setOpen(!open)}
+        >
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <motion.div
-          className="md:hidden glass px-6 py-6 flex flex-col gap-4"
+        <motion.nav
+          id="mobile-menu"
+          aria-label="Mobile"
+          className="md:hidden glass px-6 py-6 flex flex-col gap-4 pb-[calc(env(safe-area-inset-bottom)+1.5rem)]"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25 }}
         >
           {links.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="inline-flex items-center min-h-[44px] text-muted-foreground hover:text-foreground transition-colors"
+            >
               {l.label}
             </a>
           ))}
@@ -135,7 +164,7 @@ const Navbar = () => {
                 key={pl.href}
                 href={pl.href}
                 onClick={() => setOpen(false)}
-                className="block pl-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors border-l border-border/40"
+                className="flex items-center pl-3 min-h-[44px] text-sm text-muted-foreground hover:text-foreground transition-colors border-l border-border/40"
               >
                 {pl.label}
               </a>
@@ -144,13 +173,13 @@ const Navbar = () => {
 
           <button
             onClick={() => { setOpen(false); openContactModal(); }}
-            className="px-5 py-2.5 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg text-center"
+            className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg text-center"
           >
             {get("nav_cta", "Get Started")}
           </button>
-        </motion.div>
+        </motion.nav>
       )}
-    </motion.nav>
+    </motion.header>
   );
 };
 

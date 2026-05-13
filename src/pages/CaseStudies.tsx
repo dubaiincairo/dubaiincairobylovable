@@ -5,8 +5,7 @@ import { ArrowRight, ArrowLeft } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
 import { supabase } from "@/integrations/supabase/client";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 
 type CaseStudy = {
   id: string;
@@ -50,10 +49,10 @@ const CaseStudies = () => {
   const filtered = filter === "All" ? studies : studies.filter((s) => s.industry === filter);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <PageTransition>
+      <main id="main-content">
 
-      <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 px-6 overflow-hidden">
+      <section className="relative pt-24 pb-8 md:pt-28 md:pb-10 px-6 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)' }} />
 
         <div className="relative max-w-6xl mx-auto">
@@ -156,8 +155,8 @@ const CaseStudies = () => {
         </div>
       </section>
 
-      <Footer />
-    </div>
+      </main>
+    </PageTransition>
   );
 };
 

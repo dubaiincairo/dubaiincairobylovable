@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Quote, Facebook, Linkedin, Instagram } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { RichText } from "@/components/ui/rich-text";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 const SOCIALS = [
   { key: "founder_facebook",  Icon: Facebook,  label: "Facebook"  },
@@ -13,23 +15,25 @@ const FounderSection = () => {
   const { get } = useSiteContent();
 
   return (
-    <section id="team" className="relative py-12 md:py-20 px-6 overflow-hidden">
+    <section id="team" className="relative py-8 md:py-14 px-6 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)' }} />
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-primary/4 blur-[140px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
 
         {/* LEFT — copy */}
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("founder_subtitle", "A Message from Our Founder")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
+          <h2 className="text-4xl md:text-5xl font-display font-bold leading-tight whitespace-pre-line">
             {get("founder_headline", "Built by Someone Who's Been in the Trenches.")}
           </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">
-            {get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")}
-          </p>
+          <AnimatedUnderline align="left" className="mb-5" />
+          <RichText
+            html={get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")}
+            className="text-muted-foreground text-lg leading-relaxed"
+          />
 
           {/* Social icons */}
           <div className="flex items-center gap-3 mt-8">
@@ -64,9 +68,10 @@ const FounderSection = () => {
               </div>
             </div>
 
-            <p className="text-foreground text-lg md:text-xl font-display italic leading-relaxed mb-6 text-center whitespace-pre-line">
-              "{get("founder_quote", "I believe that continuous learning is the key to success in business. That's why I've completed 50+ specialized training courses in eBusiness, and I will never stop growing, nor will we.")}"
-            </p>
+            <RichText
+              html={get("founder_quote", "I believe that continuous learning is the key to success in business. That's why I've completed 50+ specialized training courses in eBusiness, and I will never stop growing, nor will we.")}
+              className="text-foreground text-lg md:text-xl font-display italic leading-relaxed mb-6 text-center"
+            />
 
             <div className="w-12 h-px bg-primary/30 mx-auto mb-4" />
 

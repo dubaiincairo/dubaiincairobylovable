@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { z } from "zod";
 import { fadeUp, scaleIn, viewportOnce } from "@/lib/animations";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -55,7 +56,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="relative py-12 md:py-20 px-6 overflow-hidden">
+    <section id="contact" className="relative py-8 md:py-14 px-6 overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.04), transparent 70%)' }} />
 
       <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
@@ -65,9 +66,10 @@ const ContactSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("contact_subtitle", "Get Started")}
           </span>
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold leading-tight whitespace-pre-line">
             {get("contact_headline", "Ready to Grow?\nLet's Build.")}
           </h2>
+          <AnimatedUnderline align="left" className="mb-5" />
           <p className="text-muted-foreground text-lg leading-relaxed mb-10 whitespace-pre-line">
             {get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services with measurable impact, flexible execution, and competitive pricing.")}
           </p>

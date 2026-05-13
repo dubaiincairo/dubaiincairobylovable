@@ -4,6 +4,8 @@ import { Quote, Linkedin, ChevronDown, ChevronUp } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { RichText } from "@/components/ui/rich-text";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 type Testimonial = {
   id: string;
@@ -41,13 +43,12 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
 
         {/* Quote text — fixed height with fade + expand */}
         <div className="relative flex-1 mb-1">
-          <div
-            className={`text-foreground/90 text-sm leading-relaxed italic whitespace-pre-line overflow-hidden transition-all duration-300 ${
+          <RichText
+            html={t.content}
+            className={`text-foreground/90 text-sm leading-relaxed italic overflow-hidden transition-all duration-300 ${
               expanded ? "max-h-[2000px]" : "max-h-[6.5rem]"
             }`}
-          >
-            "{t.content}"
-          </div>
+          />
 
           {/* Fade gradient when collapsed */}
           {!expanded && (
@@ -130,7 +131,7 @@ const TestimonialsSection = () => {
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="relative py-12 md:py-20 px-6 overflow-hidden">
+    <section className="relative py-8 md:py-14 px-6 overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)" }}
@@ -153,6 +154,7 @@ const TestimonialsSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("testimonials_headline", "Trusted by Leaders.\nRecommended by Peers.")}
           </h2>
+          <AnimatedUnderline />
           <p className="mt-4 text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
             {get("testimonials_subtext", "Real recommendations from clients and colleagues — pulled directly from LinkedIn.")}
           </p>

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { RichText } from "@/components/ui/rich-text";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 const AboutSection = () => {
   const { get } = useSiteContent();
@@ -24,7 +26,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="relative py-12 md:py-20 px-6 overflow-hidden">
+    <section id="about" className="relative py-8 md:py-14 px-6 overflow-hidden">
       <div className="absolute top-1/2 right-0 w-[480px] h-[480px] rounded-full bg-primary/4 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
@@ -34,15 +36,18 @@ const AboutSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("about_subtitle", "Who We Are")}
           </span>
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 leading-tight whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold leading-tight whitespace-pre-line">
             {get("about_headline", "A Digital Agency Built on Science, Not Guesswork")}
           </h2>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-5 whitespace-pre-line">
-            {get("about_body", "Founded in 2021, Dubai in Cairo is a Cairo-based digital marketing and eBusiness solutions agency.")}
-          </p>
-          <p className="text-foreground font-medium text-base md:text-lg leading-relaxed whitespace-pre-line">
-            {get("about_body_2", "We are 100% digital by design — no overhead, no guesswork. Just a focused team turning data into strategy.")}
-          </p>
+          <AnimatedUnderline align="left" className="mb-5" />
+          <RichText
+            html={get("about_body", "Founded in 2021, Dubai in Cairo is a Cairo-based digital marketing and eBusiness solutions agency.")}
+            className="text-muted-foreground text-base md:text-lg leading-relaxed mb-5"
+          />
+          <RichText
+            html={get("about_body_2", "We are 100% digital by design — no overhead, no guesswork. Just a focused team turning data into strategy.")}
+            className="text-foreground font-medium text-base md:text-lg leading-relaxed"
+          />
         </motion.div>
 
         {/* RIGHT — Process steps */}
@@ -73,9 +78,7 @@ const AboutSection = () => {
                 <h3 className="font-display font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {step.desc}
-                </p>
+                <RichText html={step.desc} className="text-muted-foreground text-sm leading-relaxed" />
               </div>
             </motion.div>
           ))}

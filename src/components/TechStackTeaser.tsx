@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { TrendingUp, ShoppingCart, Cpu, ArrowRight } from "lucide-react";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { RichText } from "@/components/ui/rich-text";
 
 const LAYERS = [
   { Icon: TrendingUp,   color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", label: "Growth & Customer Intelligence" },
@@ -35,9 +36,10 @@ const TechStackTeaser = () => {
               <h2 className="font-display font-bold text-xl md:text-2xl text-foreground mb-1">
                 {get("tech_headline", "Integrated Solutions. Proven Tools.")}
               </h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {get("tech_teaser_desc", "41 industry-leading tools across 3 intelligent layers — purpose-built to drive growth, operations, and innovation.")}
-              </p>
+              <RichText
+                html={get("tech_teaser_desc", "41 industry-leading tools across 3 intelligent layers — purpose-built to drive growth, operations, and innovation.")}
+                className="text-sm text-muted-foreground leading-relaxed"
+              />
             </div>
 
             {/* middle — 3 layer pills */}

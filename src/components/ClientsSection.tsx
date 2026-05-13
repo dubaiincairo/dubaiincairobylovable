@@ -3,43 +3,68 @@ import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 
-const driveImg = (id: string) => `https://drive.google.com/uc?export=view&id=${id}`;
+const MAX_SLOTS = 24;
+const GAP = 16;
 
-const LOGO_MAP: Record<string, string> = {
-  "Novartis":                      driveImg("1o3FOf7f11ttW4KgGySmJx_AkuJ5ToWgX"),
-  "Sanofi":                        driveImg("1HgRxZlkzZF1pNqyj-Hf3JOjuIfnAWRY8"),
-  "Roche":                         driveImg("1FbjFKBZLGnVlZDgiLHW58Q58FLmv31zD"),
-  "Novo Nordisk":                  driveImg("1JUlTFhYOcVf4YWiXlKfjEgcxx9mFxs98"),
-  "Banque Misr":                   driveImg("1ShiTKV-EI8ebo6OwKiFfHwoY_ixZBgjr"),
-  "Monin":                         driveImg("1x9FP9c52lCxZsk7V73AMaSFwE1CFLsN7"),
-  "Berlitz":                       driveImg("1wME_0l97T_jeKt17E671cHYCYopTQLzC"),
-  "World Economic Forum":          driveImg("1i3OAk4NehrSm5ykRhf4lJLiVRB9eNjAt"),
-  "EDGE Consultants":              driveImg("1FakwE71h4BBhquIyuya_3Ple-yEXPJ9-"),
-  "San Benedetto":                 driveImg("1fV1L2fpmTsw0rnHyzY0Ab0VlB469H8qh"),
-  "Edu Fun":                       driveImg("1ca3mV_-ftQIm_buMj1Wj_IlTuww_K-kK"),
-  "Arma Group":                    driveImg("1Tia50ucaqUlADkAWmhv3wqzD81snK4c3"),
-  "Abou Tarek":                    driveImg("1PikR4VmaAVPzRP-LKtCiqzWg8f5rVLcE"),
-  "SARJ":                          driveImg("1mbLSIaKSMu8ptmbr1YsO06UuNhuwQ1R2"),
-  "ADCB":                          driveImg("1_zLJpegkwQdVOK-KIae9UKsV7mmQYlSm"),
-  "National Council for Women":    driveImg("1u32DClLo_fqHf9gPR3R80n63B1OzlVcR"),
+interface Logo {
+  name: string;
+  url: string;
+}
+
+// First-paint default brand names. The corresponding URL is left empty so the
+// component renders a styled text wordmark until a real SVG/PNG is uploaded
+// to that slot in the admin. Huawei alone has a public Simple Icons SVG; the
+// rest (regional, pharma, hospitality) need to be uploaded by the editor.
+const DEFAULT_NAMES = [
+  "Arma",
+  "Sanofi",
+  "Novartis",
+  "Roche",
+  "Novo Nordisk",
+  "Berlitz",
+  "Monin",
+  "Alpro",
+  "Huawei",
+  "World Economic Forum",
+  "Banque Misr",
+  "The National Council for Women",
+  "ADCB Bank",
+  "Shark Tank Egypt",
+  "Sarj",
+  "EDGE Consultants",
+  "Abou Tarek",
+  "Quanta",
+  "San Benedetto",
+  "EduFun",
+  "El Kou5 Restaurant & Cafe",
+];
+
+const DEFAULT_URLS: Record<number, string> = {
+  9: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/huawei.svg",
 };
-
-const defaultClients = "Novartis,Sanofi,Roche,Novo Nordisk,Banque Misr,Monin,Berlitz,World Economic Forum,EDGE Consultants,San Benedetto,Edu Fun,Arma Group,Abou Tarek,SARJ,ADCB,National Council for Women,Huawei,Yorkshire Tea,Beyond Meat,Alpro,Shark Tank Egypt,AstraZeneca,Pfizer,L'Oréal,Unilever,Samsung,Vodafone,Orange,Nestlé,PepsiCo,Johnson & Johnson,Danone,Bayer";
-
-const GAP = 16; // px — space between chips
 
 const ClientsSection = () => {
   const { get } = useSiteContent();
-  const raw = get("clients_list", defaultClients);
-  const clients = raw.split(/[,\n]/).map(s => s.trim()).filter(Boolean);
 
-  const half = Math.ceil(clients.length / 2);
-  const row1 = clients.slice(0, half);
-  const row2 = clients.slice(half);
+  const logos: Logo[] = [];
+  for (let i = 1; i <= MAX_SLOTS; i++) {
+    const fallbackName = DEFAULT_NAMES[i - 1] ?? "";
+    const fallbackUrl = DEFAULT_URLS[i] ?? "";
+    const name = get(`client_logo_${i}_name`, fallbackName).trim();
+    const url = get(`client_logo_${i}_url`, fallbackUrl).trim();
+    if (!name && !url) continue;
+    logos.push({ name: name || `Client ${i}`, url });
+  }
+
+  if (logos.length === 0) return null;
 
   return (
-    <section id="work" className="relative py-10 md:py-14 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 20% 50%, hsl(38 80% 55% / 0.03) 0%, transparent 50%)' }} />
+    <section id="work" className="relative py-12 md:py-16 overflow-hidden">
+      {/* Ambient gold wash behind the strip */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[240px] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse, hsl(38 80% 55% / 0.05), transparent 70%)" }}
+      />
 
       <div className="relative max-w-6xl mx-auto px-6">
         <motion.div className="text-center mb-8" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
@@ -55,15 +80,17 @@ const ClientsSection = () => {
         </motion.div>
       </div>
 
-      <div className="space-y-3">
-        <MarqueeRow items={row1} direction="left" />
-        <MarqueeRow items={row2} direction="right" gold />
+      {/* Single-row continuous marquee — framed by a thin top and bottom rule */}
+      <div className="relative border-y border-border/30 bg-card/20">
+        <LogoMarquee items={logos} />
       </div>
     </section>
   );
 };
 
-const MarqueeRow = ({ items, direction, gold = false }: { items: string[]; direction: "left" | "right"; gold?: boolean }) => {
+/* ─────────────────── Marquee ─────────────────── */
+
+const LogoMarquee = ({ items }: { items: Logo[] }) => {
   const copyRef = useRef<HTMLDivElement>(null);
   const [copyWidth, setCopyWidth] = useState(0);
 
@@ -77,37 +104,40 @@ const MarqueeRow = ({ items, direction, gold = false }: { items: string[]; direc
     return () => ro.disconnect();
   }, [items]);
 
-  const from = direction === "left" ? 0 : -copyWidth;
-  const to   = direction === "left" ? -copyWidth : 0;
-
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden py-2">
       {/* fade edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
-      <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
+      <div
+        className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
+        style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }}
+      />
+      <div
+        className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
+        style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }}
+      />
 
       <div
-        className="flex"
-        style={copyWidth ? {
-          willChange: "transform",
-          animation: `marquee-${direction} 30s linear infinite`,
-          ["--from" as string]: `${from}px`,
-          ["--to"   as string]: `${to}px`,
-        } : { visibility: "hidden" }}
+        className="flex items-center"
+        style={
+          copyWidth
+            ? {
+                willChange: "transform",
+                animation: `marquee-left 60s linear infinite`,
+                ["--from" as string]: `0px`,
+                ["--to" as string]: `${-copyWidth}px`,
+              }
+            : { visibility: "hidden" }
+        }
       >
-        {/* copy 1 — measured */}
-        <div ref={copyRef} className="flex flex-shrink-0">
-          {items.map((name, i) => (
-            <LogoChip key={i} name={name} gold={gold} gap={GAP} />
+        <div ref={copyRef} className="flex flex-shrink-0 items-center">
+          {items.map((logo, i) => (
+            <LogoCell key={i} logo={logo} />
           ))}
         </div>
-        {/* copies 2–6 — ensures track is always full, loop never visible */}
-        {[2,3,4,5,6].map(n => (
-          <div key={n} className="flex flex-shrink-0" aria-hidden>
-            {items.map((name, i) => (
-              <LogoChip key={`${n}-${i}`} name={name} gold={gold} gap={GAP} />
+        {[2, 3].map((n) => (
+          <div key={n} className="flex flex-shrink-0 items-center" aria-hidden>
+            {items.map((logo, i) => (
+              <LogoCell key={`${n}-${i}`} logo={logo} />
             ))}
           </div>
         ))}
@@ -116,37 +146,40 @@ const MarqueeRow = ({ items, direction, gold = false }: { items: string[]; direc
   );
 };
 
-const LogoChip = ({ name, gold, gap }: { name: string; gold: boolean; gap: number }) => {
-  const logoUrl = LOGO_MAP[name];
-
-  if (logoUrl) {
-    return (
-      <div
-        className="flex-shrink-0 flex items-center justify-center px-5 rounded-xl border border-border bg-white/90 hover:border-primary/40 transition-colors duration-200"
-        style={{ marginRight: gap, height: "52px", minWidth: "110px", maxWidth: "200px" }}
-      >
-        <img
-          src={logoUrl}
-          alt={name}
-          className="max-h-8 max-w-full object-contain"
-          loading="lazy"
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className={`flex-shrink-0 px-6 py-3 rounded-full border text-sm font-display font-semibold cursor-default transition-colors duration-200
-        ${gold
-          ? "border-primary/30 text-primary/80 bg-primary/5 hover:bg-primary/10 hover:text-primary"
-          : "border-border text-muted-foreground bg-card hover:border-primary/30 hover:text-foreground"
-        }`}
-      style={{ marginRight: gap }}
-    >
-      {name}
-    </div>
-  );
-};
+const LogoCell = ({ logo }: { logo: Logo }) => (
+  <div
+    className="flex-shrink-0 flex items-center justify-center h-20 w-48 px-4 group"
+    style={{ marginRight: GAP }}
+    title={logo.name}
+  >
+    {logo.url ? (
+      <img
+        src={logo.url}
+        alt={logo.name}
+        loading="lazy"
+        decoding="async"
+        className="max-h-12 max-w-[160px] w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ filter: "brightness(0) invert(1)" }}
+        onError={(e) => {
+          // Image failed -> swap to text wordmark so the cell is never empty
+          const el = e.currentTarget;
+          el.style.display = "none";
+          const parent = el.parentElement;
+          if (parent && !parent.querySelector(".logo-fallback")) {
+            const span = document.createElement("span");
+            span.className =
+              "logo-fallback font-display font-semibold text-base text-muted-foreground/60 tracking-wide whitespace-nowrap";
+            span.textContent = logo.name;
+            parent.appendChild(span);
+          }
+        }}
+      />
+    ) : (
+      <span className="font-display font-semibold text-base text-muted-foreground/60 group-hover:text-foreground transition-colors duration-300 tracking-wide whitespace-nowrap text-center">
+        {logo.name}
+      </span>
+    )}
+  </div>
+);
 
 export default ClientsSection;

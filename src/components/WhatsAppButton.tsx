@@ -15,7 +15,7 @@ const WhatsAppButton = () => {
       rel="noopener noreferrer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-3 group"
+      className="fixed right-6 z-50 flex items-center gap-3 group bottom-[calc(env(safe-area-inset-bottom)+1.5rem)]"
       aria-label="Chat on WhatsApp"
     >
       {/* Tooltip */}
