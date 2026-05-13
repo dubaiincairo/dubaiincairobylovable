@@ -9,7 +9,7 @@ import {
   Type, AlignLeft, MousePointer, Hash, LayoutList,
   Plus, Trash2, Pencil, Star, Eye, EyeOff, BookOpen, Briefcase, Landmark,
   Upload, ImageIcon, GripVertical, Mail, Menu, LayoutDashboard, MessageSquare,
-  Globe, Check,
+  Globe, Check, Info,
 } from "lucide-react";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
 import { cn } from "@/lib/utils";
@@ -878,6 +878,14 @@ function FieldRow({
         <RichTextEditor value={value} onChange={(val) => onChange(field.key, val)} minHeight={80} />
       ) : (
         <AutoResizeTextarea value={value} onChange={(val) => onChange(field.key, val)} />
+      )}
+      {field.key.includes("og_image") && (
+        <div className="mt-2 flex items-start gap-2 rounded-lg border border-amber-500/20 bg-amber-500/5 px-3 py-2">
+          <Info className="w-3.5 h-3.5 text-amber-400 mt-0.5 shrink-0" />
+          <p className="text-[10px] text-amber-400/90 leading-relaxed">
+            After uploading a new social banner here, the <code className="font-mono bg-amber-500/10 px-1 rounded">index.html</code> file must also be updated to match the new URL — otherwise WhatsApp, Facebook, and other crawlers will still show the old image. Contact your developer to sync the change.
+          </p>
+        </div>
       )}
     </div>
   );
