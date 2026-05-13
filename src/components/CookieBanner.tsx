@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cookie, X, ShieldCheck } from "lucide-react";
 
@@ -66,12 +67,12 @@ const CookieBanner = () => {
                 We use essential cookies to keep the site running and optional
                 analytics cookies to understand how you use it. No data is sold
                 or shared with third parties.{" "}
-                <a
-                  href="/privacy"
+                <Link
+                  to="/privacy"
                   className="text-primary/80 hover:text-primary underline underline-offset-2 transition-colors"
                 >
                   Privacy policy
-                </a>
+                </Link>
               </p>
             </div>
 

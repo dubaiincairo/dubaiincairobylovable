@@ -20,6 +20,7 @@ import ZohoPartnerPage from "./pages/ZohoPartnerPage";
 import Tech from "./pages/Tech";
 import Studios from "./pages/Studios";
 import FAQ from "./pages/FAQ";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
@@ -62,6 +63,7 @@ const AnimatedRoutes = () => {
           <Route path="/studios" element={<Studios />} />
           <Route path="/tech" element={<Tech />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
