@@ -98,7 +98,7 @@ const HighlightsSection = () => {
 
       <div className="relative max-w-6xl mx-auto">
         <motion.div
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10"
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-10"
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}
         >
           <div>

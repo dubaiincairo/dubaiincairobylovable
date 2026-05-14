@@ -47,11 +47,11 @@ const ValuesSection = () => {
       <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
-        <motion.div className="text-center mb-8 md:mb-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="text-center mb-6 md:mb-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("values_subtitle", "What We Stand For")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("values_headline", "Core beliefs shaping our approach")}
           </h2>
           <AnimatedUnderline />
@@ -68,12 +68,12 @@ const ValuesSection = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={viewportOnce}
-                    className="group glass-card gradient-border text-center p-5 md:p-8 rounded-xl hover-lift h-full"
+                    className="group glass-card gradient-border text-center p-6 rounded-xl hover-lift h-full"
                   >
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:rotate-12">
                       <v.icon className="w-5 h-5 text-primary" />
                     </div>
-                    <h3 className="font-display font-semibold mb-2 whitespace-pre-line">{v.title}</h3>
+                    <h3 className="text-lg font-display font-semibold mb-2 whitespace-pre-line">{v.title}</h3>
                     <RichText html={v.desc} className="text-muted-foreground text-sm" />
                   </motion.div>
                 </CarouselItem>
@@ -96,11 +96,11 @@ const ValuesSection = () => {
         {/* Desktop: static 3-column grid */}
         <div className="hidden lg:grid lg:grid-cols-3 gap-6">
           {values.map((v, i) => (
-            <motion.div key={i} className="group glass-card gradient-border text-center p-5 md:p-8 rounded-xl hover-lift" variants={cardFadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+            <motion.div key={i} className="group glass-card gradient-border text-center p-6 rounded-xl hover-lift" variants={cardFadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:rotate-12">
                 <v.icon className="w-5 h-5 text-primary" />
               </div>
-              <h3 className="font-display font-semibold mb-2 whitespace-pre-line">{v.title}</h3>
+              <h3 className="text-lg font-display font-semibold mb-2 whitespace-pre-line">{v.title}</h3>
               <RichText html={v.desc} className="text-muted-foreground text-sm" />
             </motion.div>
           ))}

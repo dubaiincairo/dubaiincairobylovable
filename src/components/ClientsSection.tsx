@@ -37,7 +37,7 @@ const ClientsSection = () => {
   if (logos.length === 0) return null;
 
   return (
-    <section id="work" className="relative py-12 md:py-16 overflow-hidden">
+    <section id="work" className="relative py-8 md:py-14 overflow-hidden">
       {/* Ambient gold wash behind the strip */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[240px] pointer-events-none"

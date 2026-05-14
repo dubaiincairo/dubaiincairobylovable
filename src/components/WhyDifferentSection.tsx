@@ -48,11 +48,11 @@ const WhyDifferentSection = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)' }} />
 
       <div className="relative max-w-6xl mx-auto">
-        <motion.div className="text-center mb-8 md:mb-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="text-center mb-6 md:mb-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("edges_subtitle", "Why We're Different")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("edges_headline", "A Smarter Way to Grow Your Business Online")}
           </h2>
           <AnimatedUnderline />
@@ -69,7 +69,7 @@ const WhyDifferentSection = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={viewportOnce}
-                    className="group glass-card gradient-border p-5 md:p-8 rounded-xl hover-lift h-full"
+                    className="group glass-card gradient-border p-6 rounded-xl hover-lift h-full"
                   >
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 transition-transform duration-300 group-hover:rotate-12">
                       <item.icon className="w-5 h-5 text-primary" />
@@ -97,7 +97,7 @@ const WhyDifferentSection = () => {
         {/* Desktop: static 3-column grid */}
         <div className="hidden lg:grid lg:grid-cols-3 gap-6">
           {edges.map((item, i) => (
-            <motion.div key={i} className="group glass-card gradient-border p-5 md:p-8 rounded-xl hover-lift" variants={cardFadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+            <motion.div key={i} className="group glass-card gradient-border p-6 rounded-xl hover-lift" variants={cardFadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-5 transition-transform duration-300 group-hover:rotate-12">
                 <item.icon className="w-5 h-5 text-primary" />
               </div>

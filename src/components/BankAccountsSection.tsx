@@ -95,7 +95,7 @@ const BankAccountsSection = () => {
 
         {/* ── Header ── */}
         <motion.div
-          className="text-center mb-8 md:mb-12"
+          className="text-center mb-6 md:mb-12"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -104,7 +104,7 @@ const BankAccountsSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             Payment & Banking
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold mb-4 whitespace-pre-line">
             Bank Account Details
           </h2>
           <p className="text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
@@ -163,7 +163,7 @@ const BankAccountsSection = () => {
                           </div>
                           <div>
                             {bank.abbr && <span className="text-[10px] font-semibold uppercase tracking-widest text-primary/70 mb-1 block">{bank.abbr}</span>}
-                            <h3 className="text-base font-display font-semibold text-foreground leading-snug">{bank.title}</h3>
+                            <h3 className="text-lg font-display font-semibold text-foreground leading-snug">{bank.title}</h3>
                             {bank.branch && (
                               <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
                                 <MapPin className="w-3 h-3 text-primary/60 shrink-0" /><span>{bank.branch}</span>
@@ -224,7 +224,7 @@ const BankAccountsSection = () => {
                     </div>
                     <div>
                       {bank.abbr && <span className="text-[10px] font-semibold uppercase tracking-widest text-primary/70 mb-1 block">{bank.abbr}</span>}
-                      <h3 className="text-base font-display font-semibold text-foreground leading-snug">{bank.title}</h3>
+                      <h3 className="text-lg font-display font-semibold text-foreground leading-snug">{bank.title}</h3>
                       {bank.branch && (
                         <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
                           <MapPin className="w-3 h-3 text-primary/60 shrink-0" /><span>{bank.branch}</span>

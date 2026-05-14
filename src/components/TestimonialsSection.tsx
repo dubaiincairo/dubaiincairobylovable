@@ -137,7 +137,7 @@ const TestimonialsSection = () => {
 
       <div className="relative max-w-6xl mx-auto px-6">
         <motion.div
-          className="text-center mb-8 md:mb-12"
+          className="text-center mb-6 md:mb-12"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -146,7 +146,7 @@ const TestimonialsSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("testimonials_subtitle", "What Clients Say")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("testimonials_headline", "Trusted by Leaders.\nRecommended by Peers.")}
           </h2>
           <AnimatedUnderline />
@@ -162,7 +162,7 @@ const TestimonialsSection = () => {
         >
           <CarouselContent className="-ml-4 md:-ml-6 items-start">
             {testimonials.map((t, i) => (
-              <CarouselItem key={t.id} className="pl-4 md:pl-6 basis-full md:basis-1/2 lg:basis-1/3">
+              <CarouselItem key={t.id} className="pl-4 md:pl-6 basis-[88%] md:basis-1/2 lg:basis-1/3">
                 <TestimonialCard t={t} index={i} />
               </CarouselItem>
             ))}
