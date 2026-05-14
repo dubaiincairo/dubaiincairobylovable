@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useContactModal } from "@/context/ContactModalContext";
 import { slideDown } from "@/lib/animations";
@@ -17,7 +19,11 @@ const Navbar = () => {
     { href: "/partnerships/zoho",    label: get("nav_partner_zoho",    "Zoho") },
   ];
   const { openContactModal } = useContactModal();
-  const { scrollY } = useScroll();
+  const { pathname } = useLocation();
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  const { scrollY, scrollYProgress } = useScroll();
   const bgOpacity = useTransform(scrollY, [0, 100], [0.6, 0.95]);
   const blurVal = useTransform(scrollY, [0, 100], [8, 20]);
   const [scrolled, setScrolled] = useState(false);
@@ -52,6 +58,12 @@ const Navbar = () => {
       initial="hidden"
       animate="visible"
     >
+      {/* Scroll progress bar */}
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary/60 via-primary to-primary/60 origin-left pointer-events-none"
+        style={{ scaleX: scrollYProgress }}
+      />
+
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="/" className="font-display font-bold text-xl inline-flex items-center min-h-[44px]">
           <span className="text-gradient-gold">{get("nav_brand_1", "Dubai")}</span>
@@ -60,15 +72,28 @@ const Navbar = () => {
         </a>
 
         <nav aria-label="Primary" className="hidden md:flex items-center gap-8 text-sm">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="inline-flex items-center min-h-[44px] text-muted-foreground hover:text-foreground transition-colors duration-300"
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            const active = isActive(l.href);
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                className={cn(
+                  "relative inline-flex items-center min-h-[44px] transition-colors duration-300",
+                  active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                {l.label}
+                {active && (
+                  <motion.span
+                    layoutId="nav-underline"
+                    className="absolute -bottom-px left-0 right-0 h-[2px] bg-primary rounded-full"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </a>
+            );
+          })}
 
           {/* Partnerships dropdown */}
           <div

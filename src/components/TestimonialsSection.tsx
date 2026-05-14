@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Quote, Linkedin, ChevronDown, ChevronUp } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { fadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
 import AnimatedUnderline from "@/components/ui/animated-underline";
+import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 type Testimonial = {
   id: string;
@@ -116,6 +117,9 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
 const TestimonialsSection = () => {
   const { get } = useSiteContent();
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     supabase
@@ -128,17 +132,33 @@ const TestimonialsSection = () => {
       });
   }, []);
 
+  useEffect(() => {
+    if (!api) return;
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
+    api.on("select", () => setCurrent(api.selectedScrollSnap()));
+  }, [api]);
+
+  // Auto-advance every 5 s; pause on user interaction
+  const resetTimer = useCallback(() => {
+    if (!api) return;
+    const t = setInterval(() => api.scrollNext(), 5000);
+    return () => clearInterval(t);
+  }, [api]);
+
+  useEffect(() => resetTimer(), [resetTimer]);
+
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="relative py-8 md:py-14 px-6 overflow-hidden">
+    <section className="relative py-8 md:py-14 overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)" }}
       />
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-primary/4 blur-[140px] translate-x-1/3 -translate-y-1/2 pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-6xl mx-auto px-6">
 
         {/* Header */}
         <motion.div
@@ -160,18 +180,41 @@ const TestimonialsSection = () => {
           </p>
         </motion.div>
 
-        {/* Cards grid */}
-        <motion.div
-          className="grid md:grid-cols-3 gap-6 items-start"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
+        {/* Carousel */}
+        <Carousel
+          setApi={setApi}
+          opts={{ loop: true, align: "start" }}
+          className="w-full"
         >
-          {testimonials.map((t, i) => (
-            <TestimonialCard key={t.id} t={t} index={i} />
-          ))}
-        </motion.div>
+          <CarouselContent className="-ml-4 md:-ml-6 items-start">
+            {testimonials.map((t, i) => (
+              <CarouselItem key={t.id} className="pl-4 md:pl-6 basis-full md:basis-1/2 lg:basis-1/3">
+                <TestimonialCard t={t} index={i} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+
+          <CarouselPrevious className="hidden sm:flex -left-4 lg:-left-6" />
+          <CarouselNext className="hidden sm:flex -right-4 lg:-right-6" />
+        </Carousel>
+
+        {/* Dot indicators */}
+        {count > 1 && (
+          <div className="flex justify-center gap-2 mt-8">
+            {Array.from({ length: count }).map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Go to testimonial ${i + 1}`}
+                onClick={() => api?.scrollTo(i)}
+                className={`rounded-full transition-all duration-300 ${
+                  i === current
+                    ? "w-5 h-2 bg-primary"
+                    : "w-2 h-2 bg-border hover:bg-muted-foreground"
+                }`}
+              />
+            ))}
+          </div>
+        )}
 
       </div>
     </section>

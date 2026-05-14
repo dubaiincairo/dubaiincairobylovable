@@ -18,11 +18,21 @@ const contactSchema = z.object({
   message: z.string().trim().min(1, "Message is required").max(2000),
 });
 
+const SERVICES = [
+  "Digital Marketing",
+  "ERP / Odoo",
+  "eCommerce",
+  "Tech Stack",
+  "Partnerships",
+  "Other",
+];
+
 const ContactSection = () => {
   const { toast } = useToast();
   const { get } = useSiteContent();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -42,17 +52,21 @@ const ContactSection = () => {
       return;
     }
     setIsSubmitting(true);
+    const fullMessage = selectedService
+      ? `Service interest: ${selectedService}\n\n${result.data.message}`
+      : result.data.message;
     const { error } = await supabase.from("contact_submissions").insert({
-      name: result.data.name, email: result.data.email, phone: result.data.phone || null, message: result.data.message,
+      name: result.data.name, email: result.data.email, phone: result.data.phone || null, message: fullMessage,
     });
     setIsSubmitting(false);
     if (error) { toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" }); return; }
     // Fire email notification (non-blocking — don't fail the form if this errors)
     supabase.functions.invoke("send-notification", {
-      body: { type: "contact", data: { name: result.data.name, email: result.data.email, phone: result.data.phone || "", message: result.data.message } },
+      body: { type: "contact", data: { name: result.data.name, email: result.data.email, phone: result.data.phone || "", message: fullMessage } },
     }).catch(() => {});
     setIsSubmitted(true);
     setForm({ name: "", email: "", phone: "", message: "" });
+    setSelectedService("");
   };
 
   return (
@@ -132,6 +146,29 @@ const ContactSection = () => {
                 </label>
                 <Input id="phone" name="phone" value={form.phone} onChange={handleChange} placeholder={get("contact_phone_placeholder", "+1 234 567 890")} className="bg-card border-border" />
               </div>
+              {/* Service chips */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  {get("contact_service_label", "Service of interest")}
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {SERVICES.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => setSelectedService((prev) => (prev === s ? "" : s))}
+                      className={`px-3 py-1 rounded-full text-xs font-medium border transition-all duration-200 ${
+                        selectedService === s
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                      }`}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">
                   {get("contact_message_label", "Message *")}
