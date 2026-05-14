@@ -14,10 +14,18 @@ interface Logo {
 const ClientsSection = () => {
   const { get } = useSiteContent();
 
-  // Slots are populated entirely from the CMS — empty name AND empty url means
-  // the editor cleared the slot, so it is omitted from the marquee.
+  // Order is editor-controlled via admin drag-and-drop (clients_order CMS key).
+  // Missing/invalid entries fall back to natural 1..N order.
+  const orderRaw = get("clients_order", "").trim();
+  const parsed = orderRaw
+    ? orderRaw.split(",").map((s) => parseInt(s, 10)).filter((n) => Number.isFinite(n) && n >= 1 && n <= MAX_SLOTS)
+    : [];
+  const seen = new Set(parsed);
+  for (let i = 1; i <= MAX_SLOTS; i++) if (!seen.has(i)) parsed.push(i);
+  const order = parsed.slice(0, MAX_SLOTS);
+
   const logos: Logo[] = [];
-  for (let i = 1; i <= MAX_SLOTS; i++) {
+  for (const i of order) {
     const enabled = get(`client_logo_${i}_enabled`, "true").trim();
     if (enabled === "false") continue;
     const name = get(`client_logo_${i}_name`, "").trim();
