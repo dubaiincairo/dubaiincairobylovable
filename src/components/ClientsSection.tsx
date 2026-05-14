@@ -118,9 +118,8 @@ const LogoMarquee = ({ items }: { items: Logo[] }) => {
 
 const LogoCell = ({ logo }: { logo: Logo }) => (
   <div
-    className="flex-shrink-0 flex items-center justify-center h-20 w-48 px-4 group"
+    className="relative flex-shrink-0 flex items-center justify-center h-20 w-48 px-4 group"
     style={{ marginRight: GAP }}
-    title={logo.name}
   >
     {logo.url ? (
       <img
@@ -148,6 +147,10 @@ const LogoCell = ({ logo }: { logo: Logo }) => (
         {logo.name}
       </span>
     )}
+    {/* Brand name tooltip on hover */}
+    <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 translate-y-full px-2 py-0.5 rounded bg-popover border border-border text-[10px] font-medium text-foreground whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20 shadow-sm">
+      {logo.name}
+    </span>
   </div>
 );
 
