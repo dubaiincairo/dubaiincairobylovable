@@ -1,3 +1,4 @@
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -1841,6 +1842,15 @@ function BanksPanel({ logActivity }: { logActivity: (action: string, entityType:
 
 const CLIENT_SLOTS = Array.from({ length: 24 }, (_, i) => i + 1);
 
+function parseOrder(raw: string): number[] {
+  const parsed = raw
+    ? raw.split(",").map((s) => parseInt(s, 10)).filter((n) => Number.isFinite(n) && n >= 1 && n <= 24)
+    : [];
+  const seen = new Set(parsed);
+  for (let i = 1; i <= 24; i++) if (!seen.has(i)) parsed.push(i);
+  return parsed.slice(0, 24);
+}
+
 function ClientsLogoPanel({
   edited, dbValues, onChange,
 }: {
@@ -1849,40 +1859,28 @@ function ClientsLogoPanel({
   onChange: (key: string, val: string) => void;
 }) {
   const val = (key: string) => edited[key] ?? dbValues[key] ?? "";
-  const sensors = useSensors(useSensor(PointerSensor));
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
+
+  const [order, setOrder] = useState<number[]>(() => parseOrder(val("clients_order")));
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
 
-    const oldIndex = CLIENT_SLOTS.indexOf(Number(active.id));
-    const newIndex = CLIENT_SLOTS.indexOf(Number(over.id));
-    const newOrder = arrayMove(CLIENT_SLOTS, oldIndex, newIndex);
+    const oldIndex = order.indexOf(Number(active.id));
+    const newIndex = order.indexOf(Number(over.id));
+    if (oldIndex === -1 || newIndex === -1) return;
 
-    // Snapshot all slot data before rewriting
-    const snap: Record<number, { name: string; url: string; enabled: string }> = {};
-    for (const n of CLIENT_SLOTS) {
-      snap[n] = {
-        name: val(`client_logo_${n}_name`),
-        url: val(`client_logo_${n}_url`),
-        enabled: val(`client_logo_${n}_enabled`) || "true",
-      };
-    }
-
-    // Write each slot's data into its new positional key
-    newOrder.forEach((slot, idx) => {
-      const pos = idx + 1;
-      onChange(`client_logo_${pos}_name`, snap[slot].name);
-      onChange(`client_logo_${pos}_url`, snap[slot].url);
-      onChange(`client_logo_${pos}_enabled`, snap[slot].enabled);
-    });
+    const newOrder = arrayMove(order, oldIndex, newIndex);
+    setOrder(newOrder);
+    onChange("clients_order", newOrder.join(","));
   };
 
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <SortableContext items={CLIENT_SLOTS} strategy={verticalListSortingStrategy}>
+      <SortableContext items={order} strategy={verticalListSortingStrategy}>
         <div className="space-y-3">
-          {CLIENT_SLOTS.map((n) => (
+          {order.map((n) => (
             <SortableLogoRow key={n} n={n} val={val} onChange={onChange} />
           ))}
         </div>
@@ -1906,7 +1904,11 @@ function SortableLogoRow({
   const show = val(showKey) !== "false";
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: n });
-  const style = { transform: CSS.Transform.toString(transform), transition };
+  const style: React.CSSProperties = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 50 : undefined,
+  };
 
   return (
     <div
@@ -1914,7 +1916,9 @@ function SortableLogoRow({
       style={style}
       className={cn(
         "flex items-center gap-3 rounded-lg border border-border bg-background px-3 py-2.5",
-        isDragging && "opacity-50 shadow-lg z-50"
+        isDragging
+          ? "shadow-xl ring-2 ring-primary/40 scale-[1.01] cursor-grabbing"
+          : "hover:border-border/80"
       )}
     >
       {/* Drag handle */}
@@ -1951,38 +1955,31 @@ function SortableLogoRow({
         )}
       </div>
 
-      {/* Client name + URL */}
-      <div className="flex-1 min-w-0 flex flex-col gap-1">
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => onChange(nameKey, e.target.value)}
-          placeholder={`Client ${n} name`}
-          className="w-full rounded-md border border-input bg-background px-2 py-1 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+      {/* Client name */}
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => onChange(nameKey, e.target.value)}
+        placeholder={`Client ${n} name`}
+        className="flex-1 min-w-0 rounded-md border border-input bg-background px-2 py-1 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+      />
+
+      {/* Logo URL or upload */}
+      <div className="flex items-center gap-1.5 shrink-0">
+        <LogoUploadButton
+          value={url}
+          fieldKey={urlKey}
+          onChange={(v) => onChange(urlKey, v)}
         />
-        <div className="flex items-center gap-1">
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => onChange(urlKey, e.target.value)}
-            placeholder="Logo URL (or upload →)"
-            className="flex-1 min-w-0 rounded-md border border-input bg-background px-2 py-1 text-xs text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-          />
-          <LogoUploadButton
-            value={url}
-            fieldKey={urlKey}
-            onChange={(v) => onChange(urlKey, v)}
-          />
-          {url && (
-            <button
-              onClick={() => onChange(urlKey, "")}
-              className="w-6 h-6 rounded flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
-              title="Clear logo"
-            >
-              <X className="w-3 h-3" />
-            </button>
-          )}
-        </div>
+        {url && (
+          <button
+            onClick={() => onChange(urlKey, "")}
+            className="w-6 h-6 rounded flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+            title="Clear logo"
+          >
+            <X className="w-3 h-3" />
+          </button>
+        )}
       </div>
     </div>
   );
