@@ -19,27 +19,27 @@ import {
 } from "@/components/ui/select";
 
 const COUNTRY_CODES = [
-  { code: "+20",  flag: "🇪🇬", label: "Egypt" },
-  { code: "+971", flag: "🇦🇪", label: "UAE" },
-  { code: "+966", flag: "🇸🇦", label: "Saudi Arabia" },
-  { code: "+965", flag: "🇰🇼", label: "Kuwait" },
-  { code: "+974", flag: "🇶🇦", label: "Qatar" },
-  { code: "+973", flag: "🇧🇭", label: "Bahrain" },
-  { code: "+968", flag: "🇴🇲", label: "Oman" },
-  { code: "+962", flag: "🇯🇴", label: "Jordan" },
-  { code: "+961", flag: "🇱🇧", label: "Lebanon" },
-  { code: "+249", flag: "🇸🇩", label: "Sudan" },
-  { code: "+218", flag: "🇱🇾", label: "Libya" },
-  { code: "+212", flag: "🇲🇦", label: "Morocco" },
-  { code: "+216", flag: "🇹🇳", label: "Tunisia" },
-  { code: "+213", flag: "🇩🇿", label: "Algeria" },
-  { code: "+1",   flag: "🇺🇸", label: "USA/Canada" },
-  { code: "+44",  flag: "🇬🇧", label: "UK" },
-  { code: "+49",  flag: "🇩🇪", label: "Germany" },
-  { code: "+33",  flag: "🇫🇷", label: "France" },
-  { code: "+90",  flag: "🇹🇷", label: "Turkey" },
-  { code: "+91",  flag: "🇮🇳", label: "India" },
-  { code: "+86",  flag: "🇨🇳", label: "China" },
+  { code: "+20",  label: "Egypt" },
+  { code: "+971", label: "UAE" },
+  { code: "+966", label: "Saudi Arabia" },
+  { code: "+965", label: "Kuwait" },
+  { code: "+974", label: "Qatar" },
+  { code: "+973", label: "Bahrain" },
+  { code: "+968", label: "Oman" },
+  { code: "+962", label: "Jordan" },
+  { code: "+961", label: "Lebanon" },
+  { code: "+249", label: "Sudan" },
+  { code: "+218", label: "Libya" },
+  { code: "+212", label: "Morocco" },
+  { code: "+216", label: "Tunisia" },
+  { code: "+213", label: "Algeria" },
+  { code: "+1",   label: "USA / Canada" },
+  { code: "+44",  label: "United Kingdom" },
+  { code: "+49",  label: "Germany" },
+  { code: "+33",  label: "France" },
+  { code: "+90",  label: "Turkey" },
+  { code: "+91",  label: "India" },
+  { code: "+86",  label: "China" },
 ];
 
 const contactSchema = z.object({
@@ -178,18 +178,17 @@ const ContactSection = () => {
                 <div className="flex gap-2">
                   <Select value={countryCode} onValueChange={setCountryCode}>
                     <SelectTrigger
-                      className="w-[130px] shrink-0 bg-card border-border text-sm"
+                      className="w-[96px] shrink-0 bg-card border-border font-mono text-sm tracking-tight justify-center gap-1.5"
                       aria-label="Country code"
                     >
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent className="max-h-72">
+                    <SelectContent className="max-h-72 min-w-[220px]">
                       {COUNTRY_CODES.map((c) => (
-                        <SelectItem key={c.code} value={c.code}>
-                          <span className="inline-flex items-center gap-2">
-                            <span className="text-base leading-none">{c.flag}</span>
-                            <span className="font-mono text-xs">{c.code}</span>
-                            <span className="text-muted-foreground text-xs">{c.label}</span>
+                        <SelectItem key={c.code} value={c.code} className="py-2">
+                          <span className="flex items-center justify-between gap-6 w-full">
+                            <span className="text-sm text-foreground">{c.label}</span>
+                            <span className="font-mono text-xs text-muted-foreground tabular-nums">{c.code}</span>
                           </span>
                         </SelectItem>
                       ))}
