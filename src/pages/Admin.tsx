@@ -1840,7 +1840,7 @@ function BanksPanel({ logActivity }: { logActivity: (action: string, entityType:
 
 // ─── ClientsLogoPanel ─────────────────────────────────────────────────────────
 
-const CLIENT_SLOTS = Array.from({ length: 20 }, (_, i) => i + 1);
+const CLIENT_SLOTS = Array.from({ length: 24 }, (_, i) => i + 1);
 
 function ClientsLogoPanel({
   edited, dbValues, onChange,
@@ -1854,9 +1854,9 @@ function ClientsLogoPanel({
   return (
     <div className="space-y-3">
       {CLIENT_SLOTS.map((n) => {
-        const nameKey   = `clients_logo_${n}_name`;
-        const urlKey    = `clients_logo_${n}_url`;
-        const showKey   = `clients_logo_${n}_show`;
+        const nameKey   = `client_logo_${n}_name`;
+        const urlKey    = `client_logo_${n}_url`;
+        const showKey   = `client_logo_${n}_enabled`;
         const name  = val(nameKey);
         const url   = val(urlKey);
         const show  = val(showKey) !== "false";  // default: show

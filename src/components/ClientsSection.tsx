@@ -11,49 +11,17 @@ interface Logo {
   url: string;
 }
 
-// First-paint default brand names. The corresponding URL is left empty so the
-// component renders a styled text wordmark until a real SVG/PNG is uploaded
-// to that slot in the admin. Huawei alone has a public Simple Icons SVG; the
-// rest (regional, pharma, hospitality) need to be uploaded by the editor.
-const DEFAULT_NAMES = [
-  "Arma",
-  "Sanofi",
-  "Novartis",
-  "Roche",
-  "Novo Nordisk",
-  "Berlitz",
-  "Monin",
-  "Alpro",
-  "Huawei",
-  "World Economic Forum",
-  "Banque Misr",
-  "The National Council for Women",
-  "ADCB Bank",
-  "Shark Tank Egypt",
-  "Sarj",
-  "EDGE Consultants",
-  "Abou Tarek",
-  "Quanta",
-  "San Benedetto",
-  "EduFun",
-  "El Kou5 Restaurant & Cafe",
-];
-
-const DEFAULT_URLS: Record<number, string> = {
-  9: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/huawei.svg",
-};
-
 const ClientsSection = () => {
   const { get } = useSiteContent();
 
+  // Slots are populated entirely from the CMS — empty name AND empty url means
+  // the editor cleared the slot, so it is omitted from the marquee.
   const logos: Logo[] = [];
   for (let i = 1; i <= MAX_SLOTS; i++) {
     const enabled = get(`client_logo_${i}_enabled`, "true").trim();
     if (enabled === "false") continue;
-    const fallbackName = DEFAULT_NAMES[i - 1] ?? "";
-    const fallbackUrl = DEFAULT_URLS[i] ?? "";
-    const name = get(`client_logo_${i}_name`, fallbackName).trim();
-    const url = get(`client_logo_${i}_url`, fallbackUrl).trim();
+    const name = get(`client_logo_${i}_name`, "").trim();
+    const url = get(`client_logo_${i}_url`, "").trim();
     if (!name && !url) continue;
     logos.push({ name: name || `Client ${i}`, url });
   }
