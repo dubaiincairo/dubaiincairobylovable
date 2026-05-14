@@ -128,10 +128,9 @@ const LogoCell = ({ logo }: { logo: Logo }) => (
         alt={logo.name}
         loading="lazy"
         decoding="async"
-        className="max-h-16 max-w-[160px] w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+        className="max-h-20 max-w-[160px] w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
         style={{ filter: "brightness(0) invert(1)" }}
         onError={(e) => {
-          // Image failed -> swap to text wordmark so the cell is never empty
           const el = e.currentTarget;
           el.style.display = "none";
           const parent = el.parentElement;
