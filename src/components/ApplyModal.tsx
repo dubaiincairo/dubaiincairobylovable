@@ -518,7 +518,7 @@ const ApplyModal = ({ jobTitle, jobId, onClose }: Props) => {
                       <input
                         type="tel"
                         className={`${inputCls} ${errors.mobile ? "border-red-400/60" : ""}`}
-                        placeholder="+20 100 000 0000"
+                        placeholder="100 000 0000"
                         value={form.mobile}
                         onChange={field("mobile")}
                         autoComplete="tel"

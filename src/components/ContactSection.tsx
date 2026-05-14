@@ -10,9 +10,16 @@ import { useSiteContent } from "@/hooks/useSiteContent";
 import { z } from "zod";
 import { fadeUp, scaleIn, viewportOnce } from "@/lib/animations";
 import AnimatedUnderline from "@/components/ui/animated-underline";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const COUNTRY_CODES = [
-  { code: "+20",  flag: "🇦🇫", label: "Egypt" },
+  { code: "+20",  flag: "🇪🇬", label: "Egypt" },
   { code: "+971", flag: "🇦🇪", label: "UAE" },
   { code: "+966", flag: "🇸🇦", label: "Saudi Arabia" },
   { code: "+965", flag: "🇰🇼", label: "Kuwait" },
@@ -169,23 +176,31 @@ const ContactSection = () => {
                   {get("contact_phone_label", "Phone *")}
                 </label>
                 <div className="flex gap-2">
-                  <select
-                    value={countryCode}
-                    onChange={(e) => setCountryCode(e.target.value)}
-                    className="shrink-0 rounded-md border border-input bg-card px-2 py-1 text-xs text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                  >
-                    {COUNTRY_CODES.map((c) => (
-                      <option key={c.code} value={c.code}>
-                        {c.flag} {c.code} {c.label}
-                      </option>
-                    ))}
-                  </select>
+                  <Select value={countryCode} onValueChange={setCountryCode}>
+                    <SelectTrigger
+                      className="w-[130px] shrink-0 bg-card border-border text-sm"
+                      aria-label="Country code"
+                    >
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-72">
+                      {COUNTRY_CODES.map((c) => (
+                        <SelectItem key={c.code} value={c.code}>
+                          <span className="inline-flex items-center gap-2">
+                            <span className="text-base leading-none">{c.flag}</span>
+                            <span className="font-mono text-xs">{c.code}</span>
+                            <span className="text-muted-foreground text-xs">{c.label}</span>
+                          </span>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <Input
                     id="phone"
                     name="phone"
                     value={form.phone}
                     onChange={handleChange}
-                    placeholder={get("contact_phone_placeholder", "10 0000 0000")}
+                    placeholder={get("contact_phone_placeholder", "100 000 0000")}
                     className="bg-card border-border flex-1"
                   />
                 </div>
