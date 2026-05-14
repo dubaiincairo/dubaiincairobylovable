@@ -1,5 +1,13 @@
 import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { sanity } from "@/integrations/sanity/client";
+import { SECTION_TYPES } from "@/integrations/sanity/sections";
+
+// Content is sourced from two places: Sanity Studio (primary, going forward)
+// and the legacy Supabase `site_content` table (fallback, edited via /admin).
+// Sanity wins on overlap. Empty strings still collapse to the code-level
+// fallback in `get()` so clearing a field reveals the default again — same UX
+// as before.
 
 type ContentMap = Record<string, string>;
 
@@ -15,7 +23,27 @@ const SiteContentContext = createContext<SiteContentContextType>({
   get: () => "",
 });
 
-const CACHE_KEY = "site_content_cache_v1";
+const CACHE_KEY = "site_content_cache_v2";
+
+const SANITY_SYSTEM_FIELDS = new Set([
+  "_id",
+  "_type",
+  "_rev",
+  "_createdAt",
+  "_updatedAt",
+  "_originalId",
+]);
+
+const flattenSanityDoc = (doc: Record<string, unknown>): ContentMap => {
+  const out: ContentMap = {};
+  for (const [k, v] of Object.entries(doc)) {
+    if (SANITY_SYSTEM_FIELDS.has(k)) continue;
+    if (typeof v === "string") out[k] = v;
+    else if (v == null) out[k] = "";
+    else out[k] = String(v);
+  }
+  return out;
+};
 
 const readCache = (): ContentMap => {
   if (typeof window === "undefined") return {};
@@ -38,14 +66,23 @@ const writeCache = (map: ContentMap) => {
   }
 };
 
+const SANITY_QUERY = `*[_type in $types]`;
+
 export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
-  // Hydrate from localStorage synchronously so returning visitors render real
-  // content on first paint instead of flashing hardcoded defaults.
+  const [supabaseMap, setSupabaseMap] = useState<ContentMap>({});
+  const [sanityMap, setSanityMap] = useState<ContentMap>({});
   const [content, setContent] = useState<ContentMap>(() => readCache());
   const [loading, setLoading] = useState<boolean>(() => Object.keys(readCache()).length === 0);
 
+  // Recompute merged map whenever either source changes. Sanity wins on overlap.
   useEffect(() => {
-    // Initial fetch
+    const merged: ContentMap = { ...supabaseMap, ...sanityMap };
+    setContent(merged);
+    writeCache(merged);
+  }, [supabaseMap, sanityMap]);
+
+  // ── Supabase: initial fetch + realtime ──────────────────────────────────
+  useEffect(() => {
     supabase
       .from("site_content")
       .select("key, value")
@@ -53,13 +90,11 @@ export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
         if (data) {
           const map: ContentMap = {};
           data.forEach((row) => (map[row.key] = row.value));
-          setContent(map);
-          writeCache(map);
+          setSupabaseMap(map);
         }
         setLoading(false);
       });
 
-    // Realtime subscription — instant updates
     const channel = supabase
       .channel("site_content_realtime")
       .on(
@@ -69,21 +104,16 @@ export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
           if (payload.eventType === "DELETE") {
             const old = payload.old as { key?: string };
             if (old.key) {
-              setContent((prev) => {
+              setSupabaseMap((prev) => {
                 const next = { ...prev };
                 delete next[old.key!];
-                writeCache(next);
                 return next;
               });
             }
           } else {
             const row = payload.new as { key: string; value: string };
             if (row.key) {
-              setContent((prev) => {
-                const next = { ...prev, [row.key]: row.value };
-                writeCache(next);
-                return next;
-              });
+              setSupabaseMap((prev) => ({ ...prev, [row.key]: row.value }));
             }
           }
         }
@@ -95,11 +125,47 @@ export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  // Treat empty strings the same as missing rows — so an editor clearing a
-  // field in /admin (which saves "" to Supabase) surfaces the code-level
-  // fallback again instead of leaving the page blank. Optional fields that
-  // intentionally render nothing when blank (e.g. founder social URLs)
-  // already pass "" as their fallback, so this change is a no-op for them.
+  // ── Sanity: initial fetch + realtime listen ─────────────────────────────
+  useEffect(() => {
+    let cancelled = false;
+    sanity
+      .fetch<Array<Record<string, unknown>>>(SANITY_QUERY, { types: SECTION_TYPES })
+      .then((docs) => {
+        if (cancelled || !docs) return;
+        const map: ContentMap = {};
+        for (const doc of docs) Object.assign(map, flattenSanityDoc(doc));
+        setSanityMap(map);
+        setLoading(false);
+      })
+      .catch(() => {
+        // Network failure or CORS — fall back silently to Supabase + defaults.
+      });
+
+    const subscription = sanity
+      .listen<Record<string, unknown>>(SANITY_QUERY, { types: SECTION_TYPES }, {
+        includeResult: true,
+        visibility: "query",
+      })
+      .subscribe({
+        next: (update) => {
+          // Only mutation events carry a `result` — welcome/disconnect events don't.
+          const result = "result" in update ? update.result : undefined;
+          if (!result) return;
+          setSanityMap((prev) => ({ ...prev, ...flattenSanityDoc(result as Record<string, unknown>) }));
+        },
+        error: () => {
+          // Realtime can drop on flaky networks — we already have the initial snapshot.
+        },
+      });
+
+    return () => {
+      cancelled = true;
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  // Treat empty strings the same as missing entries so clearing a field in
+  // either CMS surfaces the code-level fallback again.
   const get = useCallback(
     (key: string, fallback = "") => {
       const v = content[key];
