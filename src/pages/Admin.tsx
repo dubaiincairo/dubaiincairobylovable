@@ -271,10 +271,12 @@ const Admin = () => {
     <div className="min-h-screen bg-background flex">
 
       {/* ── Sidebar (desktop) ───────────────────────────────────────────── */}
-      <aside className="hidden lg:flex flex-col w-72 border-r border-border bg-card/50 sticky top-0 h-screen overflow-y-auto shrink-0">
+      <aside className="hidden lg:flex flex-col w-72 border-r border-border bg-card/50 sticky top-0 h-screen overflow-hidden shrink-0">
         <SidebarContent
           adminTab={adminTab}
           setAdminTab={(tab) => setAdminTab(tab)}
+          activeSection={activeSection}
+          selectSection={selectSection}
           hasEdits={hasEdits}
           saving={saving}
           edited={edited}
@@ -289,6 +291,8 @@ const Admin = () => {
           <SidebarContent
             adminTab={adminTab}
             setAdminTab={(tab) => { setAdminTab(tab); setMobileSidebarOpen(false); }}
+            activeSection={activeSection}
+            selectSection={(s) => { selectSection(s); setMobileSidebarOpen(false); }}
             hasEdits={hasEdits}
             saving={saving}
             edited={edited}
@@ -637,33 +641,102 @@ const Admin = () => {
 
 type AdminTab = "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "clients" | "contacts" | "applications";
 
-const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen; dividerBefore?: boolean }[] = [
-  { id: "dashboard",    label: "Dashboard",       icon: LayoutDashboard },
-  { id: "content",      label: "Content",         icon: Type },
-  { id: "seo",          label: "SEO & Meta",      icon: Globe, dividerBefore: true },
-  { id: "case-studies", label: "Cases",           icon: BookOpen },
+// Grouped nav structure mirroring the website
+type SidebarGroup = {
+  label: string;
+  icon: string;
+  items: { section: string; label: string; emoji: string }[];
+};
+
+const SIDEBAR_GROUPS: SidebarGroup[] = [
+  {
+    label: "Home Page",
+    icon: "🏠",
+    items: [
+      { section: "hero",         label: "Hero",              emoji: "🏠" },
+      { section: "stats",        label: "Statistics",        emoji: "📊" },
+      { section: "about",        label: "About",             emoji: "ℹ️" },
+      { section: "edges",        label: "Why We're Different",emoji: "⚡" },
+      { section: "values",       label: "Our Values",        emoji: "💎" },
+      { section: "services",     label: "Studios Grid",      emoji: "🎯" },
+      { section: "founder",      label: "Founder",           emoji: "👤" },
+      { section: "google",       label: "Google Maps",       emoji: "📍" },
+      { section: "legal",        label: "Legal Info",        emoji: "📜" },
+      { section: "contact",      label: "Contact Form",      emoji: "✉️" },
+    ],
+  },
+  {
+    label: "Pages",
+    icon: "📄",
+    items: [
+      { section: "studios",      label: "Studios Page",      emoji: "🎨" },
+      { section: "careers",      label: "Careers Page",      emoji: "💼" },
+      { section: "tech",         label: "Tech Stack Page",   emoji: "🛠️" },
+    ],
+  },
+  {
+    label: "Partnerships",
+    icon: "🤝",
+    items: [
+      { section: "odoo",         label: "Odoo ERP",          emoji: "🔶" },
+      { section: "yanolja",      label: "Yanolja Cloud",     emoji: "🏨" },
+      { section: "zoho",         label: "Zoho",              emoji: "🟣" },
+    ],
+  },
+  {
+    label: "Global",
+    icon: "🌐",
+    items: [
+      { section: "nav",          label: "Navigation",        emoji: "🧭" },
+      { section: "footer",       label: "Footer",            emoji: "🔗" },
+    ],
+  },
+];
+
+const DATA_TABS: { id: AdminTab; label: string; icon: typeof BookOpen }[] = [
+  { id: "clients",      label: "Client Logos",    icon: ImageIcon },
+  { id: "testimonials", label: "Testimonials",    icon: Star },
+  { id: "case-studies", label: "Case Studies",    icon: BookOpen },
   { id: "jobs",         label: "Job Listings",    icon: Briefcase },
   { id: "banks",        label: "Banks",           icon: Landmark },
-  { id: "testimonials", label: "Testimonials",    icon: Star },
-  { id: "clients",      label: "Clients",         icon: ImageIcon },
-  { id: "applications", label: "Applications",    icon: MessageSquare, dividerBefore: true },
+  { id: "seo",          label: "SEO & Meta",      icon: Globe },
+];
+
+const INBOX_TABS: { id: AdminTab; label: string; icon: typeof BookOpen }[] = [
   { id: "contacts",     label: "Messages",        icon: Mail },
+  { id: "applications", label: "Applications",    icon: MessageSquare },
 ];
 
 function SidebarContent({
-  adminTab, setAdminTab, hasEdits, saving, edited, handleSave, handleLogout,
+  adminTab, setAdminTab, activeSection, selectSection,
+  hasEdits, saving, edited, handleSave, handleLogout,
 }: {
   adminTab: AdminTab;
   setAdminTab: (t: AdminTab) => void;
+  activeSection: string | null;
+  selectSection: (s: string | null) => void;
   hasEdits: boolean;
   saving: boolean;
   edited: Record<string, string>;
   handleSave: () => void;
   handleLogout: () => void;
 }) {
+  const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({});
+
+  const toggleGroup = (label: string) =>
+    setCollapsedGroups((prev) => ({ ...prev, [label]: !prev[label] }));
+
+  const goToSection = (section: string) => {
+    setAdminTab("content");
+    selectSection(section);
+  };
+
+  const isContentSection = adminTab === "content" && activeSection !== null;
+  const isContentOrSeo = adminTab === "content" || adminTab === "seo";
+
   return (
     <>
-      <div className="p-5 border-b border-border">
+      <div className="p-5 border-b border-border shrink-0">
         <a href="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4">
           <ArrowLeft className="w-4 h-4" />
           <span className="text-xs">Back to website</span>
@@ -674,41 +747,113 @@ function SidebarContent({
         <p className="text-xs text-muted-foreground mt-1">Dubai in Cairo CMS</p>
       </div>
 
-      {/* Tab switcher */}
-      <div className="px-3 pt-3 pb-1 border-b border-border space-y-0.5">
-        {TAB_ITEMS.map(({ id, label, icon: Icon, dividerBefore }) => (
-          <div key={id}>
-            {dividerBefore && <div className="my-1 border-t border-border/50" />}
-            <button
-              onClick={() => setAdminTab(id)}
-              className={cn(
-                "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
-                adminTab === id ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+      <div className="flex-1 overflow-y-auto px-3 py-3 space-y-1">
+
+        {/* Dashboard */}
+        <button
+          onClick={() => { setAdminTab("dashboard"); selectSection(null); }}
+          className={cn(
+            "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+            adminTab === "dashboard" ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+          )}
+        >
+          <LayoutDashboard className="w-4 h-4 shrink-0" />
+          Dashboard
+        </button>
+
+        <div className="my-1.5 border-t border-border/50" />
+
+        {/* Content groups */}
+        {SIDEBAR_GROUPS.map((group) => {
+          const collapsed = collapsedGroups[group.label] ?? false;
+          return (
+            <div key={group.label}>
+              <button
+                onClick={() => toggleGroup(group.label)}
+                className="w-full flex items-center gap-2 px-3 py-1.5 text-left rounded-md hover:bg-muted/30 transition-colors"
+              >
+                <span className="text-sm leading-none">{group.icon}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex-1">{group.label}</span>
+                <ChevronDown className={cn("w-3 h-3 text-muted-foreground/60 transition-transform", !collapsed && "rotate-180")} />
+              </button>
+              {!collapsed && (
+                <div className="ml-2 mt-0.5 space-y-0.5">
+                  {group.items.map((item) => {
+                    const isActive = adminTab === "content" && activeSection === item.section;
+                    return (
+                      <button
+                        key={item.section}
+                        onClick={() => goToSection(item.section)}
+                        className={cn(
+                          "w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors text-left",
+                          isActive ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                        )}
+                      >
+                        <span className="text-xs leading-none w-4 text-center">{item.emoji}</span>
+                        <span className="truncate">{item.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               )}
-            >
-              <Icon className="w-4 h-4 shrink-0" />
-              {label}
-            </button>
-          </div>
+            </div>
+          );
+        })}
+
+        <div className="my-1.5 border-t border-border/50" />
+
+        {/* Data / Media panels */}
+        <div className="px-3 py-1">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Media & Data</span>
+        </div>
+        {DATA_TABS.map(({ id, label, icon: Icon }) => (
+          <button
+            key={id}
+            onClick={() => { setAdminTab(id); selectSection(null); }}
+            className={cn(
+              "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+              adminTab === id ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+            )}
+          >
+            <Icon className="w-4 h-4 shrink-0" />
+            {label}
+          </button>
+        ))}
+
+        <div className="my-1.5 border-t border-border/50" />
+
+        {/* Inbox */}
+        <div className="px-3 py-1">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Inbox</span>
+        </div>
+        {INBOX_TABS.map(({ id, label, icon: Icon }) => (
+          <button
+            key={id}
+            onClick={() => { setAdminTab(id); selectSection(null); }}
+            className={cn(
+              "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+              adminTab === id ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+            )}
+          >
+            <Icon className="w-4 h-4 shrink-0" />
+            {label}
+          </button>
         ))}
       </div>
 
-      {/* flex-1 spacer keeps footer pinned to bottom */}
-      <div className="flex-1" />
-
-      <div className="p-4 border-t border-border space-y-2 mt-auto">
-        {hasEdits && (adminTab === "content" || adminTab === "seo") ? (
+      <div className="p-4 border-t border-border space-y-2 shrink-0">
+        {hasEdits && isContentOrSeo ? (
           <Button onClick={handleSave} disabled={saving} size="sm" className="w-full glow-gold font-display">
             {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
             Save {Object.keys(edited).length} Change{Object.keys(edited).length !== 1 ? "s" : ""}
           </Button>
-        ) : (adminTab === "content" || adminTab === "seo") ? (
+        ) : isContentOrSeo ? (
           <div className="text-center text-xs text-muted-foreground py-1">No unsaved changes</div>
         ) : null}
         <Button variant="outline" size="sm" className="w-full" onClick={handleLogout}>
           <LogOut className="w-4 h-4 mr-1.5" /> Logout
         </Button>
-        {(adminTab === "content" || adminTab === "seo") && <p className="text-center text-[10px] text-muted-foreground">⌘S to save</p>}
+        {isContentOrSeo && <p className="text-center text-[10px] text-muted-foreground">⌘S to save</p>}
       </div>
     </>
   );
