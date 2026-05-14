@@ -97,7 +97,7 @@ function groupSectionFields(fields: ContentField[]): SectionGroups {
   const headerFields: ContentField[] = [];
   const numbered: Record<string, ContentField[]> = {};
   for (const field of fields) {
-    const m = field.key.match(/_(\d+)_/);
+    const m = field.key.match(/_([\d]+)_/);
     if (m) {
       const n = m[1];
       if (!numbered[n]) numbered[n] = [];
@@ -1689,7 +1689,7 @@ function BanksPanel({ logActivity }: { logActivity: (action: string, entityType:
   };
 
   const togglePublished = async (id: string, val: boolean) => {
-    await supabase.from("bank_accounts").update({ published: val }).eq("id", id);
+    await supabase.from("bank_accounts").update({ published: val }).eq("id", id);  
     setList((prev) => prev.map((b) => b.id === id ? { ...b, published: val } : b));
     const b = list.find((b) => b.id === id);
     logActivity(val ? "published" : "unpublished", "bank", b?.title ?? "Bank");
@@ -1915,7 +1915,7 @@ function SortableLogoRow({
       ref={setNodeRef}
       style={style}
       className={cn(
-        "flex items-center gap-3 rounded-lg border border-border bg-background px-3 py-2.5",
+        "flex items-start gap-3 rounded-lg border border-border bg-background px-3 py-2.5",
         isDragging
           ? "shadow-xl ring-2 ring-primary/40 scale-[1.01] cursor-grabbing"
           : "hover:border-border/80"
@@ -1925,61 +1925,74 @@ function SortableLogoRow({
       <button
         {...attributes}
         {...listeners}
-        className="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-foreground shrink-0 touch-none"
+        className="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-foreground shrink-0 touch-none mt-1"
         title="Drag to reorder"
       >
         <GripVertical className="w-4 h-4" />
       </button>
 
-      {/* Show toggle */}
-      <button
-        onClick={() => onChange(showKey, show ? "false" : "true")}
-        className={cn(
-          "w-5 h-5 rounded flex items-center justify-center shrink-0 transition-colors border",
-          show
-            ? "bg-green-500/10 border-green-500/30 text-green-500"
-            : "bg-muted border-border text-muted-foreground"
-        )}
-        title={show ? "Hide from marquee" : "Show in marquee"}
-      >
-        {show ? <Check className="w-3 h-3" /> : null}
-      </button>
-
-      {/* Logo preview */}
-      <div className="w-8 h-8 rounded border border-border bg-muted flex items-center justify-center shrink-0 overflow-hidden">
-        {url ? (
-          <img src={url} alt={name} className="w-6 h-6 object-contain"
-            onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
-        ) : (
-          <ImageIcon className="w-3.5 h-3.5 text-muted-foreground" />
-        )}
-      </div>
-
-      {/* Client name */}
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => onChange(nameKey, e.target.value)}
-        placeholder={`Client ${n} name`}
-        className="flex-1 min-w-0 rounded-md border border-input bg-background px-2 py-1 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-      />
-
-      {/* Logo URL or upload */}
-      <div className="flex items-center gap-1.5 shrink-0">
-        <LogoUploadButton
-          value={url}
-          fieldKey={urlKey}
-          onChange={(v) => onChange(urlKey, v)}
-        />
-        {url && (
+      {/* Right side: two rows */}
+      <div className="flex-1 min-w-0 flex flex-col gap-1.5">
+        {/* Row 1: toggle + preview + name */}
+        <div className="flex items-center gap-2">
+          {/* Show toggle */}
           <button
-            onClick={() => onChange(urlKey, "")}
-            className="w-6 h-6 rounded flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
-            title="Clear logo"
+            onClick={() => onChange(showKey, show ? "false" : "true")}
+            className={cn(
+              "w-5 h-5 rounded flex items-center justify-center shrink-0 transition-colors border",
+              show
+                ? "bg-green-500/10 border-green-500/30 text-green-500"
+                : "bg-muted border-border text-muted-foreground"
+            )}
+            title={show ? "Hide from marquee" : "Show in marquee"}
           >
-            <X className="w-3 h-3" />
+            {show ? <Check className="w-3 h-3" /> : null}
           </button>
-        )}
+
+          {/* Logo preview */}
+          <div className="w-7 h-7 rounded border border-border bg-muted flex items-center justify-center shrink-0 overflow-hidden">
+            {url ? (
+              <img src={url} alt={name} className="w-5 h-5 object-contain"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+            ) : (
+              <ImageIcon className="w-3 h-3 text-muted-foreground" />
+            )}
+          </div>
+
+          {/* Client name */}
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => onChange(nameKey, e.target.value)}
+            placeholder={`Client ${n} name`}
+            className="flex-1 min-w-0 rounded-md border border-input bg-background px-2 py-1 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          />
+        </div>
+
+        {/* Row 2: URL paste input + upload button + clear */}
+        <div className="flex items-center gap-1.5">
+          <input
+            type="url"
+            value={url}
+            onChange={(e) => onChange(urlKey, e.target.value)}
+            placeholder="Paste logo URL  (or upload →)"
+            className="flex-1 min-w-0 rounded-md border border-input bg-background px-2 py-1 text-xs text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring font-mono"
+          />
+          <LogoUploadButton
+            value={url}
+            fieldKey={urlKey}
+            onChange={(v) => onChange(urlKey, v)}
+          />
+          {url && (
+            <button
+              onClick={() => onChange(urlKey, "")}
+              className="w-6 h-6 rounded flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors shrink-0"
+              title="Clear logo"
+            >
+              <X className="w-3 h-3" />
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -2081,5 +2094,3 @@ function Field({ label, value, onChange, placeholder, long }: {
     </div>
   );
 }
-
-export default Admin;
