@@ -13,9 +13,10 @@ import AnimatedUnderline from "@/components/ui/animated-underline";
 import {
   Select,
   SelectContent,
-  SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { cn } from "@/lib/utils";
 
 const COUNTRY_CODES = [
   { code: "+20",  label: "Egypt" },
@@ -177,26 +178,35 @@ const ContactSection = () => {
                 <div className="flex gap-2">
                   <Select value={countryCode} onValueChange={setCountryCode}>
                     <SelectTrigger
-                      className="w-[92px] shrink-0 bg-card border-border hover:border-primary/40 transition-colors"
+                      className="w-[92px] shrink-0 bg-card border-border hover:border-primary/40 data-[state=open]:border-primary/60 transition-colors"
                       aria-label={`Country code, currently ${countryCode}`}
                     >
                       <span className="font-mono text-sm tabular-nums text-foreground">{countryCode}</span>
                     </SelectTrigger>
                     <SelectContent
                       align="start"
-                      className="max-h-72 w-[260px] sm:w-[280px]"
+                      sideOffset={6}
+                      className="max-h-72 w-[260px] sm:w-[280px] p-1.5"
                     >
                       {COUNTRY_CODES.map((c) => (
-                        <SelectItem
+                        <SelectPrimitive.Item
                           key={c.code}
                           value={c.code}
-                          className="py-2 pr-3 cursor-pointer focus:bg-primary/10"
+                          className={cn(
+                            "group relative flex w-full items-center gap-3 rounded-md py-2.5 pl-3 pr-3 text-sm cursor-pointer outline-none transition-colors",
+                            "focus:bg-muted/60",
+                            "data-[state=checked]:bg-primary/10",
+                          )}
                         >
-                          <span className="flex items-center justify-between gap-4 w-full">
-                            <span className="text-sm text-foreground truncate">{c.label}</span>
-                            <span className="font-mono text-xs text-muted-foreground tabular-nums shrink-0">{c.code}</span>
+                          <SelectPrimitive.ItemText asChild>
+                            <span className="flex-1 truncate text-foreground group-data-[state=checked]:text-primary group-data-[state=checked]:font-medium">
+                              {c.label}
+                            </span>
+                          </SelectPrimitive.ItemText>
+                          <span className="font-mono text-xs tabular-nums text-muted-foreground group-data-[state=checked]:text-primary shrink-0">
+                            {c.code}
                           </span>
-                        </SelectItem>
+                        </SelectPrimitive.Item>
                       ))}
                     </SelectContent>
                   </Select>
