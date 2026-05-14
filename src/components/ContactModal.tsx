@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Mail, ArrowRight, CheckCircle, Loader2, MessageSquare, Clock } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -26,6 +26,33 @@ export const ContactModal = () => {
   const [errors, setErrors]       = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted]   = useState(false);
+
+  const panelRef = useRef<HTMLDivElement>(null);
+  const firstFieldRef = useRef<HTMLInputElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  // Focus management: capture the previously-focused element on open, focus the
+  // first field, and restore on close.
+  useEffect(() => {
+    if (isOpen) {
+      triggerRef.current = document.activeElement as HTMLElement | null;
+      // Wait one frame so the motion-mounted input is in the DOM.
+      const id = window.requestAnimationFrame(() => firstFieldRef.current?.focus());
+      return () => window.cancelAnimationFrame(id);
+    }
+    triggerRef.current?.focus?.();
+  }, [isOpen]);
+
+  // Escape to close.
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -89,6 +116,10 @@ export const ContactModal = () => {
             exit={{ opacity: 0 }}
           >
             <motion.div
+              ref={panelRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="contact-modal-title"
               className="relative w-full max-w-lg bg-card border border-border rounded-2xl shadow-2xl overflow-hidden"
               initial={{ scale: 0.93, y: 20 }}
               animate={{ scale: 1, y: 0 }}
@@ -105,15 +136,20 @@ export const ContactModal = () => {
                   <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-primary block mb-0.5">
                     {get("contact_subtitle", "Get Started")}
                   </span>
-                  <h2 className="font-display font-bold text-xl text-foreground">
+                  <h2
+                    id="contact-modal-title"
+                    className="font-display font-bold text-xl text-foreground"
+                  >
                     {get("contact_modal_title", "Let's Build Together")}
                   </h2>
                 </div>
                 <button
+                  type="button"
+                  aria-label="Close contact form"
                   onClick={handleClose}
                   className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                 >
-                  <X className="w-4 h-4" />
+                  <X aria-hidden="true" className="w-4 h-4" />
                 </button>
               </div>
 
@@ -143,43 +179,87 @@ export const ContactModal = () => {
                     </Button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-medium text-foreground mb-1">
+                        <label htmlFor="contact-name" className="block text-xs font-medium text-foreground mb-1">
                           {get("contact_name_label", "Name *")}
                         </label>
-                        <Input name="name" value={form.name} onChange={handleChange}
+                        <Input
+                          id="contact-name"
+                          ref={firstFieldRef}
+                          name="name"
+                          value={form.name}
+                          onChange={handleChange}
                           placeholder={get("contact_name_placeholder", "Your name")}
-                          className="bg-background border-border h-9 text-sm" />
-                        {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
+                          aria-invalid={!!errors.name}
+                          aria-describedby={errors.name ? "contact-name-error" : undefined}
+                          autoComplete="name"
+                          className="bg-background border-border h-9 text-sm"
+                        />
+                        {errors.name && (
+                          <p id="contact-name-error" role="alert" className="text-xs text-destructive mt-1">
+                            {errors.name}
+                          </p>
+                        )}
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-foreground mb-1">
+                        <label htmlFor="contact-email" className="block text-xs font-medium text-foreground mb-1">
                           {get("contact_email_label", "Email *")}
                         </label>
-                        <Input name="email" type="email" value={form.email} onChange={handleChange}
+                        <Input
+                          id="contact-email"
+                          name="email"
+                          type="email"
+                          value={form.email}
+                          onChange={handleChange}
                           placeholder={get("contact_email_placeholder", "you@company.com")}
-                          className="bg-background border-border h-9 text-sm" />
-                        {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
+                          aria-invalid={!!errors.email}
+                          aria-describedby={errors.email ? "contact-email-error" : undefined}
+                          autoComplete="email"
+                          className="bg-background border-border h-9 text-sm"
+                        />
+                        {errors.email && (
+                          <p id="contact-email-error" role="alert" className="text-xs text-destructive mt-1">
+                            {errors.email}
+                          </p>
+                        )}
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-foreground mb-1">
+                      <label htmlFor="contact-phone" className="block text-xs font-medium text-foreground mb-1">
                         {get("contact_phone_label", "Phone (optional)")}
                       </label>
-                      <Input name="phone" value={form.phone} onChange={handleChange}
+                      <Input
+                        id="contact-phone"
+                        name="phone"
+                        value={form.phone}
+                        onChange={handleChange}
                         placeholder={get("contact_phone_placeholder", "+1 234 567 890")}
-                        className="bg-background border-border h-9 text-sm" />
+                        autoComplete="tel"
+                        className="bg-background border-border h-9 text-sm"
+                      />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-foreground mb-1">
+                      <label htmlFor="contact-message" className="block text-xs font-medium text-foreground mb-1">
                         {get("contact_message_label", "Message *")}
                       </label>
-                      <Textarea name="message" value={form.message} onChange={handleChange}
+                      <Textarea
+                        id="contact-message"
+                        name="message"
+                        value={form.message}
+                        onChange={handleChange}
                         placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")}
-                        rows={4} className="bg-background border-border text-sm resize-none" />
-                      {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
+                        aria-invalid={!!errors.message}
+                        aria-describedby={errors.message ? "contact-message-error" : undefined}
+                        rows={4}
+                        className="bg-background border-border text-sm resize-none"
+                      />
+                      {errors.message && (
+                        <p id="contact-message-error" role="alert" className="text-xs text-destructive mt-1">
+                          {errors.message}
+                        </p>
+                      )}
                     </div>
                     <Button type="submit" disabled={isSubmitting}
                       className="shimmer-btn w-full font-display font-semibold glow-gold">

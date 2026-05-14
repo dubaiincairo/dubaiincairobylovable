@@ -1,16 +1,25 @@
-import { useState, useRef } from "react";
-import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionTemplate,
+  useMotionValueEvent,
+} from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useContactModal } from "@/context/ContactModalContext";
-import { slideDown } from "@/lib/animations";
+import { slideDown, useMotionPref } from "@/lib/animations";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [partnerOpen, setPartnerOpen] = useState(false);
   const partnerTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const partnerRef = useRef<HTMLDivElement>(null);
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
+  const { shouldReduce } = useMotionPref();
   const { get } = useSiteContent();
 
   const partnerLinks = [
@@ -31,7 +40,7 @@ const Navbar = () => {
   const backgroundColor = useMotionTemplate`hsl(220 20% 4% / ${bgOpacity})`;
   const backdropFilter = useMotionTemplate`blur(${blurVal}px)`;
 
-  scrollY.on("change", (v) => setScrolled(v > 50));
+  useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 50));
 
   const handlePartnerEnter = () => {
     if (partnerTimeout.current) clearTimeout(partnerTimeout.current);
@@ -41,6 +50,38 @@ const Navbar = () => {
   const handlePartnerLeave = () => {
     partnerTimeout.current = setTimeout(() => setPartnerOpen(false), 150);
   };
+
+  // Close mobile menu on Escape + restore focus to its trigger.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        menuTriggerRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Close partnerships dropdown on Escape + outside-click.
+  useEffect(() => {
+    if (!partnerOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setPartnerOpen(false);
+    };
+    const onPointerDown = (e: PointerEvent) => {
+      if (partnerRef.current && !partnerRef.current.contains(e.target as Node)) {
+        setPartnerOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [partnerOpen]);
 
   const links = [
     { href: "/",        label: get("nav_link_home", "Home") },
@@ -65,7 +106,11 @@ const Navbar = () => {
       />
 
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="/" className="font-display font-bold text-xl inline-flex items-center min-h-[44px]">
+        <a
+          href="/"
+          aria-label="Dubai in Cairo — home"
+          className="font-display font-bold text-xl inline-flex items-center gap-1.5 min-h-[44px]"
+        >
           <span className="text-gradient-gold">{get("nav_brand_1", "Dubai")}</span>
           <span className="text-foreground">{get("nav_brand_2", "in")}</span>
           <span className="text-gradient-gold">{get("nav_brand_3", "Cairo")}</span>
@@ -97,6 +142,7 @@ const Navbar = () => {
 
           {/* Partnerships dropdown */}
           <div
+            ref={partnerRef}
             className="relative"
             onMouseEnter={handlePartnerEnter}
             onMouseLeave={handlePartnerLeave}
@@ -117,9 +163,9 @@ const Navbar = () => {
             {partnerOpen && (
               <motion.div
                 role="menu"
-                initial={{ opacity: 0, y: -6 }}
+                initial={{ opacity: 0, y: shouldReduce ? 0 : -6 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.15 }}
+                transition={{ duration: shouldReduce ? 0 : 0.15 }}
                 className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 rounded-xl border border-border bg-card/95 backdrop-blur-xl shadow-xl overflow-hidden"
                 onMouseEnter={handlePartnerEnter}
                 onMouseLeave={handlePartnerLeave}
@@ -147,6 +193,7 @@ const Navbar = () => {
         </nav>
 
         <button
+          ref={menuTriggerRef}
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
@@ -164,9 +211,9 @@ const Navbar = () => {
           id="mobile-menu"
           aria-label="Mobile"
           className="md:hidden glass px-6 py-6 flex flex-col gap-4 pb-[calc(env(safe-area-inset-bottom)+1.5rem)]"
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: shouldReduce ? 0 : -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.25 }}
+          transition={{ duration: shouldReduce ? 0 : 0.25 }}
         >
           {links.map((l) => (
             <a
