@@ -68,13 +68,13 @@ const ValuesSection = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={viewportOnce}
-                    className="group glass-card gradient-border text-center p-6 rounded-xl hover-lift h-full"
+                    className="group glass-card gradient-border p-6 rounded-xl hover-lift h-full"
                   >
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:rotate-12">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:rotate-12">
                       <v.icon className="w-5 h-5 text-primary" />
                     </div>
                     <h3 className="text-lg font-display font-semibold mb-2 whitespace-pre-line">{v.title}</h3>
-                    <RichText html={v.desc} className="text-muted-foreground text-sm" />
+                    <RichText html={v.desc} className="text-muted-foreground text-sm leading-relaxed" />
                   </motion.div>
                 </CarouselItem>
               ))}
@@ -96,12 +96,12 @@ const ValuesSection = () => {
         {/* Desktop: static 3-column grid */}
         <div className="hidden lg:grid lg:grid-cols-3 gap-6">
           {values.map((v, i) => (
-            <motion.div key={i} className="group glass-card gradient-border text-center p-6 rounded-xl hover-lift" variants={cardFadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:rotate-12">
+            <motion.div key={i} className="group glass-card gradient-border p-6 rounded-xl hover-lift" variants={cardFadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:rotate-12">
                 <v.icon className="w-5 h-5 text-primary" />
               </div>
               <h3 className="text-lg font-display font-semibold mb-2 whitespace-pre-line">{v.title}</h3>
-              <RichText html={v.desc} className="text-muted-foreground text-sm" />
+              <RichText html={v.desc} className="text-muted-foreground text-sm leading-relaxed" />
             </motion.div>
           ))}
         </div>
