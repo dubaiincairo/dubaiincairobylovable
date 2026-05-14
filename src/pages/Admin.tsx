@@ -67,12 +67,11 @@ const sectionDescriptions: Record<string, string> = {
 };
 
 const subItemLabels: Record<string, string> = {
-  hero: "Chip",
-  about: "Metric",
-  services: "Studio",
-  edges: "Edge",
-  values: "Value",
-  tech: "Category",
+  hero:    "Float Card",
+  about:   "Step",
+  edges:   "Edge",
+  values:  "Value",
+  careers: "Item",
 };
 
 // ─── Per-section explicit layouts (mirror the live page structure) ───────────
@@ -81,60 +80,67 @@ type SectionLayout = { label: string; keys: string[] }[];
 
 const SECTION_LAYOUT: Record<string, SectionLayout> = {
   nav: [
-    { label: "Identity",         keys: ["nav_brand", "nav_logo_url"] },
-    { label: "Navigation Links", keys: ["nav_link_1", "nav_link_2", "nav_link_3", "nav_link_4", "nav_cta"] },
+    { label: "Brand Wordmark",     keys: ["nav_brand_1", "nav_brand_2", "nav_brand_3", "nav_favicon_url"] },
+    { label: "Main Links",         keys: ["nav_link_home", "nav_link_studios", "nav_link_careers", "nav_link_tech", "nav_link_faq"] },
+    { label: "Partnerships Menu",  keys: ["nav_link_partnerships", "nav_partner_odoo", "nav_partner_yanolja", "nav_partner_zoho"] },
+    { label: "CTA",                keys: ["nav_cta"] },
   ],
   hero: [
-    { label: "Section Copy", keys: ["hero_overline", "hero_headline", "hero_subheadline", "hero_body", "hero_cta_primary", "hero_cta_secondary"] },
-    { label: "Chips",        keys: ["hero_chip_1", "hero_chip_2", "hero_chip_3"] },
+    { label: "Copy & CTAs",        keys: ["hero_tagline", "hero_headline", "hero_subheadline", "hero_cta_primary", "hero_cta_secondary"] },
+    { label: "Dashboard Card",     keys: ["hero_card_label", "hero_card_trend", "hero_card_value", "hero_card_sublabel"] },
+    { label: "Float Card 1",       keys: ["hero_float_1_value", "hero_float_1_label"] },
+    { label: "Float Card 2",       keys: ["hero_float_2_value", "hero_float_2_label"] },
+    { label: "Float Card 3",       keys: ["hero_float_3_value", "hero_float_3_label"] },
+    { label: "Float Card 4",       keys: ["hero_float_4_value", "hero_float_4_label"] },
   ],
   stats: [
-    { label: "Stat 1 — Years",      keys: ["stat_years",      "stat_years_label"] },
-    { label: "Stat 2 — Clients",    keys: ["stat_clients",    "stat_clients_label"] },
-    { label: "Stat 3 — Industries", keys: ["stat_industries", "stat_industries_label"] },
-    { label: "Stat 4 — Countries",  keys: ["stat_countries",  "stat_countries_label"] },
+    { label: "Stat 1 — Projects",  keys: ["stat_projects", "stat_projects_label"] },
+    { label: "Stat 2 — Clients",   keys: ["stat_clients",  "stat_clients_label"] },
+    { label: "Stat 3 — Years",     keys: ["stat_years",    "stat_years_label"] },
+    { label: "Stat 4 — Digital",   keys: ["stat_digital",  "stat_digital_label"] },
   ],
   about: [
-    { label: "Section Copy", keys: ["about_subtitle", "about_headline", "about_description", "about_cta"] },
-    { label: "Metric 1",     keys: ["about_metric_1_value", "about_metric_1_label"] },
-    { label: "Metric 2",     keys: ["about_metric_2_value", "about_metric_2_label"] },
-    { label: "Metric 3",     keys: ["about_metric_3_value", "about_metric_3_label"] },
+    { label: "Header & Body",      keys: ["about_subtitle", "about_headline", "about_body"] },
+    { label: "Step 1",             keys: ["about_step_1_num", "about_step_1_title", "about_step_1_desc"] },
+    { label: "Step 2",             keys: ["about_step_2_num", "about_step_2_title", "about_step_2_desc"] },
+    { label: "Step 3",             keys: ["about_step_3_num", "about_step_3_title", "about_step_3_desc"] },
   ],
   edges: [
-    { label: "Section Copy", keys: ["edges_subtitle", "edges_headline", "edges_description"] },
-    { label: "Edge 1",       keys: ["edge_1_title", "edge_1_desc"] },
-    { label: "Edge 2",       keys: ["edge_2_title", "edge_2_desc"] },
-    { label: "Edge 3",       keys: ["edge_3_title", "edge_3_desc"] },
-    { label: "Edge 4",       keys: ["edge_4_title", "edge_4_desc"] },
+    { label: "Header",             keys: ["edges_subtitle", "edges_headline"] },
+    { label: "Card 1",             keys: ["edge_1_title", "edge_1_desc"] },
+    { label: "Card 2",             keys: ["edge_2_title", "edge_2_desc"] },
+    { label: "Card 3",             keys: ["edge_3_title", "edge_3_desc"] },
   ],
   values: [
-    { label: "Section Copy", keys: ["values_subtitle", "values_headline", "values_description"] },
-    { label: "Value 1",      keys: ["value_1_title", "value_1_desc"] },
-    { label: "Value 2",      keys: ["value_2_title", "value_2_desc"] },
-    { label: "Value 3",      keys: ["value_3_title", "value_3_desc"] },
-  ],
-  services: [
-    { label: "Section Copy", keys: ["services_subtitle", "services_headline", "services_description"] },
-    { label: "Studio 1",     keys: ["studio_1_title", "studio_1_desc"] },
-    { label: "Studio 2",     keys: ["studio_2_title", "studio_2_desc"] },
-    { label: "Studio 3",     keys: ["studio_3_title", "studio_3_desc"] },
-    { label: "Studio 4",     keys: ["studio_4_title", "studio_4_desc"] },
-    { label: "Studio 5",     keys: ["studio_5_title", "studio_5_desc"] },
-    { label: "Studio 6",     keys: ["studio_6_title", "studio_6_desc"] },
+    { label: "Header",             keys: ["values_subtitle", "values_headline"] },
+    { label: "Value 1",            keys: ["value_1_title", "value_1_desc"] },
+    { label: "Value 2",            keys: ["value_2_title", "value_2_desc"] },
+    { label: "Value 3",            keys: ["value_3_title", "value_3_desc"] },
   ],
   founder: [
-    { label: "Header & Body",    keys: ["founder_subtitle", "founder_headline", "founder_body"] },
-    { label: "Portrait & Quote", keys: ["founder_name", "founder_photo_url", "founder_quote", "founder_attribution"] },
-    { label: "Calendly CTA",     keys: ["founder_calendly_url", "founder_cta_label"] },
-    { label: "Social Links",     keys: ["founder_facebook", "founder_linkedin", "founder_instagram"] },
+    { label: "Header & Body",      keys: ["founder_subtitle", "founder_headline", "founder_body"] },
+    { label: "Portrait & Quote",   keys: ["founder_name", "founder_photo_url", "founder_quote", "founder_attribution"] },
+    { label: "Calendly CTA",       keys: ["founder_calendly_url", "founder_cta_label"] },
+    { label: "Social Links",       keys: ["founder_facebook", "founder_linkedin", "founder_instagram"] },
+  ],
+  clients: [
+    { label: "Section Copy",       keys: ["clients_subtitle", "clients_headline", "clients_description"] },
+  ],
+  testimonials: [
+    { label: "Section Copy",       keys: ["testimonials_subtitle", "testimonials_headline", "testimonials_subtext"] },
+  ],
+  tech: [
+    { label: "Homepage Teaser",    keys: ["tech_subtitle", "tech_headline", "tech_teaser_desc"] },
+    { label: "Full Tech Page",     keys: ["tech_page_headline", "tech_page_subheadline", "tech_page_desc", "tech_desc"] },
+    { label: "Tech Page — CTA",    keys: ["tech_cta_title", "tech_cta_desc", "tech_cta_btn"] },
   ],
   google: [
-    { label: "Business Info", keys: ["google_biz_name", "google_biz_category", "google_rating", "google_address", "google_cta"] },
-    { label: "Map Links",     keys: ["google_maps_link", "google_maps_embed"] },
+    { label: "Business Info",      keys: ["google_biz_name", "google_biz_category", "google_rating", "google_address"] },
+    { label: "Map & CTA",          keys: ["google_maps_link", "google_maps_embed", "google_cta"] },
   ],
   legal: [
-    { label: "Header", keys: ["legal_subtitle", "legal_company_name"] },
-    { label: "Fields", keys: [
+    { label: "Header",             keys: ["legal_subtitle", "legal_company_name"] },
+    { label: "Fields",             keys: [
       "legal_reg_label",        "legal_reg",
       "legal_membership_label", "legal_membership",
       "legal_tax_label",        "legal_tax",
@@ -142,76 +148,52 @@ const SECTION_LAYOUT: Record<string, SectionLayout> = {
     ] },
   ],
   contact: [
-    { label: "Section Copy",      keys: ["contact_subtitle", "contact_headline", "contact_subtext"] },
-    { label: "Trust Signals",     keys: ["contact_trust_1", "contact_trust_2"] },
-    { label: "Form Fields",       keys: ["contact_name_label", "contact_name_placeholder", "contact_email_label", "contact_email_placeholder", "contact_phone_label", "contact_phone_placeholder", "contact_service_label", "contact_message_label", "contact_message_placeholder"] },
-    { label: "Submit & Success",  keys: ["contact_cta", "contact_success_title", "contact_success_msg", "contact_success_btn"] },
+    { label: "Section Copy",       keys: ["contact_subtitle", "contact_headline", "contact_subtext"] },
+    { label: "Trust Signals",      keys: ["contact_trust_1", "contact_trust_2"] },
+    { label: "Form — Labels & Placeholders", keys: [
+      "contact_name_label", "contact_name_placeholder",
+      "contact_email_label", "contact_email_placeholder",
+      "contact_phone_label", "contact_phone_placeholder",
+      "contact_service_label",
+      "contact_message_label", "contact_message_placeholder",
+    ] },
+    { label: "Submit & Success",   keys: ["contact_cta", "contact_success_title", "contact_success_msg", "contact_success_btn"] },
+    { label: "Pop-up Modal",       keys: ["contact_modal_title"] },
   ],
   footer: [
     { label: "Tagline & Copyright", keys: ["footer_tagline", "footer_copyright"] },
-    { label: "Social Links",        keys: ["footer_instagram", "footer_linkedin", "footer_facebook", "footer_tiktok"] },
-  ],
-  careers: [
-    { label: "Hero",       keys: ["careers_hero_overline", "careers_hero_headline", "careers_hero_body"] },
-    { label: "Perks",      keys: ["careers_perks_headline", "careers_perk_1", "careers_perk_2", "careers_perk_3", "careers_perk_4"] },
-    { label: "Open Roles", keys: ["careers_open_roles_headline", "careers_no_roles_text"] },
-  ],
-  tech: [
-    { label: "Section Copy", keys: ["tech_subtitle", "tech_headline", "tech_description"] },
-    { label: "Category 1",   keys: ["tech_category_1", "tech_tools_1"] },
-    { label: "Category 2",   keys: ["tech_category_2", "tech_tools_2"] },
-    { label: "Category 3",   keys: ["tech_category_3", "tech_tools_3"] },
-    { label: "Category 4",   keys: ["tech_category_4", "tech_tools_4"] },
   ],
   studios: [
-    { label: "Hero",     keys: ["studios_page_hero_overline", "studios_page_hero_headline", "studios_page_hero_body", "studios_page_cta"] },
-    { label: "Studio 1", keys: ["studios_page_studio_1_title", "studios_page_studio_1_overline", "studios_page_studio_1_body", "studios_page_studio_1_tag_1", "studios_page_studio_1_tag_2", "studios_page_studio_1_tag_3", "studios_page_studio_1_tag_4"] },
-    { label: "Studio 2", keys: ["studios_page_studio_2_title", "studios_page_studio_2_overline", "studios_page_studio_2_body", "studios_page_studio_2_tag_1", "studios_page_studio_2_tag_2", "studios_page_studio_2_tag_3", "studios_page_studio_2_tag_4"] },
-    { label: "Studio 3", keys: ["studios_page_studio_3_title", "studios_page_studio_3_overline", "studios_page_studio_3_body", "studios_page_studio_3_tag_1", "studios_page_studio_3_tag_2", "studios_page_studio_3_tag_3", "studios_page_studio_3_tag_4"] },
-    { label: "Studio 4", keys: ["studios_page_studio_4_title", "studios_page_studio_4_overline", "studios_page_studio_4_body", "studios_page_studio_4_tag_1", "studios_page_studio_4_tag_2", "studios_page_studio_4_tag_3", "studios_page_studio_4_tag_4"] },
-    { label: "Studio 5", keys: ["studios_page_studio_5_title", "studios_page_studio_5_overline", "studios_page_studio_5_body", "studios_page_studio_5_tag_1", "studios_page_studio_5_tag_2", "studios_page_studio_5_tag_3", "studios_page_studio_5_tag_4"] },
-    { label: "Studio 6", keys: ["studios_page_studio_6_title", "studios_page_studio_6_overline", "studios_page_studio_6_body", "studios_page_studio_6_tag_1", "studios_page_studio_6_tag_2", "studios_page_studio_6_tag_3", "studios_page_studio_6_tag_4"] },
+    { label: "Page Header",        keys: ["studios_page_eyebrow", "studios_page_headline", "studios_page_subheadline", "studios_page_desc"] },
+    { label: "Studios Grid",       keys: ["services_subtitle", "services_headline"] },
+    { label: "CTA & Back Link",    keys: ["studios_cta_title", "studios_cta_desc", "studios_cta_btn", "studios_back_link"] },
+  ],
+  careers: [
+    { label: "Hero",               keys: ["careers_hero_badge", "careers_hero_headline_1", "careers_hero_headline_2", "careers_hero_body", "careers_hero_pill_1", "careers_hero_pill_2"] },
+    { label: "Why DiC",            keys: ["careers_why_badge", "careers_why_headline", "careers_why_headline_accent"] },
+    { label: "Preferred Qualifications", keys: ["careers_pref_title", "careers_pref_1", "careers_pref_2"] },
+    { label: "Open Roles",         keys: ["careers_jobs_badge", "careers_jobs_headline", "careers_jobs_subtext"] },
+    { label: "How to Apply",       keys: ["careers_apply_badge", "careers_apply_headline", "careers_apply_body", "careers_apply_email", "careers_apply_subject"] },
   ],
   odoo: [
-    { label: "Page Header & Hero",   keys: ["odoo_page_header", "odoo_hero_overline", "odoo_hero_headline", "odoo_hero_body_1", "odoo_hero_body_2", "odoo_logo_url"] },
-    { label: "Service Tags",         keys: ["odoo_service_1", "odoo_service_2", "odoo_service_3", "odoo_service_4", "odoo_service_5", "odoo_service_6"] },
-    { label: "Suite 1 — Sales & CRM",         keys: ["odoo_suite_1_title", "odoo_suite_1_body"] },
-    { label: "Suite 2 — Marketing Automation",keys: ["odoo_suite_2_title", "odoo_suite_2_body"] },
-    { label: "Suite 3 — eCommerce",           keys: ["odoo_suite_3_title", "odoo_suite_3_body"] },
-    { label: "Suite 4 — Inventory & Logistics",keys: ["odoo_suite_4_title", "odoo_suite_4_body"] },
-    { label: "Suite 5 — Accounting & Finance",keys: ["odoo_suite_5_title", "odoo_suite_5_body"] },
-    { label: "Suite 6 — HR & Payroll",        keys: ["odoo_suite_6_title", "odoo_suite_6_body"] },
-    { label: "Suite 7 — Project Management",  keys: ["odoo_suite_7_title", "odoo_suite_7_body"] },
-    { label: "Suite 8 — Manufacturing",       keys: ["odoo_suite_8_title", "odoo_suite_8_body"] },
-    { label: "Suite 9 — Point of Sale",       keys: ["odoo_suite_9_title", "odoo_suite_9_body"] },
-    { label: "CTA",                  keys: ["odoo_cta_headline", "odoo_cta_body", "odoo_cta_btn"] },
+    { label: "Partnerships Hero",  keys: ["partnerships_badge", "partnerships_headline", "partnerships_subtext"] },
+    { label: "Page Header",        keys: ["odoo_page_badge", "odoo_page_headline", "odoo_page_subtext", "odoo_partner_name", "odoo_logo_url"] },
+    { label: "Hero",               keys: ["odoo_badge_label", "odoo_hero_badge", "odoo_hero_h1", "odoo_hero_h1_accent", "odoo_hero_h1_end", "odoo_hero_body_1", "odoo_hero_body_2"] },
+    { label: "Suites Section",     keys: ["odoo_suites_badge", "odoo_suites_h2", "odoo_suites_h2_accent"] },
+    { label: "CTA",                keys: ["odoo_cta_badge", "odoo_cta_h2", "odoo_cta_body", "odoo_cta_btn"] },
   ],
   yanolja: [
-    { label: "Page Header & Hero", keys: ["yanolja_page_header", "yanolja_hero_overline", "yanolja_hero_headline", "yanolja_hero_body", "yanolja_partner_name", "yanolja_logo_url"] },
-    { label: "Service Tags",       keys: ["yanolja_service_1", "yanolja_service_2", "yanolja_service_3", "yanolja_service_4", "yanolja_service_5", "yanolja_service_6"] },
-    { label: "Product 1",          keys: ["yanolja_product_1_title", "yanolja_product_1_body"] },
-    { label: "Product 2",          keys: ["yanolja_product_2_title", "yanolja_product_2_body"] },
-    { label: "Product 3",          keys: ["yanolja_product_3_title", "yanolja_product_3_body"] },
-    { label: "Product 4",          keys: ["yanolja_product_4_title", "yanolja_product_4_body"] },
-    { label: "Product 5",          keys: ["yanolja_product_5_title", "yanolja_product_5_body"] },
-    { label: "Product 6",          keys: ["yanolja_product_6_title", "yanolja_product_6_body"] },
-    { label: "Product 7",          keys: ["yanolja_product_7_title", "yanolja_product_7_body"] },
-    { label: "Product 8",          keys: ["yanolja_product_8_title", "yanolja_product_8_body"] },
-    { label: "CTA",                keys: ["yanolja_cta_headline", "yanolja_cta_body", "yanolja_cta_btn"] },
+    { label: "Page Header",        keys: ["yan_page_badge", "yan_page_headline", "yan_page_subtext", "yan_partner_name", "yan_logo_url"] },
+    { label: "Hero",               keys: ["yan_badge_label", "yan_hero_badge", "yan_hero_h2", "yan_hero_h2_accent", "yan_hero_body"] },
+    { label: "Suites Section",     keys: ["yan_suites_badge", "yan_suites_h2", "yan_suites_h2_accent"] },
+    { label: "CTA",                keys: ["yan_cta_badge", "yan_cta_h2", "yan_cta_body", "yan_cta_btn"] },
   ],
   zoho: [
-    { label: "Page Header & Hero", keys: ["zoho_page_header", "zoho_hero_overline", "zoho_hero_headline", "zoho_hero_body", "zoho_logo_url"] },
-    { label: "Service Tags",       keys: ["zoho_service_1", "zoho_service_2", "zoho_service_3", "zoho_service_4", "zoho_service_5", "zoho_service_6"] },
-    { label: "Suite 1 — Zoho CRM",        keys: ["zoho_suite_1_title", "zoho_suite_1_body"] },
-    { label: "Suite 2 — Zoho Campaigns",  keys: ["zoho_suite_2_title", "zoho_suite_2_body"] },
-    { label: "Suite 3 — Zoho Analytics",  keys: ["zoho_suite_3_title", "zoho_suite_3_body"] },
-    { label: "Suite 4 — Zoho Desk",       keys: ["zoho_suite_4_title", "zoho_suite_4_body"] },
-    { label: "Suite 5 — Zoho Projects",   keys: ["zoho_suite_5_title", "zoho_suite_5_body"] },
-    { label: "Suite 6 — Zoho One",        keys: ["zoho_suite_6_title", "zoho_suite_6_body"] },
-    { label: "CTA",                keys: ["zoho_cta_headline", "zoho_cta_body", "zoho_cta_btn"] },
-  ],
-  testimonials: [
-    { label: "Section Copy", keys: ["testimonials_subtitle", "testimonials_headline", "testimonials_subtext"] },
+    { label: "Page Header",        keys: ["zoho_page_badge", "zoho_page_headline", "zoho_page_subtext", "zoho_partner_name", "zoho_logo_url"] },
+    { label: "Hero",               keys: ["zoho_badge_label", "zoho_hero_badge", "zoho_hero_h1", "zoho_hero_h1_accent", "zoho_hero_h1_end", "zoho_hero_body_1", "zoho_hero_body_2"] },
+    { label: "Value Body",         keys: ["zoho_value_body"] },
+    { label: "Suites Section",     keys: ["zoho_suites_badge", "zoho_suites_h2", "zoho_suites_h2_accent"] },
+    { label: "CTA",                keys: ["zoho_cta_badge", "zoho_cta_h2", "zoho_cta_body", "zoho_cta_btn"] },
   ],
 };
 
@@ -1030,6 +1012,8 @@ const SEO_PAGES = [
   { label: "Odoo Partner", keys: ["seo_odoo_title", "seo_odoo_description"] },
   { label: "Yanolja Partner", keys: ["seo_yanolja_title", "seo_yanolja_description"] },
   { label: "Zoho Partner", keys: ["seo_zoho_title", "seo_zoho_description"] },
+  { label: "FAQ", keys: ["seo_faq_title", "seo_faq_description"] },
+  { label: "Privacy Policy", keys: ["seo_privacy_title", "seo_privacy_description"] },
 ];
 
 function SEOPanel({
@@ -1045,7 +1029,7 @@ function SEOPanel({
   const isEdited = (key: string) => key in edited;
   const hasEdits = Object.keys(edited).length > 0;
 
-  const globalKeys = ["seo_global_og_image", "seo_twitter_handle", "seo_ga4_id", "seo_gsc_verification"];
+  const globalKeys = ["seo_global_og_image", "seo_ga4_id", "seo_gsc_verification"];
   const allSeoFields = contentRegistry.filter((f) => f.section === "seo");
   const fieldMap = Object.fromEntries(allSeoFields.map((f) => [f.key, f]));
 

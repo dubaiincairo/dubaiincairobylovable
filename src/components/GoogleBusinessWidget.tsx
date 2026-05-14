@@ -38,7 +38,7 @@ const GoogleBusinessWidget = () => {
   const rating      = get("google_rating",       g("google_rating")       || "5.0");
   const address     = get("google_address",      g("google_address")      || "100 Al-Mirghany St, Heliopolis, Cairo");
   const mapsLink    = get("google_maps_link",    g("google_maps_link")    || "https://maps.google.com");
-  const rawEmbed    = get("google_maps_embed", "") || get("google_map_embed_url", g("google_map_embed_url"));
+  const rawEmbed    = get("google_maps_embed", "");
   const mapsEmbed   = resolveMapEmbed(rawEmbed, address);
   const cta         = get("google_cta",          g("google_cta")          || "View on Google Maps");
 
