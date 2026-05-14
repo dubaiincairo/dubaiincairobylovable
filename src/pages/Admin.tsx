@@ -358,6 +358,23 @@ const Admin = () => {
                 Checkbox = show in marquee · green ✓ = logo uploaded · ✕ = clear logo. Hit Save when done.
               </p>
             </div>
+
+            {/* Tip — recommended file specs */}
+            <div className="mb-4 flex items-start gap-2 rounded-lg border border-amber-500/20 bg-amber-500/5 px-3.5 py-3">
+              <Info className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
+              <div className="text-[11px] text-amber-400/90 leading-relaxed space-y-1">
+                <p className="font-semibold text-amber-300">Logo file recommendations</p>
+                <ul className="list-disc pl-4 space-y-0.5">
+                  <li><strong>Format:</strong> SVG (best) or transparent-background PNG. Also accepted: WebP, JPEG, ICO.</li>
+                  <li><strong>Dimensions:</strong> ~400×120 px for horizontal wordmarks, ~400×400 px for square / icon logos. Use 2× for crisp retina (e.g. 800×240).</li>
+                  <li><strong>Background:</strong> must be transparent — solid backgrounds will render as white blocks.</li>
+                  <li><strong>Max size:</strong> 2 MB per file.</li>
+                  <li><strong>Color:</strong> the site converts every logo to a white monochrome silhouette, so any source colour works.</li>
+                  <li><strong>No logo?</strong> Leave the file empty — the brand name will be shown as a styled text wordmark instead.</li>
+                </ul>
+              </div>
+            </div>
+
             <div className="rounded-xl border border-border bg-card overflow-hidden mb-4">
               <div className="px-5 py-2.5 bg-muted/30 border-b border-border">
                 <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Section Text</span>
