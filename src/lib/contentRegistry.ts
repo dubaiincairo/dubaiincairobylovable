@@ -137,8 +137,6 @@ export const contentRegistry: ContentField[] = [
   { section: "values", key: "value_2_desc",  label: "Value 2 — Desc",  defaultValue: "We tell clients what they need to hear, not what they want to hear. Trust is built on honesty, not flattery." },
   { section: "values", key: "value_3_title", label: "Value 3 — Title", defaultValue: "Ownership Mentality" },
   { section: "values", key: "value_3_desc",  label: "Value 3 — Desc",  defaultValue: "We treat every brand like it's our own. Your wins are our wins. Your problems are our problems." },
-  { section: "values", key: "value_4_title", label: "Value 4 — Title", defaultValue: "Speed Without Sloppiness" },
-  { section: "values", key: "value_4_desc",  label: "Value 4 — Desc",  defaultValue: "We move fast because we're organized, not reckless. Preparation is the shortcut most agencies skip." },
 
   // ── Services / Studios grid cards ──
   { section: "services", key: "services_subtitle",    label: "Section Subtitle",    defaultValue: "What We Do" },

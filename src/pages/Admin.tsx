@@ -5,12 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
 import {
-  Loader2, Save, LogOut, ArrowLeft, ChevronDown, Search, X,
+  Loader2, Save, LogOut, ArrowLeft, ChevronDown, ChevronRight, Search, X,
   Type, AlignLeft, MousePointer, Hash, LayoutList,
   Plus, Trash2, Pencil, Star, Eye, EyeOff, BookOpen, Briefcase, Landmark,
   Upload, ImageIcon, GripVertical, Mail, Menu, LayoutDashboard, MessageSquare,
   Globe, Check, Info,
+  Home, BarChart3, FileText, Zap, Sparkles, LayoutGrid, User, MapPin, ScrollText,
+  Palette, Wrench, Boxes, Building2, Workflow, Compass, Link2, Handshake, type LucideIcon,
 } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
 import { cn } from "@/lib/utils";
 import {
@@ -28,12 +31,18 @@ import { JobApplicationsPanel } from "@/components/admin/JobApplicationsPanel";
 
 // ─── Icons & labels ──────────────────────────────────────────────────────────
 
-const sectionIcons: Record<string, string> = {
-  seo: "🔍",
-  nav: "🧭", hero: "🏠", stats: "📊", about: "ℹ️", edges: "⚡",
-  values: "💎", services: "🎯", founder: "👤", clients: "🤝",
-  tech: "🛠️", google: "📍", legal: "📜", contact: "✉️", footer: "🔗",
-  careers: "💼", odoo: "🔶", yanolja: "🏨", zoho: "🟣",
+const SECTION_ICONS: Record<string, LucideIcon> = {
+  seo: Search,
+  nav: Compass, hero: Home, stats: BarChart3, about: Info, edges: Zap,
+  values: Sparkles, services: LayoutGrid, founder: User, clients: Handshake,
+  tech: Wrench, google: MapPin, legal: ScrollText, contact: Mail, footer: Link2,
+  careers: Briefcase, odoo: Boxes, yanolja: Building2, zoho: Workflow,
+  studios: Palette,
+};
+
+const SectionIcon = ({ section, className }: { section: string; className?: string }) => {
+  const Icon = SECTION_ICONS[section] ?? FileText;
+  return <Icon className={className} />;
 };
 
 const sectionDescriptions: Record<string, string> = {
@@ -103,7 +112,6 @@ const SECTION_LAYOUT: Record<string, SectionLayout> = {
     { label: "Value 1",      keys: ["value_1_title", "value_1_desc"] },
     { label: "Value 2",      keys: ["value_2_title", "value_2_desc"] },
     { label: "Value 3",      keys: ["value_3_title", "value_3_desc"] },
-    { label: "Value 4",      keys: ["value_4_title", "value_4_desc"] },
   ],
   services: [
     { label: "Section Copy", keys: ["services_subtitle", "services_headline", "services_description"] },
@@ -577,7 +585,7 @@ const Admin = () => {
                   return (
                     <div key={section} className="rounded-xl border border-border bg-card overflow-hidden">
                       <div className="flex items-center gap-3 px-5 py-3 bg-muted/30">
-                        <span className="text-lg leading-none">{sectionIcons[section] || "📄"}</span>
+                        <SectionIcon section={section} className="w-4 h-4 text-primary shrink-0" />
                         <span className="text-sm font-display font-bold text-foreground">{sectionLabels[section] || section}</span>
                         <button onClick={() => { setSearch(""); selectSection(section); }}
                           className="ml-auto text-[10px] text-primary hover:underline">Open section →</button>
@@ -638,7 +646,7 @@ const Admin = () => {
                         className="text-left rounded-xl border border-border bg-card hover:bg-muted/30 hover:border-primary/30 transition-all p-4 group"
                       >
                         <div className="flex items-start justify-between gap-2 mb-2">
-                          <span className="text-2xl leading-none">{sectionIcons[section] || "📄"}</span>
+                          <SectionIcon section={section} className="w-6 h-6 text-primary" />
                           {editCount > 0 && (
                             <span className="shrink-0 w-5 h-5 flex items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold">
                               {editCount}
@@ -695,7 +703,7 @@ const Admin = () => {
                 </button>
                 <span className="text-muted-foreground/40">/</span>
                 <span className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
-                  <span className="text-lg leading-none">{sectionIcons[activeSection] || "📄"}</span>
+                  <SectionIcon section={activeSection} className="w-4 h-4 text-primary shrink-0" />
                   {sectionLabels[activeSection] || activeSection}
                 </span>
                 {editCount > 0 && (
@@ -765,51 +773,51 @@ type AdminTab = "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "ban
 // Grouped nav structure mirroring the website
 type SidebarGroup = {
   label: string;
-  icon: string;
-  items: { section: string; label: string; emoji: string }[];
+  icon: LucideIcon;
+  items: { section: string; label: string; icon: LucideIcon }[];
 };
 
 const SIDEBAR_GROUPS: SidebarGroup[] = [
   {
     label: "Home Page",
-    icon: "🏠",
+    icon: Home,
     items: [
-      { section: "hero",         label: "Hero",              emoji: "🏠" },
-      { section: "stats",        label: "Statistics",        emoji: "📊" },
-      { section: "about",        label: "About",             emoji: "ℹ️" },
-      { section: "edges",        label: "Why We're Different",emoji: "⚡" },
-      { section: "values",       label: "Our Values",        emoji: "💎" },
-      { section: "services",     label: "Studios Grid",      emoji: "🎯" },
-      { section: "founder",      label: "Founder",           emoji: "👤" },
-      { section: "google",       label: "Google Maps",       emoji: "📍" },
-      { section: "legal",        label: "Legal Info",        emoji: "📜" },
-      { section: "contact",      label: "Contact Form",      emoji: "✉️" },
+      { section: "hero",     label: "Hero",                icon: Home },
+      { section: "stats",    label: "Statistics",          icon: BarChart3 },
+      { section: "about",    label: "About",               icon: Info },
+      { section: "edges",    label: "Why We're Different", icon: Zap },
+      { section: "values",   label: "Our Values",          icon: Sparkles },
+      { section: "services", label: "Studios Grid",        icon: LayoutGrid },
+      { section: "founder",  label: "Founder",             icon: User },
+      { section: "google",   label: "Google Maps",         icon: MapPin },
+      { section: "legal",    label: "Legal Info",          icon: ScrollText },
+      { section: "contact",  label: "Contact Form",        icon: Mail },
     ],
   },
   {
     label: "Pages",
-    icon: "📄",
+    icon: FileText,
     items: [
-      { section: "studios",      label: "Studios Page",      emoji: "🎨" },
-      { section: "careers",      label: "Careers Page",      emoji: "💼" },
-      { section: "tech",         label: "Tech Stack Page",   emoji: "🛠️" },
+      { section: "studios",  label: "Studios Page",        icon: Palette },
+      { section: "careers",  label: "Careers Page",        icon: Briefcase },
+      { section: "tech",     label: "Tech Stack Page",     icon: Wrench },
     ],
   },
   {
     label: "Partnerships",
-    icon: "🤝",
+    icon: Handshake,
     items: [
-      { section: "odoo",         label: "Odoo ERP",          emoji: "🔶" },
-      { section: "yanolja",      label: "Yanolja Cloud",     emoji: "🏨" },
-      { section: "zoho",         label: "Zoho",              emoji: "🟣" },
+      { section: "odoo",     label: "Odoo ERP",            icon: Boxes },
+      { section: "yanolja",  label: "Yanolja Cloud",       icon: Building2 },
+      { section: "zoho",     label: "Zoho",                icon: Workflow },
     ],
   },
   {
     label: "Global",
-    icon: "🌐",
+    icon: Globe,
     items: [
-      { section: "nav",          label: "Navigation",        emoji: "🧭" },
-      { section: "footer",       label: "Footer",            emoji: "🔗" },
+      { section: "nav",      label: "Navigation",          icon: Compass },
+      { section: "footer",   label: "Footer",              icon: Link2 },
     ],
   },
 ];
@@ -842,14 +850,12 @@ function SidebarContent({
   handleSave: () => void;
   handleLogout: () => void;
 }) {
-  const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({});
-
-  const toggleGroup = (label: string) =>
-    setCollapsedGroups((prev) => ({ ...prev, [label]: !prev[label] }));
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
 
   const goToSection = (section: string) => {
     setAdminTab("content");
     selectSection(section);
+    setOpenGroup(null);
   };
 
   const isContentSection = adminTab === "content" && activeSection !== null;
@@ -884,40 +890,66 @@ function SidebarContent({
 
         <div className="my-1.5 border-t border-border/50" />
 
-        {/* Content groups */}
+        {/* Content groups — each opens as a side popover */}
+        <div className="px-3 py-1">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Content</span>
+        </div>
         {SIDEBAR_GROUPS.map((group) => {
-          const collapsed = collapsedGroups[group.label] ?? false;
+          const GroupIcon = group.icon;
+          const hasActive = adminTab === "content" && group.items.some((i) => i.section === activeSection);
+          const isOpen = openGroup === group.label;
           return (
-            <div key={group.label}>
-              <button
-                onClick={() => toggleGroup(group.label)}
-                className="w-full flex items-center gap-2 px-3 py-1.5 text-left rounded-md hover:bg-muted/30 transition-colors"
+            <Popover
+              key={group.label}
+              open={isOpen}
+              onOpenChange={(o) => setOpenGroup(o ? group.label : null)}
+            >
+              <PopoverTrigger asChild>
+                <button
+                  className={cn(
+                    "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+                    hasActive
+                      ? "bg-primary/10 text-primary font-semibold"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  )}
+                >
+                  <GroupIcon className="w-4 h-4 shrink-0" />
+                  <span className="flex-1 truncate">{group.label}</span>
+                  <ChevronRight className="w-3.5 h-3.5 opacity-50 shrink-0" />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent
+                side="right"
+                align="start"
+                sideOffset={8}
+                className="w-60 p-1"
               >
-                <span className="text-sm leading-none">{group.icon}</span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex-1">{group.label}</span>
-                <ChevronDown className={cn("w-3 h-3 text-muted-foreground/60 transition-transform", !collapsed && "rotate-180")} />
-              </button>
-              {!collapsed && (
-                <div className="ml-2 mt-0.5 space-y-0.5">
+                <div className="px-2 py-1.5 mb-0.5">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{group.label}</span>
+                </div>
+                <div className="space-y-0.5">
                   {group.items.map((item) => {
+                    const ItemIcon = item.icon;
                     const isActive = adminTab === "content" && activeSection === item.section;
                     return (
                       <button
                         key={item.section}
                         onClick={() => goToSection(item.section)}
                         className={cn(
-                          "w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors text-left",
-                          isActive ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                          "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-colors text-left",
+                          isActive
+                            ? "bg-primary/10 text-primary font-semibold"
+                            : "text-foreground hover:bg-muted/60"
                         )}
                       >
-                        <span className="text-xs leading-none w-4 text-center">{item.emoji}</span>
+                        <ItemIcon className="w-4 h-4 shrink-0 opacity-70" />
                         <span className="truncate">{item.label}</span>
                       </button>
                     );
                   })}
                 </div>
-              )}
-            </div>
+              </PopoverContent>
+            </Popover>
           );
         })}
 
