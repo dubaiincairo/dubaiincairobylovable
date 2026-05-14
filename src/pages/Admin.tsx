@@ -97,7 +97,7 @@ function groupSectionFields(fields: ContentField[]): SectionGroups {
   const headerFields: ContentField[] = [];
   const numbered: Record<string, ContentField[]> = {};
   for (const field of fields) {
-    const m = field.key.match(/_(\d+)_/);
+    const m = field.key.match(/_(\ d+)_/);
     if (m) {
       const n = m[1];
       if (!numbered[n]) numbered[n] = [];
@@ -471,6 +471,7 @@ const Admin = () => {
           const numberedEntries = Object.entries(numbered).sort(([a], [b]) => Number(a) - Number(b));
           const subLabel = subItemLabels[activeSection] || "Item";
           const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
+          const isClientsSection = activeSection === "clients";
 
           return (
             <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto">
@@ -516,8 +517,21 @@ const Admin = () => {
                   </div>
                 )}
 
+                {/* Custom logo panel for the Clients section */}
+                {isClientsSection && (
+                  <div className="border-t border-border p-4">
+                    <div className="mb-3">
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-1">Logo Slots</p>
+                      <p className="text-[11px] text-muted-foreground">
+                        Checkbox = visible in marquee · ✓ = logo uploaded · ✕ = clear logo
+                      </p>
+                    </div>
+                    <ClientsLogoPanel edited={edited} dbValues={dbValues} onChange={handleChange} />
+                  </div>
+                )}
+
                 {/* Numbered sub-groups (Studio 1, Edge 2, …) */}
-                {numberedEntries.map(([num, groupFields]) => {
+                {!isClientsSection && numberedEntries.map(([num, groupFields]) => {
                   const subKey = `${activeSection}:${num}`;
                   const isSubOpen = openSubGroups[subKey] ?? false;
                   const subEditCount = groupFields.filter((f) => editedKeys.has(f.key)).length;
@@ -992,6 +1006,153 @@ function ImageUploadField({ value, onChange, fieldKey }: { value: string; onChan
   );
 }
 
+// ─── ClientsLogoPanel ────────────────────────────────────────────────────────
+
+const MAX_LOGO_SLOTS = 24;
+
+function ClientsLogoPanel({
+  edited, dbValues, onChange,
+}: {
+  edited: Record<string, string>;
+  dbValues: Record<string, string>;
+  onChange: (key: string, val: string) => void;
+}) {
+  const { toast } = useToast();
+  const [uploadingSlot, setUploadingSlot] = useState<number | null>(null);
+  const fileInputRefs = useRef<Record<number, HTMLInputElement | null>>({});
+
+  const val = (key: string, fallback = "") =>
+    edited[key] !== undefined ? edited[key] : (dbValues[key] ?? fallback);
+
+  const handleFile = async (slot: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const allowed = ["image/svg+xml", "image/png", "image/x-icon", "image/jpeg", "image/webp"];
+    if (!allowed.includes(file.type)) {
+      toast({ title: "Unsupported file type", description: "Please upload an SVG, PNG, ICO, or WebP file.", variant: "destructive" });
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      toast({ title: "File too large", description: "Max size is 2 MB.", variant: "destructive" });
+      return;
+    }
+    setUploadingSlot(slot);
+    const ext = file.name.split(".").pop() ?? "png";
+    const folder = `client-logo-${slot}`;
+    const path = `${folder}/${Date.now()}.${ext}`;
+    const { error } = await supabase.storage.from("assets").upload(path, file, { upsert: true });
+    if (error) {
+      toast({ title: "Upload failed", description: error.message, variant: "destructive" });
+      setUploadingSlot(null);
+      return;
+    }
+    const { data: urlData } = supabase.storage.from("assets").getPublicUrl(path);
+    onChange(`client_logo_${slot}_url`, urlData.publicUrl);
+    toast({ title: "Logo uploaded!", description: "Save to apply the change to the site." });
+    setUploadingSlot(null);
+    e.target.value = "";
+  };
+
+  return (
+    <div className="space-y-1">
+      {Array.from({ length: MAX_LOGO_SLOTS }, (_, i) => i + 1).map((slot) => {
+        const enabledKey = `client_logo_${slot}_enabled`;
+        const nameKey    = `client_logo_${slot}_name`;
+        const urlKey     = `client_logo_${slot}_url`;
+        const enabled    = val(enabledKey, "true") !== "false";
+        const name       = val(nameKey, "");
+        const url        = val(urlKey, "");
+        const hasUrl     = url.trim().length > 0;
+        const isUploading = uploadingSlot === slot;
+
+        return (
+          <div
+            key={slot}
+            className={cn(
+              "flex items-center gap-3 px-4 py-3 rounded-lg border transition-colors",
+              enabled ? "border-border bg-card" : "border-border/40 bg-muted/20 opacity-60"
+            )}
+          >
+            {/* Slot number */}
+            <span className="w-6 h-6 rounded-md bg-primary/10 text-primary text-xs font-bold flex items-center justify-center shrink-0">
+              {slot}
+            </span>
+
+            {/* Enable/disable checkbox */}
+            <button
+              type="button"
+              onClick={() => onChange(enabledKey, enabled ? "false" : "true")}
+              className={cn(
+                "w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-colors",
+                enabled ? "border-primary bg-primary" : "border-muted-foreground/40 bg-transparent"
+              )}
+              title={enabled ? "Visible in marquee — click to hide" : "Hidden — click to show"}
+            >
+              {enabled && <Check className="w-3 h-3 text-primary-foreground" />}
+            </button>
+
+            {/* Brand name */}
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => onChange(nameKey, e.target.value)}
+              placeholder={`Brand ${slot}`}
+              className="flex-1 min-w-0 rounded-md border border-input bg-background px-2.5 py-1.5 text-xs text-foreground placeholder:text-muted-foreground/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            />
+
+            {/* Upload button */}
+            <button
+              type="button"
+              onClick={() => fileInputRefs.current[slot]?.click()}
+              disabled={isUploading}
+              className="shrink-0 inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md bg-primary/10 hover:bg-primary/20 text-primary text-xs font-semibold transition-colors disabled:opacity-50"
+            >
+              {isUploading ? <Loader2 className="w-3 h-3 animate-spin" /> : <Upload className="w-3 h-3" />}
+              {isUploading ? "…" : "Upload"}
+            </button>
+            <input
+              ref={(el) => { fileInputRefs.current[slot] = el; }}
+              type="file"
+              accept="image/svg+xml,image/png,image/x-icon,image/jpeg,image/webp"
+              className="hidden"
+              onChange={(e) => handleFile(slot, e)}
+            />
+
+            {/* URL text input (compact) */}
+            <input
+              type="text"
+              value={url}
+              onChange={(e) => onChange(urlKey, e.target.value)}
+              placeholder="or paste URL"
+              className="w-40 rounded-md border border-input bg-background px-2.5 py-1.5 text-[11px] font-mono text-muted-foreground placeholder:text-muted-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            />
+
+            {/* Uploaded indicator */}
+            {hasUrl ? (
+              <span className="w-5 h-5 rounded-full bg-emerald-500/15 flex items-center justify-center shrink-0" title="Logo uploaded">
+                <Check className="w-3 h-3 text-emerald-500" />
+              </span>
+            ) : (
+              <span className="w-5 h-5 shrink-0" />
+            )}
+
+            {/* Clear URL button */}
+            <button
+              type="button"
+              onClick={() => onChange(urlKey, "")}
+              disabled={!hasUrl}
+              className="w-6 h-6 rounded-md flex items-center justify-center shrink-0 text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors disabled:opacity-20 disabled:cursor-not-allowed"
+              title="Remove logo URL"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 // ─── AutoResizeTextarea ───────────────────────────────────────────────────────
 
 function AutoResizeTextarea({ value, onChange }: { value: string; onChange: (v: string) => void }) {
@@ -1341,8 +1502,8 @@ function JobsPanel({ logActivity }: { logActivity: (action: string, entityType: 
 
   useEffect(() => { load(); }, []);
 
-  const openNew  = () => { setEditing({ ...EMPTY_JOB }); setIsNew(true); };
-  const openEdit = (job: Job) => { setEditing({ ...job }); setIsNew(false); };
+  const openNew   = () => { setEditing({ ...EMPTY_JOB }); setIsNew(true); };
+  const openEdit  = (job: Job) => { setEditing({ ...job }); setIsNew(false); };
   const closeForm = () => { setEditing(null); setIsNew(false); };
 
   const handleSave = async () => {
@@ -1376,8 +1537,8 @@ function JobsPanel({ logActivity }: { logActivity: (action: string, entityType: 
   const togglePublished = async (id: string, val: boolean) => {
     await supabase.from("job_listings").update({ published: val }).eq("id", id);
     setList((prev) => prev.map((j) => j.id === id ? { ...j, published: val } : j));
-    const j = list.find((j) => j.id === id);
-    logActivity(val ? "published" : "unpublished", "job", j?.title ?? "Job");
+    const job = list.find((j) => j.id === id);
+    logActivity(val ? "published" : "unpublished", "job", job?.title ?? "Job");
   };
 
   const handleDelete = async (id: string, title: string) => {
@@ -1435,27 +1596,18 @@ function JobsPanel({ logActivity }: { logActivity: (action: string, entityType: 
         {/* Role Content */}
         <div className="rounded-xl border border-border bg-card p-5 space-y-4">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Role Content</p>
-          <Field
-            label="Role Overview"
-            value={editing.role_overview || ""}
-            onChange={(v) => set("role_overview", v)}
-            long
-            placeholder="Brief 1–2 sentence description of the role and its purpose."
-          />
-          <Field
-            label="Key Responsibilities (one per line)"
-            value={editing.responsibilities || ""}
-            onChange={(v) => set("responsibilities", v)}
-            long
-            placeholder={"Develop high-end visual concepts\nUse AI tools to accelerate production\nCollaborate with marketing teams"}
-          />
-          <Field
-            label="Requirements (one per line)"
-            value={editing.requirements || ""}
-            onChange={(v) => set("requirements", v)}
-            long
-            placeholder={"5+ years of professional experience\nStrong portfolio showcasing your work\nProficiency in relevant tools"}
-          />
+          <div>
+            <label className="block text-xs font-semibold text-foreground mb-1.5">Role Overview</label>
+            <RichTextEditor value={editing.role_overview || ""} onChange={(v) => set("role_overview", v)} placeholder="Brief overview of the role..." />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-foreground mb-1.5">Responsibilities</label>
+            <RichTextEditor value={editing.responsibilities || ""} onChange={(v) => set("responsibilities", v)} placeholder="Key responsibilities..." />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-foreground mb-1.5">Requirements</label>
+            <RichTextEditor value={editing.requirements || ""} onChange={(v) => set("requirements", v)} placeholder="Skills and qualifications required..." />
+          </div>
         </div>
 
         {/* Settings */}
@@ -1468,7 +1620,7 @@ function JobsPanel({ logActivity }: { logActivity: (action: string, entityType: 
               onChange={(e) => set("published", e.target.checked)}
               className="w-4 h-4 accent-primary"
             />
-            <span className="text-sm">Published (visible on /careers page)</span>
+            <span className="text-sm">Published (visible on careers page)</span>
           </label>
           <Field
             label="Sort Order (lower number = appears first)"
@@ -1621,7 +1773,7 @@ function BanksPanel({ logActivity }: { logActivity: (action: string, entityType:
     const { active, over } = event;
     if (!over || active.id === over.id) return;
     const oldIdx = list.findIndex((b) => b.id === active.id);
-    const newIdx = list.findIndex((b) => b.id === over.id);
+    const newIdx = list.findIndex((b) => b.id === over.id);  
     const reordered = arrayMove(list, oldIdx, newIdx);
     setList(reordered);
     await Promise.all(reordered.map((b, i) =>
