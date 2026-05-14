@@ -123,16 +123,23 @@ const SECTION_LAYOUT: Record<string, SectionLayout> = {
     { label: "Studio 6",     keys: ["studio_6_title", "studio_6_desc"] },
   ],
   founder: [
-    { label: "Identity",   keys: ["founder_subtitle", "founder_name", "founder_title", "founder_image_url", "founder_linkedin_url"] },
-    { label: "Bio & CTA",  keys: ["founder_bio_1", "founder_bio_2", "founder_cta"] },
+    { label: "Header & Body",    keys: ["founder_subtitle", "founder_headline", "founder_body"] },
+    { label: "Portrait & Quote", keys: ["founder_name", "founder_photo_url", "founder_quote", "founder_attribution"] },
+    { label: "Calendly CTA",     keys: ["founder_calendly_url", "founder_cta_label"] },
+    { label: "Social Links",     keys: ["founder_facebook", "founder_linkedin", "founder_instagram"] },
   ],
   google: [
     { label: "Business Info", keys: ["google_biz_name", "google_biz_category", "google_rating", "google_address", "google_cta"] },
     { label: "Map Links",     keys: ["google_maps_link", "google_maps_embed"] },
   ],
   legal: [
-    { label: "Section Copy",         keys: ["legal_subtitle", "legal_headline", "legal_description"] },
-    { label: "Registration Details", keys: ["legal_entity_name", "legal_reg_number", "legal_tax_id", "legal_jurisdiction"] },
+    { label: "Header", keys: ["legal_subtitle", "legal_company_name"] },
+    { label: "Fields", keys: [
+      "legal_reg_label",        "legal_reg",
+      "legal_membership_label", "legal_membership",
+      "legal_tax_label",        "legal_tax",
+      "legal_sector_label",     "legal_sector",
+    ] },
   ],
   contact: [
     { label: "Section Copy",      keys: ["contact_subtitle", "contact_headline", "contact_subtext"] },

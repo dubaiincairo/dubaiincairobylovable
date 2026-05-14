@@ -204,14 +204,18 @@ export const contentRegistry: ContentField[] = [
   { section: "studios", key: "studios_page_studio_6_tag_4", label: "Studio 6 — Tag 4", defaultValue: "Automation" },
 
   // ── Founder ──
-  { section: "founder", key: "founder_subtitle",        label: "Section Subtitle",  defaultValue: "The Founder" },
-  { section: "founder", key: "founder_name",            label: "Founder Name",       defaultValue: "Ahmed Sherif" },
-  { section: "founder", key: "founder_title",           label: "Founder Title",      defaultValue: "Founder & Managing Director" },
-  { section: "founder", key: "founder_bio_1",           label: "Bio — Paragraph 1", defaultValue: "Ahmed built Dubai in Cairo from a conviction that Cairo-based talent could serve the Gulf's most demanding brands — and outperform the competition." },
-  { section: "founder", key: "founder_bio_2",           label: "Bio — Paragraph 2", defaultValue: "Over 8 years, he's led strategy and creative for clients across pharma, F&B, hospitality, government, and tech sectors." },
-  { section: "founder", key: "founder_cta",             label: "CTA Button",         defaultValue: "Connect on LinkedIn" },
-  { section: "founder", key: "founder_linkedin_url",    label: "LinkedIn URL",       defaultValue: "" },
-  { section: "founder", key: "founder_image_url",       label: "Founder Photo",      defaultValue: "", type: "upload" },
+  { section: "founder", key: "founder_subtitle",      label: "Eyebrow Text",                          defaultValue: "A Message from Our Founder" },
+  { section: "founder", key: "founder_headline",      label: "Section Headline",                      defaultValue: "Built by Someone Who's Been in the Trenches." },
+  { section: "founder", key: "founder_body",          label: "Body Copy (rich text)",                 defaultValue: "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow." },
+  { section: "founder", key: "founder_name",          label: "Founder Name (used for portrait alt)",  defaultValue: "Abdalla Hassan Elfouly" },
+  { section: "founder", key: "founder_photo_url",     label: "Founder Photo",                          defaultValue: "", type: "upload" },
+  { section: "founder", key: "founder_quote",         label: "Quote Text",                             defaultValue: "I believe that continuous learning is the key to success in business. That's why I've completed 50+ specialized training courses in eBusiness, and I will never stop growing, nor will we." },
+  { section: "founder", key: "founder_attribution",   label: "Quote Attribution",                      defaultValue: "— Abdalla Hassan Elfouly, CEO & Co-Founder" },
+  { section: "founder", key: "founder_calendly_url",  label: "Calendly Booking URL (shows the \"Reserve a Consultation\" CTA when set)", defaultValue: "" },
+  { section: "founder", key: "founder_cta_label",     label: "CTA Button Label",                       defaultValue: "Reserve a Consultation" },
+  { section: "founder", key: "founder_facebook",      label: "Facebook URL",                           defaultValue: "" },
+  { section: "founder", key: "founder_linkedin",      label: "LinkedIn URL",                           defaultValue: "" },
+  { section: "founder", key: "founder_instagram",     label: "Instagram URL",                          defaultValue: "" },
 
   // ── Clients ──
   { section: "clients", key: "clients_subtitle", label: "Section Subtitle", defaultValue: "Success Partners" },
@@ -321,14 +325,17 @@ export const contentRegistry: ContentField[] = [
   { section: "google", key: "google_maps_embed",    label: "Google Maps Embed (optional — paste the full <iframe> snippet, or the src URL from Google Maps → Share → Embed a map. If left blank, the map renders from the Address above.)", defaultValue: "" },
   { section: "google", key: "google_cta",           label: "CTA Button Label",                                  defaultValue: "View on Google Maps" },
 
-  // ── Legal ──
-  { section: "legal", key: "legal_subtitle",     label: "Section Subtitle",    defaultValue: "Licensed & Registered" },
-  { section: "legal", key: "legal_headline",     label: "Section Headline",    defaultValue: "Fully Compliant, Fully Accountable" },
-  { section: "legal", key: "legal_description",  label: "Section Description", defaultValue: "Dubai in Cairo operates as a fully registered Egyptian company. Below are our official registration details for any formal or procurement purposes." },
-  { section: "legal", key: "legal_entity_name",  label: "Legal Entity Name",   defaultValue: "" },
-  { section: "legal", key: "legal_reg_number",   label: "Registration Number", defaultValue: "" },
-  { section: "legal", key: "legal_tax_id",        label: "Tax ID",              defaultValue: "" },
-  { section: "legal", key: "legal_jurisdiction",  label: "Jurisdiction",        defaultValue: "Arab Republic of Egypt" },
+  // ── Legal strip (rendered as part of the Google Business widget — sits below the map row on /) ──
+  { section: "legal", key: "legal_subtitle",         label: "Eyebrow Text",        defaultValue: "Registered, Licensed & Ready to Operate" },
+  { section: "legal", key: "legal_company_name",     label: "Company Legal Name",  defaultValue: "Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC" },
+  { section: "legal", key: "legal_reg_label",        label: "Field 1 — Label",     defaultValue: "Commercial Registration" },
+  { section: "legal", key: "legal_reg",              label: "Field 1 — Value",     defaultValue: "163772" },
+  { section: "legal", key: "legal_membership_label", label: "Field 2 — Label",     defaultValue: "Chamber of IT & Telecom." },
+  { section: "legal", key: "legal_membership",       label: "Field 2 — Value",     defaultValue: "4568" },
+  { section: "legal", key: "legal_tax_label",        label: "Field 3 — Label",     defaultValue: "Tax Registration" },
+  { section: "legal", key: "legal_tax",              label: "Field 3 — Value",     defaultValue: "625-626-168" },
+  { section: "legal", key: "legal_sector_label",     label: "Field 4 — Label",     defaultValue: "Licensed Sector" },
+  { section: "legal", key: "legal_sector",           label: "Field 4 — Value",     defaultValue: "eBusiness Solutions" },
 
   // ── Contact ──
   { section: "contact", key: "contact_subtitle",        label: "Section Subtitle",        defaultValue: "Get Started" },

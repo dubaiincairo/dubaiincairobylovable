@@ -146,29 +146,43 @@ const GoogleBusinessWidget = () => {
           </a>
         </motion.div>
 
-        {/* Legal strip */}
+        {/* Legal strip — same width and corner-radius vocabulary as the row above */}
         <motion.div
-          className="border border-border/50 rounded-2xl px-6 py-5"
-          style={{ background: 'hsl(220 18% 6% / 0.6)' }}
+          className="border border-border rounded-2xl bg-card p-6"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
         >
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4">
-            <div className="flex items-center gap-1.5 shrink-0">
-              <Shield className="w-3.5 h-3.5 text-primary" />
-              <span className="text-[10px] font-medium tracking-[0.18em] uppercase text-primary">{legalSubtitle}</span>
+          {/* Header — Shield badge + eyebrow + company name */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+            <div className="flex items-center gap-2 shrink-0">
+              <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Shield aria-hidden="true" className="w-3.5 h-3.5 text-primary" />
+              </div>
+              <span className="text-[11px] font-medium tracking-[0.2em] uppercase text-primary">
+                {legalSubtitle}
+              </span>
             </div>
-            <div className="hidden sm:block w-px h-4 bg-border" />
-            <span className="text-sm font-display font-semibold text-foreground">{companyName}</span>
+            <div className="hidden sm:block w-px h-5 bg-border" />
+            <span className="text-sm font-display font-semibold text-foreground">
+              {companyName}
+            </span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          {/* Divider */}
+          <div className="h-px bg-border/60 my-5" />
+
+          {/* Symmetric 4-column data grid — 2x2 on mobile, 1x4 on md+ */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4">
             {legalItems.map((item, i) => (
-              <div key={i} className="flex items-center gap-1.5">
-                <span className="text-xs text-muted-foreground">{item.label}:</span>
-                <span className="text-xs font-semibold text-foreground">{item.value}</span>
+              <div key={i} className="flex flex-col">
+                <span className="text-[10px] font-medium tracking-widest uppercase text-muted-foreground mb-1">
+                  {item.label}
+                </span>
+                <span className="text-sm font-display font-semibold text-foreground">
+                  {item.value}
+                </span>
               </div>
             ))}
           </div>
