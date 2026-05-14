@@ -11,10 +11,34 @@ import { z } from "zod";
 import { fadeUp, scaleIn, viewportOnce } from "@/lib/animations";
 import AnimatedUnderline from "@/components/ui/animated-underline";
 
+const COUNTRY_CODES = [
+  { code: "+20",  flag: "🇦🇫", label: "Egypt" },
+  { code: "+971", flag: "🇦🇪", label: "UAE" },
+  { code: "+966", flag: "🇸🇦", label: "Saudi Arabia" },
+  { code: "+965", flag: "🇰🇼", label: "Kuwait" },
+  { code: "+974", flag: "🇶🇦", label: "Qatar" },
+  { code: "+973", flag: "🇧🇭", label: "Bahrain" },
+  { code: "+968", flag: "🇴🇲", label: "Oman" },
+  { code: "+962", flag: "🇯🇴", label: "Jordan" },
+  { code: "+961", flag: "🇱🇧", label: "Lebanon" },
+  { code: "+249", flag: "🇸🇩", label: "Sudan" },
+  { code: "+218", flag: "🇱🇾", label: "Libya" },
+  { code: "+212", flag: "🇲🇦", label: "Morocco" },
+  { code: "+216", flag: "🇹🇳", label: "Tunisia" },
+  { code: "+213", flag: "🇩🇿", label: "Algeria" },
+  { code: "+1",   flag: "🇺🇸", label: "USA/Canada" },
+  { code: "+44",  flag: "🇬🇧", label: "UK" },
+  { code: "+49",  flag: "🇩🇪", label: "Germany" },
+  { code: "+33",  flag: "🇫🇷", label: "France" },
+  { code: "+90",  flag: "🇹🇷", label: "Turkey" },
+  { code: "+91",  flag: "🇮🇳", label: "India" },
+  { code: "+86",  flag: "🇨🇳", label: "China" },
+];
+
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().trim().email("Invalid email address").max(255),
-  phone: z.string().trim().max(20).optional(),
+  phone: z.string().trim().min(5, "Phone number is required").max(20),
   message: z.string().trim().min(1, "Message is required").max(2000),
 });
 
@@ -33,6 +57,7 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedService, setSelectedService] = useState("");
+  const [countryCode, setCountryCode] = useState("+20");
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -52,21 +77,22 @@ const ContactSection = () => {
       return;
     }
     setIsSubmitting(true);
+    const fullPhone = `${countryCode} ${result.data.phone}`;
     const fullMessage = selectedService
       ? `Service interest: ${selectedService}\n\n${result.data.message}`
       : result.data.message;
     const { error } = await supabase.from("contact_submissions").insert({
-      name: result.data.name, email: result.data.email, phone: result.data.phone || null, message: fullMessage,
+      name: result.data.name, email: result.data.email, phone: fullPhone, message: fullMessage,
     });
     setIsSubmitting(false);
     if (error) { toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" }); return; }
-    // Fire email notification (non-blocking — don't fail the form if this errors)
     supabase.functions.invoke("send-notification", {
-      body: { type: "contact", data: { name: result.data.name, email: result.data.email, phone: result.data.phone || "", message: fullMessage } },
+      body: { type: "contact", data: { name: result.data.name, email: result.data.email, phone: fullPhone, message: fullMessage } },
     }).catch(() => {});
     setIsSubmitted(true);
     setForm({ name: "", email: "", phone: "", message: "" });
     setSelectedService("");
+    setCountryCode("+20");
   };
 
   return (
@@ -75,7 +101,6 @@ const ContactSection = () => {
 
       <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
 
-        {/* LEFT — copy */}
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("contact_subtitle", "Get Started")}
@@ -104,7 +129,6 @@ const ContactSection = () => {
           </div>
         </motion.div>
 
-        {/* RIGHT — form */}
         <div>
           {isSubmitted ? (
             <motion.div variants={scaleIn} initial="hidden" animate="visible" className="flex flex-col items-center gap-4 py-16 text-center">
@@ -142,11 +166,31 @@ const ContactSection = () => {
               </div>
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1.5">
-                  {get("contact_phone_label", "Phone (optional)")}
+                  {get("contact_phone_label", "Phone *")}
                 </label>
-                <Input id="phone" name="phone" value={form.phone} onChange={handleChange} placeholder={get("contact_phone_placeholder", "+1 234 567 890")} className="bg-card border-border" />
+                <div className="flex gap-2">
+                  <select
+                    value={countryCode}
+                    onChange={(e) => setCountryCode(e.target.value)}
+                    className="shrink-0 rounded-md border border-input bg-card px-2 py-1 text-xs text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                  >
+                    {COUNTRY_CODES.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.flag} {c.code} {c.label}
+                      </option>
+                    ))}
+                  </select>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder={get("contact_phone_placeholder", "10 0000 0000")}
+                    className="bg-card border-border flex-1"
+                  />
+                </div>
+                {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
               </div>
-              {/* Service chips */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
                   {get("contact_service_label", "Service of interest")}
