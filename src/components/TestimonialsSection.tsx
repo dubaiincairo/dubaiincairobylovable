@@ -30,7 +30,7 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
     <motion.div
       className="relative flex flex-col glass-card rounded-2xl overflow-hidden"
       style={{ borderColor: "hsl(38 80% 55% / 0.15)", background: "hsl(38 80% 55% / 0.02)" }}
-      variants={cardFadeUp}
+      variants={fadeUp}
     >
       {/* Gold top accent */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
