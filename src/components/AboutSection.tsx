@@ -42,11 +42,7 @@ const AboutSection = () => {
           <AnimatedUnderline align="left" className="mb-5" />
           <RichText
             html={get("about_body", "Founded in 2021, Dubai in Cairo is a Cairo-based digital marketing and eBusiness solutions agency.")}
-            className="text-muted-foreground text-base md:text-lg leading-relaxed mb-5"
-          />
-          <RichText
-            html={get("about_body_2", "We are 100% digital by design — no overhead, no guesswork. Just a focused team turning data into strategy.")}
-            className="text-foreground font-medium text-base md:text-lg leading-relaxed"
+            className="text-muted-foreground text-base md:text-lg leading-relaxed"
           />
         </motion.div>
 
