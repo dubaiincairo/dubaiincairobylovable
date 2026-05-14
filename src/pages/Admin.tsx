@@ -97,7 +97,7 @@ function groupSectionFields(fields: ContentField[]): SectionGroups {
   const headerFields: ContentField[] = [];
   const numbered: Record<string, ContentField[]> = {};
   for (const field of fields) {
-    const m = field.key.match(/_([\d]+)_/);
+    const m = field.key.match(/_(\ d+)_/);
     if (m) {
       const n = m[1];
       if (!numbered[n]) numbered[n] = [];
@@ -1689,7 +1689,7 @@ function BanksPanel({ logActivity }: { logActivity: (action: string, entityType:
   };
 
   const togglePublished = async (id: string, val: boolean) => {
-    await supabase.from("bank_accounts").update({ published: val }).eq("id", id);  
+    await supabase.from("bank_accounts").update({ published: val }).eq("id", id);
     setList((prev) => prev.map((b) => b.id === id ? { ...b, published: val } : b));
     const b = list.find((b) => b.id === id);
     logActivity(val ? "published" : "unpublished", "bank", b?.title ?? "Bank");
@@ -2094,3 +2094,5 @@ function Field({ label, value, onChange, placeholder, long }: {
     </div>
   );
 }
+
+export default Admin;
