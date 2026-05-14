@@ -15,7 +15,6 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
 
 const COUNTRY_CODES = [
@@ -178,17 +177,24 @@ const ContactSection = () => {
                 <div className="flex gap-2">
                   <Select value={countryCode} onValueChange={setCountryCode}>
                     <SelectTrigger
-                      className="w-[96px] shrink-0 bg-card border-border font-mono text-sm tracking-tight justify-center gap-1.5"
-                      aria-label="Country code"
+                      className="w-[92px] shrink-0 bg-card border-border hover:border-primary/40 transition-colors"
+                      aria-label={`Country code, currently ${countryCode}`}
                     >
-                      <SelectValue />
+                      <span className="font-mono text-sm tabular-nums text-foreground">{countryCode}</span>
                     </SelectTrigger>
-                    <SelectContent className="max-h-72 min-w-[220px]">
+                    <SelectContent
+                      align="start"
+                      className="max-h-72 w-[260px] sm:w-[280px]"
+                    >
                       {COUNTRY_CODES.map((c) => (
-                        <SelectItem key={c.code} value={c.code} className="py-2">
-                          <span className="flex items-center justify-between gap-6 w-full">
-                            <span className="text-sm text-foreground">{c.label}</span>
-                            <span className="font-mono text-xs text-muted-foreground tabular-nums">{c.code}</span>
+                        <SelectItem
+                          key={c.code}
+                          value={c.code}
+                          className="py-2 pr-3 cursor-pointer focus:bg-primary/10"
+                        >
+                          <span className="flex items-center justify-between gap-4 w-full">
+                            <span className="text-sm text-foreground truncate">{c.label}</span>
+                            <span className="font-mono text-xs text-muted-foreground tabular-nums shrink-0">{c.code}</span>
                           </span>
                         </SelectItem>
                       ))}
