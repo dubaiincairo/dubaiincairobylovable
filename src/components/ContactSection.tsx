@@ -103,24 +103,24 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="relative py-8 md:py-14 px-6 overflow-hidden">
+    <section id="contact" className="relative py-8 md:py-12 px-6 overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.04), transparent 70%)' }} />
 
-      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-14 items-start">
 
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("contact_subtitle", "Get Started")}
           </span>
-          <h2 className="text-3xl md:text-5xl font-display font-bold leading-tight whitespace-pre-line">
+          <h2 className="text-3xl md:text-4xl font-display font-bold leading-tight whitespace-pre-line">
             {get("contact_headline", "Ready to Grow?\nLet's Build.")}
           </h2>
           <AnimatedUnderline align="left" className="mb-5" />
-          <p className="text-muted-foreground text-lg leading-relaxed mb-10 whitespace-pre-line">
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6 whitespace-pre-line">
             {get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services with measurable impact, flexible execution, and competitive pricing.")}
           </p>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="flex items-center gap-3 text-sm text-muted-foreground">
               <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                 <Clock className="w-4 h-4 text-primary" />
@@ -153,9 +153,9 @@ const ContactSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewportOnce}
               transition={{ duration: 0.7, delay: 0.15, type: "spring", stiffness: 80, damping: 20 }}
-              className="space-y-5"
+              className="space-y-4"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">
                     {get("contact_name_label", "Name *")}
@@ -222,10 +222,10 @@ const ContactSection = () => {
                 {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
               </div>
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label className="block text-sm font-medium text-foreground mb-1.5">
                   {get("contact_service_label", "Service of interest")}
                 </label>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {SERVICES.map((s) => (
                     <button
                       key={s}
@@ -247,13 +247,13 @@ const ContactSection = () => {
                 <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">
                   {get("contact_message_label", "Message *")}
                 </label>
-                <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")} rows={5} className="bg-card border-border" />
+                <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")} rows={4} className="bg-card border-border" />
                 {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
               </div>
-              <Button type="submit" disabled={isSubmitting} className="shimmer-btn w-full sm:w-auto px-10 py-5 text-lg font-display font-semibold glow-gold">
-                {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Mail className="w-5 h-5" />}
+              <Button type="submit" disabled={isSubmitting} className="shimmer-btn w-full sm:w-auto px-8 py-3 text-base font-display font-semibold glow-gold">
+                {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />}
                 {isSubmitting ? "Sending..." : get("contact_cta", "Start a Project")}
-                {!isSubmitting && <ArrowRight className="w-5 h-5" />}
+                {!isSubmitting && <ArrowRight className="w-4 h-4" />}
               </Button>
             </motion.form>
           )}
