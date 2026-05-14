@@ -66,6 +66,140 @@ const subItemLabels: Record<string, string> = {
   tech: "Category",
 };
 
+// ─── Per-section explicit layouts (mirror the live page structure) ───────────
+
+type SectionLayout = { label: string; keys: string[] }[];
+
+const SECTION_LAYOUT: Record<string, SectionLayout> = {
+  nav: [
+    { label: "Identity",         keys: ["nav_brand", "nav_logo_url"] },
+    { label: "Navigation Links", keys: ["nav_link_1", "nav_link_2", "nav_link_3", "nav_link_4", "nav_cta"] },
+  ],
+  hero: [
+    { label: "Section Copy", keys: ["hero_overline", "hero_headline", "hero_subheadline", "hero_body", "hero_cta_primary", "hero_cta_secondary"] },
+    { label: "Chips",        keys: ["hero_chip_1", "hero_chip_2", "hero_chip_3"] },
+  ],
+  stats: [
+    { label: "Stat 1 — Years",      keys: ["stat_years",      "stat_years_label"] },
+    { label: "Stat 2 — Clients",    keys: ["stat_clients",    "stat_clients_label"] },
+    { label: "Stat 3 — Industries", keys: ["stat_industries", "stat_industries_label"] },
+    { label: "Stat 4 — Countries",  keys: ["stat_countries",  "stat_countries_label"] },
+  ],
+  about: [
+    { label: "Section Copy", keys: ["about_subtitle", "about_headline", "about_description", "about_cta"] },
+    { label: "Metric 1",     keys: ["about_metric_1_value", "about_metric_1_label"] },
+    { label: "Metric 2",     keys: ["about_metric_2_value", "about_metric_2_label"] },
+    { label: "Metric 3",     keys: ["about_metric_3_value", "about_metric_3_label"] },
+  ],
+  edges: [
+    { label: "Section Copy", keys: ["edges_subtitle", "edges_headline", "edges_description"] },
+    { label: "Edge 1",       keys: ["edge_1_title", "edge_1_desc"] },
+    { label: "Edge 2",       keys: ["edge_2_title", "edge_2_desc"] },
+    { label: "Edge 3",       keys: ["edge_3_title", "edge_3_desc"] },
+    { label: "Edge 4",       keys: ["edge_4_title", "edge_4_desc"] },
+  ],
+  values: [
+    { label: "Section Copy", keys: ["values_subtitle", "values_headline", "values_description"] },
+    { label: "Value 1",      keys: ["value_1_title", "value_1_desc"] },
+    { label: "Value 2",      keys: ["value_2_title", "value_2_desc"] },
+    { label: "Value 3",      keys: ["value_3_title", "value_3_desc"] },
+    { label: "Value 4",      keys: ["value_4_title", "value_4_desc"] },
+  ],
+  services: [
+    { label: "Section Copy", keys: ["services_subtitle", "services_headline", "services_description"] },
+    { label: "Studio 1",     keys: ["studio_1_title", "studio_1_desc"] },
+    { label: "Studio 2",     keys: ["studio_2_title", "studio_2_desc"] },
+    { label: "Studio 3",     keys: ["studio_3_title", "studio_3_desc"] },
+    { label: "Studio 4",     keys: ["studio_4_title", "studio_4_desc"] },
+    { label: "Studio 5",     keys: ["studio_5_title", "studio_5_desc"] },
+    { label: "Studio 6",     keys: ["studio_6_title", "studio_6_desc"] },
+  ],
+  founder: [
+    { label: "Identity",   keys: ["founder_subtitle", "founder_name", "founder_title", "founder_image_url", "founder_linkedin_url"] },
+    { label: "Bio & CTA",  keys: ["founder_bio_1", "founder_bio_2", "founder_cta"] },
+  ],
+  google: [
+    { label: "Business Info", keys: ["google_biz_name", "google_biz_category", "google_rating", "google_address", "google_cta"] },
+    { label: "Map Links",     keys: ["google_maps_link", "google_maps_embed"] },
+  ],
+  legal: [
+    { label: "Section Copy",         keys: ["legal_subtitle", "legal_headline", "legal_description"] },
+    { label: "Registration Details", keys: ["legal_entity_name", "legal_reg_number", "legal_tax_id", "legal_jurisdiction"] },
+  ],
+  contact: [
+    { label: "Section Copy",      keys: ["contact_subtitle", "contact_headline", "contact_subtext"] },
+    { label: "Trust Signals",     keys: ["contact_trust_1", "contact_trust_2"] },
+    { label: "Form Fields",       keys: ["contact_name_label", "contact_name_placeholder", "contact_email_label", "contact_email_placeholder", "contact_phone_label", "contact_phone_placeholder", "contact_service_label", "contact_message_label", "contact_message_placeholder"] },
+    { label: "Submit & Success",  keys: ["contact_cta", "contact_success_title", "contact_success_msg", "contact_success_btn"] },
+  ],
+  footer: [
+    { label: "Tagline & Copyright", keys: ["footer_tagline", "footer_copyright"] },
+    { label: "Social Links",        keys: ["footer_instagram", "footer_linkedin", "footer_facebook", "footer_tiktok"] },
+  ],
+  careers: [
+    { label: "Hero",       keys: ["careers_hero_overline", "careers_hero_headline", "careers_hero_body"] },
+    { label: "Perks",      keys: ["careers_perks_headline", "careers_perk_1", "careers_perk_2", "careers_perk_3", "careers_perk_4"] },
+    { label: "Open Roles", keys: ["careers_open_roles_headline", "careers_no_roles_text"] },
+  ],
+  tech: [
+    { label: "Section Copy", keys: ["tech_subtitle", "tech_headline", "tech_description"] },
+    { label: "Category 1",   keys: ["tech_category_1", "tech_tools_1"] },
+    { label: "Category 2",   keys: ["tech_category_2", "tech_tools_2"] },
+    { label: "Category 3",   keys: ["tech_category_3", "tech_tools_3"] },
+    { label: "Category 4",   keys: ["tech_category_4", "tech_tools_4"] },
+  ],
+  studios: [
+    { label: "Hero",     keys: ["studios_page_hero_overline", "studios_page_hero_headline", "studios_page_hero_body", "studios_page_cta"] },
+    { label: "Studio 1", keys: ["studios_page_studio_1_title", "studios_page_studio_1_overline", "studios_page_studio_1_body", "studios_page_studio_1_tag_1", "studios_page_studio_1_tag_2", "studios_page_studio_1_tag_3", "studios_page_studio_1_tag_4"] },
+    { label: "Studio 2", keys: ["studios_page_studio_2_title", "studios_page_studio_2_overline", "studios_page_studio_2_body", "studios_page_studio_2_tag_1", "studios_page_studio_2_tag_2", "studios_page_studio_2_tag_3", "studios_page_studio_2_tag_4"] },
+    { label: "Studio 3", keys: ["studios_page_studio_3_title", "studios_page_studio_3_overline", "studios_page_studio_3_body", "studios_page_studio_3_tag_1", "studios_page_studio_3_tag_2", "studios_page_studio_3_tag_3", "studios_page_studio_3_tag_4"] },
+    { label: "Studio 4", keys: ["studios_page_studio_4_title", "studios_page_studio_4_overline", "studios_page_studio_4_body", "studios_page_studio_4_tag_1", "studios_page_studio_4_tag_2", "studios_page_studio_4_tag_3", "studios_page_studio_4_tag_4"] },
+    { label: "Studio 5", keys: ["studios_page_studio_5_title", "studios_page_studio_5_overline", "studios_page_studio_5_body", "studios_page_studio_5_tag_1", "studios_page_studio_5_tag_2", "studios_page_studio_5_tag_3", "studios_page_studio_5_tag_4"] },
+    { label: "Studio 6", keys: ["studios_page_studio_6_title", "studios_page_studio_6_overline", "studios_page_studio_6_body", "studios_page_studio_6_tag_1", "studios_page_studio_6_tag_2", "studios_page_studio_6_tag_3", "studios_page_studio_6_tag_4"] },
+  ],
+  odoo: [
+    { label: "Page Header & Hero",   keys: ["odoo_page_header", "odoo_hero_overline", "odoo_hero_headline", "odoo_hero_body_1", "odoo_hero_body_2", "odoo_logo_url"] },
+    { label: "Service Tags",         keys: ["odoo_service_1", "odoo_service_2", "odoo_service_3", "odoo_service_4", "odoo_service_5", "odoo_service_6"] },
+    { label: "Suite 1 — Sales & CRM",         keys: ["odoo_suite_1_title", "odoo_suite_1_body"] },
+    { label: "Suite 2 — Marketing Automation",keys: ["odoo_suite_2_title", "odoo_suite_2_body"] },
+    { label: "Suite 3 — eCommerce",           keys: ["odoo_suite_3_title", "odoo_suite_3_body"] },
+    { label: "Suite 4 — Inventory & Logistics",keys: ["odoo_suite_4_title", "odoo_suite_4_body"] },
+    { label: "Suite 5 — Accounting & Finance",keys: ["odoo_suite_5_title", "odoo_suite_5_body"] },
+    { label: "Suite 6 — HR & Payroll",        keys: ["odoo_suite_6_title", "odoo_suite_6_body"] },
+    { label: "Suite 7 — Project Management",  keys: ["odoo_suite_7_title", "odoo_suite_7_body"] },
+    { label: "Suite 8 — Manufacturing",       keys: ["odoo_suite_8_title", "odoo_suite_8_body"] },
+    { label: "Suite 9 — Point of Sale",       keys: ["odoo_suite_9_title", "odoo_suite_9_body"] },
+    { label: "CTA",                  keys: ["odoo_cta_headline", "odoo_cta_body", "odoo_cta_btn"] },
+  ],
+  yanolja: [
+    { label: "Page Header & Hero", keys: ["yanolja_page_header", "yanolja_hero_overline", "yanolja_hero_headline", "yanolja_hero_body", "yanolja_partner_name", "yanolja_logo_url"] },
+    { label: "Service Tags",       keys: ["yanolja_service_1", "yanolja_service_2", "yanolja_service_3", "yanolja_service_4", "yanolja_service_5", "yanolja_service_6"] },
+    { label: "Product 1",          keys: ["yanolja_product_1_title", "yanolja_product_1_body"] },
+    { label: "Product 2",          keys: ["yanolja_product_2_title", "yanolja_product_2_body"] },
+    { label: "Product 3",          keys: ["yanolja_product_3_title", "yanolja_product_3_body"] },
+    { label: "Product 4",          keys: ["yanolja_product_4_title", "yanolja_product_4_body"] },
+    { label: "Product 5",          keys: ["yanolja_product_5_title", "yanolja_product_5_body"] },
+    { label: "Product 6",          keys: ["yanolja_product_6_title", "yanolja_product_6_body"] },
+    { label: "Product 7",          keys: ["yanolja_product_7_title", "yanolja_product_7_body"] },
+    { label: "Product 8",          keys: ["yanolja_product_8_title", "yanolja_product_8_body"] },
+    { label: "CTA",                keys: ["yanolja_cta_headline", "yanolja_cta_body", "yanolja_cta_btn"] },
+  ],
+  zoho: [
+    { label: "Page Header & Hero", keys: ["zoho_page_header", "zoho_hero_overline", "zoho_hero_headline", "zoho_hero_body", "zoho_logo_url"] },
+    { label: "Service Tags",       keys: ["zoho_service_1", "zoho_service_2", "zoho_service_3", "zoho_service_4", "zoho_service_5", "zoho_service_6"] },
+    { label: "Suite 1 — Zoho CRM",        keys: ["zoho_suite_1_title", "zoho_suite_1_body"] },
+    { label: "Suite 2 — Zoho Campaigns",  keys: ["zoho_suite_2_title", "zoho_suite_2_body"] },
+    { label: "Suite 3 — Zoho Analytics",  keys: ["zoho_suite_3_title", "zoho_suite_3_body"] },
+    { label: "Suite 4 — Zoho Desk",       keys: ["zoho_suite_4_title", "zoho_suite_4_body"] },
+    { label: "Suite 5 — Zoho Projects",   keys: ["zoho_suite_5_title", "zoho_suite_5_body"] },
+    { label: "Suite 6 — Zoho One",        keys: ["zoho_suite_6_title", "zoho_suite_6_body"] },
+    { label: "CTA",                keys: ["zoho_cta_headline", "zoho_cta_body", "zoho_cta_btn"] },
+  ],
+  testimonials: [
+    { label: "Section Copy", keys: ["testimonials_subtitle", "testimonials_headline", "testimonials_subtext"] },
+  ],
+};
+
 // ─── Field-type helpers ───────────────────────────────────────────────────────
 
 type FieldType = "heading" | "body" | "button" | "number" | "text";
@@ -529,10 +663,25 @@ const Admin = () => {
 
           // ── Single-section drill-in view ──────────────────────────────────
           const fields = grouped[activeSection] ?? [];
-          const { headerFields, numbered } = groupSectionFields(fields);
-          const numberedEntries = Object.entries(numbered).sort(([a], [b]) => Number(a) - Number(b));
-          const subLabel = subItemLabels[activeSection] || "Item";
           const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
+
+          // Use the explicit layout if defined; otherwise build a fallback layout
+          // from groupSectionFields so every section still renders as accordions.
+          let layout: SectionLayout = SECTION_LAYOUT[activeSection] ?? [];
+          if (layout.length === 0) {
+            const { headerFields, numbered } = groupSectionFields(fields);
+            const subLabel = subItemLabels[activeSection] || "Item";
+            const fallback: SectionLayout = [];
+            if (headerFields.length > 0) {
+              fallback.push({ label: "Section Copy", keys: headerFields.map((f) => f.key) });
+            }
+            Object.entries(numbered)
+              .sort(([a], [b]) => Number(a) - Number(b))
+              .forEach(([num, groupFields]) => {
+                fallback.push({ label: `${subLabel} ${num}`, keys: groupFields.map((f) => f.key) });
+              });
+            layout = fallback;
+          }
 
           return (
             <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto">
@@ -554,65 +703,38 @@ const Admin = () => {
                 )}
               </div>
 
-              <div className="rounded-xl border border-border bg-card overflow-hidden space-y-0">
-
-                {/* Section-level header fields */}
-                {headerFields.length > 0 && (
-                  <div className="divide-y divide-border">
-                    {numberedEntries.length > 0 && (
-                      <div className="px-5 py-2.5 bg-muted/30">
-                        <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                          Section Settings
-                        </span>
-                      </div>
-                    )}
-                    {headerFields.map((field) => (
-                      <FieldRow
-                        key={field.key}
-                        field={field}
-                        value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
-                        isEdited={editedKeys.has(field.key)}
-                        onChange={handleChange}
-                      />
-                    ))}
-                  </div>
-                )}
-
-                {/* Numbered sub-groups (Studio 1, Edge 2, …) */}
-                {numberedEntries.map(([num, groupFields]) => {
-                  const subKey = `${activeSection}:${num}`;
-                  const isSubOpen = openSubGroups[subKey] ?? false;
-                  const subEditCount = groupFields.filter((f) => editedKeys.has(f.key)).length;
-                  const titleField = groupFields.find((f) => f.key.includes("_title") || f.key.includes("_label"));
-                  const subTitle = titleField
-                    ? (edited[titleField.key] ?? dbValues[titleField.key] ?? titleField.defaultValue)
-                    : "";
+              <div className="space-y-2">
+                {layout.map((group) => {
+                  const groupKey = `${activeSection}:${group.label}`;
+                  const isOpen = openSubGroups[groupKey] ?? false;
+                  const groupFields = group.keys
+                    .map((k) => contentRegistry.find((f) => f.key === k))
+                    .filter((f): f is ContentField => Boolean(f));
+                  if (groupFields.length === 0) return null;
+                  const groupEditCount = groupFields.filter((f) => editedKeys.has(f.key)).length;
 
                   return (
-                    <div key={subKey} className="border-t border-border">
+                    <div key={groupKey} className="rounded-xl border border-border bg-card overflow-hidden">
                       <button
-                        onClick={() => toggleSubGroup(subKey)}
-                        className="w-full flex items-center gap-3 px-5 py-3 bg-muted/20 hover:bg-muted/40 transition-colors text-left"
+                        onClick={() => toggleSubGroup(groupKey)}
+                        className="w-full flex items-center gap-3 px-5 py-3 hover:bg-muted/30 transition-colors text-left"
                       >
-                        <span className="w-6 h-6 rounded-md bg-primary/10 text-primary text-xs font-bold flex items-center justify-center shrink-0">
-                          {num}
+                        <span className="flex-1 text-sm font-display font-semibold text-foreground truncate">
+                          {group.label}
                         </span>
-                        <div className="flex-1 min-w-0">
-                          <span className="text-xs font-semibold text-foreground">{subLabel} {num}</span>
-                          {subTitle && (
-                            <span className="text-muted-foreground text-xs ml-2 truncate">— {subTitle}</span>
-                          )}
-                        </div>
-                        {subEditCount > 0 && (
+                        <span className="text-[10px] text-muted-foreground shrink-0">
+                          {groupFields.length} field{groupFields.length !== 1 ? "s" : ""}
+                        </span>
+                        {groupEditCount > 0 && (
                           <span className="shrink-0 text-[9px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded">
-                            {subEditCount} edited
+                            {groupEditCount} edited
                           </span>
                         )}
-                        <ChevronDown className={cn("w-3.5 h-3.5 text-muted-foreground transition-transform shrink-0", isSubOpen && "rotate-180")} />
+                        <ChevronDown className={cn("w-3.5 h-3.5 text-muted-foreground transition-transform shrink-0", isOpen && "rotate-180")} />
                       </button>
 
-                      {isSubOpen && (
-                        <div className="divide-y divide-border">
+                      {isOpen && (
+                        <div className="border-t border-border divide-y divide-border">
                           {groupFields.map((field) => (
                             <FieldRow
                               key={field.key}
@@ -620,7 +742,6 @@ const Admin = () => {
                               value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
                               isEdited={editedKeys.has(field.key)}
                               onChange={handleChange}
-                              indent
                             />
                           ))}
                         </div>
