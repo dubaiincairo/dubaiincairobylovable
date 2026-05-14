@@ -186,7 +186,7 @@ const ContactSection = () => {
                     <SelectContent
                       align="start"
                       sideOffset={6}
-                      className="max-h-72 w-[260px] sm:w-[280px] p-1.5"
+                      className="max-h-72 w-[230px] p-1.5"
                     >
                       {COUNTRY_CODES.map((c) => (
                         <SelectPrimitive.Item
