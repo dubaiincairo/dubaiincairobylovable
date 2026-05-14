@@ -318,7 +318,7 @@ export const contentRegistry: ContentField[] = [
   { section: "google", key: "google_rating",        label: "Google Rating (e.g. 4.9)",                          defaultValue: "5.0" },
   { section: "google", key: "google_address",       label: "Address (shown in the card)",                       defaultValue: "100 Al-Mirghany St, Heliopolis, Cairo" },
   { section: "google", key: "google_maps_link",     label: "Google Maps Page URL (click target)",               defaultValue: "" },
-  { section: "google", key: "google_maps_embed",    label: "Google Maps Embed URL — from Google Maps → Share → Embed a map → copy src URL", defaultValue: "" },
+  { section: "google", key: "google_maps_embed",    label: "Google Maps Embed (optional — paste the full <iframe> snippet, or the src URL from Google Maps → Share → Embed a map. If left blank, the map renders from the Address above.)", defaultValue: "" },
   { section: "google", key: "google_cta",           label: "CTA Button Label",                                  defaultValue: "View on Google Maps" },
 
   // ── Legal ──

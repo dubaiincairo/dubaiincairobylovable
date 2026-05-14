@@ -6,6 +6,30 @@ import { contentRegistry } from "@/lib/contentRegistry";
 
 const g = (key: string) => contentRegistry.find((f) => f.key === key)?.defaultValue ?? "";
 
+// Resolve whatever the editor pasted into a working iframe src.
+// Accepts: raw embed URL, a full <iframe …> HTML snippet, or nothing — and
+// falls back to a keyless address query that Google guarantees will render.
+function resolveMapEmbed(raw: string, address: string): string {
+  const trimmed = (raw || "").trim();
+
+  // 1. Full <iframe> paste — pull the src attribute out.
+  const iframeSrc = trimmed.match(/src=["']([^"']+)["']/i)?.[1];
+  if (iframeSrc) return iframeSrc;
+
+  // 2. A real embed URL (these are the only google.com URLs that allow framing).
+  if (/^https?:\/\/(www\.)?google\.com\/maps\/embed/i.test(trimmed)) {
+    return trimmed;
+  }
+
+  // 3. Anything else (share links, place URLs, garbage) — build a guaranteed
+  //    embed from the address. This format works without an API key.
+  if (address) {
+    return `https://maps.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+  }
+
+  return "";
+}
+
 const GoogleBusinessWidget = () => {
   const { get } = useSiteContent();
 
@@ -14,8 +38,8 @@ const GoogleBusinessWidget = () => {
   const rating      = get("google_rating",       g("google_rating")       || "5.0");
   const address     = get("google_address",      g("google_address")      || "100 Al-Mirghany St, Heliopolis, Cairo");
   const mapsLink    = get("google_maps_link",    g("google_maps_link")    || "https://maps.google.com");
-  // try both key names — old DB key was google_maps_embed, registry key is google_map_embed_url
-  const mapsEmbed   = get("google_maps_embed", "") || get("google_map_embed_url", g("google_map_embed_url"));
+  const rawEmbed    = get("google_maps_embed", "") || get("google_map_embed_url", g("google_map_embed_url"));
+  const mapsEmbed   = resolveMapEmbed(rawEmbed, address);
   const cta         = get("google_cta",          g("google_cta")          || "View on Google Maps");
 
   const legalSubtitle   = get("legal_subtitle",        "Registered, Licensed & Ready to Operate");
