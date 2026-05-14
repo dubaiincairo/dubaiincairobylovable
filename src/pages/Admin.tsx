@@ -26,32 +26,34 @@ import { ContactSubmissionsPanel } from "@/components/admin/ContactSubmissionsPa
 import { TestimonialsPanel } from "@/components/admin/TestimonialsPanel";
 import { JobApplicationsPanel } from "@/components/admin/JobApplicationsPanel";
 
-// ─── Icons & labels ──────────────────────────────────────────────────────────
+// ─── Icons & labels ────────────────────────────────────────────
 
 const sectionIcons: Record<string, string> = {
   seo: "🔍",
   nav: "🧭", hero: "🏠", stats: "📊", about: "ℹ️", edges: "⚡",
   values: "💎", services: "🎯", founder: "👤", clients: "🤝",
   tech: "🛠️", google: "📍", legal: "📜", contact: "✉️", footer: "🔗",
-  careers: "💼", odoo: "🔶", yanolja: "🏨", zoho: "🟣",
+  careers: "🎓", odoo: "🟢", yanolja: "🏨", zoho: "🟦", testimonials: "⭐",
 };
 
 const sectionDescriptions: Record<string, string> = {
   nav: "Logo name, nav links, CTA button",
-  hero: "Headline, sub-headline, CTA buttons, right-side visual card",
-  stats: "Key numbers shown below the hero",
-  about: "Text copy + dashboard visual (header, metrics, badge)",
-  edges: "Why we're different — 6 cards",
-  values: "Our core values — 3 cards",
-  services: "Six specialised studios",
-  founder: "Founder quote & bio",
+  hero: "Overline, headline, body, chips, CTAs",
+  stats: "4 stats with labels",
+  about: "Subtitle, headline, body, CTA, 3 metrics",
+  edges: "Section header + 4 differentiator cards",
+  values: "Section header + 4 value cards",
+  services: "Section header + 6 studio cards (grid)",
+  studios: "Studios page hero + 6 studio deep-dives",
+  founder: "Name, title, bio, photo, LinkedIn",
   clients: "Client names marquee",
-  tech: "Tech stack categories & tools",
-  google: "Google Maps widget — name, address, rating, links",
-  legal: "Company registration details",
-  contact: "Contact form labels & copy",
-  footer: "Footer tagline & copyright",
-  careers: "Hero, Why Join cards, job section labels, how to apply copy",
+  testimonials: "Section header (cards in Testimonials tab)",
+  tech: "Section header + 4 tool categories",
+  google: "Google Maps embed + address",
+  legal: "Entity name, registration, tax ID",
+  contact: "Email, phone, address, section text",
+  footer: "Tagline, copyright, social links",
+  careers: "Hero, perks, open-roles fallback text",
   odoo: "Page header, hero copy, service tags, 9 suites, CTA — plus Odoo logo upload",
   yanolja: "Hero copy, partner name, logo upload, service tags, 8 products, CTA",
   zoho: "Page header, hero copy, capability tags, 6 suites, CTA — plus Zoho logo upload",
@@ -66,7 +68,7 @@ const subItemLabels: Record<string, string> = {
   tech: "Category",
 };
 
-// ─── Field-type helpers ───────────────────────────────────────────────────────
+// ─── Field-type helpers ────────────────────────────────────────────────
 
 type FieldType = "heading" | "body" | "button" | "number" | "text";
 
@@ -86,7 +88,7 @@ const fieldTypeConfig: Record<FieldType, { label: string; icon: typeof Type; col
   text:    { label: "Text",     icon: LayoutList,     color: "text-muted-foreground bg-muted"  },
 };
 
-// ─── Grouping within a section ───────────────────────────────────────────────
+// ─── Grouping within a section ─────────────────────────────────────────────
 
 interface SectionGroups {
   headerFields: ContentField[];
@@ -97,7 +99,7 @@ function groupSectionFields(fields: ContentField[]): SectionGroups {
   const headerFields: ContentField[] = [];
   const numbered: Record<string, ContentField[]> = {};
   for (const field of fields) {
-    const m = field.key.match(/_(\ d+)_/);
+    const m = field.key.match(/_([\d]+)_/);
     if (m) {
       const n = m[1];
       if (!numbered[n]) numbered[n] = [];
@@ -109,7 +111,7 @@ function groupSectionFields(fields: ContentField[]): SectionGroups {
   return { headerFields, numbered };
 }
 
-// ─── Component ───────────────────────────────────────────────────────────────
+// ─── Component ────────────────────────────────────────────────────────────────────
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -121,7 +123,7 @@ const Admin = () => {
   const [openSubGroups, setOpenSubGroups] = useState<Record<string, boolean>>({});
   const [search, setSearch]         = useState("");
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [adminTab, setAdminTab]     = useState<"dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications">("dashboard");
+  const [adminTab, setAdminTab]     = useState<AdminTab>("dashboard");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // ── Auth & data load ──
@@ -142,7 +144,7 @@ const Admin = () => {
       const { data } = await supabase.from("site_content").select("key, value");
       if (data) {
         const map: Record<string, string> = {};
-        data.forEach((row) => (map[row.key] = row.value));
+        data.forEach(({ key, value }) => { map[key] = value ?? ""; });
         setDbValues(map);
       }
       setLoading(false);
@@ -150,100 +152,57 @@ const Admin = () => {
     checkAuth();
   }, [navigate]);
 
-  // ── Activity logger ──
-  const logActivity = useCallback(async (
-    action: string,
-    entityType: string,
-    entityLabel: string,
-    fieldsChanged?: number,
-  ) => {
-    const { data: { user } } = await supabase.auth.getUser();
-    await supabase.from("admin_activity_log").insert({
-      user_email: user?.email ?? null,
-      action,
-      entity_type: entityType,
-      entity_label: entityLabel,
-      fields_changed: fieldsChanged ?? null,
-    });
-  }, []);
-
-  // ── Cmd+S / Ctrl+S shortcut ──
+  // ── Keyboard save ──
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "s") {
         e.preventDefault();
-        if (Object.keys(edited).length > 0 && !saving) handleSave();
+        if (Object.keys(edited).length > 0) handleSave();
       }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   });
 
-  const handleChange = (key: string, value: string) =>
-    setEdited((prev) => ({ ...prev, [key]: value }));
+  const handleChange = (key: string, val: string) => {
+    setEdited((prev) => ({ ...prev, [key]: val }));
+  };
 
   const handleSave = async () => {
+    if (Object.keys(edited).length === 0) return;
     setSaving(true);
-    const updates = Object.entries(edited);
-    let successCount = 0, errorCount = 0;
-
-    for (const [key, value] of updates) {
-      const field = contentRegistry.find((f) => f.key === key);
-      const section = field?.section ?? "unknown";
-      const label   = field?.label   ?? key;
-
-      // Upsert: insert on first save, update on subsequent saves.
-      // Avoids dependency on an updated_at column and race conditions.
-      const { error } = await supabase.from("site_content")
-        .upsert({ key, value, section, label }, { onConflict: "key" });
-      if (error) errorCount++; else successCount++;
-    }
-
-    setDbValues((prev) => {
-      const next = { ...prev };
-      updates.forEach(([k, v]) => (next[k] = v));
-      return next;
-    });
-    setSaving(false);
-    setEdited({});
-
-    if (successCount > 0) {
-      logActivity("updated", "content", "Site Content", successCount);
-    }
-
-    if (errorCount > 0) {
-      toast({ title: "Partially saved", description: `${successCount} updated, ${errorCount} failed.`, variant: "destructive" });
+    const upserts = Object.entries(edited).map(([key, value]) => ({ key, value }));
+    const { error } = await supabase.from("site_content").upsert(upserts, { onConflict: "key" });
+    if (error) {
+      toast({ title: "Save failed", description: error.message, variant: "destructive" });
     } else {
-      toast({ title: "Saved!", description: `${successCount} field${successCount !== 1 ? "s" : ""} updated. Changes are live.` });
+      setDbValues((prev) => ({ ...prev, ...edited }));
+      setEdited({});
+      toast({ title: "Saved!", description: "Changes are now live." });
+      logActivity("saved", "content", `${Object.keys(edited).length} field(s)`);
     }
+    setSaving(false);
   };
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate("/login");
+  // ── Activity log ──
+  const logActivity = async (action: string, entity: string, label: string) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+    await supabase.from("admin_activity_log").insert({
+      user_id: user.id, action, entity_type: entity, entity_label: label,
+    });
   };
 
-  const toggleSubGroup = (key: string) =>
-    setOpenSubGroups((prev) => ({ ...prev, [key]: !prev[key] }));
-
+  // ── Section navigation ──
   const selectSection = (section: string | null) => {
     setActiveSection(section);
-    setOpenSubGroups({});   // reset sub-group states on each section switch
-    // scroll main panel back to top
-    setTimeout(() => {
-      document.querySelector("main")?.scrollTo({ top: 0 });
-    }, 0);
+    setSearch("");
+  };
+  const toggleSubGroup = (key: string) => {
+    setOpenSubGroups((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  const hasEdits   = Object.keys(edited).length > 0;
+  const hasEdits = Object.keys(edited).length > 0;
   const editedKeys = new Set(Object.keys(edited));
   const searchLower = search.toLowerCase();
 
@@ -266,11 +225,26 @@ const Admin = () => {
     );
   });
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-6 h-6 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/login");
+  };
+
+  // ── CaseStudiesPanel ──
+  // (defined inline below)
+
   return (
     <div className="min-h-screen bg-background flex">
-
-      {/* ── Sidebar (desktop) ───────────────────────────────────────────── */}
-      <aside className="hidden lg:flex flex-col w-72 border-r border-border bg-card/50 sticky top-0 h-screen overflow-y-auto shrink-0">
+      {/* Desktop sidebar */}
+      <aside className="hidden md:flex flex-col w-56 shrink-0 border-r border-border bg-card">
         <SidebarContent
           adminTab={adminTab}
           setAdminTab={(tab) => setAdminTab(tab)}
@@ -282,65 +256,52 @@ const Admin = () => {
         />
       </aside>
 
-      {/* ── Mobile sidebar (sheet) ───────────────────────────────────────── */}
-      <Sheet open={mobileSidebarOpen} onOpenChange={setMobileSidebarOpen}>
-        <SheetContent side="left" className="w-72 p-0 flex flex-col">
-          <SidebarContent
-            adminTab={adminTab}
-            setAdminTab={(tab) => { setAdminTab(tab); setMobileSidebarOpen(false); }}
-            hasEdits={hasEdits}
-            saving={saving}
-            edited={edited}
-            handleSave={handleSave}
-            handleLogout={handleLogout}
-          />
-        </SheetContent>
-      </Sheet>
-
-      {/* ── Main ────────────────────────────────────────────────────────── */}
+      {/* Main area */}
       <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
-
         {/* Top bar */}
-        <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-lg border-b border-border">
-          <div className="max-w-3xl mx-auto px-4 md:px-6 h-14 flex items-center gap-3">
-            <div className="flex items-center gap-2 lg:hidden">
-              <button
-                onClick={() => setMobileSidebarOpen(true)}
-                className="w-8 h-8 flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              >
-                <Menu className="w-4 h-4" />
-              </button>
-              <h1 className="font-display font-bold text-sm">
-                <span className="text-gradient-gold">Content</span> Manager
-              </h1>
-            </div>
-
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => { setSearch(e.target.value); if (adminTab !== "content") setAdminTab("content"); }}
-                placeholder="Search any word from the site…"
-                className="w-full h-9 pl-9 pr-8 rounded-lg border border-input bg-background text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              />
-              {search && (
-                <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-
-            <div className="flex items-center gap-2 lg:hidden">
-              {hasEdits && (
-                <Button onClick={handleSave} disabled={saving} size="sm" className="glow-gold font-display h-9 px-3">
-                  {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                </Button>
-              )}
-              <Button variant="outline" size="sm" className="h-9 px-3" onClick={handleLogout}>
-                <LogOut className="w-4 h-4" />
+        <header className="h-14 border-b border-border bg-card/80 backdrop-blur flex items-center gap-3 px-4 shrink-0">
+          {/* Mobile menu */}
+          <Sheet open={mobileSidebarOpen} onOpenChange={setMobileSidebarOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="w-5 h-5" />
               </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-56 p-0">
+              <SidebarContent
+                adminTab={adminTab}
+                setAdminTab={(tab) => { setAdminTab(tab); setMobileSidebarOpen(false); }}
+                hasEdits={hasEdits}
+                saving={saving}
+                edited={edited}
+                handleSave={handleSave}
+                handleLogout={handleLogout}
+              />
+            </SheetContent>
+          </Sheet>
+
+          {/* Search — only in content tab */}
+          {adminTab === "content" && (
+            <div className="relative flex-1 max-w-sm">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
+              <input
+                type="search" value={search} placeholder="Search fields…"
+                className="w-full h-8 pl-8 pr-3 rounded-md border border-input bg-background text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                onChange={(e) => { setSearch(e.target.value); if (adminTab !== "content") setAdminTab("content"); }}
+              />
             </div>
+          )}
+
+          <div className="ml-auto flex items-center gap-2">
+            {hasEdits && (adminTab === "content" || adminTab === "seo" || adminTab === "clients") && (
+              <Button size="sm" className="h-8" onClick={handleSave} disabled={saving}>
+                {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin mr-1.5" /> : <Save className="w-3.5 h-3.5 mr-1.5" />}
+                {saving ? "Saving…" : "Save"}
+              </Button>
+            )}
+            <Button variant="outline" size="sm" className="h-9 px-3" onClick={handleLogout}>
+              <LogOut className="w-4 h-4" />
+            </Button>
           </div>
         </header>
 
@@ -349,14 +310,52 @@ const Admin = () => {
         {adminTab === "contacts"     && <ContactSubmissionsPanel />}
         {adminTab === "applications" && <JobApplicationsPanel />}
         {adminTab === "testimonials" && <TestimonialsPanel logActivity={(action, label) => logActivity(action, "testimonial", label)} />}
+        {adminTab === "clients" && (
+          <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto">
+            <div className="mb-5">
+              <h2 className="font-display font-bold text-lg">Client Logos</h2>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Checkbox = show in marquee · green ✓ = logo uploaded · ✕ = clear logo. Hit Save when done.
+              </p>
+            </div>
+            <div className="rounded-xl border border-border bg-card overflow-hidden mb-4">
+              <div className="px-5 py-2.5 bg-muted/30 border-b border-border">
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Section Text</span>
+              </div>
+              {(["clients_subtitle","clients_headline","clients_description"] as const).map((key) => {
+                const field = contentRegistry.find((f) => f.key === key)!;
+                return (
+                  <FieldRow key={key} field={field}
+                    value={edited[key] ?? dbValues[key] ?? field.defaultValue}
+                    isEdited={editedKeys.has(key)} onChange={handleChange} />
+                );
+              })}
+            </div>
+            <div className="rounded-xl border border-border bg-card overflow-hidden">
+              <div className="px-5 py-2.5 bg-muted/30 border-b border-border">
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Logo Slots</span>
+              </div>
+              <div className="p-4">
+                <ClientsLogoPanel edited={edited} dbValues={dbValues} onChange={handleChange} />
+              </div>
+            </div>
+            {hasEdits && (
+              <div className="mt-4 flex justify-end">
+                <Button onClick={handleSave} disabled={saving} size="sm">
+                  {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
+                  {saving ? "Saving…" : "Save Changes"}
+                </Button>
+              </div>
+            )}
+          </main>
+        )}
         {adminTab === "case-studies" && <CaseStudiesPanel logActivity={logActivity} />}
         {adminTab === "jobs"         && <JobsPanel logActivity={logActivity} />}
         {adminTab === "banks"        && <BanksPanel logActivity={logActivity} />}
 
-        {/* Content tab */}
         {adminTab === "content" && (() => {
 
-          // ── Search mode: show all matching sections expanded ──────────────
+          // ── Search mode: show all matching sections expanded ──────────────────────────
           if (search) {
             return (
               <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 space-y-4 overflow-y-auto">
@@ -419,7 +418,7 @@ const Admin = () => {
             );
           }
 
-          // ── Overview: no section selected ─────────────────────────────────
+          // ── Overview: no section selected ─────────────────────────────────────────────────
           if (!activeSection) {
             return (
               <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto">
@@ -465,7 +464,7 @@ const Admin = () => {
             );
           }
 
-          // ── Single-section drill-in view ──────────────────────────────────
+          // ── Single-section drill-in view ──────────────────────────────────────────────
           const fields = grouped[activeSection] ?? [];
           const { headerFields, numbered } = groupSectionFields(fields);
           const numberedEntries = Object.entries(numbered).sort(([a], [b]) => Number(a) - Number(b));
@@ -589,9 +588,9 @@ const Admin = () => {
   );
 };
 
-// ─── SidebarContent ───────────────────────────────────────────────────────────
+// ─── SidebarContent ─────────────────────────────────────────────────────
 
-type AdminTab = "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications";
+type AdminTab = "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "clients" | "contacts" | "applications";
 
 const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen; dividerBefore?: boolean }[] = [
   { id: "dashboard",    label: "Dashboard",       icon: LayoutDashboard },
@@ -601,6 +600,7 @@ const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen; dividerBe
   { id: "jobs",         label: "Job Listings",    icon: Briefcase },
   { id: "banks",        label: "Banks",           icon: Landmark },
   { id: "testimonials", label: "Testimonials",    icon: Star },
+  { id: "clients",      label: "Clients",         icon: ImageIcon },
   { id: "applications", label: "Applications",    icon: MessageSquare, dividerBefore: true },
   { id: "contacts",     label: "Messages",        icon: Mail },
 ];
@@ -608,8 +608,8 @@ const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen; dividerBe
 function SidebarContent({
   adminTab, setAdminTab, hasEdits, saving, edited, handleSave, handleLogout,
 }: {
-  adminTab: "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications";
-  setAdminTab: (t: "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications") => void;
+  adminTab: AdminTab;
+  setAdminTab: (t: AdminTab) => void;
   hasEdits: boolean;
   saving: boolean;
   edited: Record<string, string>;
@@ -617,27 +617,22 @@ function SidebarContent({
   handleLogout: () => void;
 }) {
   return (
-    <>
-      <div className="p-5 border-b border-border">
-        <a href="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4">
-          <ArrowLeft className="w-4 h-4" />
-          <span className="text-xs">Back to website</span>
-        </a>
-        <h1 className="font-display font-bold text-xl">
-          <span className="text-gradient-gold">Content</span> Manager
-        </h1>
-        <p className="text-xs text-muted-foreground mt-1">Dubai in Cairo CMS</p>
+    <div className="flex flex-col h-full">
+      {/* Brand */}
+      <div className="h-14 flex items-center px-4 border-b border-border shrink-0">
+        <span className="font-display font-bold text-sm text-foreground">Dubai in Cairo</span>
+        <span className="ml-1.5 text-[10px] font-semibold uppercase tracking-widest text-primary bg-primary/10 px-1.5 py-0.5 rounded">Admin</span>
       </div>
 
-      {/* Tab switcher */}
-      <div className="px-3 pt-3 pb-1 border-b border-border space-y-0.5">
+      {/* Nav */}
+      <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
         {TAB_ITEMS.map(({ id, label, icon: Icon, dividerBefore }) => (
           <div key={id}>
-            {dividerBefore && <div className="my-1 border-t border-border/50" />}
+            {dividerBefore && <div className="h-px bg-border mx-2 my-2" />}
             <button
               onClick={() => setAdminTab(id)}
               className={cn(
-                "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+                "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors",
                 adminTab === id ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               )}
             >
@@ -646,41 +641,30 @@ function SidebarContent({
             </button>
           </div>
         ))}
-      </div>
+      </nav>
 
-      {/* flex-1 spacer keeps footer pinned to bottom */}
-      <div className="flex-1" />
-
-      <div className="p-4 border-t border-border space-y-2 mt-auto">
-        {hasEdits && (adminTab === "content" || adminTab === "seo") ? (
-          <Button onClick={handleSave} disabled={saving} size="sm" className="w-full glow-gold font-display">
-            {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
-            Save {Object.keys(edited).length} Change{Object.keys(edited).length !== 1 ? "s" : ""}
+      {/* Footer */}
+      <div className="px-3 py-3 border-t border-border shrink-0 space-y-1.5">
+        {hasEdits && (adminTab === "content" || adminTab === "seo" || adminTab === "clients") ? (
+          <Button size="sm" className="w-full" onClick={handleSave} disabled={saving}>
+            {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin mr-1.5" /> : <Save className="w-3.5 h-3.5 mr-1.5" />}
+            {saving ? "Saving…" : `Save ${Object.keys(edited).length} change${Object.keys(edited).length !== 1 ? "s" : ""}`}
           </Button>
-        ) : (adminTab === "content" || adminTab === "seo") ? (
-          <div className="text-center text-xs text-muted-foreground py-1">No unsaved changes</div>
+        ) : (adminTab === "content" || adminTab === "seo" || adminTab === "clients") ? (
+          <Button size="sm" variant="outline" className="w-full" disabled>
+            <Check className="w-3.5 h-3.5 mr-1.5" /> All saved
+          </Button>
         ) : null}
+        {(adminTab === "content" || adminTab === "seo" || adminTab === "clients") && <p className="text-center text-[10px] text-muted-foreground">⌘S to save</p>}
         <Button variant="outline" size="sm" className="w-full" onClick={handleLogout}>
           <LogOut className="w-4 h-4 mr-1.5" /> Logout
         </Button>
-        {(adminTab === "content" || adminTab === "seo") && <p className="text-center text-[10px] text-muted-foreground">⌘S to save</p>}
       </div>
-    </>
+    </div>
   );
 }
 
-// ─── SEOPanel ─────────────────────────────────────────────────────────────────
-
-const SEO_PAGES = [
-  { label: "Home", keys: ["seo_home_title", "seo_home_description", "seo_home_og_image"] },
-  { label: "Studios", keys: ["seo_studios_title", "seo_studios_description"] },
-  { label: "Tech Stack", keys: ["seo_tech_title", "seo_tech_description"] },
-  { label: "Careers", keys: ["seo_careers_title", "seo_careers_description"] },
-  { label: "Case Studies", keys: ["seo_cases_title", "seo_cases_description"] },
-  { label: "Odoo Partner", keys: ["seo_odoo_title", "seo_odoo_description"] },
-  { label: "Yanolja Partner", keys: ["seo_yanolja_title", "seo_yanolja_description"] },
-  { label: "Zoho Partner", keys: ["seo_zoho_title", "seo_zoho_description"] },
-];
+// ─── SEOPanel ────────────────────────────────────────────────────────────────────────
 
 function SEOPanel({
   dbValues, edited, onChange, onSave, saving,
@@ -691,162 +675,130 @@ function SEOPanel({
   onSave: () => void;
   saving: boolean;
 }) {
-  const val = (key: string) => edited[key] ?? dbValues[key] ?? "";
-  const isEdited = (key: string) => key in edited;
+  const seoFields = contentRegistry.filter((f) => f.section === "seo");
+  const globalFields = seoFields.filter((f) => !f.key.match(/_(home|studios|careers|contact|case_studies|odoo|yanolja|zoho)_/));
+  const pageGroups: Record<string, ContentField[]> = {};
+  seoFields.filter((f) => f.key.match(/_(home|studios|careers|contact|case_studies|odoo|yanolja|zoho)_/)).forEach((f) => {
+    const m = f.key.match(/_(home|studios|careers|contact|case_studies|odoo|yanolja|zoho)_/);
+    if (m) {
+      const page = m[1];
+      if (!pageGroups[page]) pageGroups[page] = [];
+      pageGroups[page].push(f);
+    }
+  });
+  const pageLabels: Record<string, string> = {
+    home: "Home", studios: "Studios", careers: "Careers",
+    contact: "Contact", case_studies: "Case Studies",
+    odoo: "Odoo", yanolja: "Yanolja", zoho: "Zoho",
+  };
+  const editedKeys = new Set(Object.keys(edited));
   const hasEdits = Object.keys(edited).length > 0;
 
-  const globalKeys = ["seo_global_og_image", "seo_twitter_handle", "seo_ga4_id", "seo_gsc_verification"];
-  const allSeoFields = contentRegistry.filter((f) => f.section === "seo");
-  const fieldMap = Object.fromEntries(allSeoFields.map((f) => [f.key, f]));
-
   return (
-    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto space-y-6">
-      {/* Header */}
-      <div className="flex items-start justify-between gap-4">
+    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto">
+      <div className="mb-5 flex items-center justify-between">
         <div>
-          <h2 className="font-display font-bold text-lg flex items-center gap-2">
-            <Globe className="w-5 h-5 text-primary" /> SEO & Meta Settings
-          </h2>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            Control page titles, descriptions, and social sharing for every route.
-          </p>
+          <h2 className="font-display font-bold text-lg">SEO & Meta Tags</h2>
+          <p className="text-xs text-muted-foreground mt-0.5">Controls page titles, descriptions, and social share images</p>
         </div>
         {hasEdits && (
-          <Button onClick={onSave} disabled={saving} size="sm" className="glow-gold font-display shrink-0">
-            {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
-            Save
+          <Button size="sm" onClick={onSave} disabled={saving}>
+            {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin mr-1.5" /> : <Save className="w-3.5 h-3.5 mr-1.5" />}
+            {saving ? "Saving…" : "Save"}
           </Button>
         )}
       </div>
 
-      {/* Global Settings */}
-      <section className="rounded-xl border border-border bg-card overflow-hidden">
-        <div className="flex items-center gap-3 px-5 py-3 bg-muted/30 border-b border-border">
-          <Globe className="w-4 h-4 text-primary" />
-          <span className="text-sm font-display font-bold">Global Settings</span>
-          <span className="text-[10px] text-muted-foreground ml-1">— applies site-wide unless overridden per page</span>
+      {/* Global */}
+      <div className="rounded-xl border border-border bg-card overflow-hidden mb-4">
+        <div className="px-5 py-2.5 bg-muted/30 border-b border-border">
+          <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Global</span>
         </div>
         <div className="divide-y divide-border">
-          {globalKeys.map((key) => {
-            const field = fieldMap[key];
-            if (!field) return null;
-            return (
-              <SEOFieldRow
-                key={key}
-                label={field.label}
-                fieldKey={key}
-                value={val(key)}
-                isEdited={isEdited(key)}
-                type={field.type === "upload" ? "upload" : key.includes("description") ? "textarea" : "text"}
-                onChange={onChange}
-              />
-            );
-          })}
+          {globalFields.map((field) => (
+            <SEOFieldRow
+              key={field.key}
+              field={field}
+              value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
+              isEdited={editedKeys.has(field.key)}
+              onChange={onChange}
+              type={field.type === "upload" ? "upload" : key.includes("description") ? "textarea" : "text"}
+            />
+          ))}
         </div>
-      </section>
-
-      {/* Per-page meta */}
-      <div className="space-y-4">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground px-1">Per-Page Meta</h3>
-        {SEO_PAGES.map(({ label, keys }) => {
-          const pageEdited = keys.filter((k) => isEdited(k)).length;
-          return (
-            <section key={label} className="rounded-xl border border-border bg-card overflow-hidden">
-              <div className="flex items-center gap-3 px-5 py-3 bg-muted/20 border-b border-border">
-                <span className="text-sm font-display font-semibold">{label}</span>
-                {pageEdited > 0 && (
-                  <span className="text-[9px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded ml-auto">
-                    {pageEdited} unsaved
-                  </span>
-                )}
-              </div>
-              <div className="divide-y divide-border">
-                {keys.map((key) => {
-                  const field = fieldMap[key];
-                  if (!field) return null;
-                  const isTitle = key.includes("_title");
-                  const isOg    = key.includes("_og_image");
-                  return (
-                    <SEOFieldRow
-                      key={key}
-                      label={isTitle ? "Meta Title" : isOg ? "OG Image" : "Meta Description"}
-                      fieldKey={key}
-                      value={val(key)}
-                      isEdited={isEdited(key)}
-                      type={isOg ? "upload" : isTitle ? "text" : "textarea"}
-                      onChange={onChange}
-                      hint={isTitle ? "Recommended: 50–60 characters" : isOg ? undefined : "Recommended: 150–160 characters"}
-                      charCount={!isOg}
-                    />
-                  );
-                })}
-              </div>
-            </section>
-          );
-        })}
       </div>
+
+      {/* Per-page */}
+      {Object.entries(pageGroups).map(([page, fields]) => {
+        const isOg = (f: ContentField) => f.key.includes("_og_image");
+        const isTitle = (f: ContentField) => f.key.includes("_title");
+        return (
+          <div key={page} className="rounded-xl border border-border bg-card overflow-hidden mb-4">
+            <div className="px-5 py-2.5 bg-muted/30 border-b border-border">
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{pageLabels[page] || page}</span>
+            </div>
+            <div className="divide-y divide-border">
+              {fields.map((field) => (
+                <SEOFieldRow
+                  key={field.key}
+                  field={field}
+                  value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
+                  isEdited={editedKeys.has(field.key)}
+                  onChange={onChange}
+                  type={isOg(field) ? "upload" : isTitle(field) ? "text" : "textarea"}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </main>
   );
 }
 
 function SEOFieldRow({
-  label, fieldKey, value, isEdited, type, onChange, hint, charCount,
+  field, value, isEdited, onChange, type,
 }: {
-  label: string;
-  fieldKey: string;
+  field: ContentField;
   value: string;
   isEdited: boolean;
-  type: "text" | "textarea" | "upload";
   onChange: (key: string, val: string) => void;
-  hint?: string;
-  charCount?: boolean;
+  type: "text" | "textarea" | "upload";
 }) {
-  const len = value.replace(/<[^>]+>/g, "").length;
   return (
     <div className={cn("px-5 py-3.5 transition-colors", isEdited && "bg-primary/[0.03]")}>
       <div className="flex items-center gap-2 mb-1.5">
-        <label className="text-xs font-semibold text-foreground">{label}</label>
+        <label className="text-xs font-semibold text-foreground">{field.label}</label>
         {isEdited && (
           <span className="text-[9px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded ml-auto">
             unsaved
           </span>
         )}
-        {charCount && !isEdited && (
-          <span className={cn("text-[10px] ml-auto font-mono", len > (label === "Meta Title" ? 60 : 160) ? "text-destructive" : "text-muted-foreground")}>
-            {len} chars
-          </span>
-        )}
       </div>
-      {hint && <p className="text-[10px] text-muted-foreground mb-1.5">{hint}</p>}
       {type === "upload" ? (
-        <ImageUploadField value={value} onChange={(v) => onChange(fieldKey, v)} fieldKey={fieldKey} />
+        <ImageUploadField value={value} onChange={(val) => onChange(field.key, val)} fieldKey={field.key} />
       ) : type === "textarea" ? (
-        <AutoResizeTextarea value={value} onChange={(v) => onChange(fieldKey, v)} />
+        <AutoResizeTextarea value={value} onChange={(val) => onChange(field.key, val)} />
       ) : (
-        <AutoResizeTextarea value={value} onChange={(v) => onChange(fieldKey, v)} />
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(field.key, e.target.value)}
+          className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        />
+      )}
+      {field.key.includes("og_image") && (
+        <div className="mt-2 flex items-start gap-2 rounded-lg border border-amber-500/20 bg-amber-500/5 px-3 py-2">
+          <Info className="w-3.5 h-3.5 text-amber-400 mt-0.5 shrink-0" />
+          <p className="text-[10px] text-amber-400/90 leading-relaxed">
+            After uploading a new social banner here, the <code className="font-mono bg-amber-500/10 px-1 rounded">index.html</code> file must also be updated to match the new URL — otherwise WhatsApp, Facebook, and other crawlers will still show the old image. Contact your developer to sync the change.
+          </p>
+        </div>
       )}
     </div>
   );
 }
-
-// ─── FieldRow ─────────────────────────────────────────────────────────────────
-
-/** Renders a short snippet of `text` with `term` highlighted. */
-function MatchSnippet({ text, term }: { text: string; term: string }) {
-  if (!term || !text) return null;
-  const idx = text.toLowerCase().indexOf(term.toLowerCase());
-  if (idx === -1) return null;
-  const start  = Math.max(0, idx - 30);
-  const end    = Math.min(text.length, idx + term.length + 40);
-  const before = (start > 0 ? "…" : "") + text.slice(start, idx);
-  const match  = text.slice(idx, idx + term.length);
-  const after  = text.slice(idx + term.length, end) + (end < text.length ? "…" : "");
-  return (
-    <p className="text-[11px] text-muted-foreground mt-1 mb-1.5 leading-relaxed">
-      {before}<mark className="bg-primary/20 text-primary font-semibold rounded px-0.5">{match}</mark>{after}
-    </p>
-  );
-}
+// ─── FieldRow ─────────────────────────────────────────────────────────────────────────────────
 
 function FieldRow({
   field, value, isEdited, onChange, indent = false, highlight = "",
@@ -905,7 +857,7 @@ function FieldRow({
   );
 }
 
-// ─── ImageUploadField ─────────────────────────────────────────────────────────
+// ─── ImageUploadField ─────────────────────────────────────────────────────────────────────────
 
 function ImageUploadField({ value, onChange, fieldKey }: { value: string; onChange: (v: string) => void; fieldKey?: string }) {
   const { toast } = useToast();
@@ -1006,7 +958,7 @@ function ImageUploadField({ value, onChange, fieldKey }: { value: string; onChan
   );
 }
 
-// ─── ClientsLogoPanel ────────────────────────────────────────────────────────
+// ─── ClientsLogoPanel ──────────────────────────────────────────────────────────────────────
 
 const MAX_LOGO_SLOTS = 24;
 
@@ -1153,7 +1105,7 @@ function ClientsLogoPanel({
   );
 }
 
-// ─── AutoResizeTextarea ───────────────────────────────────────────────────────
+// ─── AutoResizeTextarea ────────────────────────────────────────────────────────────────────
 
 function AutoResizeTextarea({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -1168,798 +1120,45 @@ function AutoResizeTextarea({ value, onChange }: { value: string; onChange: (v: 
   useEffect(() => { resize(); }, [value, resize]);
 
   return (
-    <textarea
-      ref={ref}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      onInput={resize}
-      className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none overflow-hidden"
-      rows={1}
-    />
-  );
-}
-
-// ─── Sortable row helpers ─────────────────────────────────────────────────────
-
-function SortableCSRow({ cs, onEdit, onToggle, onDelete }: {
-  cs: CS;
-  onEdit: (cs: CS) => void;
-  onToggle: (id: string, field: "published" | "featured", val: boolean) => void;
-  onDelete: (id: string, name: string) => void;
-}) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: cs.id });
-  return (
-    <div ref={setNodeRef} style={{ transform: CSS.Transform.toString(transform), transition }}
-      className={cn("rounded-xl border border-border bg-card p-4 flex items-center gap-3", isDragging && "opacity-50 shadow-lg")}>
-      <button {...attributes} {...listeners} className="text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing shrink-0">
-        <GripVertical className="w-4 h-4" />
-      </button>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-display font-semibold text-sm text-foreground truncate">{cs.client_name || "Untitled"}</span>
-          {cs.featured && <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-semibold">Featured</span>}
-          {!cs.published && <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded font-semibold">Draft</span>}
-        </div>
-        <p className="text-xs text-muted-foreground mt-0.5 truncate">{cs.industry}{cs.tagline ? ` · ${cs.tagline}` : ""}</p>
-      </div>
-      <div className="flex items-center gap-1.5 shrink-0">
-        <button onClick={() => onToggle(cs.id, "featured", !cs.featured)} title={cs.featured ? "Unfeature" : "Feature on homepage"}
-          className={cn("w-7 h-7 rounded-md flex items-center justify-center transition-colors", cs.featured ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-muted")}>
-          <Star className="w-3.5 h-3.5" />
-        </button>
-        <button onClick={() => onToggle(cs.id, "published", !cs.published)} title={cs.published ? "Unpublish" : "Publish"}
-          className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
-          {cs.published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-        </button>
-        <button onClick={() => onEdit(cs)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
-          <Pencil className="w-3.5 h-3.5" />
-        </button>
-        <button onClick={() => onDelete(cs.id, cs.client_name)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
-          <Trash2 className="w-3.5 h-3.5" />
-        </button>
-      </div>
-    </div>
-  );
-}
-
-// ─── CaseStudiesPanel ─────────────────────────────────────────────────────────
-
-type CS = {
-  id: string; slug: string; client_name: string; industry: string;
-  tagline: string; challenge: string; solution: string; results: string;
-  metric_1_value: string; metric_1_label: string;
-  metric_2_value: string; metric_2_label: string;
-  metric_3_value: string; metric_3_label: string;
-  tags: string[]; featured: boolean; published: boolean; sort_order: number;
-};
-
-const EMPTY_CS: Omit<CS, "id"> = {
-  slug: "", client_name: "", industry: "", tagline: "",
-  challenge: "", solution: "", results: "",
-  metric_1_value: "", metric_1_label: "",
-  metric_2_value: "", metric_2_label: "",
-  metric_3_value: "", metric_3_label: "",
-  tags: [], featured: false, published: true, sort_order: 0,
-};
-
-function CaseStudiesPanel({ logActivity }: { logActivity: (action: string, entityType: string, label: string) => void }) {
-  const { toast } = useToast();
-  const [list, setList]       = useState<CS[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState<Partial<CS> | null>(null);
-  const [saving, setSaving]   = useState(false);
-  const [isNew, setIsNew]     = useState(false);
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
-
-  const load = async () => {
-    const { data } = await supabase.from("case_studies").select("*").order("sort_order");
-    if (data) setList(data as CS[]);
-    setLoading(false);
-  };
-
-  useEffect(() => { load(); }, []);
-
-  const openNew = () => { setEditing({ ...EMPTY_CS }); setIsNew(true); };
-  const openEdit = (cs: CS) => { setEditing({ ...cs }); setIsNew(false); };
-  const closeForm = () => { setEditing(null); setIsNew(false); };
-
-  const handleSave = async () => {
-    if (!editing) return;
-    setSaving(true);
-
-    const tagsArr = typeof editing.tags === "string"
-      ? (editing.tags as string).split(",").map((t: string) => t.trim()).filter(Boolean)
-      : editing.tags ?? [];
-
-    const payload = { ...editing, tags: tagsArr };
-
-    if (isNew) {
-      if (!payload.slug) {
-        payload.slug = (payload.client_name || "case-study")
-          .toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
-      }
-      const { error } = await supabase.from("case_studies").insert(payload);
-      if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
-      else { toast({ title: "Case study created!" }); logActivity("created", "case_study", payload.client_name || "New Case Study"); closeForm(); load(); }
-    } else {
-      const { error } = await supabase.from("case_studies").update(payload).eq("id", editing.id!);
-      if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
-      else { toast({ title: "Saved!" }); logActivity("updated", "case_study", payload.client_name || "Case Study"); closeForm(); load(); }
-    }
-    setSaving(false);
-  };
-
-  const handleDragEnd = async (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-    const oldIdx = list.findIndex((cs) => cs.id === active.id);
-    const newIdx = list.findIndex((cs) => cs.id === over.id);
-    const reordered = arrayMove(list, oldIdx, newIdx);
-    setList(reordered);
-    await Promise.all(reordered.map((cs, i) =>
-      supabase.from("case_studies").update({ sort_order: i }).eq("id", cs.id)
-    ));
-  };
-
-  const toggleField = async (id: string, field: "published" | "featured", val: boolean) => {
-    await supabase.from("case_studies").update({ [field]: val }).eq("id", id);
-    setList((prev) => prev.map((cs) => cs.id === id ? { ...cs, [field]: val } : cs));
-    const cs = list.find((cs) => cs.id === id);
-    logActivity(val ? field === "featured" ? "featured" : "published" : field === "featured" ? "unfeatured" : "unpublished", "case_study", cs?.client_name ?? "Case Study");
-  };
-
-  const handleDelete = async (id: string, name: string) => {
-    if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
-    await supabase.from("case_studies").delete().eq("id", id);
-    setList((prev) => prev.filter((cs) => cs.id !== id));
-    logActivity("deleted", "case_study", name);
-    toast({ title: "Deleted" });
-  };
-
-  const set = (key: string, val: string | boolean) =>
-    setEditing((prev) => prev ? { ...prev, [key]: val } : prev);
-
-  if (loading) return (
-    <div className="flex-1 flex items-center justify-center py-20">
-      <Loader2 className="w-6 h-6 animate-spin text-primary" />
-    </div>
-  );
-
-  if (editing) return (
-    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6">
-      <div className="flex items-center gap-3 mb-6">
-        <button onClick={closeForm} className="text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="w-4 h-4" />
-        </button>
-        <h2 className="font-display font-bold text-lg">{isNew ? "New Case Study" : `Edit — ${editing.client_name}`}</h2>
-      </div>
-
-      <div className="space-y-5">
-        {/* Identity */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Identity</p>
-          <Field label="Client Name *" value={editing.client_name || ""} onChange={(v) => set("client_name", v)} />
-          <Field label="Industry" value={editing.industry || ""} onChange={(v) => set("industry", v)} placeholder="e.g. Pharma, FMCG, eCommerce" />
-          <Field label="Tagline (one-line summary for cards)" value={editing.tagline || ""} onChange={(v) => set("tagline", v)} />
-          <Field label="URL Slug" value={editing.slug || ""} onChange={(v) => set("slug", v)} placeholder="auto-generated if empty" />
-          <Field label="Tags (comma-separated)" value={Array.isArray(editing.tags) ? editing.tags.join(", ") : (editing.tags || "")} onChange={(v) => set("tags", v)} placeholder="Social Media, eCommerce, Branding" />
-        </div>
-
-        {/* Metrics */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Key Metrics (shown on cards)</p>
-          {[1, 2, 3].map((n) => (
-            <div key={n} className="grid grid-cols-2 gap-3">
-              <Field label={`Metric ${n} — Value`} value={(editing as any)[`metric_${n}_value`] || ""} onChange={(v) => set(`metric_${n}_value`, v)} placeholder="+127%" />
-              <Field label={`Metric ${n} — Label`} value={(editing as any)[`metric_${n}_label`] || ""} onChange={(v) => set(`metric_${n}_label`, v)} placeholder="Revenue Growth" />
-            </div>
-          ))}
-        </div>
-
-        {/* Narrative */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Case Study Narrative</p>
-          <div>
-            <label className="block text-xs font-semibold text-foreground mb-1.5">The Challenge</label>
-            <RichTextEditor value={editing.challenge || ""} onChange={(v) => set("challenge", v)} placeholder="Describe the client's challenge..." />
-          </div>
-          <div>
-            <label className="block text-xs font-semibold text-foreground mb-1.5">Our Approach / Solution</label>
-            <RichTextEditor value={editing.solution || ""} onChange={(v) => set("solution", v)} placeholder="Describe your approach..." />
-          </div>
-          <div>
-            <label className="block text-xs font-semibold text-foreground mb-1.5">The Results</label>
-            <RichTextEditor value={editing.results || ""} onChange={(v) => set("results", v)} placeholder="What results were achieved?" />
-          </div>
-        </div>
-
-        {/* Settings */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Settings</p>
-          <label className="flex items-center gap-3 cursor-pointer">
-            <input type="checkbox" checked={!!editing.published} onChange={(e) => set("published", e.target.checked)} className="w-4 h-4 accent-primary" />
-            <span className="text-sm">Published (visible on site)</span>
-          </label>
-          <label className="flex items-center gap-3 cursor-pointer">
-            <input type="checkbox" checked={!!editing.featured} onChange={(e) => set("featured", e.target.checked)} className="w-4 h-4 accent-primary" />
-            <span className="text-sm">Featured on homepage</span>
-          </label>
-          <Field label="Sort Order (lower = first)" value={String(editing.sort_order ?? 0)} onChange={(v) => set("sort_order", parseInt(v) || 0)} placeholder="0" />
-        </div>
-
-        <div className="flex gap-3">
-          <Button onClick={handleSave} disabled={saving} className="glow-gold font-display">
-            {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
-            {isNew ? "Create Case Study" : "Save Changes"}
-          </Button>
-          <Button variant="outline" onClick={closeForm}>Cancel</Button>
-        </div>
-      </div>
-    </main>
-  );
-
-  return (
-    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h2 className="font-display font-bold text-lg">Case Studies</h2>
-          <p className="text-xs text-muted-foreground mt-0.5">{list.length} total · {list.filter(c => c.featured).length} featured · drag to reorder</p>
-        </div>
-        <Button onClick={openNew} size="sm" className="glow-gold font-display">
-          <Plus className="w-4 h-4 mr-1.5" /> New Case Study
-        </Button>
-      </div>
-
-      {list.length === 0 ? (
-        <div className="text-center py-20 border border-dashed border-border rounded-xl">
-          <BookOpen className="w-10 h-10 mx-auto mb-3 text-muted-foreground opacity-40" />
-          <p className="text-sm text-muted-foreground mb-4">No case studies yet.</p>
-          <Button onClick={openNew} size="sm" variant="outline">
-            <Plus className="w-4 h-4 mr-1.5" /> Add your first case study
-          </Button>
-        </div>
-      ) : (
-        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <SortableContext items={list.map((cs) => cs.id)} strategy={verticalListSortingStrategy}>
-            <div className="space-y-3">
-              {list.map((cs) => (
-                <SortableCSRow key={cs.id} cs={cs} onEdit={openEdit} onToggle={toggleField} onDelete={handleDelete} />
-              ))}
-            </div>
-          </SortableContext>
-        </DndContext>
-      )}
-    </main>
-  );
-}
-
-// ─── Sortable Job / Bank rows ─────────────────────────────────────────────────
-
-function SortableJobRow({ job, onEdit, onToggle, onDelete }: {
-  job: Job;
-  onEdit: (j: Job) => void;
-  onToggle: (id: string, val: boolean) => void;
-  onDelete: (id: string, title: string) => void;
-}) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: job.id });
-  return (
-    <div ref={setNodeRef} style={{ transform: CSS.Transform.toString(transform), transition }}
-      className={cn("rounded-xl border border-border bg-card p-4 flex items-center gap-3", isDragging && "opacity-50 shadow-lg")}>
-      <button {...attributes} {...listeners} className="text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing shrink-0">
-        <GripVertical className="w-4 h-4" />
-      </button>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-display font-semibold text-sm text-foreground truncate">{job.title || "Untitled"}</span>
-          {job.experience && <span className="text-[10px] bg-secondary text-secondary-foreground px-1.5 py-0.5 rounded font-semibold">{job.experience}</span>}
-          {!job.published && <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded font-semibold">Draft</span>}
-        </div>
-        {job.notes && <p className="text-xs text-muted-foreground mt-0.5 truncate">{job.notes}</p>}
-      </div>
-      <div className="flex items-center gap-1.5 shrink-0">
-        <button onClick={() => onToggle(job.id, !job.published)} title={job.published ? "Unpublish" : "Publish"}
-          className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
-          {job.published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-        </button>
-        <button onClick={() => onEdit(job)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
-          <Pencil className="w-3.5 h-3.5" />
-        </button>
-        <button onClick={() => onDelete(job.id, job.title)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
-          <Trash2 className="w-3.5 h-3.5" />
-        </button>
-      </div>
-    </div>
-  );
-}
-
-// ─── JobsPanel ────────────────────────────────────────────────────────────────
-
-type Job = {
-  id: string; title: string; role_overview: string; responsibilities: string;
-  requirements: string; notes: string; experience: string;
-  sort_order: number; published: boolean;
-};
-
-const EMPTY_JOB: Omit<Job, "id"> = {
-  title: "", role_overview: "", responsibilities: "", requirements: "",
-  notes: "", experience: "", sort_order: 0, published: true,
-};
-
-function JobsPanel({ logActivity }: { logActivity: (action: string, entityType: string, label: string) => void }) {
-  const { toast } = useToast();
-  const [list, setList]       = useState<Job[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState<Partial<Job> | null>(null);
-  const [saving, setSaving]   = useState(false);
-  const [isNew, setIsNew]     = useState(false);
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
-
-  const load = async () => {
-    const { data } = await supabase.from("job_listings").select("*").order("sort_order");
-    if (data) setList(data as Job[]);
-    setLoading(false);
-  };
-
-  useEffect(() => { load(); }, []);
-
-  const openNew   = () => { setEditing({ ...EMPTY_JOB }); setIsNew(true); };
-  const openEdit  = (job: Job) => { setEditing({ ...job }); setIsNew(false); };
-  const closeForm = () => { setEditing(null); setIsNew(false); };
-
-  const handleSave = async () => {
-    if (!editing) return;
-    setSaving(true);
-    const payload = { ...editing };
-    if (isNew) {
-      const { error } = await supabase.from("job_listings").insert(payload);
-      if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
-      else { toast({ title: "Job listing created!" }); logActivity("created", "job", payload.title || "New Job"); closeForm(); load(); }
-    } else {
-      const { error } = await supabase.from("job_listings").update(payload).eq("id", editing.id!);
-      if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
-      else { toast({ title: "Saved!" }); logActivity("updated", "job", payload.title || "Job"); closeForm(); load(); }
-    }
-    setSaving(false);
-  };
-
-  const handleDragEnd = async (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-    const oldIdx = list.findIndex((j) => j.id === active.id);
-    const newIdx = list.findIndex((j) => j.id === over.id);
-    const reordered = arrayMove(list, oldIdx, newIdx);
-    setList(reordered);
-    await Promise.all(reordered.map((j, i) =>
-      supabase.from("job_listings").update({ sort_order: i }).eq("id", j.id)
-    ));
-  };
-
-  const togglePublished = async (id: string, val: boolean) => {
-    await supabase.from("job_listings").update({ published: val }).eq("id", id);
-    setList((prev) => prev.map((j) => j.id === id ? { ...j, published: val } : j));
-    const job = list.find((j) => j.id === id);
-    logActivity(val ? "published" : "unpublished", "job", job?.title ?? "Job");
-  };
-
-  const handleDelete = async (id: string, title: string) => {
-    if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
-    await supabase.from("job_listings").delete().eq("id", id);
-    setList((prev) => prev.filter((j) => j.id !== id));
-    logActivity("deleted", "job", title);
-    toast({ title: "Deleted" });
-  };
-
-  const set = (key: string, val: string | boolean | number) =>
-    setEditing((prev) => prev ? { ...prev, [key]: val } : prev);
-
-  if (loading) return (
-    <div className="flex-1 flex items-center justify-center py-20">
-      <Loader2 className="w-6 h-6 animate-spin text-primary" />
-    </div>
-  );
-
-  if (editing) return (
-    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6">
-      <div className="flex items-center gap-3 mb-6">
-        <button onClick={closeForm} className="text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="w-4 h-4" />
-        </button>
-        <h2 className="font-display font-bold text-lg">
-          {isNew ? "New Job Listing" : `Edit — ${editing.title}`}
-        </h2>
-      </div>
-
-      <div className="space-y-5">
-        {/* Position Details */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Position Details</p>
-          <Field
-            label="Job Title *"
-            value={editing.title || ""}
-            onChange={(v) => set("title", v)}
-            placeholder="e.g. AI-Focused Senior Graphic Designer"
-          />
-          <Field
-            label="Experience Required"
-            value={editing.experience || ""}
-            onChange={(v) => set("experience", v)}
-            placeholder="e.g. 5+ Years"
-          />
-          <Field
-            label="Special Notes (optional)"
-            value={editing.notes || ""}
-            onChange={(v) => set("notes", v)}
-            placeholder="e.g. Females Only – English Fluency Required"
-          />
-        </div>
-
-        {/* Role Content */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Role Content</p>
-          <div>
-            <label className="block text-xs font-semibold text-foreground mb-1.5">Role Overview</label>
-            <RichTextEditor value={editing.role_overview || ""} onChange={(v) => set("role_overview", v)} placeholder="Brief overview of the role..." />
-          </div>
-          <div>
-            <label className="block text-xs font-semibold text-foreground mb-1.5">Responsibilities</label>
-            <RichTextEditor value={editing.responsibilities || ""} onChange={(v) => set("responsibilities", v)} placeholder="Key responsibilities..." />
-          </div>
-          <div>
-            <label className="block text-xs font-semibold text-foreground mb-1.5">Requirements</label>
-            <RichTextEditor value={editing.requirements || ""} onChange={(v) => set("requirements", v)} placeholder="Skills and qualifications required..." />
-          </div>
-        </div>
-
-        {/* Settings */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Settings</p>
-          <label className="flex items-center gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={!!editing.published}
-              onChange={(e) => set("published", e.target.checked)}
-              className="w-4 h-4 accent-primary"
-            />
-            <span className="text-sm">Published (visible on careers page)</span>
-          </label>
-          <Field
-            label="Sort Order (lower number = appears first)"
-            value={String(editing.sort_order ?? 0)}
-            onChange={(v) => set("sort_order", parseInt(v) || 0)}
-            placeholder="0"
-          />
-        </div>
-
-        <div className="flex gap-3">
-          <Button onClick={handleSave} disabled={saving} className="glow-gold font-display">
-            {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
-            {isNew ? "Create Job Listing" : "Save Changes"}
-          </Button>
-          <Button variant="outline" onClick={closeForm}>Cancel</Button>
-        </div>
-      </div>
-    </main>
-  );
-
-  return (
-    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h2 className="font-display font-bold text-lg">Job Listings</h2>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            {list.length} total · {list.filter((j) => j.published).length} published · drag to reorder
-          </p>
-        </div>
-        <Button onClick={openNew} size="sm" className="glow-gold font-display">
-          <Plus className="w-4 h-4 mr-1.5" /> New Job
-        </Button>
-      </div>
-
-      {list.length === 0 ? (
-        <div className="text-center py-20 border border-dashed border-border rounded-xl">
-          <Briefcase className="w-10 h-10 mx-auto mb-3 text-muted-foreground opacity-40" />
-          <p className="text-sm text-muted-foreground mb-4">No job listings yet.</p>
-          <Button onClick={openNew} size="sm" variant="outline">
-            <Plus className="w-4 h-4 mr-1.5" /> Add your first job
-          </Button>
-        </div>
-      ) : (
-        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <SortableContext items={list.map((j) => j.id)} strategy={verticalListSortingStrategy}>
-            <div className="space-y-3">
-              {list.map((job) => (
-                <SortableJobRow key={job.id} job={job} onEdit={openEdit} onToggle={togglePublished} onDelete={handleDelete} />
-              ))}
-            </div>
-          </SortableContext>
-        </DndContext>
-      )}
-    </main>
-  );
-}
-
-// ─── SortableBankRow ──────────────────────────────────────────────────────────
-
-function SortableBankRow({ bank, onEdit, onToggle, onDelete }: {
-  bank: BankAccount;
-  onEdit: (b: BankAccount) => void;
-  onToggle: (id: string, val: boolean) => void;
-  onDelete: (id: string, title: string) => void;
-}) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: bank.id });
-  return (
-    <div ref={setNodeRef} style={{ transform: CSS.Transform.toString(transform), transition }}
-      className={cn("rounded-xl border border-border bg-card p-4 flex items-center gap-3", isDragging && "opacity-50 shadow-lg")}>
-      <button {...attributes} {...listeners} className="text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing shrink-0">
-        <GripVertical className="w-4 h-4" />
-      </button>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-display font-semibold text-sm text-foreground truncate">{bank.title || "Untitled"}</span>
-          {bank.abbr && <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-semibold">{bank.abbr}</span>}
-          {bank.currencies && <span className="text-[10px] bg-secondary text-secondary-foreground px-1.5 py-0.5 rounded font-semibold">{bank.currencies}</span>}
-          {!bank.published && <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded font-semibold">Draft</span>}
-        </div>
-        {bank.branch && <p className="text-xs text-muted-foreground mt-0.5 truncate">{bank.branch}</p>}
-      </div>
-      <div className="flex items-center gap-1.5 shrink-0">
-        <button onClick={() => onToggle(bank.id, !bank.published)} title={bank.published ? "Unpublish" : "Publish"}
-          className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
-          {bank.published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-        </button>
-        <button onClick={() => onEdit(bank)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
-          <Pencil className="w-3.5 h-3.5" />
-        </button>
-        <button onClick={() => onDelete(bank.id, bank.title)} className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
-          <Trash2 className="w-3.5 h-3.5" />
-        </button>
-      </div>
-    </div>
-  );
-}
-
-// ─── BanksPanel ───────────────────────────────────────────────────────────────
-
-type BankAccount = {
-  id: string; title: string; abbr: string; branch: string;
-  account_number: string; iban: string; currencies: string;
-  sort_order: number; published: boolean;
-};
-
-const EMPTY_BANK: Omit<BankAccount, "id"> = {
-  title: "", abbr: "", branch: "",
-  account_number: "", iban: "", currencies: "",
-  sort_order: 0, published: true,
-};
-
-function BanksPanel({ logActivity }: { logActivity: (action: string, entityType: string, label: string) => void }) {
-  const { toast } = useToast();
-  const [list, setList]       = useState<BankAccount[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState<Partial<BankAccount> | null>(null);
-  const [saving, setSaving]   = useState(false);
-  const [isNew, setIsNew]     = useState(false);
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
-
-  const load = async () => {
-    const { data } = await supabase.from("bank_accounts").select("*").order("sort_order");
-    if (data) setList(data as BankAccount[]);
-    setLoading(false);
-  };
-
-  useEffect(() => { load(); }, []);
-
-  const openNew   = () => { setEditing({ ...EMPTY_BANK }); setIsNew(true); };
-  const openEdit  = (bank: BankAccount) => { setEditing({ ...bank }); setIsNew(false); };
-  const closeForm = () => { setEditing(null); setIsNew(false); };
-
-  const handleSave = async () => {
-    if (!editing) return;
-    setSaving(true);
-    const payload = { ...editing };
-    if (isNew) {
-      const { error } = await supabase.from("bank_accounts").insert(payload);
-      if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
-      else { toast({ title: "Bank account created!" }); logActivity("created", "bank", payload.title || "New Bank"); closeForm(); load(); }
-    } else {
-      const { error } = await supabase.from("bank_accounts").update(payload).eq("id", editing.id!);
-      if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
-      else { toast({ title: "Saved!" }); logActivity("updated", "bank", payload.title || "Bank"); closeForm(); load(); }
-    }
-    setSaving(false);
-  };
-
-  const handleDragEnd = async (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-    const oldIdx = list.findIndex((b) => b.id === active.id);
-    const newIdx = list.findIndex((b) => b.id === over.id);  
-    const reordered = arrayMove(list, oldIdx, newIdx);
-    setList(reordered);
-    await Promise.all(reordered.map((b, i) =>
-      supabase.from("bank_accounts").update({ sort_order: i }).eq("id", b.id)
-    ));
-  };
-
-  const togglePublished = async (id: string, val: boolean) => {
-    await supabase.from("bank_accounts").update({ published: val }).eq("id", id);
-    setList((prev) => prev.map((b) => b.id === id ? { ...b, published: val } : b));
-    const b = list.find((b) => b.id === id);
-    logActivity(val ? "published" : "unpublished", "bank", b?.title ?? "Bank");
-  };
-
-  const handleDelete = async (id: string, title: string) => {
-    if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
-    await supabase.from("bank_accounts").delete().eq("id", id);
-    setList((prev) => prev.filter((b) => b.id !== id));
-    logActivity("deleted", "bank", title);
-    toast({ title: "Deleted" });
-  };
-
-  const set = (key: string, val: string | boolean | number) =>
-    setEditing((prev) => prev ? { ...prev, [key]: val } : prev);
-
-  if (loading) return (
-    <div className="flex-1 flex items-center justify-center py-20">
-      <Loader2 className="w-6 h-6 animate-spin text-primary" />
-    </div>
-  );
-
-  if (editing) return (
-    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6">
-      <div className="flex items-center gap-3 mb-6">
-        <button onClick={closeForm} className="text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="w-4 h-4" />
-        </button>
-        <h2 className="font-display font-bold text-lg">
-          {isNew ? "New Bank Account" : `Edit — ${editing.title}`}
-        </h2>
-      </div>
-
-      <div className="space-y-5">
-        {/* Bank Identity */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Bank Identity</p>
-          <Field
-            label="Bank Full Name *"
-            value={editing.title || ""}
-            onChange={(v) => set("title", v)}
-            placeholder="e.g. Arab African International Bank"
-          />
-          <Field
-            label="Abbreviation"
-            value={editing.abbr || ""}
-            onChange={(v) => set("abbr", v)}
-            placeholder="e.g. AAIB"
-          />
-          <Field
-            label="Branch Name"
-            value={editing.branch || ""}
-            onChange={(v) => set("branch", v)}
-            placeholder="e.g. Arkan Plaza Branch — Sheikh Zayed"
-          />
-        </div>
-
-        {/* Account Details */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Account Details</p>
-          <Field
-            label="Account Number"
-            value={editing.account_number || ""}
-            onChange={(v) => set("account_number", v)}
-            placeholder="e.g. 1144817810010201"
-          />
-          <Field
-            label="IBAN"
-            value={editing.iban || ""}
-            onChange={(v) => set("iban", v)}
-            placeholder="e.g. EG730057028001144817810010201"
-          />
-          <Field
-            label="Currencies (comma-separated)"
-            value={editing.currencies || ""}
-            onChange={(v) => set("currencies", v)}
-            placeholder="e.g. USD,EGP"
-          />
-        </div>
-
-        {/* Settings */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Settings</p>
-          <label className="flex items-center gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={!!editing.published}
-              onChange={(e) => set("published", e.target.checked)}
-              className="w-4 h-4 accent-primary"
-            />
-            <span className="text-sm">Published (visible on homepage)</span>
-          </label>
-          <Field
-            label="Sort Order (lower number = appears first)"
-            value={String(editing.sort_order ?? 0)}
-            onChange={(v) => set("sort_order", parseInt(v) || 0)}
-            placeholder="0"
-          />
-        </div>
-
-        <div className="flex gap-3">
-          <Button onClick={handleSave} disabled={saving} className="glow-gold font-display">
-            {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
-            {isNew ? "Create Bank Account" : "Save Changes"}
-          </Button>
-          <Button variant="outline" onClick={closeForm}>Cancel</Button>
-        </div>
-      </div>
-    </main>
-  );
-
-  return (
-    <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h2 className="font-display font-bold text-lg">Bank Accounts</h2>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            {list.length} total · {list.filter((b) => b.published).length} published · drag to reorder
-          </p>
-        </div>
-        <Button onClick={openNew} size="sm" className="glow-gold font-display">
-          <Plus className="w-4 h-4 mr-1.5" /> New Bank
-        </Button>
-      </div>
-
-      {list.length === 0 ? (
-        <div className="text-center py-20 border border-dashed border-border rounded-xl">
-          <Landmark className="w-10 h-10 mx-auto mb-3 text-muted-foreground opacity-40" />
-          <p className="text-sm text-muted-foreground mb-4">No bank accounts yet.</p>
-          <Button onClick={openNew} size="sm" variant="outline">
-            <Plus className="w-4 h-4 mr-1.5" /> Add your first bank
-          </Button>
-        </div>
-      ) : (
-        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <SortableContext items={list.map((b) => b.id)} strategy={verticalListSortingStrategy}>
-            <div className="space-y-3">
-              {list.map((bank) => (
-                <SortableBankRow key={bank.id} bank={bank} onEdit={openEdit} onToggle={togglePublished} onDelete={handleDelete} />
-              ))}
-            </div>
-          </SortableContext>
-        </DndContext>
-      )}
-    </main>
-  );
-}
-
-// ─── Field ────────────────────────────────────────────────────────────────────
-
-function Field({ label, value, onChange, placeholder, long }: {
-  label: string; value: string; onChange: (v: string) => void;
-  placeholder?: string; long?: boolean;
-}) {
-  const ref = useRef<HTMLTextAreaElement>(null);
-  const resize = useCallback(() => {
-    const el = ref.current;
-    if (!el) return;
-    el.style.height = "auto";
-    el.style.height = Math.max(long ? 80 : 36, el.scrollHeight) + "px";
-  }, [long]);
-  useEffect(() => { resize(); }, [value, resize]);
-
-  return (
-    <div>
-      <label className="block text-xs font-semibold text-foreground mb-1.5">{label}</label>
+    <div className="relative">
       <textarea
         ref={ref}
         value={value}
-        placeholder={placeholder}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => { onChange(e.target.value); resize(); }}
         onInput={resize}
-        rows={long ? 3 : 1}
+        rows={1}
         className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none overflow-hidden"
       />
     </div>
   );
 }
+
+// ─── MatchSnippet ──────────────────────────────────────────────────────────────────────────────
+
+function MatchSnippet({ text, term }: { text: string; term: string }) {
+  const lower = text.toLowerCase();
+  const idx = lower.indexOf(term.toLowerCase());
+  if (idx === -1) return null;
+  const start = Math.max(0, idx - 30);
+  const end = Math.min(text.length, idx + term.length + 30);
+  const before = text.slice(start, idx);
+  const match  = text.slice(idx, idx + term.length);
+  const after  = text.slice(idx + term.length, end);
+  return (
+    <p className="text-[11px] text-muted-foreground mb-1.5 font-mono">
+      {start > 0 && <span>…</span>}
+      {before}
+      <mark className="bg-primary/20 text-primary rounded px-0.5">{match}</mark>
+      {after}
+      {end < text.length && <span>…</span>}
+    </p>
+  );
+}
+
+// ─── Panels imported from separate files ─────────────────────────────────────────────────────────
+
+import { CaseStudiesPanel } from "@/components/admin/CaseStudiesPanel";
+import { JobsPanel } from "@/components/admin/JobsPanel";
+import { BanksPanel } from "@/components/admin/BanksPanel";
 
 export default Admin;
