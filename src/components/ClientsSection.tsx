@@ -48,6 +48,8 @@ const ClientsSection = () => {
 
   const logos: Logo[] = [];
   for (let i = 1; i <= MAX_SLOTS; i++) {
+    const enabled = get(`client_logo_${i}_enabled`, "true").trim();
+    if (enabled === "false") continue;
     const fallbackName = DEFAULT_NAMES[i - 1] ?? "";
     const fallbackUrl = DEFAULT_URLS[i] ?? "";
     const name = get(`client_logo_${i}_name`, fallbackName).trim();
