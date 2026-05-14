@@ -33,8 +33,8 @@ const COUNTRY_CODES = [
   { code: "+212", label: "Morocco" },
   { code: "+216", label: "Tunisia" },
   { code: "+213", label: "Algeria" },
-  { code: "+1",   label: "USA / Canada" },
-  { code: "+44",  label: "United Kingdom" },
+  { code: "+1",   label: "USA" },
+  { code: "+44",  label: "UK" },
   { code: "+49",  label: "Germany" },
   { code: "+33",  label: "France" },
   { code: "+90",  label: "Turkey" },
@@ -186,7 +186,7 @@ const ContactSection = () => {
                     <SelectContent
                       align="start"
                       sideOffset={6}
-                      className="max-h-72 w-[230px] p-1.5"
+                      className="max-h-72 w-[190px] p-1.5"
                     >
                       {COUNTRY_CODES.map((c) => (
                         <SelectPrimitive.Item
