@@ -159,7 +159,7 @@ const LogoCell = ({ logo }: { logo: Logo }) => (
         loading="lazy"
         decoding="async"
         className="max-h-12 max-w-[160px] w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ filter: "invert(1)" }}
+        style={{ filter: "grayscale(1) invert(1)" }}
         onError={(e) => {
           // Image failed -> swap to text wordmark so the cell is never empty
           const el = e.currentTarget;
