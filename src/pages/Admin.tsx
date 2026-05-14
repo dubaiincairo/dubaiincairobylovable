@@ -831,8 +831,7 @@ function SEOFieldRow({
 }) {
   const len = value.replace(/<[^>]+>/g, "").length;
   return (
-    <div className={cn("px-5 py-3.5 transition-colors", isEdited && "bg-primary/[0.03]")}
-    >
+    <div className={cn("px-5 py-3.5 transition-colors", isEdited && "bg-primary/[0.03]")}>
       <div className="flex items-center gap-2 mb-1.5">
         <label className="text-xs font-semibold text-foreground">{label}</label>
         {isEdited && (
