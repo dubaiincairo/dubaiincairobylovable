@@ -59,6 +59,10 @@ const Footer = () => {
           <Link to="/faq" className="hover:text-primary transition-colors duration-200">
             FAQ
           </Link>
+          <span className="text-border">·</span>
+          <Link to="/partner/login" className="hover:text-primary transition-colors duration-200">
+            Partner Sign In
+          </Link>
         </div>
 
         <span className="text-xs whitespace-pre-line">{get("footer_copyright", "© 2025 Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC · All Rights Reserved")}</span>
