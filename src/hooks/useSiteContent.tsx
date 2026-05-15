@@ -38,9 +38,12 @@ const flattenSanityDoc = (doc: Record<string, unknown>): ContentMap => {
   const out: ContentMap = {};
   for (const [k, v] of Object.entries(doc)) {
     if (SANITY_SYSTEM_FIELDS.has(k)) continue;
-    if (typeof v === "string") out[k] = v;
-    else if (v == null) out[k] = "";
-    else out[k] = String(v);
+    // Only keep non-empty string values. Empty/null fields in Sanity must
+    // NOT overwrite a real value coming from Supabase /admin during the
+    // transition — otherwise saving a field in /admin shows nothing on the
+    // site because the empty Sanity field still "wins" the merge.
+    if (typeof v === "string" && v !== "") out[k] = v;
+    else if (typeof v === "number" || typeof v === "boolean") out[k] = String(v);
   }
   return out;
 };
