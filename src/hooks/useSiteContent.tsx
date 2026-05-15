@@ -3,11 +3,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { sanity } from "@/integrations/sanity/client";
 import { SECTION_TYPES } from "@/integrations/sanity/sections";
 
-// Content is sourced from two places: Sanity Studio (primary, going forward)
-// and the legacy Supabase `site_content` table (fallback, edited via /admin).
-// Sanity wins on overlap. Empty strings still collapse to the code-level
-// fallback in `get()` so clearing a field reveals the default again — same UX
-// as before.
+// Content is sourced from two places:
+//   1. Supabase `site_content` table — edited via /admin (PRIMARY).
+//   2. Sanity Studio at dubaiincairo.sanity.studio — fallback for any key
+//      /admin hasn't touched yet.
+// Admin/Supabase wins on overlap. Clearing a field in /admin (saving "")
+// collapses to the code-level fallback in `get()` so the default reappears.
 
 type ContentMap = Record<string, string>;
 
@@ -23,7 +24,9 @@ const SiteContentContext = createContext<SiteContentContextType>({
   get: () => "",
 });
 
-const CACHE_KEY = "site_content_cache_v2";
+// Bumped to v3 when /admin became primary again — old caches treated Sanity
+// as the source of truth and would shadow admin edits until they expired.
+const CACHE_KEY = "site_content_cache_v3";
 
 const SANITY_SYSTEM_FIELDS = new Set([
   "_id",
@@ -38,10 +41,8 @@ const flattenSanityDoc = (doc: Record<string, unknown>): ContentMap => {
   const out: ContentMap = {};
   for (const [k, v] of Object.entries(doc)) {
     if (SANITY_SYSTEM_FIELDS.has(k)) continue;
-    // Only keep non-empty string values. Empty/null fields in Sanity must
-    // NOT overwrite a real value coming from Supabase /admin during the
-    // transition — otherwise saving a field in /admin shows nothing on the
-    // site because the empty Sanity field still "wins" the merge.
+    // Only keep non-empty string values — empty Sanity fields must never
+    // shadow a Supabase value.
     if (typeof v === "string" && v !== "") out[k] = v;
     else if (typeof v === "number" || typeof v === "boolean") out[k] = String(v);
   }
@@ -77,9 +78,10 @@ export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
   const [content, setContent] = useState<ContentMap>(() => readCache());
   const [loading, setLoading] = useState<boolean>(() => Object.keys(readCache()).length === 0);
 
-  // Recompute merged map whenever either source changes. Sanity wins on overlap.
+  // Recompute merged map whenever either source changes. Supabase (/admin)
+  // wins on overlap — Sanity only fills in keys /admin hasn't set.
   useEffect(() => {
-    const merged: ContentMap = { ...supabaseMap, ...sanityMap };
+    const merged: ContentMap = { ...sanityMap, ...supabaseMap };
     setContent(merged);
     writeCache(merged);
   }, [supabaseMap, sanityMap]);

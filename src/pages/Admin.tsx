@@ -1253,7 +1253,7 @@ function ImageUploadField({ value, onChange, fieldKey }: { value: string; onChan
     // Validate type
     const allowed = ["image/svg+xml", "image/png", "image/x-icon", "image/jpeg", "image/webp"];
     if (!allowed.includes(file.type)) {
-      toast({ title: "Unsupported file type", description: "Please upload an SVG, PNG, ICO, or WebP file.", variant: "destructive" });
+      toast({ title: "Unsupported file type", description: "Please upload an SVG, PNG, JPEG, WebP, or ICO file.", variant: "destructive" });
       return;
     }
     // Max 2 MB
@@ -1322,7 +1322,7 @@ function ImageUploadField({ value, onChange, fieldKey }: { value: string; onChan
           {uploading
             ? <Loader2 className="w-3 h-3 animate-spin" />
             : <Upload className="w-3 h-3" />}
-          {uploading ? "Uploading…" : "Upload SVG / PNG / ICO"}
+          {uploading ? "Uploading…" : "Upload image"}
         </button>
         {isExternal && (
           <p className="text-[10px] text-muted-foreground">Hosted at: {value.slice(0, 60)}{value.length > 60 ? "…" : ""}</p>
