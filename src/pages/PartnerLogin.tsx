@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Clock } from "lucide-react";
+import { Loader2, Clock, Mail } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
 
 type Mode = "signin" | "signup";
@@ -18,6 +18,7 @@ const PartnerLogin = () => {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [checkInbox, setCheckInbox] = useState<string | null>(null);
 
   // If already authenticated, skip the form.
   useEffect(() => {
@@ -31,7 +32,7 @@ const PartnerLogin = () => {
     setLoading(true);
 
     if (mode === "signup") {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -44,8 +45,15 @@ const PartnerLogin = () => {
         toast({ title: "Sign-up failed", description: error.message, variant: "destructive" });
         return;
       }
-      toast({ title: "Account created", description: "Check your inbox to confirm your email, then sign in." });
-      setMode("signin");
+
+      // If email confirmation is OFF in Supabase, signUp returns a live
+      // session — straight into the tracker. If it's ON, session is null
+      // and we show the "check your inbox" panel.
+      if (data.session) {
+        navigate("/partner", { replace: true });
+        return;
+      }
+      setCheckInbox(email);
       return;
     }
 
@@ -57,6 +65,33 @@ const PartnerLogin = () => {
     }
     navigate("/partner", { replace: true });
   };
+
+  if (checkInbox) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center px-6">
+        <div className="w-full max-w-sm text-center">
+          <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+            <Mail className="w-6 h-6 text-primary" aria-hidden="true" />
+          </div>
+          <h1 className="text-2xl font-display font-bold mb-2">Check your inbox</h1>
+          <p className="text-sm text-muted-foreground mb-6">
+            We sent a confirmation link to <span className="text-foreground font-mono">{checkInbox}</span>.
+            Click it to verify your email, then come back here to sign in.
+          </p>
+          <Button
+            onClick={() => { setCheckInbox(null); setMode("signin"); }}
+            variant="outline"
+            className="w-full"
+          >
+            Back to sign in
+          </Button>
+          <a href="/" className="block mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors">
+            ← Back to website
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-6">
