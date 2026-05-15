@@ -109,7 +109,7 @@ const Navbar = () => {
         <a
           href="/"
           aria-label="Dubai in Cairo — home"
-          className="font-display font-bold text-xl inline-flex items-center min-h-[44px]"
+          className="font-display font-bold text-2xl md:text-[1.65rem] inline-flex items-center min-h-[44px] tracking-tight"
         >
           <span className="text-gradient-gold">{get("nav_brand_1", "Dubai")}</span>
           <span className="text-foreground">{get("nav_brand_2", "in")}</span>
