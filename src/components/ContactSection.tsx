@@ -14,7 +14,9 @@ import { RichText } from "@/components/ui/rich-text";
 import {
   Select,
   SelectContent,
+  SelectItem,
   SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { cn } from "@/lib/utils";
@@ -151,7 +153,7 @@ const ContactSection = () => {
               </Button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="rounded-xl glass-card p-6 md:p-7 space-y-4">
+            <form onSubmit={handleSubmit} className="rounded-xl glass-card p-5 md:p-6 space-y-3.5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="block text-xs font-medium text-muted-foreground mb-1">
@@ -221,32 +223,29 @@ const ContactSection = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-muted-foreground mb-1.5">
+                <label htmlFor="service" className="block text-xs font-medium text-muted-foreground mb-1">
                   {get("contact_service_label", "Service of interest")}
                 </label>
-                <div className="flex flex-wrap gap-1.5">
-                  {SERVICES.map((s) => (
-                    <button
-                      key={s}
-                      type="button"
-                      onClick={() => setSelectedService((prev) => (prev === s ? "" : s))}
-                      className={`px-3 py-1 rounded-full text-xs font-medium border transition-all duration-200 ${
-                        selectedService === s
-                          ? "border-primary bg-primary/10 text-primary"
-                          : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                      }`}
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
+                <Select value={selectedService} onValueChange={setSelectedService}>
+                  <SelectTrigger
+                    id="service"
+                    className="bg-background/60 border-border hover:border-primary/40 data-[state=open]:border-primary/60 transition-colors"
+                  >
+                    <SelectValue placeholder="Select a service (optional)" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {SERVICES.map((s) => (
+                      <SelectItem key={s} value={s}>{s}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-xs font-medium text-muted-foreground mb-1">
                   {get("contact_message_label", "Message *")}
                 </label>
-                <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")} rows={4} className="bg-background/60 border-border resize-none" />
+                <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")} rows={3} className="bg-background/60 border-border resize-none" />
                 {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
               </div>
 
