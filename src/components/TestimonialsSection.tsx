@@ -157,7 +157,7 @@ const TestimonialsSection = () => {
           opts={{ loop: true, align: "start" }}
           className="w-full"
         >
-          <CarouselContent className="-ml-4 md:-ml-6 items-start">
+          <CarouselContent className="-ml-4 md:-ml-6 items-start py-4">
             {testimonials.map((t, i) => (
               <CarouselItem key={t.id} className="pl-4 md:pl-6 basis-[88%] md:basis-1/2 lg:basis-1/3">
                 <TestimonialCard t={t} index={i} />

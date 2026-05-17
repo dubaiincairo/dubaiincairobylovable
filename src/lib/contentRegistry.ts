@@ -234,6 +234,7 @@ export const contentRegistry: ContentField[] = [
   { section: "contact", key: "contact_subtext",             label: "Section Subtext",                         defaultValue: "We're committed to delivering the best digital marketing and eCommerce services with measurable impact, flexible execution, and competitive pricing." },
   { section: "contact", key: "contact_trust_1",             label: "Trust Badge 1",                           defaultValue: "Response within 24 hours" },
   { section: "contact", key: "contact_trust_2",             label: "Trust Badge 2",                           defaultValue: "Free consultation call" },
+  { section: "contact", key: "contact_trust_3",             label: "Trust Badge 3",                           defaultValue: "Transparent pricing" },
   { section: "contact", key: "contact_name_label",          label: "Form — Name Label",                       defaultValue: "Name *" },
   { section: "contact", key: "contact_name_placeholder",    label: "Form — Name Placeholder",                 defaultValue: "Your name" },
   { section: "contact", key: "contact_email_label",         label: "Form — Email Label",                      defaultValue: "Email *" },

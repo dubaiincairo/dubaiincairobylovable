@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, CheckCircle, Loader2, MessageSquare, Clock } from "lucide-react";
+import { ArrowRight, Mail, CheckCircle, Loader2, MessageSquare, Clock, Tag } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -137,6 +137,12 @@ const ContactSection = () => {
                 <MessageSquare className="w-4 h-4 text-primary" />
               </div>
               <span>{get("contact_trust_2", "Free consultation call")}</span>
+            </div>
+            <div className="inline-flex items-center gap-3 text-sm text-foreground">
+              <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                <Tag className="w-4 h-4 text-primary" />
+              </div>
+              <span>{get("contact_trust_3", "Transparent pricing")}</span>
             </div>
           </div>
         </motion.div>
