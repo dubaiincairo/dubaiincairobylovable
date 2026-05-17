@@ -81,8 +81,9 @@ type SectionLayout = { label: string; keys: string[] }[];
 const SECTION_LAYOUT: Record<string, SectionLayout> = {
   nav: [
     { label: "Brand Wordmark",     keys: ["nav_brand_1", "nav_brand_2", "nav_brand_3", "nav_favicon_url"] },
-    { label: "Top-level Links",    keys: ["nav_link_home", "nav_link_services", "nav_link_careers", "nav_link_partnerships"] },
+    { label: "Top-level Links",    keys: ["nav_link_home", "nav_link_services", "nav_link_company", "nav_link_partnerships"] },
     { label: "Services Menu",      keys: ["nav_link_studios", "nav_link_tech", "nav_link_faq"] },
+    { label: "Company Menu",       keys: ["nav_link_careers", "nav_link_investors"] },
     { label: "Partnerships Menu",  keys: ["nav_partner_odoo", "nav_partner_yanolja", "nav_partner_zoho"] },
     { label: "CTA",                keys: ["nav_cta"] },
   ],
@@ -2201,7 +2202,7 @@ function ClientsLogoPanel({
 const NAV_TOP_DEFAULTS: { id: string; labelKey: string; defaultLabel: string }[] = [
   { id: "home",         labelKey: "nav_link_home",         defaultLabel: "Home" },
   { id: "services",     labelKey: "nav_link_services",     defaultLabel: "Services" },
-  { id: "careers",      labelKey: "nav_link_careers",      defaultLabel: "Careers" },
+  { id: "company",      labelKey: "nav_link_company",      defaultLabel: "Company" },
   { id: "partnerships", labelKey: "nav_link_partnerships", defaultLabel: "Partnerships" },
 ];
 

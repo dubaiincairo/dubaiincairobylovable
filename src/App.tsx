@@ -13,6 +13,7 @@ import ResetPassword from "./pages/ResetPassword";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudy from "./pages/CaseStudy";
 import Careers from "./pages/Careers";
+import Investors from "./pages/Investors";
 import OdooPartner from "./pages/OdooPartner";
 import OdooPartnerPage from "./pages/OdooPartnerPage";
 import YanoljaPartnerPage from "./pages/YanoljaPartnerPage";
@@ -71,6 +72,7 @@ const AnimatedRoutes = () => {
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/case-studies/:slug" element={<CaseStudy />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/investors" element={<Investors />} />
           {/* Partnerships — redirect legacy /partnerships to Odoo page */}
           <Route path="/partnerships" element={<Navigate to="/partnerships/odoo" replace />} />
           <Route path="/odoo-partner" element={<Navigate to="/partnerships/odoo" replace />} />

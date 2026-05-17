@@ -57,6 +57,10 @@ const Navbar = () => {
     { href: "/tech",    label: get("nav_link_tech",    "Technology") },
     { href: "/faq",     label: get("nav_link_faq",     "FAQ") },
   ];
+  const companyLinks = [
+    { href: "/careers",   label: get("nav_link_careers",   "Careers") },
+    { href: "/investors", label: get("nav_link_investors", "Investors") },
+  ];
   const partnerLinks = [
     { href: "/partnerships/odoo",    label: get("nav_partner_odoo",    "Odoo ERP") },
     { href: "/partnerships/yanolja", label: get("nav_partner_yanolja", "Yanolja Cloud") },
@@ -67,12 +71,12 @@ const Navbar = () => {
   const topById: Record<string, TopItem> = {
     home:         { kind: "link",     id: "home",         href: "/",        label: get("nav_link_home", "Home") },
     services:     { kind: "dropdown", id: "services",     label: get("nav_link_services", "Services"),     items: serviceLinks },
-    careers:      { kind: "link",     id: "careers",      href: "/careers", label: get("nav_link_careers", "Careers") },
+    company:      { kind: "dropdown", id: "company",      label: get("nav_link_company",  "Company"),      items: companyLinks },
     partnerships: { kind: "dropdown", id: "partnerships", label: get("nav_link_partnerships", "Partnerships"), items: partnerLinks },
   };
   const topOrder = parseOrder(
-    get("nav_top_order", "home,services,careers,partnerships"),
-    ["home", "services", "careers", "partnerships"],
+    get("nav_top_order", "home,services,company,partnerships"),
+    ["home", "services", "company", "partnerships"],
   );
   const topItems: TopItem[] = topOrder.map((id) => topById[id]).filter(Boolean);
 
