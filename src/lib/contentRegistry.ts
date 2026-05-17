@@ -36,6 +36,7 @@ export const sectionOrder = [
   "studios",
   "careers",
   "investors",
+  "whatsapp",
   "odoo",
   "yanolja",
   "zoho",
@@ -60,6 +61,7 @@ export const sectionLabels: Record<string, string> = {
   studios:      "Studios Page",
   careers:      "Careers Page",
   investors:    "Investors Page",
+  whatsapp:     "WhatsApp Chat Widget",
   odoo:         "Odoo Partner Page",
   yanolja:      "Yanolja Partner Page",
   zoho:         "Zoho Partner Page",
@@ -326,6 +328,24 @@ export const contentRegistry: ContentField[] = [
   { section: "investors", key: "investor_contact_email",      label: "Contact — Email",                       defaultValue: "investors@dubaiincairo.com" },
   { section: "investors", key: "seo_investors_title",         label: "SEO — Page Title",                      defaultValue: "Investor Relations · Dubai in Cairo" },
   { section: "investors", key: "seo_investors_description",   label: "SEO — Meta Description",                defaultValue: "Investor relations for Dubai in Cairo — a profitable AI-first digital growth studio serving the MENA region." },
+
+  // ──────────────── WhatsApp Chat Widget ────────────────
+  { section: "whatsapp", key: "wa_phone",            label: "Phone Number (digits only, no +)",   defaultValue: "201225250554" },
+  { section: "whatsapp", key: "wa_teaser_title",     label: "Teaser Bubble — Title",              defaultValue: "👋 Hi! Let's start a conversation" },
+  { section: "whatsapp", key: "wa_teaser_cta",       label: "Teaser Bubble — CTA",                defaultValue: "Tap to chat →" },
+  { section: "whatsapp", key: "wa_header_name",      label: "Chat Header — Brand Name",           defaultValue: "Dubai in Cairo" },
+  { section: "whatsapp", key: "wa_header_status",    label: "Chat Header — Status Line",          defaultValue: "Typically replies within 1 hour" },
+  { section: "whatsapp", key: "wa_opener_text",      label: "Opening Message",                    defaultValue: "👋 Hi there! How can we help you today?" },
+  { section: "whatsapp", key: "wa_opener_hint",      label: "Opening Message — Sub-hint",         defaultValue: "Pick one below" },
+  { section: "whatsapp", key: "wa_reply_1_label",    label: "Quick Reply 1 — Button Label",       defaultValue: "I'd like to discuss a project" },
+  { section: "whatsapp", key: "wa_reply_1_message",  label: "Quick Reply 1 — Sent Message",       defaultValue: "Hi! I'd like to discuss a project with your team." },
+  { section: "whatsapp", key: "wa_reply_2_label",    label: "Quick Reply 2 — Button Label",       defaultValue: "I'd like a free consultation" },
+  { section: "whatsapp", key: "wa_reply_2_message",  label: "Quick Reply 2 — Sent Message",       defaultValue: "Hi! I'd like to book a free 30-minute consultation." },
+  { section: "whatsapp", key: "wa_reply_3_label",    label: "Quick Reply 3 — Button Label",       defaultValue: "I have a quick question" },
+  { section: "whatsapp", key: "wa_reply_3_message",  label: "Quick Reply 3 — Sent Message",       defaultValue: "Hi! I have a question about your services." },
+  { section: "whatsapp", key: "wa_reply_4_label",    label: "Quick Reply 4 — Button Label",       defaultValue: "I'm exploring a partnership" },
+  { section: "whatsapp", key: "wa_reply_4_message",  label: "Quick Reply 4 — Sent Message",       defaultValue: "Hi! I'm interested in exploring a partnership with Dubai in Cairo." },
+  { section: "whatsapp", key: "wa_footer_note",      label: "Footer Note",                        defaultValue: "Picks open WhatsApp with the message ready to send" },
 
   // ──────────────── Odoo Partner Page ────────────────
   // Partnerships hero (shown above the Odoo content on /partnerships and /partnerships/odoo)

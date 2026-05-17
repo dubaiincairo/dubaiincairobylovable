@@ -6,31 +6,8 @@ import {
   COOKIE_CONSENT_STORAGE_KEY,
 } from "@/lib/cookieConsent";
 import { useMotionPref } from "@/lib/animations";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
-const WHATSAPP_NUMBER = "201225250554";
-
-// Catchy quick-reply options the visitor can tap. Each opens WhatsApp with
-// the chosen text already filled in so the conversation starts on-topic.
-const QUICK_REPLIES: { label: string; message: string }[] = [
-  {
-    label: "I'd like to discuss a project",
-    message: "Hi! I'd like to discuss a project with your team.",
-  },
-  {
-    label: "I'd like a free consultation",
-    message: "Hi! I'd like to book a free 30-minute consultation.",
-  },
-  {
-    label: "I have a quick question",
-    message: "Hi! I have a question about your services.",
-  },
-  {
-    label: "I'm exploring a partnership",
-    message: "Hi! I'm interested in exploring a partnership with Dubai in Cairo.",
-  },
-];
-
-const TEASER_TEXT = "👋 Hi! Let's start a conversation";
 const DISMISS_KEY = "wa_teaser_dismissed";
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -45,11 +22,29 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 );
 
 const WhatsAppButton = () => {
+  const { get } = useSiteContent();
   const [open, setOpen] = useState(false);
   const [showTeaser, setShowTeaser] = useState(false);
   const [consentPending, setConsentPending] = useState(false);
   const { shouldReduce } = useMotionPref();
   const panelRef = useRef<HTMLDivElement>(null);
+
+  // ── CMS-driven copy ──────────────────────────────────────────────────────
+  const phone        = get("wa_phone",         "201225250554").replace(/[^\d]/g, "");
+  const teaserTitle  = get("wa_teaser_title",  "👋 Hi! Let's start a conversation");
+  const teaserCta    = get("wa_teaser_cta",    "Tap to chat →");
+  const headerName   = get("wa_header_name",   "Dubai in Cairo");
+  const headerStatus = get("wa_header_status", "Typically replies within 1 hour");
+  const openerText   = get("wa_opener_text",   "👋 Hi there! How can we help you today?");
+  const openerHint   = get("wa_opener_hint",   "Pick one below");
+  const footerNote   = get("wa_footer_note",   "Picks open WhatsApp with the message ready to send");
+
+  const quickReplies = [1, 2, 3, 4]
+    .map((n) => ({
+      label:   get(`wa_reply_${n}_label`,   ""),
+      message: get(`wa_reply_${n}_message`, ""),
+    }))
+    .filter((r) => r.label && r.message);
 
   // Lift the button above the cookie banner if consent hasn't been recorded
   useEffect(() => {
@@ -63,7 +58,7 @@ const WhatsAppButton = () => {
   }, []);
 
   // Auto-reveal the catchy teaser bubble after 4s — unless the visitor has
-  // already dismissed it in this browser
+  // already dismissed it in this browser session
   useEffect(() => {
     if (sessionStorage.getItem(DISMISS_KEY) === "1") return;
     const t = setTimeout(() => setShowTeaser(true), 4000);
@@ -93,7 +88,7 @@ const WhatsAppButton = () => {
   };
 
   const send = (message: string) => {
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
     setOpen(false);
   };
@@ -124,10 +119,10 @@ const WhatsAppButton = () => {
                 <WhatsAppIcon className="w-5 h-5 fill-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold leading-tight">Dubai in Cairo</p>
+                <p className="text-sm font-semibold leading-tight">{headerName}</p>
                 <p className="text-[11px] text-white/80 leading-tight flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#4ade80]" />
-                  Typically replies within 1 hour
+                  {headerStatus}
                 </p>
               </div>
               <button
@@ -144,16 +139,16 @@ const WhatsAppButton = () => {
               {/* Incoming bubble */}
               <div className="flex">
                 <div className="max-w-[85%] rounded-2xl rounded-tl-md bg-card border border-border px-4 py-2.5 shadow-sm">
-                  <p className="text-sm text-foreground leading-relaxed">
-                    👋 Hi there! How can we help you today?
-                  </p>
-                  <p className="text-[10px] text-muted-foreground/70 mt-1">Pick one below</p>
+                  <p className="text-sm text-foreground leading-relaxed">{openerText}</p>
+                  {openerHint && (
+                    <p className="text-[10px] text-muted-foreground/70 mt-1">{openerHint}</p>
+                  )}
                 </div>
               </div>
 
               {/* Quick replies — stacked outgoing-style options */}
               <div className="flex flex-col gap-2 mt-4 items-end">
-                {QUICK_REPLIES.map((r) => (
+                {quickReplies.map((r) => (
                   <button
                     key={r.label}
                     type="button"
@@ -167,11 +162,11 @@ const WhatsAppButton = () => {
             </div>
 
             {/* Footer */}
-            <div className="px-4 py-2.5 bg-card border-t border-border text-center">
-              <p className="text-[10px] text-muted-foreground">
-                Picks open WhatsApp with the message ready to send
-              </p>
-            </div>
+            {footerNote && (
+              <div className="px-4 py-2.5 bg-card border-t border-border text-center">
+                <p className="text-[10px] text-muted-foreground">{footerNote}</p>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -191,10 +186,12 @@ const WhatsAppButton = () => {
               onClick={() => { setOpen(true); dismissTeaser(); }}
               className="px-4 py-2.5 text-left hover:bg-muted/40 transition-colors group"
             >
-              <p className="text-sm font-medium text-foreground leading-snug">{TEASER_TEXT}</p>
-              <p className="text-[11px] text-primary mt-0.5 group-hover:text-primary/80 transition-colors">
-                Tap to chat →
-              </p>
+              <p className="text-sm font-medium text-foreground leading-snug">{teaserTitle}</p>
+              {teaserCta && (
+                <p className="text-[11px] text-primary mt-0.5 group-hover:text-primary/80 transition-colors">
+                  {teaserCta}
+                </p>
+              )}
             </button>
             <button
               type="button"

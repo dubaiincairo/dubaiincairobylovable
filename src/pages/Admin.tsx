@@ -11,7 +11,7 @@ import {
   Upload, ImageIcon, GripVertical, Mail, Menu, LayoutDashboard, MessageSquare,
   Globe, Check, Info,
   Home, BarChart3, FileText, Zap, Sparkles, LayoutGrid, User, MapPin, ScrollText,
-  Palette, Wrench, Boxes, Building2, Workflow, Compass, Link2, Handshake, type LucideIcon,
+  Palette, Wrench, Boxes, Building2, Workflow, Compass, Link2, Handshake, TrendingUp, type LucideIcon,
 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
@@ -36,8 +36,8 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   nav: Compass, hero: Home, stats: BarChart3, about: Info, edges: Zap,
   values: Sparkles, services: LayoutGrid, founder: User, clients: Handshake,
   tech: Wrench, google: MapPin, legal: ScrollText, contact: Mail, footer: Link2,
-  careers: Briefcase, odoo: Boxes, yanolja: Building2, zoho: Workflow,
-  studios: Palette,
+  careers: Briefcase, investors: TrendingUp, odoo: Boxes, yanolja: Building2, zoho: Workflow,
+  studios: Palette, whatsapp: MessageSquare,
 };
 
 const SectionIcon = ({ section, className }: { section: string; className?: string }) => {
@@ -196,6 +196,17 @@ const SECTION_LAYOUT: Record<string, SectionLayout> = {
     { label: "Value Body",         keys: ["zoho_value_body"] },
     { label: "Suites Section",     keys: ["zoho_suites_badge", "zoho_suites_h2", "zoho_suites_h2_accent"] },
     { label: "CTA",                keys: ["zoho_cta_badge", "zoho_cta_h2", "zoho_cta_body", "zoho_cta_btn"] },
+  ],
+  whatsapp: [
+    { label: "Phone",            keys: ["wa_phone"] },
+    { label: "Teaser Bubble",    keys: ["wa_teaser_title", "wa_teaser_cta"] },
+    { label: "Chat Header",      keys: ["wa_header_name", "wa_header_status"] },
+    { label: "Opening Message",  keys: ["wa_opener_text", "wa_opener_hint"] },
+    { label: "Quick Reply 1",    keys: ["wa_reply_1_label", "wa_reply_1_message"] },
+    { label: "Quick Reply 2",    keys: ["wa_reply_2_label", "wa_reply_2_message"] },
+    { label: "Quick Reply 3",    keys: ["wa_reply_3_label", "wa_reply_3_message"] },
+    { label: "Quick Reply 4",    keys: ["wa_reply_4_label", "wa_reply_4_message"] },
+    { label: "Footer Note",      keys: ["wa_footer_note"] },
   ],
 };
 
