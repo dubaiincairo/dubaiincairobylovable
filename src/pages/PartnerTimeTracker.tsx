@@ -213,7 +213,7 @@ const PartnerTimeTracker = () => {
     <div className="min-h-screen bg-background">
       {/* Top bar */}
       <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between gap-3">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between gap-3">
           <a href="/" className="font-display font-bold text-base inline-flex items-center gap-2">
             <Clock className="w-4 h-4 text-primary" aria-hidden="true" />
             <span className="text-gradient-gold">Time</span>
@@ -232,7 +232,7 @@ const PartnerTimeTracker = () => {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 md:px-6 py-6">
+      <main className="max-w-6xl mx-auto px-4 md:px-6 py-6">
         {/* Week navigation + summary */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
           <div className="flex items-center gap-2">

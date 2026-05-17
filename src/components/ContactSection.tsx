@@ -109,7 +109,7 @@ const ContactSection = () => {
     <section id="contact" className="relative py-6 md:py-10 px-6 overflow-hidden">
       <div className="absolute top-1/2 right-0 w-[480px] h-[480px] rounded-full bg-primary/4 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-14 items-start">
+      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-14 items-start">
 
         {/* LEFT — left-aligned header + body + trust signals (matches About/Founder rhythm) */}
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
@@ -153,7 +153,10 @@ const ContactSection = () => {
             <div className="rounded-xl glass-card p-8 md:p-10 flex flex-col items-center gap-4 text-center">
               <CheckCircle className="w-12 h-12 text-primary" />
               <h3 className="text-2xl font-display font-semibold">{get("contact_success_title", "Thank You!")}</h3>
-              <p className="text-muted-foreground">{get("contact_success_msg", "We'll get back to you within 24 hours.")}</p>
+              <RichText
+                html={get("contact_success_msg", "We'll get back to you within 24 hours.")}
+                className="text-muted-foreground"
+              />
               <Button variant="outline" className="mt-4" onClick={() => setIsSubmitted(false)}>
                 {get("contact_success_btn", "Send Another Message")}
               </Button>

@@ -132,7 +132,7 @@ const TestimonialsSection = () => {
       />
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-primary/4 blur-[140px] translate-x-1/3 -translate-y-1/2 pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative max-w-6xl mx-auto px-6">
         <motion.div
           className="text-center mb-6 md:mb-12"
           variants={fadeUp}

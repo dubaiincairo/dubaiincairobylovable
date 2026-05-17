@@ -66,7 +66,7 @@ const GoogleBusinessWidget = () => {
     <section className="relative py-8 md:py-12 px-6 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 100%, hsl(38 80% 55% / 0.04) 0%, transparent 60%)' }} />
 
-      <div className="relative max-w-7xl mx-auto space-y-6">
+      <div className="relative max-w-6xl mx-auto space-y-6">
 
         <motion.div
           className="grid md:grid-cols-3 gap-6"

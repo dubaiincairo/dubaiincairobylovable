@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useContactModal } from "@/context/ContactModalContext";
+import { RichText } from "@/components/ui/rich-text";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -173,7 +174,10 @@ export const ContactModal = () => {
                   <div className="flex flex-col items-center gap-3 py-8 text-center">
                     <CheckCircle className="w-10 h-10 text-primary" />
                     <h3 className="text-lg font-display font-semibold">{get("contact_success_title", "Thank You!")}</h3>
-                    <p className="text-sm text-muted-foreground">{get("contact_success_msg", "We'll get back to you within 24 hours.")}</p>
+                    <RichText
+                      html={get("contact_success_msg", "We'll get back to you within 24 hours.")}
+                      className="text-sm text-muted-foreground"
+                    />
                     <Button variant="outline" size="sm" className="mt-2" onClick={handleClose}>
                       Close
                     </Button>

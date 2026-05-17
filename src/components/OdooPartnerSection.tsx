@@ -58,7 +58,7 @@ const OdooPartnerSection = () => (
       style={{ backgroundImage: "repeating-linear-gradient(-45deg, hsl(38 80% 55%), hsl(38 80% 55%) 1px, transparent 1px, transparent 40px)" }}
     />
 
-    <div className="relative max-w-7xl mx-auto">
+    <div className="relative max-w-6xl mx-auto">
       {/* Header */}
       <motion.div
         className="text-center mb-8 md:mb-12"

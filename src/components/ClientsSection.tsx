@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
+import { RichText } from "@/components/ui/rich-text";
 
 const MAX_SLOTS = 24;
 const GAP = 16;
@@ -44,7 +45,7 @@ const ClientsSection = () => {
         style={{ background: "radial-gradient(ellipse, hsl(38 80% 55% / 0.05), transparent 70%)" }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative max-w-6xl mx-auto px-6">
         <motion.div className="text-center mb-8" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
             {get("clients_subtitle", "Success Partners")}
@@ -52,9 +53,10 @@ const ClientsSection = () => {
           <h2 className="text-2xl md:text-3xl font-display font-bold mb-2">
             {get("clients_headline", "Trusted by Brands That Mean Business")}
           </h2>
-          <p className="text-muted-foreground text-sm max-w-xl mx-auto">
-            {get("clients_description", "From global pharmaceutical giants to beloved local names.")}
-          </p>
+          <RichText
+            html={get("clients_description", "From global pharmaceutical giants to beloved local names.")}
+            className="text-muted-foreground text-sm max-w-xl mx-auto"
+          />
         </motion.div>
       </div>
 

@@ -55,7 +55,7 @@ const CaseStudies = () => {
       <section className="relative pt-24 pb-8 md:pt-28 md:pb-10 px-6 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)' }} />
 
-        <div className="relative max-w-7xl mx-auto">
+        <div className="relative max-w-6xl mx-auto">
           <motion.div variants={fadeUp} initial="hidden" animate="visible">
             <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8">
               <ArrowLeft className="w-4 h-4" /> Back to Home
@@ -96,7 +96,7 @@ const CaseStudies = () => {
       </section>
 
       <section className="relative px-6 pb-20">
-        <div className="relative max-w-7xl mx-auto">
+        <div className="relative max-w-6xl mx-auto">
           {loading ? (
             <div className="flex justify-center py-20">
               <div className="w-6 h-6 rounded-full border-2 border-primary border-t-transparent animate-spin" />

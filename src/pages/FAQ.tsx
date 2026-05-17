@@ -325,7 +325,7 @@ const FAQ = () => {
                 "radial-gradient(circle, hsl(38 80% 55% / 0.06), transparent 70%)",
             }}
           />
-          <div className="relative max-w-7xl mx-auto">
+          <div className="relative max-w-6xl mx-auto">
             <motion.div variants={fadeUp} initial="hidden" animate="visible">
               <Link
                 to="/"
@@ -355,7 +355,7 @@ const FAQ = () => {
 
         {/* ── Body: sidebar + accordion ─────────────────────────── */}
         <section className="relative px-6 pb-14">
-          <div className="relative max-w-7xl mx-auto">
+          <div className="relative max-w-6xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-8 items-start">
 
               {/* ── Category sidebar ── */}
