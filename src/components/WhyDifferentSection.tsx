@@ -45,7 +45,7 @@ const WhyDifferentSection = () => {
   ];
 
   return (
-    <section ref={sectionRef as RefObject<HTMLElement>} className="relative py-6 md:py-10 px-6 overflow-hidden">
+    <section id="why" ref={sectionRef as RefObject<HTMLElement>} className="relative py-6 md:py-10 px-6 overflow-hidden">
       {/* Radial glow — scroll-parallax drifts the orb downward as section passes */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] pointer-events-none">
         <motion.div

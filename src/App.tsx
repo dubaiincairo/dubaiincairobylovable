@@ -46,7 +46,22 @@ const AnimatedRoutes = () => {
   return (
     <>
       <ScrollToTop />
-      {showChrome && <Navbar />}
+      {showChrome && (
+        <>
+          <Navbar />
+          {/* Top fade: solid background under the navbar fading to transparent
+              below, so page content scrolling up doesn't visually overlap the
+              navbar even with its semi-transparent backdrop. */}
+          <div
+            aria-hidden="true"
+            className="fixed top-0 left-0 right-0 h-[110px] pointer-events-none z-40"
+            style={{
+              background:
+                "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background)) 50%, transparent 100%)",
+            }}
+          />
+        </>
+      )}
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Index />} />

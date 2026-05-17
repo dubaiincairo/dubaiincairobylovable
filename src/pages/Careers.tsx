@@ -69,40 +69,82 @@ const Careers = () => {
           style={{ background: "radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)" }}
         />
         <div className="relative max-w-6xl mx-auto">
-          <motion.div variants={fadeUp} initial="hidden" animate="visible">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6"
+          >
+            <ArrowLeft className="w-4 h-4" /> Back to Home
+          </Link>
+
+          {/* 2-column hero — mirrors the homepage hero rhythm */}
+          <div className="grid md:grid-cols-2 gap-10 lg:gap-14 items-center">
+
+            {/* LEFT — copy + pills */}
+            <motion.div variants={fadeUp} initial="hidden" animate="visible">
+              <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
+                {get("careers_hero_badge", "We're Hiring")}
+              </span>
+
+              <h1 className="text-4xl md:text-6xl font-display font-bold mb-4 leading-tight">
+                {get("careers_hero_headline_1", "Build the Future of")}
+                <br />
+                <span className="text-gradient-gold">
+                  {get("careers_hero_headline_2", "Marketing with AI")}
+                </span>
+              </h1>
+
+              <RichText
+                html={get("careers_hero_body", "At Dubai in Cairo, we don't just deliver marketing solutions — we engineer growth using data, creativity, and AI-powered innovation.")}
+                className="text-muted-foreground text-lg mb-7 leading-relaxed"
+              />
+
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1.5 rounded-full text-xs font-semibold border border-primary/30 text-primary/80 bg-primary/5">
+                  {get("careers_hero_pill_1", "✦ AUS Graduates Preferred")}
+                </span>
+                <span className="px-3 py-1.5 rounded-full text-xs font-semibold border border-primary/30 text-primary/80 bg-primary/5">
+                  {get("careers_hero_pill_2", "✦ Gulf Experience Required")}
+                </span>
+              </div>
+            </motion.div>
+
+            {/* RIGHT — 2x2 perk teasers (mirrors homepage hero diagram column) */}
+            <motion.div
+              className="hidden md:block"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              <ArrowLeft className="w-4 h-4" /> Back to Home
-            </Link>
+              <div className="relative">
+                {/* decorative ring behind */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-[340px] h-[340px] rounded-full border border-primary/8 animate-float-slow" />
+                </div>
 
-            <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
-              {get("careers_hero_badge", "We're Hiring")}
-            </span>
+                <div className="relative grid grid-cols-2 gap-3 max-w-md mx-auto">
+                  {WHY_ICONS.map((Icon, i) => (
+                    <div
+                      key={i}
+                      className="group glass-card gradient-border hover-lift rounded-xl p-4"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center mb-3 transition-transform duration-300 group-hover:scale-110">
+                        <Icon className="w-4 h-4 text-primary" />
+                      </div>
+                      <h3 className="text-xs font-display font-semibold text-foreground leading-snug">
+                        {get(`careers_why_${i + 1}_title`, [
+                          "Regional & International Brands",
+                          "AI-First Culture",
+                          "Real Career Growth",
+                          "Cutting-Edge Toolkit",
+                        ][i])}
+                      </h3>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
 
-            <h1 className="text-4xl md:text-6xl font-display font-bold mb-4 leading-tight">
-              {get("careers_hero_headline_1", "Build the Future of")}
-              <br />
-              <span className="text-gradient-gold">
-                {get("careers_hero_headline_2", "Marketing with AI")}
-              </span>
-            </h1>
-
-            <RichText
-              html={get("careers_hero_body", "At Dubai in Cairo, we don't just deliver marketing solutions — we engineer growth using data, creativity, and AI-powered innovation.")}
-              className="text-muted-foreground text-lg max-w-2xl mb-8 leading-relaxed"
-            />
-
-            <div className="flex flex-wrap gap-2">
-              <span className="px-3 py-1.5 rounded-full text-xs font-semibold border border-primary/30 text-primary/80 bg-primary/5">
-                {get("careers_hero_pill_1", "✦ AUS Graduates Preferred")}
-              </span>
-              <span className="px-3 py-1.5 rounded-full text-xs font-semibold border border-primary/30 text-primary/80 bg-primary/5">
-                {get("careers_hero_pill_2", "✦ Gulf Experience Required")}
-              </span>
-            </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 

@@ -127,7 +127,7 @@ const TestimonialsSection = () => {
   if (testimonials.length === 0) return null;
 
   return (
-    <section ref={sectionRef as RefObject<HTMLElement>} className="relative py-6 md:py-10 overflow-hidden">
+    <section id="testimonials" ref={sectionRef as RefObject<HTMLElement>} className="relative py-6 md:py-10 overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)" }}

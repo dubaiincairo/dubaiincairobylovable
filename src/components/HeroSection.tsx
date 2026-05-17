@@ -132,6 +132,7 @@ const HeroSection = () => {
 
   return (
     <section
+      id="hero"
       ref={sectionRef}
       onMouseMove={handleSpotlightMove}
       onMouseLeave={handleSpotlightLeave}
