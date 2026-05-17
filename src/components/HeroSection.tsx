@@ -1,6 +1,6 @@
 import { MouseEvent, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, Variants } from "framer-motion";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { ArrowRight, TrendingUp, Users, Star, Briefcase } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { heroChild, MOTION, useMotionPref } from "@/lib/animations";
@@ -74,6 +74,19 @@ const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [spotlight, setSpotlight] = useState<{ x: number; y: number } | null>(null);
 
+  // Scroll-linked backdrop parallax. Each layer drifts at a different rate
+  // to imply depth as the hero leaves the viewport.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const orbBackY = useTransform(scrollYProgress, [0, 1], [0, -40]);
+  const orbFrontY = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const centerY = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  const centerScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const gridY = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const gridOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.3]);
+
   // Smooth, cohesive intro for the diagram column: one stagger drives the
   // dashboard card and four floating cards so they rise together as a unit.
   const diagramContainer: Variants = {
@@ -125,25 +138,49 @@ const HeroSection = () => {
       className="relative md:min-h-screen flex md:items-center overflow-hidden px-6 pt-24 pb-16 md:pt-0 md:pb-0"
     >
 
-      {/* Background orbs */}
+      {/* Background orbs — wrappers carry scroll-linked y; inner divs run the CSS keyframe drift independently */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/8 blur-[140px] animate-float-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/10 blur-[120px] animate-float-reverse" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px]"
-          style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.06), transparent 70%)' }} />
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-[500px] h-[500px]"
+          style={shouldReduce ? undefined : { y: orbBackY }}
+        >
+          <div className="w-full h-full rounded-full bg-primary/8 blur-[140px] animate-float-slow" />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px]"
+          style={shouldReduce ? undefined : { y: orbFrontY }}
+        >
+          <div className="w-full h-full rounded-full bg-accent/10 blur-[120px] animate-float-reverse" />
+        </motion.div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]">
+          <motion.div
+            className="w-full h-full"
+            style={shouldReduce ? undefined : { y: centerY, scale: centerScale }}
+          >
+            <div
+              className="w-full h-full rounded-full blur-[160px]"
+              style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.06), transparent 70%)' }}
+            />
+          </motion.div>
+        </div>
       </div>
 
-      {/* Dot grid */}
+      {/* Dot grid — outer wrapper carries scroll parallax + fade, inner runs the mount fade-in */}
       <motion.div
         className="absolute inset-0"
-        style={{
-          backgroundImage: 'radial-gradient(circle, hsl(38 80% 55% / 0.15) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.28 }}
-        transition={{ duration: 2.5, ease: "easeOut" }}
-      />
+        style={shouldReduce ? undefined : { y: gridY, opacity: gridOpacity }}
+      >
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'radial-gradient(circle, hsl(38 80% 55% / 0.15) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.28 }}
+          transition={{ duration: 2.5, ease: "easeOut" }}
+        />
+      </motion.div>
 
       {/* Spotlight cursor — desktop only, disabled when reduced-motion */}
       {spotlight && !shouldReduce && (

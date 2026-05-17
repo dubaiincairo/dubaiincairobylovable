@@ -109,10 +109,8 @@ const TechStackSection = () => {
               <motion.div
                 key={cat.num}
                 variants={cardFadeUp}
-                className="relative flex flex-col rounded-2xl border border-border bg-card overflow-hidden"
+                className="group relative flex flex-col rounded-2xl glass-card gradient-border hover-lift overflow-hidden"
               >
-                {/* accent top line */}
-                <div className={`absolute top-0 inset-x-0 h-px bg-gradient-to-r ${cat.gradFrom} via-transparent to-transparent`} />
 
                 <div className="flex flex-col flex-1 p-5 gap-4">
 

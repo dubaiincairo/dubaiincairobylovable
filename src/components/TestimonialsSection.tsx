@@ -27,12 +27,9 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
 
   return (
     <motion.div
-      className="relative flex flex-col glass-card rounded-2xl overflow-hidden"
-      style={{ borderColor: "hsl(38 80% 55% / 0.15)", background: "hsl(38 80% 55% / 0.02)" }}
+      className="group relative flex flex-col glass-card gradient-border hover-lift rounded-2xl overflow-hidden"
       variants={fadeUp}
     >
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-
       <div className="p-6 md:p-7 flex flex-col">
         <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 shrink-0">
           <Quote className="w-4 h-4 text-primary" />
@@ -46,7 +43,7 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
             }`}
           />
           {!expanded && (
-            <div className="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-[hsl(220,18%,6%)] to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-card to-transparent pointer-events-none" />
           )}
         </div>
 
