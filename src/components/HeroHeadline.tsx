@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { MOTION, useMotionPref } from "@/lib/animations";
 import { cn } from "@/lib/utils";
@@ -10,19 +9,15 @@ interface HeroHeadlineProps {
 
 const HeroHeadline = ({ text, className }: HeroHeadlineProps) => {
   const { shouldReduce } = useMotionPref();
-  const ref = useRef<HTMLHeadingElement>(null);
 
-  // Scroll-linked: progress goes from 0 (headline at top of viewport)
-  // to 1 (headline scrolled fully past the top). Drives parallax + fade.
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, -90]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.85, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
-  const blur = useTransform(scrollYProgress, [0, 0.6, 1], ["blur(0px)", "blur(0px)", "blur(4px)"]);
+  // Tied to document scroll so the effect is visible from the first
+  // pixel of scroll — not only once the headline reaches viewport top.
+  // (HeroHeadline is only rendered inside the home Hero section.)
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 600], [0, -120]);
+  const opacity = useTransform(scrollY, [0, 600], [1, 0]);
+  const scale = useTransform(scrollY, [0, 600], [1, 0.9]);
+  const blur = useTransform(scrollY, [0, 600], ["blur(0px)", "blur(5px)"]);
 
   const container: Variants = {
     hidden: {},
@@ -51,7 +46,6 @@ const HeroHeadline = ({ text, className }: HeroHeadlineProps) => {
 
   return (
     <motion.h1
-      ref={ref}
       style={scrollStyle}
       className={cn(
         "text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.05] mb-6",
