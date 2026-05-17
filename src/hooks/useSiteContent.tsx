@@ -24,9 +24,9 @@ const SiteContentContext = createContext<SiteContentContextType>({
   get: () => "",
 });
 
-// Bumped to v3 when /admin became primary again — old caches treated Sanity
-// as the source of truth and would shadow admin edits until they expired.
-const CACHE_KEY = "site_content_cache_v3";
+// Bumped to v4 after adding contact_trust_3 — old caches lacked the key and
+// the registry default wouldn't surface until the cache expired naturally.
+const CACHE_KEY = "site_content_cache_v4";
 
 const SANITY_SYSTEM_FIELDS = new Set([
   "_id",

@@ -1,12 +1,13 @@
-import { useRef, useState } from "react";
+import { useRef, useState, type RefObject } from "react";
 import { motion } from "framer-motion";
 import { Lightbulb, Handshake, Sprout } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { cardFadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
 import AnimatedUnderline from "@/components/ui/animated-underline";
 import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useCarouselSwipeHint } from "@/hooks/useCarouselSwipeHint";
+import { useSectionParallax } from "@/hooks/useSectionParallax";
 
 const ValuesSection = () => {
   const { get } = useSiteContent();
@@ -14,6 +15,7 @@ const ValuesSection = () => {
   const [current, setCurrent] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   useCarouselSwipeHint(api, carouselRef);
+  const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
 
   const values = [
     {
@@ -43,11 +45,13 @@ const ValuesSection = () => {
   ];
 
   return (
-    <section className="relative py-8 md:py-14 px-6 overflow-hidden">
-      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
+    <section ref={sectionRef as RefObject<HTMLElement>} className="relative py-6 md:py-10 px-6 overflow-hidden">
+      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] pointer-events-none">
+        <motion.div className="w-full h-full rounded-full bg-accent/5 blur-[120px]" style={{ y: orbY, scale: orbScale }} />
+      </div>
 
       <div className="relative max-w-6xl mx-auto">
-        <motion.div className="text-center mb-6 md:mb-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="text-center mb-6 md:mb-12" style={{ y: headerY, opacity: headerOpacity }}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("values_subtitle", "What We Stand For")}
           </span>

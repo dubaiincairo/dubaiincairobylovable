@@ -1,4 +1,4 @@
-import { motion, Variants } from "framer-motion";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { MOTION, useMotionPref } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
@@ -9,6 +9,15 @@ interface HeroHeadlineProps {
 
 const HeroHeadline = ({ text, className }: HeroHeadlineProps) => {
   const { shouldReduce } = useMotionPref();
+
+  // Tied to document scroll so the effect is visible from the first
+  // pixel of scroll — not only once the headline reaches viewport top.
+  // (HeroHeadline is only rendered inside the home Hero section.)
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 600], [0, -120]);
+  const opacity = useTransform(scrollY, [0, 600], [1, 0]);
+  const scale = useTransform(scrollY, [0, 600], [1, 0.9]);
+  const blur = useTransform(scrollY, [0, 600], ["blur(0px)", "blur(5px)"]);
 
   const container: Variants = {
     hidden: {},
@@ -31,8 +40,13 @@ const HeroHeadline = ({ text, className }: HeroHeadlineProps) => {
 
   const lines = text.split("\n");
 
+  const scrollStyle = shouldReduce
+    ? undefined
+    : { y, opacity, scale, filter: blur, willChange: "transform, opacity, filter" as const };
+
   return (
     <motion.h1
+      style={scrollStyle}
       className={cn(
         "text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.05] mb-6",
         className,

@@ -1,7 +1,8 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, type RefObject } from "react";
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { fadeUp, viewportOnce } from "@/lib/animations";
+import { RichText } from "@/components/ui/rich-text";
+import { useSectionParallax } from "@/hooks/useSectionParallax";
 
 const MAX_SLOTS = 24;
 const GAP = 16;
@@ -13,6 +14,7 @@ interface Logo {
 
 const ClientsSection = () => {
   const { get } = useSiteContent();
+  const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
 
   // Order is editor-controlled via admin drag-and-drop (clients_order CMS key).
   // Missing/invalid entries fall back to natural 1..N order.
@@ -37,24 +39,27 @@ const ClientsSection = () => {
   if (logos.length === 0) return null;
 
   return (
-    <section id="work" className="relative py-8 md:py-14 overflow-hidden">
-      {/* Ambient gold wash behind the strip */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[240px] pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, hsl(38 80% 55% / 0.05), transparent 70%)" }}
-      />
+    <section ref={sectionRef as RefObject<HTMLElement>} id="work" className="relative py-6 md:py-10 overflow-hidden">
+      {/* Ambient gold wash — scroll-parallax drifts the orb */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[240px] pointer-events-none">
+        <motion.div
+          className="w-full h-full"
+          style={{ y: orbY, scale: orbScale, background: "radial-gradient(ellipse, hsl(38 80% 55% / 0.05), transparent 70%)" }}
+        />
+      </div>
 
       <div className="relative max-w-6xl mx-auto px-6">
-        <motion.div className="text-center mb-8" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="text-center mb-8" style={{ y: headerY, opacity: headerOpacity }}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
             {get("clients_subtitle", "Success Partners")}
           </span>
           <h2 className="text-2xl md:text-3xl font-display font-bold mb-2">
             {get("clients_headline", "Trusted by Brands That Mean Business")}
           </h2>
-          <p className="text-muted-foreground text-sm max-w-xl mx-auto">
-            {get("clients_description", "From global pharmaceutical giants to beloved local names.")}
-          </p>
+          <RichText
+            html={get("clients_description", "From global pharmaceutical giants to beloved local names.")}
+            className="text-muted-foreground text-sm max-w-xl mx-auto"
+          />
         </motion.div>
       </div>
 

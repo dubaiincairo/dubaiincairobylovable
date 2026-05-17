@@ -11,7 +11,7 @@ import {
   Upload, ImageIcon, GripVertical, Mail, Menu, LayoutDashboard, MessageSquare,
   Globe, Check, Info,
   Home, BarChart3, FileText, Zap, Sparkles, LayoutGrid, User, MapPin, ScrollText,
-  Palette, Wrench, Boxes, Building2, Workflow, Compass, Link2, Handshake, type LucideIcon,
+  Palette, Wrench, Boxes, Building2, Workflow, Compass, Link2, Handshake, TrendingUp, type LucideIcon,
 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
@@ -36,8 +36,8 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   nav: Compass, hero: Home, stats: BarChart3, about: Info, edges: Zap,
   values: Sparkles, services: LayoutGrid, founder: User, clients: Handshake,
   tech: Wrench, google: MapPin, legal: ScrollText, contact: Mail, footer: Link2,
-  careers: Briefcase, odoo: Boxes, yanolja: Building2, zoho: Workflow,
-  studios: Palette,
+  careers: Briefcase, investors: TrendingUp, odoo: Boxes, yanolja: Building2, zoho: Workflow,
+  studios: Palette, whatsapp: MessageSquare,
 };
 
 const SectionIcon = ({ section, className }: { section: string; className?: string }) => {
@@ -81,8 +81,10 @@ type SectionLayout = { label: string; keys: string[] }[];
 const SECTION_LAYOUT: Record<string, SectionLayout> = {
   nav: [
     { label: "Brand Wordmark",     keys: ["nav_brand_1", "nav_brand_2", "nav_brand_3", "nav_favicon_url"] },
-    { label: "Main Links",         keys: ["nav_link_home", "nav_link_studios", "nav_link_careers", "nav_link_tech", "nav_link_faq"] },
-    { label: "Partnerships Menu",  keys: ["nav_link_partnerships", "nav_partner_odoo", "nav_partner_yanolja", "nav_partner_zoho"] },
+    { label: "Top-level Links",    keys: ["nav_link_home", "nav_link_services", "nav_link_company", "nav_link_partnerships"] },
+    { label: "Services Menu",      keys: ["nav_link_studios", "nav_link_tech", "nav_link_faq"] },
+    { label: "Company Menu",       keys: ["nav_link_careers", "nav_link_investors"] },
+    { label: "Partnerships Menu",  keys: ["nav_partner_odoo", "nav_partner_yanolja", "nav_partner_zoho"] },
     { label: "CTA",                keys: ["nav_cta"] },
   ],
   hero: [
@@ -194,6 +196,17 @@ const SECTION_LAYOUT: Record<string, SectionLayout> = {
     { label: "Value Body",         keys: ["zoho_value_body"] },
     { label: "Suites Section",     keys: ["zoho_suites_badge", "zoho_suites_h2", "zoho_suites_h2_accent"] },
     { label: "CTA",                keys: ["zoho_cta_badge", "zoho_cta_h2", "zoho_cta_body", "zoho_cta_btn"] },
+  ],
+  whatsapp: [
+    { label: "Phone",            keys: ["wa_phone"] },
+    { label: "Teaser Bubble",    keys: ["wa_teaser_title", "wa_teaser_cta"] },
+    { label: "Chat Header",      keys: ["wa_header_name", "wa_header_status"] },
+    { label: "Opening Message",  keys: ["wa_opener_text", "wa_opener_hint"] },
+    { label: "Quick Reply 1",    keys: ["wa_reply_1_label", "wa_reply_1_message"] },
+    { label: "Quick Reply 2",    keys: ["wa_reply_2_label", "wa_reply_2_message"] },
+    { label: "Quick Reply 3",    keys: ["wa_reply_3_label", "wa_reply_3_message"] },
+    { label: "Quick Reply 4",    keys: ["wa_reply_4_label", "wa_reply_4_message"] },
+    { label: "Footer Note",      keys: ["wa_footer_note"] },
   ],
 };
 
@@ -699,6 +712,20 @@ const Admin = () => {
                   <span className="ml-auto text-xs font-semibold text-primary">{editCount} unsaved</span>
                 )}
               </div>
+
+              {/* Nav-only: drag-and-drop ordering of top-level items */}
+              {activeSection === "nav" && (
+                <div className="rounded-xl border border-border bg-card overflow-hidden mb-3">
+                  <div className="px-5 py-2.5 bg-muted/30 border-b border-border flex items-center gap-2">
+                    <GripVertical className="w-3.5 h-3.5 text-muted-foreground" />
+                    <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Top-level Order</span>
+                    <span className="text-[10px] text-muted-foreground/70 ml-auto">drag to reorder</span>
+                  </div>
+                  <div className="p-4">
+                    <NavOrderPanel edited={edited} dbValues={dbValues} onChange={handleChange} />
+                  </div>
+                </div>
+              )}
 
               <div className="space-y-2">
                 {layout.map((group) => {
@@ -2175,6 +2202,98 @@ function ClientsLogoPanel({
         </div>
       </SortableContext>
     </DndContext>
+  );
+}
+
+// ─── NavOrderPanel ────────────────────────────────────────────────────────────
+// Drag-and-drop ordering of the top-level navbar items.
+// The order is stored in CMS key `nav_top_order` as a comma-separated string
+// of item ids. The Navbar component reads this and renders accordingly.
+
+const NAV_TOP_DEFAULTS: { id: string; labelKey: string; defaultLabel: string }[] = [
+  { id: "home",         labelKey: "nav_link_home",         defaultLabel: "Home" },
+  { id: "services",     labelKey: "nav_link_services",     defaultLabel: "Services" },
+  { id: "company",      labelKey: "nav_link_company",      defaultLabel: "Company" },
+  { id: "partnerships", labelKey: "nav_link_partnerships", defaultLabel: "Partnerships" },
+];
+
+function NavOrderPanel({
+  edited, dbValues, onChange,
+}: {
+  edited: Record<string, string>;
+  dbValues: Record<string, string>;
+  onChange: (key: string, val: string) => void;
+}) {
+  const val = (key: string) => edited[key] ?? dbValues[key] ?? "";
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
+
+  const fallbackOrder = NAV_TOP_DEFAULTS.map((n) => n.id);
+  const parse = (raw: string) => {
+    const ids = raw.split(",").map((s) => s.trim()).filter(Boolean);
+    const out: string[] = [];
+    ids.forEach((id) => { if (fallbackOrder.includes(id) && !out.includes(id)) out.push(id); });
+    fallbackOrder.forEach((id) => { if (!out.includes(id)) out.push(id); });
+    return out;
+  };
+
+  const [order, setOrder] = useState<string[]>(() => parse(val("nav_top_order") || fallbackOrder.join(",")));
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    const oldIndex = order.indexOf(String(active.id));
+    const newIndex = order.indexOf(String(over.id));
+    if (oldIndex === -1 || newIndex === -1) return;
+    const newOrder = arrayMove(order, oldIndex, newIndex);
+    setOrder(newOrder);
+    onChange("nav_top_order", newOrder.join(","));
+  };
+
+  return (
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <SortableContext items={order} strategy={verticalListSortingStrategy}>
+        <div className="space-y-2">
+          {order.map((id) => {
+            const def = NAV_TOP_DEFAULTS.find((d) => d.id === id);
+            if (!def) return null;
+            const label = val(def.labelKey) || def.defaultLabel;
+            return <SortableNavRow key={id} id={id} label={label} />;
+          })}
+        </div>
+      </SortableContext>
+    </DndContext>
+  );
+}
+
+function SortableNavRow({ id, label }: { id: string; label: string }) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+  const style: React.CSSProperties = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 50 : undefined,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={cn(
+        "flex items-center gap-3 rounded-lg border border-border bg-background/50 px-3 py-2.5",
+        isDragging && "shadow-lg border-primary/40",
+      )}
+    >
+      <button
+        type="button"
+        {...attributes}
+        {...listeners}
+        aria-label={`Drag ${label}`}
+        className="text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing touch-none"
+      >
+        <GripVertical className="w-4 h-4" />
+      </button>
+      <span className="text-sm font-medium text-foreground flex-1 truncate">{label}</span>
+      <span className="text-[10px] uppercase tracking-widest text-muted-foreground/60 shrink-0">{id}</span>
+    </div>
   );
 }
 

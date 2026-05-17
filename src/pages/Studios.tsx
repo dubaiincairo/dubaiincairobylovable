@@ -7,6 +7,7 @@ import ServicesSection from "@/components/ServicesSection";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 import { useContactModal } from "@/context/ContactModalContext";
+import { RichText } from "@/components/ui/rich-text";
 
 const Studios = () => {
   const { get } = useSiteContent();
@@ -69,9 +70,10 @@ const Studios = () => {
               <h3 className="font-display font-bold text-xl text-foreground mb-1">
                 {get("studios_cta_title", "Not sure which studio fits your goal?")}
               </h3>
-              <p className="text-sm text-muted-foreground">
-                {get("studios_cta_desc", "Tell us about your project and we'll match you with the right team.")}
-              </p>
+              <RichText
+                html={get("studios_cta_desc", "Tell us about your project and we'll match you with the right team.")}
+                className="text-sm text-muted-foreground"
+              />
             </div>
             <button
               onClick={openContactModal}

@@ -1,12 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { cardFadeUp, viewportOnce } from "@/lib/animations";
 import AnimatedUnderline from "@/components/ui/animated-underline";
 import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useCarouselSwipeHint } from "@/hooks/useCarouselSwipeHint";
+import { useSectionParallax } from "@/hooks/useSectionParallax";
 
 type CaseStudy = {
   id: string;
@@ -29,6 +30,7 @@ const HighlightsSection = () => {
   const [current, setCurrent] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   useCarouselSwipeHint(api, carouselRef);
+  const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
 
   useEffect(() => {
     supabase
@@ -93,13 +95,18 @@ const HighlightsSection = () => {
   );
 
   return (
-    <section id="highlights" className="relative py-8 md:py-14 px-6 overflow-hidden">
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-primary/4 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+    <section ref={sectionRef as RefObject<HTMLElement>} id="highlights" className="relative py-6 md:py-10 px-6 overflow-hidden">
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <motion.div
+          className="w-full h-full rounded-full bg-primary/4 blur-[150px]"
+          style={{ y: orbY, scale: orbScale }}
+        />
+      </div>
 
       <div className="relative max-w-6xl mx-auto">
         <motion.div
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-10"
-          variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}
+          style={{ y: headerY, opacity: headerOpacity }}
         >
           <div>
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">

@@ -13,6 +13,7 @@ import ResetPassword from "./pages/ResetPassword";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudy from "./pages/CaseStudy";
 import Careers from "./pages/Careers";
+import Investors from "./pages/Investors";
 import OdooPartner from "./pages/OdooPartner";
 import OdooPartnerPage from "./pages/OdooPartnerPage";
 import YanoljaPartnerPage from "./pages/YanoljaPartnerPage";
@@ -46,7 +47,22 @@ const AnimatedRoutes = () => {
   return (
     <>
       <ScrollToTop />
-      {showChrome && <Navbar />}
+      {showChrome && (
+        <>
+          <Navbar />
+          {/* Top fade: solid background under the navbar fading to transparent
+              below, so page content scrolling up doesn't visually overlap the
+              navbar even with its semi-transparent backdrop. */}
+          <div
+            aria-hidden="true"
+            className="fixed top-0 left-0 right-0 h-[110px] pointer-events-none z-40"
+            style={{
+              background:
+                "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background)) 50%, transparent 100%)",
+            }}
+          />
+        </>
+      )}
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Index />} />
@@ -56,6 +72,7 @@ const AnimatedRoutes = () => {
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/case-studies/:slug" element={<CaseStudy />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/investors" element={<Investors />} />
           {/* Partnerships — redirect legacy /partnerships to Odoo page */}
           <Route path="/partnerships" element={<Navigate to="/partnerships/odoo" replace />} />
           <Route path="/odoo-partner" element={<Navigate to="/partnerships/odoo" replace />} />

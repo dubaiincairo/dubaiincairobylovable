@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type RefObject } from "react";
 import { motion } from "framer-motion";
-import { Quote, Linkedin, ChevronDown, ChevronUp } from "lucide-react";
+import { Quote, Linkedin, ChevronDown, ChevronUp, ArrowLeft, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
 import AnimatedUnderline from "@/components/ui/animated-underline";
-import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { type CarouselApi, Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { useSectionParallax } from "@/hooks/useSectionParallax";
 
 type Testimonial = {
   id: string;
@@ -27,12 +28,9 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
 
   return (
     <motion.div
-      className="relative flex flex-col glass-card rounded-2xl overflow-hidden"
-      style={{ borderColor: "hsl(38 80% 55% / 0.15)", background: "hsl(38 80% 55% / 0.02)" }}
+      className="group relative flex flex-col glass-card gradient-border hover-lift rounded-2xl overflow-hidden"
       variants={fadeUp}
     >
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-
       <div className="p-6 md:p-7 flex flex-col">
         <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 shrink-0">
           <Quote className="w-4 h-4 text-primary" />
@@ -46,7 +44,7 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
             }`}
           />
           {!expanded && (
-            <div className="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-[hsl(220,18%,6%)] to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-card to-transparent pointer-events-none" />
           )}
         </div>
 
@@ -106,6 +104,7 @@ const TestimonialsSection = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
 
   useEffect(() => {
     supabase
@@ -128,20 +127,19 @@ const TestimonialsSection = () => {
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="relative py-8 md:py-14 overflow-hidden">
+    <section id="testimonials" ref={sectionRef as RefObject<HTMLElement>} className="relative py-6 md:py-10 overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)" }}
       />
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-primary/4 blur-[140px] translate-x-1/3 -translate-y-1/2 pointer-events-none" />
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] translate-x-1/3 -translate-y-1/2 pointer-events-none">
+        <motion.div className="w-full h-full rounded-full bg-primary/4 blur-[140px]" style={{ y: orbY, scale: orbScale }} />
+      </div>
 
       <div className="relative max-w-6xl mx-auto px-6">
         <motion.div
           className="text-center mb-6 md:mb-12"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
+          style={{ y: headerY, opacity: headerOpacity }}
         >
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("testimonials_subtitle", "What Clients Say")}
@@ -150,9 +148,10 @@ const TestimonialsSection = () => {
             {get("testimonials_headline", "Trusted by Leaders.\nRecommended by Peers.")}
           </h2>
           <AnimatedUnderline />
-          <p className="mt-4 text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
-            {get("testimonials_subtext", "Real recommendations from clients and colleagues — pulled directly from LinkedIn.")}
-          </p>
+          <RichText
+            html={get("testimonials_subtext", "Real recommendations from clients and colleagues — pulled directly from LinkedIn.")}
+            className="mt-4 text-muted-foreground text-base max-w-xl mx-auto leading-relaxed"
+          />
         </motion.div>
 
         <Carousel
@@ -160,32 +159,49 @@ const TestimonialsSection = () => {
           opts={{ loop: true, align: "start" }}
           className="w-full"
         >
-          <CarouselContent className="-ml-4 md:-ml-6 items-start">
+          <CarouselContent className="-ml-4 md:-ml-6 items-start py-4">
             {testimonials.map((t, i) => (
               <CarouselItem key={t.id} className="pl-4 md:pl-6 basis-[88%] md:basis-1/2 lg:basis-1/3">
                 <TestimonialCard t={t} index={i} />
               </CarouselItem>
             ))}
           </CarouselContent>
-
-          <CarouselPrevious className="hidden sm:flex -left-4 lg:-left-6" />
-          <CarouselNext className="hidden sm:flex -right-4 lg:-right-6" />
         </Carousel>
 
         {count > 1 && (
-          <div className="flex justify-center gap-2 mt-8">
-            {Array.from({ length: count }).map((_, i) => (
-              <button
-                key={i}
-                aria-label={`Go to testimonial ${i + 1}`}
-                onClick={() => api?.scrollTo(i)}
-                className={`rounded-full transition-all duration-300 ${
-                  i === current
-                    ? "w-5 h-2 bg-primary"
-                    : "w-2 h-2 bg-border hover:bg-muted-foreground"
-                }`}
-              />
-            ))}
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <button
+              type="button"
+              onClick={() => api?.scrollPrev()}
+              aria-label="Previous testimonial"
+              className="w-9 h-9 rounded-full border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/8 transition-all duration-200"
+            >
+              <ArrowLeft aria-hidden="true" className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-2">
+              {Array.from({ length: count }).map((_, i) => (
+                <button
+                  key={i}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                  onClick={() => api?.scrollTo(i)}
+                  className={`rounded-full transition-all duration-300 ${
+                    i === current
+                      ? "w-5 h-2 bg-primary"
+                      : "w-2 h-2 bg-border hover:bg-muted-foreground"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => api?.scrollNext()}
+              aria-label="Next testimonial"
+              className="w-9 h-9 rounded-full border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/8 transition-all duration-200"
+            >
+              <ArrowRight aria-hidden="true" className="w-4 h-4" />
+            </button>
           </div>
         )}
       </div>

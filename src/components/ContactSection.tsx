@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, CheckCircle, Loader2, MessageSquare, Clock } from "lucide-react";
+import { ArrowRight, Mail, CheckCircle, Loader2, MessageSquare, Clock, Tag } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -8,12 +8,15 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { z } from "zod";
-import { fadeUp, scaleIn, viewportOnce } from "@/lib/animations";
+import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
 import AnimatedUnderline from "@/components/ui/animated-underline";
+import { RichText } from "@/components/ui/rich-text";
 import {
   Select,
   SelectContent,
+  SelectItem,
   SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { cn } from "@/lib/utils";
@@ -103,82 +106,88 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="relative py-8 md:py-12 px-6 overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.04), transparent 70%)' }} />
+    <section id="contact" className="relative py-6 md:py-10 px-6 overflow-hidden">
+      <div className="absolute top-1/2 right-0 w-[480px] h-[480px] rounded-full bg-primary/4 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-14 items-start">
 
+        {/* LEFT — left-aligned header + body + trust signals (matches About/Founder rhythm) */}
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("contact_subtitle", "Get Started")}
           </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold leading-tight whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold leading-tight whitespace-pre-line">
             {get("contact_headline", "Ready to Grow?\nLet's Build.")}
           </h2>
           <AnimatedUnderline align="left" className="mb-5" />
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6 whitespace-pre-line">
-            {get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services with measurable impact, flexible execution, and competitive pricing.")}
-          </p>
+          <RichText
+            html={get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services with measurable impact, flexible execution, and competitive pricing.")}
+            className="text-muted-foreground text-base md:text-lg leading-relaxed"
+          />
 
-          <div className="space-y-3">
-            <div className="flex items-center gap-3 text-sm text-muted-foreground">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+          <div className="mt-6 md:mt-7 flex flex-col gap-3">
+            <div className="inline-flex items-center gap-3 text-sm text-foreground">
+              <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
                 <Clock className="w-4 h-4 text-primary" />
               </div>
               <span>{get("contact_trust_1", "Response within 24 hours")}</span>
             </div>
-            <div className="flex items-center gap-3 text-sm text-muted-foreground">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+            <div className="inline-flex items-center gap-3 text-sm text-foreground">
+              <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
                 <MessageSquare className="w-4 h-4 text-primary" />
               </div>
               <span>{get("contact_trust_2", "Free consultation call")}</span>
             </div>
+            <div className="inline-flex items-center gap-3 text-sm text-foreground">
+              <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                <Tag className="w-4 h-4 text-primary" />
+              </div>
+              <span>{get("contact_trust_3", "Transparent pricing")}</span>
+            </div>
           </div>
         </motion.div>
 
-        <div>
+        {/* RIGHT — form card (placed where Founder's quote card / About's process steps sit) */}
+        <motion.div variants={cardFadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           {isSubmitted ? (
-            <motion.div variants={scaleIn} initial="hidden" animate="visible" className="flex flex-col items-center gap-4 py-16 text-center">
+            <div className="rounded-xl glass-card p-8 md:p-10 flex flex-col items-center gap-4 text-center">
               <CheckCircle className="w-12 h-12 text-primary" />
               <h3 className="text-2xl font-display font-semibold">{get("contact_success_title", "Thank You!")}</h3>
-              <p className="text-muted-foreground">{get("contact_success_msg", "We'll get back to you within 24 hours.")}</p>
+              <RichText
+                html={get("contact_success_msg", "We'll get back to you within 24 hours.")}
+                className="text-muted-foreground"
+              />
               <Button variant="outline" className="mt-4" onClick={() => setIsSubmitted(false)}>
                 {get("contact_success_btn", "Send Another Message")}
               </Button>
-            </motion.div>
+            </div>
           ) : (
-            <motion.form
-              onSubmit={handleSubmit}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewportOnce}
-              transition={{ duration: 0.7, delay: 0.15, type: "spring", stiffness: 80, damping: 20 }}
-              className="space-y-4"
-            >
+            <form onSubmit={handleSubmit} className="rounded-xl glass-card p-5 md:p-6 space-y-3.5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">
+                  <label htmlFor="name" className="block text-xs font-medium text-muted-foreground mb-1">
                     {get("contact_name_label", "Name *")}
                   </label>
-                  <Input id="name" name="name" value={form.name} onChange={handleChange} placeholder={get("contact_name_placeholder", "Your name")} className="bg-card border-border" />
-                  {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
+                  <Input id="name" name="name" value={form.name} onChange={handleChange} placeholder={get("contact_name_placeholder", "Your name")} className="bg-background/60 border-border" />
+                  {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1.5">
+                  <label htmlFor="email" className="block text-xs font-medium text-muted-foreground mb-1">
                     {get("contact_email_label", "Email *")}
                   </label>
-                  <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} placeholder={get("contact_email_placeholder", "you@company.com")} className="bg-card border-border" />
-                  {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
+                  <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} placeholder={get("contact_email_placeholder", "you@company.com")} className="bg-background/60 border-border" />
+                  {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
                 </div>
               </div>
+
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1.5">
+                <label htmlFor="phone" className="block text-xs font-medium text-muted-foreground mb-1">
                   {get("contact_phone_label", "Phone *")}
                 </label>
                 <div className="flex gap-2">
                   <Select value={countryCode} onValueChange={setCountryCode}>
                     <SelectTrigger
-                      className="w-[92px] shrink-0 bg-card border-border hover:border-primary/40 data-[state=open]:border-primary/60 transition-colors"
+                      className="w-[92px] shrink-0 bg-background/60 border-border hover:border-primary/40 data-[state=open]:border-primary/60 transition-colors"
                       aria-label={`Country code, currently ${countryCode}`}
                     >
                       <span className="font-mono text-sm tabular-nums text-foreground">{countryCode}</span>
@@ -216,48 +225,51 @@ const ContactSection = () => {
                     value={form.phone}
                     onChange={handleChange}
                     placeholder={get("contact_phone_placeholder", "100 000 0000")}
-                    className="bg-card border-border flex-1"
+                    className="bg-background/60 border-border flex-1"
                   />
                 </div>
-                {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-1.5">
-                  {get("contact_service_label", "Service of interest")}
-                </label>
-                <div className="flex flex-wrap gap-1.5">
-                  {SERVICES.map((s) => (
-                    <button
-                      key={s}
-                      type="button"
-                      onClick={() => setSelectedService((prev) => (prev === s ? "" : s))}
-                      className={`px-3 py-1 rounded-full text-xs font-medium border transition-all duration-200 ${
-                        selectedService === s
-                          ? "border-primary bg-primary/10 text-primary"
-                          : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                      }`}
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
+                {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone}</p>}
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">
+                <label htmlFor="service" className="block text-xs font-medium text-muted-foreground mb-1">
+                  {get("contact_service_label", "Service of interest")}
+                </label>
+                <Select value={selectedService} onValueChange={setSelectedService}>
+                  <SelectTrigger
+                    id="service"
+                    className="bg-background/60 border-border hover:border-primary/40 data-[state=open]:border-primary/60 transition-colors"
+                  >
+                    <SelectValue placeholder="Select a service (optional)" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {SERVICES.map((s) => (
+                      <SelectItem key={s} value={s}>{s}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-xs font-medium text-muted-foreground mb-1">
                   {get("contact_message_label", "Message *")}
                 </label>
-                <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")} rows={4} className="bg-card border-border" />
-                {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
+                <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")} rows={3} className="bg-background/60 border-border resize-none" />
+                {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
               </div>
-              <Button type="submit" disabled={isSubmitting} className="shimmer-btn w-full sm:w-auto px-8 py-3 text-base font-display font-semibold glow-gold">
+
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="shimmer-btn w-full px-8 py-3 text-base font-display font-semibold glow-gold mt-1"
+              >
                 {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />}
                 {isSubmitting ? "Sending..." : get("contact_cta", "Start a Project")}
                 {!isSubmitting && <ArrowRight className="w-4 h-4" />}
               </Button>
-            </motion.form>
+            </form>
           )}
-        </div>
+        </motion.div>
 
       </div>
     </section>

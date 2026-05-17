@@ -1,9 +1,11 @@
+import { type RefObject } from "react";
 import { motion } from "framer-motion";
 import { Quote, Facebook, Linkedin, Instagram, Calendar, ArrowRight } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
 import AnimatedUnderline from "@/components/ui/animated-underline";
+import { useSectionParallax } from "@/hooks/useSectionParallax";
 
 const SOCIALS = [
   { key: "founder_facebook",  Icon: Facebook,  label: "Facebook"  },
@@ -17,11 +19,14 @@ const FounderSection = () => {
   const calendlyUrl = get("founder_calendly_url", "").trim();
   const ctaLabel    = get("founder_cta_label", "Reserve a Consultation");
   const founderName = get("founder_name", "Abdalla Hassan Elfouly");
+  const { ref: sectionRef, orbY, orbScale } = useSectionParallax();
 
   return (
-    <section id="team" className="relative py-8 md:py-14 px-6 overflow-hidden">
+    <section ref={sectionRef as RefObject<HTMLElement>} id="team" className="relative py-6 md:py-10 px-6 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)' }} />
-      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-primary/4 blur-[140px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <motion.div className="w-full h-full rounded-full bg-primary/4 blur-[140px]" style={{ y: orbY, scale: orbScale }} />
+      </div>
 
       <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-14 items-center">
 

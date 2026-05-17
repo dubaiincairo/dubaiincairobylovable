@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { RichText } from "@/components/ui/rich-text";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useSEO } from "@/hooks/useSEO";
 import {
@@ -234,9 +235,10 @@ const OdooPartner = () => {
             <h1 className="text-4xl md:text-5xl font-display font-bold mb-3">
               {get("partnerships_headline", "Our Technology Partners")}
             </h1>
-            <p className="text-muted-foreground max-w-2xl text-base leading-relaxed">
-              {get("partnerships_subtext", "We have built deep implementation expertise across two technology ecosystems — Odoo for ERP and business automation, and Yanolja Cloud for hospitality management.")}
-            </p>
+            <RichText
+              html={get("partnerships_subtext", "We have built deep implementation expertise across two technology ecosystems — Odoo for ERP and business automation, and Yanolja Cloud for hospitality management.")}
+              className="text-muted-foreground max-w-2xl text-base leading-relaxed"
+            />
           </motion.div>
         </div>
       </section>
@@ -270,12 +272,14 @@ const OdooPartner = () => {
                 <br />
                 {get("odoo_hero_h1_end", "Partner")}
               </h2>
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4 max-w-lg">
-                {get("odoo_hero_body_1", "We are now a verified Odoo partner, enabling our clients to operate within a fully integrated, closed-loop ecosystem that connects eCommerce, digital marketing, and backend operations. We believe that impactful marketing cannot exist in isolation — real, scalable results require a robust ERP system that digitally manages and synchronizes all operational processes.")}
-              </p>
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-lg">
-                {get("odoo_hero_body_2", "That's why we've established a dedicated Odoo studio, specializing in implementation, customization, and API development, ensuring seamless integration between your business operations and your marketing engine.")}
-              </p>
+              <RichText
+                html={get("odoo_hero_body_1", "We are now a verified Odoo partner, enabling our clients to operate within a fully integrated, closed-loop ecosystem that connects eCommerce, digital marketing, and backend operations. We believe that impactful marketing cannot exist in isolation — real, scalable results require a robust ERP system that digitally manages and synchronizes all operational processes.")}
+                className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4 max-w-lg"
+              />
+              <RichText
+                html={get("odoo_hero_body_2", "That's why we've established a dedicated Odoo studio, specializing in implementation, customization, and API development, ensuring seamless integration between your business operations and your marketing engine.")}
+                className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-lg"
+              />
             </motion.div>
 
             {/* Right: logo card */}
@@ -390,9 +394,10 @@ const OdooPartner = () => {
             <h2 className="text-2xl md:text-3xl font-display font-bold mb-3">
               {get("odoo_cta_h2", "Ready to Build Your Integrated Ecosystem?")}
             </h2>
-            <p className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed text-sm">
-              {get("odoo_cta_body", "Let's connect your marketing engine to a fully synchronized ERP backend. Our Odoo studio handles everything from initial scoping to go-live.")}
-            </p>
+            <RichText
+              html={get("odoo_cta_body", "Let's connect your marketing engine to a fully synchronized ERP backend. Our Odoo studio handles everything from initial scoping to go-live.")}
+              className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed text-sm"
+            />
             <button
               onClick={openContactModal}
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-display font-semibold rounded-lg hover:brightness-110 transition-all glow-gold shimmer-btn text-sm"
@@ -432,9 +437,10 @@ const OdooPartner = () => {
                 <br />
                 <span className="text-gradient-gold">{get("yan_hero_h2_accent", "Partnership")}</span>
               </h2>
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-lg">
-                {get("yan_hero_body", "We have also expanded our capabilities into the hospitality technology sector through our work with Yanolja Cloud and its suite of cloud-based management solutions. Over the past 12 months, we have built extensive hands-on experience implementing and integrating these systems across hospitality properties in Saudi Arabia, enabling fully digital, streamlined operations aligned with modern guest experiences. This practical exposure has positioned us as specialized implementors in hospitality tech, and we are now actively scaling these capabilities into new markets beyond Saudi Arabia.")}
-              </p>
+              <RichText
+                html={get("yan_hero_body", "We have also expanded our capabilities into the hospitality technology sector through our work with Yanolja Cloud and its suite of cloud-based management solutions. Over the past 12 months, we have built extensive hands-on experience implementing and integrating these systems across hospitality properties in Saudi Arabia, enabling fully digital, streamlined operations aligned with modern guest experiences. This practical exposure has positioned us as specialized implementors in hospitality tech, and we are now actively scaling these capabilities into new markets beyond Saudi Arabia.")}
+                className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-lg"
+              />
             </motion.div>
 
             {/* Right: logo card */}
@@ -548,9 +554,10 @@ const OdooPartner = () => {
             <h2 className="text-2xl md:text-3xl font-display font-bold mb-3">
               {get("yan_cta_h2", "Ready to Digitize Your Hospitality Operations?")}
             </h2>
-            <p className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed text-sm">
-              {get("yan_cta_body", "Our hospitality tech team brings 12 months of hands-on implementation experience across Saudi Arabia. Let's bring that expertise to your property.")}
-            </p>
+            <RichText
+              html={get("yan_cta_body", "Our hospitality tech team brings 12 months of hands-on implementation experience across Saudi Arabia. Let's bring that expertise to your property.")}
+              className="text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed text-sm"
+            />
             <button
               onClick={openContactModal}
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-display font-semibold rounded-lg hover:brightness-110 transition-all glow-gold shimmer-btn text-sm"

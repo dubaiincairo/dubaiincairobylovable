@@ -7,6 +7,7 @@ import TechStackSection from "@/components/TechStackSection";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 import { useContactModal } from "@/context/ContactModalContext";
+import { RichText } from "@/components/ui/rich-text";
 
 const Tech = () => {
   const { get } = useSiteContent();
@@ -44,9 +45,10 @@ const Tech = () => {
               <br />
               <span className="text-gradient-gold">{get("tech_page_subheadline", "Every Result We Deliver")}</span>
             </h1>
-            <p className="text-muted-foreground text-base max-w-2xl leading-relaxed">
-              {get("tech_page_desc", "We don't just use tools — we architect intelligent stacks. Three purpose-built layers that cover acquisition, execution, and innovation across your entire digital operation.")}
-            </p>
+            <RichText
+              html={get("tech_page_desc", "We don't just use tools — we architect intelligent stacks. Three purpose-built layers that cover acquisition, execution, and innovation across your entire digital operation.")}
+              className="text-muted-foreground text-base max-w-2xl leading-relaxed"
+            />
           </motion.div>
         </div>
       </section>
@@ -62,9 +64,10 @@ const Tech = () => {
               <h3 className="font-display font-bold text-xl text-foreground mb-1">
                 {get("tech_cta_title", "Want to know which stack fits your business?")}
               </h3>
-              <p className="text-sm text-muted-foreground">
-                {get("tech_cta_desc", "We'll audit your current tools and recommend the right combination.")}
-              </p>
+              <RichText
+                html={get("tech_cta_desc", "We'll audit your current tools and recommend the right combination.")}
+                className="text-sm text-muted-foreground"
+              />
             </div>
             <button
               type="button"

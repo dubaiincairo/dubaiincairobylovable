@@ -76,7 +76,7 @@ const TechStackSection = () => {
   const { get } = useSiteContent();
 
   return (
-    <section className="relative py-10 md:py-14 px-6 overflow-hidden">
+    <section className="relative py-6 md:py-10 px-6 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[260px] rounded-full bg-primary/4 blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
@@ -109,10 +109,8 @@ const TechStackSection = () => {
               <motion.div
                 key={cat.num}
                 variants={cardFadeUp}
-                className="relative flex flex-col rounded-2xl border border-border bg-card overflow-hidden"
+                className="group relative flex flex-col rounded-2xl glass-card gradient-border hover-lift overflow-hidden"
               >
-                {/* accent top line */}
-                <div className={`absolute top-0 inset-x-0 h-px bg-gradient-to-r ${cat.gradFrom} via-transparent to-transparent`} />
 
                 <div className="flex flex-col flex-1 p-5 gap-4">
 
