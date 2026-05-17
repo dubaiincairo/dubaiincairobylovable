@@ -8,8 +8,9 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { z } from "zod";
-import { fadeUp, scaleIn, viewportOnce } from "@/lib/animations";
+import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
 import AnimatedUnderline from "@/components/ui/animated-underline";
+import { RichText } from "@/components/ui/rich-text";
 import {
   Select,
   SelectContent,
@@ -103,176 +104,164 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="relative py-10 md:py-16 px-6 overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.04), transparent 70%)' }} />
+    <section id="contact" className="relative py-8 md:py-14 px-6 overflow-hidden">
+      <div className="absolute top-1/2 right-0 w-[480px] h-[480px] rounded-full bg-primary/4 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-      <div className="relative max-w-3xl mx-auto">
+      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-14 items-start">
 
-        {/* Compact centered header — matches Services/Values rhythm */}
-        <motion.div
-          className="text-center mb-8 md:mb-10"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-        >
-          <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
+        {/* LEFT — left-aligned header + body + trust signals (matches About/Founder rhythm) */}
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+          <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("contact_subtitle", "Get Started")}
           </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold leading-tight whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold leading-tight whitespace-pre-line">
             {get("contact_headline", "Ready to Grow?\nLet's Build.")}
           </h2>
-          <AnimatedUnderline align="center" />
-          <p className="text-muted-foreground text-base leading-relaxed max-w-xl mx-auto mt-3 mb-5 whitespace-pre-line">
-            {get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services with measurable impact, flexible execution, and competitive pricing.")}
-          </p>
+          <AnimatedUnderline align="left" className="mb-5" />
+          <RichText
+            html={get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services with measurable impact, flexible execution, and competitive pricing.")}
+            className="text-muted-foreground text-base md:text-lg leading-relaxed"
+          />
 
-          {/* Inline trust pills — replaces stacked iconed cards */}
-          <div className="flex flex-wrap justify-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium text-muted-foreground bg-card/40 border border-border/60">
-              <Clock className="w-3 h-3 text-primary" />
-              {get("contact_trust_1", "Response within 24 hours")}
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium text-muted-foreground bg-card/40 border border-border/60">
-              <MessageSquare className="w-3 h-3 text-primary" />
-              {get("contact_trust_2", "Free consultation call")}
-            </span>
+          <div className="mt-6 md:mt-7 flex flex-col gap-3">
+            <div className="inline-flex items-center gap-3 text-sm text-foreground">
+              <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                <Clock className="w-4 h-4 text-primary" />
+              </div>
+              <span>{get("contact_trust_1", "Response within 24 hours")}</span>
+            </div>
+            <div className="inline-flex items-center gap-3 text-sm text-foreground">
+              <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                <MessageSquare className="w-4 h-4 text-primary" />
+              </div>
+              <span>{get("contact_trust_2", "Free consultation call")}</span>
+            </div>
           </div>
         </motion.div>
 
-        {/* Form */}
-        {isSubmitted ? (
-          <motion.div
-            variants={scaleIn}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-col items-center gap-4 py-16 text-center"
-          >
-            <CheckCircle className="w-12 h-12 text-primary" />
-            <h3 className="text-2xl font-display font-semibold">{get("contact_success_title", "Thank You!")}</h3>
-            <p className="text-muted-foreground">{get("contact_success_msg", "We'll get back to you within 24 hours.")}</p>
-            <Button variant="outline" className="mt-4" onClick={() => setIsSubmitted(false)}>
-              {get("contact_success_btn", "Send Another Message")}
-            </Button>
-          </motion.div>
-        ) : (
-          <motion.form
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportOnce}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-3.5 rounded-2xl border border-border/60 bg-card/30 backdrop-blur-sm p-5 md:p-7"
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              <div>
-                <label htmlFor="name" className="block text-xs font-medium text-muted-foreground mb-1">
-                  {get("contact_name_label", "Name *")}
-                </label>
-                <Input id="name" name="name" value={form.name} onChange={handleChange} placeholder={get("contact_name_placeholder", "Your name")} className="bg-background/60 border-border" />
-                {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-xs font-medium text-muted-foreground mb-1">
-                  {get("contact_email_label", "Email *")}
-                </label>
-                <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} placeholder={get("contact_email_placeholder", "you@company.com")} className="bg-background/60 border-border" />
-                {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
-              </div>
+        {/* RIGHT — form card (placed where Founder's quote card / About's process steps sit) */}
+        <motion.div variants={cardFadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+          {isSubmitted ? (
+            <div className="rounded-xl glass-card p-8 md:p-10 flex flex-col items-center gap-4 text-center">
+              <CheckCircle className="w-12 h-12 text-primary" />
+              <h3 className="text-2xl font-display font-semibold">{get("contact_success_title", "Thank You!")}</h3>
+              <p className="text-muted-foreground">{get("contact_success_msg", "We'll get back to you within 24 hours.")}</p>
+              <Button variant="outline" className="mt-4" onClick={() => setIsSubmitted(false)}>
+                {get("contact_success_btn", "Send Another Message")}
+              </Button>
             </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="rounded-xl glass-card p-6 md:p-7 space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="name" className="block text-xs font-medium text-muted-foreground mb-1">
+                    {get("contact_name_label", "Name *")}
+                  </label>
+                  <Input id="name" name="name" value={form.name} onChange={handleChange} placeholder={get("contact_name_placeholder", "Your name")} className="bg-background/60 border-border" />
+                  {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-xs font-medium text-muted-foreground mb-1">
+                    {get("contact_email_label", "Email *")}
+                  </label>
+                  <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} placeholder={get("contact_email_placeholder", "you@company.com")} className="bg-background/60 border-border" />
+                  {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
+                </div>
+              </div>
 
-            <div>
-              <label htmlFor="phone" className="block text-xs font-medium text-muted-foreground mb-1">
-                {get("contact_phone_label", "Phone *")}
-              </label>
-              <div className="flex gap-2">
-                <Select value={countryCode} onValueChange={setCountryCode}>
-                  <SelectTrigger
-                    className="w-[92px] shrink-0 bg-background/60 border-border hover:border-primary/40 data-[state=open]:border-primary/60 transition-colors"
-                    aria-label={`Country code, currently ${countryCode}`}
-                  >
-                    <span className="font-mono text-sm tabular-nums text-foreground">{countryCode}</span>
-                  </SelectTrigger>
-                  <SelectContent
-                    align="start"
-                    sideOffset={6}
-                    className="max-h-72 w-[190px] p-1.5"
-                  >
-                    {COUNTRY_CODES.map((c) => (
-                      <SelectPrimitive.Item
-                        key={c.code}
-                        value={c.code}
-                        className={cn(
-                          "group relative flex w-full items-center gap-3 rounded-md py-2.5 pl-3 pr-3 text-sm cursor-pointer outline-none transition-colors",
-                          "focus:bg-muted/60",
-                          "data-[state=checked]:bg-primary/10",
-                        )}
-                      >
-                        <SelectPrimitive.ItemText asChild>
-                          <span className="flex-1 truncate text-foreground group-data-[state=checked]:text-primary group-data-[state=checked]:font-medium">
-                            {c.label}
+              <div>
+                <label htmlFor="phone" className="block text-xs font-medium text-muted-foreground mb-1">
+                  {get("contact_phone_label", "Phone *")}
+                </label>
+                <div className="flex gap-2">
+                  <Select value={countryCode} onValueChange={setCountryCode}>
+                    <SelectTrigger
+                      className="w-[92px] shrink-0 bg-background/60 border-border hover:border-primary/40 data-[state=open]:border-primary/60 transition-colors"
+                      aria-label={`Country code, currently ${countryCode}`}
+                    >
+                      <span className="font-mono text-sm tabular-nums text-foreground">{countryCode}</span>
+                    </SelectTrigger>
+                    <SelectContent
+                      align="start"
+                      sideOffset={6}
+                      className="max-h-72 w-[190px] p-1.5"
+                    >
+                      {COUNTRY_CODES.map((c) => (
+                        <SelectPrimitive.Item
+                          key={c.code}
+                          value={c.code}
+                          className={cn(
+                            "group relative flex w-full items-center gap-3 rounded-md py-2.5 pl-3 pr-3 text-sm cursor-pointer outline-none transition-colors",
+                            "focus:bg-muted/60",
+                            "data-[state=checked]:bg-primary/10",
+                          )}
+                        >
+                          <SelectPrimitive.ItemText asChild>
+                            <span className="flex-1 truncate text-foreground group-data-[state=checked]:text-primary group-data-[state=checked]:font-medium">
+                              {c.label}
+                            </span>
+                          </SelectPrimitive.ItemText>
+                          <span className="font-mono text-xs tabular-nums text-muted-foreground group-data-[state=checked]:text-primary shrink-0">
+                            {c.code}
                           </span>
-                        </SelectPrimitive.ItemText>
-                        <span className="font-mono text-xs tabular-nums text-muted-foreground group-data-[state=checked]:text-primary shrink-0">
-                          {c.code}
-                        </span>
-                      </SelectPrimitive.Item>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <Input
-                  id="phone"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  placeholder={get("contact_phone_placeholder", "100 000 0000")}
-                  className="bg-background/60 border-border flex-1"
-                />
+                        </SelectPrimitive.Item>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder={get("contact_phone_placeholder", "100 000 0000")}
+                    className="bg-background/60 border-border flex-1"
+                  />
+                </div>
+                {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone}</p>}
               </div>
-              {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone}</p>}
-            </div>
 
-            <div>
-              <label className="block text-xs font-medium text-muted-foreground mb-1.5">
-                {get("contact_service_label", "Service of interest")}
-              </label>
-              <div className="flex flex-wrap gap-1.5">
-                {SERVICES.map((s) => (
-                  <button
-                    key={s}
-                    type="button"
-                    onClick={() => setSelectedService((prev) => (prev === s ? "" : s))}
-                    className={`px-3 py-1 rounded-full text-xs font-medium border transition-all duration-200 ${
-                      selectedService === s
-                        ? "border-primary bg-primary/10 text-primary"
-                        : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                    }`}
-                  >
-                    {s}
-                  </button>
-                ))}
+              <div>
+                <label className="block text-xs font-medium text-muted-foreground mb-1.5">
+                  {get("contact_service_label", "Service of interest")}
+                </label>
+                <div className="flex flex-wrap gap-1.5">
+                  {SERVICES.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => setSelectedService((prev) => (prev === s ? "" : s))}
+                      className={`px-3 py-1 rounded-full text-xs font-medium border transition-all duration-200 ${
+                        selectedService === s
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                      }`}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div>
-              <label htmlFor="message" className="block text-xs font-medium text-muted-foreground mb-1">
-                {get("contact_message_label", "Message *")}
-              </label>
-              <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")} rows={4} className="bg-background/60 border-border resize-none" />
-              {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
-            </div>
+              <div>
+                <label htmlFor="message" className="block text-xs font-medium text-muted-foreground mb-1">
+                  {get("contact_message_label", "Message *")}
+                </label>
+                <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")} rows={4} className="bg-background/60 border-border resize-none" />
+                {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
+              </div>
 
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="shimmer-btn w-full px-8 py-3 text-base font-display font-semibold glow-gold mt-1"
-            >
-              {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />}
-              {isSubmitting ? "Sending..." : get("contact_cta", "Start a Project")}
-              {!isSubmitting && <ArrowRight className="w-4 h-4" />}
-            </Button>
-          </motion.form>
-        )}
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="shimmer-btn w-full px-8 py-3 text-base font-display font-semibold glow-gold mt-1"
+              >
+                {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />}
+                {isSubmitting ? "Sending..." : get("contact_cta", "Start a Project")}
+                {!isSubmitting && <ArrowRight className="w-4 h-4" />}
+              </Button>
+            </form>
+          )}
+        </motion.div>
 
       </div>
     </section>
