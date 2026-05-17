@@ -1,4 +1,5 @@
-import { motion, Variants } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { MOTION, useMotionPref } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
@@ -9,6 +10,19 @@ interface HeroHeadlineProps {
 
 const HeroHeadline = ({ text, className }: HeroHeadlineProps) => {
   const { shouldReduce } = useMotionPref();
+  const ref = useRef<HTMLHeadingElement>(null);
+
+  // Scroll-linked: progress goes from 0 (headline at top of viewport)
+  // to 1 (headline scrolled fully past the top). Drives parallax + fade.
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.85, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+  const blur = useTransform(scrollYProgress, [0, 0.6, 1], ["blur(0px)", "blur(0px)", "blur(4px)"]);
 
   const container: Variants = {
     hidden: {},
@@ -31,8 +45,14 @@ const HeroHeadline = ({ text, className }: HeroHeadlineProps) => {
 
   const lines = text.split("\n");
 
+  const scrollStyle = shouldReduce
+    ? undefined
+    : { y, opacity, scale, filter: blur, willChange: "transform, opacity, filter" as const };
+
   return (
     <motion.h1
+      ref={ref}
+      style={scrollStyle}
       className={cn(
         "text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.05] mb-6",
         className,
