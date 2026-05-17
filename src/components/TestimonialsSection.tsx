@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Quote, Linkedin, ChevronDown, ChevronUp } from "lucide-react";
+import { Quote, Linkedin, ChevronDown, ChevronUp, ArrowLeft, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
 import AnimatedUnderline from "@/components/ui/animated-underline";
-import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { type CarouselApi, Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 type Testimonial = {
   id: string;
@@ -125,7 +125,7 @@ const TestimonialsSection = () => {
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="relative py-8 md:py-14 overflow-hidden">
+    <section className="relative py-6 md:py-10 overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)" }}
@@ -164,25 +164,42 @@ const TestimonialsSection = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-
-          <CarouselPrevious className="hidden sm:flex -left-4 lg:-left-6" />
-          <CarouselNext className="hidden sm:flex -right-4 lg:-right-6" />
         </Carousel>
 
         {count > 1 && (
-          <div className="flex justify-center gap-2 mt-8">
-            {Array.from({ length: count }).map((_, i) => (
-              <button
-                key={i}
-                aria-label={`Go to testimonial ${i + 1}`}
-                onClick={() => api?.scrollTo(i)}
-                className={`rounded-full transition-all duration-300 ${
-                  i === current
-                    ? "w-5 h-2 bg-primary"
-                    : "w-2 h-2 bg-border hover:bg-muted-foreground"
-                }`}
-              />
-            ))}
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <button
+              type="button"
+              onClick={() => api?.scrollPrev()}
+              aria-label="Previous testimonial"
+              className="w-9 h-9 rounded-full border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/8 transition-all duration-200"
+            >
+              <ArrowLeft aria-hidden="true" className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-2">
+              {Array.from({ length: count }).map((_, i) => (
+                <button
+                  key={i}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                  onClick={() => api?.scrollTo(i)}
+                  className={`rounded-full transition-all duration-300 ${
+                    i === current
+                      ? "w-5 h-2 bg-primary"
+                      : "w-2 h-2 bg-border hover:bg-muted-foreground"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => api?.scrollNext()}
+              aria-label="Next testimonial"
+              className="w-9 h-9 rounded-full border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/8 transition-all duration-200"
+            >
+              <ArrowRight aria-hidden="true" className="w-4 h-4" />
+            </button>
           </div>
         )}
       </div>

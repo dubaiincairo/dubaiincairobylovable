@@ -48,7 +48,7 @@ const capabilities = [
 ];
 
 const OdooPartnerSection = () => (
-  <section className="relative py-8 md:py-14 px-6 overflow-hidden">
+  <section className="relative py-6 md:py-10 px-6 overflow-hidden">
     {/* Background orbs */}
     <div className="absolute top-1/2 left-0 w-[450px] h-[450px] rounded-full bg-primary/5 blur-[150px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
     <div className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-primary/4 blur-[120px] translate-x-1/3 pointer-events-none" />

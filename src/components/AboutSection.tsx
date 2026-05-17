@@ -26,10 +26,10 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="relative py-8 md:py-14 px-6 overflow-hidden">
+    <section id="about" className="relative py-6 md:py-10 px-6 overflow-hidden">
       <div className="absolute top-1/2 right-0 w-[480px] h-[480px] rounded-full bg-primary/4 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-12 items-start">
 
         {/* LEFT — copy */}
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
