@@ -5,7 +5,9 @@ import { useMotionPref } from "@/lib/animations";
 interface SectionParallax {
   ref: RefObject<HTMLElement>;
   headerY: MotionValue<number>;
+  headerOpacity: MotionValue<number>;
   orbY: MotionValue<number>;
+  orbScale: MotionValue<number>;
   contentY: MotionValue<number>;
 }
 
@@ -14,22 +16,35 @@ interface SectionParallax {
  * and motion values that drift the section's header, background orb, and
  * content as the section moves through the viewport.
  *
- * scrollYProgress goes 0 → 1 over the full window during which any part of
- * the section is in view (offset: ["start end", "end start"]).
+ * Uses a tightened offset (start at 90% from viewport top → end at 10%)
+ * so the animation happens during the most-visible scroll window rather
+ * than the whole viewport-passage — giving the effect noticeable speed
+ * per scroll-pixel.
  *
- * Reduced-motion users get static MotionValues (range collapses to [0, 0]).
+ * Reduced-motion users get static MotionValues.
  */
 export const useSectionParallax = (): SectionParallax => {
   const ref = useRef<HTMLElement>(null);
   const { shouldReduce } = useMotionPref();
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
+    offset: ["start 0.9", "end 0.1"],
   });
 
-  const headerY = useTransform(scrollYProgress, [0, 1], shouldReduce ? [0, 0] : [25, -25]);
-  const orbY = useTransform(scrollYProgress, [0, 1], shouldReduce ? [0, 0] : [-45, 45]);
-  const contentY = useTransform(scrollYProgress, [0, 1], shouldReduce ? [0, 0] : [12, -12]);
+  const headerY = useTransform(scrollYProgress, [0, 1], shouldReduce ? [0, 0] : [80, -80]);
+  const headerOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.8, 1],
+    shouldReduce ? [1, 1, 1, 1] : [0.35, 1, 1, 0.5],
+  );
+  const orbY = useTransform(scrollYProgress, [0, 1], shouldReduce ? [0, 0] : [-140, 140]);
+  const orbScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    shouldReduce ? [1, 1, 1] : [0.85, 1.15, 0.85],
+  );
+  const contentY = useTransform(scrollYProgress, [0, 1], shouldReduce ? [0, 0] : [40, -40]);
 
-  return { ref, headerY, orbY, contentY };
+  return { ref, headerY, headerOpacity, orbY, orbScale, contentY };
 };
+

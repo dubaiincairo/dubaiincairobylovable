@@ -14,7 +14,7 @@ interface Logo {
 
 const ClientsSection = () => {
   const { get } = useSiteContent();
-  const { ref: sectionRef, headerY, orbY } = useSectionParallax();
+  const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
 
   // Order is editor-controlled via admin drag-and-drop (clients_order CMS key).
   // Missing/invalid entries fall back to natural 1..N order.
@@ -44,12 +44,12 @@ const ClientsSection = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[240px] pointer-events-none">
         <motion.div
           className="w-full h-full"
-          style={{ y: orbY, background: "radial-gradient(ellipse, hsl(38 80% 55% / 0.05), transparent 70%)" }}
+          style={{ y: orbY, scale: orbScale, background: "radial-gradient(ellipse, hsl(38 80% 55% / 0.05), transparent 70%)" }}
         />
       </div>
 
       <div className="relative max-w-6xl mx-auto px-6">
-        <motion.div className="text-center mb-8" style={{ y: headerY }}>
+        <motion.div className="text-center mb-8" style={{ y: headerY, opacity: headerOpacity }}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
             {get("clients_subtitle", "Success Partners")}
           </span>

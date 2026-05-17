@@ -15,7 +15,7 @@ const WhyDifferentSection = () => {
   const [current, setCurrent] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   useCarouselSwipeHint(api, carouselRef);
-  const { ref: sectionRef, headerY, orbY } = useSectionParallax();
+  const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
 
   const edges = [
     {
@@ -50,12 +50,12 @@ const WhyDifferentSection = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] pointer-events-none">
         <motion.div
           className="w-full h-full rounded-full"
-          style={{ y: orbY, background: 'radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)' }}
+          style={{ y: orbY, scale: orbScale, background: 'radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)' }}
         />
       </div>
 
       <div className="relative max-w-6xl mx-auto">
-        <motion.div className="text-center mb-6 md:mb-12" style={{ y: headerY }}>
+        <motion.div className="text-center mb-6 md:mb-12" style={{ y: headerY, opacity: headerOpacity }}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("edges_subtitle", "Why We're Different")}
           </span>

@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, MapPin, Landmark, Building2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useCarouselSwipeHint } from "@/hooks/useCarouselSwipeHint";
+import { useSectionParallax } from "@/hooks/useSectionParallax";
 
 // ── Type ──────────────────────────────────────────────────────────────────────
 
@@ -63,6 +64,7 @@ const BankAccountsSection = () => {
   const [current, setCurrent] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   useCarouselSwipeHint(api, carouselRef);
+  const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
 
   useEffect(() => {
     supabase
@@ -83,23 +85,22 @@ const BankAccountsSection = () => {
   }, [api]);
 
   return (
-    <section id="bank-accounts" className="relative py-6 md:py-10 px-6 overflow-hidden">
+    <section ref={sectionRef as RefObject<HTMLElement>} id="bank-accounts" className="relative py-6 md:py-10 px-6 overflow-hidden">
 
-      {/* Ambient radial glow */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)" }}
-      />
+      {/* Ambient radial glow — scroll parallax */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] pointer-events-none">
+        <motion.div
+          className="w-full h-full rounded-full"
+          style={{ y: orbY, scale: orbScale, background: "radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)" }}
+        />
+      </div>
 
       <div className="relative max-w-6xl mx-auto">
 
         {/* ── Header ── */}
         <motion.div
           className="text-center mb-6 md:mb-12"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
+          style={{ y: headerY, opacity: headerOpacity }}
         >
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             Payment & Banking

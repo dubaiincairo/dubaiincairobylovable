@@ -30,7 +30,7 @@ const HighlightsSection = () => {
   const [current, setCurrent] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   useCarouselSwipeHint(api, carouselRef);
-  const { ref: sectionRef, headerY, orbY } = useSectionParallax();
+  const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
 
   useEffect(() => {
     supabase
@@ -99,14 +99,14 @@ const HighlightsSection = () => {
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] translate-x-1/2 -translate-y-1/2 pointer-events-none">
         <motion.div
           className="w-full h-full rounded-full bg-primary/4 blur-[150px]"
-          style={{ y: orbY }}
+          style={{ y: orbY, scale: orbScale }}
         />
       </div>
 
       <div className="relative max-w-6xl mx-auto">
         <motion.div
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-10"
-          style={{ y: headerY }}
+          style={{ y: headerY, opacity: headerOpacity }}
         >
           <div>
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">

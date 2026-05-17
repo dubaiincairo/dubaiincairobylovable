@@ -14,12 +14,12 @@ const LAYERS = [
 
 const TechStackTeaser = () => {
   const { get } = useSiteContent();
-  const { ref: sectionRef, orbY, contentY } = useSectionParallax();
+  const { ref: sectionRef, orbY, orbScale, contentY } = useSectionParallax();
 
   return (
     <section ref={sectionRef as RefObject<HTMLElement>} className="relative py-6 md:py-10 px-6 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] pointer-events-none">
-        <motion.div className="w-full h-full rounded-full bg-primary/3 blur-[100px]" style={{ y: orbY }} />
+        <motion.div className="w-full h-full rounded-full bg-primary/3 blur-[100px]" style={{ y: orbY, scale: orbScale }} />
       </div>
 
       <div className="relative max-w-6xl mx-auto">

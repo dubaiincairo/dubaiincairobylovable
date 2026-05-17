@@ -104,7 +104,7 @@ const TestimonialsSection = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
-  const { ref: sectionRef, headerY, orbY } = useSectionParallax();
+  const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
 
   useEffect(() => {
     supabase
@@ -133,13 +133,13 @@ const TestimonialsSection = () => {
         style={{ background: "linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)" }}
       />
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] translate-x-1/3 -translate-y-1/2 pointer-events-none">
-        <motion.div className="w-full h-full rounded-full bg-primary/4 blur-[140px]" style={{ y: orbY }} />
+        <motion.div className="w-full h-full rounded-full bg-primary/4 blur-[140px]" style={{ y: orbY, scale: orbScale }} />
       </div>
 
       <div className="relative max-w-6xl mx-auto px-6">
         <motion.div
           className="text-center mb-6 md:mb-12"
-          style={{ y: headerY }}
+          style={{ y: headerY, opacity: headerOpacity }}
         >
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("testimonials_subtitle", "What Clients Say")}

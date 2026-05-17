@@ -1,11 +1,14 @@
+import { type RefObject } from "react";
 import { motion } from "framer-motion";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeUp, staggerContainer, cardFadeUp, viewportOnce, MOTION } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
 import AnimatedUnderline from "@/components/ui/animated-underline";
+import { useSectionParallax } from "@/hooks/useSectionParallax";
 
 const AboutSection = () => {
   const { get } = useSiteContent();
+  const { ref: sectionRef, orbY, orbScale } = useSectionParallax();
 
   const steps = [
     {
@@ -26,8 +29,10 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="relative py-6 md:py-10 px-6 overflow-hidden">
-      <div className="absolute top-1/2 right-0 w-[480px] h-[480px] rounded-full bg-primary/4 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+    <section ref={sectionRef as RefObject<HTMLElement>} id="about" className="relative py-6 md:py-10 px-6 overflow-hidden">
+      <div className="absolute top-1/2 right-0 w-[480px] h-[480px] translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <motion.div className="w-full h-full rounded-full bg-primary/4 blur-[150px]" style={{ y: orbY, scale: orbScale }} />
+      </div>
 
       <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-12 items-start">
 

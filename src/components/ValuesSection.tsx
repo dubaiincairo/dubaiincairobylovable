@@ -15,7 +15,7 @@ const ValuesSection = () => {
   const [current, setCurrent] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   useCarouselSwipeHint(api, carouselRef);
-  const { ref: sectionRef, headerY, orbY } = useSectionParallax();
+  const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
 
   const values = [
     {
@@ -47,11 +47,11 @@ const ValuesSection = () => {
   return (
     <section ref={sectionRef as RefObject<HTMLElement>} className="relative py-6 md:py-10 px-6 overflow-hidden">
       <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] pointer-events-none">
-        <motion.div className="w-full h-full rounded-full bg-accent/5 blur-[120px]" style={{ y: orbY }} />
+        <motion.div className="w-full h-full rounded-full bg-accent/5 blur-[120px]" style={{ y: orbY, scale: orbScale }} />
       </div>
 
       <div className="relative max-w-6xl mx-auto">
-        <motion.div className="text-center mb-6 md:mb-12" style={{ y: headerY }}>
+        <motion.div className="text-center mb-6 md:mb-12" style={{ y: headerY, opacity: headerOpacity }}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("values_subtitle", "What We Stand For")}
           </span>
