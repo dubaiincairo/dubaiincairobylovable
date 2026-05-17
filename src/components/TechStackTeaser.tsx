@@ -1,9 +1,10 @@
+import { type RefObject } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { TrendingUp, ShoppingCart, Cpu, ArrowRight } from "lucide-react";
-import { fadeUp, viewportOnce } from "@/lib/animations";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { RichText } from "@/components/ui/rich-text";
+import { useSectionParallax } from "@/hooks/useSectionParallax";
 
 const LAYERS = [
   { Icon: TrendingUp,   color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", label: "Growth & Customer Intelligence" },
@@ -13,15 +14,18 @@ const LAYERS = [
 
 const TechStackTeaser = () => {
   const { get } = useSiteContent();
+  const { ref: sectionRef, orbY, contentY } = useSectionParallax();
 
   return (
-    <section className="relative py-6 md:py-10 px-6 overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] rounded-full bg-primary/3 blur-[100px] pointer-events-none" />
+    <section ref={sectionRef as RefObject<HTMLElement>} className="relative py-6 md:py-10 px-6 overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] pointer-events-none">
+        <motion.div className="w-full h-full rounded-full bg-primary/3 blur-[100px]" style={{ y: orbY }} />
+      </div>
 
       <div className="relative max-w-6xl mx-auto">
         <motion.div
           className="rounded-2xl border border-border bg-card overflow-hidden"
-          variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}
+          style={{ y: contentY }}
         >
           {/* top accent */}
           <div className="h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />

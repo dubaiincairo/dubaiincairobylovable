@@ -1,12 +1,13 @@
-import { useRef, useState } from "react";
+import { useRef, useState, type RefObject } from "react";
 import { motion } from "framer-motion";
 import { BrainCircuit, Globe, Target } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { cardFadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
 import AnimatedUnderline from "@/components/ui/animated-underline";
 import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useCarouselSwipeHint } from "@/hooks/useCarouselSwipeHint";
+import { useSectionParallax } from "@/hooks/useSectionParallax";
 
 const WhyDifferentSection = () => {
   const { get } = useSiteContent();
@@ -14,6 +15,7 @@ const WhyDifferentSection = () => {
   const [current, setCurrent] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   useCarouselSwipeHint(api, carouselRef);
+  const { ref: sectionRef, headerY, orbY } = useSectionParallax();
 
   const edges = [
     {
@@ -43,12 +45,17 @@ const WhyDifferentSection = () => {
   ];
 
   return (
-    <section className="relative py-6 md:py-10 px-6 overflow-hidden">
-      {/* Radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)' }} />
+    <section ref={sectionRef as RefObject<HTMLElement>} className="relative py-6 md:py-10 px-6 overflow-hidden">
+      {/* Radial glow — scroll-parallax drifts the orb downward as section passes */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] pointer-events-none">
+        <motion.div
+          className="w-full h-full rounded-full"
+          style={{ y: orbY, background: 'radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)' }}
+        />
+      </div>
 
       <div className="relative max-w-6xl mx-auto">
-        <motion.div className="text-center mb-6 md:mb-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="text-center mb-6 md:mb-12" style={{ y: headerY }}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("edges_subtitle", "Why We're Different")}
           </span>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type RefObject } from "react";
 import { motion } from "framer-motion";
 import { Quote, Linkedin, ChevronDown, ChevronUp, ArrowLeft, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -7,6 +7,7 @@ import { fadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
 import AnimatedUnderline from "@/components/ui/animated-underline";
 import { type CarouselApi, Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { useSectionParallax } from "@/hooks/useSectionParallax";
 
 type Testimonial = {
   id: string;
@@ -103,6 +104,7 @@ const TestimonialsSection = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const { ref: sectionRef, headerY, orbY } = useSectionParallax();
 
   useEffect(() => {
     supabase
@@ -125,20 +127,19 @@ const TestimonialsSection = () => {
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="relative py-6 md:py-10 overflow-hidden">
+    <section ref={sectionRef as RefObject<HTMLElement>} className="relative py-6 md:py-10 overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)" }}
       />
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-primary/4 blur-[140px] translate-x-1/3 -translate-y-1/2 pointer-events-none" />
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] translate-x-1/3 -translate-y-1/2 pointer-events-none">
+        <motion.div className="w-full h-full rounded-full bg-primary/4 blur-[140px]" style={{ y: orbY }} />
+      </div>
 
       <div className="relative max-w-6xl mx-auto px-6">
         <motion.div
           className="text-center mb-6 md:mb-12"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
+          style={{ y: headerY }}
         >
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("testimonials_subtitle", "What Clients Say")}
