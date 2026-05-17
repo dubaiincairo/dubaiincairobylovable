@@ -10,6 +10,7 @@ import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animat
 import PageTransition from "@/components/PageTransition";
 import ApplyModal from "@/components/ApplyModal";
 import { RichText } from "@/components/ui/rich-text";
+import AnimatedUnderline from "@/components/ui/animated-underline";
 
 type Job = {
   id: string;
@@ -106,10 +107,11 @@ const Careers = () => {
       </section>
 
       {/* ── Why Join ─────────────────────────────────────────────────────── */}
-      <section className="relative px-6 py-10 md:py-12">
+      <section className="relative px-6 py-6 md:py-10 overflow-hidden">
+        <div className="absolute top-0 right-0 w-[450px] h-[450px] rounded-full bg-primary/4 blur-[140px] translate-x-1/3 -translate-y-1/3 pointer-events-none" />
         <div className="relative max-w-7xl mx-auto">
           <motion.div
-            className="text-center mb-10"
+            className="text-center mb-6 md:mb-10"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -118,12 +120,13 @@ const Careers = () => {
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
               {get("careers_why_badge", "Why Dubai in Cairo")}
             </span>
-            <h2 className="text-2xl md:text-3xl font-display font-bold">
+            <h2 className="text-3xl md:text-5xl font-display font-bold">
               {get("careers_why_headline", "More Than a Job.")}{" "}
               <span className="text-gradient-gold">
                 {get("careers_why_headline_accent", "A Career Accelerator.")}
               </span>
             </h2>
+            <AnimatedUnderline />
           </motion.div>
 
           <motion.div
@@ -161,10 +164,11 @@ const Careers = () => {
       </section>
 
       {/* ── Open Positions ───────────────────────────────────────────────── */}
-      <section className="relative px-6 pb-12">
-        <div className="relative max-w-4xl mx-auto">
+      <section className="relative px-6 py-6 md:py-10 overflow-hidden">
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-primary/5 blur-[130px] -translate-x-1/3 translate-y-1/3 pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto">
           <motion.div
-            className="text-center mb-10"
+            className="text-center mb-6 md:mb-10"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -173,14 +177,16 @@ const Careers = () => {
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
               {get("careers_jobs_badge", "Open Positions")}
             </span>
-            <h2 className="text-2xl md:text-3xl font-display font-bold">
+            <h2 className="text-3xl md:text-5xl font-display font-bold">
               {get("careers_jobs_headline", "Find Your Role")}
             </h2>
-            <p className="text-muted-foreground text-sm mt-2">
+            <AnimatedUnderline />
+            <p className="text-muted-foreground text-sm mt-3 max-w-xl mx-auto">
               {get("careers_jobs_subtext", "Click any position to view full details")}
             </p>
           </motion.div>
 
+          <div className="max-w-4xl mx-auto">
           {loading ? (
             <div className="flex justify-center py-20">
               <div className="w-6 h-6 rounded-full border-2 border-primary border-t-transparent animate-spin" />
@@ -329,12 +335,15 @@ const Careers = () => {
               </AccordionPrimitive.Root>
             </motion.div>
           )}
+          </div>
         </div>
       </section>
 
       {/* ── How to Apply CTA ─────────────────────────────────────────────── */}
-      <section className="relative px-6 pb-14">
-        <div className="relative max-w-4xl mx-auto">
+      <section className="relative px-6 py-6 md:py-10 overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.04), transparent 70%)' }} />
+        <div className="relative max-w-7xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <motion.div
             className="rounded-2xl border border-border/60 p-8 md:p-12 text-center"
             style={{
@@ -372,6 +381,7 @@ const Careers = () => {
               </span>
             </p>
           </motion.div>
+        </div>
         </div>
       </section>
 

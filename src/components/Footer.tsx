@@ -4,10 +4,7 @@ import { Phone } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeIn, viewportOnce } from "@/lib/animations";
 
-const PHONES = [
-  { display: "+20 120 200 0068", href: "tel:+20120200068" },
-  { display: "+966 059 597 9064", href: "tel:+966595979064" },
-];
+const tel = (display: string) => `tel:${display.replace(/[^\d+]/g, "")}`;
 
 const Footer = () => {
   const { get } = useSiteContent();
@@ -26,9 +23,14 @@ const Footer = () => {
     { href: "/partnerships/zoho",    label: get("nav_partner_zoho",    "Zoho") },
   ];
 
+  const phones = [
+    get("footer_phone_1", "+20 120 200 0068"),
+    get("footer_phone_2", "+966 059 597 9064"),
+  ];
+
   return (
     <motion.footer
-      className="relative pt-12 md:pt-14 pb-6 px-6 border-t border-border"
+      className="relative pt-8 md:pt-10 pb-5 px-6 border-t border-border"
       variants={fadeIn}
       initial="hidden"
       whileInView="visible"
@@ -39,11 +41,11 @@ const Footer = () => {
 
       <div className="max-w-7xl mx-auto">
 
-        {/* 4-column grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mb-10">
+        {/* 3-column grid (brand spans 2 of 4 cols → 50% width with phones underneath) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-7">
 
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
+          {/* Brand + tagline + phones */}
+          <div className="col-span-2 md:col-span-2">
             <span
               aria-label="Dubai in Cairo"
               className="font-display font-semibold text-foreground text-xl inline-flex items-center gap-1.5"
@@ -52,17 +54,30 @@ const Footer = () => {
               <span>{get("nav_brand_2", "in")}</span>
               <span className="text-gradient-gold">{get("nav_brand_3", "Cairo")}</span>
             </span>
-            <p className="mt-3 text-xs italic text-muted-foreground max-w-xs leading-relaxed whitespace-pre-line">
+            <p className="mt-2 text-xs italic text-muted-foreground max-w-md leading-relaxed whitespace-pre-line">
               {get("footer_tagline", "From Dubai to Cairo, we transferred the scope, the challenges, and the quality.")}
             </p>
+            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5">
+              {phones.map((p) => (
+                <a
+                  key={p}
+                  href={tel(p)}
+                  aria-label={`Call ${p}`}
+                  className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors duration-200"
+                >
+                  <Phone aria-hidden="true" className="w-3 h-3 text-primary/60" />
+                  {p}
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Explore */}
           <div>
-            <h3 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-foreground mb-3">
-              Explore
+            <h3 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-foreground mb-2.5">
+              {get("footer_explore_label", "Explore")}
             </h3>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-1.5">
               {exploreLinks.map((l) => (
                 <li key={l.href}>
                   <Link to={l.href} className="text-xs text-muted-foreground hover:text-primary transition-colors duration-200">
@@ -75,10 +90,10 @@ const Footer = () => {
 
           {/* Partnerships */}
           <div>
-            <h3 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-foreground mb-3">
-              Partnerships
+            <h3 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-foreground mb-2.5">
+              {get("footer_partnerships_label", "Partnerships")}
             </h3>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-1.5">
               {partnerLinks.map((l) => (
                 <li key={l.href}>
                   <Link to={l.href} className="text-xs text-muted-foreground hover:text-primary transition-colors duration-200">
@@ -89,31 +104,10 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h3 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-foreground mb-3">
-              Contact
-            </h3>
-            <ul className="flex flex-col gap-2">
-              {PHONES.map((p) => (
-                <li key={p.href}>
-                  <a
-                    href={p.href}
-                    aria-label={`Call ${p.display}`}
-                    className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors duration-200"
-                  >
-                    <Phone aria-hidden="true" className="w-3 h-3 text-primary/60" />
-                    {p.display}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
         </div>
 
         {/* Bottom strip: copyright + legal */}
-        <div className="pt-5 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
+        <div className="pt-4 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
           <span className="whitespace-pre-line text-center sm:text-left">
             {get("footer_copyright", "© 2025 Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC · All Rights Reserved")}
           </span>

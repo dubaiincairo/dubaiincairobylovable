@@ -251,8 +251,12 @@ export const contentRegistry: ContentField[] = [
   { section: "contact", key: "contact_modal_title",         label: "Modal — Title (shown when nav \"Get Started\" opens the modal)", defaultValue: "Let's Build Together" },
 
   // ──────────────── Footer ────────────────
-  { section: "footer", key: "footer_tagline",   label: "Tagline",   defaultValue: "From Dubai to Cairo, we transferred the scope, the challenges, and the quality." },
-  { section: "footer", key: "footer_copyright", label: "Copyright", defaultValue: "© 2025 Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC · All Rights Reserved" },
+  { section: "footer", key: "footer_tagline",            label: "Tagline",            defaultValue: "From Dubai to Cairo, we transferred the scope, the challenges, and the quality." },
+  { section: "footer", key: "footer_explore_label",      label: "Column Header — Explore",       defaultValue: "Explore" },
+  { section: "footer", key: "footer_partnerships_label", label: "Column Header — Partnerships",  defaultValue: "Partnerships" },
+  { section: "footer", key: "footer_phone_1",            label: "Phone 1",            defaultValue: "+20 120 200 0068" },
+  { section: "footer", key: "footer_phone_2",            label: "Phone 2",            defaultValue: "+966 059 597 9064" },
+  { section: "footer", key: "footer_copyright",          label: "Copyright",          defaultValue: "© 2025 Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC · All Rights Reserved" },
 
   // ──────────────── Studios Page ────────────────
   { section: "studios", key: "studios_page_eyebrow",     label: "Page — Eyebrow",      defaultValue: "Our Studios" },
