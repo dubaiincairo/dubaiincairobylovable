@@ -5,12 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
 import {
-  Loader2, Save, LogOut, ArrowLeft, ChevronDown, Search, X,
+  Loader2, Save, LogOut, ArrowLeft, ChevronDown, ChevronRight, Search, X,
   Type, AlignLeft, MousePointer, Hash, LayoutList,
   Plus, Trash2, Pencil, Star, Eye, EyeOff, BookOpen, Briefcase, Landmark,
   Upload, ImageIcon, GripVertical, Mail, Menu, LayoutDashboard, MessageSquare,
   Globe, Check, Info,
+  Home, BarChart3, FileText, Zap, Sparkles, LayoutGrid, User, MapPin, ScrollText,
+  Palette, Wrench, Boxes, Building2, Workflow, Compass, Link2, Handshake, type LucideIcon,
 } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
 import { cn } from "@/lib/utils";
 import {
@@ -28,12 +31,18 @@ import { JobApplicationsPanel } from "@/components/admin/JobApplicationsPanel";
 
 // ─── Icons & labels ──────────────────────────────────────────────────────────
 
-const sectionIcons: Record<string, string> = {
-  seo: "🔍",
-  nav: "🧭", hero: "🏠", stats: "📊", about: "ℹ️", edges: "⚡",
-  values: "💎", services: "🎯", founder: "👤", clients: "🤝",
-  tech: "🛠️", google: "📍", legal: "📜", contact: "✉️", footer: "🔗",
-  careers: "💼", odoo: "🔶", yanolja: "🏨", zoho: "🟣",
+const SECTION_ICONS: Record<string, LucideIcon> = {
+  seo: Search,
+  nav: Compass, hero: Home, stats: BarChart3, about: Info, edges: Zap,
+  values: Sparkles, services: LayoutGrid, founder: User, clients: Handshake,
+  tech: Wrench, google: MapPin, legal: ScrollText, contact: Mail, footer: Link2,
+  careers: Briefcase, odoo: Boxes, yanolja: Building2, zoho: Workflow,
+  studios: Palette,
+};
+
+const SectionIcon = ({ section, className }: { section: string; className?: string }) => {
+  const Icon = SECTION_ICONS[section] ?? FileText;
+  return <Icon className={className} />;
 };
 
 const sectionDescriptions: Record<string, string> = {
@@ -58,12 +67,134 @@ const sectionDescriptions: Record<string, string> = {
 };
 
 const subItemLabels: Record<string, string> = {
-  hero: "Chip",
-  about: "Metric",
-  services: "Studio",
-  edges: "Edge",
-  values: "Value",
-  tech: "Category",
+  hero:    "Float Card",
+  about:   "Step",
+  edges:   "Edge",
+  values:  "Value",
+  careers: "Item",
+};
+
+// ─── Per-section explicit layouts (mirror the live page structure) ───────────
+
+type SectionLayout = { label: string; keys: string[] }[];
+
+const SECTION_LAYOUT: Record<string, SectionLayout> = {
+  nav: [
+    { label: "Brand Wordmark",     keys: ["nav_brand_1", "nav_brand_2", "nav_brand_3", "nav_favicon_url"] },
+    { label: "Main Links",         keys: ["nav_link_home", "nav_link_studios", "nav_link_careers", "nav_link_tech", "nav_link_faq"] },
+    { label: "Partnerships Menu",  keys: ["nav_link_partnerships", "nav_partner_odoo", "nav_partner_yanolja", "nav_partner_zoho"] },
+    { label: "CTA",                keys: ["nav_cta"] },
+  ],
+  hero: [
+    { label: "Copy & CTAs",        keys: ["hero_tagline", "hero_headline", "hero_subheadline", "hero_cta_primary", "hero_cta_secondary"] },
+    { label: "Dashboard Card",     keys: ["hero_card_label", "hero_card_trend", "hero_card_value", "hero_card_sublabel"] },
+    { label: "Float Card 1",       keys: ["hero_float_1_value", "hero_float_1_label"] },
+    { label: "Float Card 2",       keys: ["hero_float_2_value", "hero_float_2_label"] },
+    { label: "Float Card 3",       keys: ["hero_float_3_value", "hero_float_3_label"] },
+    { label: "Float Card 4",       keys: ["hero_float_4_value", "hero_float_4_label"] },
+  ],
+  stats: [
+    { label: "Stat 1 — Projects",  keys: ["stat_projects", "stat_projects_label"] },
+    { label: "Stat 2 — Clients",   keys: ["stat_clients",  "stat_clients_label"] },
+    { label: "Stat 3 — Years",     keys: ["stat_years",    "stat_years_label"] },
+    { label: "Stat 4 — Digital",   keys: ["stat_digital",  "stat_digital_label"] },
+  ],
+  about: [
+    { label: "Header & Body",      keys: ["about_subtitle", "about_headline", "about_body"] },
+    { label: "Step 1",             keys: ["about_step_1_num", "about_step_1_title", "about_step_1_desc"] },
+    { label: "Step 2",             keys: ["about_step_2_num", "about_step_2_title", "about_step_2_desc"] },
+    { label: "Step 3",             keys: ["about_step_3_num", "about_step_3_title", "about_step_3_desc"] },
+  ],
+  edges: [
+    { label: "Header",             keys: ["edges_subtitle", "edges_headline"] },
+    { label: "Card 1",             keys: ["edge_1_title", "edge_1_desc"] },
+    { label: "Card 2",             keys: ["edge_2_title", "edge_2_desc"] },
+    { label: "Card 3",             keys: ["edge_3_title", "edge_3_desc"] },
+  ],
+  values: [
+    { label: "Header",             keys: ["values_subtitle", "values_headline"] },
+    { label: "Value 1",            keys: ["value_1_title", "value_1_desc"] },
+    { label: "Value 2",            keys: ["value_2_title", "value_2_desc"] },
+    { label: "Value 3",            keys: ["value_3_title", "value_3_desc"] },
+  ],
+  founder: [
+    { label: "Header & Body",      keys: ["founder_subtitle", "founder_headline", "founder_body"] },
+    { label: "Portrait & Quote",   keys: ["founder_name", "founder_photo_url", "founder_quote", "founder_attribution"] },
+    { label: "Calendly CTA",       keys: ["founder_calendly_url", "founder_cta_label"] },
+    { label: "Social Links",       keys: ["founder_facebook", "founder_linkedin", "founder_instagram"] },
+  ],
+  clients: [
+    { label: "Section Copy",       keys: ["clients_subtitle", "clients_headline", "clients_description"] },
+  ],
+  testimonials: [
+    { label: "Section Copy",       keys: ["testimonials_subtitle", "testimonials_headline", "testimonials_subtext"] },
+  ],
+  tech: [
+    { label: "Homepage Teaser",    keys: ["tech_subtitle", "tech_headline", "tech_teaser_desc"] },
+    { label: "Full Tech Page",     keys: ["tech_page_headline", "tech_page_subheadline", "tech_page_desc", "tech_desc"] },
+    { label: "Tech Page — CTA",    keys: ["tech_cta_title", "tech_cta_desc", "tech_cta_btn"] },
+  ],
+  google: [
+    { label: "Business Info",      keys: ["google_biz_name", "google_biz_category", "google_rating", "google_address"] },
+    { label: "Map & CTA",          keys: ["google_maps_link", "google_maps_embed", "google_cta"] },
+  ],
+  legal: [
+    { label: "Header",             keys: ["legal_subtitle", "legal_company_name"] },
+    { label: "Fields",             keys: [
+      "legal_reg_label",        "legal_reg",
+      "legal_membership_label", "legal_membership",
+      "legal_tax_label",        "legal_tax",
+      "legal_sector_label",     "legal_sector",
+    ] },
+  ],
+  contact: [
+    { label: "Section Copy",       keys: ["contact_subtitle", "contact_headline", "contact_subtext"] },
+    { label: "Trust Signals",      keys: ["contact_trust_1", "contact_trust_2"] },
+    { label: "Form — Labels & Placeholders", keys: [
+      "contact_name_label", "contact_name_placeholder",
+      "contact_email_label", "contact_email_placeholder",
+      "contact_phone_label", "contact_phone_placeholder",
+      "contact_service_label",
+      "contact_message_label", "contact_message_placeholder",
+    ] },
+    { label: "Submit & Success",   keys: ["contact_cta", "contact_success_title", "contact_success_msg", "contact_success_btn"] },
+    { label: "Pop-up Modal",       keys: ["contact_modal_title"] },
+  ],
+  footer: [
+    { label: "Tagline & Copyright", keys: ["footer_tagline", "footer_copyright"] },
+  ],
+  studios: [
+    { label: "Page Header",        keys: ["studios_page_eyebrow", "studios_page_headline", "studios_page_subheadline", "studios_page_desc"] },
+    { label: "Studios Grid",       keys: ["services_subtitle", "services_headline"] },
+    { label: "CTA & Back Link",    keys: ["studios_cta_title", "studios_cta_desc", "studios_cta_btn", "studios_back_link"] },
+  ],
+  careers: [
+    { label: "Hero",               keys: ["careers_hero_badge", "careers_hero_headline_1", "careers_hero_headline_2", "careers_hero_body", "careers_hero_pill_1", "careers_hero_pill_2"] },
+    { label: "Why DiC",            keys: ["careers_why_badge", "careers_why_headline", "careers_why_headline_accent"] },
+    { label: "Preferred Qualifications", keys: ["careers_pref_title", "careers_pref_1", "careers_pref_2"] },
+    { label: "Open Roles",         keys: ["careers_jobs_badge", "careers_jobs_headline", "careers_jobs_subtext"] },
+    { label: "How to Apply",       keys: ["careers_apply_badge", "careers_apply_headline", "careers_apply_body", "careers_apply_email", "careers_apply_subject"] },
+  ],
+  odoo: [
+    { label: "Partnerships Hero",  keys: ["partnerships_badge", "partnerships_headline", "partnerships_subtext"] },
+    { label: "Page Header",        keys: ["odoo_page_badge", "odoo_page_headline", "odoo_page_subtext", "odoo_partner_name", "odoo_logo_url"] },
+    { label: "Hero",               keys: ["odoo_badge_label", "odoo_hero_badge", "odoo_hero_h1", "odoo_hero_h1_accent", "odoo_hero_h1_end", "odoo_hero_body_1", "odoo_hero_body_2"] },
+    { label: "Suites Section",     keys: ["odoo_suites_badge", "odoo_suites_h2", "odoo_suites_h2_accent"] },
+    { label: "CTA",                keys: ["odoo_cta_badge", "odoo_cta_h2", "odoo_cta_body", "odoo_cta_btn"] },
+  ],
+  yanolja: [
+    { label: "Page Header",        keys: ["yan_page_badge", "yan_page_headline", "yan_page_subtext", "yan_partner_name", "yan_logo_url"] },
+    { label: "Hero",               keys: ["yan_badge_label", "yan_hero_badge", "yan_hero_h2", "yan_hero_h2_accent", "yan_hero_body"] },
+    { label: "Suites Section",     keys: ["yan_suites_badge", "yan_suites_h2", "yan_suites_h2_accent"] },
+    { label: "CTA",                keys: ["yan_cta_badge", "yan_cta_h2", "yan_cta_body", "yan_cta_btn"] },
+  ],
+  zoho: [
+    { label: "Page Header",        keys: ["zoho_page_badge", "zoho_page_headline", "zoho_page_subtext", "zoho_partner_name", "zoho_logo_url"] },
+    { label: "Hero",               keys: ["zoho_badge_label", "zoho_hero_badge", "zoho_hero_h1", "zoho_hero_h1_accent", "zoho_hero_h1_end", "zoho_hero_body_1", "zoho_hero_body_2"] },
+    { label: "Value Body",         keys: ["zoho_value_body"] },
+    { label: "Suites Section",     keys: ["zoho_suites_badge", "zoho_suites_h2", "zoho_suites_h2_accent"] },
+    { label: "CTA",                keys: ["zoho_cta_badge", "zoho_cta_h2", "zoho_cta_body", "zoho_cta_btn"] },
+  ],
 };
 
 // ─── Field-type helpers ───────────────────────────────────────────────────────
@@ -97,7 +228,7 @@ function groupSectionFields(fields: ContentField[]): SectionGroups {
   const headerFields: ContentField[] = [];
   const numbered: Record<string, ContentField[]> = {};
   for (const field of fields) {
-    const m = field.key.match(/_(\d+)_/);
+    const m = field.key.match(/_(\ d+)_/);
     if (m) {
       const n = m[1];
       if (!numbered[n]) numbered[n] = [];
@@ -121,7 +252,7 @@ const Admin = () => {
   const [openSubGroups, setOpenSubGroups] = useState<Record<string, boolean>>({});
   const [search, setSearch]         = useState("");
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [adminTab, setAdminTab]     = useState<"dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications">("dashboard");
+  const [adminTab, setAdminTab]     = useState<AdminTab>("dashboard");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // ── Auth & data load ──
@@ -253,6 +384,7 @@ const Admin = () => {
   }, {});
 
   const filteredSections = sectionOrder.filter((section) => {
+    if (section === "clients") return false;
     if (!search) return true;
     const fields = grouped[section];
     return (
@@ -270,10 +402,12 @@ const Admin = () => {
     <div className="min-h-screen bg-background flex">
 
       {/* ── Sidebar (desktop) ───────────────────────────────────────────── */}
-      <aside className="hidden lg:flex flex-col w-72 border-r border-border bg-card/50 sticky top-0 h-screen overflow-y-auto shrink-0">
+      <aside className="hidden lg:flex flex-col w-72 border-r border-border bg-card/50 sticky top-0 h-screen overflow-hidden shrink-0">
         <SidebarContent
           adminTab={adminTab}
           setAdminTab={(tab) => setAdminTab(tab)}
+          activeSection={activeSection}
+          selectSection={selectSection}
           hasEdits={hasEdits}
           saving={saving}
           edited={edited}
@@ -288,6 +422,8 @@ const Admin = () => {
           <SidebarContent
             adminTab={adminTab}
             setAdminTab={(tab) => { setAdminTab(tab); setMobileSidebarOpen(false); }}
+            activeSection={activeSection}
+            selectSection={(s) => { selectSection(s); setMobileSidebarOpen(false); }}
             hasEdits={hasEdits}
             saving={saving}
             edited={edited}
@@ -349,6 +485,62 @@ const Admin = () => {
         {adminTab === "contacts"     && <ContactSubmissionsPanel />}
         {adminTab === "applications" && <JobApplicationsPanel />}
         {adminTab === "testimonials" && <TestimonialsPanel logActivity={(action, label) => logActivity(action, "testimonial", label)} />}
+        {adminTab === "clients" && (
+          <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto">
+            <div className="mb-5">
+              <h2 className="font-display font-bold text-lg">Client Logos</h2>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Checkbox = show in marquee · green ✓ = logo uploaded · ✕ = clear logo. Hit Save when done.
+              </p>
+            </div>
+
+            {/* Tip — recommended file specs */}
+            <div className="mb-4 flex items-start gap-2 rounded-lg border border-amber-500/20 bg-amber-500/5 px-3.5 py-3">
+              <Info className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
+              <div className="text-[11px] text-amber-400/90 leading-relaxed space-y-1">
+                <p className="font-semibold text-amber-300">Logo file recommendations</p>
+                <ul className="list-disc pl-4 space-y-0.5">
+                  <li><strong>Format:</strong> SVG (best) or transparent-background PNG. Also accepted: WebP, JPEG, ICO.</li>
+                  <li><strong>Dimensions:</strong> ~400×120 px for horizontal wordmarks, ~400×400 px for square / icon logos. Use 2× for crisp retina (e.g. 800×240).</li>
+                  <li><strong>Background:</strong> must be transparent — solid backgrounds will render as white blocks.</li>
+                  <li><strong>Max size:</strong> 2 MB per file.</li>
+                  <li><strong>Color:</strong> the site converts every logo to a white monochrome silhouette, so any source colour works.</li>
+                  <li><strong>No logo?</strong> Leave the file empty — the brand name will be shown as a styled text wordmark instead.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-border bg-card overflow-hidden mb-4">
+              <div className="px-5 py-2.5 bg-muted/30 border-b border-border">
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Section Text</span>
+              </div>
+              {(["clients_subtitle","clients_headline","clients_description"] as const).map((key) => {
+                const field = contentRegistry.find((f) => f.key === key)!;
+                return (
+                  <FieldRow key={key} field={field}
+                    value={edited[key] ?? dbValues[key] ?? field.defaultValue}
+                    isEdited={editedKeys.has(key)} onChange={handleChange} />
+                );
+              })}
+            </div>
+            <div className="rounded-xl border border-border bg-card overflow-hidden">
+              <div className="px-5 py-2.5 bg-muted/30 border-b border-border">
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Logo Slots</span>
+              </div>
+              <div className="p-4">
+                <ClientsLogoPanel edited={edited} dbValues={dbValues} onChange={handleChange} />
+              </div>
+            </div>
+            {hasEdits && (
+              <div className="mt-4 flex justify-end">
+                <Button onClick={handleSave} disabled={saving} size="sm">
+                  {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
+                  {saving ? "Saving…" : "Save Changes"}
+                </Button>
+              </div>
+            )}
+          </main>
+        )}
         {adminTab === "case-studies" && <CaseStudiesPanel logActivity={logActivity} />}
         {adminTab === "jobs"         && <JobsPanel logActivity={logActivity} />}
         {adminTab === "banks"        && <BanksPanel logActivity={logActivity} />}
@@ -382,7 +574,7 @@ const Admin = () => {
                   return (
                     <div key={section} className="rounded-xl border border-border bg-card overflow-hidden">
                       <div className="flex items-center gap-3 px-5 py-3 bg-muted/30">
-                        <span className="text-lg leading-none">{sectionIcons[section] || "📄"}</span>
+                        <SectionIcon section={section} className="w-4 h-4 text-primary shrink-0" />
                         <span className="text-sm font-display font-bold text-foreground">{sectionLabels[section] || section}</span>
                         <button onClick={() => { setSearch(""); selectSection(section); }}
                           className="ml-auto text-[10px] text-primary hover:underline">Open section →</button>
@@ -429,6 +621,7 @@ const Admin = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   {sectionOrder.map((section) => {
+                    if (section === "clients") return null;
                     const fields = grouped[section] ?? [];
                     if (fields.length === 0) return null;
                     const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
@@ -442,7 +635,7 @@ const Admin = () => {
                         className="text-left rounded-xl border border-border bg-card hover:bg-muted/30 hover:border-primary/30 transition-all p-4 group"
                       >
                         <div className="flex items-start justify-between gap-2 mb-2">
-                          <span className="text-2xl leading-none">{sectionIcons[section] || "📄"}</span>
+                          <SectionIcon section={section} className="w-6 h-6 text-primary" />
                           {editCount > 0 && (
                             <span className="shrink-0 w-5 h-5 flex items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold">
                               {editCount}
@@ -467,10 +660,25 @@ const Admin = () => {
 
           // ── Single-section drill-in view ──────────────────────────────────
           const fields = grouped[activeSection] ?? [];
-          const { headerFields, numbered } = groupSectionFields(fields);
-          const numberedEntries = Object.entries(numbered).sort(([a], [b]) => Number(a) - Number(b));
-          const subLabel = subItemLabels[activeSection] || "Item";
           const editCount = fields.filter((f) => editedKeys.has(f.key)).length;
+
+          // Use the explicit layout if defined; otherwise build a fallback layout
+          // from groupSectionFields so every section still renders as accordions.
+          let layout: SectionLayout = SECTION_LAYOUT[activeSection] ?? [];
+          if (layout.length === 0) {
+            const { headerFields, numbered } = groupSectionFields(fields);
+            const subLabel = subItemLabels[activeSection] || "Item";
+            const fallback: SectionLayout = [];
+            if (headerFields.length > 0) {
+              fallback.push({ label: "Section Copy", keys: headerFields.map((f) => f.key) });
+            }
+            Object.entries(numbered)
+              .sort(([a], [b]) => Number(a) - Number(b))
+              .forEach(([num, groupFields]) => {
+                fallback.push({ label: `${subLabel} ${num}`, keys: groupFields.map((f) => f.key) });
+              });
+            layout = fallback;
+          }
 
           return (
             <main className="flex-1 max-w-3xl w-full mx-auto px-4 md:px-6 py-6 overflow-y-auto">
@@ -484,7 +692,7 @@ const Admin = () => {
                 </button>
                 <span className="text-muted-foreground/40">/</span>
                 <span className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
-                  <span className="text-lg leading-none">{sectionIcons[activeSection] || "📄"}</span>
+                  <SectionIcon section={activeSection} className="w-4 h-4 text-primary shrink-0" />
                   {sectionLabels[activeSection] || activeSection}
                 </span>
                 {editCount > 0 && (
@@ -492,65 +700,38 @@ const Admin = () => {
                 )}
               </div>
 
-              <div className="rounded-xl border border-border bg-card overflow-hidden space-y-0">
-
-                {/* Section-level header fields */}
-                {headerFields.length > 0 && (
-                  <div className="divide-y divide-border">
-                    {numberedEntries.length > 0 && (
-                      <div className="px-5 py-2.5 bg-muted/30">
-                        <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                          Section Settings
-                        </span>
-                      </div>
-                    )}
-                    {headerFields.map((field) => (
-                      <FieldRow
-                        key={field.key}
-                        field={field}
-                        value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
-                        isEdited={editedKeys.has(field.key)}
-                        onChange={handleChange}
-                      />
-                    ))}
-                  </div>
-                )}
-
-                {/* Numbered sub-groups (Studio 1, Edge 2, …) */}
-                {numberedEntries.map(([num, groupFields]) => {
-                  const subKey = `${activeSection}:${num}`;
-                  const isSubOpen = openSubGroups[subKey] ?? false;
-                  const subEditCount = groupFields.filter((f) => editedKeys.has(f.key)).length;
-                  const titleField = groupFields.find((f) => f.key.includes("_title") || f.key.includes("_label"));
-                  const subTitle = titleField
-                    ? (edited[titleField.key] ?? dbValues[titleField.key] ?? titleField.defaultValue)
-                    : "";
+              <div className="space-y-2">
+                {layout.map((group) => {
+                  const groupKey = `${activeSection}:${group.label}`;
+                  const isOpen = openSubGroups[groupKey] ?? false;
+                  const groupFields = group.keys
+                    .map((k) => contentRegistry.find((f) => f.key === k))
+                    .filter((f): f is ContentField => Boolean(f));
+                  if (groupFields.length === 0) return null;
+                  const groupEditCount = groupFields.filter((f) => editedKeys.has(f.key)).length;
 
                   return (
-                    <div key={subKey} className="border-t border-border">
+                    <div key={groupKey} className="rounded-xl border border-border bg-card overflow-hidden">
                       <button
-                        onClick={() => toggleSubGroup(subKey)}
-                        className="w-full flex items-center gap-3 px-5 py-3 bg-muted/20 hover:bg-muted/40 transition-colors text-left"
+                        onClick={() => toggleSubGroup(groupKey)}
+                        className="w-full flex items-center gap-3 px-5 py-3 hover:bg-muted/30 transition-colors text-left"
                       >
-                        <span className="w-6 h-6 rounded-md bg-primary/10 text-primary text-xs font-bold flex items-center justify-center shrink-0">
-                          {num}
+                        <span className="flex-1 text-sm font-display font-semibold text-foreground truncate">
+                          {group.label}
                         </span>
-                        <div className="flex-1 min-w-0">
-                          <span className="text-xs font-semibold text-foreground">{subLabel} {num}</span>
-                          {subTitle && (
-                            <span className="text-muted-foreground text-xs ml-2 truncate">— {subTitle}</span>
-                          )}
-                        </div>
-                        {subEditCount > 0 && (
+                        <span className="text-[10px] text-muted-foreground shrink-0">
+                          {groupFields.length} field{groupFields.length !== 1 ? "s" : ""}
+                        </span>
+                        {groupEditCount > 0 && (
                           <span className="shrink-0 text-[9px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded">
-                            {subEditCount} edited
+                            {groupEditCount} edited
                           </span>
                         )}
-                        <ChevronDown className={cn("w-3.5 h-3.5 text-muted-foreground transition-transform shrink-0", isSubOpen && "rotate-180")} />
+                        <ChevronDown className={cn("w-3.5 h-3.5 text-muted-foreground transition-transform shrink-0", isOpen && "rotate-180")} />
                       </button>
 
-                      {isSubOpen && (
-                        <div className="divide-y divide-border">
+                      {isOpen && (
+                        <div className="border-t border-border divide-y divide-border">
                           {groupFields.map((field) => (
                             <FieldRow
                               key={field.key}
@@ -558,7 +739,6 @@ const Admin = () => {
                               value={edited[field.key] ?? dbValues[field.key] ?? field.defaultValue}
                               isEdited={editedKeys.has(field.key)}
                               onChange={handleChange}
-                              indent
                             />
                           ))}
                         </div>
@@ -577,34 +757,102 @@ const Admin = () => {
 
 // ─── SidebarContent ───────────────────────────────────────────────────────────
 
-type AdminTab = "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications";
+type AdminTab = "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "clients" | "contacts" | "applications";
 
-const TAB_ITEMS: { id: AdminTab; label: string; icon: typeof BookOpen; dividerBefore?: boolean }[] = [
-  { id: "dashboard",    label: "Dashboard",       icon: LayoutDashboard },
-  { id: "content",      label: "Content",         icon: Type },
-  { id: "seo",          label: "SEO & Meta",      icon: Globe, dividerBefore: true },
-  { id: "case-studies", label: "Cases",           icon: BookOpen },
+// Grouped nav structure mirroring the website
+type SidebarGroup = {
+  label: string;
+  icon: LucideIcon;
+  items: { section: string; label: string; icon: LucideIcon }[];
+};
+
+const SIDEBAR_GROUPS: SidebarGroup[] = [
+  {
+    label: "Home Page",
+    icon: Home,
+    items: [
+      { section: "hero",     label: "Hero",                icon: Home },
+      { section: "stats",    label: "Statistics",          icon: BarChart3 },
+      { section: "about",    label: "About",               icon: Info },
+      { section: "edges",    label: "Why We're Different", icon: Zap },
+      { section: "values",   label: "Our Values",          icon: Sparkles },
+      { section: "services", label: "Studios Grid",        icon: LayoutGrid },
+      { section: "founder",  label: "Founder",             icon: User },
+      { section: "google",   label: "Google Maps",         icon: MapPin },
+      { section: "legal",    label: "Legal Info",          icon: ScrollText },
+      { section: "contact",  label: "Contact Form",        icon: Mail },
+    ],
+  },
+  {
+    label: "Pages",
+    icon: FileText,
+    items: [
+      { section: "studios",  label: "Studios Page",        icon: Palette },
+      { section: "careers",  label: "Careers Page",        icon: Briefcase },
+      { section: "tech",     label: "Tech Stack Page",     icon: Wrench },
+    ],
+  },
+  {
+    label: "Partnerships",
+    icon: Handshake,
+    items: [
+      { section: "odoo",     label: "Odoo ERP",            icon: Boxes },
+      { section: "yanolja",  label: "Yanolja Cloud",       icon: Building2 },
+      { section: "zoho",     label: "Zoho",                icon: Workflow },
+    ],
+  },
+  {
+    label: "Global",
+    icon: Globe,
+    items: [
+      { section: "nav",      label: "Navigation",          icon: Compass },
+      { section: "footer",   label: "Footer",              icon: Link2 },
+    ],
+  },
+];
+
+const DATA_TABS: { id: AdminTab; label: string; icon: typeof BookOpen }[] = [
+  { id: "clients",      label: "Client Logos",    icon: ImageIcon },
+  { id: "testimonials", label: "Testimonials",    icon: Star },
+  { id: "case-studies", label: "Case Studies",    icon: BookOpen },
   { id: "jobs",         label: "Job Listings",    icon: Briefcase },
   { id: "banks",        label: "Banks",           icon: Landmark },
-  { id: "testimonials", label: "Testimonials",    icon: Star },
-  { id: "applications", label: "Applications",    icon: MessageSquare, dividerBefore: true },
+  { id: "seo",          label: "SEO & Meta",      icon: Globe },
+];
+
+const INBOX_TABS: { id: AdminTab; label: string; icon: typeof BookOpen }[] = [
   { id: "contacts",     label: "Messages",        icon: Mail },
+  { id: "applications", label: "Applications",    icon: MessageSquare },
 ];
 
 function SidebarContent({
-  adminTab, setAdminTab, hasEdits, saving, edited, handleSave, handleLogout,
+  adminTab, setAdminTab, activeSection, selectSection,
+  hasEdits, saving, edited, handleSave, handleLogout,
 }: {
-  adminTab: "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications";
-  setAdminTab: (t: "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "contacts" | "applications") => void;
+  adminTab: AdminTab;
+  setAdminTab: (t: AdminTab) => void;
+  activeSection: string | null;
+  selectSection: (s: string | null) => void;
   hasEdits: boolean;
   saving: boolean;
   edited: Record<string, string>;
   handleSave: () => void;
   handleLogout: () => void;
 }) {
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
+
+  const goToSection = (section: string) => {
+    setAdminTab("content");
+    selectSection(section);
+    setOpenGroup(null);
+  };
+
+  const isContentSection = adminTab === "content" && activeSection !== null;
+  const isContentOrSeo = adminTab === "content" || adminTab === "seo";
+
   return (
     <>
-      <div className="p-5 border-b border-border">
+      <div className="p-5 border-b border-border shrink-0">
         <a href="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4">
           <ArrowLeft className="w-4 h-4" />
           <span className="text-xs">Back to website</span>
@@ -615,41 +863,139 @@ function SidebarContent({
         <p className="text-xs text-muted-foreground mt-1">Dubai in Cairo CMS</p>
       </div>
 
-      {/* Tab switcher */}
-      <div className="px-3 pt-3 pb-1 border-b border-border space-y-0.5">
-        {TAB_ITEMS.map(({ id, label, icon: Icon, dividerBefore }) => (
-          <div key={id}>
-            {dividerBefore && <div className="my-1 border-t border-border/50" />}
-            <button
-              onClick={() => setAdminTab(id)}
-              className={cn(
-                "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
-                adminTab === id ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-              )}
+      <div className="flex-1 overflow-y-auto px-3 py-3 space-y-1">
+
+        {/* Dashboard */}
+        <button
+          onClick={() => { setAdminTab("dashboard"); selectSection(null); }}
+          className={cn(
+            "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+            adminTab === "dashboard" ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+          )}
+        >
+          <LayoutDashboard className="w-4 h-4 shrink-0" />
+          Dashboard
+        </button>
+
+        <div className="my-1.5 border-t border-border/50" />
+
+        {/* Content groups — each opens as a side popover */}
+        <div className="px-3 py-1">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Content</span>
+        </div>
+        {SIDEBAR_GROUPS.map((group) => {
+          const GroupIcon = group.icon;
+          const hasActive = adminTab === "content" && group.items.some((i) => i.section === activeSection);
+          const isOpen = openGroup === group.label;
+          return (
+            <Popover
+              key={group.label}
+              open={isOpen}
+              onOpenChange={(o) => setOpenGroup(o ? group.label : null)}
             >
-              <Icon className="w-4 h-4 shrink-0" />
-              {label}
-            </button>
-          </div>
+              <PopoverTrigger asChild>
+                <button
+                  className={cn(
+                    "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+                    hasActive
+                      ? "bg-primary/10 text-primary font-semibold"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  )}
+                >
+                  <GroupIcon className="w-4 h-4 shrink-0" />
+                  <span className="flex-1 truncate">{group.label}</span>
+                  <ChevronRight className="w-3.5 h-3.5 opacity-50 shrink-0" />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent
+                side="right"
+                align="start"
+                sideOffset={8}
+                className="w-60 p-1"
+              >
+                <div className="px-2 py-1.5 mb-0.5">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{group.label}</span>
+                </div>
+                <div className="space-y-0.5">
+                  {group.items.map((item) => {
+                    const ItemIcon = item.icon;
+                    const isActive = adminTab === "content" && activeSection === item.section;
+                    return (
+                      <button
+                        key={item.section}
+                        onClick={() => goToSection(item.section)}
+                        className={cn(
+                          "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-colors text-left",
+                          isActive
+                            ? "bg-primary/10 text-primary font-semibold"
+                            : "text-foreground hover:bg-muted/60"
+                        )}
+                      >
+                        <ItemIcon className="w-4 h-4 shrink-0 opacity-70" />
+                        <span className="truncate">{item.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </PopoverContent>
+            </Popover>
+          );
+        })}
+
+        <div className="my-1.5 border-t border-border/50" />
+
+        {/* Data / Media panels */}
+        <div className="px-3 py-1">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Media & Data</span>
+        </div>
+        {DATA_TABS.map(({ id, label, icon: Icon }) => (
+          <button
+            key={id}
+            onClick={() => { setAdminTab(id); selectSection(null); }}
+            className={cn(
+              "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+              adminTab === id ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+            )}
+          >
+            <Icon className="w-4 h-4 shrink-0" />
+            {label}
+          </button>
+        ))}
+
+        <div className="my-1.5 border-t border-border/50" />
+
+        {/* Inbox */}
+        <div className="px-3 py-1">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Inbox</span>
+        </div>
+        {INBOX_TABS.map(({ id, label, icon: Icon }) => (
+          <button
+            key={id}
+            onClick={() => { setAdminTab(id); selectSection(null); }}
+            className={cn(
+              "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors text-left",
+              adminTab === id ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+            )}
+          >
+            <Icon className="w-4 h-4 shrink-0" />
+            {label}
+          </button>
         ))}
       </div>
 
-      {/* flex-1 spacer keeps footer pinned to bottom */}
-      <div className="flex-1" />
-
-      <div className="p-4 border-t border-border space-y-2 mt-auto">
-        {hasEdits && (adminTab === "content" || adminTab === "seo") ? (
+      <div className="p-4 border-t border-border space-y-2 shrink-0">
+        {hasEdits && isContentOrSeo ? (
           <Button onClick={handleSave} disabled={saving} size="sm" className="w-full glow-gold font-display">
             {saving ? <Loader2 className="w-4 h-4 animate-spin mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
             Save {Object.keys(edited).length} Change{Object.keys(edited).length !== 1 ? "s" : ""}
           </Button>
-        ) : (adminTab === "content" || adminTab === "seo") ? (
+        ) : isContentOrSeo ? (
           <div className="text-center text-xs text-muted-foreground py-1">No unsaved changes</div>
         ) : null}
         <Button variant="outline" size="sm" className="w-full" onClick={handleLogout}>
           <LogOut className="w-4 h-4 mr-1.5" /> Logout
         </Button>
-        {(adminTab === "content" || adminTab === "seo") && <p className="text-center text-[10px] text-muted-foreground">⌘S to save</p>}
+        {isContentOrSeo && <p className="text-center text-[10px] text-muted-foreground">⌘S to save</p>}
       </div>
     </>
   );
@@ -666,6 +1012,8 @@ const SEO_PAGES = [
   { label: "Odoo Partner", keys: ["seo_odoo_title", "seo_odoo_description"] },
   { label: "Yanolja Partner", keys: ["seo_yanolja_title", "seo_yanolja_description"] },
   { label: "Zoho Partner", keys: ["seo_zoho_title", "seo_zoho_description"] },
+  { label: "FAQ", keys: ["seo_faq_title", "seo_faq_description"] },
+  { label: "Privacy Policy", keys: ["seo_privacy_title", "seo_privacy_description"] },
 ];
 
 function SEOPanel({
@@ -681,7 +1029,7 @@ function SEOPanel({
   const isEdited = (key: string) => key in edited;
   const hasEdits = Object.keys(edited).length > 0;
 
-  const globalKeys = ["seo_global_og_image", "seo_twitter_handle", "seo_ga4_id", "seo_gsc_verification"];
+  const globalKeys = ["seo_global_og_image", "seo_ga4_id", "seo_gsc_verification"];
   const allSeoFields = contentRegistry.filter((f) => f.section === "seo");
   const fieldMap = Object.fromEntries(allSeoFields.map((f) => [f.key, f]));
 
@@ -905,7 +1253,7 @@ function ImageUploadField({ value, onChange, fieldKey }: { value: string; onChan
     // Validate type
     const allowed = ["image/svg+xml", "image/png", "image/x-icon", "image/jpeg", "image/webp"];
     if (!allowed.includes(file.type)) {
-      toast({ title: "Unsupported file type", description: "Please upload an SVG, PNG, ICO, or WebP file.", variant: "destructive" });
+      toast({ title: "Unsupported file type", description: "Please upload an SVG, PNG, JPEG, WebP, or ICO file.", variant: "destructive" });
       return;
     }
     // Max 2 MB
@@ -974,7 +1322,7 @@ function ImageUploadField({ value, onChange, fieldKey }: { value: string; onChan
           {uploading
             ? <Loader2 className="w-3 h-3 animate-spin" />
             : <Upload className="w-3 h-3" />}
-          {uploading ? "Uploading…" : "Upload SVG / PNG / ICO"}
+          {uploading ? "Uploading…" : "Upload image"}
         </button>
         {isExternal && (
           <p className="text-[10px] text-muted-foreground">Hosted at: {value.slice(0, 60)}{value.length > 60 ? "…" : ""}</p>
@@ -1776,6 +2124,232 @@ function BanksPanel({ logActivity }: { logActivity: (action: string, entityType:
         </DndContext>
       )}
     </main>
+  );
+}
+
+// ─── ClientsLogoPanel ─────────────────────────────────────────────────────────
+
+const CLIENT_SLOTS = Array.from({ length: 24 }, (_, i) => i + 1);
+
+function parseOrder(raw: string): number[] {
+  const parsed = raw
+    ? raw.split(",").map((s) => parseInt(s, 10)).filter((n) => Number.isFinite(n) && n >= 1 && n <= 24)
+    : [];
+  const seen = new Set(parsed);
+  for (let i = 1; i <= 24; i++) if (!seen.has(i)) parsed.push(i);
+  return parsed.slice(0, 24);
+}
+
+function ClientsLogoPanel({
+  edited, dbValues, onChange,
+}: {
+  edited: Record<string, string>;
+  dbValues: Record<string, string>;
+  onChange: (key: string, val: string) => void;
+}) {
+  const val = (key: string) => edited[key] ?? dbValues[key] ?? "";
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
+
+  const [order, setOrder] = useState<number[]>(() => parseOrder(val("clients_order")));
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = order.indexOf(Number(active.id));
+    const newIndex = order.indexOf(Number(over.id));
+    if (oldIndex === -1 || newIndex === -1) return;
+
+    const newOrder = arrayMove(order, oldIndex, newIndex);
+    setOrder(newOrder);
+    onChange("clients_order", newOrder.join(","));
+  };
+
+  return (
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <SortableContext items={order} strategy={verticalListSortingStrategy}>
+        <div className="space-y-3">
+          {order.map((n) => (
+            <SortableLogoRow key={n} n={n} val={val} onChange={onChange} />
+          ))}
+        </div>
+      </SortableContext>
+    </DndContext>
+  );
+}
+
+function SortableLogoRow({
+  n, val, onChange,
+}: {
+  n: number;
+  val: (key: string) => string;
+  onChange: (key: string, v: string) => void;
+}) {
+  const nameKey = `client_logo_${n}_name`;
+  const urlKey  = `client_logo_${n}_url`;
+  const showKey = `client_logo_${n}_enabled`;
+  const name = val(nameKey);
+  const url  = val(urlKey);
+  const show = val(showKey) !== "false";
+
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: n });
+  const style: React.CSSProperties = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 50 : undefined,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={cn(
+        "flex items-start gap-3 rounded-lg border border-border bg-background px-3 py-2.5",
+        isDragging
+          ? "shadow-xl ring-2 ring-primary/40 scale-[1.01] cursor-grabbing"
+          : "hover:border-border/80"
+      )}
+    >
+      {/* Drag handle */}
+      <button
+        {...attributes}
+        {...listeners}
+        className="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-foreground shrink-0 touch-none mt-1"
+        title="Drag to reorder"
+      >
+        <GripVertical className="w-4 h-4" />
+      </button>
+
+      {/* Right side: two rows */}
+      <div className="flex-1 min-w-0 flex flex-col gap-1.5">
+        {/* Row 1: toggle + preview + name */}
+        <div className="flex items-center gap-2">
+          {/* Show toggle */}
+          <button
+            onClick={() => onChange(showKey, show ? "false" : "true")}
+            className={cn(
+              "w-5 h-5 rounded flex items-center justify-center shrink-0 transition-colors border",
+              show
+                ? "bg-green-500/10 border-green-500/30 text-green-500"
+                : "bg-muted border-border text-muted-foreground"
+            )}
+            title={show ? "Hide from marquee" : "Show in marquee"}
+          >
+            {show ? <Check className="w-3 h-3" /> : null}
+          </button>
+
+          {/* Logo preview */}
+          <div className="w-7 h-7 rounded border border-border bg-muted flex items-center justify-center shrink-0 overflow-hidden">
+            {url ? (
+              <img src={url} alt={name} className="w-5 h-5 object-contain"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+            ) : (
+              <ImageIcon className="w-3 h-3 text-muted-foreground" />
+            )}
+          </div>
+
+          {/* Client name */}
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => onChange(nameKey, e.target.value)}
+            placeholder={`Client ${n} name`}
+            className="flex-1 min-w-0 rounded-md border border-input bg-background px-2 py-1 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          />
+        </div>
+
+        {/* Row 2: URL paste input + upload button + clear */}
+        <div className="flex items-center gap-1.5">
+          <input
+            type="url"
+            value={url}
+            onChange={(e) => onChange(urlKey, e.target.value)}
+            placeholder="Paste logo URL  (or upload →)"
+            className="flex-1 min-w-0 rounded-md border border-input bg-background px-2 py-1 text-xs text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring font-mono"
+          />
+          <LogoUploadButton
+            value={url}
+            fieldKey={urlKey}
+            onChange={(v) => onChange(urlKey, v)}
+          />
+          {url && (
+            <button
+              onClick={() => onChange(urlKey, "")}
+              className="w-6 h-6 rounded flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors shrink-0"
+              title="Clear logo"
+            >
+              <X className="w-3 h-3" />
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LogoUploadButton({
+  value, fieldKey, onChange,
+}: {
+  value: string;
+  fieldKey: string;
+  onChange: (v: string) => void;
+}) {
+  const { toast } = useToast();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const allowed = ["image/svg+xml", "image/png", "image/jpeg", "image/webp"];
+    if (!allowed.includes(file.type)) {
+      toast({ title: "Unsupported type", description: "SVG, PNG, JPG or WebP only.", variant: "destructive" });
+      return;
+    }
+    if (file.size > 1 * 1024 * 1024) {
+      toast({ title: "Too large", description: "Max 1 MB per logo.", variant: "destructive" });
+      return;
+    }
+    setUploading(true);
+    const ext  = file.name.split(".").pop() ?? "png";
+    const path = `client-logos/${fieldKey}-${Date.now()}.${ext}`;
+    const { error } = await supabase.storage.from("assets").upload(path, file, { upsert: true });
+    if (error) {
+      toast({ title: "Upload failed", description: error.message, variant: "destructive" });
+      setUploading(false);
+      return;
+    }
+    const { data: urlData } = supabase.storage.from("assets").getPublicUrl(path);
+    onChange(urlData.publicUrl);
+    toast({ title: "Logo uploaded!", description: "Hit Save to apply." });
+    setUploading(false);
+    e.target.value = "";
+  };
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => inputRef.current?.click()}
+        disabled={uploading}
+        className={cn(
+          "w-6 h-6 rounded flex items-center justify-center transition-colors",
+          value
+            ? "text-green-500 bg-green-500/10 hover:bg-green-500/20"
+            : "text-muted-foreground bg-muted hover:text-primary hover:bg-primary/10"
+        )}
+        title={value ? "Replace logo" : "Upload logo"}
+      >
+        {uploading ? <Loader2 className="w-3 h-3 animate-spin" /> : <Upload className="w-3 h-3" />}
+      </button>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/svg+xml,image/png,image/jpeg,image/webp"
+        className="hidden"
+        onChange={handleFile}
+      />
+    </>
   );
 }
 

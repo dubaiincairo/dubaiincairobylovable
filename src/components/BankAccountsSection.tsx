@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, MapPin, Landmark, Building2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { useCarouselSwipeHint } from "@/hooks/useCarouselSwipeHint";
 
 // ── Type ──────────────────────────────────────────────────────────────────────
 
@@ -57,6 +59,10 @@ function CopyField({ label, value }: { label: string; value: string }) {
 const BankAccountsSection = () => {
   const [banks, setBanks] = useState<BankAccount[]>([]);
   const [loading, setLoading] = useState(true);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  useCarouselSwipeHint(api, carouselRef);
 
   useEffect(() => {
     supabase
@@ -69,6 +75,12 @@ const BankAccountsSection = () => {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    if (!api) return;
+    setCurrent(api.selectedScrollSnap());
+    api.on("select", () => setCurrent(api.selectedScrollSnap()));
+  }, [api]);
 
   return (
     <section id="bank-accounts" className="relative py-8 md:py-14 px-6 overflow-hidden">
@@ -83,7 +95,7 @@ const BankAccountsSection = () => {
 
         {/* ── Header ── */}
         <motion.div
-          className="text-center mb-8 md:mb-12"
+          className="text-center mb-6 md:mb-12"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -92,7 +104,7 @@ const BankAccountsSection = () => {
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             Payment & Banking
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold mb-4 whitespace-pre-line">
             Bank Account Details
           </h2>
           <p className="text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
@@ -120,78 +132,115 @@ const BankAccountsSection = () => {
 
         {/* ── Bank cards ── */}
         {!loading && banks.length > 0 && (
-          <motion.div
-            className="grid md:grid-cols-3 gap-5 md:gap-6"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-          >
-            {banks.map((bank) => {
-              const currencyList = (bank.currencies || "")
-                .split(",")
-                .map((c) => c.trim())
-                .filter(Boolean);
+          <>
+            {/* Mobile / tablet: peek carousel */}
+            <div ref={carouselRef} className="lg:hidden">
+              <Carousel setApi={setApi} opts={{ align: "start", loop: false }} className="w-full">
+                <CarouselContent className="-ml-4">
+                  {banks.map((bank) => {
+                    const currencyList = (bank.currencies || "")
+                      .split(",").map((c) => c.trim()).filter(Boolean);
+                    return (
+                      <CarouselItem key={bank.id} className="pl-4 basis-[85%] sm:basis-1/2">
+                        <motion.div
+                          variants={cardFadeUp}
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={viewportOnce}
+                          className="group glass-card gradient-border rounded-xl p-6 hover-lift flex flex-col gap-5 h-full"
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:rotate-12">
+                              <Building2 className="w-5 h-5 text-primary" />
+                            </div>
+                            {currencyList.length > 0 && (
+                              <div className="flex gap-1.5 mt-1 shrink-0">
+                                {currencyList.map((c) => (
+                                  <span key={c} className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border border-primary/25 text-primary/80 bg-primary/5">{c}</span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                          <div>
+                            {bank.abbr && <span className="text-[10px] font-semibold uppercase tracking-widest text-primary/70 mb-1 block">{bank.abbr}</span>}
+                            <h3 className="text-lg font-display font-semibold text-foreground leading-snug">{bank.title}</h3>
+                            {bank.branch && (
+                              <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
+                                <MapPin className="w-3 h-3 text-primary/60 shrink-0" /><span>{bank.branch}</span>
+                              </div>
+                            )}
+                          </div>
+                          <div className="h-px bg-border/60" />
+                          <div className="flex flex-col gap-4">
+                            {bank.account_number && <CopyField label="Account Number — Companies" value={bank.account_number} />}
+                            {bank.iban && <CopyField label="IBAN" value={bank.iban} />}
+                          </div>
+                        </motion.div>
+                      </CarouselItem>
+                    );
+                  })}
+                </CarouselContent>
+                <CarouselPrevious className="hidden sm:flex -left-4" />
+                <CarouselNext className="hidden sm:flex -right-4" />
+              </Carousel>
+              {banks.length > 1 && (
+                <div className="flex justify-center gap-2 mt-6">
+                  {banks.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => api?.scrollTo(i)}
+                      className={`rounded-full transition-all duration-300 ${i === current ? "w-5 h-2 bg-primary" : "w-2 h-2 bg-border hover:bg-muted-foreground"}`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
 
-              return (
-                <motion.div
-                  key={bank.id}
-                  variants={cardFadeUp}
-                  className="group glass-card gradient-border rounded-xl p-6 hover-lift flex flex-col gap-5"
-                >
-                  {/* Bank header */}
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:rotate-12">
-                      <Building2 className="w-5 h-5 text-primary" />
+            {/* Desktop: static 3-column grid */}
+            <div className="hidden lg:grid lg:grid-cols-3 gap-6">
+              {banks.map((bank) => {
+                const currencyList = (bank.currencies || "")
+                  .split(",").map((c) => c.trim()).filter(Boolean);
+                return (
+                  <motion.div
+                    key={bank.id}
+                    variants={cardFadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewportOnce}
+                    className="group glass-card gradient-border rounded-xl p-6 hover-lift flex flex-col gap-5"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:rotate-12">
+                        <Building2 className="w-5 h-5 text-primary" />
+                      </div>
+                      {currencyList.length > 0 && (
+                        <div className="flex gap-1.5 mt-1 shrink-0">
+                          {currencyList.map((c) => (
+                            <span key={c} className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border border-primary/25 text-primary/80 bg-primary/5">{c}</span>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    {currencyList.length > 0 && (
-                      <div className="flex gap-1.5 mt-1 shrink-0">
-                        {currencyList.map((c) => (
-                          <span
-                            key={c}
-                            className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border border-primary/25 text-primary/80 bg-primary/5"
-                          >
-                            {c}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Bank identity */}
-                  <div>
-                    {bank.abbr && (
-                      <span className="text-[10px] font-semibold uppercase tracking-widest text-primary/70 mb-1 block">
-                        {bank.abbr}
-                      </span>
-                    )}
-                    <h3 className="text-base font-display font-semibold text-foreground leading-snug">
-                      {bank.title}
-                    </h3>
-                    {bank.branch && (
-                      <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
-                        <MapPin className="w-3 h-3 text-primary/60 shrink-0" />
-                        <span>{bank.branch}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Divider */}
-                  <div className="h-px bg-border/60" />
-
-                  {/* Account fields */}
-                  <div className="flex flex-col gap-4">
-                    {bank.account_number && (
-                      <CopyField label="Account Number — Companies" value={bank.account_number} />
-                    )}
-                    {bank.iban && (
-                      <CopyField label="IBAN" value={bank.iban} />
-                    )}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+                    <div>
+                      {bank.abbr && <span className="text-[10px] font-semibold uppercase tracking-widest text-primary/70 mb-1 block">{bank.abbr}</span>}
+                      <h3 className="text-lg font-display font-semibold text-foreground leading-snug">{bank.title}</h3>
+                      {bank.branch && (
+                        <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
+                          <MapPin className="w-3 h-3 text-primary/60 shrink-0" /><span>{bank.branch}</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="h-px bg-border/60" />
+                    <div className="flex flex-col gap-4">
+                      {bank.account_number && <CopyField label="Account Number — Companies" value={bank.account_number} />}
+                      {bank.iban && <CopyField label="IBAN" value={bank.iban} />}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </>
         )}
 
         {/* ── Footer note ── */}

@@ -21,6 +21,8 @@ import Tech from "./pages/Tech";
 import Studios from "./pages/Studios";
 import FAQ from "./pages/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import PartnerLogin from "./pages/PartnerLogin";
+import PartnerTimeTracker from "./pages/PartnerTimeTracker";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
@@ -35,7 +37,7 @@ import GoogleIntegrations from "./components/GoogleIntegrations";
 
 const queryClient = new QueryClient();
 
-const CHROMELESS_PATHS = ["/login", "/admin", "/reset-password"];
+const CHROMELESS_PATHS = ["/login", "/admin", "/reset-password", "/partner"];
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -64,6 +66,8 @@ const AnimatedRoutes = () => {
           <Route path="/tech" element={<Tech />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/partner/login" element={<PartnerLogin />} />
+          <Route path="/partner" element={<PartnerTimeTracker />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

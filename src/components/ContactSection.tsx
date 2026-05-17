@@ -10,19 +10,61 @@ import { useSiteContent } from "@/hooks/useSiteContent";
 import { z } from "zod";
 import { fadeUp, scaleIn, viewportOnce } from "@/lib/animations";
 import AnimatedUnderline from "@/components/ui/animated-underline";
+import {
+  Select,
+  SelectContent,
+  SelectTrigger,
+} from "@/components/ui/select";
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { cn } from "@/lib/utils";
+
+const COUNTRY_CODES = [
+  { code: "+20",  label: "Egypt" },
+  { code: "+971", label: "UAE" },
+  { code: "+966", label: "Saudi Arabia" },
+  { code: "+965", label: "Kuwait" },
+  { code: "+974", label: "Qatar" },
+  { code: "+973", label: "Bahrain" },
+  { code: "+968", label: "Oman" },
+  { code: "+962", label: "Jordan" },
+  { code: "+961", label: "Lebanon" },
+  { code: "+249", label: "Sudan" },
+  { code: "+218", label: "Libya" },
+  { code: "+212", label: "Morocco" },
+  { code: "+216", label: "Tunisia" },
+  { code: "+213", label: "Algeria" },
+  { code: "+1",   label: "USA" },
+  { code: "+44",  label: "UK" },
+  { code: "+49",  label: "Germany" },
+  { code: "+33",  label: "France" },
+  { code: "+90",  label: "Turkey" },
+  { code: "+91",  label: "India" },
+  { code: "+86",  label: "China" },
+];
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().trim().email("Invalid email address").max(255),
-  phone: z.string().trim().max(20).optional(),
+  phone: z.string().trim().min(5, "Phone number is required").max(20),
   message: z.string().trim().min(1, "Message is required").max(2000),
 });
+
+const SERVICES = [
+  "Digital Marketing",
+  "ERP / Odoo",
+  "eCommerce",
+  "Tech Stack",
+  "Partnerships",
+  "Other",
+];
 
 const ContactSection = () => {
   const { toast } = useToast();
   const { get } = useSiteContent();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
+  const [countryCode, setCountryCode] = useState("+20");
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -42,39 +84,43 @@ const ContactSection = () => {
       return;
     }
     setIsSubmitting(true);
+    const fullPhone = `${countryCode} ${result.data.phone}`;
+    const fullMessage = selectedService
+      ? `Service interest: ${selectedService}\n\n${result.data.message}`
+      : result.data.message;
     const { error } = await supabase.from("contact_submissions").insert({
-      name: result.data.name, email: result.data.email, phone: result.data.phone || null, message: result.data.message,
+      name: result.data.name, email: result.data.email, phone: fullPhone, message: fullMessage,
     });
     setIsSubmitting(false);
     if (error) { toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" }); return; }
-    // Fire email notification (non-blocking — don't fail the form if this errors)
     supabase.functions.invoke("send-notification", {
-      body: { type: "contact", data: { name: result.data.name, email: result.data.email, phone: result.data.phone || "", message: result.data.message } },
+      body: { type: "contact", data: { name: result.data.name, email: result.data.email, phone: fullPhone, message: fullMessage } },
     }).catch(() => {});
     setIsSubmitted(true);
     setForm({ name: "", email: "", phone: "", message: "" });
+    setSelectedService("");
+    setCountryCode("+20");
   };
 
   return (
-    <section id="contact" className="relative py-8 md:py-14 px-6 overflow-hidden">
+    <section id="contact" className="relative py-8 md:py-12 px-6 overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(38 80% 55% / 0.04), transparent 70%)' }} />
 
-      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-14 items-start">
 
-        {/* LEFT — copy */}
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("contact_subtitle", "Get Started")}
           </span>
-          <h2 className="text-3xl md:text-5xl font-display font-bold leading-tight whitespace-pre-line">
+          <h2 className="text-3xl md:text-4xl font-display font-bold leading-tight whitespace-pre-line">
             {get("contact_headline", "Ready to Grow?\nLet's Build.")}
           </h2>
           <AnimatedUnderline align="left" className="mb-5" />
-          <p className="text-muted-foreground text-lg leading-relaxed mb-10 whitespace-pre-line">
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6 whitespace-pre-line">
             {get("contact_subtext", "We're committed to delivering the best digital marketing and eCommerce services with measurable impact, flexible execution, and competitive pricing.")}
           </p>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="flex items-center gap-3 text-sm text-muted-foreground">
               <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                 <Clock className="w-4 h-4 text-primary" />
@@ -90,7 +136,6 @@ const ContactSection = () => {
           </div>
         </motion.div>
 
-        {/* RIGHT — form */}
         <div>
           {isSubmitted ? (
             <motion.div variants={scaleIn} initial="hidden" animate="visible" className="flex flex-col items-center gap-4 py-16 text-center">
@@ -108,9 +153,9 @@ const ContactSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewportOnce}
               transition={{ duration: 0.7, delay: 0.15, type: "spring", stiffness: 80, damping: 20 }}
-              className="space-y-5"
+              className="space-y-4"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">
                     {get("contact_name_label", "Name *")}
@@ -128,21 +173,87 @@ const ContactSection = () => {
               </div>
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1.5">
-                  {get("contact_phone_label", "Phone (optional)")}
+                  {get("contact_phone_label", "Phone *")}
                 </label>
-                <Input id="phone" name="phone" value={form.phone} onChange={handleChange} placeholder={get("contact_phone_placeholder", "+1 234 567 890")} className="bg-card border-border" />
+                <div className="flex gap-2">
+                  <Select value={countryCode} onValueChange={setCountryCode}>
+                    <SelectTrigger
+                      className="w-[92px] shrink-0 bg-card border-border hover:border-primary/40 data-[state=open]:border-primary/60 transition-colors"
+                      aria-label={`Country code, currently ${countryCode}`}
+                    >
+                      <span className="font-mono text-sm tabular-nums text-foreground">{countryCode}</span>
+                    </SelectTrigger>
+                    <SelectContent
+                      align="start"
+                      sideOffset={6}
+                      className="max-h-72 w-[190px] p-1.5"
+                    >
+                      {COUNTRY_CODES.map((c) => (
+                        <SelectPrimitive.Item
+                          key={c.code}
+                          value={c.code}
+                          className={cn(
+                            "group relative flex w-full items-center gap-3 rounded-md py-2.5 pl-3 pr-3 text-sm cursor-pointer outline-none transition-colors",
+                            "focus:bg-muted/60",
+                            "data-[state=checked]:bg-primary/10",
+                          )}
+                        >
+                          <SelectPrimitive.ItemText asChild>
+                            <span className="flex-1 truncate text-foreground group-data-[state=checked]:text-primary group-data-[state=checked]:font-medium">
+                              {c.label}
+                            </span>
+                          </SelectPrimitive.ItemText>
+                          <span className="font-mono text-xs tabular-nums text-muted-foreground group-data-[state=checked]:text-primary shrink-0">
+                            {c.code}
+                          </span>
+                        </SelectPrimitive.Item>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder={get("contact_phone_placeholder", "100 000 0000")}
+                    className="bg-card border-border flex-1"
+                  />
+                </div>
+                {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
               </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1.5">
+                  {get("contact_service_label", "Service of interest")}
+                </label>
+                <div className="flex flex-wrap gap-1.5">
+                  {SERVICES.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => setSelectedService((prev) => (prev === s ? "" : s))}
+                      className={`px-3 py-1 rounded-full text-xs font-medium border transition-all duration-200 ${
+                        selectedService === s
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                      }`}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">
                   {get("contact_message_label", "Message *")}
                 </label>
-                <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")} rows={5} className="bg-card border-border" />
+                <Textarea id="message" name="message" value={form.message} onChange={handleChange} placeholder={get("contact_message_placeholder", "Tell us about your project and goals...")} rows={4} className="bg-card border-border" />
                 {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
               </div>
-              <Button type="submit" disabled={isSubmitting} className="shimmer-btn w-full sm:w-auto px-10 py-5 text-lg font-display font-semibold glow-gold">
-                {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Mail className="w-5 h-5" />}
+              <Button type="submit" disabled={isSubmitting} className="shimmer-btn w-full sm:w-auto px-8 py-3 text-base font-display font-semibold glow-gold">
+                {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />}
                 {isSubmitting ? "Sending..." : get("contact_cta", "Start a Project")}
-                {!isSubmitting && <ArrowRight className="w-5 h-5" />}
+                {!isSubmitting && <ArrowRight className="w-4 h-4" />}
               </Button>
             </motion.form>
           )}

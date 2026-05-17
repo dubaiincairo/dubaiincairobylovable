@@ -60,6 +60,50 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Content management
+
+The site reads editable text from two sources, merged in this order (Sanity wins):
+
+1. **Sanity CMS** (primary) — Studio at https://dubaiincairo.sanity.studio.
+   The Studio is the codebase in `/studio` (its own `package.json`, no impact
+   on the SPA bundle). One singleton document per page-section (Hero, About,
+   Services, Founder, Footer, Careers, Odoo, Yanolja, Zoho, …). Edits land
+   live within a couple of seconds via Sanity's live listen.
+2. **Supabase `site_content`** (fallback) — the legacy table, still editable
+   via `/admin`. Used when a key isn't set in Sanity yet, or when Sanity is
+   unreachable. Will be retired once Sanity coverage is complete.
+
+Empty strings in either source collapse to the code-level fallback in
+`get(key, fallback)`, so clearing a field reveals the default.
+
+### Studio: deploy + edit
+
+```bash
+cd studio
+npm install
+npx sanity dev          # local Studio at http://localhost:3333
+npx sanity deploy       # one-off — publishes to dubaiincairo.sanity.studio
+```
+
+### Adding a new editable field
+
+1. Add the entry to `src/lib/contentRegistry.ts` (single source of truth).
+2. From `studio/`: `npx sanity schema deploy && npx sanity deploy`.
+3. The field appears in Sanity Studio under its section.
+
+### Re-seeding from Supabase (rarely needed)
+
+The initial migration has already run. To re-run later (e.g. after a registry
+expansion), from the repo root:
+
+```bash
+SANITY_WRITE_TOKEN=<editor-token> npm run migrate:cms
+```
+
+Generate the token at https://www.sanity.io/manage → API → Tokens (Editor
+scope). The script is idempotent — it locates each section's existing
+document by `_type` and replaces it in place rather than creating duplicates.
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.

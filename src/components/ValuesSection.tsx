@@ -1,12 +1,19 @@
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Lightbulb, Handshake, Sprout } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animations";
+import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
 import AnimatedUnderline from "@/components/ui/animated-underline";
+import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { useCarouselSwipeHint } from "@/hooks/useCarouselSwipeHint";
 
 const ValuesSection = () => {
   const { get } = useSiteContent();
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  useCarouselSwipeHint(api, carouselRef);
 
   const values = [
     {
@@ -40,27 +47,64 @@ const ValuesSection = () => {
       <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
-        <motion.div className="text-center mb-8 md:mb-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        <motion.div className="text-center mb-6 md:mb-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("values_subtitle", "What We Stand For")}
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
+          <h2 className="text-3xl md:text-5xl font-display font-bold whitespace-pre-line">
             {get("values_headline", "Core beliefs shaping our approach")}
           </h2>
           <AnimatedUnderline />
         </motion.div>
 
-        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+        {/* Mobile / tablet: peek carousel */}
+        <div ref={carouselRef} className="lg:hidden">
+          <Carousel setApi={(a) => { setApi(a); if (a) { setCurrent(a.selectedScrollSnap()); a.on("select", () => setCurrent(a.selectedScrollSnap())); } }} opts={{ align: "start", loop: false }} className="w-full">
+            <CarouselContent className="-ml-4">
+              {values.map((v, i) => (
+                <CarouselItem key={i} className="pl-4 basis-[85%] sm:basis-1/2">
+                  <motion.div
+                    variants={cardFadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewportOnce}
+                    className="group glass-card gradient-border p-6 rounded-xl hover-lift h-full"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:rotate-12">
+                      <v.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <h3 className="text-lg font-display font-semibold mb-2 whitespace-pre-line">{v.title}</h3>
+                    <RichText html={v.desc} className="text-muted-foreground text-sm leading-relaxed" />
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden sm:flex -left-4" />
+            <CarouselNext className="hidden sm:flex -right-4" />
+          </Carousel>
+          <div className="flex justify-center gap-2 mt-6">
+            {values.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => api?.scrollTo(i)}
+                className={`rounded-full transition-all duration-300 ${i === current ? "w-5 h-2 bg-primary" : "w-2 h-2 bg-border hover:bg-muted-foreground"}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop: static 3-column grid */}
+        <div className="hidden lg:grid lg:grid-cols-3 gap-6">
           {values.map((v, i) => (
-            <motion.div key={i} className="group glass-card gradient-border text-center p-5 md:p-8 rounded-xl hover-lift" variants={cardFadeUp}>
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:rotate-12">
+            <motion.div key={i} className="group glass-card gradient-border p-6 rounded-xl hover-lift" variants={cardFadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:rotate-12">
                 <v.icon className="w-5 h-5 text-primary" />
               </div>
-              <h3 className="font-display font-semibold mb-2 whitespace-pre-line">{v.title}</h3>
-              <RichText html={v.desc} className="text-muted-foreground text-sm" />
+              <h3 className="text-lg font-display font-semibold mb-2 whitespace-pre-line">{v.title}</h3>
+              <RichText html={v.desc} className="text-muted-foreground text-sm leading-relaxed" />
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

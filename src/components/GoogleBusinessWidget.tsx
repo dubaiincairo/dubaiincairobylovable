@@ -6,16 +6,41 @@ import { contentRegistry } from "@/lib/contentRegistry";
 
 const g = (key: string) => contentRegistry.find((f) => f.key === key)?.defaultValue ?? "";
 
+// Resolve whatever the editor pasted into a working iframe src.
+// Accepts: raw embed URL, a full <iframe …> HTML snippet, or nothing — and
+// falls back to a keyless address query that Google guarantees will render.
+function resolveMapEmbed(raw: string, address: string): string {
+  const trimmed = (raw || "").trim();
+
+  // 1. Full <iframe> paste — pull the src attribute out.
+  const iframeSrc = trimmed.match(/src=["']([^"']+)["']/i)?.[1];
+  if (iframeSrc) return iframeSrc;
+
+  // 2. A real embed URL (these are the only google.com URLs that allow framing).
+  if (/^https?:\/\/(www\.)?google\.com\/maps\/embed/i.test(trimmed)) {
+    return trimmed;
+  }
+
+  // 3. Anything else (share links, place URLs, garbage) — build a guaranteed
+  //    embed from the address. This format works without an API key.
+  if (address) {
+    return `https://maps.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+  }
+
+  return "";
+}
+
 const GoogleBusinessWidget = () => {
   const { get } = useSiteContent();
 
-  const bizName     = get("google_biz_name",     g("google_biz_name"));
-  const bizCategory = get("google_biz_category", g("google_biz_category"));
-  const rating      = get("google_rating",       g("google_rating"));
-  const address     = get("google_address",      g("google_address"));
-  const mapsLink    = get("google_maps_link",    g("google_maps_link"));
-  const mapsEmbed   = get("google_maps_embed",   g("google_maps_embed"));
-  const cta         = get("google_cta",          g("google_cta"));
+  const bizName     = get("google_biz_name",     g("google_biz_name")     || "Dubai in Cairo");
+  const bizCategory = get("google_biz_category", g("google_biz_category") || "Digital Marketing Agency");
+  const rating      = get("google_rating",       g("google_rating")       || "5.0");
+  const address     = get("google_address",      g("google_address")      || "100 Al-Mirghany St, Heliopolis, Cairo");
+  const mapsLink    = get("google_maps_link",    g("google_maps_link")    || "https://maps.google.com");
+  const rawEmbed    = get("google_maps_embed", "");
+  const mapsEmbed   = resolveMapEmbed(rawEmbed, address);
+  const cta         = get("google_cta",          g("google_cta")          || "View on Google Maps");
 
   const legalSubtitle   = get("legal_subtitle",        "Registered, Licensed & Ready to Operate");
   const companyName     = get("legal_company_name",    "Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC");
@@ -27,7 +52,6 @@ const GoogleBusinessWidget = () => {
   const legalTax        = get("legal_tax",             "625-626-168");
   const legalSectorLabel= get("legal_sector_label",    "Licensed Sector");
   const legalSector     = get("legal_sector",          "eBusiness Solutions");
-  const legalAddress    = get("legal_address",         "100 Al-Mirghany Street, Abu Dhabi Bank Building, 1st Floor, Heliopolis, Cairo");
 
   const ratingNum = Math.min(5, Math.max(0, parseFloat(rating) || 5));
 
@@ -44,7 +68,6 @@ const GoogleBusinessWidget = () => {
 
       <div className="relative max-w-6xl mx-auto space-y-6">
 
-        {/* Map + Info card */}
         <motion.div
           className="grid md:grid-cols-3 gap-6"
           variants={fadeUp}
@@ -84,9 +107,7 @@ const GoogleBusinessWidget = () => {
             </div>
           </div>
 
-          {/* Map embed — pointer-events disabled to suppress Google's native
-              white hover tooltips; the CTA button below opens the full
-              interactive map in a new tab. */}
+          {/* Map embed */}
           <a
             href={mapsLink}
             target="_blank"
@@ -94,55 +115,74 @@ const GoogleBusinessWidget = () => {
             aria-label={`${bizName} on Google Maps`}
             className="md:col-span-2 relative rounded-2xl overflow-hidden border border-border h-64 md:h-72 bg-[hsl(220,20%,4%)] block group"
           >
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                filter: "invert(100%) hue-rotate(180deg) brightness(0.95)",
-                pointerEvents: "none",
-              }}
-            >
-              <iframe
-                title="Dubai in Cairo on Google Maps"
-                src={mapsEmbed}
-                width="100%"
-                height="100%"
-                style={{ border: 0, display: "block" }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                tabIndex={-1}
-                aria-hidden="true"
-              />
-            </div>
+            {mapsEmbed ? (
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  filter: "invert(100%) hue-rotate(180deg) brightness(0.95)",
+                  pointerEvents: "none",
+                }}
+              >
+                <iframe
+                  title="Dubai in Cairo on Google Maps"
+                  src={mapsEmbed}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, display: "block" }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                />
+              </div>
+            ) : (
+              <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-muted-foreground">
+                <MapPin className="w-8 h-8 text-primary/50" />
+                <span className="text-sm font-medium">View on Google Maps</span>
+              </div>
+            )}
             <div className="absolute inset-0 pointer-events-none transition-colors duration-300 group-hover:bg-primary/[0.04]" />
           </a>
         </motion.div>
 
-        {/* Legal strip */}
+        {/* Legal strip — same width and corner-radius vocabulary as the row above */}
         <motion.div
-          className="border border-border/50 rounded-2xl px-6 py-5"
-          style={{ background: 'hsl(220 18% 6% / 0.6)' }}
+          className="border border-border rounded-2xl bg-card p-6"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
         >
-          {/* Top row: badge + company name */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4">
-            <div className="flex items-center gap-1.5 shrink-0">
-              <Shield className="w-3.5 h-3.5 text-primary" />
-              <span className="text-[10px] font-medium tracking-[0.18em] uppercase text-primary">{legalSubtitle}</span>
+          {/* Header — Shield badge + eyebrow + company name */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+            <div className="flex items-center gap-2 shrink-0">
+              <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Shield aria-hidden="true" className="w-3.5 h-3.5 text-primary" />
+              </div>
+              <span className="text-[11px] font-medium tracking-[0.2em] uppercase text-primary">
+                {legalSubtitle}
+              </span>
             </div>
-            <div className="hidden sm:block w-px h-4 bg-border" />
-            <span className="text-sm font-display font-semibold text-foreground">{companyName}</span>
+            <div className="hidden sm:block w-px h-5 bg-border" />
+            <span className="text-sm font-display font-semibold text-foreground">
+              {companyName}
+            </span>
           </div>
 
-          {/* Bottom row: legal items */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          {/* Divider */}
+          <div className="h-px bg-border/60 my-5" />
+
+          {/* Symmetric 4-column data grid — 2x2 on mobile, 1x4 on md+ */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4">
             {legalItems.map((item, i) => (
-              <div key={i} className="flex items-center gap-1.5">
-                <span className="text-xs text-muted-foreground">{item.label}:</span>
-                <span className="text-xs font-semibold text-foreground">{item.value}</span>
+              <div key={i} className="flex flex-col">
+                <span className="text-[10px] font-medium tracking-widest uppercase text-muted-foreground mb-1">
+                  {item.label}
+                </span>
+                <span className="text-sm font-display font-semibold text-foreground">
+                  {item.value}
+                </span>
               </div>
             ))}
           </div>

@@ -11,47 +11,25 @@ interface Logo {
   url: string;
 }
 
-// First-paint default brand names. The corresponding URL is left empty so the
-// component renders a styled text wordmark until a real SVG/PNG is uploaded
-// to that slot in the admin. Huawei alone has a public Simple Icons SVG; the
-// rest (regional, pharma, hospitality) need to be uploaded by the editor.
-const DEFAULT_NAMES = [
-  "Arma",
-  "Sanofi",
-  "Novartis",
-  "Roche",
-  "Novo Nordisk",
-  "Berlitz",
-  "Monin",
-  "Alpro",
-  "Huawei",
-  "World Economic Forum",
-  "Banque Misr",
-  "The National Council for Women",
-  "ADCB Bank",
-  "Shark Tank Egypt",
-  "Sarj",
-  "EDGE Consultants",
-  "Abou Tarek",
-  "Quanta",
-  "San Benedetto",
-  "EduFun",
-  "El Kou5 Restaurant & Cafe",
-];
-
-const DEFAULT_URLS: Record<number, string> = {
-  9: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/huawei.svg",
-};
-
 const ClientsSection = () => {
   const { get } = useSiteContent();
 
+  // Order is editor-controlled via admin drag-and-drop (clients_order CMS key).
+  // Missing/invalid entries fall back to natural 1..N order.
+  const orderRaw = get("clients_order", "").trim();
+  const parsed = orderRaw
+    ? orderRaw.split(",").map((s) => parseInt(s, 10)).filter((n) => Number.isFinite(n) && n >= 1 && n <= MAX_SLOTS)
+    : [];
+  const seen = new Set(parsed);
+  for (let i = 1; i <= MAX_SLOTS; i++) if (!seen.has(i)) parsed.push(i);
+  const order = parsed.slice(0, MAX_SLOTS);
+
   const logos: Logo[] = [];
-  for (let i = 1; i <= MAX_SLOTS; i++) {
-    const fallbackName = DEFAULT_NAMES[i - 1] ?? "";
-    const fallbackUrl = DEFAULT_URLS[i] ?? "";
-    const name = get(`client_logo_${i}_name`, fallbackName).trim();
-    const url = get(`client_logo_${i}_url`, fallbackUrl).trim();
+  for (const i of order) {
+    const enabled = get(`client_logo_${i}_enabled`, "true").trim();
+    if (enabled === "false") continue;
+    const name = get(`client_logo_${i}_name`, "").trim();
+    const url = get(`client_logo_${i}_url`, "").trim();
     if (!name && !url) continue;
     logos.push({ name: name || `Client ${i}`, url });
   }
@@ -59,7 +37,7 @@ const ClientsSection = () => {
   if (logos.length === 0) return null;
 
   return (
-    <section id="work" className="relative py-12 md:py-16 overflow-hidden">
+    <section id="work" className="relative py-8 md:py-14 overflow-hidden">
       {/* Ambient gold wash behind the strip */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[240px] pointer-events-none"
@@ -148,9 +126,8 @@ const LogoMarquee = ({ items }: { items: Logo[] }) => {
 
 const LogoCell = ({ logo }: { logo: Logo }) => (
   <div
-    className="flex-shrink-0 flex items-center justify-center h-20 w-48 px-4 group"
+    className="relative flex-shrink-0 flex items-center justify-center h-20 w-48 px-4 group"
     style={{ marginRight: GAP }}
-    title={logo.name}
   >
     {logo.url ? (
       <img
@@ -158,10 +135,9 @@ const LogoCell = ({ logo }: { logo: Logo }) => (
         alt={logo.name}
         loading="lazy"
         decoding="async"
-        className="max-h-12 max-w-[160px] w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+        className="max-h-20 max-w-[160px] w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
         style={{ filter: "brightness(0) invert(1)" }}
         onError={(e) => {
-          // Image failed -> swap to text wordmark so the cell is never empty
           const el = e.currentTarget;
           el.style.display = "none";
           const parent = el.parentElement;
@@ -179,6 +155,10 @@ const LogoCell = ({ logo }: { logo: Logo }) => (
         {logo.name}
       </span>
     )}
+    {/* Brand name tooltip on hover */}
+    <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 translate-y-full px-2 py-0.5 rounded bg-popover border border-border text-[10px] font-medium text-foreground whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20 shadow-sm">
+      {logo.name}
+    </span>
   </div>
 );
 
