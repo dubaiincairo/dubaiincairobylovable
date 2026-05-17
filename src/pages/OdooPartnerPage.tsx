@@ -125,7 +125,7 @@ const OdooPartnerPage = () => {
 
       {/* ── Page intro ──────────────────────────────────────────────────── */}
       <section className="relative pt-24 pb-8 md:pt-28 md:pb-10 px-6">
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative max-w-7xl mx-auto">
           <motion.div variants={fadeUp} initial="hidden" animate="visible">
             <Link
               to="/partnerships"
@@ -163,7 +163,7 @@ const OdooPartnerPage = () => {
           }}
         />
 
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
 
             <motion.div variants={slideInLeft} initial="hidden" whileInView="visible" viewport={viewportOnce}>
@@ -224,7 +224,7 @@ const OdooPartnerPage = () => {
       {/* ── Odoo Suites Grid ─────────────────────────────────────────────── */}
       <section className="relative px-6 pb-8 md:pb-12 overflow-hidden">
         <div className="absolute top-0 right-0 w-[350px] h-[350px] rounded-full bg-primary/4 blur-[120px] translate-x-1/3 pointer-events-none" />
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-10"
             variants={fadeUp}

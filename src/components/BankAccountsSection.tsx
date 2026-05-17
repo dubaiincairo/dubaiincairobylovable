@@ -91,7 +91,7 @@ const BankAccountsSection = () => {
         style={{ background: "radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 70%)" }}
       />
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-7xl mx-auto">
 
         {/* ── Header ── */}
         <motion.div

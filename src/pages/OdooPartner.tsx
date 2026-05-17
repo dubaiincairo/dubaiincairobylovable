@@ -220,7 +220,7 @@ const OdooPartner = () => {
 
       {/* ── Page intro ──────────────────────────────────────────────────── */}
       <section className="relative pt-28 pb-12 md:pt-32 md:pb-16 px-6">
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative max-w-7xl mx-auto">
           <motion.div variants={fadeUp} initial="hidden" animate="visible">
             <Link
               to="/"
@@ -255,7 +255,7 @@ const OdooPartner = () => {
           style={{ backgroundImage: "repeating-linear-gradient(-45deg, hsl(38 80% 55%), hsl(38 80% 55%) 1px, transparent 1px, transparent 40px)" }}
         />
 
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
 
             {/* Left: copy */}
@@ -320,7 +320,7 @@ const OdooPartner = () => {
       {/* ── Odoo Suites Grid ─────────────────────────────────────────────── */}
       <section className="relative px-6 pb-8 md:pb-12 overflow-hidden">
         <div className="absolute top-0 right-0 w-[350px] h-[350px] rounded-full bg-primary/4 blur-[120px] translate-x-1/3 pointer-events-none" />
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-10"
             variants={fadeUp}
@@ -404,7 +404,7 @@ const OdooPartner = () => {
       </section>
 
       {/* ── Section divider ──────────────────────────────────────────────── */}
-      <div className="max-w-6xl mx-auto px-6 py-4">
+      <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
       </div>
 
@@ -419,7 +419,7 @@ const OdooPartner = () => {
           style={{ background: "radial-gradient(circle, hsl(38 80% 55% / 0.05), transparent 65%)" }}
         />
 
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
 
             {/* Left: copy */}
@@ -478,7 +478,7 @@ const OdooPartner = () => {
       {/* ── Yanolja Products Grid ─────────────────────────────────────────── */}
       <section className="relative px-6 pb-8 md:pb-12 overflow-hidden">
         <div className="absolute top-0 left-0 w-[350px] h-[350px] rounded-full bg-primary/4 blur-[120px] -translate-x-1/3 pointer-events-none" />
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-10"
             variants={fadeUp}

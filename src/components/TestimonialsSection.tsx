@@ -132,7 +132,7 @@ const TestimonialsSection = () => {
       />
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-primary/4 blur-[140px] translate-x-1/3 -translate-y-1/2 pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto px-6">
+      <div className="relative max-w-7xl mx-auto px-6">
         <motion.div
           className="text-center mb-6 md:mb-12"
           variants={fadeUp}
@@ -147,9 +147,10 @@ const TestimonialsSection = () => {
             {get("testimonials_headline", "Trusted by Leaders.\nRecommended by Peers.")}
           </h2>
           <AnimatedUnderline />
-          <p className="mt-4 text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
-            {get("testimonials_subtext", "Real recommendations from clients and colleagues — pulled directly from LinkedIn.")}
-          </p>
+          <RichText
+            html={get("testimonials_subtext", "Real recommendations from clients and colleagues — pulled directly from LinkedIn.")}
+            className="mt-4 text-muted-foreground text-base max-w-xl mx-auto leading-relaxed"
+          />
         </motion.div>
 
         <Carousel

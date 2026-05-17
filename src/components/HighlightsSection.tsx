@@ -96,7 +96,7 @@ const HighlightsSection = () => {
     <section id="highlights" className="relative py-6 md:py-10 px-6 overflow-hidden">
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full bg-primary/4 blur-[150px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-7xl mx-auto">
         <motion.div
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-10"
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}

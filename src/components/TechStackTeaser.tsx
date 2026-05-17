@@ -18,7 +18,7 @@ const TechStackTeaser = () => {
     <section className="relative py-6 md:py-10 px-6 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] rounded-full bg-primary/3 blur-[100px] pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-7xl mx-auto">
         <motion.div
           className="rounded-2xl border border-border bg-card overflow-hidden"
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}

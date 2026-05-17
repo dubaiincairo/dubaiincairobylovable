@@ -44,7 +44,7 @@ const ClientsSection = () => {
         style={{ background: "radial-gradient(ellipse, hsl(38 80% 55% / 0.05), transparent 70%)" }}
       />
 
-      <div className="relative max-w-6xl mx-auto px-6">
+      <div className="relative max-w-7xl mx-auto px-6">
         <motion.div className="text-center mb-8" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
             {get("clients_subtitle", "Success Partners")}

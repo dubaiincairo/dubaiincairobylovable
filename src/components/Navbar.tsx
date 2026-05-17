@@ -105,7 +105,7 @@ const Navbar = () => {
         style={{ scaleX: scrollYProgress }}
       />
 
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <a
           href="/"
           aria-label="Dubai in Cairo — home"

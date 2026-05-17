@@ -37,7 +37,7 @@ const Footer = () => {
       {/* Gold accent line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38 80% 55% / 0.3), transparent)' }} />
 
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
 
         {/* 4-column grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mb-10">

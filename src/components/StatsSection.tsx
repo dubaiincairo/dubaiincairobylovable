@@ -21,7 +21,7 @@ const StatsSection = () => {
         style={{ background: 'radial-gradient(ellipse, hsl(38 80% 55% / 0.06), transparent 70%)' }}
       />
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-7xl mx-auto">
         <motion.div
           className="grid grid-cols-2 md:grid-cols-4 rounded-2xl border border-border bg-card/40 backdrop-blur-sm overflow-hidden shadow-[0_10px_40px_-20px_rgba(0,0,0,0.4)]"
           variants={staggerContainer}
