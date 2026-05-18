@@ -38,6 +38,9 @@ const WhatsAppButton = () => {
   const openerText   = get("wa_opener_text",   "👋 Hi there! How can we help you today?");
   const openerHint   = get("wa_opener_hint",   "Pick one below");
   const footerNote   = get("wa_footer_note",   "Picks open WhatsApp with the message ready to send");
+  const ariaOpen     = get("wa_aria_open",     "Open WhatsApp chat");
+  const ariaClose    = get("wa_aria_close",    "Close WhatsApp chat");
+  const ariaDismiss  = get("wa_aria_dismiss",  "Dismiss");
 
   const quickReplies = [1, 2, 3, 4]
     .map((n) => ({
@@ -127,7 +130,7 @@ const WhatsAppButton = () => {
               </div>
               <button
                 onClick={() => setOpen(false)}
-                aria-label="Close chat"
+                aria-label={ariaClose}
                 className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
               >
                 <X className="w-4 h-4" />
@@ -196,7 +199,7 @@ const WhatsAppButton = () => {
             <button
               type="button"
               onClick={dismissTeaser}
-              aria-label="Dismiss"
+              aria-label={ariaDismiss}
               className="px-2 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors border-l border-border"
             >
               <X className="w-3.5 h-3.5" />
@@ -209,7 +212,7 @@ const WhatsAppButton = () => {
       <button
         type="button"
         onClick={() => { setOpen((v) => !v); if (showTeaser) dismissTeaser(); }}
-        aria-label={open ? "Close WhatsApp chat" : "Open WhatsApp chat"}
+        aria-label={open ? ariaClose : ariaOpen}
         aria-expanded={open}
         className="relative group"
       >

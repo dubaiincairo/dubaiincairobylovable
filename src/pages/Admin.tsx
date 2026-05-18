@@ -207,6 +207,7 @@ const SECTION_LAYOUT: Record<string, SectionLayout> = {
     { label: "Quick Reply 3",    keys: ["wa_reply_3_label", "wa_reply_3_message"] },
     { label: "Quick Reply 4",    keys: ["wa_reply_4_label", "wa_reply_4_message"] },
     { label: "Footer Note",      keys: ["wa_footer_note"] },
+    { label: "Accessibility",    keys: ["wa_aria_open", "wa_aria_close", "wa_aria_dismiss"] },
   ],
 };
 
