@@ -346,6 +346,9 @@ export const contentRegistry: ContentField[] = [
   { section: "whatsapp", key: "wa_reply_4_label",    label: "Quick Reply 4 — Button Label",       defaultValue: "I'm exploring a partnership" },
   { section: "whatsapp", key: "wa_reply_4_message",  label: "Quick Reply 4 — Sent Message",       defaultValue: "Hi! I'm interested in exploring a partnership with Dubai in Cairo." },
   { section: "whatsapp", key: "wa_footer_note",      label: "Footer Note",                        defaultValue: "Picks open WhatsApp with the message ready to send" },
+  { section: "whatsapp", key: "wa_aria_open",        label: "Accessibility — Open Button Label",  defaultValue: "Open WhatsApp chat" },
+  { section: "whatsapp", key: "wa_aria_close",       label: "Accessibility — Close Button Label", defaultValue: "Close WhatsApp chat" },
+  { section: "whatsapp", key: "wa_aria_dismiss",     label: "Accessibility — Dismiss Teaser Label", defaultValue: "Dismiss" },
 
   // ──────────────── Odoo Partner Page ────────────────
   // Partnerships hero (shown above the Odoo content on /partnerships and /partnerships/odoo)
