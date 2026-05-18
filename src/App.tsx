@@ -99,7 +99,6 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <WhatsAppButton />
       <SiteContentProvider>
         <GoogleIntegrations />
         <ContactModalProvider>
@@ -111,6 +110,7 @@ const App = () => (
             <ContentGate>
               <AnimatedRoutes />
             </ContentGate>
+            <WhatsAppButton />
           </BrowserRouter>
         </ContactModalProvider>
       </SiteContentProvider>
