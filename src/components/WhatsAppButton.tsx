@@ -8,7 +8,9 @@ import {
 import { useMotionPref } from "@/lib/animations";
 import { useSiteContent } from "@/hooks/useSiteContent";
 
-const DISMISS_KEY = "wa_teaser_dismissed";
+// Bump this when the teaser copy changes so existing visitors who dismissed
+// the previous version see the new bubble again.
+const DISMISS_KEY = "wa_teaser_dismissed_v2";
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg
@@ -60,11 +62,11 @@ const WhatsAppButton = () => {
     return () => window.removeEventListener(COOKIE_CONSENT_EVENT, sync);
   }, []);
 
-  // Auto-reveal the catchy teaser bubble after 4s — unless the visitor has
-  // already dismissed it in this browser session
+  // Reveal the teaser bubble shortly after the page paints — unless the visitor
+  // has already dismissed it in this browser session.
   useEffect(() => {
     if (sessionStorage.getItem(DISMISS_KEY) === "1") return;
-    const t = setTimeout(() => setShowTeaser(true), 4000);
+    const t = setTimeout(() => setShowTeaser(true), 1200);
     return () => clearTimeout(t);
   }, []);
 
@@ -182,7 +184,7 @@ const WhatsAppButton = () => {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: shouldReduce ? 0 : 12, scale: shouldReduce ? 1 : 0.9 }}
             transition={{ duration: shouldReduce ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden md:flex items-stretch gap-0 max-w-[15rem] rounded-2xl rounded-br-md border border-border bg-card shadow-xl overflow-hidden"
+            className="flex items-stretch gap-0 max-w-[15rem] rounded-2xl rounded-br-md border border-border bg-card shadow-xl overflow-hidden"
           >
             <button
               type="button"
