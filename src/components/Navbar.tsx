@@ -60,6 +60,7 @@ const Navbar = () => {
   const { shouldReduce } = useMotionPref();
   const { get } = useSiteContent();
   const { openContactModal } = useContactModal();
+  const { locale } = useLocale();
   const { pathname } = useLocation();
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -166,7 +167,7 @@ const Navbar = () => {
         style={{ height: navHeight }}
       >
         <a
-          href="/"
+          href={locale === "ar" ? "/ar" : "/"}
           aria-label="Dubai in Cairo — home"
           className="font-display font-bold text-2xl md:text-[1.65rem] inline-flex items-center min-h-[44px] tracking-tight"
         >

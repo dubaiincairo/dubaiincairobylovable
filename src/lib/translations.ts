@@ -2,20 +2,22 @@
 //
 // Workflow:
 //   1. useSiteContent.get(key, fallback) checks the current locale
-//      (via LocaleContext). When locale === "ar", it consults this dict
-//      first. If a non-empty Arabic value exists, it wins over Supabase
-//      and Sanity. Otherwise it falls through to the existing chain.
-//   2. Only keys that need translation are listed. Brand fragments,
-//      partner names ("Odoo", "Zoho"), phone numbers, registration
-//      numbers, and stat *values* (numbers like "216+", "+34% ↑") stay
-//      in their canonical form.
-//   3. Future pages: append their key translations to the same map. No
-//      structural change needed.
+//      (via LocaleContext). When locale === "ar":
+//        a) it first checks CMS for `${key}_ar` (Supabase / Sanity) —
+//           editor's override wins
+//        b) then falls back to this dictionary
+//        c) then to the English chain (existing CMS / fallback)
+//   2. contentRegistry auto-generates `${key}_ar` sibling fields for
+//      every entry in this dictionary, so both /admin and Sanity
+//      Studio surface an Arabic input next to every English one.
+//   3. To translate a new key: just add it here. The CMS field will
+//      appear automatically on the next reload of /admin and after
+//      `npx sanity schema deploy && npx sanity deploy` from /studio.
 //
 // Tone notes:
 //   - GCC-friendly Modern Standard Arabic, kept warm and direct.
 //   - Western numerals are used throughout (preferred in modern GCC
-//     business/marketing contexts).
+//     business / marketing contexts).
 
 export const arabicTranslations: Record<string, string> = {
   // ──────────────── Navigation ────────────────
@@ -31,6 +33,9 @@ export const arabicTranslations: Record<string, string> = {
   nav_link_careers: "الوظائف",
   nav_link_investors: "المستثمرون",
   nav_link_partnerships: "الشراكات",
+  nav_partner_odoo: "Odoo ERP",
+  nav_partner_yanolja: "Yanolja Cloud",
+  nav_partner_zoho: "Zoho",
   nav_cta: "ابدأ الآن",
 
   // ──────────────── Hero ────────────────
@@ -122,6 +127,21 @@ export const arabicTranslations: Record<string, string> = {
   tech_headline: "حلولٌ متكاملة. أدواتٌ مُجرَّبة.",
   tech_teaser_desc:
     "41 أداةً رائدة في مجالها عبر 3 طبقاتٍ ذكية — مُصمَّمةٌ لقيادة النموّ والعمليات والابتكار.",
+  tech_layer_1_label: "النموّ وذكاء العميل",
+  tech_layer_2_label: "التجارة وعمليات الأعمال",
+  tech_layer_3_label: "الإبداع والذكاء الاصطناعي والبنية",
+  tech_explore_cta: "اكتشف المنظومة الكاملة",
+
+  // ──────────────── Bank Accounts ────────────────
+  bank_subtitle: "المدفوعات والحسابات البنكية",
+  bank_headline: "تفاصيل الحسابات البنكية",
+  bank_description:
+    "جميع الحسابات مسجّلة باسم شركة دبي في القاهرة للتسويق الرقمي وحلول الأعمال الإلكترونية ش.ذ.م.م — جمهورية مصر العربية.",
+  bank_empty_state: "لا تتوفّر حسابات بنكية في الوقت الحالي.",
+  bank_account_label: "رقم الحساب — للشركات",
+  bank_iban_label: "رقم الآيبان (IBAN)",
+  bank_footer_note:
+    "للتحويلات البنكية، يُرجى دائمًا إدراج رقم الآيبان وتحديد عملة التحويل.",
 
   // ──────────────── Legal Strip (Bank Accounts panel) ────────────────
   legal_subtitle: "مُسجَّلة ومُرخّصة وجاهزة للعمل",
@@ -132,6 +152,13 @@ export const arabicTranslations: Record<string, string> = {
   legal_tax_label: "البطاقة الضريبية",
   legal_sector_label: "القطاع المُرخَّص",
   legal_sector: "حلول الأعمال الإلكترونية",
+
+  // ──────────────── Google Business Widget ────────────────
+  google_biz_name: "دبي في القاهرة",
+  google_biz_category: "وكالة تسويق رقمي",
+  google_address: "100 شارع الميرغني، مصر الجديدة، القاهرة",
+  google_cta: "اعرض على خرائط جوجل",
+  google_rating_suffix: "على جوجل",
 
   // ──────────────── Contact Section ────────────────
   contact_subtitle: "ابدأ الآن",
@@ -155,12 +182,6 @@ export const arabicTranslations: Record<string, string> = {
   contact_success_msg: "سنتواصل معك خلال 24 ساعة.",
   contact_success_btn: "إرسال رسالة أخرى",
   contact_modal_title: "لنبني معًا",
-
-  // ──────────────── Google Business Card ────────────────
-  google_biz_name: "دبي في القاهرة",
-  google_biz_category: "وكالة تسويق رقمي",
-  google_address: "100 شارع الميرغني، مصر الجديدة، القاهرة",
-  google_cta: "اعرض على خرائط جوجل",
 
   // ──────────────── Footer ────────────────
   footer_tagline:

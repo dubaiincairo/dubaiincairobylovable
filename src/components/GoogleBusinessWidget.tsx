@@ -41,6 +41,7 @@ const GoogleBusinessWidget = () => {
   const rawEmbed    = get("google_maps_embed", "");
   const mapsEmbed   = resolveMapEmbed(rawEmbed, address);
   const cta         = get("google_cta",          g("google_cta")          || "View on Google Maps");
+  const ratingSuffix= get("google_rating_suffix", g("google_rating_suffix") || "on Google");
 
   const legalSubtitle   = get("legal_subtitle",        "Registered, Licensed & Ready to Operate");
   const companyName     = get("legal_company_name",    "Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC");
@@ -89,7 +90,7 @@ const GoogleBusinessWidget = () => {
                   ))}
                 </div>
                 <span className="text-sm font-semibold text-foreground">{rating}</span>
-                <span className="text-xs text-muted-foreground">on Google</span>
+                <span className="text-xs text-muted-foreground">{ratingSuffix}</span>
               </div>
               <div className="flex gap-3">
                 <MapPin className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
@@ -139,7 +140,7 @@ const GoogleBusinessWidget = () => {
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-muted-foreground">
                 <MapPin className="w-8 h-8 text-primary/50" />
-                <span className="text-sm font-medium">View on Google Maps</span>
+                <span className="text-sm font-medium">{cta}</span>
               </div>
             )}
             <div className="absolute inset-0 pointer-events-none transition-colors duration-300 group-hover:bg-primary/[0.04]" />

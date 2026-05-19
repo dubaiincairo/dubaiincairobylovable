@@ -66,7 +66,7 @@ const Footer = () => {
                 <a
                   key={p}
                   href={tel(p)}
-                  aria-label={`Call ${p}`}
+                  aria-label={t("Call", "اتصل بـ") + ` ${p}`}
                   className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors duration-200"
                 >
                   <Phone aria-hidden="true" className="w-3 h-3 text-primary/60" />

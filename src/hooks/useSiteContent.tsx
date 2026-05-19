@@ -172,21 +172,34 @@ export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  // Treat empty strings the same as missing entries so clearing a field in
-  // either CMS surfaces the code-level fallback again.
+  // Resolution order for a key, in order of precedence:
   //
-  // Locale resolution: when the page is in Arabic, the in-code Arabic
-  // translation (`src/lib/translations.ts`) wins over both CMS sources
-  // and the English fallback. This lets us ship a translated homepage
-  // immediately without waiting on a parallel CMS schema. CMS values
-  // are still used for any key that isn't translated yet.
+  //   When locale === "ar":
+  //     1. CMS Arabic field (`${key}_ar`)    — editor's override wins
+  //     2. Code-level Arabic translation       — sensible default
+  //     3. CMS English field (`${key}`)        — last resort before fallback
+  //     4. fallback                            — caller-provided default
+  //
+  //   When locale === "en":
+  //     1. CMS English field (`${key}`)
+  //     2. fallback
+  //
+  // Empty strings are treated as missing so clearing a field in either CMS
+  // collapses back to the next layer in the chain.
   const get = useCallback(
     (key: string, fallback = "") => {
-      const translated = getTranslation(locale, key);
-      if (translated) return translated;
+      const isNonEmpty = (v: string | undefined | null): v is string =>
+        v !== undefined && v !== null && v !== "";
+
+      if (locale === "ar") {
+        const cmsAr = content[`${key}_ar`];
+        if (isNonEmpty(cmsAr)) return cmsAr;
+        const codeAr = getTranslation(locale, key);
+        if (codeAr) return codeAr;
+      }
       const v = content[key];
-      if (v === undefined || v === null || v === "") return fallback;
-      return v;
+      if (isNonEmpty(v)) return v;
+      return fallback;
     },
     [content, locale],
   );

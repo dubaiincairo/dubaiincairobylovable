@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Quote, Linkedin, ChevronDown, ChevronUp, ArrowLeft, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useT } from "@/hooks/useT";
 import { fadeUp, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
 import AnimatedUnderline from "@/components/ui/animated-underline";
@@ -25,6 +26,7 @@ type Testimonial = {
 
 function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
   const [expanded, setExpanded] = useState(false);
+  const tr = useT();
 
   return (
     <motion.div
@@ -53,9 +55,9 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
           className="flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary/80 transition-colors mt-2 mb-5 self-start"
         >
           {expanded ? (
-            <><ChevronUp className="w-3.5 h-3.5" /> Read less</>
+            <><ChevronUp className="w-3.5 h-3.5" /> {tr("Read less", "عرض أقل")}</>
           ) : (
-            <><ChevronDown className="w-3.5 h-3.5" /> Read more</>
+            <><ChevronDown className="w-3.5 h-3.5" /> {tr("Read more", "عرض المزيد")}</>
           )}
         </button>
 
@@ -100,6 +102,7 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
 
 const TestimonialsSection = () => {
   const { get } = useSiteContent();
+  const t = useT();
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -173,17 +176,17 @@ const TestimonialsSection = () => {
             <button
               type="button"
               onClick={() => api?.scrollPrev()}
-              aria-label="Previous testimonial"
+              aria-label={t("Previous testimonial", "السابق")}
               className="w-9 h-9 rounded-full border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/8 transition-all duration-200"
             >
-              <ArrowLeft aria-hidden="true" className="w-4 h-4" />
+              <ArrowLeft aria-hidden="true" className="w-4 h-4 rtl:rotate-180" />
             </button>
 
             <div className="flex items-center gap-2">
               {Array.from({ length: count }).map((_, i) => (
                 <button
                   key={i}
-                  aria-label={`Go to testimonial ${i + 1}`}
+                  aria-label={t(`Go to testimonial ${i + 1}`, `الانتقال إلى التوصية ${i + 1}`)}
                   onClick={() => api?.scrollTo(i)}
                   className={`rounded-full transition-all duration-300 ${
                     i === current
@@ -197,10 +200,10 @@ const TestimonialsSection = () => {
             <button
               type="button"
               onClick={() => api?.scrollNext()}
-              aria-label="Next testimonial"
+              aria-label={t("Next testimonial", "التالي")}
               className="w-9 h-9 rounded-full border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/8 transition-all duration-200"
             >
-              <ArrowRight aria-hidden="true" className="w-4 h-4" />
+              <ArrowRight aria-hidden="true" className="w-4 h-4 rtl:rotate-180" />
             </button>
           </div>
         )}
