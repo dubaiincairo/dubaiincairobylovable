@@ -2,6 +2,8 @@ import { createContext, useContext, useEffect, useState, useCallback, ReactNode 
 import { supabase } from "@/integrations/supabase/client";
 import { sanity } from "@/integrations/sanity/client";
 import { SECTION_TYPES } from "@/integrations/sanity/sections";
+import { useLocale } from "@/contexts/LocaleContext";
+import { getTranslation } from "@/lib/translations";
 
 // Content is sourced from two places:
 //   1. Supabase `site_content` table — edited via /admin (PRIMARY).
@@ -73,6 +75,7 @@ const writeCache = (map: ContentMap) => {
 const SANITY_QUERY = `*[_type in $types]`;
 
 export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
+  const { locale } = useLocale();
   const [supabaseMap, setSupabaseMap] = useState<ContentMap>({});
   const [sanityMap, setSanityMap] = useState<ContentMap>({});
   const [content, setContent] = useState<ContentMap>(() => readCache());
@@ -171,13 +174,21 @@ export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
 
   // Treat empty strings the same as missing entries so clearing a field in
   // either CMS surfaces the code-level fallback again.
+  //
+  // Locale resolution: when the page is in Arabic, the in-code Arabic
+  // translation (`src/lib/translations.ts`) wins over both CMS sources
+  // and the English fallback. This lets us ship a translated homepage
+  // immediately without waiting on a parallel CMS schema. CMS values
+  // are still used for any key that isn't translated yet.
   const get = useCallback(
     (key: string, fallback = "") => {
+      const translated = getTranslation(locale, key);
+      if (translated) return translated;
       const v = content[key];
       if (v === undefined || v === null || v === "") return fallback;
       return v;
     },
-    [content],
+    [content, locale],
   );
 
   return (

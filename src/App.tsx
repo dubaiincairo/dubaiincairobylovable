@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AnimatePresence } from "framer-motion";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { SiteContentProvider } from "@/hooks/useSiteContent";
+import { LocaleProvider } from "@/contexts/LocaleContext";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
@@ -66,6 +67,8 @@ const AnimatedRoutes = () => {
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Index />} />
+          {/* Arabic homepage — same component, locale derived from path */}
+          <Route path="/ar" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/reset-password" element={<ResetPassword />} />
@@ -99,21 +102,26 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <SiteContentProvider>
-        <GoogleIntegrations />
-        <ContactModalProvider>
-          <ContactModal />
-          <FaviconUpdater />
-          <BrowserRouter>
-            <SkipToMain />
-            <CookieBanner />
-            <ContentGate>
-              <AnimatedRoutes />
-            </ContentGate>
-            <WhatsAppButton />
-          </BrowserRouter>
-        </ContactModalProvider>
-      </SiteContentProvider>
+      {/* BrowserRouter is the outermost provider so LocaleProvider (which
+          reads pathname via useLocation) can sit above SiteContentProvider —
+          letting useSiteContent.get() return Arabic translations on /ar/* */}
+      <BrowserRouter>
+        <LocaleProvider>
+          <SiteContentProvider>
+            <GoogleIntegrations />
+            <ContactModalProvider>
+              <ContactModal />
+              <FaviconUpdater />
+              <SkipToMain />
+              <CookieBanner />
+              <ContentGate>
+                <AnimatedRoutes />
+              </ContentGate>
+              <WhatsAppButton />
+            </ContactModalProvider>
+          </SiteContentProvider>
+        </LocaleProvider>
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );

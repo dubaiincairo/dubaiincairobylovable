@@ -71,6 +71,26 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
   }
+  /* ── Arabic / RTL — swap both display & body fonts to Cairo for native
+     Arabic rendering. Cairo carries weights 300–800 and ships with the
+     same proportions as the Latin pair, so layouts hold their rhythm. */
+  html[dir="rtl"] body,
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3,
+  html[dir="rtl"] h4,
+  html[dir="rtl"] h5,
+  html[dir="rtl"] h6 {
+    font-family: "Cairo", "Space Grotesk", sans-serif;
+  }
+  /* Italics aren't a thing in Arabic typography — neutralize them so
+     blockquotes and emphasis don't render as slanted Latin glyphs. */
+  html[dir="rtl"] i,
+  html[dir="rtl"] em,
+  html[dir="rtl"] blockquote,
+  html[dir="rtl"] .italic {
+    font-style: normal;
+  }
 }
 
 @layer utilities {

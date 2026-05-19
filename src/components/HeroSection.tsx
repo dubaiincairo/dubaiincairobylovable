@@ -7,6 +7,7 @@ import { heroChild, MOTION, useMotionPref } from "@/lib/animations";
 import { FloatCard } from "@/components/ui/float-card";
 import { AnimatedNumber } from "@/components/ui/animated-number";
 import HeroHeadline from "@/components/HeroHeadline";
+import { useT } from "@/hooks/useT";
 
 // ── Animated SVG chart path ────────────────────────────────────────────────
 const ChartVisual = ({ shouldReduce }: { shouldReduce: boolean }) => (
@@ -70,6 +71,7 @@ const ScrollCue = ({ label }: { label: string }) => {
 // ── Main component ─────────────────────────────────────────────────────────
 const HeroSection = () => {
   const { get } = useSiteContent();
+  const t = useT();
   const { shouldReduce } = useMotionPref();
   const sectionRef = useRef<HTMLElement>(null);
   const [spotlight, setSpotlight] = useState<{ x: number; y: number } | null>(null);
@@ -206,8 +208,8 @@ const HeroSection = () => {
       {/* ── Split grid ── */}
       <div className="relative z-10 max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 lg:gap-20 items-center md:pt-20">
 
-        {/* LEFT — copy */}
-        <div className="text-left">
+        {/* LEFT — copy (auto-flips to right side under RTL via grid order) */}
+        <div className="text-start">
           <motion.div variants={heroChild(0)} initial="hidden" animate="visible">
             <span
               className="inline-block px-4 py-1.5 mb-8 text-xs font-medium tracking-[0.2em] uppercase border border-gold-subtle rounded-full text-primary whitespace-pre-line animate-shimmer-badge"
@@ -244,7 +246,7 @@ const HeroSection = () => {
               className="group inline-flex items-center gap-2.5 px-8 py-4 bg-primary text-primary-foreground font-display font-semibold text-sm tracking-wide rounded-lg transition-colors duration-300 hover:bg-primary/90"
             >
               {get("hero_cta_primary", "Explore Our Services")}
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 rtl:rotate-180" />
             </Link>
             <a
               href="#contact"
@@ -314,7 +316,7 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      <ScrollCue label="Scroll" />
+      <ScrollCue label={t("Scroll", "اسحب لأسفل")} />
     </section>
   );
 };
