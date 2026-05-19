@@ -234,15 +234,19 @@ const Investors = () => {
               <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
                 {get("investor_quote_badge", "Founding Philosophy")}
               </span>
-              <p className="text-xl md:text-2xl font-display font-medium italic leading-relaxed text-foreground max-w-3xl mx-auto">
-                &ldquo;{get(
-                  "investor_quote_text",
-                  "Strategy without implementation is a document. Implementation without strategy is noise.",
-                )}&rdquo;
-              </p>
-              <p className="text-sm text-muted-foreground mt-5 max-w-md mx-auto">
-                {get("investor_quote_caption", "The conviction that shapes every engagement we deliver.")}
-              </p>
+              <blockquote className="max-w-3xl mx-auto">
+                <RichText
+                  html={get(
+                    "investor_quote_text",
+                    "Strategy without implementation is a document. Implementation without strategy is noise.",
+                  )}
+                  className="text-xl md:text-2xl font-display font-medium italic leading-relaxed text-foreground"
+                />
+              </blockquote>
+              <RichText
+                html={get("investor_quote_caption", "The conviction that shapes every engagement we deliver.")}
+                className="text-sm text-muted-foreground mt-5 max-w-md mx-auto"
+              />
             </motion.div>
           </div>
         </section>
