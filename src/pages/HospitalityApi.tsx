@@ -21,7 +21,7 @@ import { chapters, projectMeta, projectStats, type Block } from "@/lib/hospitali
 // Canva "watch" presentation — accounting integration from hospitality software to Odoo.
 const CANVA_EMBED = "https://www.canva.com/design/DAHKZe1a-PY/DUVo6Oljvl8yj2okEmEDVg/watch?embed";
 const CANVA_LINK = "https://www.canva.com/design/DAHKZe1a-PY/DUVo6Oljvl8yj2okEmEDVg/watch";
-const VIDEO_TITLE = "الربط المحاسبي الشامل من برامج الفندقة إلى أودو";
+const VIDEO_TITLE = "User Guide: New Hospitality Dashboard";
 
 const CALLOUTS = {
   note: { Icon: Info, box: "border-border bg-muted/40", accent: "text-muted-foreground", label: "Note" },
@@ -239,7 +239,6 @@ const HospitalityApi = () => {
                   href={CANVA_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  dir="rtl"
                   className="transition-colors hover:text-foreground"
                 >
                   {VIDEO_TITLE}
