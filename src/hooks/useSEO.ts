@@ -20,7 +20,7 @@ interface SEORawProps {
 
 type SEOProps = SEOKeyProps | SEORawProps;
 
-const BASE_URL = "https://www.dubaiincairo.com";
+const BASE_URL = "https://dubaiincairo.com";
 const SCRIPT_ID = "dynamic-jsonld";
 
 function setMeta(name: string, content: string, property = false) {
