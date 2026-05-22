@@ -36,17 +36,6 @@ export interface Chapter {
   blocks: Block[];
 }
 
-export const projectMeta = {
-  badges: ["Odoo 19 module", "Works with any PMS", "One-way automated sync", "Multi-property ready"],
-};
-
-export const projectStats = [
-  { value: "Any PMS", label: "Connects your existing front-desk system" },
-  { value: "Odoo 19", label: "Native accounting destination" },
-  { value: "5", label: "Transaction types automated" },
-  { value: "0", label: "Manual re-entries once it is live" },
-];
-
 export const chapters: Chapter[] = [
   {
     id: "executive-overview",

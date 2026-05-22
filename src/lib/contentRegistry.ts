@@ -41,6 +41,7 @@ export const sectionOrder = [
   "odoo",
   "yanolja",
   "zoho",
+  "hospitality",
 ];
 
 export const sectionLabels: Record<string, string> = {
@@ -67,6 +68,7 @@ export const sectionLabels: Record<string, string> = {
   odoo:         "Odoo Partner Page",
   yanolja:      "Yanolja Partner Page",
   zoho:         "Zoho Partner Page",
+  hospitality:  "Hospitality API Page",
 };
 
 // English source-of-truth fields. The exported `contentRegistry` (at the
@@ -485,6 +487,35 @@ const baseRegistry: ContentField[] = [
   { section: "zoho", key: "zoho_cta_h2",           label: "CTA — Headline",             defaultValue: "Ready to Operationalize Zoho for Your Business?" },
   { section: "zoho", key: "zoho_cta_body",         label: "CTA — Body (rich text)",     defaultValue: "Let's connect your Zoho environment to your actual business workflows. Our enablement team handles implementation, integration, and team training end to end." },
   { section: "zoho", key: "zoho_cta_btn",          label: "CTA — Button Label",         defaultValue: "Get in Touch" },
+
+  // ──────────────── Hospitality API Page ────────────────
+  { section: "hospitality", key: "hosp_hero_eyebrow",      label: "Hero — Eyebrow",                    defaultValue: "Hospitality Financial Connector" },
+  { section: "hospitality", key: "hosp_hero_headline_1",   label: "Hero — Headline (line 1)",          defaultValue: "Connect Any PMS" },
+  { section: "hospitality", key: "hosp_hero_headline_2",   label: "Hero — Headline (line 2, gold)",    defaultValue: "to Odoo 19 Accounting" },
+  { section: "hospitality", key: "hosp_hero_desc",         label: "Hero — Description",                defaultValue: "An automated financial connector that pushes every reservation, payment, and charge from your hotel's PMS straight into Odoo 19 Accounting — accurate, real-time, and audit-ready, whatever system your front desk runs. Watch the overview, then explore exactly how it works below." },
+  { section: "hospitality", key: "hosp_back_link",         label: "Back-to-Home Link Label",           defaultValue: "Back to Home" },
+  { section: "hospitality", key: "hosp_stat_1_value",      label: "Stat 1 — Value",                    defaultValue: "10×" },
+  { section: "hospitality", key: "hosp_stat_1_label",      label: "Stat 1 — Label",                    defaultValue: "Faster month-end close" },
+  { section: "hospitality", key: "hosp_stat_2_value",      label: "Stat 2 — Value",                    defaultValue: "99.9%" },
+  { section: "hospitality", key: "hosp_stat_2_label",      label: "Stat 2 — Label",                    defaultValue: "Posting accuracy" },
+  { section: "hospitality", key: "hosp_stat_3_value",      label: "Stat 3 — Value",                    defaultValue: "24/7" },
+  { section: "hospitality", key: "hosp_stat_3_label",      label: "Stat 3 — Label",                    defaultValue: "Automated, always-on sync" },
+  { section: "hospitality", key: "hosp_stat_4_value",      label: "Stat 4 — Value",                    defaultValue: "100%" },
+  { section: "hospitality", key: "hosp_stat_4_label",      label: "Stat 4 — Label",                    defaultValue: "Hands-off once it is live" },
+  { section: "hospitality", key: "hosp_video_title",       label: "Video — Caption Title",             defaultValue: "User Guide: New Hospitality Dashboard" },
+  { section: "hospitality", key: "hosp_video_credit",      label: "Video — Caption Credit",            defaultValue: "by Abdalla H. Elfouly" },
+  { section: "hospitality", key: "hosp_manual_eyebrow",    label: "Dashboard — Eyebrow",               defaultValue: "How It Works" },
+  { section: "hospitality", key: "hosp_manual_headline_1", label: "Dashboard — Headline (line 1)",     defaultValue: "Explore the connector," },
+  { section: "hospitality", key: "hosp_manual_headline_2", label: "Dashboard — Headline (accent, gold)", defaultValue: "chapter by chapter" },
+  { section: "hospitality", key: "hosp_manual_desc",       label: "Dashboard — Description",           defaultValue: "Pick a topic from the panel for the full detail — architecture, accounting logic, deployment, security, and day-to-day operations." },
+  { section: "hospitality", key: "hosp_badge_1",           label: "Dashboard — Badge 1",               defaultValue: "Odoo 19 module" },
+  { section: "hospitality", key: "hosp_badge_2",           label: "Dashboard — Badge 2",               defaultValue: "Works with any PMS" },
+  { section: "hospitality", key: "hosp_badge_3",           label: "Dashboard — Badge 3",               defaultValue: "One-way automated sync" },
+  { section: "hospitality", key: "hosp_badge_4",           label: "Dashboard — Badge 4",               defaultValue: "Multi-property ready" },
+  { section: "hospitality", key: "hosp_cta_title",         label: "CTA — Title",                       defaultValue: "Want this integration for your property?" },
+  { section: "hospitality", key: "hosp_cta_desc",          label: "CTA — Description",                  defaultValue: "Tell us which PMS you run and we'll map the full accounting flow into Odoo." },
+  { section: "hospitality", key: "hosp_cta_btn",           label: "CTA — Button Label",                defaultValue: "Book an Integration Call" },
+  { section: "hospitality", key: "hosp_footer_link",       label: "Footer — Link Label",               defaultValue: "Hospitality API" },
 ];
 
 // ──────────────── Arabic siblings (auto-generated) ────────────────

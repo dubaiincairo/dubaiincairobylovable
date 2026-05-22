@@ -14,14 +14,14 @@ import {
 import { useSEO } from "@/hooks/useSEO";
 import PageTransition from "@/components/PageTransition";
 import { useContactModal } from "@/context/ContactModalContext";
+import { useSiteContent } from "@/hooks/useSiteContent";
 import { cn } from "@/lib/utils";
 import { fadeUp, scaleIn, viewportOnce, useMotionPref } from "@/lib/animations";
-import { chapters, projectMeta, projectStats, type Block } from "@/lib/hospitalityApiContent";
+import { chapters, type Block } from "@/lib/hospitalityApiContent";
 
-// Canva "watch" presentation — accounting integration from hospitality software to Odoo.
+// Canva "watch" presentation embedded as the page's hero video.
 const CANVA_EMBED = "https://www.canva.com/design/DAHKZe1a-PY/DUVo6Oljvl8yj2okEmEDVg/watch?embed";
 const CANVA_LINK = "https://www.canva.com/design/DAHKZe1a-PY/DUVo6Oljvl8yj2okEmEDVg/watch";
-const VIDEO_TITLE = "User Guide: New Hospitality Dashboard";
 
 const CALLOUTS = {
   note: { Icon: Info, box: "border-border bg-muted/40", accent: "text-muted-foreground", label: "Note" },
@@ -147,6 +147,7 @@ const BlockView = ({ block }: { block: Block }) => {
 
 const HospitalityApi = () => {
   const { openContactModal } = useContactModal();
+  const { get } = useSiteContent();
   const { shouldReduce } = useMotionPref();
   const [activeIndex, setActiveIndex] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -157,6 +158,22 @@ const HospitalityApi = () => {
       "An automated financial connector that bridges any hotel PMS to Odoo 19 Accounting — real-time invoicing, payments, reconciliation, and e-invoicing readiness, with full multi-property support.",
     canonical: "/hospitalityapi",
   });
+
+  const videoTitle = get("hosp_video_title", "User Guide: New Hospitality Dashboard");
+
+  const stats = [
+    { value: get("hosp_stat_1_value", "10×"), label: get("hosp_stat_1_label", "Faster month-end close") },
+    { value: get("hosp_stat_2_value", "99.9%"), label: get("hosp_stat_2_label", "Posting accuracy") },
+    { value: get("hosp_stat_3_value", "24/7"), label: get("hosp_stat_3_label", "Automated, always-on sync") },
+    { value: get("hosp_stat_4_value", "100%"), label: get("hosp_stat_4_label", "Hands-off once it is live") },
+  ];
+
+  const badges = [
+    get("hosp_badge_1", "Odoo 19 module"),
+    get("hosp_badge_2", "Works with any PMS"),
+    get("hosp_badge_3", "One-way automated sync"),
+    get("hosp_badge_4", "Multi-property ready"),
+  ];
 
   const active = chapters[activeIndex];
   const ActiveIcon = active.icon;
@@ -181,7 +198,7 @@ const HospitalityApi = () => {
                 to="/"
                 className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                <ArrowLeft className="h-4 w-4" /> Back to Home
+                <ArrowLeft className="h-4 w-4" /> {get("hosp_back_link", "Back to Home")}
               </Link>
 
               <div className="mb-4 flex items-center gap-3">
@@ -189,20 +206,22 @@ const HospitalityApi = () => {
                   <Hotel className="h-5 w-5 text-primary" />
                 </div>
                 <span className="text-xs font-medium uppercase tracking-[0.2em] text-primary">
-                  Hospitality Financial Connector
+                  {get("hosp_hero_eyebrow", "Hospitality Financial Connector")}
                 </span>
               </div>
 
               <h1 className="mb-4 font-display text-4xl font-bold leading-tight md:text-6xl">
-                Connect Any PMS
+                {get("hosp_hero_headline_1", "Connect Any PMS")}
                 <br />
-                <span className="text-gradient-gold">to Odoo 19 Accounting</span>
+                <span className="text-gradient-gold">
+                  {get("hosp_hero_headline_2", "to Odoo 19 Accounting")}
+                </span>
               </h1>
               <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
-                An automated financial connector that pushes every reservation, payment, and
-                charge from your hotel's PMS straight into Odoo 19 Accounting — accurate,
-                real-time, and audit-ready, whatever system your front desk runs. Watch the
-                overview, then explore exactly how it works below.
+                {get(
+                  "hosp_hero_desc",
+                  "An automated financial connector that pushes every reservation, payment, and charge from your hotel's PMS straight into Odoo 19 Accounting — accurate, real-time, and audit-ready, whatever system your front desk runs. Watch the overview, then explore exactly how it works below.",
+                )}
               </p>
             </motion.div>
           </div>
@@ -226,7 +245,7 @@ const HospitalityApi = () => {
                 <div style={{ position: "relative", width: "100%", height: 0, paddingTop: "65.034%" }}>
                   <iframe
                     loading="lazy"
-                    title={VIDEO_TITLE}
+                    title={videoTitle}
                     src={CANVA_EMBED}
                     allow="fullscreen"
                     allowFullScreen
@@ -241,9 +260,9 @@ const HospitalityApi = () => {
                   rel="noopener noreferrer"
                   className="transition-colors hover:text-foreground"
                 >
-                  {VIDEO_TITLE}
+                  {videoTitle}
                 </a>{" "}
-                — by Abdalla H. Elfouly
+                — {get("hosp_video_credit", "by Abdalla H. Elfouly")}
               </p>
             </motion.div>
           </div>
@@ -258,8 +277,8 @@ const HospitalityApi = () => {
             whileInView="visible"
             viewport={viewportOnce}
           >
-            {projectStats.map((s) => (
-              <div key={s.label} className="rounded-xl border border-border bg-card px-4 py-5 text-center">
+            {stats.map((s, i) => (
+              <div key={i} className="rounded-xl border border-border bg-card px-4 py-5 text-center">
                 <div className="font-display text-2xl font-bold text-gradient-gold md:text-3xl">{s.value}</div>
                 <div className="mt-1 text-xs leading-snug text-muted-foreground">{s.label}</div>
               </div>
@@ -278,19 +297,24 @@ const HospitalityApi = () => {
               viewport={viewportOnce}
             >
               <span className="mb-3 block text-xs font-medium uppercase tracking-[0.2em] text-primary">
-                How It Works
+                {get("hosp_manual_eyebrow", "How It Works")}
               </span>
               <h2 className="font-display text-3xl font-bold leading-tight md:text-4xl">
-                Explore the connector, <span className="text-gradient-gold">chapter by chapter</span>
+                {get("hosp_manual_headline_1", "Explore the connector,")}{" "}
+                <span className="text-gradient-gold">
+                  {get("hosp_manual_headline_2", "chapter by chapter")}
+                </span>
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                Pick a topic from the panel for the full detail — architecture, accounting
-                logic, deployment, security, and day-to-day operations.
+                {get(
+                  "hosp_manual_desc",
+                  "Pick a topic from the panel for the full detail — architecture, accounting logic, deployment, security, and day-to-day operations.",
+                )}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {projectMeta.badges.map((m) => (
+                {badges.map((m, i) => (
                   <span
-                    key={m}
+                    key={i}
                     className="rounded-full border border-border bg-card px-3 py-1 text-[11px] font-medium text-muted-foreground"
                   >
                     {m}
@@ -312,7 +336,6 @@ const HospitalityApi = () => {
                   >
                     {chapters.map((ch, i) => {
                       const isActive = i === activeIndex;
-                      const ChIcon = ch.icon;
                       return (
                         <button
                           key={ch.id}
@@ -334,12 +357,6 @@ const HospitalityApi = () => {
                           >
                             {ch.number}
                           </span>
-                          <ChIcon
-                            className={cn(
-                              "hidden h-4 w-4 shrink-0 lg:block",
-                              isActive ? "text-primary" : "text-muted-foreground",
-                            )}
-                          />
                           <span
                             className={cn(
                               "whitespace-nowrap text-sm font-medium lg:whitespace-normal",
@@ -441,10 +458,13 @@ const HospitalityApi = () => {
             <div className="flex flex-col items-center justify-between gap-6 rounded-2xl border border-border bg-card px-8 py-10 md:flex-row">
               <div>
                 <h3 className="mb-1 font-display text-xl font-bold text-foreground">
-                  Want this integration for your property?
+                  {get("hosp_cta_title", "Want this integration for your property?")}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  Tell us which PMS you run and we&apos;ll map the full accounting flow into Odoo.
+                  {get(
+                    "hosp_cta_desc",
+                    "Tell us which PMS you run and we'll map the full accounting flow into Odoo.",
+                  )}
                 </p>
               </div>
               <button
@@ -452,7 +472,7 @@ const HospitalityApi = () => {
                 onClick={openContactModal}
                 className="shimmer-btn glow-gold shrink-0 rounded-xl bg-primary px-6 py-3 font-display text-sm font-semibold text-primary-foreground transition-all hover:brightness-110"
               >
-                Book an Integration Call
+                {get("hosp_cta_btn", "Book an Integration Call")}
               </button>
             </div>
           </div>
