@@ -8,7 +8,9 @@ import {
 import { useMotionPref } from "@/lib/animations";
 import { useSiteContent } from "@/hooks/useSiteContent";
 
-const DISMISS_KEY = "wa_teaser_dismissed";
+// Bump this when the teaser copy changes so existing visitors who dismissed
+// the previous version see the new bubble again.
+const DISMISS_KEY = "wa_teaser_dismissed_v2";
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg
@@ -38,6 +40,9 @@ const WhatsAppButton = () => {
   const openerText   = get("wa_opener_text",   "👋 Hi there! How can we help you today?");
   const openerHint   = get("wa_opener_hint",   "Pick one below");
   const footerNote   = get("wa_footer_note",   "Picks open WhatsApp with the message ready to send");
+  const ariaOpen     = get("wa_aria_open",     "Open WhatsApp chat");
+  const ariaClose    = get("wa_aria_close",    "Close WhatsApp chat");
+  const ariaDismiss  = get("wa_aria_dismiss",  "Dismiss");
 
   const quickReplies = [1, 2, 3, 4]
     .map((n) => ({
@@ -57,11 +62,11 @@ const WhatsAppButton = () => {
     return () => window.removeEventListener(COOKIE_CONSENT_EVENT, sync);
   }, []);
 
-  // Auto-reveal the catchy teaser bubble after 4s — unless the visitor has
-  // already dismissed it in this browser session
+  // Reveal the teaser bubble shortly after the page paints — unless the visitor
+  // has already dismissed it in this browser session.
   useEffect(() => {
     if (sessionStorage.getItem(DISMISS_KEY) === "1") return;
-    const t = setTimeout(() => setShowTeaser(true), 4000);
+    const t = setTimeout(() => setShowTeaser(true), 1200);
     return () => clearTimeout(t);
   }, []);
 
@@ -127,7 +132,7 @@ const WhatsAppButton = () => {
               </div>
               <button
                 onClick={() => setOpen(false)}
-                aria-label="Close chat"
+                aria-label={ariaClose}
                 className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
               >
                 <X className="w-4 h-4" />
@@ -179,7 +184,7 @@ const WhatsAppButton = () => {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: shouldReduce ? 0 : 12, scale: shouldReduce ? 1 : 0.9 }}
             transition={{ duration: shouldReduce ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden md:flex items-stretch gap-0 max-w-[15rem] rounded-2xl rounded-br-md border border-border bg-card shadow-xl overflow-hidden"
+            className="flex items-stretch gap-0 max-w-[15rem] rounded-2xl rounded-br-md border border-border bg-card shadow-xl overflow-hidden"
           >
             <button
               type="button"
@@ -196,7 +201,7 @@ const WhatsAppButton = () => {
             <button
               type="button"
               onClick={dismissTeaser}
-              aria-label="Dismiss"
+              aria-label={ariaDismiss}
               className="px-2 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors border-l border-border"
             >
               <X className="w-3.5 h-3.5" />
@@ -209,7 +214,7 @@ const WhatsAppButton = () => {
       <button
         type="button"
         onClick={() => { setOpen((v) => !v); if (showTeaser) dismissTeaser(); }}
-        aria-label={open ? "Close WhatsApp chat" : "Open WhatsApp chat"}
+        aria-label={open ? ariaClose : ariaOpen}
         aria-expanded={open}
         className="relative group"
       >
