@@ -152,9 +152,9 @@ const HospitalityApi = () => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useSEO({
-    title: "Hospitality API — eZee → Odoo Integration Connector | Dubai in Cairo",
+    title: "Hospitality Financial Connector — Any PMS to Odoo 19 | Dubai in Cairo",
     description:
-      "The complete technical & operations manual for the eZee–Odoo Integration Connector: an automated financial bridge between eZee Absolute PMS and Odoo 19 Accounting, built for a multi-property hotel group in Saudi Arabia.",
+      "An automated financial connector that bridges any hotel PMS to Odoo 19 Accounting — real-time invoicing, payments, reconciliation, and e-invoicing readiness, with full multi-property support.",
     canonical: "/hospitalityapi",
   });
 
@@ -189,19 +189,20 @@ const HospitalityApi = () => {
                   <Hotel className="h-5 w-5 text-primary" />
                 </div>
                 <span className="text-xs font-medium uppercase tracking-[0.2em] text-primary">
-                  Hospitality API · Case Project
+                  Hospitality Financial Connector
                 </span>
               </div>
 
               <h1 className="mb-4 font-display text-4xl font-bold leading-tight md:text-6xl">
-                The eZee → Odoo
+                Connect Any PMS
                 <br />
-                <span className="text-gradient-gold">Integration Connector</span>
+                <span className="text-gradient-gold">to Odoo 19 Accounting</span>
               </h1>
               <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
-                An automated, one-way financial bridge between eZee Absolute PMS and Odoo 19
-                Accounting — delivered for the WD Group's six hotels across Saudi Arabia. Watch
-                the overview, then explore the full technical &amp; operations manual below.
+                An automated financial connector that pushes every reservation, payment, and
+                charge from your hotel's PMS straight into Odoo 19 Accounting — accurate,
+                real-time, and audit-ready, whatever system your front desk runs. Watch the
+                overview, then explore exactly how it works below.
               </p>
             </motion.div>
           </div>
@@ -278,17 +279,17 @@ const HospitalityApi = () => {
               viewport={viewportOnce}
             >
               <span className="mb-3 block text-xs font-medium uppercase tracking-[0.2em] text-primary">
-                Technical &amp; Operations Manual
+                How It Works
               </span>
               <h2 className="font-display text-3xl font-bold leading-tight md:text-4xl">
-                Explore the project, <span className="text-gradient-gold">chapter by chapter</span>
+                Explore the connector, <span className="text-gradient-gold">chapter by chapter</span>
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                Pick a topic from the panel to open its full detail — architecture, accounting
-                logic, deployment, troubleshooting, and more.
+                Pick a topic from the panel for the full detail — architecture, accounting
+                logic, deployment, security, and day-to-day operations.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {[`Document v${projectMeta.documentVersion}`, projectMeta.platform, projectMeta.scope].map((m) => (
+                {projectMeta.badges.map((m) => (
                   <span
                     key={m}
                     className="rounded-full border border-border bg-card px-3 py-1 text-[11px] font-medium text-muted-foreground"
