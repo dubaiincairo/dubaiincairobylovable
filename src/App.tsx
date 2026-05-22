@@ -25,6 +25,7 @@ import FAQ from "./pages/FAQ";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import PartnerLogin from "./pages/PartnerLogin";
 import PartnerTimeTracker from "./pages/PartnerTimeTracker";
+import HospitalityApi from "./pages/HospitalityApi";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
@@ -84,6 +85,7 @@ const AnimatedRoutes = () => {
           <Route path="/partnerships/zoho" element={<ZohoPartnerPage />} />
           <Route path="/studios" element={<Studios />} />
           <Route path="/tech" element={<Tech />} />
+          <Route path="/hospitalityapi" element={<HospitalityApi />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/partner/login" element={<PartnerLogin />} />
