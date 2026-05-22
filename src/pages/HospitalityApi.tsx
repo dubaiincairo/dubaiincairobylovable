@@ -82,7 +82,12 @@ const BlockView = ({ block }: { block: Block }) => {
     case "table":
       return (
         <div className="mt-4 overflow-x-auto rounded-xl border border-border">
-          <table className="w-full border-collapse text-sm">
+          <table
+            className={cn(
+              "w-full border-collapse text-sm",
+              block.headers.length >= 3 && "min-w-[36rem]",
+            )}
+          >
             <thead>
               <tr className="bg-muted/50">
                 {block.headers.map((h, i) => (
@@ -196,7 +201,7 @@ const HospitalityApi = () => {
             <motion.div variants={fadeUp} initial="hidden" animate="visible">
               <Link
                 to="/"
-                className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="mb-6 -ml-1 inline-flex min-h-[44px] items-center gap-2 px-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 <ArrowLeft className="h-4 w-4" /> {get("hosp_back_link", "Back to Home")}
               </Link>
@@ -326,7 +331,7 @@ const HospitalityApi = () => {
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-8 lg:items-start">
               {/* Side panel */}
               <aside className="lg:sticky lg:top-24 lg:self-start">
-                <div className="lg:rounded-2xl lg:border lg:border-border lg:bg-card lg:p-3">
+                <div className="relative lg:rounded-2xl lg:border lg:border-border lg:bg-card lg:p-3">
                   <p className="hidden px-3 pb-2 pt-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground lg:block">
                     Chapters
                   </p>
@@ -371,6 +376,11 @@ const HospitalityApi = () => {
                       );
                     })}
                   </nav>
+                  {/* Scroll cue: fade the right edge so the chapter strip reads as scrollable on mobile. */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute bottom-2 right-0 top-0 w-12 bg-gradient-to-l from-background to-transparent lg:hidden"
+                  />
                 </div>
               </aside>
 
@@ -406,12 +416,12 @@ const HospitalityApi = () => {
                   </motion.div>
 
                   {/* Prev / Next */}
-                  <div className="mt-10 flex items-stretch justify-between gap-3 border-t border-border pt-6">
+                  <div className="mt-10 flex flex-col gap-3 border-t border-border pt-6 sm:flex-row sm:items-stretch sm:justify-between">
                     {activeIndex > 0 ? (
                       <button
                         type="button"
                         onClick={() => selectChapter(activeIndex - 1)}
-                        className="group flex items-center gap-2.5 rounded-xl border border-border bg-card px-4 py-3 text-left transition-colors hover:border-primary/30 hover:bg-muted/40"
+                        className="group flex w-full items-center gap-2.5 rounded-xl border border-border bg-card px-4 py-3 text-left transition-colors hover:border-primary/30 hover:bg-muted/40 sm:w-auto"
                       >
                         <ChevronLeft className="h-4 w-4 shrink-0 text-primary" />
                         <span className="min-w-0">
@@ -430,7 +440,7 @@ const HospitalityApi = () => {
                       <button
                         type="button"
                         onClick={() => selectChapter(activeIndex + 1)}
-                        className="group flex items-center gap-2.5 rounded-xl border border-border bg-card px-4 py-3 text-right transition-colors hover:border-primary/30 hover:bg-muted/40"
+                        className="group flex w-full items-center justify-end gap-2.5 rounded-xl border border-border bg-card px-4 py-3 text-right transition-colors hover:border-primary/30 hover:bg-muted/40 sm:w-auto"
                       >
                         <span className="min-w-0">
                           <span className="block text-[11px] uppercase tracking-wide text-muted-foreground">
