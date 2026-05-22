@@ -11,11 +11,12 @@ const Footer = () => {
   const { get } = useSiteContent();
 
   const exploreLinks = [
-    { href: "/",        label: get("nav_link_home",    "Home") },
-    { href: "/studios", label: get("nav_link_studios", "Studios") },
-    { href: "/careers", label: get("nav_link_careers", "Careers") },
-    { href: "/tech",    label: get("nav_link_tech",    "Tech Stack") },
-    { href: "/faq",     label: get("nav_link_faq",     "FAQ") },
+    { href: "/",               label: get("nav_link_home",        "Home") },
+    { href: "/studios",        label: get("nav_link_studios",     "Studios") },
+    { href: "/careers",        label: get("nav_link_careers",     "Careers") },
+    { href: "/tech",           label: get("nav_link_tech",        "Tech Stack") },
+    { href: "/hospitalityapi", label: get("hosp_footer_link",     "Hospitality API") },
+    { href: "/faq",            label: get("nav_link_faq",         "FAQ") },
   ];
 
   const partnerLinks = [

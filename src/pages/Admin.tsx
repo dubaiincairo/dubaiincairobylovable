@@ -87,6 +87,15 @@ const SECTION_LAYOUT: Record<string, SectionLayout> = {
     { label: "Partnerships Menu",  keys: ["nav_partner_odoo", "nav_partner_yanolja", "nav_partner_zoho"] },
     { label: "CTA",                keys: ["nav_cta"] },
   ],
+  hospitality: [
+    { label: "Hero",               keys: ["hosp_hero_eyebrow", "hosp_hero_headline_1", "hosp_hero_headline_2", "hosp_hero_desc", "hosp_back_link"] },
+    { label: "Stat Cards",         keys: ["hosp_stat_1_value", "hosp_stat_1_label", "hosp_stat_2_value", "hosp_stat_2_label", "hosp_stat_3_value", "hosp_stat_3_label", "hosp_stat_4_value", "hosp_stat_4_label"] },
+    { label: "Hero Video Caption", keys: ["hosp_video_title", "hosp_video_credit"] },
+    { label: "Dashboard Heading",  keys: ["hosp_manual_eyebrow", "hosp_manual_headline_1", "hosp_manual_headline_2", "hosp_manual_desc"] },
+    { label: "Dashboard Badges",   keys: ["hosp_badge_1", "hosp_badge_2", "hosp_badge_3", "hosp_badge_4"] },
+    { label: "Call to Action",     keys: ["hosp_cta_title", "hosp_cta_desc", "hosp_cta_btn"] },
+    { label: "Footer Link",        keys: ["hosp_footer_link"] },
+  ],
   hero: [
     { label: "Copy & CTAs",        keys: ["hero_tagline", "hero_headline", "hero_subheadline", "hero_cta_primary", "hero_cta_secondary"] },
     { label: "Dashboard Card",     keys: ["hero_card_label", "hero_card_trend", "hero_card_value", "hero_card_sublabel"] },
