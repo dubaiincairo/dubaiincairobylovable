@@ -14,9 +14,7 @@ interface Logo {
 
 const ClientsSection = () => {
   const { get } = useSiteContent();
-  // Shortest section on the page: the default 80px header travel escapes the
-  // overflow-hidden bounds and clips the headline. 12px stays inside py-6.
-  const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax({ headerTravel: 12 });
+  const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
 
   // Order is editor-controlled via admin drag-and-drop (clients_order CMS key).
   // Missing/invalid entries fall back to natural 1..N order.

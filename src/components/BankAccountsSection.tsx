@@ -105,7 +105,7 @@ const BankAccountsSection = () => {
 
         {/* ── Header ── */}
         <motion.div
-          className="text-center mb-6 md:mb-12"
+          className="text-center mb-8 md:mb-12"
           style={{ y: headerY, opacity: headerOpacity }}
         >
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">

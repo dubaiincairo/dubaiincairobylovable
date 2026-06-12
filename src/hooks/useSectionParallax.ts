@@ -13,10 +13,11 @@ interface SectionParallax {
 
 interface SectionParallaxOptions {
   /**
-   * Max px the header drifts up/down across the scroll window. Sections are
-   * `overflow-hidden`, so short sections (little content below the header)
-   * must pass a value smaller than their top padding or the header gets
-   * clipped against the section's own top edge near the end of the window.
+   * Max px the header drifts up/down across the scroll window. Keep this
+   * below the section's top padding and its header-to-content margin: the
+   * sections are `overflow-hidden` with static content right below the
+   * header, so a large travel clips the header against the section's top
+   * edge and crushes it into the cards below.
    */
   headerTravel?: number;
 }
@@ -33,7 +34,7 @@ interface SectionParallaxOptions {
  *
  * Reduced-motion users get static MotionValues.
  */
-export const useSectionParallax = ({ headerTravel = 80 }: SectionParallaxOptions = {}): SectionParallax => {
+export const useSectionParallax = ({ headerTravel = 12 }: SectionParallaxOptions = {}): SectionParallax => {
   const ref = useRef<HTMLElement>(null);
   const { shouldReduce } = useMotionPref();
   const { scrollYProgress } = useScroll({
