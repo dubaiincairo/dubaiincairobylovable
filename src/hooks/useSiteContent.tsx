@@ -2,6 +2,8 @@ import { createContext, useContext, useEffect, useState, useCallback, ReactNode 
 import { supabase } from "@/integrations/supabase/client";
 import { sanity } from "@/integrations/sanity/client";
 import { SECTION_TYPES } from "@/integrations/sanity/sections";
+import { useLocale } from "@/contexts/LocaleContext";
+import { getTranslation } from "@/lib/translations";
 
 // Content is sourced from two places:
 //   1. Supabase `site_content` table — edited via /admin (PRIMARY).
@@ -73,6 +75,7 @@ const writeCache = (map: ContentMap) => {
 const SANITY_QUERY = `*[_type in $types]`;
 
 export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
+  const { locale } = useLocale();
   const [supabaseMap, setSupabaseMap] = useState<ContentMap>({});
   const [sanityMap, setSanityMap] = useState<ContentMap>({});
   const [content, setContent] = useState<ContentMap>(() => readCache());
@@ -169,15 +172,36 @@ export const SiteContentProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  // Treat empty strings the same as missing entries so clearing a field in
-  // either CMS surfaces the code-level fallback again.
+  // Resolution order for a key, in order of precedence:
+  //
+  //   When locale === "ar":
+  //     1. CMS Arabic field (`${key}_ar`)    — editor's override wins
+  //     2. Code-level Arabic translation       — sensible default
+  //     3. CMS English field (`${key}`)        — last resort before fallback
+  //     4. fallback                            — caller-provided default
+  //
+  //   When locale === "en":
+  //     1. CMS English field (`${key}`)
+  //     2. fallback
+  //
+  // Empty strings are treated as missing so clearing a field in either CMS
+  // collapses back to the next layer in the chain.
   const get = useCallback(
     (key: string, fallback = "") => {
+      const isNonEmpty = (v: string | undefined | null): v is string =>
+        v !== undefined && v !== null && v !== "";
+
+      if (locale === "ar") {
+        const cmsAr = content[`${key}_ar`];
+        if (isNonEmpty(cmsAr)) return cmsAr;
+        const codeAr = getTranslation(locale, key);
+        if (codeAr) return codeAr;
+      }
       const v = content[key];
-      if (v === undefined || v === null || v === "") return fallback;
-      return v;
+      if (isNonEmpty(v)) return v;
+      return fallback;
     },
-    [content],
+    [content, locale],
   );
 
   return (

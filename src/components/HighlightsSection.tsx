@@ -8,6 +8,7 @@ import AnimatedUnderline from "@/components/ui/animated-underline";
 import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useCarouselSwipeHint } from "@/hooks/useCarouselSwipeHint";
 import { useSectionParallax } from "@/hooks/useSectionParallax";
+import { useT } from "@/hooks/useT";
 
 type CaseStudy = {
   id: string;
@@ -31,6 +32,7 @@ const HighlightsSection = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   useCarouselSwipeHint(api, carouselRef);
   const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
+  const t = useT();
 
   useEffect(() => {
     supabase
@@ -105,15 +107,15 @@ const HighlightsSection = () => {
 
       <div className="relative max-w-6xl mx-auto">
         <motion.div
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-10"
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 md:mb-12"
           style={{ y: headerY, opacity: headerOpacity }}
         >
           <div>
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
-              Highlights from Our Collaboration
+              {t("Highlights from Our Collaboration", "أبرز نتائجنا مع العملاء")}
             </span>
             <h2 className="text-3xl md:text-5xl font-display font-bold leading-tight">
-              Real Clients.<br />Measurable Results.
+              {t("Real Clients.", "عملاءٌ حقيقيون.")}<br />{t("Measurable Results.", "نتائجُ قابلة للقياس.")}
             </h2>
             <AnimatedUnderline align="left" />
           </div>
@@ -121,8 +123,8 @@ const HighlightsSection = () => {
             to="/case-studies"
             className="group inline-flex items-center gap-2 text-sm font-display font-semibold text-primary hover:text-primary/80 transition-colors shrink-0"
           >
-            See All Case Studies
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            {t("See All Case Studies", "كلّ قصص النجاح")}
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:rotate-180" />
           </Link>
         </motion.div>
 

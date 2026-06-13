@@ -11,6 +11,17 @@ interface SectionParallax {
   contentY: MotionValue<number>;
 }
 
+interface SectionParallaxOptions {
+  /**
+   * Max px the header drifts up/down across the scroll window. Keep this
+   * below the section's top padding and its header-to-content margin: the
+   * sections are `overflow-hidden` with static content right below the
+   * header, so a large travel clips the header against the section's top
+   * edge and crushes it into the cards below.
+   */
+  headerTravel?: number;
+}
+
 /**
  * Section-local scroll parallax. Returns a ref to attach to the <section>
  * and motion values that drift the section's header, background orb, and
@@ -23,7 +34,7 @@ interface SectionParallax {
  *
  * Reduced-motion users get static MotionValues.
  */
-export const useSectionParallax = (): SectionParallax => {
+export const useSectionParallax = ({ headerTravel = 12 }: SectionParallaxOptions = {}): SectionParallax => {
   const ref = useRef<HTMLElement>(null);
   const { shouldReduce } = useMotionPref();
   const { scrollYProgress } = useScroll({
@@ -31,7 +42,11 @@ export const useSectionParallax = (): SectionParallax => {
     offset: ["start 0.9", "end 0.1"],
   });
 
-  const headerY = useTransform(scrollYProgress, [0, 1], shouldReduce ? [0, 0] : [80, -80]);
+  const headerY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    shouldReduce ? [0, 0] : [headerTravel, -headerTravel],
+  );
   const headerOpacity = useTransform(
     scrollYProgress,
     [0, 0.2, 0.8, 1],

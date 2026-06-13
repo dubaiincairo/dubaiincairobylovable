@@ -51,7 +51,7 @@ const ValuesSection = () => {
       </div>
 
       <div className="relative max-w-6xl mx-auto">
-        <motion.div className="text-center mb-6 md:mb-12" style={{ y: headerY, opacity: headerOpacity }}>
+        <motion.div className="text-center mb-8 md:mb-12" style={{ y: headerY, opacity: headerOpacity }}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("values_subtitle", "What We Stand For")}
           </span>

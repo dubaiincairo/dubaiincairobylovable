@@ -1,4 +1,5 @@
 import { useSEO } from "@/hooks/useSEO";
+import { useT } from "@/hooks/useT";
 import PageTransition from "@/components/PageTransition";
 import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
@@ -15,23 +16,24 @@ import BankAccountsSection from "@/components/BankAccountsSection";
 import GoogleBusinessWidget from "@/components/GoogleBusinessWidget";
 import SectionIndicator from "@/components/SectionIndicator";
 
-const HOMEPAGE_SECTIONS = [
-  { id: "hero",         label: "Home" },
-  { id: "about",        label: "About" },
-  { id: "why",          label: "Why Us" },
-  { id: "work",         label: "Clients" },
-  { id: "highlights",   label: "Case Studies" },
-  { id: "team",         label: "Founder" },
-  { id: "testimonials", label: "Reviews" },
-  { id: "contact",      label: "Contact" },
-];
-
 const Index = () => {
   useSEO({ titleKey: "seo_home_title", descriptionKey: "seo_home_description", canonical: "/", ogImageKey: "seo_home_og_image" });
+  const t = useT();
+
+  const sections = [
+    { id: "hero",         label: t("Home",         "الرئيسية") },
+    { id: "about",        label: t("About",        "من نحن") },
+    { id: "why",          label: t("Why Us",       "لماذا نحن") },
+    { id: "work",         label: t("Clients",      "العملاء") },
+    { id: "highlights",   label: t("Case Studies", "قصص النجاح") },
+    { id: "team",         label: t("Founder",      "المؤسّس") },
+    { id: "testimonials", label: t("Reviews",      "آراء العملاء") },
+    { id: "contact",      label: t("Contact",      "تواصل معنا") },
+  ];
 
   return (
     <PageTransition>
-      <SectionIndicator sections={HOMEPAGE_SECTIONS} />
+      <SectionIndicator sections={sections} />
       <main id="main-content">
         <HeroSection />
         <StatsSection />

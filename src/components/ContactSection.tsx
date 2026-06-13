@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useT } from "@/hooks/useT";
 import { z } from "zod";
 import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
 import AnimatedUnderline from "@/components/ui/animated-underline";
@@ -64,6 +65,7 @@ const SERVICES = [
 const ContactSection = () => {
   const { toast } = useToast();
   const { get } = useSiteContent();
+  const t = useT();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedService, setSelectedService] = useState("");
@@ -240,7 +242,7 @@ const ContactSection = () => {
                     id="service"
                     className="bg-background/60 border-border hover:border-primary/40 data-[state=open]:border-primary/60 transition-colors"
                   >
-                    <SelectValue placeholder="Select a service (optional)" />
+                    <SelectValue placeholder={t("Select a service (optional)", "اختر خدمة (اختياري)")} />
                   </SelectTrigger>
                   <SelectContent>
                     {SERVICES.map((s) => (
@@ -264,8 +266,8 @@ const ContactSection = () => {
                 className="shimmer-btn w-full px-8 py-3 text-base font-display font-semibold glow-gold mt-1"
               >
                 {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />}
-                {isSubmitting ? "Sending..." : get("contact_cta", "Start a Project")}
-                {!isSubmitting && <ArrowRight className="w-4 h-4" />}
+                {isSubmitting ? t("Sending...", "جاري الإرسال...") : get("contact_cta", "Start a Project")}
+                {!isSubmitting && <ArrowRight className="w-4 h-4 rtl:rotate-180" />}
               </Button>
             </form>
           )}

@@ -7,11 +7,36 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useContactModal } from "@/context/ContactModalContext";
+import { useLocale } from "@/contexts/LocaleContext";
 import { slideDown, useMotionPref } from "@/lib/animations";
+
+// ── EN/AR pill ─────────────────────────────────────────────────────────────
+// Small two-state toggle next to the CTA. Always shows both labels so users
+// recognize the option at a glance; the active language is highlighted.
+const LocaleToggle = ({ className = "" }: { className?: string }) => {
+  const { locale, otherLocaleHref } = useLocale();
+  const otherLabel = locale === "ar" ? "EN" : "AR";
+  const ariaLabel = locale === "ar" ? "Switch to English" : "التحويل إلى العربية";
+  return (
+    <Link
+      to={otherLocaleHref}
+      aria-label={ariaLabel}
+      className={cn(
+        "inline-flex items-center min-h-[36px] px-3 py-1.5 rounded-full border border-border text-xs font-display font-semibold tracking-wide text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors duration-300",
+        className,
+      )}
+    >
+      <span className={cn("px-1", locale === "en" && "text-primary")}>EN</span>
+      <span aria-hidden="true" className="text-border/80">/</span>
+      <span className={cn("px-1", locale === "ar" && "text-primary")}>AR</span>
+      <span className="sr-only">{otherLabel}</span>
+    </Link>
+  );
+};
 
 type TopItem =
   | { kind: "link"; id: string; href: string; label: string }
@@ -35,6 +60,7 @@ const Navbar = () => {
   const { shouldReduce } = useMotionPref();
   const { get } = useSiteContent();
   const { openContactModal } = useContactModal();
+  const { locale } = useLocale();
   const { pathname } = useLocation();
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -141,7 +167,7 @@ const Navbar = () => {
         style={{ height: navHeight }}
       >
         <a
-          href="/"
+          href={locale === "ar" ? "/ar" : "/"}
           aria-label="Dubai in Cairo — home"
           className="font-display font-bold text-2xl md:text-[1.65rem] inline-flex items-center min-h-[44px] tracking-tight"
         >
@@ -224,6 +250,8 @@ const Navbar = () => {
             );
           })}
 
+          <LocaleToggle />
+
           <button
             onClick={openContactModal}
             className="shimmer-btn inline-flex items-center min-h-[44px] px-5 py-2 bg-primary text-primary-foreground font-display font-semibold text-xs tracking-wide rounded-lg transition-all hover:brightness-110"
@@ -283,6 +311,8 @@ const Navbar = () => {
               </div>
             ),
           )}
+
+          <LocaleToggle className="self-start" />
 
           <button
             onClick={() => { setOpen(false); openContactModal(); }}
