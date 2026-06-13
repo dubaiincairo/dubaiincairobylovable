@@ -4,13 +4,11 @@ import { Phone } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { fadeIn, viewportOnce } from "@/lib/animations";
 import { RichText } from "@/components/ui/rich-text";
-import { useT } from "@/hooks/useT";
 
 const tel = (display: string) => `tel:${display.replace(/[^\d+]/g, "")}`;
 
 const Footer = () => {
   const { get } = useSiteContent();
-  const t = useT();
 
   const exploreLinks = [
     { href: "/",               label: get("nav_link_home",        "Home") },
@@ -67,7 +65,7 @@ const Footer = () => {
                 <a
                   key={p}
                   href={tel(p)}
-                  aria-label={t("Call", "اتصل بـ") + ` ${p}`}
+                  aria-label={`Call ${p}`}
                   className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors duration-200"
                 >
                   <Phone aria-hidden="true" className="w-3 h-3 text-primary/60" />
@@ -113,16 +111,16 @@ const Footer = () => {
 
         {/* Bottom strip: copyright + legal */}
         <div className="pt-4 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
-          <span className="whitespace-pre-line text-center sm:text-start">
+          <span className="whitespace-pre-line text-center sm:text-left">
             {get("footer_copyright", "© 2025 Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC · All Rights Reserved")}
           </span>
           <div className="flex items-center gap-4">
             <Link to="/privacy" className="hover:text-primary transition-colors duration-200">
-              {t("Privacy Policy", "سياسة الخصوصية")}
+              Privacy Policy
             </Link>
             <span className="text-border">·</span>
             <Link to="/partner/login" className="hover:text-primary transition-colors duration-200">
-              {t("Partner Sign In", "دخول الشركاء")}
+              Partner Sign In
             </Link>
           </div>
         </div>

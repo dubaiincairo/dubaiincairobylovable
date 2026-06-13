@@ -61,9 +61,7 @@ const SectionIndicator = ({ sections }: Props) => {
   return (
     <nav
       aria-label="Page sections"
-      // In RTL, mirror to the left edge so the strip never sits over the
-      // beginning of each line (which is on the right side in Arabic).
-      className="fixed right-5 rtl:right-auto rtl:left-5 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-end rtl:items-start gap-3"
+      className="fixed right-5 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-end gap-3"
     >
       {sections.map((s) => {
         const isActive = active === s.id;
@@ -76,10 +74,10 @@ const SectionIndicator = ({ sections }: Props) => {
             aria-current={isActive ? "true" : undefined}
             className="group relative flex items-center"
           >
-            {/* Hover/active label — sits opposite to the dot column */}
+            {/* Hover/active label */}
             <span
               className={cn(
-                "absolute right-full mr-3 rtl:right-auto rtl:left-full rtl:mr-0 rtl:ml-3 px-2 py-0.5 rounded text-[10px] font-semibold tracking-wider uppercase whitespace-nowrap bg-card border border-border text-foreground shadow-sm transition-opacity duration-200",
+                "absolute right-full mr-3 px-2 py-0.5 rounded text-[10px] font-semibold tracking-wider uppercase whitespace-nowrap bg-card border border-border text-foreground shadow-sm transition-opacity duration-200",
                 isActive
                   ? "opacity-100"
                   : "opacity-0 group-hover:opacity-100 pointer-events-none",

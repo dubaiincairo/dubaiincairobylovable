@@ -103,7 +103,7 @@ const WhatsAppButton = () => {
     : "bottom-[calc(env(safe-area-inset-bottom)+1.5rem)]";
 
   return (
-    <div className={`fixed right-6 rtl:right-auto rtl:left-6 z-50 flex flex-col items-end rtl:items-start gap-3 ${bottomClass}`}>
+    <div className={`fixed right-6 z-50 flex flex-col items-end gap-3 ${bottomClass}`}>
 
       {/* Conversation panel */}
       <AnimatePresence>

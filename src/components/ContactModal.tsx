@@ -8,7 +8,6 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { useContactModal } from "@/context/ContactModalContext";
-import { useT } from "@/hooks/useT";
 import { RichText } from "@/components/ui/rich-text";
 import { z } from "zod";
 
@@ -23,7 +22,6 @@ export const ContactModal = () => {
   const { isOpen, closeContactModal } = useContactModal();
   const { toast } = useToast();
   const { get } = useSiteContent();
-  const t = useT();
 
   const [form, setForm]           = useState({ name: "", email: "", phone: "", message: "" });
   const [errors, setErrors]       = useState<Record<string, string>>({});
@@ -148,7 +146,7 @@ export const ContactModal = () => {
                 </div>
                 <button
                   type="button"
-                  aria-label={t("Close contact form", "إغلاق النموذج")}
+                  aria-label="Close contact form"
                   onClick={handleClose}
                   className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                 >
@@ -181,7 +179,7 @@ export const ContactModal = () => {
                       className="text-sm text-muted-foreground"
                     />
                     <Button variant="outline" size="sm" className="mt-2" onClick={handleClose}>
-                      {t("Close", "إغلاق")}
+                      Close
                     </Button>
                   </div>
                 ) : (
@@ -270,8 +268,8 @@ export const ContactModal = () => {
                     <Button type="submit" disabled={isSubmitting}
                       className="shimmer-btn w-full font-display font-semibold glow-gold">
                       {isSubmitting
-                        ? <><Loader2 className="w-4 h-4 animate-spin me-2" /> {t("Sending...", "جاري الإرسال...")}</>
-                        : <><Mail className="w-4 h-4 me-2" />{get("contact_cta", "Start a Project")}<ArrowRight className="w-4 h-4 ms-2 rtl:rotate-180" /></>
+                        ? <><Loader2 className="w-4 h-4 animate-spin mr-2" /> Sending...</>
+                        : <><Mail className="w-4 h-4 mr-2" />{get("contact_cta", "Start a Project")}<ArrowRight className="w-4 h-4 ml-2" /></>
                       }
                     </Button>
                   </form>
