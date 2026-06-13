@@ -3,7 +3,7 @@ import { next } from "@vercel/edge";
 const SUPABASE_URL = "https://tblfnxaedhmwydjqngnb.supabase.co";
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRibGZueGFlZGhtd3lkanFuZ25iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxMTYzNjMsImV4cCI6MjA5MjY5MjM2M30.MjXLYqzgqCmZqOrT4_Per3-P9tGjGIqfVM2zFtjJMYA";
-const FALLBACK_OG = `${SUPABASE_URL}/storage/v1/object/public/assets/seo-global-og-image/1777917583639.jpeg`;
+const FALLBACK_OG = "https://dubaiincairo.com/og-image.jpg";
 
 // In-memory cache: edge workers are reused across requests
 let cache: { url: string; expires: number } | null = null;

@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /login
 Disallow: /reset-password
 
-Sitemap: https://www.dubaiincairo.com/sitemap.xml
+Sitemap: https://dubaiincairo.com/sitemap.xml
