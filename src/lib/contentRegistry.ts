@@ -30,7 +30,6 @@ export const sectionOrder = [
   "testimonials",
   "tech",
   "google",
-  "bank",
   "legal",
   "contact",
   "footer",
@@ -57,7 +56,6 @@ export const sectionLabels: Record<string, string> = {
   testimonials: "Homepage — Testimonials",
   tech:         "Tech Stack (Teaser + Page)",
   google:       "Homepage — Google Business Card",
-  bank:         "Homepage — Bank Accounts (Headers)",
   legal:        "Homepage — Legal Strip",
   contact:      "Contact Section + Modal",
   footer:       "Footer",
@@ -71,10 +69,7 @@ export const sectionLabels: Record<string, string> = {
   hospitality:  "Hospitality API Page",
 };
 
-// English source-of-truth fields. The exported `contentRegistry` (at the
-// bottom of this file) is this list interleaved with auto-generated `_ar`
-// siblings, one for every key that has a translation in `translations.ts`.
-const baseRegistry: ContentField[] = [
+export const contentRegistry: ContentField[] = [
   // ──────────────── SEO & Meta ────────────────
   { section: "seo", key: "seo_global_og_image",     label: "Global OG Image (1200×630, used when a page doesn't set its own)", defaultValue: "", type: "upload" },
   { section: "seo", key: "seo_ga4_id",              label: "Google Analytics 4 Measurement ID (e.g. G-XXXXXXX)",               defaultValue: "" },
@@ -220,10 +215,6 @@ const baseRegistry: ContentField[] = [
   { section: "tech", key: "tech_cta_title",        label: "Page — CTA Title",          defaultValue: "Want to know which stack fits your business?" },
   { section: "tech", key: "tech_cta_desc",         label: "Page — CTA Body",           defaultValue: "We'll audit your current tools and recommend the right combination." },
   { section: "tech", key: "tech_cta_btn",          label: "Page — CTA Button",         defaultValue: "Get a Free Stack Audit" },
-  { section: "tech", key: "tech_layer_1_label",    label: "Teaser — Layer 1 Pill",     defaultValue: "Growth & Customer Intelligence" },
-  { section: "tech", key: "tech_layer_2_label",    label: "Teaser — Layer 2 Pill",     defaultValue: "Commerce & Business Operations" },
-  { section: "tech", key: "tech_layer_3_label",    label: "Teaser — Layer 3 Pill",     defaultValue: "Creative, AI & Infrastructure" },
-  { section: "tech", key: "tech_explore_cta",      label: "Teaser — Explore Button",   defaultValue: "Explore Full Stack" },
 
   // ──────────────── Homepage — Google Business Card ────────────────
   { section: "google", key: "google_biz_name",      label: "Business Name",                       defaultValue: "Dubai in Cairo" },
@@ -233,16 +224,6 @@ const baseRegistry: ContentField[] = [
   { section: "google", key: "google_maps_link",     label: "Google Maps Page URL (click target)", defaultValue: "https://maps.google.com" },
   { section: "google", key: "google_maps_embed",    label: "Google Maps Embed (full <iframe> snippet or src URL — if blank, falls back to the address above)", defaultValue: "" },
   { section: "google", key: "google_cta",           label: "CTA Button Label",                    defaultValue: "View on Google Maps" },
-  { section: "google", key: "google_rating_suffix", label: "Rating Suffix (after the number)",    defaultValue: "on Google" },
-
-  // ──────────────── Homepage — Bank Accounts (Headers) ────────────────
-  { section: "bank", key: "bank_subtitle",       label: "Eyebrow Text",         defaultValue: "Payment & Banking" },
-  { section: "bank", key: "bank_headline",       label: "Section Headline",     defaultValue: "Bank Account Details" },
-  { section: "bank", key: "bank_description",    label: "Section Description (rich text)", defaultValue: "All accounts are registered under Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC — Arab Republic of Egypt." },
-  { section: "bank", key: "bank_empty_state",    label: "Empty State Message",  defaultValue: "No bank accounts available at the moment." },
-  { section: "bank", key: "bank_account_label", label: "Card — Account Number Label", defaultValue: "Account Number — Companies" },
-  { section: "bank", key: "bank_iban_label",    label: "Card — IBAN Label",            defaultValue: "IBAN" },
-  { section: "bank", key: "bank_footer_note",   label: "Footer Note",                  defaultValue: "For wire transfers, always include the IBAN and specify the transfer currency." },
 
   // ──────────────── Homepage — Legal Strip ────────────────
   { section: "legal", key: "legal_subtitle",         label: "Eyebrow Text",       defaultValue: "Registered, Licensed & Ready to Operate" },
@@ -517,30 +498,3 @@ const baseRegistry: ContentField[] = [
   { section: "hospitality", key: "hosp_cta_btn",           label: "CTA — Button Label",                defaultValue: "Book an Integration Call" },
   { section: "hospitality", key: "hosp_footer_link",       label: "Footer — Link Label",               defaultValue: "Hospitality API" },
 ];
-
-// ──────────────── Arabic siblings (auto-generated) ────────────────
-//
-// For every English field whose key has a translation in `translations.ts`,
-// emit a parallel `${key}_ar` field. The pair appears next to each other
-// in /admin and in Sanity Studio so editors see "Hero Headline (EN)"
-// immediately followed by "Hero Headline (AR — العربية)". URL/upload
-// fields are skipped — uploads aren't language-dependent.
-import { arabicTranslations } from "./translations";
-
-const arabicSibling = (f: ContentField): ContentField | null => {
-  if (f.type === "upload") return null;
-  if (/_url$/.test(f.key)) return null;
-  const ar = arabicTranslations[f.key];
-  if (ar === undefined) return null;
-  return {
-    section: f.section,
-    key: `${f.key}_ar`,
-    label: `${f.label} — العربية (AR)`,
-    defaultValue: ar,
-  };
-};
-
-export const contentRegistry: ContentField[] = baseRegistry.flatMap((f) => {
-  const ar = arabicSibling(f);
-  return ar ? [f, ar] : [f];
-});

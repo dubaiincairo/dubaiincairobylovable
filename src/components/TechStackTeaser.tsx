@@ -6,16 +6,15 @@ import { useSiteContent } from "@/hooks/useSiteContent";
 import { RichText } from "@/components/ui/rich-text";
 import { useSectionParallax } from "@/hooks/useSectionParallax";
 
-const LAYER_ICONS = [TrendingUp, ShoppingCart, Cpu];
+const LAYERS = [
+  { Icon: TrendingUp,   color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", label: "Growth & Customer Intelligence" },
+  { Icon: ShoppingCart, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", label: "Commerce & Business Operations" },
+  { Icon: Cpu,          color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", label: "Creative, AI & Infrastructure" },
+];
 
 const TechStackTeaser = () => {
   const { get } = useSiteContent();
   const { ref: sectionRef, orbY, orbScale, contentY } = useSectionParallax();
-  const layers = [
-    { Icon: LAYER_ICONS[0], label: get("tech_layer_1_label", "Growth & Customer Intelligence") },
-    { Icon: LAYER_ICONS[1], label: get("tech_layer_2_label", "Commerce & Business Operations") },
-    { Icon: LAYER_ICONS[2], label: get("tech_layer_3_label", "Creative, AI & Infrastructure") },
-  ];
 
   return (
     <section ref={sectionRef as RefObject<HTMLElement>} className="relative py-6 md:py-10 px-6 overflow-hidden">
@@ -49,10 +48,10 @@ const TechStackTeaser = () => {
 
             {/* middle — 3 layer pills */}
             <div className="flex flex-col gap-2 md:min-w-[220px]">
-              {layers.map(({ Icon, label }, i) => (
-                <div key={i} className="flex items-center gap-2.5 px-3 py-2 rounded-lg border border-primary/20 bg-primary/10">
-                  <Icon className="w-3.5 h-3.5 text-primary shrink-0" />
-                  <span className="text-xs font-medium text-primary">{label}</span>
+              {LAYERS.map(({ Icon, color, bg, border, label }) => (
+                <div key={label} className={`flex items-center gap-2.5 px-3 py-2 rounded-lg border ${border} ${bg}`}>
+                  <Icon className={`w-3.5 h-3.5 ${color} shrink-0`} />
+                  <span className={`text-xs font-medium ${color}`}>{label}</span>
                 </div>
               ))}
             </div>
@@ -62,8 +61,7 @@ const TechStackTeaser = () => {
               to="/tech"
               className="shrink-0 inline-flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground font-display font-semibold text-sm rounded-xl hover:brightness-110 transition-all shimmer-btn"
             >
-              {get("tech_explore_cta", "Explore Full Stack")}
-              <ArrowRight className="w-4 h-4 rtl:rotate-180" />
+              Explore Full Stack <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </motion.div>

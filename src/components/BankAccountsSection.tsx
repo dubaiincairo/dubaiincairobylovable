@@ -6,8 +6,6 @@ import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
 import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useCarouselSwipeHint } from "@/hooks/useCarouselSwipeHint";
 import { useSectionParallax } from "@/hooks/useSectionParallax";
-import { useSiteContent } from "@/hooks/useSiteContent";
-import { RichText } from "@/components/ui/rich-text";
 
 // ── Type ──────────────────────────────────────────────────────────────────────
 
@@ -60,7 +58,6 @@ function CopyField({ label, value }: { label: string; value: string }) {
 // ── Section ───────────────────────────────────────────────────────────────────
 
 const BankAccountsSection = () => {
-  const { get } = useSiteContent();
   const [banks, setBanks] = useState<BankAccount[]>([]);
   const [loading, setLoading] = useState(true);
   const [api, setApi] = useState<CarouselApi>();
@@ -68,9 +65,6 @@ const BankAccountsSection = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   useCarouselSwipeHint(api, carouselRef);
   const { ref: sectionRef, headerY, headerOpacity, orbY, orbScale } = useSectionParallax();
-
-  const accountLabel = get("bank_account_label", "Account Number — Companies");
-  const ibanLabel = get("bank_iban_label", "IBAN");
 
   useEffect(() => {
     supabase
@@ -109,18 +103,18 @@ const BankAccountsSection = () => {
           style={{ y: headerY, opacity: headerOpacity }}
         >
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
-            {get("bank_subtitle", "Payment & Banking")}
+            Payment & Banking
           </span>
           <h2 className="text-3xl md:text-5xl font-display font-bold mb-4 whitespace-pre-line">
-            {get("bank_headline", "Bank Account Details")}
+            Bank Account Details
           </h2>
-          <RichText
-            html={get(
-              "bank_description",
-              "All accounts are registered under Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC — Arab Republic of Egypt.",
-            )}
-            className="text-muted-foreground text-base max-w-xl mx-auto leading-relaxed"
-          />
+          <p className="text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
+            All accounts are registered under{" "}
+            <span className="text-foreground font-medium">
+              Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC
+            </span>{" "}
+            — Arab Republic of Egypt.
+          </p>
         </motion.div>
 
         {/* ── Loading ── */}
@@ -133,7 +127,7 @@ const BankAccountsSection = () => {
         {/* ── Empty ── */}
         {!loading && banks.length === 0 && (
           <div className="text-center py-20 border border-dashed border-border rounded-xl text-muted-foreground">
-            <p className="text-sm">{get("bank_empty_state", "No bank accounts available at the moment.")}</p>
+            <p className="text-sm">No bank accounts available at the moment.</p>
           </div>
         )}
 
@@ -179,8 +173,8 @@ const BankAccountsSection = () => {
                           </div>
                           <div className="h-px bg-border/60" />
                           <div className="flex flex-col gap-4">
-                            {bank.account_number && <CopyField label={accountLabel} value={bank.account_number} />}
-                            {bank.iban && <CopyField label={ibanLabel} value={bank.iban} />}
+                            {bank.account_number && <CopyField label="Account Number — Companies" value={bank.account_number} />}
+                            {bank.iban && <CopyField label="IBAN" value={bank.iban} />}
                           </div>
                         </motion.div>
                       </CarouselItem>
@@ -261,7 +255,7 @@ const BankAccountsSection = () => {
           >
             <Landmark className="w-4 h-4 text-primary/60 shrink-0" />
             <span>
-              {get("bank_footer_note", "For wire transfers, always include the IBAN and specify the transfer currency.")}
+              For wire transfers, always include the IBAN and specify the transfer currency.
             </span>
           </motion.div>
         )}
