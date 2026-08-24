@@ -1,3 +1,28 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/saudihospitalityweb",
+      "destination": "https://swissblue23may-git-codex-marketin-b957d5-dubaiincairos-projects.vercel.app/saudihospitalityweb"
+    },
+    {
+      "source": "/saudihospitalityweb/:path*",
+      "destination": "https://swissblue23may-git-codex-marketin-b957d5-dubaiincairos-projects.vercel.app/saudihospitalityweb/:path*"
+    },
+    {
+      "source": "/en/saudihospitalityweb",
+      "destination": "https://swissblue23may-git-codex-marketin-b957d5-dubaiincairos-projects.vercel.app/en/saudihospitalityweb"
+    },
+    {
+      "source": "/en/saudihospitalityweb/:path*",
+      "destination": "https://swissblue23may-git-codex-marketin-b957d5-dubaiincairos-projects.vercel.app/en/saudihospitalityweb/:path*"
+    },
+    {
+      "source": "/_next/:path*",
+      "destination": "https://swissblue23may-git-codex-marketin-b957d5-dubaiincairos-projects.vercel.app/_next/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
