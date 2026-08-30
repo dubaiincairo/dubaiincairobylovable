@@ -1,135 +1,47 @@
-import { type RefObject } from "react";
 import { motion } from "framer-motion";
-import { Quote, Facebook, Linkedin, Instagram, Calendar, ArrowRight } from "lucide-react";
+import { Quote } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
-import { fadeUp, cardFadeUp, viewportOnce } from "@/lib/animations";
-import { RichText } from "@/components/ui/rich-text";
-import AnimatedUnderline from "@/components/ui/animated-underline";
-import { useSectionParallax } from "@/hooks/useSectionParallax";
-
-const SOCIALS = [
-  { key: "founder_facebook",  Icon: Facebook,  label: "Facebook"  },
-  { key: "founder_linkedin",  Icon: Linkedin,  label: "LinkedIn"  },
-  { key: "founder_instagram", Icon: Instagram, label: "Instagram" },
-] as const;
+import { fadeUp, fadeIn, springBounce, viewportOnce } from "@/lib/animations";
 
 const FounderSection = () => {
   const { get } = useSiteContent();
-  const photoUrl    = get("founder_photo_url", "").trim();
-  const calendlyUrl = get("founder_calendly_url", "").trim();
-  const ctaLabel    = get("founder_cta_label", "Reserve a Consultation");
-  const founderName = get("founder_name", "Abdalla Hassan Elfouly");
-  const { ref: sectionRef, orbY, orbScale } = useSectionParallax();
 
   return (
-    <section ref={sectionRef as RefObject<HTMLElement>} id="team" className="relative py-6 md:py-10 px-6 overflow-hidden">
+    <section id="team" className="relative py-16 md:py-32 px-6 overflow-hidden">
+      {/* Cinematic gradient */}
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 18% 6%) 50%, hsl(220 20% 4%) 100%)' }} />
-      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-        <motion.div className="w-full h-full rounded-full bg-primary/4 blur-[140px]" style={{ y: orbY, scale: orbScale }} />
-      </div>
+      {/* Gold accent lines */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24" style={{ background: 'linear-gradient(180deg, transparent, hsl(38 80% 55% / 0.2), transparent)' }} />
 
-      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-14 items-center">
-
-        {/* LEFT — copy + CTA */}
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+      <div className="relative max-w-4xl mx-auto">
+        <motion.div className="text-center mb-6 md:mb-12" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-4 block">
             {get("founder_subtitle", "A Message from Our Founder")}
           </span>
-          <h2 className="text-3xl md:text-5xl font-display font-bold leading-tight whitespace-pre-line">
-            {get("founder_headline", "Built by Someone Who's Been in the Trenches.")}
+          <h2 className="text-4xl md:text-5xl font-display font-bold whitespace-pre-line">
+            {get("founder_headline", "Built by Someone Who's Been in the Trenches")}
           </h2>
-          <AnimatedUnderline align="left" className="mb-5" />
-          <RichText
-            html={get("founder_body", "Elfouly founded Dubai'nCairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow.")}
-            className="text-muted-foreground text-base md:text-lg leading-relaxed"
-          />
-
-          {/* CTA — Reserve a Consultation (Calendly).
-              Renders only when an URL is set via /admin → site_content key
-              `founder_calendly_url`. */}
-          {calendlyUrl && (
-            <a
-              href={calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shimmer-btn group inline-flex items-center gap-2.5 mt-7 px-6 py-3 bg-primary text-primary-foreground font-display font-semibold text-sm tracking-wide rounded-lg transition-colors duration-300 hover:bg-primary/90 glow-gold"
-            >
-              <Calendar aria-hidden="true" className="w-4 h-4" />
-              {ctaLabel}
-              <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </a>
-          )}
-
-          {/* Social icons */}
-          <div className="flex items-center gap-2.5 mt-6">
-            {SOCIALS.map(({ key, Icon, label }) => {
-              const url = get(key, "");
-              if (!url) return null;
-              return (
-                <a
-                  key={key}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-9 h-9 rounded-xl border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/8 transition-all duration-200"
-                >
-                  <Icon aria-hidden="true" className="w-4 h-4" />
-                </a>
-              );
-            })}
-          </div>
         </motion.div>
 
-        {/* RIGHT — Founder card (portrait + quote) */}
-        <motion.div variants={cardFadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-          <figure
-            className="relative p-6 md:p-7 rounded-xl glass-card"
-            style={{ borderColor: 'hsl(38 80% 55% / 0.2)', background: 'hsl(38 80% 55% / 0.03)' }}
-          >
-            {/* Portrait + quote chip */}
-            <div className="flex justify-center mb-4">
-              <div className="relative">
-                <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-2 border-primary/30 bg-card/60 shadow-lg">
-                  {photoUrl ? (
-                    <img
-                      src={photoUrl}
-                      alt={founderName}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-primary/8 flex items-center justify-center">
-                      <Quote aria-hidden="true" className="w-7 h-7 text-primary/60" />
-                    </div>
-                  )}
-                </div>
-                {photoUrl && (
-                  <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-card border-2 border-primary/30 flex items-center justify-center shadow-md">
-                    <Quote aria-hidden="true" className="w-3.5 h-3.5 text-primary/70" />
-                  </div>
-                )}
-              </div>
+        <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={viewportOnce} className="space-y-6 text-muted-foreground text-lg leading-relaxed text-center max-w-3xl mx-auto">
+          <p className="whitespace-pre-line">{get("founder_body", "Abdullah Hassan Al-Fawali founded Dubai in Cairo with a bold vision.")}</p>
+          <p className="whitespace-pre-line">{get("founder_education", "His foundation is built on dual academic distinctions from the Arab Academy.")}</p>
+        </motion.div>
+
+        <motion.blockquote variants={springBounce} initial="hidden" whileInView="visible" viewport={viewportOnce} className="mt-12 relative p-8 rounded-xl glass-card text-center flex flex-col items-center" style={{ borderColor: 'hsl(38 80% 55% / 0.2)', background: 'hsl(38 80% 55% / 0.03)' }}>
+          <Quote className="w-8 h-8 text-primary/30 mx-auto mb-4" />
+          <p className="text-foreground text-lg md:text-xl font-display italic leading-relaxed mb-6 whitespace-pre-line">
+            "{get("founder_quote", "I believe that continuous learning is the key to success in business.")}"
+          </p>
+          {get("founder_image") && (
+            <div className="w-20 h-20 rounded-full overflow-hidden mb-3 border-2 border-primary/30 shadow-lg">
+              <img src={get("founder_image")} alt="Founder & CEO" className="w-full h-full object-cover" />
             </div>
-
-            <blockquote>
-              <RichText
-                html={get("founder_quote", "I believe that continuous learning is the key to success in business. That's why I've completed 50+ specialized training courses in eBusiness, and I will never stop growing, nor will we.")}
-                className="text-foreground text-base md:text-lg font-display italic leading-relaxed text-center"
-              />
-            </blockquote>
-
-            <div className="w-12 h-px bg-primary/30 mx-auto my-4" />
-
-            <figcaption className="text-center">
-              <span className="text-sm text-primary font-display font-semibold whitespace-pre-line">
-                {get("founder_attribution", "— Abdalla Hassan Elfouly, CEO & Co-Founder")}
-              </span>
-            </figcaption>
-          </figure>
-        </motion.div>
-
+          )}
+          <footer className="text-sm text-primary font-display font-semibold whitespace-pre-line">
+            {get("founder_attribution", "— Abdullah Al-Fawali, CEO & Founder")}
+          </footer>
+        </motion.blockquote>
       </div>
     </section>
   );
