@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yerkab (يركب) — Automotive Spare Parts Platform | Commercial Proposal</title>
+  <!-- Canonical & Domain Metadata -->
+  <link rel="canonical" href="https://dubaiincairo.com/proposals/yerkab">
+  <meta property="og:title" content="Yerkab (يركب) — Automotive Spare Parts Platform | Commercial Proposal">
+  <meta property="og:description" content="Commercial Proposal, 3-Month Delivery Roadmap, and 49 Features across Website, Android, and iOS for Yerkab Automotive Spare Parts Platform.">
+  <meta property="og:url" content="https://dubaiincairo.com/proposals/yerkab">
+  <meta property="og:type" content="website">
+  <!-- Tailwind CSS allowlisted in Antigravity -->
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Custom Scrollbar and Transitions */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(59, 130, 246, 0.4);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(59, 130, 246, 0.7);
+    }
+    
+    /* Modern Glassmorphism & Visual Tokens */
+    .glass-card {
+      background: rgba(19, 29, 46, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(59, 130, 246, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px -10px rgba(0, 0, 0, 0.45);
+    }
+    .glass-nav {
+      background: rgba(11, 17, 29, 0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .badge-glow {
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.25);
+    }
+    .gold-glow {
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+    }
+
+    /* Custom Modern Select Dropdowns */
+    .custom-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: none !important;
+    }
+    .custom-select::-ms-expand {
+      display: none;
+    }
+    select.custom-select option {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 10px 14px;
+    }
+
+    /* Direction-aware Select & Search Positioning */
+    html[dir="ltr"] .custom-select {
+      padding-left: 0.875rem;
+      padding-right: 2.75rem;
+      text-align: left;
+    }
+    html[dir="ltr"] .select-arrow-container {
+      right: 0.625rem;
+      left: auto;
+    }
+    html[dir="ltr"] #feature-search {
+      padding-left: 0.875rem;
+      padding-right: 2.5rem;
+      text-align: left;
+    }
+    html[dir="ltr"] #search-icon {
+      right: 0.75rem;
+      left: auto;
+    }
+
+    html[dir="rtl"] .custom-select {
+      padding-right: 0.875rem;
+      padding-left: 2.75rem;
+      text-align: right;
+    }
+    html[dir="rtl"] .select-arrow-container {
+      left: 0.625rem;
+      right: auto;
+    }
+    html[dir="rtl"] #feature-search {
+      padding-right: 0.875rem;
+      padding-left: 2.5rem;
+      text-align: right;
+    }
+    html[dir="rtl"] #search-icon {
+      left: 0.75rem;
+      right: auto;
+    }
+
+    /* Print Styles for Executive Export */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .glass-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        transform: none !important;
+        break-inside: avoid;
+      }
+      .tab-content {
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-blue-600 selection:text-white pb-20">
+
+  <!-- TOP STICKY NAVIGATION BAR -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <!-- Logo & Project Identity -->
+      <div class="flex items-center gap-3.5 shrink-0">
+        <!-- Interlocking Yerkab Emblem -->
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-700 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/25 border border-cyan-400/40 relative group">
+          <svg class="w-6 h-6 transform group-hover:scale-110 transition duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4l8 8m0 0l8-8m-8 8v8"/>
+            <circle cx="12" cy="12" r="2.5" fill="currentColor" />
+          </svg>
+          <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-400 border-2 border-slate-900 rounded-full" title="Verified Engine"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-xl tracking-tight text-white flex items-center gap-1.5" id="brand-title">
+              <span>YERKAB</span>
+              <span class="text-cyan-400">•</span>
+              <span class="text-blue-300">يَرْكَبْ</span>
+            </span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30" id="brand-tag">
+              Guaranteed Fitment • يركب بالملّي
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block" id="brand-sub">
+            Saudi Automotive Aftermarket Platform • Commercial Proposal & Roadmap
+          </p>
+        </div>
+      </div>
+
+      <!-- Live Canonical Domain Link (Direct connection to dubaiincairo.com/proposals/yerkab) -->
+      <div class="hidden xl:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-xs text-slate-400" id="nav-domain-lbl">Official Proposal:</span>
+        <a href="https://dubaiincairo.com/proposals/yerkab" target="_blank" class="font-mono text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+          dubaiincairo.com/proposals/yerkab
+          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Actions: Copy Link, Simulator, Print, Language Switcher -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Copy Link Button -->
+        <button onclick="copyProposalLink()" class="px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-medium flex items-center gap-1.5 transition shadow-sm" title="Copy Proposal URL">
+          <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+          <span class="hidden md:inline" id="btn-copy-text">Share Link</span>
+        </button>
+
+        <!-- Interactive Simulator Jump Button -->
+        <button onclick="switchTab('simulator')" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 text-xs font-semibold transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span id="btn-demo-fitment">Fitment Simulator</span>
+        </button>
+
+        <!-- Print / PDF Proposal -->
+        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="Print / Export PDF">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+        </button>
+
+        <!-- Language Toggle -->
+        <div class="bg-slate-800/90 p-1 rounded-xl border border-slate-700/80 flex items-center">
+          <button id="lang-en" onclick="setLanguage('en')" class="px-3 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm">
+            English
+          </button>
+          <button id="lang-ar" onclick="setLanguage('ar')" class="px-3 py-1 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white">
+            العربية
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-10">
+
+    <!-- HERO / EXECUTIVE BANNER -->
+    <section class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-6 sm:p-10 shadow-2xl">
+      <div class="absolute -right-20 -top-20 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-6">
+        <!-- Top Category Pill & Live Domain -->
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span id="hero-pill">YERKAB • COMMERCIAL PROPOSAL &amp; PRODUCT ROADMAP</span>
+          </div>
+
+          <!-- Direct Domain Link in Hero -->
+          <a href="https://dubaiincairo.com/proposals/yerkab" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 hover:text-cyan-300 transition group">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span class="font-mono text-cyan-400">dubaiincairo.com/proposals/yerkab</span>
+            <span class="text-slate-400 group-hover:text-cyan-400">↗</span>
+          </a>
+        </div>
+
+        <!-- Main Title & Vision -->
+        <div class="space-y-3 max-w-4xl">
+          <div class="flex items-center gap-3">
+            <span class="text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded-lg bg-blue-600 text-white shadow-sm" id="hero-brand-badge">BRAND: YERKAB • يَرْكَبْ</span>
+            <span class="text-xs text-slate-400" id="hero-brand-meaning">"It Fits • Guaranteed Fitment"</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight" id="hero-title">
+            Yerkab: Automotive Spare Parts Platform
+          </h1>
+          <p class="text-lg sm:text-xl text-blue-300 font-medium" id="hero-subtitle">
+            Product Features, Delivery Roadmap & Consolidated Commercial Proposal
+          </p>
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed pt-2" id="hero-exec-overview">
+            The Saudi automotive aftermarket currently operates in a state of structural fragmentation, where procurement is often dictated by chance rather than technical certainty. This platform is not merely a retail outlet; it is a strategic response to that volatility. We transition the customer from a "trial-and-error" buyer to a protected participant in a verified ecosystem.
+          </p>
+        </div>
+
+        <!-- Core Strategic Pillar Callout -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-blue-950/40 border border-blue-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-start gap-3.5">
+            <div class="p-2.5 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30 shrink-0">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-sm font-bold text-white uppercase tracking-wider" id="hero-reassurance-title">Our Core Product: Professional Reassurance</div>
+              <p class="text-xs sm:text-sm text-slate-300 mt-0.5" id="hero-reassurance-desc">
+                By fusing sophisticated digital discovery with expert human verification, we eliminate the inherent risks of incompatibility and fraud that plague traditional channels.
+              </p>
+            </div>
+          </div>
+          <div class="shrink-0 flex items-center gap-2 bg-slate-900/80 px-4 py-2 rounded-xl border border-slate-700">
+            <span class="text-xs text-slate-400" id="hero-fleet-label">KSA Target Fleet:</span>
+            <span class="text-sm font-extrabold text-amber-400">15.88M Vehicles</span>
+          </div>
+        </div>
+
+        <!-- KPI Summary Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+          <!-- KPI 1 -->
+          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-1-label">Portfolio Investment</div>
+            <div class="text-2xl font-black text-amber-400 mt-1">SAR 10,090</div>
+            <div class="text-xs text-slate-400 mt-0.5" id="kpi-1-sub">3 Production Products</div>
+          </div>
+          <!-- KPI 2 -->
+          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-2-label">Delivery Sequence</div>
+            <div class="text-2xl font-black text-blue-400 mt-1">3 Months</div>
+            <div class="text-xs text-slate-400 mt-0.5" id="kpi-2-sub">1 Month Per Milestone</div>
+          </div>
+          <!-- KPI 3 -->
+          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-3-label">Total Capabilities</div>
+            <div class="text-2xl font-black text-emerald-400 mt-1">49 Features</div>
+            <div class="text-xs text-slate-400 mt-0.5" id="kpi-3-sub">Web + Android + iOS</div>
+          </div>
+          <!-- KPI 4 -->
+          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-4-label">Fitment Guarantee</div>
+            <div class="text-2xl font-black text-purple-400 mt-1">100% Verified</div>
+            <div class="text-xs text-slate-400 mt-0.5" id="kpi-4-sub">AI + Human Engineering</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMERCIAL SUMMARY & SEQUENCED ROADMAP -->
+    <section class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="text-xs font-bold text-amber-400 tracking-wider uppercase" id="comm-summary-pre">Commercial Structure</div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1" id="comm-summary-title">Delivery Schedule & Investment Allocation</h2>
+          <p class="text-sm text-slate-400 mt-1" id="comm-summary-sub">Each product is treated as a clear delivery milestone with zero ambiguity.</p>
+        </div>
+        <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-4 py-2 rounded-xl text-amber-300 font-bold text-sm">
+          <span id="comm-summary-total-label">Consolidated Portfolio Total:</span>
+          <span class="text-base text-amber-400 font-extrabold">SAR 10,090</span>
+        </div>
+      </div>
+
+      <!-- 3-Product Milestone Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Milestone 1: Website -->
+        <div class="glass-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-blue-500">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30" id="card-m1-tag">Month 1 • Milestone 1</span>
+            <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold text-white mt-4" id="card-m1-title">Website Platform</h3>
+          <p class="text-xs text-slate-400 mt-1" id="card-m1-role">Digital storefront, organic SEO acquisition, and transactional foundation.</p>
+          
+          <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-baseline justify-between">
+            <div>
+              <span class="text-xs text-slate-400 block" id="card-m1-time-label">Planned Delivery</span>
+              <span class="text-sm font-semibold text-slate-200" id="card-m1-time">1 Month</span>
+            </div>
+            <div class="text-right">
+              <span class="text-xs text-slate-400 block" id="card-m1-invest-label">Investment</span>
+              <span class="text-xl font-extrabold text-blue-400">SAR 3,600</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400 flex items-center gap-1.5">
+            <span class="text-emerald-400">✓</span>
+            <span id="card-m1-features-count">17 Core Integrated Features</span>
+          </div>
+        </div>
+
+        <!-- Milestone 2: Android Application -->
+        <div class="glass-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-emerald-500">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" id="card-m2-tag">Month 2 • Milestone 2</span>
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold text-white mt-4" id="card-m2-title">Android Application</h3>
+          <p class="text-xs text-slate-400 mt-1" id="card-m2-role">Mobile field verification, camera VIN scan, biometrics & push engagement.</p>
+          
+          <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-baseline justify-between">
+            <div>
+              <span class="text-xs text-slate-400 block" id="card-m2-time-label">Planned Delivery</span>
+              <span class="text-sm font-semibold text-slate-200" id="card-m2-time">1 Month</span>
+            </div>
+            <div class="text-right">
+              <span class="text-xs text-slate-400 block" id="card-m2-invest-label">Investment</span>
+              <span class="text-xl font-extrabold text-emerald-400">SAR 3,150</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400 flex items-center gap-1.5">
+            <span class="text-emerald-400">✓</span>
+            <span id="card-m2-features-count">16 Mobile-Native Features</span>
+          </div>
+        </div>
+
+        <!-- Milestone 3: iOS Application -->
+        <div class="glass-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-purple-500">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30" id="card-m3-tag">Month 3 • Milestone 3</span>
+            <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold text-white mt-4" id="card-m3-title">iOS Application</h3>
+          <p class="text-xs text-slate-400 mt-1" id="card-m3-role">Premium iPhone experience, Face ID, Apple Pay & seamless universal links.</p>
+          
+          <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-baseline justify-between">
+            <div>
+              <span class="text-xs text-slate-400 block" id="card-m3-time-label">Planned Delivery</span>
+              <span class="text-sm font-semibold text-slate-200" id="card-m3-time">1 Month</span>
+            </div>
+            <div class="text-right">
+              <span class="text-xs text-slate-400 block" id="card-m3-invest-label">Investment</span>
+              <span class="text-xl font-extrabold text-purple-400">SAR 3,340</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400 flex items-center gap-1.5">
+            <span class="text-emerald-400">✓</span>
+            <span id="card-m3-features-count">16 Apple Ecosystem Features</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE PRODUCT EXPLORER & TABS -->
+    <section class="space-y-6 pt-4">
+      <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <!-- Tab Navigation Buttons -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none" role="tablist">
+          <button onclick="switchTab('website')" id="tab-btn-website" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+            <span>🌐</span>
+            <span id="tab-label-web">1. Website (17)</span>
+          </button>
+          <button onclick="switchTab('android')" id="tab-btn-android" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">
+            <span>🤖</span>
+            <span id="tab-label-android">2. Android App (16)</span>
+          </button>
+          <button onclick="switchTab('ios')" id="tab-btn-ios" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">
+            <span>🍏</span>
+            <span id="tab-label-ios">3. iOS App (16)</span>
+          </button>
+          <button onclick="switchTab('matrix')" id="tab-btn-matrix" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">
+            <span>📊</span>
+            <span id="tab-label-matrix">Unified Matrix</span>
+          </button>
+          <button onclick="switchTab('simulator')" id="tab-btn-simulator" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-900/40">
+            <span>⚡</span>
+            <span id="tab-label-sim">Interactive Prototype</span>
+          </button>
+        </div>
+
+        <!-- Quick Keyword Search / Filter -->
+        <div class="relative w-full md:w-64">
+          <input type="text" id="feature-search" oninput="filterFeatures()" placeholder="Filter features..." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-4 pr-9 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 text-left">
+          <span id="search-icon" class="absolute right-3 top-2 text-slate-400 text-xs pointer-events-none">🔍</span>
+        </div>
+      </div>
+
+      <!-- TAB PANEL 1: WEBSITE FEATURES (17 FEATURES) -->
+      <div id="tab-panel-website" class="tab-content space-y-6">
+        <!-- Strategic Advantage Banner -->
+        <div class="p-5 rounded-2xl bg-gradient-to-r from-blue-950/70 to-slate-900 border border-blue-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-400" id="web-strat-badge">Strategic Advantage</span>
+            <h4 class="text-lg font-bold text-white" id="web-strat-title">Structural Organization of Demand</h4>
+            <p class="text-xs text-slate-300 max-w-3xl leading-relaxed" id="web-strat-desc">
+              The Website addresses the primary market gap of "unorganized discovery". Features like 'Human Verification' and 'Compatibility Status' directly neutralize the risk of wrong-part procurement, converting a high-anxiety task into a controlled, professional process.
+            </p>
+          </div>
+          <div class="shrink-0 text-right bg-blue-900/30 px-4 py-2 rounded-xl border border-blue-500/20">
+            <span class="text-xs text-blue-300 block font-semibold" id="web-card-inv-label">Milestone Investment</span>
+            <span class="text-xl font-extrabold text-white">SAR 3,600</span>
+          </div>
+        </div>
+
+        <!-- 17 Feature Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="web-features-grid">
+          <!-- Injected via JavaScript for instant bilingual toggle & filtering -->
+        </div>
+      </div>
+
+      <!-- TAB PANEL 2: ANDROID APPLICATION FEATURES (16 FEATURES) -->
+      <div id="tab-panel-android" class="tab-content hidden space-y-6">
+        <!-- Strategic Advantage Banner -->
+        <div class="p-5 rounded-2xl bg-gradient-to-r from-emerald-950/70 to-slate-900 border border-emerald-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400" id="android-strat-badge">Strategic Advantage</span>
+            <h4 class="text-lg font-bold text-white" id="android-strat-title">Frictionless Verification & Field Accessibility</h4>
+            <p class="text-xs text-slate-300 max-w-3xl leading-relaxed" id="android-strat-desc">
+              The Android App leverages camera-native verification to eliminate communication barriers. By allowing instant photo-uploads for technical review, we solve the common "WhatsApp dependency" issue, providing a secure, corporate-grade alternative for real-time part confirmation.
+            </p>
+          </div>
+          <div class="shrink-0 text-right bg-emerald-900/30 px-4 py-2 rounded-xl border border-emerald-500/20">
+            <span class="text-xs text-emerald-300 block font-semibold" id="android-card-inv-label">Milestone Investment</span>
+            <span class="text-xl font-extrabold text-white">SAR 3,150</span>
+          </div>
+        </div>
+
+        <!-- 16 Feature Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="android-features-grid">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- TAB PANEL 3: iOS APPLICATION FEATURES (16 FEATURES) -->
+      <div id="tab-panel-ios" class="tab-content hidden space-y-6">
+        <!-- Strategic Advantage Banner -->
+        <div class="p-5 rounded-2xl bg-gradient-to-r from-purple-950/70 to-slate-900 border border-purple-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-purple-400" id="ios-strat-badge">Strategic Advantage</span>
+            <h4 class="text-lg font-bold text-white" id="ios-strat-title">Premium Trust Barrier & Frictionless iOS Commerce</h4>
+            <p class="text-xs text-slate-300 max-w-3xl leading-relaxed" id="ios-strat-desc">
+              The iOS App caters to the high-value segment where accuracy and time-savings are paramount. Features such as Face ID and Universal Links reduce cognitive load, positioning the platform as a seamless, high-confidence extension of the user’s automotive lifestyle.
+            </p>
+          </div>
+          <div class="shrink-0 text-right bg-purple-900/30 px-4 py-2 rounded-xl border border-purple-500/20">
+            <span class="text-xs text-purple-300 block font-semibold" id="ios-card-inv-label">Milestone Investment</span>
+            <span class="text-xl font-extrabold text-white">SAR 3,340</span>
+          </div>
+        </div>
+
+        <!-- 16 Feature Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="ios-features-grid">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- TAB PANEL 4: CROSS-PRODUCT COMPARISON MATRIX -->
+      <div id="tab-panel-matrix" class="tab-content hidden space-y-6">
+        <div class="glass-card rounded-2xl p-6">
+          <h4 class="text-lg font-bold text-white" id="matrix-title">Unified Ecosystem: Cross-Platform Feature Parity</h4>
+          <p class="text-xs text-slate-300 mt-1 mb-6" id="matrix-desc">
+            Customers use the same synchronized account, saved vehicles, compatibility ratings, wishlists, order history, and support records across all three platforms.
+          </p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-slate-700 bg-slate-900/60 text-slate-300">
+                  <th class="p-3 font-bold" id="th-feature">Feature / Capability</th>
+                  <th class="p-3 font-bold text-center" id="th-web">Website Platform</th>
+                  <th class="p-3 font-bold text-center" id="th-android">Android Application</th>
+                  <th class="p-3 font-bold text-center" id="th-ios">iOS Application</th>
+                  <th class="p-3 font-bold" id="th-nature">Execution Nature</th>
+                </tr>
+              </thead>
+              <tbody id="matrix-table-body" class="divide-y divide-slate-800 text-slate-300">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB PANEL 5: INTERACTIVE PROTOTYPE & FITMENT SIMULATOR -->
+      <div id="tab-panel-simulator" class="tab-content hidden space-y-6">
+        <div class="glass-card rounded-3xl p-6 sm:p-8 border border-emerald-500/30">
+          <div class="max-w-3xl">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400" id="sim-pill">Interactive UX Demonstration</span>
+            <h3 class="text-2xl font-bold text-white mt-1" id="sim-title">Guaranteed Fitment & Human Verification Flow</h3>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1" id="sim-desc">
+              Experience the platform's core differentiator: select your vehicle, choose a replacement part, and observe how the dual AI-fitment engine and Human Expert Verification safeguards the buyer from wrong purchases.
+            </p>
+          </div>
+
+          <!-- Simulator Interactive Box -->
+          <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <!-- Left Controls: Vehicle & Part Selection -->
+            <div class="lg:col-span-5 space-y-4 bg-slate-900/80 p-5 rounded-2xl border border-slate-800">
+              <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5" id="sim-lbl-garage">
+                  01. My Garage (Select Saved Vehicle)
+                </label>
+                <div class="relative group">
+                  <select id="sim-vehicle" onchange="runFitmentCheck()" class="custom-select w-full bg-slate-800/90 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 rounded-xl py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30 transition shadow-inner cursor-pointer">
+                    <option value="camry">Toyota Camry 2023 — 2.5L 4-Cylinder (GLE)</option>
+                    <option value="landcruiser">Toyota Land Cruiser 2024 — 3.5L Twin-Turbo (VXR)</option>
+                    <option value="patrol">Nissan Patrol 2022 — 5.6L V8 (Titanium)</option>
+                    <option value="tucson">Hyundai Tucson 2021 — 2.0L Smartstream</option>
+                  </select>
+                  <div class="select-arrow-container pointer-events-none absolute inset-y-0 flex items-center">
+                    <div class="w-6 h-6 rounded-lg bg-slate-700/50 group-hover:bg-slate-700 group-focus-within:bg-emerald-500/20 flex items-center justify-center transition border border-slate-600/30 group-focus-within:border-emerald-500/40">
+                      <svg class="w-3.5 h-3.5 text-slate-300 group-hover:text-white group-focus-within:text-emerald-400 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5" id="sim-lbl-part">
+                  02. Catalog Spare Part Query
+                </label>
+                <div class="relative group">
+                  <select id="sim-part" onchange="runFitmentCheck()" class="custom-select w-full bg-slate-800/90 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 rounded-xl py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30 transition shadow-inner cursor-pointer">
+                    <option value="brake-front">Ceramic Front Brake Pads (OEM: 04465-33471)</option>
+                    <option value="alternator">High-Output Alternator 150A (Multi-Trim Variant)</option>
+                    <option value="oil-filter">Synthetic Engine Oil Filter Element</option>
+                    <option value="radiator-fan">Electronic Cooling Radiator Fan Assembly</option>
+                  </select>
+                  <div class="select-arrow-container pointer-events-none absolute inset-y-0 flex items-center">
+                    <div class="w-6 h-6 rounded-lg bg-slate-700/50 group-hover:bg-slate-700 group-focus-within:bg-emerald-500/20 flex items-center justify-center transition border border-slate-600/30 group-focus-within:border-emerald-500/40">
+                      <svg class="w-3.5 h-3.5 text-slate-300 group-hover:text-white group-focus-within:text-emerald-400 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-2">
+                <button onclick="openVerificationModal()" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-blue-500/25 transition flex items-center justify-center gap-2">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                  </svg>
+                  <span id="sim-btn-manual-req">Request Human Technical Verification</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right Results: Real-time Fitment Analysis Screen -->
+            <div class="lg:col-span-7 bg-slate-900/90 rounded-2xl p-6 border border-slate-800 space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                  <span class="text-xs font-bold text-slate-300 uppercase tracking-wider" id="sim-engine-title">Compatibility Diagnostic Engine</span>
+                </div>
+                <span id="sim-status-pill" class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  100% Compatible (متوافق بالكامل)
+                </span>
+              </div>
+
+              <!-- Diagnostic Details Display -->
+              <div class="space-y-3">
+                <div class="flex justify-between items-center text-xs">
+                  <span class="text-slate-400" id="sim-diag-vehicle-lbl">Target Vehicle:</span>
+                  <span id="sim-out-vehicle" class="font-semibold text-white">Toyota Camry 2023 — 2.5L</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                  <span class="text-slate-400" id="sim-diag-part-lbl">Requested Part:</span>
+                  <span id="sim-out-part" class="font-semibold text-white">Ceramic Front Brake Pads</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                  <span class="text-slate-400" id="sim-diag-oem-lbl">Authoritative OEM Reference:</span>
+                  <span id="sim-out-oem" class="font-mono text-blue-400">04465-33471-KSA</span>
+                </div>
+              </div>
+
+              <!-- Explanation Box -->
+              <div id="sim-expl-box" class="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-xs text-emerald-200 leading-relaxed">
+                Direct factory fitment confirmed. Chassis and rotor diameter matches Saudi-market GCC specifications exactly. Risk score: 0.0%.
+              </div>
+
+              <!-- Alternatives Card -->
+              <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700 flex items-center justify-between text-xs">
+                <div>
+                  <div class="font-bold text-slate-200" id="sim-alt-title">Available Verified Alternatives:</div>
+                  <div class="text-slate-400 mt-0.5" id="sim-alt-sub">1 Original Genuine OEM • 2 High-Tier German Aftermarket</div>
+                </div>
+                <span class="px-2.5 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono">SAR 185 - 340</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STRATEGIC VALUE & CLOSING EXECUTIVE THESIS -->
+    <section class="rounded-3xl bg-gradient-to-br from-slate-900 via-blue-950/30 to-slate-900 border border-slate-800 p-6 sm:p-10 space-y-6">
+      <div class="max-w-4xl space-y-2">
+        <div class="text-xs font-bold text-amber-400 uppercase tracking-wider" id="thesis-pill">Strategic Differentiation</div>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-white" id="thesis-title">Risk Mitigation & Demand Management</h3>
+        <p class="text-sm text-slate-300 leading-relaxed" id="thesis-body">
+          The platform’s strategic advantage lies in Risk Mitigation and Demand Management. Unlike competitors focused solely on catalog depth or aggressive pricing, our value is rooted in technical accuracy and the reduction of costly purchasing errors. By positioning as a Trusted Specialist, we address the Saudi market's need for reliable expertise, fostering long-term loyalty through service quality and the psychological peace of mind that comes from guaranteed compatibility.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-800">
+        <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+          <div class="text-amber-400 font-bold text-sm" id="thesis-c1-t">01. Cost-of-Error Eradication</div>
+          <p class="text-xs text-slate-400 mt-1" id="thesis-c1-d">Returns in traditional channels exceed 24% due to incorrect fitment. Our dual verification reduces return overhead to near zero.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+          <div class="text-blue-400 font-bold text-sm" id="thesis-c2-t">02. Unified Multi-Platform Journey</div>
+          <p class="text-xs text-slate-400 mt-1" id="thesis-c2-d">One synchronized backend serving Web, Android, and iOS eliminates customer friction and drives repeat customer lifetime value.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+          <div class="text-emerald-400 font-bold text-sm" id="thesis-c3-t">03. High-Discipline Delivery</div>
+          <p class="text-xs text-slate-400 mt-1" id="thesis-c3-d">Strict 3-month staged milestones ensure immediate time-to-market with clear financial investment tranches.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER / PROPOSAL METADATA -->
+    <footer class="pt-8 border-t border-slate-800 text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4 no-print">
+      <div>
+        <span class="font-bold text-slate-300" id="foot-copy">Automotive Spare Parts Platform — Commercial Proposal</span>
+        <span class="mx-2">•</span>
+        <span id="foot-date">Saudi Market Strategic Initiative</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <button onclick="setLanguage('en')" class="hover:text-blue-400 transition">English</button>
+        <span>/</span>
+        <button onclick="setLanguage('ar')" class="hover:text-blue-400 transition">العربية</button>
+        <span class="text-slate-600">|</span>
+        <span class="text-amber-400 font-mono font-bold">Total: SAR 10,090</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- INTERACTIVE HUMAN VERIFICATION MODAL -->
+  <div id="verification-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="glass-card rounded-2xl max-w-lg w-full p-6 border border-blue-500/40 relative space-y-4">
+      <button onclick="closeVerificationModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+      
+      <div class="flex items-center gap-3">
+        <div class="p-2 rounded-xl bg-blue-500/20 text-blue-400">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold text-white" id="modal-title">Human Technical Verification</h4>
+          <p class="text-xs text-slate-300" id="modal-sub">Submit vehicle chassis (VIN) or photo for certified expert confirmation.</p>
+        </div>
+      </div>
+
+      <div class="space-y-3 pt-2">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" id="modal-lbl-vin">Chassis / VIN Number (17 digits):</label>
+          <input type="text" id="modal-vin" value="JTMAB3FV8P5029184" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-blue-400 focus:outline-none focus:border-blue-500 uppercase">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" id="modal-lbl-notes">Technical Inquiry / Notes:</label>
+          <textarea id="modal-notes" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500">Checking compatibility for Saudi GCC trim with heavy-duty cooling package.</textarea>
+        </div>
+        <div class="p-3 rounded-xl bg-blue-950/40 border border-blue-500/20 text-xs text-blue-300 flex items-center gap-2">
+          <span>📷</span>
+          <span id="modal-upload-hint">Camera / Gallery upload enabled natively on Android & iOS applications.</span>
+        </div>
+      </div>
+
+      <div class="pt-2 flex items-center justify-end gap-2">
+        <button onclick="closeVerificationModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white" id="modal-btn-cancel">Cancel</button>
+        <button onclick="submitVerification()" class="px-5 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition" id="modal-btn-submit">
+          Submit to Technical Specialist
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION POP-UP MODAL (Consistent Executive UI/UX) -->
+  <div id="confirmation-modal" onclick="if(event.target === this) closeConfirmationModal()" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="glass-card rounded-3xl max-w-md w-full p-6 sm:p-8 border border-emerald-500/40 relative space-y-5 text-center shadow-2xl">
+      <button onclick="closeConfirmationModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800/70 hover:bg-slate-700 flex items-center justify-center transition">✕</button>
+
+      <!-- Animated Icon Badge -->
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+        <svg class="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+
+      <div class="space-y-1.5">
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 inline-block" id="confirm-pill">
+          REQUEST SUBMITTED • تم إرسال الطلب
+        </span>
+        <h4 class="text-xl font-extrabold text-white" id="confirm-title">Technical Verification Dispatched</h4>
+        <p class="text-xs text-slate-300 leading-relaxed max-w-sm mx-auto" id="confirm-desc">
+          A certified automotive technical specialist has received your inquiry and is cross-referencing GCC factory catalogs.
+        </p>
+      </div>
+
+      <!-- Ticket Metadata Card -->
+      <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs space-y-2.5">
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400" id="confirm-lbl-vin">Chassis / VIN:</span>
+          <span id="confirm-vin-display" class="font-mono font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">JTMAB3FV8P5029184</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400" id="confirm-lbl-ticket">Ticket Reference:</span>
+          <span id="confirm-ticket-id" class="font-mono text-slate-300 font-semibold">#VER-2026-9481</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400" id="confirm-lbl-sla">Expected Response:</span>
+          <span class="text-emerald-400 font-bold" id="confirm-sla">&lt; 15 Minutes (Priority SLA)</span>
+        </div>
+        <div class="flex justify-between items-center pt-1.5 border-t border-slate-800/80">
+          <span class="text-slate-400" id="confirm-lbl-channel">Notification Channel:</span>
+          <span class="text-slate-300 font-medium flex items-center gap-1" id="confirm-channel-val">
+            <span>📲 Push &amp; WhatsApp</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <button onclick="closeConfirmationModal()" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/30 transition flex items-center justify-center gap-2" id="confirm-btn-done">
+        Done &amp; Continue Browsing
+      </button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast-notification" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition duration-300 pointer-events-none">
+    <div class="bg-slate-900/95 border border-cyan-500/50 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 backdrop-blur-lg">
+      <div class="w-7 h-7 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+        ✓
+      </div>
+      <div>
+        <p class="text-xs font-bold text-white" id="toast-title">Link Copied to Clipboard!</p>
+        <p class="text-[11px] text-cyan-300 font-mono" id="toast-sub">dubaiincairo.com/proposals/yerkab</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT: COMPREHENSIVE DATA & INTERACTIVE LOGIC -->
+  <script>
+    const PROPOSAL_URL = 'https://dubaiincairo.com/proposals/yerkab';
+
+    function copyProposalLink() {
+      const isAr = currentLang === 'ar';
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(PROPOSAL_URL).then(() => {
+          showToast(
+            isAr ? 'تم نسخ الرابط بنجاح!' : 'Proposal URL Copied!',
+            'dubaiincairo.com/proposals/yerkab'
+          );
+        }).catch(() => {
+          showFallbackPrompt(isAr);
+        });
+      } else {
+        showFallbackPrompt(isAr);
+      }
+    }
+
+    function showFallbackPrompt(isAr) {
+      prompt(isAr ? 'انسخ رابط العرض التجاري:' : 'Copy Proposal URL:', PROPOSAL_URL);
+    }
+
+    function showToast(title, sub) {
+      const toast = document.getElementById('toast-notification');
+      if (!toast) return;
+      document.getElementById('toast-title').innerText = title;
+      document.getElementById('toast-sub').innerText = sub;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+
+    // State management
+    let currentLang = 'en';
+    let currentTab = 'website';
+
+    // Comprehensive Bilingual Feature Data (Strictly matching prompt)
+    const websiteFeatures = [
+      {
+        num: '01',
+        titleEn: 'Customer Account',
+        titleAr: 'حساب العميل',
+        whatEn: 'Customers can register, sign in, manage profile details, save delivery addresses and review previous orders.',
+        whatAr: 'يمكن للعميل إنشاء حساب وتسجيل الدخول وإدارة بياناته وعناوين التوصيل ومراجعة طلباته السابقة.',
+        benefitEn: 'Faster repeat purchases and a more personalized shopping experience.',
+        benefitAr: 'تسريع عمليات الشراء المتكررة وتقديم تجربة أكثر تخصيصاً.',
+        category: 'account',
+        icon: 'user'
+      },
+      {
+        num: '02',
+        titleEn: 'My Garage',
+        titleAr: 'مرآبي',
+        whatEn: 'Customers can save one or more vehicles using make, model, year, trim and engine information.',
+        whatAr: 'يمكن للعميل حفظ سيارة واحدة أو أكثر باستخدام الماركة والموديل والسنة والفئة والمحرك.',
+        benefitEn: 'The platform remembers the customer’s car and reduces repeated data entry and wrong-part risk.',
+        benefitAr: 'يتذكر النظام سيارة العميل ويقلل تكرار إدخال البيانات واحتمال شراء قطعة غير مناسبة.',
+        category: 'vehicle',
+        icon: 'garage'
+      },
+      {
+        num: '03',
+        titleEn: 'Vehicle-Based Part Discovery',
+        titleAr: 'البحث حسب السيارة',
+        whatEn: 'Customers can start shopping from their vehicle and browse parts that are relevant to that specific car.',
+        whatAr: 'يبدأ العميل من بيانات سيارته ثم يتصفح القطع المرتبطة بهذه السيارة تحديداً.',
+        benefitEn: 'Less confusion and a shorter path to the right product.',
+        benefitAr: 'تقليل الحيرة والوصول إلى المنتجات المناسبة بخطوات أقل.',
+        category: 'discovery',
+        icon: 'car-search'
+      },
+      {
+        num: '04',
+        titleEn: 'OEM / Part-Number Search',
+        titleAr: 'البحث برقم القطعة أو رقم OEM',
+        whatEn: 'Customers can search using OEM numbers, manufacturer references or alternative part numbers.',
+        whatAr: 'يمكن البحث باستخدام رقم القطعة الأصلي أو رقم الشركة المصنعة أو الأرقام البديلة.',
+        benefitEn: 'Ideal for customers who already know the required part and want to find it quickly.',
+        benefitAr: 'مثالي للعميل الذي يعرف رقم القطعة ويريد الوصول إليها بسرعة.',
+        category: 'search',
+        icon: 'barcode'
+      },
+      {
+        num: '05',
+        titleEn: 'Smart Search & Filters',
+        titleAr: 'البحث الذكي والفلاتر',
+        whatEn: 'Keyword search, suggestions and filters can narrow results by compatibility, brand, price, origin, availability and product type.',
+        whatAr: 'يوفر البحث بالكلمات واقتراحات البحث مع فلاتر حسب التوافق والعلامة التجارية والسعر وبلد المنشأ والتوفر ونوع القطعة.',
+        benefitEn: 'Makes a large spare-parts catalog easier and faster to navigate.',
+        benefitAr: 'تسهيل التعامل مع كتالوج كبير والوصول إلى الخيارات المناسبة بسرعة.',
+        category: 'search',
+        icon: 'filter'
+      },
+      {
+        num: '06',
+        titleEn: 'Compatibility Status',
+        titleAr: 'حالة توافق القطعة',
+        whatEn: 'Each product can show whether it is Compatible, Likely Compatible, Verification Required or Not Compatible with the selected vehicle.',
+        whatAr: 'يمكن للمنتج إظهار حالة التوافق: متوافق، غالباً متوافق، يحتاج تحقق، أو غير متوافق مع السيارة المختارة.',
+        benefitEn: 'Gives the customer confidence before placing an order and helps reduce incorrect purchases.',
+        benefitAr: 'رفع ثقة العميل قبل الطلب وتقليل احتمالية شراء قطعة غير مناسبة.',
+        category: 'verification',
+        icon: 'check-shield'
+      },
+      {
+        num: '07',
+        titleEn: 'Human Compatibility Verification',
+        titleAr: 'التحقق البشري من التوافق',
+        whatEn: 'Customers can request a manual check using VIN/chassis number, current part number, photos and notes.',
+        whatAr: 'يمكن للعميل طلب مراجعة يدوية باستخدام رقم الهيكل أو رقم القطعة الحالية أو الصور أو الملاحظات.',
+        benefitEn: 'Provides expert reassurance when vehicle specifications are unclear or multiple versions exist.',
+        benefitAr: 'تقديم طمأنينة إضافية عندما تكون مواصفات السيارة غير واضحة أو توجد أكثر من نسخة للقطعة.',
+        category: 'verification',
+        icon: 'expert'
+      },
+      {
+        num: '08',
+        titleEn: 'Detailed Product Pages',
+        titleAr: 'صفحة منتج تفصيلية',
+        whatEn: 'Product pages present images, brand, manufacturer, OEM references, original/aftermarket classification, country of manufacture, warranty, price, VAT, availability and expected delivery information.',
+        whatAr: 'تعرض الصفحة الصور والعلامة التجارية والشركة المصنعة وأرقام OEM وتصنيف أصلي أو بديل وبلد المنشأ والضمان والسعر والضريبة والتوفر وموعد التوصيل المتوقع.',
+        benefitEn: 'Customers can make an informed purchase without contacting support for basic product details.',
+        benefitAr: 'تمكين العميل من اتخاذ قرار واعٍ دون الحاجة للتواصل مع الدعم للحصول على المعلومات الأساسية.',
+        category: 'product',
+        icon: 'document'
+      },
+      {
+        num: '09',
+        titleEn: 'Original & Aftermarket Alternatives',
+        titleAr: 'بدائل أصلية وتجارية',
+        whatEn: 'Where available, the platform can show alternative brands or equivalent parts for the same requirement.',
+        whatAr: 'يمكن عرض علامات تجارية أو قطع بديلة تؤدي نفس الغرض عندما تكون متاحة.',
+        benefitEn: 'Customers can choose the best balance between quality, brand preference and budget.',
+        benefitAr: 'إعطاء العميل حرية الاختيار بين الجودة والعلامة التجارية والميزانية.',
+        category: 'product',
+        icon: 'split'
+      },
+      {
+        num: '10',
+        titleEn: 'Wishlist',
+        titleAr: 'قائمة المفضلة',
+        whatEn: 'Customers can save products for later.',
+        whatAr: 'يمكن للعميل حفظ المنتجات للرجوع إليها لاحقاً.',
+        benefitEn: 'Useful when comparing options or planning future maintenance purchases.',
+        benefitAr: 'مفيدة عند مقارنة الخيارات أو التخطيط لصيانة مستقبلية.',
+        category: 'commerce',
+        icon: 'heart'
+      },
+      {
+        num: '11',
+        titleEn: 'Shopping Cart & Checkout',
+        titleAr: 'سلة الشراء وإتمام الطلب',
+        whatEn: 'Customers can add products, select address and delivery method, apply promotions and complete checkout as a guest or registered user.',
+        whatAr: 'يمكن إضافة القطع وتحديد العنوان وطريقة التوصيل وتطبيق العروض وإتمام الطلب كزائر أو كمستخدم مسجل.',
+        benefitEn: 'A simple purchase flow reduces friction and makes ordering easier.',
+        benefitAr: 'تجربة شراء بسيطة تقلل الخطوات وتسهّل إتمام الطلب.',
+        category: 'commerce',
+        icon: 'cart'
+      },
+      {
+        num: '12',
+        titleEn: 'Secure Payment Integration',
+        titleAr: 'الدفع الإلكتروني الآمن',
+        whatEn: 'The website can connect to the selected secure online payment provider and display the final order total clearly.',
+        whatAr: 'يمكن ربط الموقع بمزود الدفع الإلكتروني المختار مع عرض القيمة النهائية للطلب بوضوح.',
+        benefitEn: 'Customers can pay confidently using familiar digital payment methods.',
+        benefitAr: 'تمكين العميل من الدفع بثقة باستخدام وسائل دفع رقمية مألوفة.',
+        category: 'commerce',
+        icon: 'card'
+      },
+      {
+        num: '13',
+        titleEn: 'Order & Delivery Tracking',
+        titleAr: 'تتبع الطلب والتوصيل',
+        whatEn: 'Customers can view order status, payment status, shipment progress and delivery information.',
+        whatAr: 'يمكن للعميل متابعة حالة الطلب والدفع والشحنة وبيانات التوصيل.',
+        benefitEn: 'Reduces uncertainty and the need to contact support for routine updates.',
+        benefitAr: 'تقليل القلق والحاجة للتواصل مع خدمة العملاء لمعرفة التحديثات المعتادة.',
+        category: 'post-purchase',
+        icon: 'truck'
+      },
+      {
+        num: '14',
+        titleEn: 'Returns & Refund Tracking',
+        titleAr: 'إدارة المرتجعات والاسترداد',
+        whatEn: 'Customers can submit return requests, select a reason, upload supporting photos and follow return/refund status.',
+        whatAr: 'يمكن تقديم طلب إرجاع واختيار السبب وإرفاق صور ومتابعة حالة الإرجاع واسترداد المبلغ.',
+        benefitEn: 'Builds trust by making after-sales service transparent and easy to follow.',
+        benefitAr: 'تعزيز الثقة من خلال خدمة ما بعد البيع الواضحة وسهلة المتابعة.',
+        category: 'post-purchase',
+        icon: 'return'
+      },
+      {
+        num: '15',
+        titleEn: 'WhatsApp & Customer Support',
+        titleAr: 'واتساب وخدمة العملاء',
+        whatEn: 'Direct support options can include WhatsApp, phone and contact forms, especially around compatibility questions.',
+        whatAr: 'يمكن توفير التواصل المباشر عبر واتساب والهاتف ونموذج التواصل، خاصة في أسئلة التوافق.',
+        benefitEn: 'Customers can quickly reach a real person when they need reassurance.',
+        benefitAr: 'منح العميل وصولاً سريعاً لشخص حقيقي عندما يحتاج إلى المساعدة أو التأكيد.',
+        category: 'support',
+        icon: 'whatsapp'
+      },
+      {
+        num: '16',
+        titleEn: 'SEO & Vehicle-Specific Landing Pages',
+        titleAr: 'تهيئة محركات البحث وصفحات السيارات',
+        whatEn: 'The website can create search-friendly pages for vehicles, categories, brands and relevant part numbers.',
+        whatAr: 'يمكن إنشاء صفحات مناسبة لمحركات البحث للسيارات والفئات والعلامات التجارية وأرقام القطع المهمة.',
+        benefitEn: 'Customers can discover the right products directly from Google and other search engines.',
+        benefitAr: 'مساعدة العملاء على الوصول مباشرة إلى القطع المناسبة من خلال جوجل ومحركات البحث.',
+        category: 'marketing',
+        icon: 'seo'
+      },
+      {
+        num: '17',
+        titleEn: 'Offers & Marketing Content',
+        titleAr: 'العروض والمحتوى التسويقي',
+        whatEn: 'The website can highlight campaigns, selected offers, popular categories and educational content.',
+        whatAr: 'يمكن إبراز الحملات والعروض والفئات الشائعة والمحتوى التوعوي.',
+        benefitEn: 'Helps customers discover relevant deals and useful information at the right time.',
+        benefitAr: 'مساعدة العميل على اكتشاف العروض والمعلومات المفيدة في الوقت المناسب.',
+        category: 'marketing',
+        icon: 'sparkles'
+      }
+    ];
+
+    const androidFeatures = [
+      {
+        num: '01',
+        titleEn: 'Customer Account',
+        titleAr: 'حساب العميل',
+        whatEn: 'Customers can register, sign in, manage their profile, addresses, orders and preferences directly from the app.',
+        whatAr: 'يمكن للعميل التسجيل والدخول وإدارة الملف الشخصي والعناوين والطلبات والتفضيلات من التطبيق.',
+        benefitEn: 'Creates a convenient mobile shopping account that stays with the customer.',
+        benefitAr: 'توفير حساب تسوق مريح يرافق العميل في كل مرة يعود فيها للشراء.',
+        icon: 'user'
+      },
+      {
+        num: '02',
+        titleEn: 'My Garage',
+        titleAr: 'مرآبي',
+        whatEn: 'Customers can save their vehicles and set a default car for future searches.',
+        whatAr: 'يمكن حفظ السيارات وتحديد سيارة افتراضية لعمليات البحث القادمة.',
+        benefitEn: 'The app becomes personalized to the customer’s actual vehicle.',
+        benefitAr: 'تحويل التطبيق إلى تجربة مخصصة للسيارة الفعلية للعميل.',
+        icon: 'garage'
+      },
+      {
+        num: '03',
+        titleEn: 'Vehicle & Part Search',
+        titleAr: 'البحث عن السيارة والقطعة',
+        whatEn: 'Customers can search by vehicle, OEM/part number, keyword, category and filters.',
+        whatAr: 'يمكن البحث بالسيارة أو رقم OEM أو رقم القطعة أو الكلمات أو الفئة مع استخدام الفلاتر.',
+        benefitEn: 'Makes finding the correct part quick even when the customer is away from a computer.',
+        benefitAr: 'الوصول إلى القطعة الصحيحة بسرعة حتى أثناء التنقل.',
+        icon: 'car-search'
+      },
+      {
+        num: '04',
+        titleEn: 'Compatibility Status',
+        titleAr: 'حالة توافق القطعة',
+        whatEn: 'The app displays the compatibility result for the selected saved vehicle.',
+        whatAr: 'يعرض التطبيق نتيجة التوافق مع السيارة المحفوظة والمختارة.',
+        benefitEn: 'Customers can make purchase decisions with more confidence.',
+        benefitAr: 'مساعدة العميل على اتخاذ قرار شراء بثقة أكبر.',
+        icon: 'check-shield'
+      },
+      {
+        num: '05',
+        titleEn: 'Human Verification Request',
+        titleAr: 'طلب التحقق البشري',
+        whatEn: 'Customers can submit VIN/chassis information, part numbers, notes and photos for technical review.',
+        whatAr: 'يمكن إرسال رقم الهيكل ورقم القطعة والملاحظات والصور للمراجعة الفنية.',
+        benefitEn: 'Provides an easy mobile path to expert confirmation before purchasing.',
+        benefitAr: 'توفير مسار سريع للحصول على تأكيد خبير قبل الشراء.',
+        icon: 'expert'
+      },
+      {
+        num: '06',
+        titleEn: 'Camera & Gallery Upload',
+        titleAr: 'الكاميرا ومعرض الصور',
+        whatEn: 'The app can use the Android camera and media picker to capture the current part or vehicle information.',
+        whatAr: 'يمكن استخدام كاميرا أندرويد ومعرض الصور لتصوير القطعة الحالية أو بيانات السيارة.',
+        benefitEn: 'Customers can send the exact visual information needed without leaving the app.',
+        benefitAr: 'إرسال المعلومات البصرية المطلوبة بسهولة دون الخروج من التطبيق.',
+        icon: 'camera'
+      },
+      {
+        num: '07',
+        titleEn: 'Detailed Product Pages',
+        titleAr: 'صفحات المنتجات التفصيلية',
+        whatEn: 'Customers can view product images, specifications, OEM references, origin, warranty, price, availability and delivery information.',
+        whatAr: 'يعرض التطبيق الصور والمواصفات وأرقام OEM وبلد المنشأ والضمان والسعر والتوفر والتوصيل.',
+        benefitEn: 'Provides the information required to compare products and choose confidently.',
+        benefitAr: 'تمكين العميل من المقارنة والاختيار على أساس معلومات واضحة.',
+        icon: 'document'
+      },
+      {
+        num: '08',
+        titleEn: 'Wishlist',
+        titleAr: 'قائمة المفضلة',
+        whatEn: 'Customers can save products for later and return to them from the app.',
+        whatAr: 'يمكن حفظ المنتجات والرجوع إليها لاحقاً.',
+        benefitEn: 'Useful for planned maintenance and product comparisons.',
+        benefitAr: 'مفيدة للصيانة المخطط لها ولمقارنة المنتجات.',
+        icon: 'heart'
+      },
+      {
+        num: '09',
+        titleEn: 'Mobile Cart & Checkout',
+        titleAr: 'السلة وإتمام الطلب عبر الجوال',
+        whatEn: 'Customers can manage cart items, delivery address, shipping and payment from the app.',
+        whatAr: 'يمكن إدارة السلة والعنوان والشحن والدفع بالكامل من التطبيق.',
+        benefitEn: 'Allows the entire purchase to be completed conveniently from a phone.',
+        benefitAr: 'إتمام رحلة الشراء كاملة من الهاتف بسهولة.',
+        icon: 'cart'
+      },
+      {
+        num: '10',
+        titleEn: 'Google Pay / Digital Payments',
+        titleAr: 'Google Pay ووسائل الدفع الرقمية',
+        whatEn: 'Google Pay can be enabled where supported by the selected payment provider, together with other approved payment methods.',
+        whatAr: 'يمكن تفعيل Google Pay عندما يدعمه مزود الدفع المختار إلى جانب وسائل الدفع المعتمدة الأخرى.',
+        benefitEn: 'Makes checkout faster and more familiar for Android users.',
+        benefitAr: 'تسريع الدفع وتقديم تجربة مألوفة لمستخدمي أندرويد.',
+        icon: 'google-pay'
+      },
+      {
+        num: '11',
+        titleEn: 'Biometric Login',
+        titleAr: 'الدخول بالبصمة أو القياسات الحيوية',
+        whatEn: 'The app can use supported Android biometric authentication for convenient access.',
+        whatAr: 'يمكن استخدام وسائل التحقق الحيوي المدعومة في جهاز أندرويد.',
+        benefitEn: 'Customers can return to their account quickly without repeatedly entering passwords.',
+        benefitAr: 'دخول أسرع للحساب دون الحاجة لإدخال كلمة المرور في كل مرة.',
+        icon: 'fingerprint'
+      },
+      {
+        num: '12',
+        titleEn: 'Push Notifications',
+        titleAr: 'الإشعارات الفورية',
+        whatEn: 'The app can notify customers about verification completion, payment, order processing, shipping, delivery, returns and refunds.',
+        whatAr: 'يمكن إرسال إشعارات عند انتهاء التحقق وتأكيد الدفع وتجهيز الطلب والشحن والتوصيل والمرتجعات والاسترداد.',
+        benefitEn: 'Important updates reach the customer immediately without manual checking.',
+        benefitAr: 'وصول التحديثات المهمة للعميل فوراً دون الحاجة للفحص اليدوي.',
+        icon: 'bell'
+      },
+      {
+        num: '13',
+        titleEn: 'Order & Return Tracking',
+        titleAr: 'تتبع الطلبات والمرتجعات',
+        whatEn: 'Customers can follow purchases, shipping, returns and refunds from one mobile screen.',
+        whatAr: 'يمكن متابعة المشتريات والشحن والمرتجعات واسترداد المبالغ من شاشة واحدة.',
+        benefitEn: 'Keeps the complete after-sales journey visible and easy to manage.',
+        benefitAr: 'جعل رحلة ما بعد الشراء واضحة وسهلة الإدارة.',
+        icon: 'truck'
+      },
+      {
+        num: '14',
+        titleEn: 'App Links & Deep Links',
+        titleAr: 'الروابط المباشرة',
+        whatEn: 'Links from campaigns, messages or the website can open the relevant product or screen inside the app.',
+        whatAr: 'يمكن للروابط القادمة من الحملات أو الرسائل أو الموقع فتح المنتج أو الشاشة المطلوبة داخل التطبيق.',
+        benefitEn: 'Reduces unnecessary navigation and brings customers directly to the content they need.',
+        benefitAr: 'تقليل الخطوات والوصول مباشرة إلى المحتوى المطلوب.',
+        icon: 'link'
+      },
+      {
+        num: '15',
+        titleEn: 'Native Sharing',
+        titleAr: 'المشاركة الأصلية في أندرويد',
+        whatEn: 'Customers can share products through Android’s native share options.',
+        whatAr: 'يمكن مشاركة المنتجات باستخدام خيارات المشاركة الموجودة في أندرويد.',
+        benefitEn: 'Makes it easy to send a part to a mechanic, family member or friend for confirmation.',
+        benefitAr: 'تسهيل إرسال القطعة لميكانيكي أو صديق أو أحد أفراد الأسرة للحصول على رأي.',
+        icon: 'share'
+      },
+      {
+        num: '16',
+        titleEn: 'Customer Support',
+        titleAr: 'خدمة العملاء',
+        whatEn: 'WhatsApp, phone and support requests remain accessible from the app.',
+        whatAr: 'يبقى واتساب والهاتف وطلبات الدعم متاحة مباشرة من التطبيق.',
+        benefitEn: 'Human assistance is always close when a customer is unsure.',
+        benefitAr: 'ضمان وجود مساعدة بشرية قريبة عندما يكون العميل غير متأكد.',
+        icon: 'whatsapp'
+      }
+    ];
+
+    const iosFeatures = [
+      {
+        num: '01',
+        titleEn: 'Customer Account',
+        titleAr: 'حساب العميل',
+        whatEn: 'Customers can register, sign in, manage profile details, addresses, orders and preferences from the iPhone app.',
+        whatAr: 'يمكن للعميل التسجيل والدخول وإدارة بياناته وعناوينه وطلباته وتفضيلاته من تطبيق الآيفون.',
+        benefitEn: 'Creates a convenient and consistent shopping account for repeat customers.',
+        benefitAr: 'تقديم حساب مريح ومتسق للعملاء المتكررين.',
+        icon: 'user'
+      },
+      {
+        num: '02',
+        titleEn: 'My Garage',
+        titleAr: 'مرآبي',
+        whatEn: 'Customers can save their vehicles and keep a preferred vehicle selected.',
+        whatAr: 'يمكن حفظ السيارات والإبقاء على سيارة مفضلة محددة.',
+        benefitEn: 'The app can immediately focus the shopping experience on parts relevant to the customer’s car.',
+        benefitAr: 'تركيز تجربة التسوق مباشرة على القطع المرتبطة بسيارة العميل.',
+        icon: 'garage'
+      },
+      {
+        num: '03',
+        titleEn: 'Vehicle & Part Search',
+        titleAr: 'البحث عن السيارة والقطعة',
+        whatEn: 'Customers can search by vehicle, OEM/part number, keyword, category and filters.',
+        whatAr: 'يمكن البحث بالسيارة أو رقم OEM أو رقم القطعة أو الكلمات أو الفئات والفلاتر.',
+        benefitEn: 'Finding a part becomes fast and convenient from anywhere.',
+        benefitAr: 'العثور على القطعة بسرعة ومن أي مكان.',
+        icon: 'car-search'
+      },
+      {
+        num: '04',
+        titleEn: 'Compatibility Status',
+        titleAr: 'حالة توافق القطعة',
+        whatEn: 'The app displays the fitment result against the selected saved vehicle.',
+        whatAr: 'يعرض التطبيق نتيجة التوافق مع السيارة المحفوظة والمختارة.',
+        benefitEn: 'Reduces uncertainty before checkout and supports better purchasing decisions.',
+        benefitAr: 'تقليل عدم اليقين قبل الدفع ودعم قرار شراء أفضل.',
+        icon: 'check-shield'
+      },
+      {
+        num: '05',
+        titleEn: 'Human Verification Request',
+        titleAr: 'طلب التحقق البشري',
+        whatEn: 'Customers can send VIN/chassis details, part numbers, notes and images for technical confirmation.',
+        whatAr: 'يمكن إرسال رقم الهيكل ورقم القطعة والملاحظات والصور للحصول على تأكيد فني.',
+        benefitEn: 'Gives customers expert reassurance directly from their phone.',
+        benefitAr: 'الحصول على طمأنينة خبير مباشرة من الهاتف.',
+        icon: 'expert'
+      },
+      {
+        num: '06',
+        titleEn: 'Camera & Photo Library',
+        titleAr: 'الكاميرا ومكتبة الصور',
+        whatEn: 'The iPhone camera and photo library can be used to capture the current part, label or vehicle information.',
+        whatAr: 'يمكن استخدام كاميرا الآيفون ومكتبة الصور لتصوير القطعة أو الملصق أو بيانات السيارة.',
+        benefitEn: 'Makes verification faster because customers can send the exact information they have in front of them.',
+        benefitAr: 'تسريع التحقق بإرسال المعلومات الموجودة أمام العميل مباشرة.',
+        icon: 'camera'
+      },
+      {
+        num: '07',
+        titleEn: 'Detailed Product Pages',
+        titleAr: 'صفحات المنتجات التفصيلية',
+        whatEn: 'Customers can review images, specifications, OEM references, origin, warranty, price, availability and delivery information.',
+        whatAr: 'يمكن مراجعة الصور والمواصفات وأرقام OEM وبلد المنشأ والضمان والسعر والتوفر والتوصيل.',
+        benefitEn: 'Provides transparency and supports confident comparison between options.',
+        benefitAr: 'تقديم شفافية كافية للمقارنة والاختيار بثقة.',
+        icon: 'document'
+      },
+      {
+        num: '08',
+        titleEn: 'Wishlist',
+        titleAr: 'قائمة المفضلة',
+        whatEn: 'Customers can save products and return to them later.',
+        whatAr: 'يمكن حفظ المنتجات والعودة إليها لاحقاً.',
+        benefitEn: 'Useful for planned purchases and maintenance reminders.',
+        benefitAr: 'مفيدة للمشتريات المخطط لها وتذكّر احتياجات الصيانة.',
+        icon: 'heart'
+      },
+      {
+        num: '09',
+        titleEn: 'Mobile Cart & Checkout',
+        titleAr: 'السلة وإتمام الطلب عبر الجوال',
+        whatEn: 'Customers can complete the shopping journey from cart to delivery and payment inside the app.',
+        whatAr: 'يمكن إكمال الرحلة من السلة إلى العنوان والتوصيل والدفع داخل التطبيق.',
+        benefitEn: 'Provides a smooth mobile-first purchase experience.',
+        benefitAr: 'تجربة شراء سلسة ومصممة للجوال.',
+        icon: 'cart'
+      },
+      {
+        num: '10',
+        titleEn: 'Apple Pay / Digital Payments',
+        titleAr: 'Apple Pay ووسائل الدفع الرقمية',
+        whatEn: 'Apple Pay can be enabled where supported by the selected payment provider, together with other approved payment options.',
+        whatAr: 'يمكن تفعيل Apple Pay عندما يدعمه مزود الدفع المختار إلى جانب وسائل الدفع المعتمدة الأخرى.',
+        benefitEn: 'Creates a fast and familiar checkout experience for iPhone users.',
+        benefitAr: 'تجربة دفع سريعة ومألوفة لمستخدمي الآيفون.',
+        icon: 'apple-pay'
+      },
+      {
+        num: '11',
+        titleEn: 'Face ID / Biometric Login',
+        titleAr: 'Face ID أو الدخول الحيوي',
+        whatEn: 'The app can use Face ID or supported device authentication for secure access.',
+        whatAr: 'يمكن استخدام Face ID أو وسائل التحقق المدعومة في الجهاز.',
+        benefitEn: 'Customers can sign in quickly while keeping account access protected.',
+        benefitAr: 'تسجيل دخول سريع مع الحفاظ على حماية الوصول للحساب.',
+        icon: 'face-id'
+      },
+      {
+        num: '12',
+        titleEn: 'Push Notifications',
+        titleAr: 'الإشعارات الفورية',
+        whatEn: 'Customers can receive real-time notifications for verification, payment, processing, shipping, delivery, returns and refunds.',
+        whatAr: 'يمكن إرسال تحديثات فورية عن التحقق والدفع والتجهيز والشحن والتوصيل والمرتجعات والاسترداد.',
+        benefitEn: 'Keeps customers informed without requiring them to repeatedly open the app.',
+        benefitAr: 'إبقاء العميل على اطلاع دون الحاجة لفتح التطبيق باستمرار.',
+        icon: 'bell'
+      },
+      {
+        num: '13',
+        titleEn: 'Order & Return Tracking',
+        titleAr: 'تتبع الطلبات والمرتجعات',
+        whatEn: 'Purchases, shipments, returns and refunds can be followed from the app.',
+        whatAr: 'يمكن متابعة المشتريات والشحن والمرتجعات والمبالغ المستردة داخل التطبيق.',
+        benefitEn: 'Gives the customer one clear place to manage the full post-purchase journey.',
+        benefitAr: 'توفير مكان واحد واضح لإدارة ما بعد الشراء.',
+        icon: 'truck'
+      },
+      {
+        num: '14',
+        titleEn: 'Universal Links / Deep Links',
+        titleAr: 'Universal Links والروابط المباشرة',
+        whatEn: 'Links from campaigns, messages or the website can open the relevant product or app screen.',
+        whatAr: 'يمكن للروابط القادمة من الحملات أو الرسائل أو الموقع فتح المنتج أو الشاشة المطلوبة في التطبيق.',
+        benefitEn: 'Brings customers directly to the intended content with fewer steps.',
+        benefitAr: 'نقل العميل مباشرة إلى المحتوى المقصود بخطوات أقل.',
+        icon: 'link'
+      },
+      {
+        num: '15',
+        titleEn: 'Native Share Sheet',
+        titleAr: 'المشاركة الأصلية في iOS',
+        whatEn: 'Products can be shared using the standard iOS sharing experience.',
+        whatAr: 'يمكن مشاركة المنتجات باستخدام واجهة المشاركة القياسية في نظام iOS.',
+        benefitEn: 'Customers can easily ask a mechanic, friend or family member for a second opinion.',
+        benefitAr: 'تسهيل إرسال القطعة لميكانيكي أو صديق أو أحد أفراد الأسرة للحصول على رأي إضافي.',
+        icon: 'share'
+      },
+      {
+        num: '16',
+        titleEn: 'Customer Support',
+        titleAr: 'خدمة العملاء',
+        whatEn: 'WhatsApp, phone and support requests are available from within the app.',
+        whatAr: 'يمكن الوصول إلى واتساب والهاتف وطلبات الدعم من داخل التطبيق.',
+        benefitEn: 'Customers always have access to human assistance when compatibility or ordering questions arise.',
+        benefitAr: 'ضمان وجود مساعدة بشرية عندما تظهر أسئلة عن التوافق أو الطلب.',
+        icon: 'whatsapp'
+      }
+    ];
+
+    const matrixData = [
+      { featureEn: 'Customer Account & Multi-Address', featureAr: 'حساب العميل وإدارة العناوين', web: 'Web Portal', android: 'Native Mobile Account', ios: 'Native iOS Account', nature: 'Single Unified Auth' },
+      { featureEn: 'My Garage (Multi-Vehicle Profile)', featureAr: 'مرآبي وحفظ مواصفات السيارة', web: 'Full Web Garage', android: 'Mobile Garage + Default Car', ios: 'Mobile Garage + Default Car', nature: 'Cloud Sync Engine' },
+      { featureEn: 'Vehicle-Based Part Discovery', featureAr: 'البحث الموجه بنوع وموديل السيارة', web: 'Catalog View + Tree', android: 'Mobile Guided Flow', ios: 'Mobile Guided Flow', nature: 'Accurate Filtering' },
+      { featureEn: 'OEM & Part-Number Search', featureAr: 'البحث برقم القطعة ورقم OEM', web: 'Elastic / SQL Search', android: 'Instant Quick-Bar', ios: 'Instant Quick-Bar', nature: 'Direct Indexing' },
+      { featureEn: 'Smart Compatibility Status Badge', featureAr: 'شعار حالة توافق القطعة', web: '4-Tier Fitment Badge', android: '4-Tier Fitment Badge', ios: '4-Tier Fitment Badge', nature: 'Algorithmic Certainty' },
+      { featureEn: 'Human Technical Verification', featureAr: 'طلب التحقق البشري عبر خبير', web: 'Web Form + Uploads', android: 'Camera Scan + Upload', ios: 'Camera Scan + Photos', nature: 'Expert Reassurance' },
+      { featureEn: 'Digital Payment Processing', featureAr: 'معالجة الدفع الرقمي الآمن', web: 'Payment Gateway / Mada', android: 'Google Pay + Cards', ios: 'Apple Pay + Cards', nature: 'PCI-DSS Compliant' },
+      { featureEn: 'Biometric Access', featureAr: 'تسجيل الدخول الحيوي الآمن', web: 'Session / Passkeys', android: 'Fingerprint / Biometric', ios: 'Face ID / Touch ID', nature: 'Native OS Security' },
+      { featureEn: 'Real-Time Push Notifications', featureAr: 'الإشعارات الفورية بمراحل الطلب', web: 'Web Push / Email', android: 'FCM Push Engine', ios: 'APNs Push Engine', nature: 'Zero-Lag Alerts' },
+      { featureEn: 'Order Tracking & Returns', featureAr: 'تتبع الشحنات وإدارة الاسترجاع', web: 'Detailed Dashboard', android: 'Single-Screen Status', ios: 'Single-Screen Status', nature: 'Full Transparency' },
+      { featureEn: 'Direct WhatsApp & Escalation', featureAr: 'دعم واتساب الفوري والاستشارات', web: 'Direct Web Link', android: 'Native WhatsApp Intent', ios: 'Native WhatsApp URL', nature: 'Human Safety Net' }
+    ];
+
+    // SVG Icon Generator Helper
+    function getSvgIcon(iconName) {
+      switch(iconName) {
+        case 'user':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>';
+        case 'garage':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>';
+        case 'car-search':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>';
+        case 'barcode':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>';
+        case 'filter':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>';
+        case 'check-shield':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>';
+        case 'expert':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>';
+        case 'document':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>';
+        case 'split':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>';
+        case 'heart':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>';
+        case 'cart':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>';
+        case 'card':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>';
+        case 'truck':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>';
+        case 'return':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>';
+        case 'whatsapp':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>';
+        case 'seo':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>';
+        case 'sparkles':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>';
+        case 'camera':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>';
+        case 'google-pay':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>';
+        case 'fingerprint':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"/>';
+        case 'bell':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>';
+        case 'link':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>';
+        case 'share':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>';
+        case 'apple-pay':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>';
+        case 'face-id':
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+        default:
+          return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+      }
+    }
+
+    // Render Feature Cards into their respective grids
+    function renderCards() {
+      const isAr = currentLang === 'ar';
+
+      // 1. Website Grid
+      const webGrid = document.getElementById('web-features-grid');
+      webGrid.innerHTML = websiteFeatures.map(item => `
+        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between feature-item" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">${item.num}</span>
+              <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-blue-400">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  ${getSvgIcon(item.icon)}
+                </svg>
+              </div>
+            </div>
+            <h5 class="text-base font-bold text-white mb-2">${isAr ? item.titleAr : item.titleEn}</h5>
+            
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                <span class="font-bold text-slate-300 block mb-0.5">${isAr ? 'ما الذي تقدمه:' : 'What it does:'}</span>
+                <p class="text-slate-400 leading-relaxed">${isAr ? item.whatAr : item.whatEn}</p>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-blue-950/20 border border-blue-500/10">
+                <span class="font-bold text-blue-300 block mb-0.5">${isAr ? 'الفائدة للمستخدم:' : 'Customer benefit:'}</span>
+                <p class="text-slate-300 leading-relaxed">${isAr ? item.benefitAr : item.benefitEn}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // 2. Android Grid
+      const androidGrid = document.getElementById('android-features-grid');
+      androidGrid.innerHTML = androidFeatures.map(item => `
+        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between feature-item" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">${item.num}</span>
+              <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-emerald-400">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  ${getSvgIcon(item.icon)}
+                </svg>
+              </div>
+            </div>
+            <h5 class="text-base font-bold text-white mb-2">${isAr ? item.titleAr : item.titleEn}</h5>
+            
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                <span class="font-bold text-slate-300 block mb-0.5">${isAr ? 'ما الذي تقدمه:' : 'What it does:'}</span>
+                <p class="text-slate-400 leading-relaxed">${isAr ? item.whatAr : item.whatEn}</p>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-emerald-950/20 border border-emerald-500/10">
+                <span class="font-bold text-emerald-300 block mb-0.5">${isAr ? 'الفائدة للمستخدم:' : 'Customer benefit:'}</span>
+                <p class="text-slate-300 leading-relaxed">${isAr ? item.benefitAr : item.benefitEn}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // 3. iOS Grid
+      const iosGrid = document.getElementById('ios-features-grid');
+      iosGrid.innerHTML = iosFeatures.map(item => `
+        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between feature-item" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">${item.num}</span>
+              <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-purple-400">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  ${getSvgIcon(item.icon)}
+                </svg>
+              </div>
+            </div>
+            <h5 class="text-base font-bold text-white mb-2">${isAr ? item.titleAr : item.titleEn}</h5>
+            
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                <span class="font-bold text-slate-300 block mb-0.5">${isAr ? 'ما الذي تقدمه:' : 'What it does:'}</span>
+                <p class="text-slate-400 leading-relaxed">${isAr ? item.whatAr : item.whatEn}</p>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-purple-950/20 border border-purple-500/10">
+                <span class="font-bold text-purple-300 block mb-0.5">${isAr ? 'الفائدة للمستخدم:' : 'Customer benefit:'}</span>
+                <p class="text-slate-300 leading-relaxed">${isAr ? item.benefitAr : item.benefitEn}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // 4. Matrix Table
+      const matrixTbody = document.getElementById('matrix-table-body');
+      matrixTbody.innerHTML = matrixData.map(row => `
+        <tr class="hover:bg-slate-800/40 transition">
+          <td class="p-3 font-semibold text-white">${isAr ? row.featureAr : row.featureEn}</td>
+          <td class="p-3 text-center text-blue-300 font-mono"><span class="px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">${row.web}</span></td>
+          <td class="p-3 text-center text-emerald-300 font-mono"><span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">${row.android}</span></td>
+          <td class="p-3 text-center text-purple-300 font-mono"><span class="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">${row.ios}</span></td>
+          <td class="p-3 text-slate-400">${row.nature}</td>
+        </tr>
+      `).join('');
+    }
+
+    // Set Language & Direction
+    function setLanguage(lang) {
+      currentLang = lang;
+      const isAr = lang === 'ar';
+      document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+      document.documentElement.lang = lang;
+
+      // Update button active states
+      document.getElementById('lang-en').className = !isAr 
+        ? 'px-3 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm' 
+        : 'px-3 py-1 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white';
+      document.getElementById('lang-ar').className = isAr 
+        ? 'px-3 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm' 
+        : 'px-3 py-1 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white';
+
+      // Update Hero and Static Headers
+      const brandTitle = document.getElementById('brand-title');
+      if (brandTitle) {
+        brandTitle.innerHTML = isAr 
+          ? '<span>يَرْكَبْ</span><span class="text-cyan-400">•</span><span class="text-blue-300">YERKAB</span>' 
+          : '<span>YERKAB</span><span class="text-cyan-400">•</span><span class="text-blue-300">يَرْكَبْ</span>';
+      }
+      const brandTag = document.getElementById('brand-tag');
+      if (brandTag) brandTag.innerText = isAr ? 'توافق مضمون • يركب بالملّي' : 'Guaranteed Fitment • يركب بالملّي';
+      const brandSub = document.getElementById('brand-sub');
+      if (brandSub) brandSub.innerText = isAr 
+        ? 'منصة قطع غيار السيارات في المملكة • العرض التجاري والمواصفات الفنية' 
+        : 'Saudi Automotive Aftermarket Platform • Commercial Proposal & Roadmap';
+      const btnDemo = document.getElementById('btn-demo-fitment');
+      if (btnDemo) btnDemo.innerText = isAr ? 'محاكي التوافق الفني' : 'Fitment Simulator';
+      const btnCopy = document.getElementById('btn-copy-text');
+      if (btnCopy) btnCopy.innerText = isAr ? 'مشاركة الرابط' : 'Share Link';
+      const navDomain = document.getElementById('nav-domain-lbl');
+      if (navDomain) navDomain.innerText = isAr ? 'الرابط الرسمي:' : 'Official Proposal:';
+
+      const heroPill = document.getElementById('hero-pill');
+      if (heroPill) heroPill.innerText = isAr ? 'يَرْكَب • العرض التجاري والجدول الزمني لتنفيذ المنظومة' : 'YERKAB • COMMERCIAL PROPOSAL & PRODUCT ROADMAP';
+      const heroBadge = document.getElementById('hero-brand-badge');
+      if (heroBadge) heroBadge.innerText = isAr ? 'العلامة التجارية: يَرْكَبْ' : 'BRAND: YERKAB • يَرْكَبْ';
+      const heroMeaning = document.getElementById('hero-brand-meaning');
+      if (heroMeaning) heroMeaning.innerText = isAr ? '"يركب بالملّي • توافق هندسي مضمون"' : '"It Fits • Guaranteed Fitment"';
+      const heroTitle = document.getElementById('hero-title');
+      if (heroTitle) heroTitle.innerText = isAr ? 'يَرْكَب: منصة رقمية لقطع غيار السيارات' : 'Yerkab: Automotive Spare Parts Platform';
+      const heroSub = document.getElementById('hero-subtitle');
+      if (heroSub) heroSub.innerText = isAr ? 'مزايا المنتجات والجدول الزمني والعرض التجاري (الموقع • أندرويد • آيفون)' : 'Product Features, Delivery Roadmap & Consolidated Commercial Proposal';
+      document.getElementById('hero-exec-overview').innerText = isAr 
+        ? 'تعد هذه المنصة الاستجابة الاستراتيجية لحالة التشتت الهيكلي في سوق قطع الغيار السعودي. نحن لا نقدم مجرد واجهة بيع، بل نقدم حلاً تقنياً ينهي عصر "التجربة والخطأ" في الشراء. منتجنا الأساسي هو الاطمئنان المهني، حيث نحول المشتري من حالة عدم اليقين إلى بيئة محكومة بالدقة الفنية.'
+        : 'The Saudi automotive aftermarket currently operates in a state of structural fragmentation, where procurement is often dictated by chance rather than technical certainty. This platform is not merely a retail outlet; it is a strategic response to that volatility. We transition the customer from a "trial-and-error" buyer to a protected participant in a verified ecosystem.';
+
+      document.getElementById('hero-reassurance-title').innerText = isAr ? 'منتجنا الأساسي: الاطمئنان المهني' : 'Our Core Product: Professional Reassurance';
+      document.getElementById('hero-reassurance-desc').innerText = isAr
+        ? 'من خلال دمج البحث الرقمي المتقدم مع التحقق البشري الخبير، نحن نقضي على مخاطر عدم التوافق التي ترهق المستهلكين، ونجعل كل صفقة مدعومة ببيانات دقيقة واستشارات متخصصة.'
+        : 'By fusing sophisticated digital discovery with expert human verification, we eliminate the inherent risks of incompatibility and fraud that plague traditional channels.';
+
+      document.getElementById('hero-fleet-label').innerText = isAr ? 'حجم أسطول المملكة المستهدف:' : 'KSA Target Fleet:';
+
+      // KPI labels
+      document.getElementById('kpi-1-label').innerText = isAr ? 'إجمالي الاستثمار' : 'Portfolio Investment';
+      document.getElementById('kpi-1-sub').innerText = isAr ? '3 منتجات إنتاجية كاملة' : '3 Production Products';
+      document.getElementById('kpi-2-label').innerText = isAr ? 'تسلسل التنفيذ' : 'Delivery Sequence';
+      document.getElementById('kpi-2-sub').innerText = isAr ? 'شهر واحد لكل مرحلة تسليم' : '1 Month Per Milestone';
+      document.getElementById('kpi-3-label').innerText = isAr ? 'إجمالي الخصائص' : 'Total Capabilities';
+      document.getElementById('kpi-3-sub').innerText = isAr ? 'الموقع + أندرويد + آيفون' : 'Web + Android + iOS';
+      document.getElementById('kpi-4-label').innerText = isAr ? 'ضمان التوافق' : 'Fitment Guarantee';
+      document.getElementById('kpi-4-sub').innerText = isAr ? 'فحص خوارزمي + بشري خبير' : 'AI + Human Engineering';
+
+      // Commercial Summary
+      document.getElementById('comm-summary-pre').innerText = isAr ? 'الهيكلة التجارية والجدول الزمني' : 'Commercial Structure';
+      document.getElementById('comm-summary-title').innerText = isAr ? 'الملخص التجاري وجدول التسليم' : 'Delivery Schedule & Investment Allocation';
+      document.getElementById('comm-summary-sub').innerText = isAr ? 'يتم التعامل مع كل منتج كمرحلة تسليم واضحة ومحددة المعالم.' : 'Each product is treated as a clear delivery milestone with zero ambiguity.';
+      document.getElementById('comm-summary-total-label').innerText = isAr ? 'إجمالي استثمار المحفظة الرقمية:' : 'Consolidated Portfolio Total:';
+
+      // Milestone Cards
+      document.getElementById('card-m1-tag').innerText = isAr ? 'الشهر الأول • المرحلة الأولى' : 'Month 1 • Milestone 1';
+      document.getElementById('card-m1-title').innerText = isAr ? 'الموقع الإلكتروني' : 'Website Platform';
+      document.getElementById('card-m1-role').innerText = isAr ? 'واجهة البيع الأساسية، قناة الوصول عبر محركات البحث، وتأسيس رحلة العميل.' : 'Digital storefront, organic SEO acquisition, and transactional foundation.';
+      document.getElementById('card-m1-time-label').innerText = isAr ? 'مدة التنفيذ المخططة' : 'Planned Delivery';
+      document.getElementById('card-m1-time').innerText = isAr ? 'شهر واحد' : '1 Month';
+      document.getElementById('card-m1-invest-label').innerText = isAr ? 'استثمار التطوير' : 'Investment';
+      document.getElementById('card-m1-features-count').innerText = isAr ? '17 ميزة متكاملة' : '17 Core Integrated Features';
+
+      document.getElementById('card-m2-tag').innerText = isAr ? 'الشهر الثاني • المرحلة الثانية' : 'Month 2 • Milestone 2';
+      document.getElementById('card-m2-title').innerText = isAr ? 'تطبيق أندرويد' : 'Android Application';
+      document.getElementById('card-m2-role').innerText = isAr ? 'نقل رحلة الشراء للجوال، رفع الصور بالكاميرا، الدخول الحيوي، والإشعارات الفورية.' : 'Mobile field verification, camera VIN scan, biometrics & push engagement.';
+      document.getElementById('card-m2-time-label').innerText = isAr ? 'مدة التنفيذ المخططة' : 'Planned Delivery';
+      document.getElementById('card-m2-time').innerText = isAr ? 'شهر واحد' : '1 Month';
+      document.getElementById('card-m2-invest-label').innerText = isAr ? 'استثمار التطوير' : 'Investment';
+      document.getElementById('card-m2-features-count').innerText = isAr ? '16 ميزة مخصصة للجوال' : '16 Mobile-Native Features';
+
+      document.getElementById('card-m3-tag').innerText = isAr ? 'الشهر الثالث • المرحلة الثالثة' : 'Month 3 • Milestone 3';
+      document.getElementById('card-m3-title').innerText = isAr ? 'تطبيق آيفون' : 'iOS Application';
+      document.getElementById('card-m3-role').innerText = isAr ? 'تجربة ممتازة لمستخدمي آبل، Face ID، و Apple Pay، والروابط العميقة.' : 'Premium iPhone experience, Face ID, Apple Pay & seamless universal links.';
+      document.getElementById('card-m3-time-label').innerText = isAr ? 'مدة التنفيذ المخططة' : 'Planned Delivery';
+      document.getElementById('card-m3-time').innerText = isAr ? 'شهر واحد' : '1 Month';
+      document.getElementById('card-m3-invest-label').innerText = isAr ? 'استثمار التطوير' : 'Investment';
+      document.getElementById('card-m3-features-count').innerText = isAr ? '16 ميزة لنظام iOS' : '16 Apple Ecosystem Features';
+
+      // Tab Buttons
+      document.getElementById('tab-label-web').innerText = isAr ? '1. الموقع الإلكتروني (17)' : '1. Website (17)';
+      document.getElementById('tab-label-android').innerText = isAr ? '2. تطبيق أندرويد (16)' : '2. Android App (16)';
+      document.getElementById('tab-label-ios').innerText = isAr ? '3. تطبيق آيفون (16)' : '3. iOS App (16)';
+      document.getElementById('tab-label-matrix').innerText = isAr ? 'مصفوفة التكامل' : 'Unified Matrix';
+      document.getElementById('tab-label-sim').innerText = isAr ? 'محاكي التجربة والتوافق' : 'Interactive Prototype';
+
+      // Strategic Banners in Tabs
+      document.getElementById('web-strat-badge').innerText = isAr ? 'الميزة الاستراتيجية للموقع' : 'Strategic Advantage';
+      document.getElementById('web-strat-title').innerText = isAr ? 'التنظيم الهيكلي للطلب وعشوائية البحث' : 'Structural Organization of Demand';
+      document.getElementById('web-strat-desc').innerText = isAr 
+        ? 'يعالج الموقع الإلكتروني الفجوة الجوهرية في "عشوائية البحث" داخل السوق. ميزات مثل "التحقق البشري" و"حالة التوافق" تحيد مخاطر شراء القطع الخاطئة بشكل مباشر، محولةً عملية الشراء من تجربة مقلقة إلى عملية مهنية محكومة.'
+        : 'The Website addresses the primary market gap of "unorganized discovery". Features like \'Human Verification\' and \'Compatibility Status\' directly neutralize the risk of wrong-part procurement, converting a high-anxiety task into a controlled, professional process.';
+      document.getElementById('web-card-inv-label').innerText = isAr ? 'استثمار المرحلة' : 'Milestone Investment';
+
+      document.getElementById('android-strat-badge').innerText = isAr ? 'الميزة الاستراتيجية لأندرويد' : 'Strategic Advantage';
+      document.getElementById('android-strat-title').innerText = isAr ? 'التحقق السلس والفوري وإلغاء الاعتماد على الواتساب' : 'Frictionless Verification & Field Accessibility';
+      document.getElementById('android-strat-desc').innerText = isAr
+        ? 'يستفيد تطبيق أندرويد من قدرات الكاميرا لإلغاء حواجز التواصل. من خلال إتاحة الرفع الفوري للصور للمراجعة الفنية، نحن نحل مشكلة "الاعتماد على الواتساب" التقليدية، ونوفر بديلاً مؤسسياً آمناً لتأكيد توافق القطع في الوقت الفعلي.'
+        : 'The Android App leverages camera-native verification to eliminate communication barriers. By allowing instant photo-uploads for technical review, we solve the common "WhatsApp dependency" issue, providing a secure, corporate-grade alternative for real-time part confirmation.';
+      document.getElementById('android-card-inv-label').innerText = isAr ? 'استثمار المرحلة' : 'Milestone Investment';
+
+      document.getElementById('ios-strat-badge').innerText = isAr ? 'الميزة الاستراتيجية لآيفون' : 'Strategic Advantage';
+      document.getElementById('ios-strat-title').innerText = isAr ? 'بناء حاجز الثقة المتميز وتقليل الجهد الذهني' : 'Premium Trust Barrier & Frictionless iOS Commerce';
+      document.getElementById('ios-strat-desc').innerText = isAr
+        ? 'يستهدف تطبيق آيفون الفئة التي تولي الأولوية للدقة وتوفير الوقت. ميزات مثل Face ID والروابط المباشرة تقلل الجهد الذهني، مما يضع المنصة كأداة موثوقة وعالية الكفاءة تتماشى مع نمط حياة مالك المركبة الحديث في المملكة.'
+        : 'The iOS App caters to the high-value segment where accuracy and time-savings are paramount. Features such as Face ID and Universal Links reduce cognitive load, positioning the platform as a seamless, high-confidence extension of the user’s automotive lifestyle.';
+      document.getElementById('ios-card-inv-label').innerText = isAr ? 'استثمار المرحلة' : 'Milestone Investment';
+
+      // Matrix labels
+      document.getElementById('matrix-title').innerText = isAr ? 'تجربة موحدة بين المنتجات الثلاثة' : 'Unified Ecosystem: Cross-Platform Feature Parity';
+      document.getElementById('matrix-desc').innerText = isAr
+        ? 'تم تصميم الموقع الإلكتروني وتطبيق أندرويد وتطبيق آيفون ليعملوا كنظام واحد مترابط. يستطيع العميل استخدام نفس الحساب والسيارات المحفوظة ومعلومات التوافق والمفضلة وسجل الطلبات والمرتجعات وسجلات الدعم عبر المنتجات الثلاثة.'
+        : 'Customers use the same synchronized account, saved vehicles, compatibility ratings, wishlists, order history, and support records across all three platforms.';
+      document.getElementById('th-feature').innerText = isAr ? 'الميزة والقدرة الفنية' : 'Feature / Capability';
+      document.getElementById('th-web').innerText = isAr ? 'الموقع الإلكتروني' : 'Website Platform';
+      document.getElementById('th-android').innerText = isAr ? 'تطبيق أندرويد' : 'Android Application';
+      document.getElementById('th-ios').innerText = isAr ? 'تطبيق آيفون' : 'iOS Application';
+      document.getElementById('th-nature').innerText = isAr ? 'طبيعة المعالجة' : 'Execution Nature';
+
+      // Simulator labels
+      document.getElementById('sim-pill').innerText = isAr ? 'تجربة تفاعلية حية' : 'Interactive UX Demonstration';
+      document.getElementById('sim-title').innerText = isAr ? 'محاكي ضمان التوافق والتحقق الفني الخبير' : 'Guaranteed Fitment & Human Verification Flow';
+      document.getElementById('sim-desc').innerText = isAr
+        ? 'جرب القيمة الجوهرية للمنصة: اختر سيارتك المحفوظة وقطعة الغيار المطلوبة، وشاهد كيف يحمي محرك التوافق الهجين (الخوارزمي + البشري) العميل من أي عملية شراء خاطئة.'
+        : 'Experience the platform\'s core differentiator: select your vehicle, choose a replacement part, and observe how the dual AI-fitment engine and Human Expert Verification safeguards the buyer from wrong purchases.';
+      document.getElementById('sim-lbl-garage').innerText = isAr ? '01. مرآبي (اختر سيارتك المحفوظة)' : '01. My Garage (Select Saved Vehicle)';
+      document.getElementById('sim-lbl-part').innerText = isAr ? '02. استعلام قطعة الغيار من الكتالوج' : '02. Catalog Spare Part Query';
+      document.getElementById('sim-btn-manual-req').innerText = isAr ? 'طلب تحقق بشري من خبير فني' : 'Request Human Technical Verification';
+      document.getElementById('sim-engine-title').innerText = isAr ? 'محرك الفحص الفني للتوافق' : 'Compatibility Diagnostic Engine';
+      document.getElementById('sim-diag-vehicle-lbl').innerText = isAr ? 'المركبة المستهدفة:' : 'Target Vehicle:';
+      document.getElementById('sim-diag-part-lbl').innerText = isAr ? 'القطعة المطلوبة:' : 'Requested Part:';
+      document.getElementById('sim-diag-oem-lbl').innerText = isAr ? 'رقم OEM المعتمد:' : 'Authoritative OEM Reference:';
+      document.getElementById('sim-alt-title').innerText = isAr ? 'البدائل المتوافقة المعتمدة المتاحة:' : 'Available Verified Alternatives:';
+      document.getElementById('sim-alt-sub').innerText = isAr ? '1 قطعة أصلية وكالة • 2 بديل ألماني عالي الجودة' : '1 Original Genuine OEM • 2 High-Tier German Aftermarket';
+
+      // Strategic Thesis
+      document.getElementById('thesis-pill').innerText = isAr ? 'القيمة الأساسية للمشروع' : 'Strategic Differentiation';
+      document.getElementById('thesis-title').innerText = isAr ? 'تقليل المخاطر وإدارة الطلب باحترافية' : 'Risk Mitigation & Demand Management';
+      document.getElementById('thesis-body').innerText = isAr
+        ? 'تكمن القيمة الاستراتيجية للمنصة في تقليل المخاطر وإدارة الطلب باحترافية. فعلى عكس المنافسين الذين يركزون فقط على حجم الكتالوج أو المنافسة السعرية، تنبع قيمتنا من الدقة الفنية وتقليل أخطاء الشراء المكلفة. ومن خلال التموضع كـ "خبير متخصص"، نلبي تطلعات السوق السعودي للخبرة الموثوقة، مما يبني ولاءً طويل الأمد قائماً على جودة الخدمة والاطمئنان النفسي الناتج عن ضمان التوافق.'
+        : 'The platform’s strategic advantage lies in Risk Mitigation and Demand Management. Unlike competitors focused solely on catalog depth or aggressive pricing, our value is rooted in technical accuracy and the reduction of costly purchasing errors. By positioning as a Trusted Specialist, we address the Saudi market\'s need for reliable expertise, fostering long-term loyalty through service quality and the psychological peace of mind that comes from guaranteed compatibility.';
+
+      document.getElementById('thesis-c1-t').innerText = isAr ? '01. القضاء على تكلفة الخطأ' : '01. Cost-of-Error Eradication';
+      document.getElementById('thesis-c1-d').innerText = isAr ? 'تتجاوز مرتجعات القنوات التقليدية 24% بسبب عدم ملاءمة القطع. نظامنا للتحقق يخفض المرتجعات لمستويات تقارب الصفر.' : 'Returns in traditional channels exceed 24% due to incorrect fitment. Our dual verification reduces return overhead to near zero.';
+      document.getElementById('thesis-c2-t').innerText = isAr ? '02. رحلة موحدة متعددة المنصات' : '02. Unified Multi-Platform Journey';
+      document.getElementById('thesis-c2-d').innerText = isAr ? 'نظام خلفي موحد للموقع وتطبيقات الجوال يلغي التشتت ويزيد القيمة الدائمة للعميل على المدى الطويل.' : 'One synchronized backend serving Web, Android, and iOS eliminates customer friction and drives repeat customer lifetime value.';
+      document.getElementById('thesis-c3-t').innerText = isAr ? '03. التزام زمني واستثماري صارم' : '03. High-Discipline Delivery';
+      document.getElementById('thesis-c3-d').innerText = isAr ? 'مراحل تسليم شهرية متتابعة تضمن الانطلاق السريع للسوق مع وضوح مالي كامل في كل دفعة.' : 'Strict 3-month staged milestones ensure immediate time-to-market with clear financial investment tranches.';
+
+      // Search input & placeholder localization & layout
+      const searchInput = document.getElementById('feature-search');
+      const searchIcon = document.getElementById('search-icon');
+      if (searchInput) {
+        searchInput.placeholder = isAr ? 'ابحث في المزايا والخصائص...' : 'Filter features...';
+        if (isAr) {
+          searchInput.className = 'w-full bg-slate-900/90 border border-slate-700 rounded-xl pr-4 pl-9 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 text-right';
+        } else {
+          searchInput.className = 'w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-4 pr-9 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 text-left';
+        }
+      }
+      if (searchIcon) {
+        searchIcon.className = isAr 
+          ? 'absolute left-3 top-2 text-slate-400 text-xs pointer-events-none' 
+          : 'absolute right-3 top-2 text-slate-400 text-xs pointer-events-none';
+      }
+
+      // Verification Modal Localization
+      const modalTitle = document.getElementById('modal-title');
+      if (modalTitle) modalTitle.innerText = isAr ? 'التحقق الفني البشري من التوافق' : 'Human Technical Verification';
+      const modalSub = document.getElementById('modal-sub');
+      if (modalSub) modalSub.innerText = isAr ? 'أرسل رقم هيكل المركبة (VIN) أو صورة القطعة للتأكيد الفني المعتمد.' : 'Submit vehicle chassis (VIN) or photo for certified expert confirmation.';
+      const modalLblVin = document.getElementById('modal-lbl-vin');
+      if (modalLblVin) modalLblVin.innerText = isAr ? 'رقم الهيكل / VIN (17 رمزاً):' : 'Chassis / VIN Number (17 digits):';
+      const modalVin = document.getElementById('modal-vin');
+      if (modalVin) modalVin.placeholder = isAr ? 'مثال: JTMAB3FV8P5029184' : 'e.g. JTMAB3FV8P5029184';
+      const modalLblNotes = document.getElementById('modal-lbl-notes');
+      if (modalLblNotes) modalLblNotes.innerText = isAr ? 'الاستفسار الفني / الملاحظات:' : 'Technical Inquiry / Notes:';
+      const modalNotes = document.getElementById('modal-notes');
+      if (modalNotes) {
+        if (isAr && modalNotes.value === 'Checking compatibility for Saudi GCC trim with heavy-duty cooling package.') {
+          modalNotes.value = 'التحقق من التوافق للمواصفات الخليجية السعودية مع حزمة التبريد العالي.';
+        } else if (!isAr && modalNotes.value === 'التحقق من التوافق للمواصفات الخليجية السعودية مع حزمة التبريد العالي.') {
+          modalNotes.value = 'Checking compatibility for Saudi GCC trim with heavy-duty cooling package.';
+        }
+      }
+      const modalUploadHint = document.getElementById('modal-upload-hint');
+      if (modalUploadHint) modalUploadHint.innerText = isAr ? 'إمكانية التصوير بالكاميرا ومعرض الصور مفعلة أصلياً في تطبيقات أندرويد وآيفون.' : 'Camera / Gallery upload enabled natively on Android & iOS applications.';
+      const modalBtnCancel = document.getElementById('modal-btn-cancel');
+      if (modalBtnCancel) modalBtnCancel.innerText = isAr ? 'إلغاء' : 'Cancel';
+      const modalBtnSubmit = document.getElementById('modal-btn-submit');
+      if (modalBtnSubmit) modalBtnSubmit.innerText = isAr ? 'إرسال إلى الخبير الفني' : 'Submit to Technical Specialist';
+
+      // Simulator Select Options Localization
+      const simVehicle = document.getElementById('sim-vehicle');
+      if (simVehicle) {
+        simVehicle.options[0].text = isAr ? 'تويوتا كامري 2023 — 2.5 لتر 4 سلندر (GLE)' : 'Toyota Camry 2023 — 2.5L 4-Cylinder (GLE)';
+        simVehicle.options[1].text = isAr ? 'تويوتا لاند كروزر 2024 — 3.5 لتر توين تيربو (VXR)' : 'Toyota Land Cruiser 2024 — 3.5L Twin-Turbo (VXR)';
+        simVehicle.options[2].text = isAr ? 'نيسان باترول 2022 — 5.6 لتر V8 (تيتانيوم)' : 'Nissan Patrol 2022 — 5.6L V8 (Titanium)';
+        simVehicle.options[3].text = isAr ? 'هيونداي توسان 2021 — 2.0 لتر سمارت ستريم' : 'Hyundai Tucson 2021 — 2.0L Smartstream';
+      }
+
+      const simPart = document.getElementById('sim-part');
+      if (simPart) {
+        simPart.options[0].text = isAr ? 'فحمات فرامل سيراميك أمامية (OEM: 04465-33471)' : 'Ceramic Front Brake Pads (OEM: 04465-33471)';
+        simPart.options[1].text = isAr ? 'دينامو / مولد كهرباء 150 أمبير (متعدد الفئات)' : 'High-Output Alternator 150A (Multi-Trim Variant)';
+        simPart.options[2].text = isAr ? 'فلتر زيت المحرك التخليقي' : 'Synthetic Engine Oil Filter Element';
+        simPart.options[3].text = isAr ? 'مروحة تبريد الرديتر الإلكترونية' : 'Electronic Cooling Radiator Fan Assembly';
+      }
+
+      // Footer
+      const footCopy = document.getElementById('foot-copy');
+      if (footCopy) footCopy.innerText = isAr ? 'منصة يَرْكَبْ (Yerkab) لقطع غيار السيارات — dubaiincairo.com/proposals/yerkab' : 'Yerkab (يركب) — Automotive Spare Parts Platform • dubaiincairo.com/proposals/yerkab';
+      const footDate = document.getElementById('foot-date');
+      if (footDate) footDate.innerText = isAr ? 'مبادرة استراتيجية معتمدة لسوق المملكة العربية السعودية' : 'Certified Strategic Initiative for Saudi Market';
+
+      // Confirmation Modal Localization
+      updateConfirmationModalTexts(isAr);
+
+      // Re-render the cards with active language
+      renderCards();
+      runFitmentCheck();
+    }
+
+    // Switch active tab
+    function switchTab(tabId) {
+      currentTab = tabId;
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      
+      const targetPanel = document.getElementById(`tab-panel-${tabId}`);
+      if (targetPanel) {
+        targetPanel.classList.remove('hidden');
+      }
+
+      // Reset button styles
+      const tabBtns = ['website', 'android', 'ios', 'matrix', 'simulator'];
+      tabBtns.forEach(id => {
+        const btn = document.getElementById(`tab-btn-${id}`);
+        if (!btn) return;
+        if (id === tabId) {
+          btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20';
+        } else if (id === 'simulator') {
+          btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-900/40';
+        } else {
+          btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700';
+        }
+      });
+    }
+
+    // Live Search / Filter
+    function filterFeatures() {
+      const q = document.getElementById('feature-search').value.toLowerCase().trim();
+      const items = document.querySelectorAll('.feature-item');
+      items.forEach(item => {
+        const searchData = item.getAttribute('data-search') || '';
+        if (!q || searchData.includes(q)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // Interactive Fitment Engine Simulator
+    function runFitmentCheck() {
+      const vehicleVal = document.getElementById('sim-vehicle').value;
+      const partVal = document.getElementById('sim-part').value;
+      const isAr = currentLang === 'ar';
+
+      const vehicleName = document.getElementById('sim-vehicle').options[document.getElementById('sim-vehicle').selectedIndex].text;
+      const partName = document.getElementById('sim-part').options[document.getElementById('sim-part').selectedIndex].text;
+
+      document.getElementById('sim-out-vehicle').innerText = vehicleName;
+      document.getElementById('sim-out-part').innerText = partName;
+
+      const statusPill = document.getElementById('sim-status-pill');
+      const explBox = document.getElementById('sim-expl-box');
+      const oemRef = document.getElementById('sim-out-oem');
+
+      if (partVal === 'alternator') {
+        // Verification Required Case
+        statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500/20 text-amber-400 border border-amber-500/30';
+        statusPill.innerText = isAr ? 'يحتاج تحقق فني (Verification Required)' : 'Verification Required (Manual Review)';
+        oemRef.innerText = '27060-0V210 / 27060-0V280 (Dual Pulley Variants)';
+        explBox.className = 'p-3.5 rounded-xl bg-amber-950/30 border border-amber-500/20 text-xs text-amber-200 leading-relaxed';
+        explBox.innerHTML = isAr
+          ? 'تنبيه: يتوفر نوعان لمولد الكهرباء (130 أمبير و150 أمبير) حسب حزمة التبريد الخليجية. تم تفعيل خيار <b>"طلب التحقق البشري"</b> للتأكد عبر رقم الهيكل والصورة لمنع أي خطأ.'
+          : 'Warning: 2 alternator variants exist (130A vs 150A) depending on GCC cold/heavy-duty cooling spec. <b>"Human Verification Request"</b> is recommended to guarantee 100% fitment via VIN inspection.';
+      } else if (vehicleVal === 'patrol' && partVal === 'brake-front') {
+        // Likely Compatible
+        statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-blue-500/20 text-blue-400 border border-blue-500/30';
+        statusPill.innerText = isAr ? 'غالباً متوافق (Likely Compatible)' : 'Likely Compatible (95% Fitment Score)';
+        oemRef.innerText = 'D1060-1LB0A-GCC';
+        explBox.className = 'p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/20 text-xs text-blue-200 leading-relaxed';
+        explBox.innerHTML = isAr
+          ? 'متوافق مع طرازات نيسان باترول Y62 لمحركات 5.6L لسنوات 2018-2023. مواصفات الكبح مطابقة لمعايير هيئة التقييس لدول مجلس التعاون.'
+          : 'Fits Nissan Patrol Y62 5.6L V8 (2018-2023). Rotor surface clearance complies with GSO standards. High confidence match.';
+      } else {
+        // Compatible Case
+        statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+        statusPill.innerText = isAr ? '100% متوافق بالكامل (Certified Compatible)' : '100% Compatible (Factory Fitment Guaranteed)';
+        oemRef.innerText = '04465-33471-KSA';
+        explBox.className = 'p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-xs text-emerald-200 leading-relaxed';
+        explBox.innerHTML = isAr
+          ? 'توافق مصنعي مباشر ومؤكد. أبعاد أقراص الفرامل والأسلاك الحساسة مطابقة للسيارة المختارة بنسبة 100%. معدل خطر الخطأ: 0.0%.'
+          : 'Direct factory fitment confirmed. Caliper mount points and rotor diameter match Saudi-market GCC specifications exactly. Risk score: 0.0%.';
+      }
+    }
+
+    // Verification Modal Logic
+    function openVerificationModal() {
+      const modal = document.getElementById('verification-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeVerificationModal() {
+      const modal = document.getElementById('verification-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function submitVerification() {
+      const isAr = currentLang === 'ar';
+      const vin = (document.getElementById('modal-vin').value || 'JTMAB3FV8P5029184').trim();
+      
+      // Close the inquiry entry modal
+      closeVerificationModal();
+
+      // Populate confirmation modal details
+      const confirmVinDisplay = document.getElementById('confirm-vin-display');
+      if (confirmVinDisplay) confirmVinDisplay.innerText = vin;
+
+      const randomTicket = '#VER-2026-' + Math.floor(1000 + Math.random() * 9000);
+      const confirmTicketId = document.getElementById('confirm-ticket-id');
+      if (confirmTicketId) confirmTicketId.innerText = randomTicket;
+
+      updateConfirmationModalTexts(isAr);
+
+      // Open custom confirmation modal
+      const confirmModal = document.getElementById('confirmation-modal');
+      if (confirmModal) {
+        confirmModal.classList.remove('hidden');
+        confirmModal.classList.add('flex');
+      }
+    }
+
+    function closeConfirmationModal() {
+      const confirmModal = document.getElementById('confirmation-modal');
+      if (confirmModal) {
+        confirmModal.classList.add('hidden');
+        confirmModal.classList.remove('flex');
+      }
+    }
+
+    function updateConfirmationModalTexts(isAr) {
+      const confirmPill = document.getElementById('confirm-pill');
+      if (confirmPill) confirmPill.innerText = isAr ? 'تم استلام الطلب بنجاح' : 'REQUEST SUBMITTED & VERIFIED';
+
+      const confirmTitle = document.getElementById('confirm-title');
+      if (confirmTitle) confirmTitle.innerText = isAr ? 'تم إرسال طلب التحقق إلى المكتب الفني' : 'Technical Verification Dispatched';
+
+      const confirmDesc = document.getElementById('confirm-desc');
+      if (confirmDesc) confirmDesc.innerText = isAr 
+        ? 'استلم مهندس معتمد طلبك وبدأ في مراجعة كتالوجات الوكالة للمواصفات الخليجية لضمان التوافق التام بنسبة 100%.'
+        : 'A certified automotive technical specialist has received your inquiry and is cross-referencing GCC factory catalogs to ensure 100% compatibility.';
+
+      const confirmLblVin = document.getElementById('confirm-lbl-vin');
+      if (confirmLblVin) confirmLblVin.innerText = isAr ? 'رقم الهيكل / VIN:' : 'Chassis / VIN:';
+
+      const confirmLblTicket = document.getElementById('confirm-lbl-ticket');
+      if (confirmLblTicket) confirmLblTicket.innerText = isAr ? 'رقم تذكرة الفحص:' : 'Ticket Reference:';
+
+      const confirmLblSla = document.getElementById('confirm-lbl-sla');
+      if (confirmLblSla) confirmLblSla.innerText = isAr ? 'الوقت المتوقع للرد:' : 'Expected Response:';
+
+      const confirmSla = document.getElementById('confirm-sla');
+      if (confirmSla) confirmSla.innerText = isAr ? 'أقل من 15 دقيقة (أولوية قصوى)' : '< 15 Minutes (Priority SLA)';
+
+      const confirmLblChannel = document.getElementById('confirm-lbl-channel');
+      if (confirmLblChannel) confirmLblChannel.innerText = isAr ? 'قناة الإشعار:' : 'Notification Channel:';
+
+      const confirmChannelVal = document.getElementById('confirm-channel-val');
+      if (confirmChannelVal) confirmChannelVal.innerHTML = isAr ? '<span>📲 إشعار فوري بالجوال وواتساب</span>' : '<span>📲 Mobile Push &amp; WhatsApp</span>';
+
+      const confirmBtnDone = document.getElementById('confirm-btn-done');
+      if (confirmBtnDone) confirmBtnDone.innerText = isAr ? 'تم والمتابعة في المنصة' : 'Done & Continue Browsing';
+    }
+
+    // Dismiss modals on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeVerificationModal();
+        closeConfirmationModal();
+      }
+    });
+
+    // Initialize on Page Load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCards();
+      runFitmentCheck();
+    });
+  </script>
+</body>
+</html>

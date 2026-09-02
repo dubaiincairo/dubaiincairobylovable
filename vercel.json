@@ -21,6 +21,18 @@
       "destination": "https://swissblue23may-git-codex-marketin-b957d5-dubaiincairos-projects.vercel.app/_next/:path*"
     },
     {
+      "source": "/proposals/yerkab",
+      "destination": "/proposals/yerkab/index.html"
+    },
+    {
+      "source": "/proposals/yerkab/",
+      "destination": "/proposals/yerkab/index.html"
+    },
+    {
+      "source": "/proposals/yerkab/:path*",
+      "destination": "/proposals/yerkab/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
