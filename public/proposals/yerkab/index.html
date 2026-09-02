@@ -325,24 +325,209 @@
       }
     }
 
-    /* Print Styles for Executive Export */
+    /* Publication-Grade Executive Print Styles */
     @media print {
+      @page {
+        margin: 12mm 10mm 12mm 10mm;
+        size: A4 portrait;
+      }
+      
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
       body {
         background: #ffffff !important;
         color: #0f172a !important;
+        font-size: 10pt !important;
+        line-height: 1.4 !important;
+        padding-bottom: 0 !important;
       }
-      .no-print {
+
+      /* Hide interactive Web UI elements in PDF */
+      header,
+      #scroll-progress-bar,
+      #tabs-nav,
+      #feature-search-container,
+      #filter-count-badge,
+      #verification-modal,
+      #confirmation-modal,
+      .no-print,
+      .ambient-orb-1,
+      .ambient-orb-2,
+      .ambient-orb-3,
+      button,
+      .card-arrow,
+      #toast-notification,
+      #tab-panel-simulator {
         display: none !important;
       }
-      .glass-card {
+
+      /* Clean Document Header for PDF */
+      #print-doc-header {
+        display: block !important;
+      }
+
+      main {
+        padding-top: 0 !important;
+        max-width: 100% !important;
+      }
+
+      /* Section styling for executive PDF */
+      section {
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        margin-bottom: 1.5rem !important;
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+      }
+
+      #hero-section,
+      #commercial-structure-section,
+      #strategic-thesis-section {
         background: #ffffff !important;
         border: 1px solid #cbd5e1 !important;
+        border-radius: 14px !important;
+        padding: 1.25rem !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+
+      /* Force high contrast text on light paper */
+      h1, h2, h3, h4, h5, h6 {
+        color: #0f172a !important;
+        break-after: avoid !important;
+      }
+
+      p, span, div, li, td, th {
+        color: #334155 !important;
+      }
+
+      /* Executive KPI & Milestone Cards in Print */
+      .spotlight-card, .glass-card {
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 12px !important;
         box-shadow: none !important;
         transform: none !important;
-        break-inside: avoid;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
       }
-      .tab-content {
+
+      /* Text color overrides for metrics & badges in PDF */
+      .text-white { color: #0f172a !important; }
+      .text-slate-100, .text-slate-200, .text-slate-300 { color: #1e293b !important; }
+      .text-slate-400 { color: #475569 !important; }
+      .text-amber-400 { color: #b45309 !important; font-weight: 800 !important; }
+      .text-blue-400, .text-blue-300 { color: #1d4ed8 !important; font-weight: 800 !important; }
+      .text-emerald-400, .text-emerald-300 { color: #047857 !important; font-weight: 800 !important; }
+      .text-purple-400, .text-purple-300 { color: #6d28d9 !important; font-weight: 800 !important; }
+      .text-cyan-400, .text-cyan-300 { color: #0e7490 !important; font-weight: 800 !important; }
+      .text-rose-400, .text-rose-300 { color: #be123c !important; font-weight: 800 !important; }
+
+      /* Background colors for pills in PDF */
+      .bg-slate-900, .bg-slate-900\/60, .bg-slate-900\/80, .bg-slate-800, .bg-slate-800\/60, .bg-slate-800\/90 {
+        background: #f1f5f9 !important;
+        border-color: #cbd5e1 !important;
+      }
+
+      .bg-blue-950\/40, .bg-blue-950\/20, .bg-blue-500\/10, .bg-blue-500\/20 {
+        background: #eff6ff !important;
+        border-color: #bfdbfe !important;
+      }
+
+      .bg-emerald-500\/10, .bg-emerald-500\/20 {
+        background: #ecfdf5 !important;
+        border-color: #a7f3d0 !important;
+      }
+
+      .bg-purple-500\/10, .bg-purple-500\/20 {
+        background: #faf5ff !important;
+        border-color: #e9d5ff !important;
+      }
+
+      .bg-amber-500\/10, .bg-amber-500\/20 {
+        background: #fffbeb !important;
+        border-color: #fde68a !important;
+      }
+
+      .bg-cyan-500\/10 {
+        background: #ecfeff !important;
+        border-color: #a5f3fc !important;
+      }
+
+      /* 3-Column Horizontal Grids for Milestones and Strategic Pillars in Print */
+      .grid.grid-cols-1.md\:grid-cols-3,
+      #strategic-thesis-section .grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 12px !important;
+      }
+
+      /* Only print the currently active tab to prevent blank pages and 30-page bloat */
+      .tab-content.hidden {
+        display: none !important;
+      }
+      .tab-content:not(.hidden) {
         display: block !important;
+        break-before: auto !important;
+        page-break-before: auto !important;
+      }
+
+      /* Unified Matrix Table in Print */
+      #tab-panel-matrix table {
+        border: 1px solid #cbd5e1 !important;
+        width: 100% !important;
+        background: #ffffff !important;
+      }
+
+      #tab-panel-matrix th {
+        background: #f1f5f9 !important;
+        color: #0f172a !important;
+        border-bottom: 2px solid #94a3b8 !important;
+        padding: 6px 10px !important;
+      }
+
+      #tab-panel-matrix td {
+        border-bottom: 1px solid #e2e8f0 !important;
+        color: #334155 !important;
+        padding: 5px 10px !important;
+      }
+
+      /* Feature Grids: compact 2-column layout */
+      #web-features-grid, #android-features-grid, #ios-features-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.6rem !important;
+      }
+
+      .feature-item {
+        padding: 0.75rem !important;
+        border: 1px solid #cbd5e1 !important;
+        background: #f8fafc !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+
+      .feature-drawer {
+        display: none !important;
+      }
+
+      /* Clean footer for print */
+      footer {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        margin-top: 1.5rem !important;
+        padding-top: 1rem !important;
+        border-top: 1px solid #cbd5e1 !important;
       }
     }
   </style>
@@ -428,6 +613,22 @@
 
   <!-- MAIN CONTAINER -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-10 relative z-10">
+
+    <!-- Dedicated Executive Letterhead for Printed PDF -->
+    <div id="print-doc-header" class="hidden pb-4 mb-6 border-b-2 border-slate-900">
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-xl font-black text-slate-900 flex items-center gap-2">
+            <span>YERKAB • يَرْكَبْ</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-blue-100 text-blue-800">Guaranteed Fitment • يركب بالملّي</span>
+          </div>
+          <p class="text-xs text-slate-600 mt-1" id="print-doc-sub">Saudi Automotive Spare Parts Platform — Commercial Proposal &amp; 90-Day Delivery Roadmap</p>
+        </div>
+        <div class="text-right text-xs text-slate-500 font-mono">
+          dubaiincairo.com/proposals/yerkab
+        </div>
+      </div>
+    </div>
 
     <!-- HERO / EXECUTIVE BANNER -->
     <section class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-6 sm:p-10 shadow-2xl">
@@ -565,7 +766,7 @@
             </div>
             <span class="text-[11px] text-blue-400 font-semibold group-hover:text-cyan-300 transition-colors flex items-center gap-1">
               <span id="card-m1-explore">View features</span>
-              <span>→</span>
+              <span id="card-m1-arrow">→</span>
             </span>
           </div>
         </div>
@@ -601,7 +802,7 @@
             </div>
             <span class="text-[11px] text-emerald-400 font-semibold group-hover:text-emerald-300 transition-colors flex items-center gap-1">
               <span id="card-m2-explore">View features</span>
-              <span>→</span>
+              <span id="card-m2-arrow">→</span>
             </span>
           </div>
         </div>
@@ -637,7 +838,7 @@
             </div>
             <span class="text-[11px] text-purple-400 font-semibold group-hover:text-purple-300 transition-colors flex items-center gap-1">
               <span id="card-m3-explore">View features</span>
-              <span>→</span>
+              <span id="card-m3-arrow">→</span>
             </span>
           </div>
         </div>
@@ -646,7 +847,7 @@
 
     <!-- INTERACTIVE PRODUCT EXPLORER & TABS -->
     <section class="space-y-6 pt-4">
-      <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
         <!-- Tab Navigation Buttons (Horizontal Smooth Momentum Scroll on Mobile) -->
         <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scroll-touch" role="tablist" id="tabs-nav">
           <button onclick="switchTab('website')" id="tab-btn-website" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20 active:scale-95 touch-manipulation">
@@ -1967,6 +2168,12 @@
       if (brandSub) brandSub.innerText = isAr 
         ? 'منصة قطع غيار السيارات في المملكة • العرض التجاري والمواصفات الفنية' 
         : 'Saudi Automotive Aftermarket Platform • Commercial Proposal & Roadmap';
+      const printDocSub = document.getElementById('print-doc-sub');
+      if (printDocSub) {
+        printDocSub.innerText = isAr 
+          ? 'منصة قطع غيار السيارات في المملكة — العرض التجاري وخارطة الطريق 90 يوماً' 
+          : 'Saudi Automotive Spare Parts Platform — Commercial Proposal & 90-Day Delivery Roadmap';
+      }
       const btnDemo = document.getElementById('btn-demo-fitment');
       if (btnDemo) btnDemo.innerText = isAr ? 'محاكي التوافق الفني' : 'Fitment Simulator';
       const btnCopy = document.getElementById('btn-copy-text');
@@ -2028,6 +2235,8 @@
       document.getElementById('card-m1-features-count').innerText = isAr ? '17 ميزة متكاملة' : '17 Core Integrated Features';
       const m1Explore = document.getElementById('card-m1-explore');
       if (m1Explore) m1Explore.innerText = isAr ? 'استعراض المزايا' : 'View features';
+      const m1Arrow = document.getElementById('card-m1-arrow');
+      if (m1Arrow) m1Arrow.innerText = isAr ? '←' : '→';
 
       document.getElementById('card-m2-tag').innerText = isAr ? 'الشهر الثاني • المرحلة الثانية' : 'Month 2 • Milestone 2';
       document.getElementById('card-m2-title').innerText = isAr ? 'تطبيق أندرويد' : 'Android Application';
@@ -2040,6 +2249,8 @@
       document.getElementById('card-m2-features-count').innerText = isAr ? '16 ميزة مخصصة للجوال' : '16 Mobile-Native Features';
       const m2Explore = document.getElementById('card-m2-explore');
       if (m2Explore) m2Explore.innerText = isAr ? 'استعراض المزايا' : 'View features';
+      const m2Arrow = document.getElementById('card-m2-arrow');
+      if (m2Arrow) m2Arrow.innerText = isAr ? '←' : '→';
 
       document.getElementById('card-m3-tag').innerText = isAr ? 'الشهر الثالث • المرحلة الثالثة' : 'Month 3 • Milestone 3';
       document.getElementById('card-m3-title').innerText = isAr ? 'تطبيق آيفون' : 'iOS Application';
@@ -2052,6 +2263,8 @@
       document.getElementById('card-m3-features-count').innerText = isAr ? '16 ميزة لنظام iOS' : '16 Apple Ecosystem Features';
       const m3Explore = document.getElementById('card-m3-explore');
       if (m3Explore) m3Explore.innerText = isAr ? 'استعراض المزايا' : 'View features';
+      const m3Arrow = document.getElementById('card-m3-arrow');
+      if (m3Arrow) m3Arrow.innerText = isAr ? '←' : '→';
 
       // Tab Buttons
       document.getElementById('tab-label-web').innerText = isAr ? '1. الموقع الإلكتروني (17)' : '1. Website (17)';
@@ -2481,47 +2694,50 @@
       });
     }
 
-    // Number Counting Animation (Smooth, deliberate count-up at 1600ms)
+    // Number Counting Animation (Classified into 2 Phases: Fast initial surge -> Slower deliberate crawl)
     function runNumberCounters() {
       const isAr = currentLang === 'ar';
       
       // 1. Portfolio Investment: 0 -> 10,090 SAR (or 10,090 ﷼)
       const kpi1 = document.getElementById('kpi-1-val');
-      if (kpi1) animateNumberCounter(kpi1, 10090, 1600, { isCurrency: true });
+      if (kpi1) animateNumberCounter(kpi1, 10090, 2200, { isCurrency: true });
 
       // 2. Delivery Sequence: 0 -> 90 Days (or 90 يوماً)
       const kpi2 = document.getElementById('kpi-2-val');
-      if (kpi2) animateNumberCounter(kpi2, 90, 1600, { suffix: isAr ? ' يوماً' : ' Days' });
+      if (kpi2) animateNumberCounter(kpi2, 90, 2200, { suffix: isAr ? ' يوماً' : ' Days' });
 
       // 3. Total Capabilities: 0 -> 49 Features (or 49 خاصية)
       const kpi3 = document.getElementById('kpi-3-val');
-      if (kpi3) animateNumberCounter(kpi3, 49, 1500, { suffix: isAr ? ' خاصية' : ' Features' });
+      if (kpi3) animateNumberCounter(kpi3, 49, 2000, { suffix: isAr ? ' خاصية' : ' Features' });
 
       // 4. Fitment Guarantee: 0% -> 100% Verified (or 100% توافق مؤكد)
       const kpi4 = document.getElementById('kpi-4-val');
-      if (kpi4) animateNumberCounter(kpi4, 100, 1700, { suffix: isAr ? '% توافق مؤكد' : '% Verified' });
+      if (kpi4) animateNumberCounter(kpi4, 100, 2200, { suffix: isAr ? '% توافق مؤكد' : '% Verified' });
 
       // 5. Target Fleet: 0.00 -> 15.88M Vehicles
       const fleet = document.getElementById('hero-fleet-val');
       if (fleet) {
-        animateNumberCounter(fleet, 15.88, 1600, { decimals: 2, suffix: 'M Vehicles' });
+        animateNumberCounter(fleet, 15.88, 2200, { decimals: 2, suffix: 'M Vehicles' });
       }
 
       // 6. Milestone Prices (Website, Android, iOS, Total)
       const m1 = document.getElementById('card-m1-price');
-      if (m1) animateNumberCounter(m1, 3600, 1400, { isCurrency: true });
+      if (m1) animateNumberCounter(m1, 3600, 2000, { isCurrency: true });
 
       const m2 = document.getElementById('card-m2-price');
-      if (m2) animateNumberCounter(m2, 3150, 1400, { isCurrency: true });
+      if (m2) animateNumberCounter(m2, 3150, 2000, { isCurrency: true });
 
       const m3 = document.getElementById('card-m3-price');
-      if (m3) animateNumberCounter(m3, 3340, 1400, { isCurrency: true });
+      if (m3) animateNumberCounter(m3, 3340, 2000, { isCurrency: true });
 
       const commTotal = document.getElementById('comm-total-val');
-      if (commTotal) animateNumberCounter(commTotal, 10090, 1600, { isCurrency: true });
+      if (commTotal) animateNumberCounter(commTotal, 10090, 2200, { isCurrency: true });
     }
 
-    function animateNumberCounter(el, target, duration = 1600, options = {}) {
+    // Two-Phase Counter:
+    // Phase 1 (First 35% of time): Fast counter - quickly ascends from 0 to ~78% of the target.
+    // Phase 2 (Remaining 65% of time): Slower counter - gently counts up the final 22% so the user can easily observe and understand the numbers.
+    function animateNumberCounter(el, target, duration = 2200, options = {}) {
       if (!el) return;
       const isAr = currentLang === 'ar';
       const { isCurrency = false, prefix = '', suffix = '', decimals = 0 } = options;
@@ -2533,16 +2749,26 @@
       function step(now) {
         const elapsed = now - start;
         const p = Math.min(elapsed / duration, 1);
-        // Quartic ease-out for a very smooth and deliberate counting motion
-        const ease = 1 - Math.pow(1 - p, 4);
+        
+        let currentRatio;
+        if (p < 0.35) {
+          // Phase 1: Fast initial burst (covers 0 -> 78% of target within first 35% of duration)
+          const p1 = p / 0.35;
+          currentRatio = 0.78 * (1 - Math.pow(1 - p1, 2));
+        } else {
+          // Phase 2: Slower, observational phase (counts remaining 22% smoothly over 65% of duration)
+          const p2 = (p - 0.35) / 0.65;
+          currentRatio = 0.78 + 0.22 * (1 - Math.pow(1 - p2, 3));
+        }
+
         const current = decimals > 0 
-          ? (target * ease).toFixed(decimals) 
-          : Math.floor(target * ease);
+          ? (target * currentRatio).toFixed(decimals) 
+          : Math.floor(target * currentRatio);
 
         if (isCurrency) {
           el.innerHTML = formatCurrency(Number(current).toLocaleString('en-US'), isAr);
         } else {
-          el.innerText = `${prefix}${current}${suffix}`;
+          el.innerText = `${prefix}${Number(current).toLocaleString('en-US')}${suffix}`;
         }
 
         if (p < 1) {
@@ -2551,13 +2777,55 @@
           if (isCurrency) {
             el.innerHTML = formatCurrency(target.toLocaleString('en-US'), isAr);
           } else {
-            el.innerText = `${prefix}${decimals > 0 ? target.toFixed(decimals) : target}${suffix}`;
+            el.innerText = `${prefix}${decimals > 0 ? target.toFixed(decimals) : target.toLocaleString('en-US')}${suffix}`;
           }
           el._animFrame = null;
         }
       }
       el._animFrame = requestAnimationFrame(step);
     }
+
+    // Immediate canonical completion of number counters before PDF generation
+    function finalizeCountersForPrint() {
+      const isAr = currentLang === 'ar';
+      
+      // Stop all active animation frames
+      document.querySelectorAll('*').forEach(el => {
+        if (el._animFrame) {
+          cancelAnimationFrame(el._animFrame);
+          el._animFrame = null;
+        }
+      });
+
+      const kpi1 = document.getElementById('kpi-1-val');
+      if (kpi1) kpi1.innerHTML = formatCurrency('10,090', isAr);
+
+      const kpi2 = document.getElementById('kpi-2-val');
+      if (kpi2) kpi2.innerText = isAr ? '90 يوماً' : '90 Days';
+
+      const kpi3 = document.getElementById('kpi-3-val');
+      if (kpi3) kpi3.innerText = isAr ? '49 خاصية' : '49 Features';
+
+      const kpi4 = document.getElementById('kpi-4-val');
+      if (kpi4) kpi4.innerText = isAr ? '100% توافق مؤكد' : '100% Verified';
+
+      const fleet = document.getElementById('hero-fleet-val');
+      if (fleet) fleet.innerText = '15.88M Vehicles';
+
+      const m1 = document.getElementById('card-m1-price');
+      if (m1) m1.innerHTML = formatCurrency('3,600', isAr);
+
+      const m2 = document.getElementById('card-m2-price');
+      if (m2) m2.innerHTML = formatCurrency('3,150', isAr);
+
+      const m3 = document.getElementById('card-m3-price');
+      if (m3) m3.innerHTML = formatCurrency('3,340', isAr);
+
+      const commTotal = document.getElementById('comm-total-val');
+      if (commTotal) commTotal.innerHTML = formatCurrency('10,090', isAr);
+    }
+
+    window.addEventListener('beforeprint', finalizeCountersForPrint);
 
     // High-Tech Scroll Progress Tracker (Passive 60fps)
     window.addEventListener('scroll', () => {
@@ -2658,13 +2926,19 @@
     });
 
     // Initialize on Page Load
-    document.addEventListener('DOMContentLoaded', () => {
+    function initApp() {
       renderCards();
       runFitmentCheck();
       initSpotlightCards();
       runNumberCounters();
       filterFeatures();
-    });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initApp);
+    } else {
+      initApp();
+    }
   </script>
 </body>
 </html>
