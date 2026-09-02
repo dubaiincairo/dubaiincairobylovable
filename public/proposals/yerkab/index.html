@@ -382,7 +382,7 @@
         </button>
 
         <!-- Interactive Simulator Jump Button -->
-        <button onclick="switchTab('simulator')" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 active:scale-95 text-xs font-semibold transition touch-manipulation">
+        <button onclick="jumpToSimulator()" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 active:scale-95 text-xs font-semibold transition touch-manipulation cursor-pointer" title="Jump to Interactive Prototype">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
@@ -484,8 +484,8 @@
           <!-- KPI 2 -->
           <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-blue-500/50 transition-all duration-300 cursor-pointer group">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-2-label">Delivery Sequence</div>
-            <div class="text-2xl font-black text-blue-400 mt-1" id="kpi-2-val">3 Months</div>
-            <div class="text-xs text-slate-400 mt-0.5" id="kpi-2-sub">1 Month Per Milestone</div>
+            <div class="text-2xl font-black text-blue-400 mt-1" id="kpi-2-val">90 Days</div>
+            <div class="text-xs text-slate-400 mt-0.5" id="kpi-2-sub">30 Days Per Milestone</div>
           </div>
           <!-- KPI 3 -->
           <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer group">
@@ -913,7 +913,7 @@
         </div>
         <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
           <div class="text-emerald-400 font-bold text-sm" id="thesis-c3-t">03. High-Discipline Delivery</div>
-          <p class="text-xs text-slate-400 mt-1" id="thesis-c3-d">Strict 3-month staged milestones ensure immediate time-to-market with clear financial investment tranches.</p>
+          <p class="text-xs text-slate-400 mt-1" id="thesis-c3-d">Strict 90-day staged milestones ensure immediate time-to-market with clear financial investment tranches.</p>
         </div>
       </div>
     </section>
@@ -1906,23 +1906,15 @@
 
       // KPI values & labels (Full Arabic localization & SAMA official symbol)
       document.getElementById('kpi-1-label').innerText = isAr ? 'إجمالي الاستثمار' : 'Portfolio Investment';
-      const kpi1Val = document.getElementById('kpi-1-val');
-      if (kpi1Val) kpi1Val.innerHTML = formatCurrency('10,090', isAr);
       document.getElementById('kpi-1-sub').innerText = isAr ? '3 منتجات إنتاجية كاملة' : '3 Production Products';
 
       document.getElementById('kpi-2-label').innerText = isAr ? 'تسلسل التنفيذ' : 'Delivery Sequence';
-      const kpi2Val = document.getElementById('kpi-2-val');
-      if (kpi2Val) kpi2Val.innerText = isAr ? '3 أشهر' : '3 Months';
-      document.getElementById('kpi-2-sub').innerText = isAr ? 'شهر واحد لكل مرحلة تسليم' : '1 Month Per Milestone';
+      document.getElementById('kpi-2-sub').innerText = isAr ? '30 يوماً لكل مرحلة تسليم' : '30 Days Per Milestone';
 
       document.getElementById('kpi-3-label').innerText = isAr ? 'إجمالي الخصائص' : 'Total Capabilities';
-      const kpi3Val = document.getElementById('kpi-3-val');
-      if (kpi3Val) kpi3Val.innerText = isAr ? '49 خاصية' : '49 Features';
       document.getElementById('kpi-3-sub').innerText = isAr ? 'الموقع + أندرويد + آيفون' : 'Web + Android + iOS';
 
       document.getElementById('kpi-4-label').innerText = isAr ? 'ضمان التوافق' : 'Fitment Guarantee';
-      const kpi4Val = document.getElementById('kpi-4-val');
-      if (kpi4Val) kpi4Val.innerText = isAr ? 'توافق مؤكد 100%' : '100% Verified';
       document.getElementById('kpi-4-sub').innerText = isAr ? 'فحص خوارزمي + بشري خبير' : 'AI + Human Engineering';
 
       // Commercial Summary
@@ -2044,7 +2036,7 @@
       document.getElementById('thesis-c2-t').innerText = isAr ? '02. رحلة موحدة متعددة المنصات' : '02. Unified Multi-Platform Journey';
       document.getElementById('thesis-c2-d').innerText = isAr ? 'نظام خلفي موحد للموقع وتطبيقات الجوال يلغي التشتت ويزيد القيمة الدائمة للعميل على المدى الطويل.' : 'One synchronized backend serving Web, Android, and iOS eliminates customer friction and drives repeat customer lifetime value.';
       document.getElementById('thesis-c3-t').innerText = isAr ? '03. التزام زمني واستثماري صارم' : '03. High-Discipline Delivery';
-      document.getElementById('thesis-c3-d').innerText = isAr ? 'مراحل تسليم شهرية متتابعة تضمن الانطلاق السريع للسوق مع وضوح مالي كامل في كل دفعة.' : 'Strict 3-month staged milestones ensure immediate time-to-market with clear financial investment tranches.';
+      document.getElementById('thesis-c3-d').innerText = isAr ? 'مراحل تسليم مرحلية منضبطة خلال 90 يوماً تضمن الانطلاق السريع للسوق مع وضوح مالي كامل في كل مرحلة.' : 'Strict 90-day staged milestones ensure immediate time-to-market with clear financial investment tranches.';
 
       // Search input & placeholder localization & layout
       const searchInput = document.getElementById('feature-search');
@@ -2199,6 +2191,22 @@
       filterFeatures();
     }
 
+    // Dedicated Jump to Simulator: activates prototype tab and frames full viewport directly under sticky header
+    function jumpToSimulator() {
+      switchTab('simulator');
+      const tabsNav = document.getElementById('tabs-nav');
+      if (tabsNav) {
+        const header = document.querySelector('header');
+        const headerH = header ? header.getBoundingClientRect().height : 70;
+        const tabsRect = tabsNav.getBoundingClientRect();
+        const scrollTarget = window.pageYOffset + tabsRect.top - headerH - 12;
+        window.scrollTo({
+          top: Math.max(0, scrollTarget),
+          behavior: 'smooth'
+        });
+      }
+    }
+
     // Live Search / Filter with Real-time Count Animation
     function filterFeatures() {
       const q = document.getElementById('feature-search').value.toLowerCase().trim();
@@ -2349,50 +2357,82 @@
       });
     }
 
-    // Number Counting Animation (Smooth Quintic Ease-Out)
+    // Number Counting Animation (Smooth, deliberate count-up at 1600ms)
     function runNumberCounters() {
       const isAr = currentLang === 'ar';
+      
+      // 1. Portfolio Investment: 0 -> 10,090 SAR (or 10,090 ﷼)
       const kpi1 = document.getElementById('kpi-1-val');
-      if (kpi1) animateNumberCounter(kpi1, 10090, 800, true);
+      if (kpi1) animateNumberCounter(kpi1, 10090, 1600, { isCurrency: true });
 
+      // 2. Delivery Sequence: 0 -> 90 Days (or 90 يوماً)
+      const kpi2 = document.getElementById('kpi-2-val');
+      if (kpi2) animateNumberCounter(kpi2, 90, 1600, { suffix: isAr ? ' يوماً' : ' Days' });
+
+      // 3. Total Capabilities: 0 -> 49 Features (or 49 خاصية)
+      const kpi3 = document.getElementById('kpi-3-val');
+      if (kpi3) animateNumberCounter(kpi3, 49, 1500, { suffix: isAr ? ' خاصية' : ' Features' });
+
+      // 4. Fitment Guarantee: 0% -> 100% Verified (or 100% توافق مؤكد)
+      const kpi4 = document.getElementById('kpi-4-val');
+      if (kpi4) animateNumberCounter(kpi4, 100, 1700, { suffix: isAr ? '% توافق مؤكد' : '% Verified' });
+
+      // 5. Target Fleet: 0.00 -> 15.88M Vehicles
+      const fleet = document.getElementById('hero-fleet-val');
+      if (fleet) {
+        animateNumberCounter(fleet, 15.88, 1600, { decimals: 2, suffix: 'M Vehicles' });
+      }
+
+      // 6. Milestone Prices (Website, Android, iOS, Total)
       const m1 = document.getElementById('card-m1-price');
-      if (m1) animateNumberCounter(m1, 3600, 700, true);
+      if (m1) animateNumberCounter(m1, 3600, 1400, { isCurrency: true });
 
       const m2 = document.getElementById('card-m2-price');
-      if (m2) animateNumberCounter(m2, 3150, 700, true);
+      if (m2) animateNumberCounter(m2, 3150, 1400, { isCurrency: true });
 
       const m3 = document.getElementById('card-m3-price');
-      if (m3) animateNumberCounter(m3, 3340, 700, true);
+      if (m3) animateNumberCounter(m3, 3340, 1400, { isCurrency: true });
 
       const commTotal = document.getElementById('comm-total-val');
-      if (commTotal) animateNumberCounter(commTotal, 10090, 800, true);
+      if (commTotal) animateNumberCounter(commTotal, 10090, 1600, { isCurrency: true });
     }
 
-    function animateNumberCounter(el, target, duration = 800, isCurrency = false) {
+    function animateNumberCounter(el, target, duration = 1600, options = {}) {
       if (!el) return;
       const isAr = currentLang === 'ar';
+      const { isCurrency = false, prefix = '', suffix = '', decimals = 0 } = options;
       const start = performance.now();
+
+      // Cancel previous frame if any
+      if (el._animFrame) cancelAnimationFrame(el._animFrame);
+
       function step(now) {
         const elapsed = now - start;
         const p = Math.min(elapsed / duration, 1);
-        const ease = 1 - Math.pow(1 - p, 3);
-        const current = Math.floor(target * ease);
+        // Quartic ease-out for a very smooth and deliberate counting motion
+        const ease = 1 - Math.pow(1 - p, 4);
+        const current = decimals > 0 
+          ? (target * ease).toFixed(decimals) 
+          : Math.floor(target * ease);
+
         if (isCurrency) {
-          el.innerHTML = formatCurrency(current.toLocaleString('en-US'), isAr);
+          el.innerHTML = formatCurrency(Number(current).toLocaleString('en-US'), isAr);
         } else {
-          el.innerText = current.toLocaleString('en-US');
+          el.innerText = `${prefix}${current}${suffix}`;
         }
+
         if (p < 1) {
-          requestAnimationFrame(step);
+          el._animFrame = requestAnimationFrame(step);
         } else {
           if (isCurrency) {
             el.innerHTML = formatCurrency(target.toLocaleString('en-US'), isAr);
           } else {
-            el.innerText = target.toLocaleString('en-US');
+            el.innerText = `${prefix}${decimals > 0 ? target.toFixed(decimals) : target}${suffix}`;
           }
+          el._animFrame = null;
         }
       }
-      requestAnimationFrame(step);
+      el._animFrame = requestAnimationFrame(step);
     }
 
     // High-Tech Scroll Progress Tracker (Passive 60fps)
