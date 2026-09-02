@@ -280,25 +280,25 @@
           <!-- KPI 1 -->
           <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-1-label">Portfolio Investment</div>
-            <div class="text-2xl font-black text-amber-400 mt-1">SAR 10,090</div>
+            <div class="text-2xl font-black text-amber-400 mt-1 flex items-center" id="kpi-1-val">SAR 10,090</div>
             <div class="text-xs text-slate-400 mt-0.5" id="kpi-1-sub">3 Production Products</div>
           </div>
           <!-- KPI 2 -->
           <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-2-label">Delivery Sequence</div>
-            <div class="text-2xl font-black text-blue-400 mt-1">3 Months</div>
+            <div class="text-2xl font-black text-blue-400 mt-1" id="kpi-2-val">3 Months</div>
             <div class="text-xs text-slate-400 mt-0.5" id="kpi-2-sub">1 Month Per Milestone</div>
           </div>
           <!-- KPI 3 -->
           <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-3-label">Total Capabilities</div>
-            <div class="text-2xl font-black text-emerald-400 mt-1">49 Features</div>
+            <div class="text-2xl font-black text-emerald-400 mt-1" id="kpi-3-val">49 Features</div>
             <div class="text-xs text-slate-400 mt-0.5" id="kpi-3-sub">Web + Android + iOS</div>
           </div>
           <!-- KPI 4 -->
           <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-4-label">Fitment Guarantee</div>
-            <div class="text-2xl font-black text-purple-400 mt-1">100% Verified</div>
+            <div class="text-2xl font-black text-purple-400 mt-1" id="kpi-4-val">100% Verified</div>
             <div class="text-xs text-slate-400 mt-0.5" id="kpi-4-sub">AI + Human Engineering</div>
           </div>
         </div>
@@ -315,7 +315,7 @@
         </div>
         <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-4 py-2 rounded-xl text-amber-300 font-bold text-sm">
           <span id="comm-summary-total-label">Consolidated Portfolio Total:</span>
-          <span class="text-base text-amber-400 font-extrabold">SAR 10,090</span>
+          <span class="text-base text-amber-400 font-extrabold" id="comm-total-val">SAR 10,090</span>
         </div>
       </div>
 
@@ -341,7 +341,7 @@
             </div>
             <div class="text-right">
               <span class="text-xs text-slate-400 block" id="card-m1-invest-label">Investment</span>
-              <span class="text-xl font-extrabold text-blue-400">SAR 3,600</span>
+              <span class="text-xl font-extrabold text-blue-400" id="card-m1-price">SAR 3,600</span>
             </div>
           </div>
 
@@ -371,7 +371,7 @@
             </div>
             <div class="text-right">
               <span class="text-xs text-slate-400 block" id="card-m2-invest-label">Investment</span>
-              <span class="text-xl font-extrabold text-emerald-400">SAR 3,150</span>
+              <span class="text-xl font-extrabold text-emerald-400" id="card-m2-price">SAR 3,150</span>
             </div>
           </div>
 
@@ -401,7 +401,7 @@
             </div>
             <div class="text-right">
               <span class="text-xs text-slate-400 block" id="card-m3-invest-label">Investment</span>
-              <span class="text-xl font-extrabold text-purple-400">SAR 3,340</span>
+              <span class="text-xl font-extrabold text-purple-400" id="card-m3-price">SAR 3,340</span>
             </div>
           </div>
 
@@ -460,7 +460,7 @@
           </div>
           <div class="shrink-0 text-right bg-blue-900/30 px-4 py-2 rounded-xl border border-blue-500/20">
             <span class="text-xs text-blue-300 block font-semibold" id="web-card-inv-label">Milestone Investment</span>
-            <span class="text-xl font-extrabold text-white">SAR 3,600</span>
+            <span class="text-xl font-extrabold text-white" id="web-inv-val">SAR 3,600</span>
           </div>
         </div>
 
@@ -483,7 +483,7 @@
           </div>
           <div class="shrink-0 text-right bg-emerald-900/30 px-4 py-2 rounded-xl border border-emerald-500/20">
             <span class="text-xs text-emerald-300 block font-semibold" id="android-card-inv-label">Milestone Investment</span>
-            <span class="text-xl font-extrabold text-white">SAR 3,150</span>
+            <span class="text-xl font-extrabold text-white" id="android-inv-val">SAR 3,150</span>
           </div>
         </div>
 
@@ -506,7 +506,7 @@
           </div>
           <div class="shrink-0 text-right bg-purple-900/30 px-4 py-2 rounded-xl border border-purple-500/20">
             <span class="text-xs text-purple-300 block font-semibold" id="ios-card-inv-label">Milestone Investment</span>
-            <span class="text-xl font-extrabold text-white">SAR 3,340</span>
+            <span class="text-xl font-extrabold text-white" id="ios-inv-val">SAR 3,340</span>
           </div>
         </div>
 
@@ -650,7 +650,7 @@
                   <div class="font-bold text-slate-200" id="sim-alt-title">Available Verified Alternatives:</div>
                   <div class="text-slate-400 mt-0.5" id="sim-alt-sub">1 Original Genuine OEM • 2 High-Tier German Aftermarket</div>
                 </div>
-                <span class="px-2.5 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono">SAR 185 - 340</span>
+                <span class="px-2.5 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono" id="sim-diag-price">SAR 185 - 340</span>
               </div>
             </div>
           </div>
@@ -696,7 +696,7 @@
         <span>/</span>
         <button onclick="setLanguage('ar')" class="hover:text-blue-400 transition">العربية</button>
         <span class="text-slate-600">|</span>
-        <span class="text-amber-400 font-mono font-bold">Total: SAR 10,090</span>
+        <span class="text-amber-400 font-mono font-bold" id="foot-total-val">Total: SAR 10,090</span>
       </div>
     </footer>
 
@@ -842,6 +842,16 @@
         toast.classList.remove('translate-y-0', 'opacity-100');
         toast.classList.add('translate-y-20', 'opacity-0');
       }, 3000);
+    }
+
+    // Official Saudi Central Bank (SAMA) Saudi Riyal Currency Symbol (Approved Feb 2025 - Unicode U+20C1)
+    const RIYAL_SYMBOL_SVG = `<svg viewBox="0 0 1124.14 1256.39" fill="currentColor" class="inline-block align-baseline h-[0.82em] w-auto mx-0.5 pointer-events-none" aria-label="ريال"><path d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"/><path d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l334.33-71.05v170.26l-358.3,76.14c-20.06,44.47-33.32,92.75-38.4,143.37l375.04-79.7c30.53-6.35,56.77-24.4,73.83-49.24l68.78-101.97v-.02c7.14-10.55,11.3-23.27,11.3-36.97v-149.98l132.25-28.11v270.4l424.53-90.28Z"/></svg>`;
+
+    function formatCurrency(amount, isAr) {
+      if (isAr) {
+        return `<span class="inline-flex items-baseline gap-1 font-mono">${amount} ${RIYAL_SYMBOL_SVG}</span>`;
+      }
+      return `SAR ${amount}`;
     }
 
     // State management
@@ -1600,14 +1610,25 @@
 
       document.getElementById('hero-fleet-label').innerText = isAr ? 'حجم أسطول المملكة المستهدف:' : 'KSA Target Fleet:';
 
-      // KPI labels
+      // KPI values & labels (Full Arabic localization & SAMA official symbol)
       document.getElementById('kpi-1-label').innerText = isAr ? 'إجمالي الاستثمار' : 'Portfolio Investment';
+      const kpi1Val = document.getElementById('kpi-1-val');
+      if (kpi1Val) kpi1Val.innerHTML = formatCurrency('10,090', isAr);
       document.getElementById('kpi-1-sub').innerText = isAr ? '3 منتجات إنتاجية كاملة' : '3 Production Products';
+
       document.getElementById('kpi-2-label').innerText = isAr ? 'تسلسل التنفيذ' : 'Delivery Sequence';
+      const kpi2Val = document.getElementById('kpi-2-val');
+      if (kpi2Val) kpi2Val.innerText = isAr ? '3 أشهر' : '3 Months';
       document.getElementById('kpi-2-sub').innerText = isAr ? 'شهر واحد لكل مرحلة تسليم' : '1 Month Per Milestone';
+
       document.getElementById('kpi-3-label').innerText = isAr ? 'إجمالي الخصائص' : 'Total Capabilities';
+      const kpi3Val = document.getElementById('kpi-3-val');
+      if (kpi3Val) kpi3Val.innerText = isAr ? '49 خاصية' : '49 Features';
       document.getElementById('kpi-3-sub').innerText = isAr ? 'الموقع + أندرويد + آيفون' : 'Web + Android + iOS';
+
       document.getElementById('kpi-4-label').innerText = isAr ? 'ضمان التوافق' : 'Fitment Guarantee';
+      const kpi4Val = document.getElementById('kpi-4-val');
+      if (kpi4Val) kpi4Val.innerText = isAr ? 'توافق مؤكد 100%' : '100% Verified';
       document.getElementById('kpi-4-sub').innerText = isAr ? 'فحص خوارزمي + بشري خبير' : 'AI + Human Engineering';
 
       // Commercial Summary
@@ -1615,6 +1636,8 @@
       document.getElementById('comm-summary-title').innerText = isAr ? 'الملخص التجاري وجدول التسليم' : 'Delivery Schedule & Investment Allocation';
       document.getElementById('comm-summary-sub').innerText = isAr ? 'يتم التعامل مع كل منتج كمرحلة تسليم واضحة ومحددة المعالم.' : 'Each product is treated as a clear delivery milestone with zero ambiguity.';
       document.getElementById('comm-summary-total-label').innerText = isAr ? 'إجمالي استثمار المحفظة الرقمية:' : 'Consolidated Portfolio Total:';
+      const commTotal = document.getElementById('comm-total-val');
+      if (commTotal) commTotal.innerHTML = formatCurrency('10,090', isAr);
 
       // Milestone Cards
       document.getElementById('card-m1-tag').innerText = isAr ? 'الشهر الأول • المرحلة الأولى' : 'Month 1 • Milestone 1';
@@ -1623,6 +1646,8 @@
       document.getElementById('card-m1-time-label').innerText = isAr ? 'مدة التنفيذ المخططة' : 'Planned Delivery';
       document.getElementById('card-m1-time').innerText = isAr ? 'شهر واحد' : '1 Month';
       document.getElementById('card-m1-invest-label').innerText = isAr ? 'استثمار التطوير' : 'Investment';
+      const cardM1Price = document.getElementById('card-m1-price');
+      if (cardM1Price) cardM1Price.innerHTML = formatCurrency('3,600', isAr);
       document.getElementById('card-m1-features-count').innerText = isAr ? '17 ميزة متكاملة' : '17 Core Integrated Features';
 
       document.getElementById('card-m2-tag').innerText = isAr ? 'الشهر الثاني • المرحلة الثانية' : 'Month 2 • Milestone 2';
@@ -1631,6 +1656,8 @@
       document.getElementById('card-m2-time-label').innerText = isAr ? 'مدة التنفيذ المخططة' : 'Planned Delivery';
       document.getElementById('card-m2-time').innerText = isAr ? 'شهر واحد' : '1 Month';
       document.getElementById('card-m2-invest-label').innerText = isAr ? 'استثمار التطوير' : 'Investment';
+      const cardM2Price = document.getElementById('card-m2-price');
+      if (cardM2Price) cardM2Price.innerHTML = formatCurrency('3,150', isAr);
       document.getElementById('card-m2-features-count').innerText = isAr ? '16 ميزة مخصصة للجوال' : '16 Mobile-Native Features';
 
       document.getElementById('card-m3-tag').innerText = isAr ? 'الشهر الثالث • المرحلة الثالثة' : 'Month 3 • Milestone 3';
@@ -1639,6 +1666,8 @@
       document.getElementById('card-m3-time-label').innerText = isAr ? 'مدة التنفيذ المخططة' : 'Planned Delivery';
       document.getElementById('card-m3-time').innerText = isAr ? 'شهر واحد' : '1 Month';
       document.getElementById('card-m3-invest-label').innerText = isAr ? 'استثمار التطوير' : 'Investment';
+      const cardM3Price = document.getElementById('card-m3-price');
+      if (cardM3Price) cardM3Price.innerHTML = formatCurrency('3,340', isAr);
       document.getElementById('card-m3-features-count').innerText = isAr ? '16 ميزة لنظام iOS' : '16 Apple Ecosystem Features';
 
       // Tab Buttons
@@ -1655,6 +1684,8 @@
         ? 'يعالج الموقع الإلكتروني الفجوة الجوهرية في "عشوائية البحث" داخل السوق. ميزات مثل "التحقق البشري" و"حالة التوافق" تحيد مخاطر شراء القطع الخاطئة بشكل مباشر، محولةً عملية الشراء من تجربة مقلقة إلى عملية مهنية محكومة.'
         : 'The Website addresses the primary market gap of "unorganized discovery". Features like \'Human Verification\' and \'Compatibility Status\' directly neutralize the risk of wrong-part procurement, converting a high-anxiety task into a controlled, professional process.';
       document.getElementById('web-card-inv-label').innerText = isAr ? 'استثمار المرحلة' : 'Milestone Investment';
+      const webInv = document.getElementById('web-inv-val');
+      if (webInv) webInv.innerHTML = formatCurrency('3,600', isAr);
 
       document.getElementById('android-strat-badge').innerText = isAr ? 'الميزة الاستراتيجية لأندرويد' : 'Strategic Advantage';
       document.getElementById('android-strat-title').innerText = isAr ? 'التحقق السلس والفوري وإلغاء الاعتماد على الواتساب' : 'Frictionless Verification & Field Accessibility';
@@ -1662,6 +1693,8 @@
         ? 'يستفيد تطبيق أندرويد من قدرات الكاميرا لإلغاء حواجز التواصل. من خلال إتاحة الرفع الفوري للصور للمراجعة الفنية، نحن نحل مشكلة "الاعتماد على الواتساب" التقليدية، ونوفر بديلاً مؤسسياً آمناً لتأكيد توافق القطع في الوقت الفعلي.'
         : 'The Android App leverages camera-native verification to eliminate communication barriers. By allowing instant photo-uploads for technical review, we solve the common "WhatsApp dependency" issue, providing a secure, corporate-grade alternative for real-time part confirmation.';
       document.getElementById('android-card-inv-label').innerText = isAr ? 'استثمار المرحلة' : 'Milestone Investment';
+      const androidInv = document.getElementById('android-inv-val');
+      if (androidInv) androidInv.innerHTML = formatCurrency('3,150', isAr);
 
       document.getElementById('ios-strat-badge').innerText = isAr ? 'الميزة الاستراتيجية لآيفون' : 'Strategic Advantage';
       document.getElementById('ios-strat-title').innerText = isAr ? 'بناء حاجز الثقة المتميز وتقليل الجهد الذهني' : 'Premium Trust Barrier & Frictionless iOS Commerce';
@@ -1669,6 +1702,8 @@
         ? 'يستهدف تطبيق آيفون الفئة التي تولي الأولوية للدقة وتوفير الوقت. ميزات مثل Face ID والروابط المباشرة تقلل الجهد الذهني، مما يضع المنصة كأداة موثوقة وعالية الكفاءة تتماشى مع نمط حياة مالك المركبة الحديث في المملكة.'
         : 'The iOS App caters to the high-value segment where accuracy and time-savings are paramount. Features such as Face ID and Universal Links reduce cognitive load, positioning the platform as a seamless, high-confidence extension of the user’s automotive lifestyle.';
       document.getElementById('ios-card-inv-label').innerText = isAr ? 'استثمار المرحلة' : 'Milestone Investment';
+      const iosInv = document.getElementById('ios-inv-val');
+      if (iosInv) iosInv.innerHTML = formatCurrency('3,340', isAr);
 
       // Matrix labels
       document.getElementById('matrix-title').innerText = isAr ? 'تجربة موحدة بين المنتجات الثلاثة' : 'Unified Ecosystem: Cross-Platform Feature Parity';
@@ -1771,11 +1806,25 @@
         simPart.options[3].text = isAr ? 'مروحة تبريد الرديتر الإلكترونية' : 'Electronic Cooling Radiator Fan Assembly';
       }
 
+      // Simulator Alternative Price
+      const simPrice = document.getElementById('sim-diag-price');
+      if (simPrice) {
+        simPrice.innerHTML = isAr 
+          ? `<span class="inline-flex items-baseline gap-1 font-mono">185 - 340 ${RIYAL_SYMBOL_SVG}</span>`
+          : 'SAR 185 - 340';
+      }
+
       // Footer
       const footCopy = document.getElementById('foot-copy');
       if (footCopy) footCopy.innerText = isAr ? 'منصة يَرْكَبْ (Yerkab) لقطع غيار السيارات — dubaiincairo.com/proposals/yerkab' : 'Yerkab (يركب) — Automotive Spare Parts Platform • dubaiincairo.com/proposals/yerkab';
       const footDate = document.getElementById('foot-date');
       if (footDate) footDate.innerText = isAr ? 'مبادرة استراتيجية معتمدة لسوق المملكة العربية السعودية' : 'Certified Strategic Initiative for Saudi Market';
+      const footTotal = document.getElementById('foot-total-val');
+      if (footTotal) {
+        footTotal.innerHTML = isAr 
+          ? `<span class="inline-flex items-baseline gap-1 font-mono font-bold text-amber-400">الإجمالي: 10,090 ${RIYAL_SYMBOL_SVG}</span>`
+          : 'Total: SAR 10,090';
+      }
 
       // Confirmation Modal Localization
       updateConfirmationModalTexts(isAr);
