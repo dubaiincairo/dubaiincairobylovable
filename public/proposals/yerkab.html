@@ -300,6 +300,21 @@
       border-color: rgba(56, 189, 248, 0.5) !important;
     }
 
+    /* Strategic Section Dynamic Breathing Aura */
+    @keyframes strategicAura {
+      0%, 100% {
+        border-color: rgba(59, 130, 246, 0.25);
+        box-shadow: 0 0 40px -10px rgba(59, 130, 246, 0.12);
+      }
+      50% {
+        border-color: rgba(16, 185, 129, 0.35);
+        box-shadow: 0 0 50px -10px rgba(16, 185, 129, 0.15);
+      }
+    }
+    #strategic-thesis-section {
+      animation: strategicAura 6s ease-in-out infinite;
+    }
+
     /* Accessibility: Respect Reduced Motion Preferences */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -892,28 +907,104 @@
       </div>
     </section>
 
-    <!-- STRATEGIC VALUE & CLOSING EXECUTIVE THESIS -->
-    <section class="rounded-3xl bg-gradient-to-br from-slate-900 via-blue-950/30 to-slate-900 border border-slate-800 p-6 sm:p-10 space-y-6">
-      <div class="max-w-4xl space-y-2">
-        <div class="text-xs font-bold text-amber-400 uppercase tracking-wider" id="thesis-pill">Strategic Differentiation</div>
-        <h3 class="text-2xl sm:text-3xl font-extrabold text-white" id="thesis-title">Risk Mitigation & Demand Management</h3>
-        <p class="text-sm text-slate-300 leading-relaxed" id="thesis-body">
+    <!-- STRATEGIC VALUE & CLOSING EXECUTIVE THESIS (ANIMATED & INTERACTIVE) -->
+    <section id="strategic-thesis-section" class="relative rounded-3xl bg-gradient-to-br from-slate-900 via-blue-950/40 to-slate-900 border border-slate-800 hover:border-slate-700/80 transition-all duration-500 p-6 sm:p-10 space-y-8 shadow-2xl overflow-hidden group">
+      <!-- Ambient Glow Behind Section -->
+      <div class="absolute -right-20 -top-20 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-600/20 transition-all duration-700"></div>
+      <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/15 transition-all duration-700"></div>
+
+      <div class="relative z-10 max-w-4xl space-y-3">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/25 text-xs font-bold text-amber-400 uppercase tracking-wider shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          <span id="thesis-pill">Strategic Differentiation</span>
+        </div>
+        <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight" id="thesis-title">Risk Mitigation &amp; Demand Management</h3>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed" id="thesis-body">
           The platform’s strategic advantage lies in Risk Mitigation and Demand Management. Unlike competitors focused solely on catalog depth or aggressive pricing, our value is rooted in technical accuracy and the reduction of costly purchasing errors. By positioning as a Trusted Specialist, we address the Saudi market's need for reliable expertise, fostering long-term loyalty through service quality and the psychological peace of mind that comes from guaranteed compatibility.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-800">
-        <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
-          <div class="text-amber-400 font-bold text-sm" id="thesis-c1-t">01. Cost-of-Error Eradication</div>
-          <p class="text-xs text-slate-400 mt-1" id="thesis-c1-d">Returns in traditional channels exceed 24% due to incorrect fitment. Our dual verification reduces return overhead to near zero.</p>
+      <!-- 3 Interactive Animated Strategic Pillar Cards -->
+      <div class="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-5 pt-2 border-t border-slate-800/80">
+        <!-- Pillar Card 1: Cost-of-Error Eradication -->
+        <div onclick="selectPillarCard(this)" class="spotlight-card p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 hover:border-amber-500/50 hover:shadow-xl hover:shadow-amber-500/5 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group/card flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/25 text-amber-400 flex items-center justify-center font-mono font-black text-xs group-hover/card:scale-110 group-hover/card:bg-amber-500/20 transition-transform">
+                01
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-rose-500/15 text-rose-300 border border-rose-500/25 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-ping"></span>
+                <span id="stat-c1-tag">24% → 0% Returns</span>
+              </span>
+            </div>
+            <div>
+              <div class="text-amber-400 font-bold text-base group-hover/card:text-amber-300 transition-colors" id="thesis-c1-t">01. Cost-of-Error Eradication</div>
+              <p class="text-xs text-slate-400 mt-1.5 leading-relaxed" id="thesis-c1-d">Returns in traditional channels exceed 24% due to incorrect fitment. Our dual verification reduces return overhead to near zero.</p>
+            </div>
+          </div>
+          <!-- Micro-Metric Bar -->
+          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
+            <span class="text-slate-400" id="stat-c1-label">Return Overhead:</span>
+            <span class="font-mono font-bold text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="stat-c1-val">0.0% Guaranteed</span>
+            </span>
+          </div>
         </div>
-        <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
-          <div class="text-blue-400 font-bold text-sm" id="thesis-c2-t">02. Unified Multi-Platform Journey</div>
-          <p class="text-xs text-slate-400 mt-1" id="thesis-c2-d">One synchronized backend serving Web, Android, and iOS eliminates customer friction and drives repeat customer lifetime value.</p>
+
+        <!-- Pillar Card 2: Unified Multi-Platform Journey -->
+        <div onclick="selectPillarCard(this)" class="spotlight-card p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group/card flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/25 text-blue-400 flex items-center justify-center font-mono font-black text-xs group-hover/card:scale-110 group-hover/card:bg-blue-500/20 transition-transform">
+                02
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-500/15 text-blue-300 border border-blue-500/25 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping"></span>
+                <span id="stat-c2-tag">Sync Web • iOS • Android</span>
+              </span>
+            </div>
+            <div>
+              <div class="text-blue-400 font-bold text-base group-hover/card:text-blue-300 transition-colors" id="thesis-c2-t">02. Unified Multi-Platform Journey</div>
+              <p class="text-xs text-slate-400 mt-1.5 leading-relaxed" id="thesis-c2-d">One synchronized backend serving Web, Android, and iOS eliminates customer friction and drives repeat customer lifetime value.</p>
+            </div>
+          </div>
+          <!-- Micro-Metric Bar -->
+          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
+            <span class="text-slate-400" id="stat-c2-label">Ecosystem Sync:</span>
+            <span class="font-mono font-bold text-cyan-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+              <span id="stat-c2-val">3 Platforms 1 API</span>
+            </span>
+          </div>
         </div>
-        <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
-          <div class="text-emerald-400 font-bold text-sm" id="thesis-c3-t">03. High-Discipline Delivery</div>
-          <p class="text-xs text-slate-400 mt-1" id="thesis-c3-d">Strict 90-day staged milestones ensure immediate time-to-market with clear financial investment tranches.</p>
+
+        <!-- Pillar Card 3: High-Discipline Delivery -->
+        <div onclick="selectPillarCard(this)" class="spotlight-card p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/5 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group/card flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 flex items-center justify-center font-mono font-black text-xs group-hover/card:scale-110 group-hover/card:bg-emerald-500/20 transition-transform">
+                03
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/25 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span id="stat-c3-tag">90 Days • 3 Milestones</span>
+              </span>
+            </div>
+            <div>
+              <div class="text-emerald-400 font-bold text-base group-hover/card:text-emerald-300 transition-colors" id="thesis-c3-t">03. High-Discipline Delivery</div>
+              <p class="text-xs text-slate-400 mt-1.5 leading-relaxed" id="thesis-c3-d">Strict 90-day staged milestones ensure immediate time-to-market with clear financial investment tranches.</p>
+            </div>
+          </div>
+          <!-- Micro-Metric Bar -->
+          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
+            <span class="text-slate-400" id="stat-c3-label">Timeline Precision:</span>
+            <span class="font-mono font-bold text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="stat-c3-val">30d Per Milestone</span>
+            </span>
+          </div>
         </div>
       </div>
     </section>
@@ -2038,6 +2129,28 @@
       document.getElementById('thesis-c3-t').innerText = isAr ? '03. التزام زمني واستثماري صارم' : '03. High-Discipline Delivery';
       document.getElementById('thesis-c3-d').innerText = isAr ? 'مراحل تسليم مرحلية منضبطة خلال 90 يوماً تضمن الانطلاق السريع للسوق مع وضوح مالي كامل في كل مرحلة.' : 'Strict 90-day staged milestones ensure immediate time-to-market with clear financial investment tranches.';
 
+      // Strategic Pillar Badges & Micro-Metrics
+      const statC1Tag = document.getElementById('stat-c1-tag');
+      if (statC1Tag) statC1Tag.innerText = isAr ? '24% ← 0% نسبة المرتجعات' : '24% → 0% Returns';
+      const statC1Label = document.getElementById('stat-c1-label');
+      if (statC1Label) statC1Label.innerText = isAr ? 'معدل أخطاء التوافق:' : 'Return Overhead:';
+      const statC1Val = document.getElementById('stat-c1-val');
+      if (statC1Val) statC1Val.innerText = isAr ? '0.0% توافق مضمون' : '0.0% Guaranteed';
+
+      const statC2Tag = document.getElementById('stat-c2-tag');
+      if (statC2Tag) statC2Tag.innerText = isAr ? 'تزامن الموقع • آيفون • أندرويد' : 'Sync Web • iOS • Android';
+      const statC2Label = document.getElementById('stat-c2-label');
+      if (statC2Label) statC2Label.innerText = isAr ? 'تكامل المنظومة:' : 'Ecosystem Sync:';
+      const statC2Val = document.getElementById('stat-c2-val');
+      if (statC2Val) statC2Val.innerText = isAr ? '3 منصات بربط موحد' : '3 Platforms 1 API';
+
+      const statC3Tag = document.getElementById('stat-c3-tag');
+      if (statC3Tag) statC3Tag.innerText = isAr ? '90 يوماً • 3 مراحل تسليم' : '90 Days • 3 Milestones';
+      const statC3Label = document.getElementById('stat-c3-label');
+      if (statC3Label) statC3Label.innerText = isAr ? 'انضباط الجداول:' : 'Timeline Precision:';
+      const statC3Val = document.getElementById('stat-c3-val');
+      if (statC3Val) statC3Val.innerText = isAr ? '30 يوماً لكل مرحلة' : '30d Per Milestone';
+
       // Search input & placeholder localization & layout
       const searchInput = document.getElementById('feature-search');
       const searchIcon = document.getElementById('search-icon');
@@ -2132,6 +2245,17 @@
 
       // Dynamically count-up numbers in new language format
       runNumberCounters();
+    }
+
+    // Interactive Strategic Pillar Selection
+    function selectPillarCard(el) {
+      const isAlreadyActive = el.classList.contains('ring-2');
+      document.querySelectorAll('#strategic-thesis-section .spotlight-card').forEach(c => {
+        c.classList.remove('ring-2', 'ring-cyan-500/60', 'shadow-2xl', 'scale-[1.02]');
+      });
+      if (!isAlreadyActive) {
+        el.classList.add('ring-2', 'ring-cyan-500/60', 'shadow-2xl', 'scale-[1.02]');
+      }
     }
 
     // Interactive Feature Card Drawer Toggle
