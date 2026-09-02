@@ -315,6 +315,80 @@
       animation: strategicAura 6s ease-in-out infinite;
     }
 
+    /* ==========================================================================
+       Soft Fluent Scroll-Based Animation Architecture
+       ========================================================================== */
+    
+    /* Header Elevation & Glow Transition on Scroll */
+    header {
+      transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    header.header-scrolled {
+      background: rgba(11, 17, 29, 0.95) !important;
+      backdrop-filter: blur(24px) !important;
+      -webkit-backdrop-filter: blur(24px) !important;
+      border-bottom-color: rgba(56, 189, 248, 0.22) !important;
+      box-shadow: 0 12px 35px -10px rgba(2, 6, 23, 0.85), 0 1px 0 0 rgba(56, 189, 248, 0.12) !important;
+    }
+
+    /* Ambient Orbs Parallax Smooth Interpolation */
+    .ambient-orb-1,
+    .ambient-orb-2,
+    .ambient-orb-3 {
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: transform;
+    }
+
+    /* Base Fluent Scroll Item: Soft Gliding Entrance */
+    .fluent-scroll-item {
+      opacity: 0;
+      transform: translateY(22px) scale(0.988);
+      filter: blur(1.5px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity, filter;
+    }
+
+    .fluent-scroll-item.is-revealed {
+      opacity: 1 !important;
+      transform: translateY(0) scale(1) !important;
+      filter: blur(0) !important;
+    }
+
+    /* Fluent Micro-Staggers */
+    .stagger-1 { transition-delay: 50ms; }
+    .stagger-2 { transition-delay: 110ms; }
+    .stagger-3 { transition-delay: 170ms; }
+    .stagger-4 { transition-delay: 230ms; }
+
+    /* Modern CSS Native View-Timeline Integration (Continuous Hardware Composited Animation) */
+    @media (prefers-reduced-motion: no-preference) {
+      @supports ((animation-timeline: view()) and (animation-range: entry)) {
+        @keyframes fluentScrollReveal {
+          from {
+            opacity: 0.15;
+            transform: translateY(22px) scale(0.988);
+            filter: blur(1.5px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+          }
+        }
+
+        .fluent-scroll-item {
+          animation: fluentScrollReveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+          animation-timeline: view();
+          animation-range: entry 5% cover 28%;
+          transition: none; /* Let CSS view-timeline control it smoothly */
+        }
+      }
+    }
+
     /* Accessibility: Respect Reduced Motion Preferences */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -322,6 +396,14 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+      }
+      .fluent-scroll-item,
+      .fluent-scroll-item.is-revealed {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+        animation: none !important;
       }
     }
 
@@ -349,6 +431,18 @@
         font-size: 10pt !important;
         line-height: 1.4 !important;
         padding-bottom: 0 !important;
+      }
+
+      .fluent-scroll-item,
+      .is-revealed,
+      [class*="stagger-"],
+      header.header-scrolled {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+        animation: none !important;
+        box-shadow: none !important;
       }
 
       /* Hide interactive Web UI elements in PDF */
@@ -711,27 +805,27 @@
         </div>
 
         <!-- KPI Summary Cards with Interactive Spotlight & Count-Up Hooks -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 fluent-scroll-item" id="kpi-summary-container">
           <!-- KPI 1 -->
-          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition-all duration-300 cursor-pointer group">
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition-all duration-300 cursor-pointer group fluent-scroll-item stagger-1">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-1-label">Portfolio Investment</div>
             <div class="text-2xl font-black text-amber-400 mt-1 flex items-center" id="kpi-1-val">SAR 10,090</div>
             <div class="text-xs text-slate-400 mt-0.5" id="kpi-1-sub">3 Production Products</div>
           </div>
           <!-- KPI 2 -->
-          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-blue-500/50 transition-all duration-300 cursor-pointer group">
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-blue-500/50 transition-all duration-300 cursor-pointer group fluent-scroll-item stagger-2">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-2-label">Delivery Sequence</div>
             <div class="text-2xl font-black text-blue-400 mt-1" id="kpi-2-val">90 Days</div>
             <div class="text-xs text-slate-400 mt-0.5" id="kpi-2-sub">30 Days Per Milestone</div>
           </div>
           <!-- KPI 3 -->
-          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer group">
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer group fluent-scroll-item stagger-3">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-3-label">Total Capabilities</div>
             <div class="text-2xl font-black text-emerald-400 mt-1" id="kpi-3-val">49 Features</div>
             <div class="text-xs text-slate-400 mt-0.5" id="kpi-3-sub">Web + Android + iOS</div>
           </div>
           <!-- KPI 4 -->
-          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-purple-500/50 transition-all duration-300 cursor-pointer group">
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-purple-500/50 transition-all duration-300 cursor-pointer group fluent-scroll-item stagger-4">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-4-label">Fitment Guarantee</div>
             <div class="text-2xl font-black text-purple-400 mt-1" id="kpi-4-val">100% Verified</div>
             <div class="text-xs text-slate-400 mt-0.5" id="kpi-4-sub">AI + Human Engineering</div>
@@ -741,8 +835,8 @@
     </section>
 
     <!-- COMMERCIAL SUMMARY & SEQUENCED ROADMAP -->
-    <section class="space-y-6">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <section class="space-y-6" id="commercial-structure-section">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 fluent-scroll-item">
         <div>
           <div class="text-xs font-bold text-amber-400 tracking-wider uppercase" id="comm-summary-pre">Commercial Structure</div>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1" id="comm-summary-title">Delivery Schedule & Investment Allocation</h2>
@@ -757,7 +851,7 @@
       <!-- 3-Product Milestone Cards (Interactive Shortcuts) -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Milestone 1: Website -->
-        <div onclick="switchTab('website'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-blue-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-blue-500/10">
+        <div onclick="switchTab('website'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-blue-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-blue-500/10 fluent-scroll-item stagger-1">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30" id="card-m1-tag">Month 1 • Milestone 1</span>
             <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center transition-transform group-hover:scale-110">
@@ -793,7 +887,7 @@
         </div>
 
         <!-- Milestone 2: Android Application -->
-        <div onclick="switchTab('android'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-emerald-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-emerald-500/10">
+        <div onclick="switchTab('android'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-emerald-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-emerald-500/10 fluent-scroll-item stagger-2">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" id="card-m2-tag">Month 2 • Milestone 2</span>
             <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center transition-transform group-hover:scale-110">
@@ -829,7 +923,7 @@
         </div>
 
         <!-- Milestone 3: iOS Application -->
-        <div onclick="switchTab('ios'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-purple-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-purple-500/10">
+        <div onclick="switchTab('ios'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-purple-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-purple-500/10 fluent-scroll-item stagger-3">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30" id="card-m3-tag">Month 3 • Milestone 3</span>
             <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center transition-transform group-hover:scale-110">
@@ -867,7 +961,7 @@
     </section>
 
     <!-- INTERACTIVE PRODUCT EXPLORER & TABS -->
-    <section class="space-y-6 pt-4">
+    <section id="product-explorer-section" class="space-y-6 pt-4 fluent-scroll-item">
       <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
         <!-- Tab Navigation Buttons (Horizontal Smooth Momentum Scroll on Mobile) -->
         <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scroll-touch" role="tablist" id="tabs-nav">
@@ -1130,7 +1224,7 @@
     </section>
 
     <!-- STRATEGIC VALUE & CLOSING EXECUTIVE THESIS (ANIMATED & INTERACTIVE) -->
-    <section id="strategic-thesis-section" class="relative rounded-3xl bg-gradient-to-br from-slate-900 via-blue-950/40 to-slate-900 border border-slate-800 hover:border-slate-700/80 transition-all duration-500 p-6 sm:p-10 space-y-8 shadow-2xl overflow-hidden group">
+    <section id="strategic-thesis-section" class="relative rounded-3xl bg-gradient-to-br from-slate-900 via-blue-950/40 to-slate-900 border border-slate-800 hover:border-slate-700/80 transition-all duration-500 p-6 sm:p-10 space-y-8 shadow-2xl overflow-hidden group fluent-scroll-item">
       <!-- Ambient Glow Behind Section -->
       <div class="absolute -right-20 -top-20 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-600/20 transition-all duration-700"></div>
       <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/15 transition-all duration-700"></div>
@@ -1149,7 +1243,7 @@
       <!-- 3 Interactive Animated Strategic Pillar Cards -->
       <div class="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-5 pt-2 border-t border-slate-800/80">
         <!-- Pillar Card 1: Cost-of-Error Eradication -->
-        <div onclick="selectPillarCard(this)" class="spotlight-card p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 hover:border-amber-500/50 hover:shadow-xl hover:shadow-amber-500/5 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group/card flex flex-col justify-between">
+        <div onclick="selectPillarCard(this)" class="spotlight-card p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 hover:border-amber-500/50 hover:shadow-xl hover:shadow-amber-500/5 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group/card flex flex-col justify-between fluent-scroll-item stagger-1">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
               <div class="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/25 text-amber-400 flex items-center justify-center font-mono font-black text-xs group-hover/card:scale-110 group-hover/card:bg-amber-500/20 transition-transform">
@@ -1176,7 +1270,7 @@
         </div>
 
         <!-- Pillar Card 2: Unified Multi-Platform Journey -->
-        <div onclick="selectPillarCard(this)" class="spotlight-card p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group/card flex flex-col justify-between">
+        <div onclick="selectPillarCard(this)" class="spotlight-card p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group/card flex flex-col justify-between fluent-scroll-item stagger-2">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
               <div class="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/25 text-blue-400 flex items-center justify-center font-mono font-black text-xs group-hover/card:scale-110 group-hover/card:bg-blue-500/20 transition-transform">
@@ -1203,7 +1297,7 @@
         </div>
 
         <!-- Pillar Card 3: High-Discipline Delivery -->
-        <div onclick="selectPillarCard(this)" class="spotlight-card p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/5 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group/card flex flex-col justify-between">
+        <div onclick="selectPillarCard(this)" class="spotlight-card p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/5 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group/card flex flex-col justify-between fluent-scroll-item stagger-3">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
               <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 flex items-center justify-center font-mono font-black text-xs group-hover/card:scale-110 group-hover/card:bg-emerald-500/20 transition-transform">
@@ -1232,7 +1326,7 @@
     </section>
 
     <!-- FOOTER / PROPOSAL METADATA -->
-    <footer class="pt-8 border-t border-slate-800 text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4 no-print">
+    <footer class="pt-8 border-t border-slate-800 text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4 no-print fluent-scroll-item">
       <div>
         <span class="font-bold text-slate-300" id="foot-copy">Automotive Spare Parts Platform — Commercial Proposal</span>
         <span class="mx-2">•</span>
@@ -2848,15 +2942,90 @@
 
     window.addEventListener('beforeprint', finalizeCountersForPrint);
 
-    // High-Tech Scroll Progress Tracker (Passive 60fps)
-    window.addEventListener('scroll', () => {
+    // =========================================================================
+    // Soft Fluent Scroll Motion & Parallax Controller
+    // =========================================================================
+    function initFluentScrollAnimations() {
+      // 1. Observe all .fluent-scroll-item elements for soft entrance
+      const scrollElements = document.querySelectorAll('.fluent-scroll-item');
+      
+      const supportsViewTimeline = window.CSS && CSS.supports && CSS.supports('(animation-timeline: view()) and (animation-range: entry)');
+      
+      if (!supportsViewTimeline) {
+        // High-performance IntersectionObserver fallback
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          rootMargin: '0px 0px -40px 0px',
+          threshold: 0.12
+        });
+
+        scrollElements.forEach(el => scrollObserver.observe(el));
+      } else {
+        // In CSS view-timeline mode, mark revealed as safeguard
+        scrollElements.forEach(el => el.classList.add('is-revealed'));
+      }
+
+      // 2. Scroll-Triggered KPI Counters on Entry
+      const kpiContainer = document.getElementById('kpi-summary-container');
+      if (kpiContainer) {
+        let kpiTriggered = false;
+        const kpiObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !kpiTriggered) {
+              kpiTriggered = true;
+              runNumberCounters();
+            }
+          });
+        }, { threshold: 0.2 });
+        kpiObserver.observe(kpiContainer);
+      }
+
+      // 3. Smooth rAF-Throttled Scroll Loop for Progress, Ambient Parallax & Header Elevation
+      let isScrollTicking = false;
       const bar = document.getElementById('scroll-progress-bar');
-      if (!bar) return;
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-      bar.style.width = scrolled + '%';
-    }, { passive: true });
+      const header = document.querySelector('header');
+      const orb1 = document.querySelector('.ambient-orb-1');
+      const orb2 = document.querySelector('.ambient-orb-2');
+      const orb3 = document.querySelector('.ambient-orb-3');
+
+      window.addEventListener('scroll', () => {
+        if (!isScrollTicking) {
+          window.requestAnimationFrame(() => {
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            
+            // Dynamic Reading Progress Bar
+            if (bar) {
+              const scrolled = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+              bar.style.width = scrolled + '%';
+            }
+
+            // Header Elevation Glassmorphism Glow on Scroll
+            if (header) {
+              if (scrollY > 20) {
+                header.classList.add('header-scrolled');
+              } else {
+                header.classList.remove('header-scrolled');
+              }
+            }
+
+            // Soft Ambient Parallax on Atmospheric Orbs
+            if (orb1) orb1.style.transform = `translate3d(0, ${scrollY * 0.07}px, 0)`;
+            if (orb2) orb2.style.transform = `translate3d(0, ${scrollY * -0.05}px, 0)`;
+            if (orb3) orb3.style.transform = `translate3d(0, ${scrollY * 0.04}px, 0)`;
+
+            isScrollTicking = false;
+          });
+          isScrollTicking = true;
+        }
+      }, { passive: true });
+    }
 
     // Verification Modal Logic
     function openVerificationModal() {
@@ -2953,6 +3122,7 @@
       initSpotlightCards();
       runNumberCounters();
       filterFeatures();
+      initFluentScrollAnimations();
     }
 
     if (document.readyState === 'loading') {
