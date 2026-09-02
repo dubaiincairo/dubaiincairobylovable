@@ -227,6 +227,78 @@
       left: 0.75rem;
       right: auto;
     }
+    /* Interactive Spotlight Card System */
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.16), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Ambient Background Floating Orbs */
+    @keyframes orbFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, -30px) scale(1.08); }
+    }
+    @keyframes orbFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, 35px) scale(1.06); }
+    }
+    @keyframes orbFloat3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(25px, 25px) scale(1.1); }
+    }
+    .ambient-orb-1 {
+      animation: orbFloat1 20s ease-in-out infinite;
+      will-change: transform;
+    }
+    .ambient-orb-2 {
+      animation: orbFloat2 25s ease-in-out infinite;
+      will-change: transform;
+    }
+    .ambient-orb-3 {
+      animation: orbFloat3 22s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Interactive Expandable Feature Drawer */
+    .feature-drawer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+    .feature-item.is-expanded .feature-drawer {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+    .feature-drawer-inner {
+      overflow: hidden;
+    }
+
+    /* Live Simulator Radar Scan Effect */
+    @keyframes scanShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .scanning-active {
+      background: linear-gradient(90deg, rgba(30, 41, 59, 0.8) 0%, rgba(59, 130, 246, 0.25) 50%, rgba(30, 41, 59, 0.8) 100%) !important;
+      background-size: 200% 100% !important;
+      animation: scanShimmer 0.7s infinite linear !important;
+      border-color: rgba(56, 189, 248, 0.5) !important;
+    }
 
     /* Accessibility: Respect Reduced Motion Preferences */
     @media (prefers-reduced-motion: reduce) {
@@ -260,10 +332,17 @@
     }
   </style>
 </head>
-<body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-blue-600 selection:text-white pb-20">
+<body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-blue-600 selection:text-white pb-20 relative">
+
+  <!-- Ambient High-Tech Floating Interactive Glow Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-20 -left-40 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+    <div class="ambient-orb-2 absolute top-1/3 -right-40 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px]"></div>
+    <div class="ambient-orb-3 absolute bottom-20 left-1/3 w-[450px] h-[450px] bg-cyan-600/10 rounded-full blur-[120px]"></div>
+  </div>
 
   <!-- TOP STICKY NAVIGATION BAR -->
-  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80 pt-[env(safe-area-inset-top)]">
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80 pt-[env(safe-area-inset-top)] relative">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3 sm:gap-4">
       <!-- Logo & Project Identity -->
       <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
@@ -328,10 +407,12 @@
         </div>
       </div>
     </div>
+    <!-- High-Tech Animated Scroll Progress Bar -->
+    <div id="scroll-progress-bar" class="absolute bottom-0 left-0 h-[2.5px] bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 w-0 transition-[width] duration-75 ease-out shadow-[0_0_10px_rgba(56,189,248,0.8)] pointer-events-none"></div>
   </header>
 
   <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-10">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-10 relative z-10">
 
     <!-- HERO / EXECUTIVE BANNER -->
     <section class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-6 sm:p-10 shadow-2xl">
@@ -388,32 +469,32 @@
           </div>
           <div class="shrink-0 flex items-center gap-2 bg-slate-900/80 px-4 py-2 rounded-xl border border-slate-700">
             <span class="text-xs text-slate-400" id="hero-fleet-label">KSA Target Fleet:</span>
-            <span class="text-sm font-extrabold text-amber-400">15.88M Vehicles</span>
+            <span class="text-sm font-extrabold text-amber-400 font-mono" id="hero-fleet-val">15.88M Vehicles</span>
           </div>
         </div>
 
-        <!-- KPI Summary Cards -->
+        <!-- KPI Summary Cards with Interactive Spotlight & Count-Up Hooks -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
           <!-- KPI 1 -->
-          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition-all duration-300 cursor-pointer group">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-1-label">Portfolio Investment</div>
             <div class="text-2xl font-black text-amber-400 mt-1 flex items-center" id="kpi-1-val">SAR 10,090</div>
             <div class="text-xs text-slate-400 mt-0.5" id="kpi-1-sub">3 Production Products</div>
           </div>
           <!-- KPI 2 -->
-          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-blue-500/50 transition-all duration-300 cursor-pointer group">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-2-label">Delivery Sequence</div>
             <div class="text-2xl font-black text-blue-400 mt-1" id="kpi-2-val">3 Months</div>
             <div class="text-xs text-slate-400 mt-0.5" id="kpi-2-sub">1 Month Per Milestone</div>
           </div>
           <!-- KPI 3 -->
-          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer group">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-3-label">Total Capabilities</div>
             <div class="text-2xl font-black text-emerald-400 mt-1" id="kpi-3-val">49 Features</div>
             <div class="text-xs text-slate-400 mt-0.5" id="kpi-3-sub">Web + Android + iOS</div>
           </div>
           <!-- KPI 4 -->
-          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-purple-500/50 transition-all duration-300 cursor-pointer group">
             <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-4-label">Fitment Guarantee</div>
             <div class="text-2xl font-black text-purple-400 mt-1" id="kpi-4-val">100% Verified</div>
             <div class="text-xs text-slate-400 mt-0.5" id="kpi-4-sub">AI + Human Engineering</div>
@@ -436,19 +517,19 @@
         </div>
       </div>
 
-      <!-- 3-Product Milestone Cards -->
+      <!-- 3-Product Milestone Cards (Interactive Shortcuts) -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Milestone 1: Website -->
-        <div class="glass-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-blue-500">
+        <div onclick="switchTab('website'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-blue-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-blue-500/10">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30" id="card-m1-tag">Month 1 • Milestone 1</span>
-            <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center">
+            <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center transition-transform group-hover:scale-110">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
               </svg>
             </div>
           </div>
-          <h3 class="text-xl font-bold text-white mt-4" id="card-m1-title">Website Platform</h3>
+          <h3 class="text-xl font-bold text-white mt-4 group-hover:text-blue-300 transition-colors" id="card-m1-title">Website Platform</h3>
           <p class="text-xs text-slate-400 mt-1" id="card-m1-role">Digital storefront, organic SEO acquisition, and transactional foundation.</p>
           
           <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-baseline justify-between">
@@ -462,23 +543,29 @@
             </div>
           </div>
 
-          <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400 flex items-center gap-1.5">
-            <span class="text-emerald-400">✓</span>
-            <span id="card-m1-features-count">17 Core Integrated Features</span>
+          <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400 flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <span class="text-emerald-400">✓</span>
+              <span id="card-m1-features-count">17 Core Integrated Features</span>
+            </div>
+            <span class="text-[11px] text-blue-400 font-semibold group-hover:text-cyan-300 transition-colors flex items-center gap-1">
+              <span id="card-m1-explore">View features</span>
+              <span>→</span>
+            </span>
           </div>
         </div>
 
         <!-- Milestone 2: Android Application -->
-        <div class="glass-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-emerald-500">
+        <div onclick="switchTab('android'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-emerald-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-emerald-500/10">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" id="card-m2-tag">Month 2 • Milestone 2</span>
-            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center transition-transform group-hover:scale-110">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
               </svg>
             </div>
           </div>
-          <h3 class="text-xl font-bold text-white mt-4" id="card-m2-title">Android Application</h3>
+          <h3 class="text-xl font-bold text-white mt-4 group-hover:text-emerald-300 transition-colors" id="card-m2-title">Android Application</h3>
           <p class="text-xs text-slate-400 mt-1" id="card-m2-role">Mobile field verification, camera VIN scan, biometrics & push engagement.</p>
           
           <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-baseline justify-between">
@@ -492,23 +579,29 @@
             </div>
           </div>
 
-          <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400 flex items-center gap-1.5">
-            <span class="text-emerald-400">✓</span>
-            <span id="card-m2-features-count">16 Mobile-Native Features</span>
+          <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400 flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <span class="text-emerald-400">✓</span>
+              <span id="card-m2-features-count">16 Mobile-Native Features</span>
+            </div>
+            <span class="text-[11px] text-emerald-400 font-semibold group-hover:text-emerald-300 transition-colors flex items-center gap-1">
+              <span id="card-m2-explore">View features</span>
+              <span>→</span>
+            </span>
           </div>
         </div>
 
         <!-- Milestone 3: iOS Application -->
-        <div class="glass-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-purple-500">
+        <div onclick="switchTab('ios'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-purple-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-purple-500/10">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30" id="card-m3-tag">Month 3 • Milestone 3</span>
-            <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center">
+            <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center transition-transform group-hover:scale-110">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"/>
               </svg>
             </div>
           </div>
-          <h3 class="text-xl font-bold text-white mt-4" id="card-m3-title">iOS Application</h3>
+          <h3 class="text-xl font-bold text-white mt-4 group-hover:text-purple-300 transition-colors" id="card-m3-title">iOS Application</h3>
           <p class="text-xs text-slate-400 mt-1" id="card-m3-role">Premium iPhone experience, Face ID, Apple Pay & seamless universal links.</p>
           
           <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-baseline justify-between">
@@ -522,9 +615,15 @@
             </div>
           </div>
 
-          <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400 flex items-center gap-1.5">
-            <span class="text-emerald-400">✓</span>
-            <span id="card-m3-features-count">16 Apple Ecosystem Features</span>
+          <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400 flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <span class="text-emerald-400">✓</span>
+              <span id="card-m3-features-count">16 Apple Ecosystem Features</span>
+            </div>
+            <span class="text-[11px] text-purple-400 font-semibold group-hover:text-purple-300 transition-colors flex items-center gap-1">
+              <span id="card-m3-explore">View features</span>
+              <span>→</span>
+            </span>
           </div>
         </div>
       </div>
@@ -557,10 +656,15 @@
           </button>
         </div>
 
-        <!-- Quick Keyword Search / Filter -->
-        <div class="relative w-full md:w-64">
-          <input type="text" id="feature-search" oninput="filterFeatures()" placeholder="Filter features..." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-4 pr-9 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30 transition text-left">
-          <span id="search-icon" class="absolute right-3 top-2.5 text-slate-400 text-xs pointer-events-none">🔍</span>
+        <!-- Quick Keyword Search / Filter with Live Result Counter -->
+        <div class="relative w-full md:w-80 flex items-center gap-2">
+          <div class="relative flex-1">
+            <input type="text" id="feature-search" oninput="filterFeatures()" placeholder="Filter features..." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-4 pr-9 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30 transition text-left">
+            <span id="search-icon" class="absolute right-3 top-2.5 text-slate-400 text-xs pointer-events-none">🔍</span>
+          </div>
+          <span id="filter-count-badge" class="shrink-0 text-[11px] font-mono px-2.5 py-1.5 rounded-xl bg-blue-500/10 text-blue-300 border border-blue-500/25 font-bold transition-all duration-200">
+            17 / 17
+          </span>
         </div>
       </div>
 
@@ -761,13 +865,26 @@
                 Direct factory fitment confirmed. Chassis and rotor diameter matches Saudi-market GCC specifications exactly. Risk score: 0.0%.
               </div>
 
-              <!-- Alternatives Card -->
-              <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700 flex items-center justify-between text-xs">
-                <div>
-                  <div class="font-bold text-slate-200" id="sim-alt-title">Available Verified Alternatives:</div>
-                  <div class="text-slate-400 mt-0.5" id="sim-alt-sub">1 Original Genuine OEM • 2 High-Tier German Aftermarket</div>
+              <!-- Interactive Alternatives Selector Card -->
+              <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700 space-y-3 text-xs">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <div class="font-bold text-slate-200" id="sim-alt-title">Available Verified Alternatives:</div>
+                    <div class="text-slate-400 text-[11px] mt-0.5" id="sim-alt-sub">Compare factory OEM vs certified German aftermarket</div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono font-bold" id="sim-diag-price">SAR 340 (OEM)</span>
                 </div>
-                <span class="px-2.5 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono" id="sim-diag-price">SAR 185 - 340</span>
+                <!-- Interactive Variant Selector Buttons -->
+                <div class="flex flex-wrap items-center gap-2 pt-1">
+                  <button type="button" id="alt-btn-oem" onclick="setAlternative('oem')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition active:scale-95 flex items-center gap-1.5 touch-manipulation">
+                    <span>👑</span>
+                    <span id="alt-lbl-oem">Genuine OEM • أصلي وكالة</span>
+                  </button>
+                  <button type="button" id="alt-btn-aftermarket" onclick="setAlternative('aftermarket')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white transition active:scale-95 flex items-center gap-1.5 touch-manipulation">
+                    <span>🇩🇪</span>
+                    <span id="alt-lbl-after">German Aftermarket • بديل ألماني معتمد</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1571,7 +1688,7 @@
       // 1. Website Grid
       const webGrid = document.getElementById('web-features-grid');
       webGrid.innerHTML = websiteFeatures.map((item, idx) => `
-        <div class="glass-card card-animated rounded-2xl p-5 flex flex-col justify-between feature-item cursor-pointer touch-manipulation" style="animation-delay: ${idx * 25}ms;" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
+        <div onclick="toggleFeatureCard(this)" class="glass-card spotlight-card card-animated rounded-2xl p-5 flex flex-col justify-between feature-item cursor-pointer touch-manipulation group hover:border-blue-500/50 transition-all duration-300" style="animation-delay: ${idx * 25}ms;" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
           <div>
             <div class="flex items-center justify-between mb-3">
               <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">${item.num}</span>
@@ -1581,7 +1698,7 @@
                 </svg>
               </div>
             </div>
-            <h5 class="text-base font-bold text-white mb-2">${isAr ? item.titleAr : item.titleEn}</h5>
+            <h5 class="text-base font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">${isAr ? item.titleAr : item.titleEn}</h5>
             
             <div class="space-y-2 text-xs">
               <div class="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
@@ -1594,6 +1711,25 @@
                 <p class="text-slate-300 leading-relaxed">${isAr ? item.benefitAr : item.benefitEn}</p>
               </div>
             </div>
+
+            <!-- Interactive Expandable Drawer -->
+            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-blue-400 group-hover:text-cyan-300 transition-colors">
+              <span class="font-semibold">${isAr ? 'اضغط لعرض الأثر المعماري' : 'Tap for technical impact'}</span>
+              <span class="transform transition-transform duration-200 card-arrow text-xs">▼</span>
+            </div>
+
+            <div class="feature-drawer">
+              <div class="feature-drawer-inner pt-2.5 space-y-1.5 text-[11px] border-t border-blue-500/20 mt-2">
+                <div class="flex items-center justify-between text-slate-400">
+                  <span>${isAr ? 'النطاق التقني:' : 'Architecture Tier:'}</span>
+                  <span class="font-mono text-cyan-300 font-bold">${isAr ? 'بنية ويب سحابية مرنة' : 'Cloud Web Gateway'}</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-400">
+                  <span>${isAr ? 'جاهزية الربط:' : 'Integration Status:'}</span>
+                  <span class="font-mono text-emerald-400 font-bold">${isAr ? 'متصل بقاعدة مركبات KSA' : 'Synced with KSA Fleet API'}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       `).join('');
@@ -1601,7 +1737,7 @@
       // 2. Android Grid
       const androidGrid = document.getElementById('android-features-grid');
       androidGrid.innerHTML = androidFeatures.map((item, idx) => `
-        <div class="glass-card card-animated rounded-2xl p-5 flex flex-col justify-between feature-item cursor-pointer touch-manipulation" style="animation-delay: ${idx * 25}ms;" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
+        <div onclick="toggleFeatureCard(this)" class="glass-card spotlight-card card-animated rounded-2xl p-5 flex flex-col justify-between feature-item cursor-pointer touch-manipulation group hover:border-emerald-500/50 transition-all duration-300" style="animation-delay: ${idx * 25}ms;" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
           <div>
             <div class="flex items-center justify-between mb-3">
               <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">${item.num}</span>
@@ -1611,7 +1747,7 @@
                 </svg>
               </div>
             </div>
-            <h5 class="text-base font-bold text-white mb-2">${isAr ? item.titleAr : item.titleEn}</h5>
+            <h5 class="text-base font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">${isAr ? item.titleAr : item.titleEn}</h5>
             
             <div class="space-y-2 text-xs">
               <div class="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
@@ -1624,6 +1760,25 @@
                 <p class="text-slate-300 leading-relaxed">${isAr ? item.benefitAr : item.benefitEn}</p>
               </div>
             </div>
+
+            <!-- Interactive Expandable Drawer -->
+            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-emerald-400 group-hover:text-emerald-300 transition-colors">
+              <span class="font-semibold">${isAr ? 'اضغط لعرض الأثر المعماري' : 'Tap for technical impact'}</span>
+              <span class="transform transition-transform duration-200 card-arrow text-xs">▼</span>
+            </div>
+
+            <div class="feature-drawer">
+              <div class="feature-drawer-inner pt-2.5 space-y-1.5 text-[11px] border-t border-emerald-500/20 mt-2">
+                <div class="flex items-center justify-between text-slate-400">
+                  <span>${isAr ? 'النطاق التقني:' : 'Architecture Tier:'}</span>
+                  <span class="font-mono text-emerald-300 font-bold">${isAr ? 'تطبيق أصلي Native Android' : 'Kotlin Native / Jetpack'}</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-400">
+                  <span>${isAr ? 'العتاد المستخدم:' : 'Hardware Hook:'}</span>
+                  <span class="font-mono text-cyan-400 font-bold">${isAr ? 'كاميرا الذكاء الاصطناعي + بيومترك' : 'Camera OCR + Biometric Prompt'}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       `).join('');
@@ -1631,7 +1786,7 @@
       // 3. iOS Grid
       const iosGrid = document.getElementById('ios-features-grid');
       iosGrid.innerHTML = iosFeatures.map((item, idx) => `
-        <div class="glass-card card-animated rounded-2xl p-5 flex flex-col justify-between feature-item cursor-pointer touch-manipulation" style="animation-delay: ${idx * 25}ms;" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
+        <div onclick="toggleFeatureCard(this)" class="glass-card spotlight-card card-animated rounded-2xl p-5 flex flex-col justify-between feature-item cursor-pointer touch-manipulation group hover:border-purple-500/50 transition-all duration-300" style="animation-delay: ${idx * 25}ms;" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
           <div>
             <div class="flex items-center justify-between mb-3">
               <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">${item.num}</span>
@@ -1641,7 +1796,7 @@
                 </svg>
               </div>
             </div>
-            <h5 class="text-base font-bold text-white mb-2">${isAr ? item.titleAr : item.titleEn}</h5>
+            <h5 class="text-base font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">${isAr ? item.titleAr : item.titleEn}</h5>
             
             <div class="space-y-2 text-xs">
               <div class="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
@@ -1654,9 +1809,31 @@
                 <p class="text-slate-300 leading-relaxed">${isAr ? item.benefitAr : item.benefitEn}</p>
               </div>
             </div>
+
+            <!-- Interactive Expandable Drawer -->
+            <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-purple-400 group-hover:text-purple-300 transition-colors">
+              <span class="font-semibold">${isAr ? 'اضغط لعرض الأثر المعماري' : 'Tap for technical impact'}</span>
+              <span class="transform transition-transform duration-200 card-arrow text-xs">▼</span>
+            </div>
+
+            <div class="feature-drawer">
+              <div class="feature-drawer-inner pt-2.5 space-y-1.5 text-[11px] border-t border-purple-500/20 mt-2">
+                <div class="flex items-center justify-between text-slate-400">
+                  <span>${isAr ? 'النطاق التقني:' : 'Architecture Tier:'}</span>
+                  <span class="font-mono text-purple-300 font-bold">${isAr ? 'تطبيق أصلي Swift / iOS' : 'Swift / SwiftUI Native'}</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-400">
+                  <span>${isAr ? 'منظومة آبل:' : 'Apple Ecosystem:'}</span>
+                  <span class="font-mono text-cyan-400 font-bold">${isAr ? 'Face ID + Apple Pay + Safari Universal' : 'Face ID + Apple Pay + Universal Links'}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       `).join('');
+
+      // Initialize Spotlight event listeners on new cards
+      initSpotlightCards();
 
       // 4. Matrix Table
       const matrixTbody = document.getElementById('matrix-table-body');
@@ -1766,6 +1943,8 @@
       const cardM1Price = document.getElementById('card-m1-price');
       if (cardM1Price) cardM1Price.innerHTML = formatCurrency('3,600', isAr);
       document.getElementById('card-m1-features-count').innerText = isAr ? '17 ميزة متكاملة' : '17 Core Integrated Features';
+      const m1Explore = document.getElementById('card-m1-explore');
+      if (m1Explore) m1Explore.innerText = isAr ? 'استعراض المزايا' : 'View features';
 
       document.getElementById('card-m2-tag').innerText = isAr ? 'الشهر الثاني • المرحلة الثانية' : 'Month 2 • Milestone 2';
       document.getElementById('card-m2-title').innerText = isAr ? 'تطبيق أندرويد' : 'Android Application';
@@ -1776,6 +1955,8 @@
       const cardM2Price = document.getElementById('card-m2-price');
       if (cardM2Price) cardM2Price.innerHTML = formatCurrency('3,150', isAr);
       document.getElementById('card-m2-features-count').innerText = isAr ? '16 ميزة مخصصة للجوال' : '16 Mobile-Native Features';
+      const m2Explore = document.getElementById('card-m2-explore');
+      if (m2Explore) m2Explore.innerText = isAr ? 'استعراض المزايا' : 'View features';
 
       document.getElementById('card-m3-tag').innerText = isAr ? 'الشهر الثالث • المرحلة الثالثة' : 'Month 3 • Milestone 3';
       document.getElementById('card-m3-title').innerText = isAr ? 'تطبيق آيفون' : 'iOS Application';
@@ -1786,6 +1967,8 @@
       const cardM3Price = document.getElementById('card-m3-price');
       if (cardM3Price) cardM3Price.innerHTML = formatCurrency('3,340', isAr);
       document.getElementById('card-m3-features-count').innerText = isAr ? '16 ميزة لنظام iOS' : '16 Apple Ecosystem Features';
+      const m3Explore = document.getElementById('card-m3-explore');
+      if (m3Explore) m3Explore.innerText = isAr ? 'استعراض المزايا' : 'View features';
 
       // Tab Buttons
       document.getElementById('tab-label-web').innerText = isAr ? '1. الموقع الإلكتروني (17)' : '1. Website (17)';
@@ -1923,7 +2106,12 @@
         simPart.options[3].text = isAr ? 'مروحة تبريد الرديتر الإلكترونية' : 'Electronic Cooling Radiator Fan Assembly';
       }
 
-      // Simulator Alternative Price
+      // Simulator Alternative Buttons & Price
+      const altOem = document.getElementById('alt-lbl-oem');
+      if (altOem) altOem.innerText = isAr ? 'أصلي وكالة (OEM)' : 'Genuine OEM';
+      const altAfter = document.getElementById('alt-lbl-after');
+      if (altAfter) altAfter.innerText = isAr ? 'بديل ألماني معتمد' : 'German Aftermarket';
+
       const simPrice = document.getElementById('sim-diag-price');
       if (simPrice) {
         simPrice.innerHTML = isAr 
@@ -1949,6 +2137,32 @@
       // Re-render the cards with active language
       renderCards();
       runFitmentCheck();
+
+      // Dynamically count-up numbers in new language format
+      runNumberCounters();
+    }
+
+    // Interactive Feature Card Drawer Toggle
+    function toggleFeatureCard(cardEl) {
+      const wasExpanded = cardEl.classList.contains('is-expanded');
+      
+      // Close other cards in the same grid for clean accordion experience
+      const parentGrid = cardEl.parentElement;
+      if (parentGrid) {
+        parentGrid.querySelectorAll('.feature-item.is-expanded').forEach(el => {
+          if (el !== cardEl) {
+            el.classList.remove('is-expanded');
+            const arrow = el.querySelector('.card-arrow');
+            if (arrow) arrow.style.transform = 'rotate(0deg)';
+          }
+        });
+      }
+
+      cardEl.classList.toggle('is-expanded', !wasExpanded);
+      const arrow = cardEl.querySelector('.card-arrow');
+      if (arrow) {
+        arrow.style.transform = !wasExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+      }
     }
 
     // Switch active tab with smooth momentum auto-scroll into view
@@ -1980,23 +2194,87 @@
       if (activeBtn) {
         activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
+
+      // Re-trigger live search counter for current tab
+      filterFeatures();
     }
 
-    // Live Search / Filter
+    // Live Search / Filter with Real-time Count Animation
     function filterFeatures() {
       const q = document.getElementById('feature-search').value.toLowerCase().trim();
-      const items = document.querySelectorAll('.feature-item');
+      const currentGridId = currentTab === 'android' ? 'android-features-grid' : currentTab === 'ios' ? 'ios-features-grid' : 'web-features-grid';
+      const currentGrid = document.getElementById(currentGridId);
+      const items = currentGrid ? currentGrid.querySelectorAll('.feature-item') : document.querySelectorAll('.feature-item');
+      let visibleCount = 0;
+      let totalCount = items.length;
+
       items.forEach(item => {
         const searchData = item.getAttribute('data-search') || '';
         if (!q || searchData.includes(q)) {
           item.style.display = 'flex';
+          visibleCount++;
         } else {
           item.style.display = 'none';
         }
       });
+
+      const badge = document.getElementById('filter-count-badge');
+      if (badge) {
+        badge.innerText = `${visibleCount} / ${totalCount}`;
+        badge.classList.remove('animate-pop');
+        void badge.offsetWidth;
+        badge.classList.add('animate-pop');
+      }
     }
 
-    // Interactive Fitment Engine Simulator
+    // Interactive Alternatives Variant Selection
+    let selectedAlternative = 'oem'; // 'oem' | 'aftermarket'
+
+    function setAlternative(altType) {
+      selectedAlternative = altType;
+      const isAr = currentLang === 'ar';
+      const partVal = document.getElementById('sim-part').value;
+      const btnOem = document.getElementById('alt-btn-oem');
+      const btnAfter = document.getElementById('alt-btn-aftermarket');
+      const oemRef = document.getElementById('sim-out-oem');
+      const priceTag = document.getElementById('sim-diag-price');
+
+      if (altType === 'oem') {
+        if (btnOem) btnOem.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition active:scale-95 flex items-center gap-1.5 touch-manipulation border border-blue-400/30';
+        if (btnAfter) btnAfter.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition active:scale-95 flex items-center gap-1.5 touch-manipulation border border-transparent';
+        if (partVal === 'alternator') {
+          oemRef.innerText = '27060-0V280-OEM (Denso Japan)';
+          priceTag.innerHTML = isAr ? formatCurrency('580', true) : 'SAR 580 (OEM)';
+        } else if (partVal === 'oil-filter') {
+          oemRef.innerText = '04152-YZZA1-OEM (Toyota Genuine)';
+          priceTag.innerHTML = isAr ? formatCurrency('45', true) : 'SAR 45 (OEM)';
+        } else {
+          oemRef.innerText = '04465-33471-KSA (Factory OEM)';
+          priceTag.innerHTML = isAr ? formatCurrency('340', true) : 'SAR 340 (OEM)';
+        }
+      } else {
+        if (btnOem) btnOem.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition active:scale-95 flex items-center gap-1.5 touch-manipulation border border-transparent';
+        if (btnAfter) btnAfter.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-sm transition active:scale-95 flex items-center gap-1.5 touch-manipulation border border-emerald-400/30';
+        if (partVal === 'alternator') {
+          oemRef.innerText = 'AL-7819-GER (Bosch GCC Spec)';
+          priceTag.innerHTML = isAr ? formatCurrency('390', true) : 'SAR 390 (Bosch)';
+        } else if (partVal === 'oil-filter') {
+          oemRef.innerText = 'HU-7019-Z (Mann-Filter Germany)';
+          priceTag.innerHTML = isAr ? formatCurrency('28', true) : 'SAR 28 (Mann)';
+        } else {
+          oemRef.innerText = 'BP-9402-GER (Brembo Ceramic)';
+          priceTag.innerHTML = isAr ? formatCurrency('185', true) : 'SAR 185 (Brembo)';
+        }
+      }
+
+      if (priceTag) {
+        priceTag.classList.remove('animate-pop');
+        void priceTag.offsetWidth;
+        priceTag.classList.add('animate-pop');
+      }
+    }
+
+    // Interactive Fitment Engine Simulator with 300ms Diagnostic Scanner Simulation
     function runFitmentCheck() {
       const vehicleVal = document.getElementById('sim-vehicle').value;
       const partVal = document.getElementById('sim-part').value;
@@ -2010,43 +2288,122 @@
 
       const statusPill = document.getElementById('sim-status-pill');
       const explBox = document.getElementById('sim-expl-box');
-      const oemRef = document.getElementById('sim-out-oem');
 
+      // Live High-Tech Scanner Animation Feedback
+      if (explBox) {
+        explBox.classList.add('scanning-active');
+        explBox.innerHTML = isAr
+          ? '<span class="flex items-center gap-2"><span>🔍</span><span>جاري مطابقة أبعاد القطعة ورقم الهيكل مع كتالوجات الوكالة للمواصفات الخليجية...</span></span>'
+          : '<span class="flex items-center gap-2"><span>🔍</span><span>Scanning GCC factory database & cross-referencing vehicle chassis specification...</span></span>';
+      }
       if (statusPill) {
-        statusPill.classList.remove('animate-pop');
-        void statusPill.offsetWidth; // trigger reflow for smooth re-animation
-        statusPill.classList.add('animate-pop');
+        statusPill.className = 'px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 animate-pulse';
+        statusPill.innerText = isAr ? 'فحص التوافق...' : 'Verifying Fitment...';
       }
 
-      if (partVal === 'alternator') {
-        // Verification Required Case
-        statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500/20 text-amber-400 border border-amber-500/30 animate-pop';
-        statusPill.innerText = isAr ? 'يحتاج تحقق فني (Verification Required)' : 'Verification Required (Manual Review)';
-        oemRef.innerText = '27060-0V210 / 27060-0V280 (Dual Pulley Variants)';
-        explBox.className = 'p-3.5 rounded-xl bg-amber-950/30 border border-amber-500/20 text-xs text-amber-200 leading-relaxed';
-        explBox.innerHTML = isAr
-          ? 'تنبيه: يتوفر نوعان لمولد الكهرباء (130 أمبير و150 أمبير) حسب حزمة التبريد الخليجية. تم تفعيل خيار <b>"طلب التحقق البشري"</b> للتأكد عبر رقم الهيكل والصورة لمنع أي خطأ.'
-          : 'Warning: 2 alternator variants exist (130A vs 150A) depending on GCC cold/heavy-duty cooling spec. <b>"Human Verification Request"</b> is recommended to guarantee 100% fitment via VIN inspection.';
-      } else if (vehicleVal === 'patrol' && partVal === 'brake-front') {
-        // Likely Compatible
-        statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-blue-500/20 text-blue-400 border border-blue-500/30 animate-pop';
-        statusPill.innerText = isAr ? 'غالباً متوافق (Likely Compatible)' : 'Likely Compatible (95% Fitment Score)';
-        oemRef.innerText = 'D1060-1LB0A-GCC';
-        explBox.className = 'p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/20 text-xs text-blue-200 leading-relaxed';
-        explBox.innerHTML = isAr
-          ? 'متوافق مع طرازات نيسان باترول Y62 لمحركات 5.6L لسنوات 2018-2023. مواصفات الكبح مطابقة لمعايير هيئة التقييس لدول مجلس التعاون.'
-          : 'Fits Nissan Patrol Y62 5.6L V8 (2018-2023). Rotor surface clearance complies with GSO standards. High confidence match.';
-      } else {
-        // Compatible Case
-        statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 animate-pop';
-        statusPill.innerText = isAr ? '100% متوافق بالكامل (Certified Compatible)' : '100% Compatible (Factory Fitment Guaranteed)';
-        oemRef.innerText = '04465-33471-KSA';
-        explBox.className = 'p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-xs text-emerald-200 leading-relaxed';
-        explBox.innerHTML = isAr
-          ? 'توافق مصنعي مباشر ومؤكد. أبعاد أقراص الفرامل والأسلاك الحساسة مطابقة للسيارة المختارة بنسبة 100%. معدل خطر الخطأ: 0.0%.'
-          : 'Direct factory fitment confirmed. Caliper mount points and rotor diameter match Saudi-market GCC specifications exactly. Risk score: 0.0%.';
-      }
+      setTimeout(() => {
+        if (explBox) explBox.classList.remove('scanning-active');
+
+        if (partVal === 'alternator') {
+          // Verification Required Case
+          statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500/20 text-amber-400 border border-amber-500/30 animate-pop';
+          statusPill.innerText = isAr ? 'يحتاج تحقق فني (Verification Required)' : 'Verification Required (Manual Review)';
+          explBox.className = 'p-3.5 rounded-xl bg-amber-950/30 border border-amber-500/20 text-xs text-amber-200 leading-relaxed';
+          explBox.innerHTML = isAr
+            ? 'تنبيه: يتوفر نوعان لمولد الكهرباء (130 أمبير و150 أمبير) حسب حزمة التبريد الخليجية. تم تفعيل خيار <b>"طلب التحقق البشري"</b> للتأكد عبر رقم الهيكل والصورة لمنع أي خطأ.'
+            : 'Warning: 2 alternator variants exist (130A vs 150A) depending on GCC cold/heavy-duty cooling spec. <b>"Human Verification Request"</b> is recommended to guarantee 100% fitment via VIN inspection.';
+        } else if (vehicleVal === 'patrol' && partVal === 'brake-front') {
+          // Likely Compatible
+          statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-blue-500/20 text-blue-400 border border-blue-500/30 animate-pop';
+          statusPill.innerText = isAr ? 'غالباً متوافق (Likely Compatible)' : 'Likely Compatible (95% Fitment Score)';
+          explBox.className = 'p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/20 text-xs text-blue-200 leading-relaxed';
+          explBox.innerHTML = isAr
+            ? 'متوافق مع طرازات نيسان باترول Y62 لمحركات 5.6L لسنوات 2018-2023. مواصفات الكبح مطابقة لمعايير هيئة التقييس لدول مجلس التعاون.'
+            : 'Fits Nissan Patrol Y62 5.6L V8 (2018-2023). Rotor surface clearance complies with GSO standards. High confidence match.';
+        } else {
+          // Compatible Case
+          statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 animate-pop';
+          statusPill.innerText = isAr ? '100% متوافق بالكامل (Certified Compatible)' : '100% Compatible (Factory Fitment Guaranteed)';
+          explBox.className = 'p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-xs text-emerald-200 leading-relaxed';
+          explBox.innerHTML = isAr
+            ? 'توافق مصنعي مباشر ومؤكد. أبعاد أقراص الفرامل والأسلاك الحساسة مطابقة للسيارة المختارة بنسبة 100%. معدل خطر الخطأ: 0.0%.'
+            : 'Direct factory fitment confirmed. Caliper mount points and rotor diameter match Saudi-market GCC specifications exactly. Risk score: 0.0%.';
+        }
+
+        setAlternative(selectedAlternative);
+      }, 300);
     }
+
+    // Interactive Cursor Spotlight Engine (Linear/Vercel style 60fps)
+    function initSpotlightCards() {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        card.removeEventListener('mousemove', card._spotlightHandler);
+        card._spotlightHandler = (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        };
+        card.addEventListener('mousemove', card._spotlightHandler);
+      });
+    }
+
+    // Number Counting Animation (Smooth Quintic Ease-Out)
+    function runNumberCounters() {
+      const isAr = currentLang === 'ar';
+      const kpi1 = document.getElementById('kpi-1-val');
+      if (kpi1) animateNumberCounter(kpi1, 10090, 800, true);
+
+      const m1 = document.getElementById('card-m1-price');
+      if (m1) animateNumberCounter(m1, 3600, 700, true);
+
+      const m2 = document.getElementById('card-m2-price');
+      if (m2) animateNumberCounter(m2, 3150, 700, true);
+
+      const m3 = document.getElementById('card-m3-price');
+      if (m3) animateNumberCounter(m3, 3340, 700, true);
+
+      const commTotal = document.getElementById('comm-total-val');
+      if (commTotal) animateNumberCounter(commTotal, 10090, 800, true);
+    }
+
+    function animateNumberCounter(el, target, duration = 800, isCurrency = false) {
+      if (!el) return;
+      const isAr = currentLang === 'ar';
+      const start = performance.now();
+      function step(now) {
+        const elapsed = now - start;
+        const p = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        const current = Math.floor(target * ease);
+        if (isCurrency) {
+          el.innerHTML = formatCurrency(current.toLocaleString('en-US'), isAr);
+        } else {
+          el.innerText = current.toLocaleString('en-US');
+        }
+        if (p < 1) {
+          requestAnimationFrame(step);
+        } else {
+          if (isCurrency) {
+            el.innerHTML = formatCurrency(target.toLocaleString('en-US'), isAr);
+          } else {
+            el.innerText = target.toLocaleString('en-US');
+          }
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    // High-Tech Scroll Progress Tracker (Passive 60fps)
+    window.addEventListener('scroll', () => {
+      const bar = document.getElementById('scroll-progress-bar');
+      if (!bar) return;
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      bar.style.width = scrolled + '%';
+    }, { passive: true });
 
     // Verification Modal Logic
     function openVerificationModal() {
@@ -2140,6 +2497,9 @@
     document.addEventListener('DOMContentLoaded', () => {
       renderCards();
       runFitmentCheck();
+      initSpotlightCards();
+      runNumberCounters();
+      filterFeatures();
     });
   </script>
 </body>
