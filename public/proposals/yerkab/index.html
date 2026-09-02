@@ -13,45 +13,164 @@
   <!-- Tailwind CSS allowlisted in Antigravity -->
   <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
-    /* Custom Scrollbar and Transitions */
+    /* Mobile Touch & Tap Normalization */
+    *, *::before, *::after {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    /* iOS Safari Auto-Zoom Prevention: inputs must be >= 16px on mobile */
+    @media (max-width: 640px) {
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+    }
+
+    /* Smooth Momentum Touch Scrolling for iOS Safari & Android Chrome */
+    .scroll-touch {
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .scroll-touch::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Custom Scrollbar for Desktop */
     ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
     }
     ::-webkit-scrollbar-track {
       background: rgba(15, 23, 42, 0.6);
     }
     ::-webkit-scrollbar-thumb {
       background: rgba(59, 130, 246, 0.4);
-      border-radius: 4px;
+      border-radius: 9999px;
     }
     ::-webkit-scrollbar-thumb:hover {
       background: rgba(59, 130, 246, 0.7);
     }
     
-    /* Modern Glassmorphism & Visual Tokens */
+    /* Modern Glassmorphism & GPU Acceleration */
     .glass-card {
       background: rgba(19, 29, 46, 0.75);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
     .glass-card:hover {
-      border-color: rgba(59, 130, 246, 0.35);
-      transform: translateY(-2px);
-      box-shadow: 0 16px 32px -10px rgba(0, 0, 0, 0.45);
+      border-color: rgba(59, 130, 246, 0.4);
+      transform: translateY(-3px) translateZ(0);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5);
+    }
+    .glass-card:active {
+      transform: translateY(-1px) scale(0.99) translateZ(0);
     }
     .glass-nav {
-      background: rgba(11, 17, 29, 0.88);
+      background: rgba(11, 17, 29, 0.92);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
     }
     .badge-glow {
       box-shadow: 0 0 15px rgba(59, 130, 246, 0.25);
     }
     .gold-glow {
       box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+    }
+
+    /* 60fps Native-Feel Animations */
+    @keyframes tabEnter {
+      0% {
+        opacity: 0;
+        transform: translateY(12px) scale(0.995);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .tab-content:not(.hidden) {
+      animation: tabEnter 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+      will-change: opacity, transform;
+    }
+
+    @keyframes cardFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .card-animated {
+      animation: cardFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+      will-change: transform, opacity;
+    }
+
+    @keyframes popIn {
+      0% {
+        transform: scale(0.92);
+        opacity: 0.7;
+      }
+      50% {
+        transform: scale(1.03);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    .animate-pop {
+      animation: popIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Modal Transitions */
+    @keyframes modalBackdrop {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes modalDialog {
+      0% {
+        opacity: 0;
+        transform: scale(0.94) translateY(14px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    .modal-backdrop-anim {
+      animation: modalBackdrop 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .modal-dialog-anim {
+      animation: modalDialog 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+      transform: translateZ(0);
+      will-change: transform, opacity;
     }
 
     /* Custom Modern Select Dropdowns */
@@ -109,6 +228,16 @@
       right: auto;
     }
 
+    /* Accessibility: Respect Reduced Motion Preferences */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     /* Print Styles for Executive Export */
     @media print {
       body {
@@ -134,51 +263,39 @@
 <body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-blue-600 selection:text-white pb-20">
 
   <!-- TOP STICKY NAVIGATION BAR -->
-  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80 pt-[env(safe-area-inset-top)]">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3 sm:gap-4">
       <!-- Logo & Project Identity -->
-      <div class="flex items-center gap-3.5 shrink-0">
+      <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
         <!-- Interlocking Yerkab Emblem -->
-        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-700 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/25 border border-cyan-400/40 relative group">
-          <svg class="w-6 h-6 transform group-hover:scale-110 transition duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-700 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/25 border border-cyan-400/40 relative group shrink-0">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 transform group-hover:scale-110 transition duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4l8 8m0 0l8-8m-8 8v8"/>
             <circle cx="12" cy="12" r="2.5" fill="currentColor" />
           </svg>
-          <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-400 border-2 border-slate-900 rounded-full" title="Verified Engine"></span>
+          <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 border-2 border-slate-900 rounded-full" title="Verified Engine"></span>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="font-extrabold text-xl tracking-tight text-white flex items-center gap-1.5" id="brand-title">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white flex items-center gap-1.5" id="brand-title">
               <span>YERKAB</span>
               <span class="text-cyan-400">•</span>
               <span class="text-blue-300">يَرْكَبْ</span>
             </span>
-            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30" id="brand-tag">
+            <span class="hidden sm:inline-flex text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30" id="brand-tag">
               Guaranteed Fitment • يركب بالملّي
             </span>
           </div>
-          <p class="text-xs text-slate-400 hidden sm:block" id="brand-sub">
+          <p class="text-[11px] sm:text-xs text-slate-400 hidden sm:block" id="brand-sub">
             Saudi Automotive Aftermarket Platform • Commercial Proposal & Roadmap
           </p>
         </div>
       </div>
 
-      <!-- Live Canonical Domain Link (Direct connection to dubaiincairo.com/proposals/yerkab) -->
-      <div class="hidden xl:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 shadow-inner">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span class="text-xs text-slate-400" id="nav-domain-lbl">Official Proposal:</span>
-        <a href="https://dubaiincairo.com/proposals/yerkab" target="_blank" class="font-mono text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
-          dubaiincairo.com/proposals/yerkab
-          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-          </svg>
-        </a>
-      </div>
-
       <!-- Actions: Copy Link, Simulator, Print, Language Switcher -->
-      <div class="flex items-center gap-2 sm:gap-3">
+      <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
         <!-- Copy Link Button -->
-        <button onclick="copyProposalLink()" class="px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-medium flex items-center gap-1.5 transition shadow-sm" title="Copy Proposal URL">
+        <button onclick="copyProposalLink()" class="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-slate-200 border border-slate-700 text-xs font-medium flex items-center gap-1.5 transition shadow-sm touch-manipulation" title="Copy Proposal URL">
           <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
           </svg>
@@ -186,7 +303,7 @@
         </button>
 
         <!-- Interactive Simulator Jump Button -->
-        <button onclick="switchTab('simulator')" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 text-xs font-semibold transition">
+        <button onclick="switchTab('simulator')" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 active:scale-95 text-xs font-semibold transition touch-manipulation">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
@@ -194,18 +311,18 @@
         </button>
 
         <!-- Print / PDF Proposal -->
-        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="Print / Export PDF">
+        <button onclick="window.print()" class="p-1.5 sm:p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-slate-300 border border-slate-700 text-xs transition touch-manipulation" title="Print / Export PDF">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
           </svg>
         </button>
 
         <!-- Language Toggle -->
-        <div class="bg-slate-800/90 p-1 rounded-xl border border-slate-700/80 flex items-center">
-          <button id="lang-en" onclick="setLanguage('en')" class="px-3 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm">
+        <div class="bg-slate-800/90 p-0.5 sm:p-1 rounded-xl border border-slate-700/80 flex items-center">
+          <button id="lang-en" onclick="setLanguage('en')" class="px-2.5 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition bg-blue-600 text-white shadow-sm touch-manipulation">
             English
           </button>
-          <button id="lang-ar" onclick="setLanguage('ar')" class="px-3 py-1 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white">
+          <button id="lang-ar" onclick="setLanguage('ar')" class="px-2.5 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition text-slate-400 hover:text-white touch-manipulation">
             العربية
           </button>
         </div>
@@ -416,25 +533,25 @@
     <!-- INTERACTIVE PRODUCT EXPLORER & TABS -->
     <section class="space-y-6 pt-4">
       <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <!-- Tab Navigation Buttons -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none" role="tablist">
-          <button onclick="switchTab('website')" id="tab-btn-website" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+        <!-- Tab Navigation Buttons (Horizontal Smooth Momentum Scroll on Mobile) -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scroll-touch" role="tablist" id="tabs-nav">
+          <button onclick="switchTab('website')" id="tab-btn-website" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20 active:scale-95 touch-manipulation">
             <span>🌐</span>
             <span id="tab-label-web">1. Website (17)</span>
           </button>
-          <button onclick="switchTab('android')" id="tab-btn-android" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">
+          <button onclick="switchTab('android')" id="tab-btn-android" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95 touch-manipulation">
             <span>🤖</span>
             <span id="tab-label-android">2. Android App (16)</span>
           </button>
-          <button onclick="switchTab('ios')" id="tab-btn-ios" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">
+          <button onclick="switchTab('ios')" id="tab-btn-ios" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95 touch-manipulation">
             <span>🍏</span>
             <span id="tab-label-ios">3. iOS App (16)</span>
           </button>
-          <button onclick="switchTab('matrix')" id="tab-btn-matrix" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">
+          <button onclick="switchTab('matrix')" id="tab-btn-matrix" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95 touch-manipulation">
             <span>📊</span>
             <span id="tab-label-matrix">Unified Matrix</span>
           </button>
-          <button onclick="switchTab('simulator')" id="tab-btn-simulator" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-900/40">
+          <button onclick="switchTab('simulator')" id="tab-btn-simulator" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-900/40 active:scale-95 touch-manipulation">
             <span>⚡</span>
             <span id="tab-label-sim">Interactive Prototype</span>
           </button>
@@ -442,8 +559,8 @@
 
         <!-- Quick Keyword Search / Filter -->
         <div class="relative w-full md:w-64">
-          <input type="text" id="feature-search" oninput="filterFeatures()" placeholder="Filter features..." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-4 pr-9 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 text-left">
-          <span id="search-icon" class="absolute right-3 top-2 text-slate-400 text-xs pointer-events-none">🔍</span>
+          <input type="text" id="feature-search" oninput="filterFeatures()" placeholder="Filter features..." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-4 pr-9 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30 transition text-left">
+          <span id="search-icon" class="absolute right-3 top-2.5 text-slate-400 text-xs pointer-events-none">🔍</span>
         </div>
       </div>
 
@@ -691,7 +808,7 @@
         <span class="mx-2">•</span>
         <span id="foot-date">Saudi Market Strategic Initiative</span>
       </div>
-      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4">
         <button onclick="setLanguage('en')" class="hover:text-blue-400 transition">English</button>
         <span>/</span>
         <button onclick="setLanguage('ar')" class="hover:text-blue-400 transition">العربية</button>
@@ -703,18 +820,18 @@
   </main>
 
   <!-- INTERACTIVE HUMAN VERIFICATION MODAL -->
-  <div id="verification-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="glass-card rounded-2xl max-w-lg w-full p-6 border border-blue-500/40 relative space-y-4">
-      <button onclick="closeVerificationModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+  <div id="verification-modal" onclick="if(event.target === this) closeVerificationModal()" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 modal-backdrop-anim">
+    <div class="glass-card modal-dialog-anim rounded-2xl max-w-lg w-full p-5 sm:p-6 border border-blue-500/40 relative space-y-4 max-h-[90dvh] overflow-y-auto">
+      <button onclick="closeVerificationModal()" class="absolute top-3.5 right-3.5 text-slate-400 hover:text-white text-base w-9 h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 flex items-center justify-center transition active:scale-95 touch-manipulation" aria-label="Close">✕</button>
       
       <div class="flex items-center gap-3">
-        <div class="p-2 rounded-xl bg-blue-500/20 text-blue-400">
+        <div class="p-2.5 rounded-xl bg-blue-500/20 text-blue-400 shrink-0">
           <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
           </svg>
         </div>
         <div>
-          <h4 class="text-lg font-bold text-white" id="modal-title">Human Technical Verification</h4>
+          <h4 class="text-base sm:text-lg font-bold text-white" id="modal-title">Human Technical Verification</h4>
           <p class="text-xs text-slate-300" id="modal-sub">Submit vehicle chassis (VIN) or photo for certified expert confirmation.</p>
         </div>
       </div>
@@ -735,8 +852,8 @@
       </div>
 
       <div class="pt-2 flex items-center justify-end gap-2">
-        <button onclick="closeVerificationModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white" id="modal-btn-cancel">Cancel</button>
-        <button onclick="submitVerification()" class="px-5 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition" id="modal-btn-submit">
+        <button onclick="closeVerificationModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white active:scale-95 touch-manipulation" id="modal-btn-cancel">Cancel</button>
+        <button onclick="submitVerification()" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition active:scale-95 touch-manipulation" id="modal-btn-submit">
           Submit to Technical Specialist
         </button>
       </div>
@@ -744,12 +861,12 @@
   </div>
 
   <!-- CONFIRMATION POP-UP MODAL (Consistent Executive UI/UX) -->
-  <div id="confirmation-modal" onclick="if(event.target === this) closeConfirmationModal()" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="glass-card rounded-3xl max-w-md w-full p-6 sm:p-8 border border-emerald-500/40 relative space-y-5 text-center shadow-2xl">
-      <button onclick="closeConfirmationModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800/70 hover:bg-slate-700 flex items-center justify-center transition">✕</button>
+  <div id="confirmation-modal" onclick="if(event.target === this) closeConfirmationModal()" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 modal-backdrop-anim">
+    <div class="glass-card modal-dialog-anim rounded-3xl max-w-md w-full p-6 sm:p-8 border border-emerald-500/40 relative space-y-5 text-center shadow-2xl max-h-[90dvh] overflow-y-auto">
+      <button onclick="closeConfirmationModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-base w-9 h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 flex items-center justify-center transition active:scale-95 touch-manipulation" aria-label="Close">✕</button>
 
       <!-- Animated Icon Badge -->
-      <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shadow-lg shadow-emerald-500/20 animate-pop">
         <svg class="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
         </svg>
@@ -766,7 +883,7 @@
       </div>
 
       <!-- Ticket Metadata Card -->
-      <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs space-y-2.5">
+      <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs space-y-2.5 text-left">
         <div class="flex justify-between items-center">
           <span class="text-slate-400" id="confirm-lbl-vin">Chassis / VIN:</span>
           <span id="confirm-vin-display" class="font-mono font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">JTMAB3FV8P5029184</span>
@@ -788,21 +905,21 @@
       </div>
 
       <!-- Action Button -->
-      <button onclick="closeConfirmationModal()" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/30 transition flex items-center justify-center gap-2" id="confirm-btn-done">
+      <button onclick="closeConfirmationModal()" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/30 transition flex items-center justify-center gap-2 active:scale-95 touch-manipulation" id="confirm-btn-done">
         Done &amp; Continue Browsing
       </button>
     </div>
   </div>
 
   <!-- TOAST NOTIFICATION -->
-  <div id="toast-notification" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition duration-300 pointer-events-none">
+  <div id="toast-notification" class="fixed bottom-[max(1.5rem,calc(env(safe-area-inset-bottom)+1rem))] right-4 sm:right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
     <div class="bg-slate-900/95 border border-cyan-500/50 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 backdrop-blur-lg">
       <div class="w-7 h-7 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
         ✓
       </div>
       <div>
-        <p class="text-xs font-bold text-white" id="toast-title">Link Copied to Clipboard!</p>
-        <p class="text-[11px] text-cyan-300 font-mono" id="toast-sub">dubaiincairo.com/proposals/yerkab</p>
+        <div class="text-xs font-bold text-white" id="toast-title">Link Copied!</div>
+        <div class="text-[11px] text-slate-400" id="toast-sub">dubaiincairo.com/proposals/yerkab</div>
       </div>
     </div>
   </div>
@@ -1453,12 +1570,12 @@
 
       // 1. Website Grid
       const webGrid = document.getElementById('web-features-grid');
-      webGrid.innerHTML = websiteFeatures.map(item => `
-        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between feature-item" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
+      webGrid.innerHTML = websiteFeatures.map((item, idx) => `
+        <div class="glass-card card-animated rounded-2xl p-5 flex flex-col justify-between feature-item cursor-pointer touch-manipulation" style="animation-delay: ${idx * 25}ms;" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
           <div>
             <div class="flex items-center justify-between mb-3">
               <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">${item.num}</span>
-              <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-blue-400">
+              <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-blue-400 transition-transform group-hover:scale-110">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   ${getSvgIcon(item.icon)}
                 </svg>
@@ -1483,12 +1600,12 @@
 
       // 2. Android Grid
       const androidGrid = document.getElementById('android-features-grid');
-      androidGrid.innerHTML = androidFeatures.map(item => `
-        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between feature-item" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
+      androidGrid.innerHTML = androidFeatures.map((item, idx) => `
+        <div class="glass-card card-animated rounded-2xl p-5 flex flex-col justify-between feature-item cursor-pointer touch-manipulation" style="animation-delay: ${idx * 25}ms;" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
           <div>
             <div class="flex items-center justify-between mb-3">
               <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">${item.num}</span>
-              <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-emerald-400">
+              <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-emerald-400 transition-transform group-hover:scale-110">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   ${getSvgIcon(item.icon)}
                 </svg>
@@ -1513,12 +1630,12 @@
 
       // 3. iOS Grid
       const iosGrid = document.getElementById('ios-features-grid');
-      iosGrid.innerHTML = iosFeatures.map(item => `
-        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between feature-item" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
+      iosGrid.innerHTML = iosFeatures.map((item, idx) => `
+        <div class="glass-card card-animated rounded-2xl p-5 flex flex-col justify-between feature-item cursor-pointer touch-manipulation" style="animation-delay: ${idx * 25}ms;" data-search="${item.titleEn.toLowerCase()} ${item.titleAr} ${item.whatEn.toLowerCase()} ${item.whatAr} ${item.num}">
           <div>
             <div class="flex items-center justify-between mb-3">
               <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">${item.num}</span>
-              <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-purple-400">
+              <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-purple-400 transition-transform group-hover:scale-110">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   ${getSvgIcon(item.icon)}
                 </svg>
@@ -1834,7 +1951,7 @@
       runFitmentCheck();
     }
 
-    // Switch active tab
+    // Switch active tab with smooth momentum auto-scroll into view
     function switchTab(tabId) {
       currentTab = tabId;
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -1844,19 +1961,25 @@
         targetPanel.classList.remove('hidden');
       }
 
-      // Reset button styles
+      // Reset button styles with responsive mobile classes
       const tabBtns = ['website', 'android', 'ios', 'matrix', 'simulator'];
       tabBtns.forEach(id => {
         const btn = document.getElementById(`tab-btn-${id}`);
         if (!btn) return;
         if (id === tabId) {
-          btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20';
+          btn.className = 'shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20 active:scale-95 touch-manipulation';
         } else if (id === 'simulator') {
-          btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-900/40';
+          btn.className = 'shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-900/40 active:scale-95 touch-manipulation';
         } else {
-          btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700';
+          btn.className = 'shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95 touch-manipulation';
         }
       });
+
+      // Smooth scroll the active tab button into center view on mobile
+      const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+      if (activeBtn) {
+        activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
     }
 
     // Live Search / Filter
@@ -1889,9 +2012,15 @@
       const explBox = document.getElementById('sim-expl-box');
       const oemRef = document.getElementById('sim-out-oem');
 
+      if (statusPill) {
+        statusPill.classList.remove('animate-pop');
+        void statusPill.offsetWidth; // trigger reflow for smooth re-animation
+        statusPill.classList.add('animate-pop');
+      }
+
       if (partVal === 'alternator') {
         // Verification Required Case
-        statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500/20 text-amber-400 border border-amber-500/30';
+        statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500/20 text-amber-400 border border-amber-500/30 animate-pop';
         statusPill.innerText = isAr ? 'يحتاج تحقق فني (Verification Required)' : 'Verification Required (Manual Review)';
         oemRef.innerText = '27060-0V210 / 27060-0V280 (Dual Pulley Variants)';
         explBox.className = 'p-3.5 rounded-xl bg-amber-950/30 border border-amber-500/20 text-xs text-amber-200 leading-relaxed';
@@ -1900,7 +2029,7 @@
           : 'Warning: 2 alternator variants exist (130A vs 150A) depending on GCC cold/heavy-duty cooling spec. <b>"Human Verification Request"</b> is recommended to guarantee 100% fitment via VIN inspection.';
       } else if (vehicleVal === 'patrol' && partVal === 'brake-front') {
         // Likely Compatible
-        statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-blue-500/20 text-blue-400 border border-blue-500/30';
+        statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-blue-500/20 text-blue-400 border border-blue-500/30 animate-pop';
         statusPill.innerText = isAr ? 'غالباً متوافق (Likely Compatible)' : 'Likely Compatible (95% Fitment Score)';
         oemRef.innerText = 'D1060-1LB0A-GCC';
         explBox.className = 'p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/20 text-xs text-blue-200 leading-relaxed';
@@ -1909,7 +2038,7 @@
           : 'Fits Nissan Patrol Y62 5.6L V8 (2018-2023). Rotor surface clearance complies with GSO standards. High confidence match.';
       } else {
         // Compatible Case
-        statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+        statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 animate-pop';
         statusPill.innerText = isAr ? '100% متوافق بالكامل (Certified Compatible)' : '100% Compatible (Factory Fitment Guaranteed)';
         oemRef.innerText = '04465-33471-KSA';
         explBox.className = 'p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-xs text-emerald-200 leading-relaxed';
