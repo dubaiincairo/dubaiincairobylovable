@@ -91,11 +91,12 @@ export const contentRegistry: ContentField[] = [
   // ── Founder ──
   { section: "founder", key: "founder_subtitle", label: "Section Subtitle", defaultValue: "A Message from Our Founder" },
   { section: "founder", key: "founder_headline", label: "Section Headline", defaultValue: "Built by Someone Who's Been in the Trenches" },
-  { section: "founder", key: "founder_body", label: "Founder Body", defaultValue: "Abdullah Hassan Al-Fawali founded Dubai in Cairo with a bold vision." },
-  { section: "founder", key: "founder_education", label: "Founder Education", defaultValue: "His foundation is built on dual academic distinctions from the Arab Academy." },
-  { section: "founder", key: "founder_quote", label: "Founder Quote", defaultValue: "I believe that continuous learning is the key to success in business." },
-  { section: "founder", key: "founder_attribution", label: "Quote Attribution", defaultValue: "— Abdullah Al-Fawali, CEO & Founder" },
-  { section: "founder", key: "founder_image", label: "Founder Photo URL", defaultValue: "" },
+  { section: "founder", key: "founder_body", label: "Founder Body", defaultValue: "Abdalla Hassan Elfouly founded Dubai in Cairo with a bold vision: a digital world teeming with opportunity and a belief that technology can fundamentally transform the way businesses operate and grow." },
+  { section: "founder", key: "founder_education", label: "Founder Education", defaultValue: "" },
+  { section: "founder", key: "founder_quote", label: "Founder Quote", defaultValue: "Strategy without implementation is a document. Implementation without strategy is noise. The discipline to keep both together, and to charge accordingly, is a market position that most agencies are structurally incapable of holding." },
+  { section: "founder", key: "founder_attribution", label: "Quote Attribution", defaultValue: "— Abdalla Hassan Elfouly, CEO & Co-Founder" },
+  { section: "founder", key: "founder_photo_url", label: "Founder Photo URL", defaultValue: "https://tblfnxaedhmwydjqngnb.supabase.co/storage/v1/object/public/assets/founder-photo/1778849606599.jpeg" },
+  { section: "founder", key: "founder_image", label: "Founder Photo URL (alias)", defaultValue: "" },
 
   // ── Clients ──
   { section: "clients", key: "clients_subtitle", label: "Section Subtitle", defaultValue: "Success Partners" },
