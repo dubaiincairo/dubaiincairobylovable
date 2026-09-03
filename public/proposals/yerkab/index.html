@@ -2520,6 +2520,7 @@
 
       // Re-trigger live search counter for current tab
       filterFeatures();
+      checkScrollReveal();
     }
 
     // Dedicated Jump to Simulator: activates prototype tab and frames full viewport directly under sticky header
@@ -2564,6 +2565,8 @@
         void badge.offsetWidth;
         badge.classList.add('animate-pop');
       }
+
+      checkScrollReveal();
     }
 
     // Interactive Alternatives Variant Selection
@@ -2822,42 +2825,54 @@
     window.addEventListener('beforeprint', finalizeCountersForPrint);
 
     // =========================================================================
-    // High-Performance Smooth Scroll Reveal & Parallax Engine
+    // Bulletproof Dual-Engine Scroll Reveal System (60-120fps Hardware Composited)
     // =========================================================================
+    function checkScrollReveal() {
+      const triggerBottom = window.innerHeight * 0.92;
+      const triggerTop = -150; // Ensure elements scrolled past are revealed
+      
+      const unrevealed = document.querySelectorAll('.scroll-reveal:not(.is-revealed)');
+      for (let i = 0; i < unrevealed.length; i++) {
+        const el = unrevealed[i];
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= triggerBottom && rect.bottom >= triggerTop) {
+          el.classList.add('is-revealed');
+        }
+      }
+    }
+
     let scrollRevealObserver = null;
 
     function initScrollRevealObserver() {
-      if (scrollRevealObserver) {
-        scrollRevealObserver.disconnect();
-      }
+      // Immediate synchronous check
+      checkScrollReveal();
 
-      scrollRevealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-revealed');
-            // Unobserve so elements remain permanently revealed without retro-fading or lag
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {
-        rootMargin: '0px 0px -40px 0px',
-        threshold: 0.08
-      });
-
-      // Observe all current .scroll-reveal elements
-      document.querySelectorAll('.scroll-reveal:not(.is-revealed)').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        // If already in viewport or above fold, reveal immediately
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          el.classList.add('is-revealed');
-        } else {
-          scrollRevealObserver.observe(el);
+      // Passive IntersectionObserver for background detection
+      if ('IntersectionObserver' in window) {
+        if (scrollRevealObserver) {
+          scrollRevealObserver.disconnect();
         }
-      });
+
+        scrollRevealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          rootMargin: '0px 0px -40px 0px',
+          threshold: 0.05
+        });
+
+        document.querySelectorAll('.scroll-reveal:not(.is-revealed)').forEach(el => {
+          scrollRevealObserver.observe(el);
+        });
+      }
     }
 
     function initScrollEngine() {
-      // 1. Initial observation of scroll reveal elements
+      // 1. Initial observation
       initScrollRevealObserver();
 
       // 2. Scroll-Triggered KPI Counters on Entry
@@ -2871,11 +2886,11 @@
               runNumberCounters();
             }
           });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
         kpiObserver.observe(kpiContainer);
       }
 
-      // 3. Smooth rAF-Throttled Scroll Loop for Progress, Ambient Parallax & Header Elevation
+      // 3. Smooth rAF-Throttled Scroll Loop for Progress, Ambient Parallax, Header Elevation & Reveal
       let isScrollTicking = false;
       const bar = document.getElementById('scroll-progress-bar');
       const header = document.querySelector('header');
@@ -2889,6 +2904,9 @@
             const scrollY = window.pageYOffset || document.documentElement.scrollTop;
             const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             
+            // Seamless scroll reveal check
+            checkScrollReveal();
+
             // Dynamic Reading Progress Bar
             if (bar) {
               const scrolled = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
@@ -2914,6 +2932,8 @@
           isScrollTicking = true;
         }
       }, { passive: true });
+
+      window.addEventListener('resize', checkScrollReveal, { passive: true });
     }
 
     // Verification Modal Logic
