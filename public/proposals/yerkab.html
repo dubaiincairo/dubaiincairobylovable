@@ -753,7 +753,7 @@
           </div>
           <div class="shrink-0 flex items-center gap-2 bg-slate-900/80 px-4 py-2 rounded-xl border border-slate-700">
             <span class="text-xs text-slate-400" id="hero-fleet-label">KSA Target Fleet:</span>
-            <span class="text-sm font-extrabold text-amber-400 font-mono" id="hero-fleet-val">15.88M Vehicles</span>
+            <span class="text-sm font-extrabold text-amber-400 font-mono" id="hero-fleet-val">15.88 Million</span>
           </div>
         </div>
 
@@ -2217,6 +2217,8 @@
         : 'By fusing sophisticated digital discovery with expert human verification, we eliminate the inherent risks of incompatibility and fraud that plague traditional channels.';
 
       document.getElementById('hero-fleet-label').innerText = isAr ? 'حجم أسطول المملكة المستهدف:' : 'KSA Target Fleet:';
+      const fleetEl = document.getElementById('hero-fleet-val');
+      if (fleetEl) fleetEl.innerText = isAr ? '15.88 مليون' : '15.88 Million';
 
       // KPI values & labels (Full Arabic localization & SAMA official symbol)
       document.getElementById('kpi-1-label').innerText = isAr ? 'إجمالي الاستثمار' : 'Portfolio Investment';
@@ -2711,10 +2713,10 @@
       const kpi4 = document.getElementById('kpi-4-val');
       if (kpi4) animateNumberCounter(kpi4, 100, 2200, { suffix: isAr ? '% توافق مؤكد' : '% Verified' });
 
-      // 5. Target Fleet: 0.00 -> 15.88M Vehicles
+      // 5. Target Fleet: 0.00 -> 15.88 Million / 15.88 مليون
       const fleet = document.getElementById('hero-fleet-val');
       if (fleet) {
-        animateNumberCounter(fleet, 15.88, 2200, { decimals: 2, suffix: 'M Vehicles' });
+        animateNumberCounter(fleet, 15.88, 2200, { decimals: 2, suffix: isAr ? ' مليون' : ' Million' });
       }
 
       // 6. Milestone Prices (Website, Android, iOS, Total)
@@ -2762,10 +2764,14 @@
           ? (target * currentRatio).toFixed(decimals) 
           : Math.floor(target * currentRatio);
 
+        const formattedVal = decimals > 0 
+          ? Number(current).toFixed(decimals) 
+          : Number(current).toLocaleString('en-US');
+
         if (isCurrency) {
-          el.innerHTML = formatCurrency(Number(current).toLocaleString('en-US'), isAr);
+          el.innerHTML = formatCurrency(formattedVal, isAr);
         } else {
-          el.innerText = `${prefix}${Number(current).toLocaleString('en-US')}${suffix}`;
+          el.innerText = `${prefix}${formattedVal}${suffix}`;
         }
 
         if (p < 1) {
@@ -2807,7 +2813,7 @@
       if (kpi4) kpi4.innerText = isAr ? '100% توافق مؤكد' : '100% Verified';
 
       const fleet = document.getElementById('hero-fleet-val');
-      if (fleet) fleet.innerText = '15.88M Vehicles';
+      if (fleet) fleet.innerText = isAr ? '15.88 مليون' : '15.88 Million';
 
       const m1 = document.getElementById('card-m1-price');
       if (m1) m1.innerHTML = formatCurrency('3,600', isAr);
