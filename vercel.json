@@ -33,6 +33,102 @@
       "destination": "/proposals/yerkab/:path*"
     },
     {
+      "source": "/manuals/wdgroup",
+      "destination": "/manuals/wdgroup/index.html"
+    },
+    {
+      "source": "/manuals/wdgroup/",
+      "destination": "/manuals/wdgroup/index.html"
+    },
+    {
+      "source": "/manuals/wdgroup/ar",
+      "destination": "/manuals/wdgroup/ar.html"
+    },
+    {
+      "source": "/manuals/wdgroup/swissbluewebsite",
+      "destination": "/manuals/wdgroup/swissbluewebsite/index.html"
+    },
+    {
+      "source": "/manuals/wdgroup/swissbluewebsite/",
+      "destination": "/manuals/wdgroup/swissbluewebsite/index.html"
+    },
+    {
+      "source": "/manuals/wdgroup/swissbluewebsite/ar",
+      "destination": "/manuals/wdgroup/swissbluewebsite/ar.html"
+    },
+    {
+      "source": "/manuals/wdgroup/swissbluewebsite/features-en",
+      "destination": "/manuals/wdgroup/swissbluewebsite/features-en.html"
+    },
+    {
+      "source": "/manuals/wdgroup/swissbluewebsite/features-ar",
+      "destination": "/manuals/wdgroup/swissbluewebsite/features-ar.html"
+    },
+    {
+      "source": "/manuals/wdgroup/swissbluewebsite/sops-en",
+      "destination": "/manuals/wdgroup/swissbluewebsite/sops-en.html"
+    },
+    {
+      "source": "/manuals/wdgroup/swissbluewebsite/sops-ar",
+      "destination": "/manuals/wdgroup/swissbluewebsite/sops-ar.html"
+    },
+    {
+      "source": "/manuals/wdgroup/swissbluewebsite/manual",
+      "destination": "/manuals/wdgroup/swissbluewebsite/manual.html"
+    },
+    {
+      "source": "/manuals/wdgroup/ezeeodooconnector",
+      "destination": "/manuals/wdgroup/ezeeodooconnector/index.html"
+    },
+    {
+      "source": "/manuals/wdgroup/ezeeodooconnector/",
+      "destination": "/manuals/wdgroup/ezeeodooconnector/index.html"
+    },
+    {
+      "source": "/manuals/wdgroup/ezeeodooconnector/ar",
+      "destination": "/manuals/wdgroup/ezeeodooconnector/ar.html"
+    },
+    {
+      "source": "/manuals/wdgroup/wdgroupwebsite",
+      "destination": "/manuals/wdgroup/wdgroupwebsite/index.html"
+    },
+    {
+      "source": "/manuals/wdgroup/wdgroupwebsite/",
+      "destination": "/manuals/wdgroup/wdgroupwebsite/index.html"
+    },
+    {
+      "source": "/manuals/wdgroup/wdgroupwebsite/ar",
+      "destination": "/manuals/wdgroup/wdgroupwebsite/ar.html"
+    },
+    {
+      "source": "/manuals/wdgroup/internalcommunication",
+      "destination": "/manuals/wdgroup/internalcommunication/index.html"
+    },
+    {
+      "source": "/manuals/wdgroup/internalcommunication/",
+      "destination": "/manuals/wdgroup/internalcommunication/index.html"
+    },
+    {
+      "source": "/manuals/wdgroup/internalcommunication/ar",
+      "destination": "/manuals/wdgroup/internalcommunication/ar.html"
+    },
+    {
+      "source": "/manuals/wdgroup/odooerp",
+      "destination": "/manuals/wdgroup/odooerp/index.html"
+    },
+    {
+      "source": "/manuals/wdgroup/odooerp/",
+      "destination": "/manuals/wdgroup/odooerp/index.html"
+    },
+    {
+      "source": "/manuals/wdgroup/odooerp/ar",
+      "destination": "/manuals/wdgroup/odooerp/ar.html"
+    },
+    {
+      "source": "/manuals/:path*",
+      "destination": "/manuals/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
