@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiss Blue Hotel Website — Standard Operating Procedures (SOPs)</title>
+  
+  <!-- Tailwind CSS allowlisted in Antigravity -->
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  
+  <style>
+    *, *::before, *::after {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.7); }
+
+    /* Yerkab Glassmorphism */
+    .glass-card {
+      background: rgba(19, 29, 46, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateZ(0);
+    }
+    .glass-card:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      transform: translateY(-3px) translateZ(0);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5);
+    }
+    .glass-nav {
+      background: rgba(11, 17, 29, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Spotlight Card */
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.16), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    /* Modal Animation */
+    @keyframes modalBackdrop { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalDialog {
+      0% { opacity: 0; transform: scale(0.95) translateY(12px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-backdrop-anim { animation: modalBackdrop 0.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .modal-dialog-anim { animation: modalDialog 0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    /* Ambient Floating Orbs */
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    /* Print Styles */
+    @media print {
+      body { background: #ffffff !important; color: #0f172a !important; }
+      .no-print, header, .ambient-orb-1, .ambient-orb-2, #modal-overlay { display: none !important; }
+      .glass-card { background: #ffffff !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid !important; }
+      .text-white { color: #0f172a !important; }
+      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+    }
+  </style>
+</head>
+<body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-blue-600 selection:text-white pb-20 relative">
+
+  <!-- Ambient Glow Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-20 -left-40 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+    <div class="ambient-orb-2 absolute top-1/3 -right-40 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <!-- STICKY HEADER -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-800 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/25 border border-blue-400/40">
+          SB
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white">SWISS BLUE HOTELS</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/30">
+              Employee SOPs
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            Standard Operating Procedures &amp; Workflow Execution Protocols
+          </p>
+        </div>
+      </div>
+
+      <!-- Navigation & Language Links -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="swiss_blue_features_en.html" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition">
+          Switch to Features →
+        </a>
+        <a href="swiss_blue_sops_ar.html" class="px-3 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-xs font-bold text-blue-300 border border-blue-500/30 transition">
+          العربية (100% RTL)
+        </a>
+        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="Print PDF">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN VIEWPORT -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8 relative z-10">
+
+    <!-- HERO EXECUTIVE BANNER -->
+    <section class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-6 sm:p-10 shadow-2xl">
+      <div class="space-y-4 max-w-4xl">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-300 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+          <span>OPERATIONAL EXCELLENCE • VERIFIED PROCEDURAL WORKFLOWS</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          Standard Operating Procedures (SOPs)
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          Step-by-step operational workflows for hotel front-office agents, reservations supervisors, marketing administrators, and HR coordinators. Click on any procedural card below to launch the interactive step walkthrough pop-up.
+        </p>
+      </div>
+
+      <!-- Live Search Filter -->
+      <div class="mt-8 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="relative w-full sm:w-80">
+          <input type="text" id="sop-search" oninput="filterSOPs()" placeholder="Search SOP by role or code..." class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-blue-500 transition">
+        </div>
+        <div class="text-xs text-slate-400 font-mono">
+          <span>Target PMS:</span>
+          <span class="text-cyan-400 font-bold ml-1">eZee Absolute</span>
+          <span class="text-slate-600 mx-1">|</span>
+          <span>Target ERP:</span>
+          <span class="text-purple-400 font-bold ml-1">Odoo 19 Enterprise</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOP CARDS GRID -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="sops-grid">
+
+      <!-- SOP 01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-6 flex flex-col justify-between sop-card cursor-pointer group hover:border-blue-500/50 transition-all duration-300" onclick="openSopModal(0)">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">SOP-SB-01</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300">Front Office / Reservations</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">
+            Processing Direct Web Reservations (eZee Absolute)
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4">
+            End-to-end procedure for capturing incoming web booking alerts, checking real-time room inventory, applying the WEB-DIRECT discount code, and issuing guest confirmation vouchers.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-blue-400 font-semibold">
+          <span>Click to Open Full Procedure</span>
+          <span>→</span>
+        </div>
+      </div>
+
+      <!-- SOP 02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-6 flex flex-col justify-between sop-card cursor-pointer group hover:border-purple-500/50 transition-all duration-300" onclick="openSopModal(1)">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">SOP-SB-02</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300">Marketing &amp; Admin</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+            Publishing Seasonal Banners &amp; Rates in Sanity Studio
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4">
+            Step-by-step walkthrough for authenticating into Sanity Studio v3, updating bilingual English/Arabic promotional copy, uploading compressed WebP banners, and triggering cache flushes.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-purple-400 font-semibold">
+          <span>Click to Open Full Procedure</span>
+          <span>→</span>
+        </div>
+      </div>
+
+      <!-- SOP 03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-6 flex flex-col justify-between sop-card cursor-pointer group hover:border-emerald-500/50 transition-all duration-300" onclick="openSopModal(2)">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">SOP-SB-03</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300">Commercial Sales</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
+            Handling B2B Corporate &amp; Banquet Requests
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4">
+            Immediate response protocol for corporate accommodation, wedding hall rentals, and conference inquiries received via Brevo and WhatsApp with a mandatory 2-hour SLA.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-emerald-400 font-semibold">
+          <span>Click to Open Full Procedure</span>
+          <span>→</span>
+        </div>
+      </div>
+
+      <!-- SOP 04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-6 flex flex-col justify-between sop-card cursor-pointer group hover:border-emerald-500/50 transition-all duration-300" onclick="openSopModal(3)">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">SOP-SB-04</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300">Human Resources</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
+            Reviewing Job Applications &amp; Resume Attachments
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4">
+            Managing incoming talent applications sent to careers@swissblue.sa, opening direct serverless PDF attachments, screening qualifications, and initiating candidate interviews.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-emerald-400 font-semibold">
+          <span>Click to Open Full Procedure</span>
+          <span>→</span>
+        </div>
+      </div>
+
+      <!-- SOP 05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-6 flex flex-col justify-between sop-card cursor-pointer group hover:border-cyan-500/50 transition-all duration-300" onclick="openSopModal(4)">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">SOP-SB-05</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300">Front Desk Manager</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+            Unit Roster &amp; Inventory Allocation (Tulip Alrawdah)
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4">
+            Verification protocol for Tulip Alrawdah’s 36 total units, managing the strict allocation of the 15 One-Bedroom Superior suites to avoid overbooking.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-cyan-400 font-semibold">
+          <span>Click to Open Full Procedure</span>
+          <span>→</span>
+        </div>
+      </div>
+
+      <!-- SOP 06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-6 flex flex-col justify-between sop-card cursor-pointer group hover:border-rose-500/50 transition-all duration-300" onclick="openSopModal(5)">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">SOP-SB-06</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300">IT &amp; Systems Desk</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2 group-hover:text-rose-300 transition-colors">
+            Brevo 401 &amp; Meta WhatsApp Notification Troubleshooting
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed mb-4">
+            Diagnostic self-healing guide resolving Brevo Unauthorized IP restrictions and Meta WhatsApp Cloud API template parameter mismatch errors (Code 132000).
+          </p>
+        </div>
+        <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-rose-400 font-semibold">
+          <span>Click to Open Full Procedure</span>
+          <span>→</span>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PROFESSIONAL POP-UP MODAL -->
+  <div id="modal-overlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden modal-backdrop-anim">
+    <div class="glass-card modal-dialog-anim rounded-2xl max-w-2xl w-full p-6 sm:p-8 space-y-6 border border-slate-700 bg-slate-900/95 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/20 text-blue-300" id="modal-sop-code">SOP-SB-01</span>
+            <span class="text-xs text-slate-400" id="modal-sop-role">Role: Specialist</span>
+          </div>
+          <h2 class="text-xl font-extrabold text-white mt-2" id="modal-sop-title">Procedure Title</h2>
+        </div>
+        <button onclick="closeSopModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body (Formatted Professional Sections) -->
+      <div class="space-y-5 text-xs text-slate-300" id="modal-sop-content">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- Modal Footer Controls -->
+      <div class="flex items-center justify-between pt-4 border-t border-slate-800">
+        <button onclick="copyModalContent()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs flex items-center gap-1.5 transition">
+          <svg class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+          <span id="copy-btn-text">Copy Procedure</span>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button onclick="window.print()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition">
+            Print SOP
+          </button>
+          <button onclick="closeSopModal()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-lg shadow-blue-500/25">
+            Close
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Full SOP Database in 100% English
+    const sopsData = [
+      {
+        code: "SOP-SB-01",
+        role: "Reservations Supervisor / Front Desk Staff",
+        title: "Processing Direct Online Web Reservations (eZee Absolute)",
+        objective: "Capture direct guest booking inquiries originating from swissblue.sa, confirm room inventory in eZee Absolute PMS, and issue formal booking confirmation under rate code WEB-DIRECT.",
+        prerequisites: "Access to reservations@swissblue.sa email inbox, front desk WhatsApp handset, and active eZee Absolute PMS operator credentials.",
+        steps: [
+          "When a guest submits a direct booking on swissblue.sa, check the incoming alert at reservations@swissblue.sa and the front-desk WhatsApp notification.",
+          "Verify the guest's requested property (e.g. Tulip Alrawdah or Vinas Riyadh), room tier (Superior, Deluxe, or Suite), check-in/out dates, and guest count.",
+          "Open eZee Absolute PMS, navigate to Front Office -> Room Availability Matrix, and confirm available inventory in the requested tier.",
+          "Create a new guest folio in eZee Absolute, entering the guest's contact info and setting Source / Channel to 'WEB-DIRECT'.",
+          "Apply the guaranteed direct booking rate discount (10% to 20% lower than OTA benchmark rates).",
+          "Hit 'Reply' to the Brevo email notification (the Reply-To header is automatically formatted to the guest's direct email). Send the branded booking confirmation voucher with payment link.",
+          "Flag the email thread as [CONFIRMED - PMS #XXXXX] to prevent duplicate handling by shift colleagues."
+        ],
+        verification: "The guest folio appears as confirmed in eZee Absolute under WEB-DIRECT, and the guest acknowledges receipt of the confirmation voucher.",
+        caution: "Never create a web direct booking under an OTA channel code (such as Booking.com or Agoda); doing so will distort USALI financial auditing and channel profitability reports in Odoo."
+      },
+      {
+        code: "SOP-SB-02",
+        role: "Marketing Officer / Website Administrator",
+        title: "Publishing Seasonal Promotional Banners & Rates in Sanity Studio",
+        objective: "Maintain, update, and publish bilingual promotional campaigns, holiday offers, and hotel room photography without code redeployment.",
+        prerequisites: "Active Google Workspace login authorized for Sanity Studio at swissblue.sa/studio.",
+        steps: [
+          "Navigate to https://swissblue.sa/studio in Google Chrome and authenticate using your corporate email.",
+          "In the left navigation sidebar, click on 'Site Content (Singleton)' for global banners or 'Hotels' for property-specific content.",
+          "To update a promotional banner, enter the headline and description in both the 'English' and 'Arabic' fields simultaneously to ensure bilingual parity.",
+          "Upload image assets in WebP or compressed JPG format with a file size strictly under 350 KB (Desktop resolution: 1920x1080, Mobile: 1080x1080).",
+          "If adding Breakfast Buffet to a property where dining is pending, always append '(Soon)' in English and '(قريباً)' in Arabic to trigger the automatic blue status badge.",
+          "Click the green 'Publish' button in the bottom right corner.",
+          "Open https://swissblue.sa in an Incognito / Private window to verify that the Vercel edge cache has refreshed immediately."
+        ],
+        verification: "The new promotional banner displays cleanly on desktop and mobile in both English and Arabic layouts.",
+        caution: "Do not upload uncompressed raw images (> 2 MB); large images degrade Google Core Web Vitals (Largest Contentful Paint) and increase visitor bounce rates."
+      },
+      {
+        code: "SOP-SB-03",
+        role: "Commercial Sales Coordinator / Events Manager",
+        title: "Handling B2B Corporate & Banquet Requests",
+        objective: "Process commercial corporate room-block inquiries, meeting room bookings, and banquet hall reservations within a strict 2-hour SLA.",
+        prerequisites: "Access to reservations@swissblue.sa and hotel corporate sales quote templates.",
+        steps: [
+          "Receive the incoming B2B alert dispatched via Brevo and WhatsApp with subject '[NEW B2B / CORPORATE REQUEST]'.",
+          "Inspect the submitted corporate data: Company Name, Commercial Tax Number, Event Dates, Seating Setup (Banquet, Classroom, Theater), and Catering requirements.",
+          "Open the hotel conference schedule in eZee Absolute to confirm hall availability.",
+          "Prepare a formal Swiss Blue corporate quotation containing room rates, meeting hall rental, audio/visual provisions, and coffee break catering packages.",
+          "Transmit the formal proforma quote to the client within 2 hours of submission.",
+          "Log the opportunity in the corporate sales pipeline under Source: 'WEBSITE-B2B'."
+        ],
+        verification: "Client confirms receipt of proposal and schedule deposit within 48 hours.",
+        caution: "Always verify corporate tax numbers against the official ZATCA registry before applying tax-exempt or deferred corporate payment terms."
+      },
+      {
+        code: "SOP-SB-04",
+        role: "HR Officer / Talent Acquisition Specialist",
+        title: "Reviewing Job Applications & Resume Attachments",
+        objective: "Screen incoming applicant inquiries from /careers, evaluate candidate qualifications, and route resumes to department heads.",
+        prerequisites: "Access to careers@swissblue.sa corporate inbox.",
+        steps: [
+          "Monitor careers@swissblue.sa for incoming application emails with subject 'New Job Applicant — Swiss Blue Hotel'.",
+          "Open the applicant's resume PDF attached directly to the notification email (encoded and attached automatically by the serverless function).",
+          "Review applicant experience against open operational vacancies in Front Office, Housekeeping, F&B, and Maintenance.",
+          "Click 'Reply' on the email thread to communicate directly with the applicant (Reply-To is pre-filled to candidate's email).",
+          "If qualified: Schedule an initial interview and file the PDF in the corporate HR candidate drive under '[Position] - [Applicant Name]'.",
+          "If unqualified: Transmit the standardized Swiss Blue polite rejection email template."
+        ],
+        verification: "Candidate status updated in HR tracker with resume archived securely.",
+        caution: "Ensure candidate personal data and CV documents are never forwarded to unauthorized external personal email accounts."
+      },
+      {
+        code: "SOP-SB-05",
+        role: "Front Office Manager / Tulip Alrawdah Supervisor",
+        title: "Unit Roster & Inventory Allocation (Tulip Alrawdah)",
+        objective: "Manage physical room readiness and allocation for the 36 total units at Tulip Alrawdah Serviced Apartments, specifically the 15 One-Bedroom Superior units.",
+        prerequisites: "Access to Tulip Alrawdah physical keycard system and eZee Absolute room status board.",
+        steps: [
+          "Open eZee Absolute PMS and filter by Property: 'Tulip Alrawdah Serviced Apartments'.",
+          "Verify the physical housekeeping readiness of the 15 One-Bedroom Superior units: Units 203, 204, 204C, 205, 206, 208, 209, 209C, 301, 302, 303, 304, 304C, 306, 307.",
+          "When a guest booking is confirmed on swissblue.sa for a 1-BR Superior suite, assign an inspected and sanitized unit from this verified roster.",
+          "Inspect air conditioning, Wi-Fi router signal, and minibar amenities prior to guest arrival.",
+          "Issue digital keycard and log check-in time in the PMS ledger."
+        ],
+        verification: "Room status transitions from 'Inspected Clean' to 'Occupied' with matching guest folio number.",
+        caution: "Do not allocate units outside the verified 15-unit roster for Superior 1-BR bookings; other units in the property are reserved for multi-bedroom and corporate contracts."
+      },
+      {
+        code: "SOP-SB-06",
+        role: "IT Support Specialist / Systems Administrator",
+        title: "Brevo 401 & Meta WhatsApp Notification Troubleshooting",
+        objective: "Diagnose and resolve notification delivery failures across Brevo transactional email and Meta WhatsApp Cloud API.",
+        prerequisites: "Administrative access to app.brevo.com and Meta Business Suite Developers portal.",
+        steps: [
+          "If lead notifications fail to arrive via email: Log into app.brevo.com -> Security -> Authorized IPs.",
+          "Verify that 'Authorized IPs' is strictly DISABLED (Vercel serverless functions send from rotating IP pools; IP restrictions cause HTTP 401 Unauthorized errors).",
+          "Verify that the sender address notifications@swissblue.sa is verified under Brevo -> Senders & Domains.",
+          "If WhatsApp alerts fail to arrive: Check server logs for error code 132000 (Parameter Count Mismatch).",
+          "Ensure the template name matches WHATSAPP_TEMPLATE_NAME ('new_form_submission') and that exactly 5 variables are passed: Type, Name, Email, Phone, Summary.",
+          "Confirm that WHATSAPP_TO is formatted in raw E.164 digits without '+' or spaces (e.g. 9665XXXXXXXX).",
+          "If problem persists beyond 30 minutes, submit a P2 ticket to Dubai in Cairo support."
+        ],
+        verification: "Test submission of B2B form results in immediate receipt of email and WhatsApp message.",
+        caution: "Never regenerate WhatsApp access tokens without updating Vercel environment variables simultaneously; token mismatch halts all mobile notifications immediately."
+      }
+    ];
+
+    // Open Modal with Formatted Content
+    function openSopModal(index) {
+      const sop = sopsData[index];
+      document.getElementById('modal-sop-code').textContent = sop.code;
+      document.getElementById('modal-sop-role').textContent = "Role: " + sop.role;
+      document.getElementById('modal-sop-title').textContent = sop.title;
+
+      const stepsHtml = sop.steps.map((step, idx) => `
+        <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white font-bold text-[11px] shrink-0 mt-0.5">${idx + 1}</span>
+          <span class="leading-relaxed text-slate-300 text-xs">${step}</span>
+        </li>
+      `).join('');
+
+      document.getElementById('modal-sop-content').innerHTML = `
+        <div class="space-y-4">
+          <!-- Section 1: Objective & Scope -->
+          <div class="p-3.5 rounded-xl bg-blue-950/20 border border-blue-500/20">
+            <span class="text-blue-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">1. Operational Objective</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.objective}</p>
+          </div>
+
+          <!-- Section 2: Prerequisites -->
+          <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+            <span class="text-slate-400 font-bold block mb-1 uppercase tracking-wider text-[11px]">2. Prerequisites &amp; System Access</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.prerequisites}</p>
+          </div>
+
+          <!-- Section 3: Step-by-Step Procedure -->
+          <div class="space-y-2">
+            <span class="text-white font-bold block uppercase tracking-wider text-[11px]">3. Step-by-Step Execution Sequence</span>
+            <ul class="space-y-2">
+              ${stepsHtml}
+            </ul>
+          </div>
+
+          <!-- Section 4: Verification -->
+          <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/20">
+            <span class="text-emerald-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">4. Quality Verification &amp; Success Metric</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.verification}</p>
+          </div>
+
+          <!-- Section 5: Caution -->
+          <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/20">
+            <span class="text-rose-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">5. Operational Caution &amp; Risk Mitigation</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.caution}</p>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modal-overlay').classList.remove('hidden');
+    }
+
+    function closeSopModal() {
+      document.getElementById('modal-overlay').classList.add('hidden');
+    }
+
+    function copyModalContent() {
+      const title = document.getElementById('modal-sop-title').textContent;
+      const content = document.getElementById('modal-sop-content').innerText;
+      navigator.clipboard.writeText(title + "\n\n" + content).then(() => {
+        const btn = document.getElementById('copy-btn-text');
+        btn.textContent = "Copied to Clipboard!";
+        setTimeout(() => { btn.textContent = "Copy Procedure"; }, 2000);
+      });
+    }
+
+    // Spotlight Mouse Tracker
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    // Real-Time Filter
+    function filterSOPs() {
+      const query = document.getElementById('sop-search').value.toLowerCase();
+      document.querySelectorAll('.sop-card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

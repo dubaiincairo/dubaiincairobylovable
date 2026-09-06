@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiss Blue Website — Review Hub | Dubai in Cairo</title>
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(59, 130, 246, 0.45);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+    }
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body class="relative flex flex-col justify-between py-12 px-6">
+  <!-- Ambient Glow Orbs -->
+  <div class="glow-orb w-96 h-96 -top-20 -left-20 bg-blue-600/20"></div>
+  <div class="glow-orb w-96 h-96 top-1/2 -right-20 bg-indigo-600/15"></div>
+
+  <main class="relative z-10 max-w-5xl mx-auto w-full">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-xs font-semibold tracking-wider text-blue-400 uppercase mb-4">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Dubai in Cairo Client Artifacts · Ready for Review
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
+        Swiss Blue Website <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent">Operations Suite</span>
+      </h1>
+      <p class="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg">
+        Cloned from the Yerkab design system. Review the dedicated bilingual feature cards and interactive SOP modals below.
+      </p>
+    </div>
+
+    <!-- Review Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <!-- 1. Features Page (English) -->
+      <a href="swiss_blue_features_en.html" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-left">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+              English · LTR
+            </span>
+            <span class="text-xs text-slate-500 font-mono">55 Features · 10 Pillars</span>
+          </div>
+          <h2 class="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors mb-2">
+            Features Showcase (English)
+          </h2>
+          <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+            All 55 features organized across 10 operational pillars with <strong>"What is this feature"</strong> and <strong>"Real Life Benefit"</strong> blocks, live category filtering, and instant search.
+          </p>
+        </div>
+        <div class="flex items-center text-sm font-semibold text-blue-400 group-hover:translate-x-1 transition-transform">
+          Open Features Page &rarr;
+        </div>
+      </a>
+
+      <!-- 2. Features Page (Arabic) -->
+      <a href="swiss_blue_features_ar.html" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-right" dir="rtl">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-['IBM_Plex_Sans_Arabic']">
+              عربي · 100% RTL
+            </span>
+            <span class="text-xs text-slate-500 font-mono">55 ميزة · 10 محاور</span>
+          </div>
+          <h2 class="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2 font-['IBM_Plex_Sans_Arabic']">
+            دليل الميزات التشغيلية (عربي)
+          </h2>
+          <p class="text-sm text-slate-400 mb-6 leading-relaxed font-['IBM_Plex_Sans_Arabic']">
+            توثيق دقيق لكافة الميزات الـ 55 مقسمة إلى 10 محاور تشغيلية، مع تقسيم ثنائي: <strong>"ما الذي تقدمه هذه الميزة"</strong> و <strong>"الفائدة العملية في بيئة العمل"</strong> وفلاتر حية.
+          </p>
+        </div>
+        <div class="flex items-center justify-end text-sm font-semibold text-emerald-400 group-hover:-translate-x-1 transition-transform font-['IBM_Plex_Sans_Arabic']">
+          استعراض صفحة الميزات &larr;
+        </div>
+      </a>
+
+      <!-- 3. SOPs Page (English) -->
+      <a href="swiss_blue_sops_en.html" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-left">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
+              Interactive Modal · LTR
+            </span>
+            <span class="text-xs text-slate-500 font-mono">6 Workflows</span>
+          </div>
+          <h2 class="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors mb-2">
+            Standard Operating Procedures (SOPs)
+          </h2>
+          <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+            Clicking any procedure launches a professional <strong>pop-up modal</strong> detailing roles, prerequisites, numbered steps, and verification checklists.
+          </p>
+        </div>
+        <div class="flex items-center text-sm font-semibold text-purple-400 group-hover:translate-x-1 transition-transform">
+          Open Interactive SOPs &rarr;
+        </div>
+      </a>
+
+      <!-- 4. SOPs Page (Arabic) -->
+      <a href="swiss_blue_sops_ar.html" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-right" dir="rtl">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-['IBM_Plex_Sans_Arabic']">
+              نافذة منبثقة تفاعلية · RTL
+            </span>
+            <span class="text-xs text-slate-500 font-mono">6 إجراءات</span>
+          </div>
+          <h2 class="text-2xl font-bold text-white group-hover:text-amber-400 transition-colors mb-2 font-['IBM_Plex_Sans_Arabic']">
+            إجراءات العمل القياسية (SOPs)
+          </h2>
+          <p class="text-sm text-slate-400 mb-6 leading-relaxed font-['IBM_Plex_Sans_Arabic']">
+            عند النقر على أي بطاقة تفتح <strong>نافذة منبثقة تفاعلية</strong> تعرض خطوات التنفيذ الرقمية، شروط البدء، ومعايير التحقق والتصعيد.
+          </p>
+        </div>
+        <div class="flex items-center justify-end text-sm font-semibold text-amber-400 group-hover:-translate-x-1 transition-transform font-['IBM_Plex_Sans_Arabic']">
+          استعراض إجراءات العمل التفاعلية &larr;
+        </div>
+      </a>
+    </div>
+
+    <!-- 5. All-in-One Operations Manual Link -->
+    <div class="glass-card rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-500/20 bg-blue-950/20">
+      <div>
+        <h3 class="text-lg font-bold text-white">Looking for the All-in-One Master Portal?</h3>
+        <p class="text-sm text-slate-400">Includes system architecture, eZee-Odoo sync logic, Brevo email settings, and troubleshooting diagnostics.</p>
+      </div>
+      <a href="/swiss_blue_website_operations_manual.html" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-colors whitespace-nowrap shadow-lg shadow-blue-500/25">
+        Open Master Portal
+      </a>
+    </div>
+  </main>
+
+  <footer class="relative z-10 text-center text-xs text-slate-500 mt-12">
+    Dubai in Cairo &copy; 2026 · Swiss Blue Hotels & Serviced Apartments Operations Suite
+  </footer>
+</body>
+</html>

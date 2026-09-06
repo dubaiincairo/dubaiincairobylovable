@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Swiss Blue Hotels & Serviced Apartments — Complete Features Catalog</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.7); }
+
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(59, 130, 246, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-nav {
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(59, 130, 246, 0.12), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    .category-pill.active {
+      background: rgba(59, 130, 246, 0.25);
+      border-color: rgba(59, 130, 246, 0.8);
+      color: #93c5fd;
+    }
+
+    @media print {
+      body { background: #ffffff !important; color: #0f172a !important; }
+      .no-print, header, .ambient-orb-1, .ambient-orb-2, #category-filters, #search-container { display: none !important; }
+      .glass-card { background: #ffffff !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid !important; }
+      .text-white { color: #0f172a !important; }
+      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+    }
+  </style>
+</head>
+<body class="selection:bg-blue-600 selection:text-white pb-20 relative">
+
+  <!-- Ambient Glow Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-10 -left-40 w-[550px] h-[550px] bg-blue-600/10 rounded-full blur-[130px]"></div>
+    <div class="ambient-orb-2 absolute top-1/2 -right-40 w-[650px] h-[650px] bg-indigo-600/10 rounded-full blur-[150px]"></div>
+  </div>
+
+  <!-- STICKY HEADER -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-800 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/25 border border-blue-400/40">
+          SB
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white">SWISS BLUE HOTELS</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/30">
+              55 Audited Features
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            Definitive Platform Feature Catalog &amp; Real-Life Operational Benefits
+          </p>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="swiss_blue_sops_en.html" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition">
+          Switch to SOPs →
+        </a>
+        <a href="swiss_blue_features_ar.html" class="px-3 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-xs font-bold text-emerald-300 border border-emerald-500/30 transition">
+          العربية (100% RTL)
+        </a>
+        <a href="swiss_blue_website_operations_manual.html" class="hidden md:inline-flex px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white transition shadow-lg shadow-blue-500/20">
+          Master Portal
+        </a>
+        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="Print Catalog">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN VIEWPORT -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8 relative z-10">
+
+    <!-- HERO INTRO -->
+    <section class="text-center max-w-4xl mx-auto space-y-3">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-xs font-semibold text-blue-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Audited Across 10 Operational Pillars · Zero Duplicates
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+        Web Platform <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent">Complete Features</span>
+      </h1>
+      <p class="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto">
+        Every capability is paired with its precise architectural definition and real-life operational impact. Use the category pills and search bar below to filter.
+      </p>
+    </section>
+
+    <!-- SEARCH & CONTROLS -->
+    <section class="space-y-4" id="search-container">
+      <div class="relative max-w-xl mx-auto">
+        <input 
+          type="text" 
+          id="feature-search" 
+          oninput="applyFilters()" 
+          placeholder="Search features, codes (e.g. BOOK-01), or benefits..." 
+          class="w-full px-4 py-3 pl-11 rounded-2xl bg-slate-900/80 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition shadow-inner"
+        >
+        <svg class="w-5 h-5 text-slate-500 absolute left-3.5 top-3.5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+      </div>
+
+      <!-- CATEGORY FILTER PILLS -->
+      <div class="flex flex-wrap items-center justify-center gap-2 pt-2" id="category-filters">
+        <button onclick="setCategory('all', this)" class="category-pill active px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-blue-500/50 transition">
+          All Pillars <span class="ml-1 opacity-70">(55)</span>
+        </button>
+        <button onclick="setCategory('cat-booking', this)" class="category-pill px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-blue-500/50 transition">
+          1. Direct Booking <span class="ml-1 opacity-70">(5)</span>
+        </button>
+        <button onclick="setCategory('cat-admin', this)" class="category-pill px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-blue-500/50 transition">
+          2. Admin Control <span class="ml-1 opacity-70">(8)</span>
+        </button>
+        <button onclick="setCategory('cat-ai', this)" class="category-pill px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-blue-500/50 transition">
+          3. AI Concierge <span class="ml-1 opacity-70">(5)</span>
+        </button>
+        <button onclick="setCategory('cat-sales', this)" class="category-pill px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-blue-500/50 transition">
+          4. Sales &amp; HR <span class="ml-1 opacity-70">(5)</span>
+        </button>
+        <button onclick="setCategory('cat-notif', this)" class="category-pill px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-blue-500/50 transition">
+          5. Notifications <span class="ml-1 opacity-70">(2)</span>
+        </button>
+        <button onclick="setCategory('cat-exp', this)" class="category-pill px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-blue-500/50 transition">
+          6. Guest Experience <span class="ml-1 opacity-70">(13)</span>
+        </button>
+        <button onclick="setCategory('cat-mkt', this)" class="category-pill px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-blue-500/50 transition">
+          7. Marketing &amp; Popups <span class="ml-1 opacity-70">(5)</span>
+        </button>
+        <button onclick="setCategory('cat-sec', this)" class="category-pill px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-blue-500/50 transition">
+          8. Security &amp; RBAC <span class="ml-1 opacity-70">(5)</span>
+        </button>
+        <button onclick="setCategory('cat-cloud', this)" class="category-pill px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-blue-500/50 transition">
+          9. Cloud &amp; ERP <span class="ml-1 opacity-70">(3)</span>
+        </button>
+        <button onclick="setCategory('cat-legal', this)" class="category-pill px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-blue-500/50 transition">
+          10. Legal &amp; SEO <span class="ml-1 opacity-70">(4)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 55 FEATURE CARDS GRID -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="features-grid">
+
+      <!-- ==================== CATEGORY 1: DIRECT BOOKING (5) ==================== -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-blue-500/50 transition-all duration-300" data-category="cat-booking">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">BOOK-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. Direct Booking</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            Interactive Direct Booking Bar &amp; Availability Selector
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                A persistent multi-field booking bar allowing guests to choose destination cities (Jeddah, Jazan, Riyadh), select hotel properties, configure stay dates via a dual-month calendar range picker, and specify adult/child guest counts.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Captures reservations immediately at the point of intent, driving direct bookings and bypassing 18%–25% third-party OTA commissions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-blue-500/50 transition-all duration-300" data-category="cat-booking">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">BOOK-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. Direct Booking</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            Automated PMS Source Attribution (<code>WEB-DIRECT</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Automatically injects the <code>WEB-DIRECT</code> source token into reservation folios and downstream accounting entries upon guest confirmation.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Allows night auditors and hotel accountants to audit direct website profitability versus OTA channels in seconds with zero manual data tagging.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-blue-500/50 transition-all duration-300" data-category="cat-booking">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">BOOK-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. Direct Booking</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            Direct-Booking Incentive Triggers &amp; Discount Callouts
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Displays dynamic price advantage tags (*"Book Direct &amp; Save up to 20%"*, *"Best Rate Guarantee"*), reinforcing commercial savings across property and room cards.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Dissuades price-sensitive domestic and business travelers from comparison shopping on OTAs, increasing immediate checkout conversion rates.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-blue-500/50 transition-all duration-300" data-category="cat-booking">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">BOOK-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. Direct Booking</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            Central Reservation Portal (<code>/central-reservation</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                A dedicated multi-property booking clearinghouse enabling corporate travel managers and VIP guests to coordinate stays across multiple Swiss Blue properties in a single consolidated interface.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Accelerates large-scale corporate account bookings and multi-city reservations with a single point of operational contact.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-blue-500/50 transition-all duration-300" data-category="cat-booking">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">BOOK-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. Direct Booking</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            Reservation Layout Lab A/B Testing (<code>/admin/reservation-layouts</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Administrative testing suite allowing staff to preview and toggle between 4 distinct reservation widget designs (<code>horizontal bar</code>, <code>side panel</code>, <code>glass card</code>, and <code>bottom dock</code>) across desktop, tablet, and mobile devices.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Empowers marketing to test and deploy the highest-converting booking interface based on seasonal traffic and user demographics.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== CATEGORY 2: ADMIN CONTROL CENTER (8) ==================== -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-admin">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">ADM-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. Admin Control</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            Executive GA4 Telemetry &amp; Property Interest Dashboard
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Real-time management dashboard integrating Google Analytics 4 API and Sanity data to track unique visitors, engaged sessions, direct booking clicks, lead conversion rates, and property-level interest ranking.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Delivers executive visibility into commercial performance and guest demand across 7, 30, and 90-day timeframes without third-party analytics logins.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-admin">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">ADM-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. Admin Control</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            Multi-Channel Submissions CRM Hub (<code>/admin/submissions</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Centralized administrative inbox that filters, manages, and tracks status across all incoming leads: B2B Corporate RFPs, Recruitment applications with resumes, and AI Chat leads with full transcripts.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Eliminates lost sales opportunities and decentralized inbox management, ensuring a strict SLA on customer follow-ups.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-admin">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">ADM-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. Admin Control</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            In-Place Visual Content Studio &amp; Layout Builder
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Administrative interface (<code>secret-panel.tsx</code>) allowing staff to edit text directly on live website layouts, toggle section visibility on or off, reorder homepage blocks, and switch languages with real-time animated transitions.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Reduces website maintenance costs to zero by allowing marketing teams to modify layouts and headlines visually without developer intervention.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-admin">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">ADM-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. Admin Control</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            AI Chat Knowledge Base Ingestion Manager
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Dedicated interface for hotel staff to upload PDF documents, hotel policy files, or website URLs directly into OpenAI vector storage to update the AI concierge's knowledge base.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Guarantees that the AI concierge delivers accurate, up-to-date answers on seasonal rates, new amenities, and hotel policies as soon as they change.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-admin">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">ADM-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. Admin Control</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            In-Studio AI Editorial Suite (Rephrase &amp; Translate)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Integrated AI tools inside content fields to rephrase hospitality copy to match Swiss Blue's brand voice and automatically translate content between English and Arabic with one click.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Speeds up bilingual content creation by 80% while preserving brand sophistication and grammatical accuracy across both languages.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-admin">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">ADM-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. Admin Control</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            Unsplash Stock Photo Search &amp; Cloud Import
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                In-admin search engine to browse high-resolution architectural and lifestyle photography from Unsplash and upload selected assets directly into the Sanity media CDN.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Provides immediate access to royalty-free, high-quality imagery for seasonal banners and blog posts without leaving the administrative workflow.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-admin">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">ADM-07</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. Admin Control</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            Admin User &amp; Role-Based Access Control (<code>/admin/users</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Multi-user administration system allowing Super Admins to invite team members, assign granular permission authorities, and reset credentials.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Enforces strict data governance and organizational accountability by ensuring staff only access features relevant to their roles.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-admin">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">ADM-08</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. Admin Control</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            Self-Service Password Recovery Flow (<code>/admin/forgot</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Cryptographically signed token recovery flow enabling administrators to reset credentials securely without direct database access.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Minimizes administrative downtime and eliminates reliance on technical support tickets when staff forget passwords.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== CATEGORY 3: AI CONCIERGE (5) ==================== -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-purple-500/50 transition-all duration-300" data-category="cat-ai">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">AI-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. AI Concierge</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            Multilingual Floating AI Concierge Widget
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Conversational assistant available 24/7 across every page, answering guest questions regarding check-in times, room amenities, dining hours, and property locations in native Arabic and English.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Provides round-the-clock guest support across international time zones, reducing front-desk telephone inquiry volume by over 40%.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-purple-500/50 transition-all duration-300" data-category="cat-ai">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">AI-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. AI Concierge</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            In-Chat Lead Capture Form (<code>ai-chat-lead-form.tsx</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Automatically triggers during high-intent chat conversations (e.g., pricing questions or large group inquiries), capturing guest contact info and booking details directly into the CRM.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Converts passive web browsers into qualified sales leads before they leave the site, boosting inquiry closing rates.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-purple-500/50 transition-all duration-300" data-category="cat-ai">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">AI-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. AI Concierge</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            Dual-Model AI Architecture (GPT-4o + Gemini API)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Hybrid generative AI routing ensuring low-latency, contextual understanding for complex hospitality inquiries in Arabic and English.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Guarantees high availability and natural conversational fluency even during peak seasonal inquiry surges.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-purple-500/50 transition-all duration-300" data-category="cat-ai">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">AI-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. AI Concierge</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            Upstash Redis Distributed Rate Limiter
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Edge rate limiter tracking IP addresses (capped at 20 requests/minute per client) to prevent API quota exhaustion, automated bot scrapers, and denial-of-service (DDoS) abuse.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Eliminates unpredictable cloud billing spikes and safeguards the website against malicious scrapers and bot traffic.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-purple-500/50 transition-all duration-300" data-category="cat-ai">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">AI-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. AI Concierge</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            Instant Human WhatsApp Escalation
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Floating WhatsApp action button allowing guests to seamlessly bypass the AI and immediately open a chat with an on-duty front-desk concierge.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Satisfies high-touch VIP guests who require personalized human interaction, combining modern automation with traditional hospitality.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== CATEGORY 4: COMMERCIAL & HR (5) ==================== -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-emerald-500/50 transition-all duration-300" data-category="cat-sales">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">SALES-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. Sales &amp; HR</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            Structured Corporate Deals &amp; Group RFP Portal
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Commercial inquiry form (<code>corporate-deal-form.tsx</code>) capturing mandatory corporate data: Company Commercial Registration (CR), VAT number, attendee counts, seating layouts, and catering preferences.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Eliminates prolonged email back-and-forth; sales engineers receive all necessary specifications up-front to generate a binding proforma invoice on the first call.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-emerald-500/50 transition-all duration-300" data-category="cat-sales">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">SALES-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. Sales &amp; HR</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            Meetings &amp; Event Banquet Showcase (<code>/meetings-events</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Visual presentation of banquet halls, conference boardrooms, audiovisual equipment, and customizable corporate catering packages.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Attracts corporate conference planners and wedding organizers by presenting clear room capacities, floor plans, and technical capabilities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-emerald-500/50 transition-all duration-300" data-category="cat-sales">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">SALES-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. Sales &amp; HR</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            Automated Resume PDF Encoding &amp; Delivery
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Accepts job applicant CV files, verifies their authentic file headers, encodes them in base64, and attaches the original PDF directly to emails sent to <code>careers@swissblue.sa</code>.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Centralizes recruitment in the official HR inbox, preventing lost resumes scattered across personal WhatsApp accounts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-emerald-500/50 transition-all duration-300" data-category="cat-sales">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">SALES-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. Sales &amp; HR</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            Interactive Careers Vacancy Filter (<code>careers-openings.tsx</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Departmental vacancy catalog (Front Office, Housekeeping, Executive, F&amp;B) featuring expandable role requirements and in-page application submissions.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Encourages high-caliber Saudi hospitality talent to apply directly for open positions with a friction-free mobile submission process.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-emerald-500/50 transition-all duration-300" data-category="cat-sales">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">SALES-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. Sales &amp; HR</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            Guest Feedback &amp; Rating Pipeline (<code>/feedback</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Direct customer review and satisfaction submission form routing guest experiences directly to executive management.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Captures internal guest feedback early to resolve service discrepancies before negative reviews reach public platforms like Google Maps or TripAdvisor.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== CATEGORY 5: NOTIFICATIONS (2) ==================== -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-teal-500/50 transition-all duration-300" data-category="cat-notif">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">NOTIF-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. Notifications</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">
+            Simultaneous Asynchronous Lead Dispatch (Brevo + WhatsApp)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Executes in the background via Next.js <code>after()</code>, simultaneously dispatching Brevo transactional emails and Meta WhatsApp Cloud API template alerts (<code>new_form_submission</code>) to managers' mobile phones within 3 seconds.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-950/30 border border-teal-500/20">
+              <span class="font-bold text-teal-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Slashes lead response time from hours to under 10 minutes, dramatically increasing the probability of closing lucrative corporate and banquet deals.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-teal-500/50 transition-all duration-300" data-category="cat-notif">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">NOTIF-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. Notifications</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">
+            Brevo Serverless SMTP Resilience Architecture
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Custom SMTP transport configuration tailored for Vercel's rotating serverless IP architecture without IP address lockouts.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-950/30 border border-teal-500/20">
+              <span class="font-bold text-teal-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Resolves <code>401 Unauthorized</code> errors permanently, ensuring zero lost bookings, RFPs, or job application emails.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== CATEGORY 6: GUEST EXPERIENCE (13) ==================== -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Property Portfolio Taxonomy &amp; Dynamic Detail Pages
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Dynamic landing pages for all 6 Swiss Blue properties across Jeddah, Jazan, and Riyadh, displaying localized neighborhood overviews, room categories, and verified amenity chips.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Facilitates chain-wide cross-selling across Saudi commercial hubs at zero additional customer acquisition cost.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Granular Room &amp; Serviced Apartment Comparison Matrix
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Direct comparison matrix covering Superior Rooms, Deluxe Suites, Junior Suites, Executive Suites, and Serviced Apartments, reflecting physical room inventory (e.g., exactly 15 One-Bedroom Superior units at Tulip Alrawdah).
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Eliminates room type confusion and prevents physical overbooking of specific unit layouts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Pre-Opening / Expansion Property Gating
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Programmatic "Coming Soon" (<code>قريباً</code>) state engine for properties under development (e.g., Jazan properties), preventing premature booking errors.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Builds marketing anticipation for future property openings while protecting guest trust from booking unfinished rooms.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Interactive Property Map (<code>property-map.tsx</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Interactive map with custom branded markers for each property and one-click Google Maps GPS navigation links for arriving guests.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Helps guests navigate directly to the property entrance from airports and business districts with zero navigational confusion.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Accessible Stay Support Panel (<code>accessible-stay-panel.tsx</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Dedicated accessibility section on property pages outlining facilities for guests with disabilities, with direct contact links to reservations for specialized equipment confirmation.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Ensures inclusive hospitality compliance and welcoming accommodations for guests of all physical abilities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Photo Gallery Lightbox &amp; Media Carousels
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                High-definition, swipeable photo galleries with full-screen lightbox previews for guest rooms, lobbies, and meeting spaces.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Elevates visual confidence and luxury brand perception, driving higher room category upgrades.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-07</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Smart Morphing Navigation Header (<code>nav-scroll-state.tsx</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Header transitioning smoothly between a transparent hero view and a compact frosted glass utility bar with sticky booking shortcuts upon scrolling.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Maximizes visual immersion on page load while keeping booking call-to-actions accessible at all times during scrolling.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-08</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Destination Guides (<code>/destinations</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                City-level landing pages highlighting key business hubs, commercial districts, and tourist attractions in Riyadh, Jeddah, and Jazan.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Positions Swiss Blue properties as the prime accommodation choice for travelers visiting major regional hubs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-09</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Dining &amp; Culinary Showcase (<code>/dining</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Showcases on-site cafes, breakfast lounges, and 24/7 room service options available at designated Swiss Blue properties.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Increases Food &amp; Beverage (F&amp;B) ancillary revenues by familiarizing guests with dining options prior to arrival.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-10</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Loyalty Program Tiers &amp; Layout Lab (<code>/loyalty</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Visual membership tier presentation (Silver, Gold, Platinum) with administrative ability to preview and switch between layout styles (<code>compact rail</code> vs. <code>editorial strip</code>).
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Drives long-term repeat bookings and direct guest retention by incentivizing membership signup.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-11</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Corporate Partners &amp; Verified Social Proof
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Curated partner logo grid and verified guest reviews (<code>partners-section.tsx</code>, <code>testimonials-section.tsx</code>) reinforcing brand authority and customer trust.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Reassures first-time domestic and international bookers of Swiss Blue's established enterprise track record.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-12</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Interactive FAQ Accordion with Live Search
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Expandable accordion answering common guest inquiries regarding check-in/out policies, security deposits, breakfast options, and parking.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Resolves common pre-booking friction instantly, freeing staff from routine informational calls.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-cyan-500/50 transition-all duration-300" data-category="cat-exp">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">EXP-13</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Guest Experience</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Verified Payment Methods Display
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Displays trusted Saudi and international payment badges: Mada, Visa, Mastercard, American Express, and Apple Pay.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Builds transactional trust and assures guests of convenient, frictionless settlement on arrival or online.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== CATEGORY 7: MARKETING AUTOMATION (5) ==================== -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-amber-500/50 transition-all duration-300" data-category="cat-mkt">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">MKT-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. Marketing</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            Time-Gated Promotional Popup Engine (<code>promotional-popup.tsx</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Configurable promotional modal supporting date-gated availability (<code>activeFrom</code> to <code>activeUntil</code>), booking windows vs. stay windows, meal inclusions, and session-based dismissal memory.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Delivers high-impact promotional messages during seasonal peaks (e.g., National Day or Ramadan) without user fatigue.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-amber-500/50 transition-all duration-300" data-category="cat-mkt">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">MKT-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. Marketing</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            Special Offers &amp; Seasonal Packages Portal (<code>/offers</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Dynamic catalog of promotional deals (Saudi National Day, Foundation Day, Weekend Getaways, Extended-Stay Corporate Discounts).
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Stimulates weekend and shoulder-season occupancy with curated, high-value packages.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-amber-500/50 transition-all duration-300" data-category="cat-mkt">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">MKT-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. Marketing</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            Live Content Auto-Refresh Engine (<code>live-content-refresh.tsx</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Client-side polling service checking <code>/api/site-content/version</code> every 5 seconds; automatically updates the page via Next.js <code>router.refresh()</code> when marketing updates content in the CMS, without requiring a page reload.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Ensures all active visitors instantly see price changes, flash sales, and banner updates in real time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-amber-500/50 transition-all duration-300" data-category="cat-mkt">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">MKT-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. Marketing</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            Amenity Normalization &amp; (Soon) Badging
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Automated parsing logic that identifies non-operational amenities (e.g., Breakfast Buffets at Vinas Riyadh or Tulip Alrawdah) and programmatically renders a blue notice badge.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Establishes total transparency before arrival, completely preventing check-in disputes regarding dining facilities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-amber-500/50 transition-all duration-300" data-category="cat-mkt">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">MKT-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. Marketing</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            Global Singleton Content Architecture (<code>siteContentType.ts</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Synchronizes global company details (CR numbers, VAT IDs, primary phone numbers, emergency contact emails) across all pages from a single administrative record.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Eliminates contradictory contact details or out-of-date tax credentials across disparate pages.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== CATEGORY 8: SECURITY & RBAC (5) ==================== -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-red-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-red-500/10 text-red-400 border border-red-500/20">SEC-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. Security</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-red-300 transition-colors">
+            Encrypted Admin Credentials at Rest (AES-256-GCM + PBKDF2)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Passwords hashed using PBKDF2-HMAC-SHA-256 with 210,000 iterations; admin user records stored in Sanity are encrypted using authenticated AES-256-GCM.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-red-950/30 border border-red-500/20">
+              <span class="font-bold text-red-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Protects administrative access completely; even if the underlying database is queried, administrative credentials remain mathematically indecipherable.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-red-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-red-500/10 text-red-400 border border-red-500/20">SEC-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. Security</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-red-300 transition-colors">
+            Timing-Safe Cryptographic Verification
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Uses byte-by-byte constant-time comparisons (<code>timingSafeEqualBytes</code>) to verify password hashes and authentication tokens.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-red-950/30 border border-red-500/20">
+              <span class="font-bold text-red-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Fully defeats timing analysis and side-channel hacking attempts against administrative authentication endpoints.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-red-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-red-500/10 text-red-400 border border-red-500/20">SEC-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. Security</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-red-300 transition-colors">
+            Granular Role-Based Access Control (RBAC)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Assigns specific permission authorities to team members: <code>analytics</code>, <code>content.en</code>, <code>content.ar</code>, <code>submissions</code>, <code>studio</code>, and <code>users</code>.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-red-950/30 border border-red-500/20">
+              <span class="font-bold text-red-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Prevents unauthorized content publication and protects confidential lead records from unapproved staff.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-red-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-red-500/10 text-red-400 border border-red-500/20">SEC-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. Security</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-red-300 transition-colors">
+            Authentic File Signature Sniffing (Magic Bytes)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Inspects binary header bytes of uploaded files to ensure candidate CVs are genuine PDFs/DOCX and images are legitimate JPEG/PNG/WebP, rejecting spoofed file extensions.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-red-950/30 border border-red-500/20">
+              <span class="font-bold text-red-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Shields serverless backend systems from malicious script injection and file spoofing exploits disguised as resumes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-red-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-red-500/10 text-red-400 border border-red-500/20">SEC-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. Security</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-red-300 transition-colors">
+            Honeypot Spam Protection &amp; CSRF Guards
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Hidden form fields (<code>HONEYPOT_FIELD</code>) that silently catch and drop automated spam bot submissions without disrupting legitimate human visitors.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-red-950/30 border border-red-500/20">
+              <span class="font-bold text-red-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Keeps the CRM clean from marketing spam bots and prevents serverless invocation waste.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== CATEGORY 9: CLOUD & ERP (3) ==================== -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-blue-400/50 transition-all duration-300" data-category="cat-cloud">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-400/10 text-blue-300 border border-blue-400/20">CLOUD-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">9. Cloud &amp; ERP</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-200 transition-colors">
+            Next.js 16 App Router &amp; Turbopack Architecture
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Built on React 19, TypeScript Strict Mode, and Tailwind CSS v4, achieving sub-second Server-Side Rendered page loads and zero layout shifts.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-400/20">
+              <span class="font-bold text-blue-200 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Maximizes Google Core Web Vitals and prevents mobile drop-offs during booking searches.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-blue-400/50 transition-all duration-300" data-category="cat-cloud">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-400/10 text-blue-300 border border-blue-400/20">CLOUD-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">9. Cloud &amp; ERP</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-200 transition-colors">
+            Downstream Odoo 19 ERP Reconciliation Pipeline
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Architectural formatting aligned with the Ozoo middleware suite on Odoo.sh (<code>watandesignsgroupksa</code>), reconciling direct hotel revenue with group corporate accounting.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-400/20">
+              <span class="font-bold text-blue-200 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Eliminates manual data entry between front-desk folios and the group's general ledger in Odoo ERP.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-blue-400/50 transition-all duration-300" data-category="cat-cloud">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-400/10 text-blue-300 border border-blue-400/20">CLOUD-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">9. Cloud &amp; ERP</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-200 transition-colors">
+            Cloud-First Dual-Branch CI/CD Deployment (Vercel)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Continuous integration pipeline with strict environment isolation: <code>staging</code> deploys to <code>test.swissblue.sa</code> and <code>main</code> deploys to <code>swissblue.sa</code>.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-400/20">
+              <span class="font-bold text-blue-200 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Eliminates production deployment risks by providing a mirror staging environment for campaign testing prior to live guest release.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== CATEGORY 10: LEGAL & SEO (4) ==================== -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-slate-500/50 transition-all duration-300" data-category="cat-legal">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-slate-500/10 text-slate-300 border border-slate-500/20">LEGAL-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">10. Legal &amp; SEO</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-slate-200 transition-colors">
+            Saudi PDPL &amp; GDPR Cookie Consent Management
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Cookie compliance banner that dispatches real-time <code>window</code> consent events, conditionally unlocking Google Analytics and AI tracking only after user agreement without requiring a page reload.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-500/20">
+              <span class="font-bold text-slate-200 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Ensures complete regulatory compliance with the Saudi Personal Data Protection Law (PDPL) and international data standards.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-slate-500/50 transition-all duration-300" data-category="cat-legal">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-slate-500/10 text-slate-300 border border-slate-500/20">LEGAL-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">10. Legal &amp; SEO</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-slate-200 transition-colors">
+            Per-Page Editable SEO &amp; Canonical URL Engine
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Maps all 20+ routes to bilingual title tags, descriptions, and keywords, with full override controls inside the admin panel.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-500/20">
+              <span class="font-bold text-slate-200 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Maximizes organic search engine visibility on Google for high-value hospitality keywords in Arabic and English.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-slate-500/50 transition-all duration-300" data-category="cat-legal">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-slate-500/10 text-slate-300 border border-slate-500/20">LEGAL-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">10. Legal &amp; SEO</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-slate-200 transition-colors">
+            Dynamic OpenGraph Social Image Generation
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Automatically generates branded social preview cards (<code>opengraph-image.tsx</code>) when links to properties or offers are shared on WhatsApp, iMessage, LinkedIn, or X.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-500/20">
+              <span class="font-bold text-slate-200 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Transforms shared links into eye-catching visual preview cards, boosting social click-through rates.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-slate-500/50 transition-all duration-300" data-category="cat-legal">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-slate-500/10 text-slate-300 border border-slate-500/20">LEGAL-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">10. Legal &amp; SEO</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-slate-200 transition-colors">
+            Hotel Policies, Cancellation &amp; Terms Portal (<code>/policy</code>)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Standardized legal pages outlining check-in/out hours, cancellation deadlines, deposit policies, child occupancy rules, and guest identification requirements under Saudi Tourism Ministry regulations.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/50 border border-slate-500/20">
+              <span class="font-bold text-slate-200 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Establishes clear contractual rules with arriving guests, protecting Swiss Blue from legal disputes and regulatory penalties.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 text-center text-xs text-slate-500 border-t border-slate-800/80 pt-8">
+    <p>Dubai in Cairo &copy; 2026 · Swiss Blue Hotels &amp; Serviced Apartments Operations Suite · 55 Audited Features</p>
+  </footer>
+
+  <script>
+    // Spotlight Cursor Tracker
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    let activeCategory = 'all';
+
+    function setCategory(category, button) {
+      activeCategory = category;
+      document.querySelectorAll('.category-pill').forEach(btn => btn.classList.remove('active'));
+      if (button) button.classList.add('active');
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const query = document.getElementById('feature-search').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.feature-item');
+      
+      cards.forEach(card => {
+        const matchesCategory = (activeCategory === 'all') || (card.getAttribute('data-category') === activeCategory);
+        const cardText = card.textContent.toLowerCase();
+        const matchesQuery = !query || cardText.includes(query);
+        
+        if (matchesCategory && matchesQuery) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
