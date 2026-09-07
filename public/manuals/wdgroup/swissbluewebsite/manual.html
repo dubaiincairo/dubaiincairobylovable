@@ -541,62 +541,123 @@
       </div>
     </div>
 
-    <!-- ==================== TAB 5: EMPLOYEE SOPS ==================== -->
+    <!-- ==================== TAB 5: WEBSITE SOPS ==================== -->
     <div id="tab-panel-sops" class="tab-content hidden space-y-6">
       
-      <div class="glass-card spotlight-card rounded-2xl p-6 border-t-4 border-t-blue-500">
-        <h2 class="text-2xl font-bold text-white">Employee Standard Operating Procedures (SOPs)</h2>
-        <p class="text-sm text-slate-300 mt-1">
-          Click any workflow card below to launch the detailed step-by-step modal guide.
-        </p>
+      <div class="glass-card spotlight-card rounded-2xl p-6 border-t-4 border-t-blue-500 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 text-[11px] font-semibold border border-blue-500/20 mb-2">
+            <span>20 PROCEDURES • 6 OPERATIONAL PILLARS</span>
+          </div>
+          <h2 class="text-2xl font-bold text-white">Website Standard Operating Procedures (SOPs)</h2>
+          <p class="text-sm text-slate-300 mt-1">
+            Governing website content management, AI concierge knowledge base, image compression standards, back-office lead triage, and edge delivery. (Reservation folios and PMS room allocation are handled natively in eZee Absolute).
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <a href="/manuals/wdgroup/swissbluewebsite/sops-en" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-500/25 transition">
+            Launch Interactive SOPs Portal →
+          </a>
+          <a href="/manuals/wdgroup/swissbluewebsite/sops-ar" class="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 transition">
+            العربية (RTL)
+          </a>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        <!-- SOP 1 -->
-        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 cursor-pointer" onclick="openModal('Direct Web Booking Processing (eZee Absolute)', 'Reservations Supervisor', '1. Notification arrives at reservations@swissblue.sa and front-desk WhatsApp.\n2. Open eZee Absolute PMS.\n3. Check requested dates against room category inventory.\n4. Create booking with Source Code: WEB-DIRECT to apply the direct rate discount.\n5. Click Reply on the Brevo notification email to send the confirmation voucher.\n6. Flag email as [CONFIRMED - PMS #XXXXX].')">
+        <!-- Pillar 1 -->
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3 cursor-pointer group hover:border-cyan-500/50 transition" onclick="window.location.href='/manuals/wdgroup/swissbluewebsite/sops-en'">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-blue-500/20 text-blue-300">SOP-SB-01</span>
-            <span class="text-xs text-slate-400">Reservations</span>
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/20 text-cyan-300">Pillar 1 • 3 SOPs</span>
+            <span class="text-xs text-slate-400">AI Concierge</span>
           </div>
-          <h3 class="text-base font-bold text-white">Direct Booking Processing</h3>
+          <h3 class="text-base font-bold text-white group-hover:text-cyan-300 transition">AI Concierge &amp; Knowledge Base</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Capturing direct online guest leads, creating folios in eZee Absolute under WEB-DIRECT, and confirming rates.
+            Updating multilingual hotel FAQs, auditing chat transcripts, and managing Upstash Redis IP rate limiting.
           </p>
-          <div class="pt-2 border-t border-slate-800 text-xs text-blue-400 font-semibold flex items-center justify-between">
-            <span>Open SOP Modal</span>
+          <div class="pt-2 border-t border-slate-800 text-xs text-cyan-400 font-semibold flex items-center justify-between">
+            <span>SOP-SB-WEB-01 to 03</span>
             <span>→</span>
           </div>
         </div>
 
-        <!-- SOP 2 -->
-        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 cursor-pointer" onclick="openModal('Sanity CMS Promotional Banner Publishing', 'Marketing Administrator', '1. Authenticate at swissblue.sa/studio.\n2. Open Site Content (Singleton).\n3. Update seasonal headline and upload compressed WebP image (<350KB).\n4. Update English and Arabic copy simultaneously.\n5. Click green Publish button.\n6. Test in private window on https://swissblue.sa.')">
+        <!-- Pillar 2 -->
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3 cursor-pointer group hover:border-purple-500/50 transition" onclick="window.location.href='/manuals/wdgroup/swissbluewebsite/sops-en'">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-purple-500/20 text-purple-300">SOP-SB-02</span>
-            <span class="text-xs text-slate-400">Marketing</span>
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-purple-500/20 text-purple-300">Pillar 2 • 2 SOPs</span>
+            <span class="text-xs text-slate-400">Media &amp; Assets</span>
           </div>
-          <h3 class="text-base font-bold text-white">Promotional Banner Updates</h3>
+          <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition">Visual Media &amp; Photography</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Publishing seasonal holiday packages and rate offers across Arabic and English pages without code redeploys.
+            Uploading WebP photos (&lt;350KB), responsive 16:9 crops, video reel embeds, and virtual tours.
           </p>
           <div class="pt-2 border-t border-slate-800 text-xs text-purple-400 font-semibold flex items-center justify-between">
-            <span>Open SOP Modal</span>
+            <span>SOP-SB-WEB-04 to 05</span>
             <span>→</span>
           </div>
         </div>
 
-        <!-- SOP 3 -->
-        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 cursor-pointer" onclick="openModal('Careers Form & PDF Resume Handling', 'HR Officer', '1. Inquiries arrive at careers@swissblue.sa.\n2. Open attached resume PDF (automatically converted and attached by serverless function).\n3. Evaluate candidate qualifications against hotel department vacancies.\n4. Hit Reply to communicate directly with candidate (Reply-To auto-configured).\n5. File resume in corporate HR drive.')">
+        <!-- Pillar 3 -->
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3 cursor-pointer group hover:border-amber-500/50 transition" onclick="window.location.href='/manuals/wdgroup/swissbluewebsite/sops-en'">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300">SOP-SB-03</span>
-            <span class="text-xs text-slate-400">HR Team</span>
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-300">Pillar 3 • 3 SOPs</span>
+            <span class="text-xs text-slate-400">Marketing &amp; CMS</span>
           </div>
-          <h3 class="text-base font-bold text-white">Careers &amp; Resume Ingestion</h3>
+          <h3 class="text-base font-bold text-white group-hover:text-amber-300 transition">Sanity CMS &amp; Campaigns</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Reviewing candidate CVs attached directly to notification emails from the `/careers` application portal.
+            Publishing holiday hero sliders, updating amenity status badges ((Soon) / (قريباً)), and adding new hotel properties.
+          </p>
+          <div class="pt-2 border-t border-slate-800 text-xs text-amber-400 font-semibold flex items-center justify-between">
+            <span>SOP-SB-WEB-06 to 08</span>
+            <span>→</span>
+          </div>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3 cursor-pointer group hover:border-emerald-500/50 transition" onclick="window.location.href='/manuals/wdgroup/swissbluewebsite/sops-en'">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300">Pillar 4 • 4 SOPs</span>
+            <span class="text-xs text-slate-400">Admin Triage</span>
+          </div>
+          <h3 class="text-base font-bold text-white group-hover:text-emerald-300 transition">Back-Office Lead Triage (/admin)</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Triaging B2B RFPs within 2 hours, processing careers PDF CVs, handling investor inquiries, and resolving feedback.
           </p>
           <div class="pt-2 border-t border-slate-800 text-xs text-emerald-400 font-semibold flex items-center justify-between">
-            <span>Open SOP Modal</span>
+            <span>SOP-SB-WEB-09 to 12</span>
+            <span>→</span>
+          </div>
+        </div>
+
+        <!-- Pillar 5 -->
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3 cursor-pointer group hover:border-indigo-500/50 transition" onclick="window.location.href='/manuals/wdgroup/swissbluewebsite/sops-en'">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300">Pillar 5 • 3 SOPs</span>
+            <span class="text-xs text-slate-400">Notifications</span>
+          </div>
+          <h3 class="text-base font-bold text-white group-hover:text-indigo-300 transition">Notification Routing &amp; APIs</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Managing Brevo SMTP delivery, Meta WhatsApp alert templates, and diagnosing Brevo 401 / WhatsApp 132000 errors.
+          </p>
+          <div class="pt-2 border-t border-slate-800 text-xs text-indigo-400 font-semibold flex items-center justify-between">
+            <span>SOP-SB-WEB-13 to 15</span>
+            <span>→</span>
+          </div>
+        </div>
+
+        <!-- Pillar 6 -->
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3 cursor-pointer group hover:border-rose-500/50 transition" onclick="window.location.href='/manuals/wdgroup/swissbluewebsite/sops-en'">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-rose-500/20 text-rose-300">Pillar 6 • 5 SOPs</span>
+            <span class="text-xs text-slate-400">Security &amp; Edge</span>
+          </div>
+          <h3 class="text-base font-bold text-white group-hover:text-rose-300 transition">Security, Edge Cache &amp; SLA</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Admin account 2FA provisioning, Vercel Edge ISR cache purging, guest reviews, Saudi PDPL compliance, and P1 outage escalation.
+          </p>
+          <div class="pt-2 border-t border-slate-800 text-xs text-rose-400 font-semibold flex items-center justify-between">
+            <span>SOP-SB-WEB-16 to 20</span>
             <span>→</span>
           </div>
         </div>
