@@ -74,15 +74,15 @@
     },
     {
       "source": "/manuals/wdgroup/ezeeodooconnector",
-      "destination": "/manuals/wdgroup/ezeeodooconnector/index.html"
+      "destination": "/manuals/wdgroup/index.html"
     },
     {
       "source": "/manuals/wdgroup/ezeeodooconnector/",
-      "destination": "/manuals/wdgroup/ezeeodooconnector/index.html"
+      "destination": "/manuals/wdgroup/index.html"
     },
     {
       "source": "/manuals/wdgroup/ezeeodooconnector/ar",
-      "destination": "/manuals/wdgroup/ezeeodooconnector/ar.html"
+      "destination": "/manuals/wdgroup/ar.html"
     },
     {
       "source": "/manuals/wdgroup/ezeeodooconnector/features-en",
@@ -150,11 +150,11 @@
     },
     {
       "source": "/manuals/ezeeodooconnector",
-      "destination": "/manuals/wdgroup/ezeeodooconnector/index.html"
+      "destination": "/manuals/wdgroup/index.html"
     },
     {
       "source": "/manuals/ezeeodooconnector/",
-      "destination": "/manuals/wdgroup/ezeeodooconnector/index.html"
+      "destination": "/manuals/wdgroup/index.html"
     },
     {
       "source": "/manuals/ezeeodooconnector/:path*",
