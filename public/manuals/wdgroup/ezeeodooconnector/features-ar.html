@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>نظام أوزو (موصل إيزي - أودو) — دليل الميزات الكامل | مجموعة الوتد</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+      direction: rtl;
+      text-align: right;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.7); }
+
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-nav {
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(99, 102, 241, 0.12), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .category-pill {
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.875rem;
+      border-radius: 0.875rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.7);
+      color: #94a3b8;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .category-pill:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: #f1f5f9;
+      transform: translateY(-1px);
+    }
+    .category-pill.active {
+      background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+      border-color: rgba(165, 180, 252, 0.6);
+      color: #ffffff;
+      box-shadow: 0 8px 20px -4px rgba(99, 102, 241, 0.45);
+      transform: translateY(-1px);
+    }
+    .category-pill .pill-badge {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      padding: 0.125rem 0.45rem;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.2s ease;
+    }
+    .category-pill.active .pill-badge {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen text-slate-100 flex flex-col justify-between selection:bg-indigo-600 selection:text-white pb-16">
+
+  <!-- Ambient Glow Background -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute -top-40 -right-40 w-[600px] h-[600px] bg-indigo-600/15 rounded-full blur-[140px]"></div>
+    <div class="ambient-orb-2 absolute top-1/3 -left-40 w-[550px] h-[550px] bg-blue-600/15 rounded-full blur-[140px]"></div>
+    <div class="absolute -bottom-40 right-1/3 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[130px]"></div>
+  </div>
+
+  <!-- Sticky Top Navigation -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-4">
+        
+        <!-- Right (Start in RTL): Brand / Title -->
+        <div class="flex items-center gap-3 min-w-0">
+          <a href="/manuals/wdgroup/ezeeodooconnector/ar" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center font-black text-white text-lg shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
+              OZ
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="font-extrabold text-sm sm:text-base text-white truncate tracking-tight">نظام أوزو (موصل إيزي - أودو)</span>
+                <span class="px-2 py-0.5 text-[10px] font-bold font-mono uppercase rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">v4.0</span>
+              </div>
+              <p class="text-xs text-slate-400 hidden sm:block truncate">تكامل نظام الفنادق ونقاط البيع مع أودو 19 للمؤسسات</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Left (End in RTL): Actions -->
+        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          <a href="/manuals/wdgroup/ezeeodooconnector/sops-ar" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition">
+            <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+            <span class="hidden sm:inline">إجراءات التشغيل القياسية (20)</span>
+            <span class="sm:hidden">الإجراءات</span>
+          </a>
+
+          <a href="/manuals/wdgroup/ezeeodooconnector/features-en" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 text-xs font-bold font-sans transition">
+            English (LTR)
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 w-full space-y-8">
+
+    <!-- Hero Header -->
+    <div class="text-center max-w-3xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-xs font-semibold text-indigo-300 uppercase tracking-wider">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        محرك القيود والربط المحاسبي والفندقي المعتمد
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+        دليل الميزات <span class="bg-gradient-to-r from-indigo-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent">التشغيلية والمالية</span>
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+        استعراض 46 ميزة مالية متقدمة مقسمة عبر 8 محاور تشغيلية، تجمع بين الآلية التقنية البرمجية الدقيقة والفائدة العملية المباشرة للمدراء الماليين والمحاسبين.
+      </p>
+    </div>
+
+    <!-- Sticky Filter & Search Control Panel -->
+    <div class="sticky top-16 sm:top-20 z-30 py-3 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 bg-[#0b0f19]/90 backdrop-blur-xl border-y border-slate-800/80 shadow-2xl">
+      <div class="max-w-7xl mx-auto space-y-3">
+        
+        <!-- Search & Quick Stats -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <div class="relative flex-1 max-w-md">
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-500">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="ابحث بالاسم، الكود، حساب الأستاذ العام، أو الفائدة التشغيلية..." 
+              oninput="handleSearch(this.value)"
+              class="w-full pr-9 pl-8 py-2 rounded-xl bg-slate-900/90 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition text-right"
+            >
+            <button 
+              id="clear-search" 
+              onclick="clearSearch()" 
+              class="hidden absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 hover:text-slate-300"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+
+          <!-- Counter Stats -->
+          <div class="flex items-center gap-3 text-xs text-slate-400 font-mono self-start sm:self-center">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800">
+              عرض <strong id="visible-count" class="text-indigo-400">46</strong> من أصل 46 ميزة
+            </span>
+          </div>
+        </div>
+
+        <!-- Horizontal Scrollable Category Rail -->
+        <div class="relative flex items-center group">
+          <button 
+            id="rail-scroll-right" 
+            onclick="scrollPillRail(220)" 
+            class="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-slate-900/95 border border-slate-700 items-center justify-center text-slate-300 hover:text-white hover:border-indigo-500 shadow-xl backdrop-blur-md transition-all opacity-0 pointer-events-none"
+            title="تمرير لليمين"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <div id="rail-fade-right" class="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0b0f19] to-transparent z-10 opacity-0 transition-opacity"></div>
+
+          <div 
+            id="category-rail" 
+            onscroll="updateRailScrollIndicators()" 
+            class="flex items-center gap-2 overflow-x-auto py-1 px-1 scroll-smooth no-scrollbar w-full"
+          >
+            <button onclick="setCategory('all', this)" class="category-pill active" data-cat="all">
+              <span>جميع المحاور</span>
+              <span class="pill-badge">46</span>
+            </button>
+
+            <button onclick="setCategory('cat-gl', this)" class="category-pill" data-cat="cat-gl">
+              <span>1. هندسة الأستاذ العام واليومية</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <button onclick="setCategory('cat-city', this)" class="category-pill" data-cat="cat-city">
+              <span>2. تفصيل ذمم الشركات</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <button onclick="setCategory('cat-deposit', this)" class="category-pill" data-cat="cat-deposit">
+              <span>3. ذمم النزلاء والدفعات المقدمة</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <button onclick="setCategory('cat-pos', this)" class="category-pill" data-cat="cat-pos">
+              <span>4. تكامل نقاط البيع وحواجز الازدواجية</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <button onclick="setCategory('cat-setup', this)" class="category-pill" data-cat="cat-setup">
+              <span>5. البيانات الأساسية ومسار الإعداد</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <button onclick="setCategory('cat-night', this)" class="category-pill" data-cat="cat-night">
+              <span>6. التدقيق الليلي والتنبيهات الآلية</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <button onclick="setCategory('cat-sec', this)" class="category-pill" data-cat="cat-sec">
+              <span>7. عزل الشركات المتعددة والحماية</span>
+              <span class="pill-badge">5</span>
+            </button>
+
+            <button onclick="setCategory('cat-report', this)" class="category-pill" data-cat="cat-report">
+              <span>8. التقارير والتعريب اللحظي</span>
+              <span class="pill-badge">5</span>
+            </button>
+          </div>
+
+          <div id="rail-fade-left" class="pointer-events-none absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0b0f19] to-transparent z-10 opacity-100 transition-opacity"></div>
+
+          <button 
+            id="rail-scroll-left" 
+            onclick="scrollPillRail(-220)" 
+            class="hidden md:flex absolute -left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-slate-900/95 border border-slate-700 items-center justify-center text-slate-300 hover:text-white hover:border-indigo-500 shadow-xl backdrop-blur-md transition-all opacity-100"
+            title="تمرير لليسار"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div id="features-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- ==================== المحور 1: هندسة الأستاذ العام واليومية ==================== -->
+
+      <!-- SYNC-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-gl">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">SYNC-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. هندسة الأستاذ العام</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            هندسة وضع التشغيل المزدوج (ملخص يومي مقابل حركات تفصيلية)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                خيار هيكلي في <code>pms.credentials</code> يتيح الاختيار بين <em>الملخص اليومي لليومية</em> (تجميع بيانات إيزي في قيد يومية متوازن واحد لكل فندق/يوم) أو <em>الحركات التفصيلية</em> (إنشاء فواتير وسندات قبض فردية لكل نزيل). يمنع الموصل الجمع بين الوضعين لنفس الفترة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                يقضي على عشرات الآلاف من قيود الفواتير المتكررة التي كانت تثقل قاعدة بيانات أودو، مما يخفض حجم التخزين بنسبة تزيد عن 90% مع الحفاظ على توازن محاسبي محكم.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNC-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-gl">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">SYNC-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. هندسة الأستاذ العام</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            مطابقة تخطيط تقرير المدير (العربية والإنجليزية)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                توليد تبويب HTML تفاعلي ثنائي اللغة (<code>ezee_manager_layout_html</code>) داخل قيد اليومية في أودو، يطابق حرفياً أقسام تقرير المدير في إيزي: إيرادات الغرف، الإضافات، رسوم البلدية 2.5%، ضريبة 15%، المدفوعات، ذمم الشركات، وذمم النزلاء.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                تمكين المدراء الماليين ومدراء الفنادق من مراجعة الإيرادات اليومية في ثوانٍ دون الحاجة لتحليل مئات بنود المدين والدائن المعقدة، بمطابقة تامة مع تقارير إيزي المطبوعة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNC-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-gl">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">SYNC-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. هندسة الأستاذ العام</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            محرك ترحيل القيود اليومية المتوازنة متعددة الأطراف
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                خوارزمية تجميع محاسبي تصنف الحركات إلى أطراف مدينة متوازنة (مدى، فيزا، نقد، تحويل بنكي، تحويلات ذمم الشركات) وأطراف دائنة متوازنة (إيرادات الغرف، المغسلة، الكافيه، الضريبة، والرسوم الحكومية).
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                ضمان عدم حدوث أي قيد محاسبي غير متوازن على الإطلاق في دفاتر أودو، حيث يتطابق إجمالي المدين مع إجمالي الدائن بدقة متناهية حتى مستوى الهللة الواحدة قبل اعتماد القيد.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNC-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-gl">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">SYNC-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. هندسة الأستاذ العام</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            عزل الرسوم الحكومية (البلدية 2.5%) عن ضريبة القيمة المضافة 15%
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                محلل تصنيف ذكي (<code>manager_classification.py</code>) يفرز رسوم البلدية الفندقية (2.5%) عن ضريبة القيمة المضافة (15%) وعن إيرادات الغرف الأساسية، ويوجه كلاً منها لحساب التزامات أو إيرادات منفصل.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                الامتثال الكامل لمتطلبات هيئة الزكاة والضريبة والجمارك (ZATCA) ومنصة بلدي، ومنع تضخم الوعاء الضريبي لضريبة القيمة المضافة أو تشويه صافي إيرادات التشغيل الفندقي.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNC-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-gl">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">SYNC-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. هندسة الأستاذ العام</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            بند جبر كسور الهللات اليومي التلقائي
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                خوارزمية موازنة آلية تحسب الفروقات الحسابية الناتجة عن التقريب العشري لنسب الضرائب على مستوى كل نزيل (بين ±0.01 إلى ±0.05 ريال)، وترحل الفرق إلى حساب <em>تقريب إيزي اليومي</em>.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                تمنع توقف وفشل المزامنة اليومية بسبب قواعد أودو الصارمة التي ترفض ترحيل أي قيد بفارق هللة واحدة ناتجة عن تقريب الضريبة على مئات حركات الإقامة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNC-06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-gl">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">SYNC-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. هندسة الأستاذ العام</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            التحقق التلقائي من العملة الأساسية والعملات المتعددة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                قراءة عملة الفندق الأساسية (الريال السعودي SAR) تلقائياً من واجهة الربط عند المصادقة ومقارنتها بعملة الشركة المحددة في أودو للتأكد من التطابق التام.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                الحماية من أخطاء فروق العملات في حال تسجيل نزيل بعملة أجنبية، مما يضمن تقييم جميع الإيرادات بالعملة المحلية المعتمدة للمجموعة دون تشويه القوائم المالية.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== المحور 2: تفصيل ذمم الشركات ==================== -->
+
+      <!-- CITY-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-city">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CITY-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. ذمم الشركات</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            دفتر الأستاذ الفرعي لتفصيل ذمم الشركات
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                نموذج محاسبي تفصيلي مستقل (<code>pms.daily.summary.city.ledger.line</code>) مرتبط بقيد اليومية الملخص، يحفظ معرّف الشركة في إيزي، واسمها، والرقم الضريبي، واسم النزيل، ورقم الفوليو، ورقم الحركة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                حل المعادلة الصعبة: الحفاظ على قيد إجمالي مدمج ومريح للمدير المالي، مع إتاحة تقرير تفصيلي كامل بضغطة زر يوضح كل ريال تم ترحيله على كل شركة على حدة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITY-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-city">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CITY-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. ذمم الشركات</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            الربط المباشر مع دفتر أستاذ الشريك في أودو
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                ختم بنود قيد اليومية الرسمية لحساب ذمم الشركات بمعرّف الشريك المقابل في أودو، بحيث تتوزع حركات ذمم الشركات الإجمالية إلى أسطر محاسبية مسندة لكل شركة رسمياً.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                تشغيل تقارير كشف حساب الشريك وأعمار الديون القياسية في أودو بنجاح كامل ومطابقتها مع الشركات دون الحاجة لإصدار فواتير فردية مرهقة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITY-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-city">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CITY-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. ذمم الشركات</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            جسر دليل الشركاء الآلي بين إيزي وأودو
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                سحب بيانات الشركات من إعدادات إيزي (<code>CITY LEDGER</code>) إلى جدول <code>pms.company.mapping</code> وإنشاء أو تحديث جهات اتصال الشركات في أودو تلقائياً.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                التخلص تماماً من الإدخال اليدوي المزدوج لبيانات الشركات المتفق معها، وتجنب الأخطاء البشرية في كتابة الأسماء أو ربط الحسابات المدينة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITY-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-city">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CITY-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. ذمم الشركات</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            خوارزمية التعرف الشلالي الذكي على الشركات
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                منظومة مطابقة متعددة المستويات تطابق الشركة بالترتيب الصارم: الرقم الضريبي / السجل التجاري المكون من 15 رقماً $\rightarrow$ كود إيزي الفريد $\rightarrow$ الاسم القانوني للشركة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                منع تكرار فتح حسابات جديدة لنفس الشركة في أودو عند وجود اختلاف طفيف في كتابة الاسم عند الاستقبال (مثل "أرامكو السعودية" مقابل "شركة أرامكو").
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITY-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-city">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CITY-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. ذمم الشركات</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            اعتماد الأسماء المستعارة المعتمدة مالياً للشركات
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                خاصية <code>alias_approved</code> في ربط الشركات تسمح للإدارة المالية بربط عدة فروع أو مسميات تشغيلية في إيزي بشركة رئيسية واحدة في أودو دون الكتابة فوق بياناتها الرسمية.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                إصدار كشوف حساب موحدة لكبرى الشركات والمؤسسات التي تتعامل مع الفندق عبر فروع أو مشاريع متعددة مع الحفاظ على تفاصيل الحجز الفندقي لكل فرع.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITY-06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-city">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CITY-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. ذمم الشركات</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            سجل تشخيص ومعالجة ذمم الشركات غير المربوطة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                طبقة تشخيصية تسجل أسباب تعذر مطابقة أي شركة جديدة وردت في بيانات اليومية، مع حفظ كود إيزي والاسم الخام في سجل المزامنة بدقة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                تنبيه فريق المحاسبة فوراً عند قيام موظف الاستقبال بتسكين نزيل على حساب شركة جديدة لم تُربط بعد، مما يمكنهم من معالجتها دون تعطيل ترحيل اليومية.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== المحور 3: ذمم النزلاء والدفعات المقدمة ==================== -->
+
+      <!-- DEP-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-deposit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">DEP-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. ذمم النزلاء</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            قاعدة تسوية الدورة الكاملة للدفعات المقدمة في نفس اليوم
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                اكتشاف وقائع الدورة المكتملة (قبض دفعة مقدمة + استردادها + تحويلها لنفس الفوليو والتاريخ والمبلغ) وتسجيل الصافي في <code>ezee_advance_roundtrip_amount</code>.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                منع التضخم الوهمي لإجمالي المقبوضات والاستردادات في تقرير المدير مع الحفاظ الكامل على خطوط الأثر المالي في دفتر الأستاذ العام، مما يطابق تقرير إيزي بالضبط.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEP-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-deposit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">DEP-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. ذمم النزلاء</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            عزل الدفعات المقدمة المرحلة من فترات سابقة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                التمييز التلقائي بين تحويلات الدفعات المقدمة القادمة من رصيد افتتاحي سابق وبين مقبوضات اليوم نفسه، وحسابها في <code>ezee_advance_carry_forward_amount</code>.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                منع تكرار احتساب الدفعات المحصلة في أشهر سابقة عند مغادرة النزيل وتسوية حسابه، مما يحافظ على دقة رصيد ذمم النزلاء التراكمي.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEP-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-deposit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">DEP-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. ذمم النزلاء</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            محرك التصحيح التلقائي الرجعي للدفعات المقدمة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                إجراء ترحيل برمجي تلقائي (<code>_pms_backfill_advance_roundtrip_amounts_2026</code>) يعيد احتساب تسويات العرض لجميع قيود الملخص السابقة عبر كافة الفنادق فور تحديث النظام.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                تصحيح القوائم التاريخية لأشهر سابقة بلمح البصر دون الحاجة لإلغاء القيود أو إعادة المزامنة اليدوية المعقدة التي قد تربك الحسابات المقفلة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEP-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-deposit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">DEP-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. ذمم النزلاء</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            محرك تسوية ومطابقة الفوليو التفصيلي
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                نظام تسوية آلي مخصص لوضع الحركات التفصيلية (<code>cron_reconcile_by_booking</code>) يربط ويسوي سندات القبض مع فواتير الإقامة التي تحمل نفس رقم الحجز في إيزي.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                أتمتة إقفال فواتير النزلاء المغادرين في وضع التفاصيل، وتوفير ساعات عمل يومية كانت تضيع في مطابقة السندات مع الفواتير يدوياً في أودو.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEP-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-deposit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">DEP-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. ذمم النزلاء</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            عزل المصروفات المدفوعة والعمولات عن الإيرادات
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                خيار تحكم <code>summary_include_paid_outs</code> يفصل المبالغ النقدية المصروفة من صندوق الاستقبال (مصروفات نثرية، عمولات وسطاء، إكراميات) عن إيرادات التشغيل الفندقي.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                منع خفض إجمالي إيرادات الغرف بمصروفات تشغيلية نثرية خرجت من الصندوق، وتوجيه كل مصروف لحسابه المحاسبي الصحيح في شجرة الحسابات.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEP-06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-deposit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">DEP-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. ذمم النزلاء</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            فصل إيرادات الخدمات الإضافية وملحقات الإقامة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                فرز الخدمات الملحقة بفواتير النزلاء (مغسلة، كوفي شوب، إفطار، تلفيات، تسجيل خروج متأخر) وتوجيهها لحسابات إيرادات ومراكز تكلفة مستقلة عن إيراد الإقامة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                تزويد الإدارة العليا برؤية واضحة ومفصلة لربحية كل قسم تشغيلي في الفندق (الأغذية والمشروبات، المغسلة، الغرف) لتقييم كفاءة التشغيل ومعدل العائد لكل غرفة متاحة (RevPAR).
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== المحور 4: نقاط البيع والازدواجية ==================== -->
+
+      <!-- POS-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-pos">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">POS-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. نقاط البيع</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            محرك الملخص اليومي لمبيعات نقاط البيع
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                تجميع مبيعات المطاعم والمقاهي من نظام إيزي أوبتيمس في قيد يومية عام متوازن واحد لكل منفذ/يوم، مصنفة حسب حساب الإيراد، الضريبة، تسوية الإكراميات، وطريقة الدفع.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                استبدال آلاف إيصالات وجبات الطعام والقهوة بقيد محاسبي مدمج منظم، مما يحافظ على نظافة وسرعة دفاتر الحسابات في أودو.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POS-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-pos">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">POS-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. نقاط البيع</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            حاجز التعارض المطلق لمشتريات المطابخ
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                قاعدة منع تعارض صارمة: إذا وُجدت فواتير موردين تفصيلية لنطاق زمني معين يُمنع ترحيل مشتريات ملخصة، وإذا وُجد ملخص يُمنع ترحيل فواتير تفصيلية.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                منع تكرار تسجيل فواتير المواد الغذائية ومشتريات المطابخ مرتين، مما يحمي الفندق من سداد مستحقات الموردين بالخطأ أو تضخيم تكلفة المبيعات.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POS-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-pos">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">POS-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. نقاط البيع</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            حارس منع ازدواجية ترحيل الغرف (Room Posting Duplication Guard)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                فاحص آلي صارم يوقف مزامنة مبيعات نقاط البيع فوراً إذا كانت الشركة مرتبطة بفندق نشط ولم يتم تفعيل خيار <code>استبعاد ترحيلات الغرف من مبيعات نقاط البيع</code>.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                حماية مؤكدة ضد احتساب وجبات المطاعم المرحلة على غرف النزلاء مرتين (مرة في مبيعات المطعم ومرة في فاتورة غرفة النزيل في الاستقبال)، مما يمنع تضخيم الإيرادات بشكل خاطئ.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POS-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-pos">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">POS-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. نقاط البيع</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            محرك المقاصة لمطابقة تقرير المدير بين المطاعم والفنادق
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                وضع تكاملي متقدم يثبت إيراد المطعم في نقاط البيع ويجعل مدين ترحيل الغرف لحساب مقاصة الرأس 7، بينما يثبت نظام الفندق مدين ذمم النزلاء والدائن لحساب المقاصة نفسه.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                مطابقة رياضية تامة 100% مع تقرير المدير في إيزي، واعتماد نقاط البيع كمصدر وحيد لإيراد الأغذية مع بقاء ذمة النزيل دقيقة ومقيدة في نظام الفندق.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POS-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-pos">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">POS-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. نقاط البيع</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            المعالجة المحاسبية غير المتماثلة للمبيعات المجانية
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                منطق محاسبي دقيق: استبعاد فواتير <code>No Charge</code> الأصلية من الإيرادات، مع الإبقاء على قيمة فواتير المطعم التي تم إلغاؤها أو تصفيرها لاحقاً في استقبال الفندق كإيراد للمطعم.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                كشف أي تلاعب أو خصم غير معتمد يتم في الاستقبال على فواتير المطاعم المحولة للغرف، حيث يظهر الفارق المالي كإشارة تدقيق فورية في حساب المقاصة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POS-06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-pos">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">POS-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. نقاط البيع</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            معالج تدقيق ومطابقة ترحيلات الغرف المشتركة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                معالج تدقيق استقصائي (<code>ezee.optimus.room.posting.audit.wizard</code>) يقارن بيانات إيزي الخام مع قيود مقاصة المطاعم وقيود الفنادق، ويحدد أرقام الإيصالات غير المطابقة بدقة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                تقليص زمن التدقيق الشهري بين إدارة الأغذية وإدارة الإيواء من أيام إلى ضغطة زر واحدة، تكشف فوراً سبب أي فارق مالي على مستوى الإيصال المفرد.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== المحور 5: البيانات الأساسية ومسار الإعداد ==================== -->
+
+      <!-- SETUP-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-setup">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SETUP-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. مسار الإعداد</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            معالج مسار الإعداد الإلزامي المتسلسل (الفنادق والمطاعم)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                تسلسل خطوات إلزامي مبرمج في واجهات النظام: اختيار الوضع $\rightarrow$ اختبار الاتصال $\rightarrow$ سحب البيانات الأساسية $\rightarrow$ قواعد السندات $\rightarrow$ مزامنة الشركاء $\rightarrow$ الجاهزية للمزامنة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                منع مسؤولي النظام أو المحاسبين الجدد من بدء مزامنة الفنادق قبل اكتمال ربط الحسابات وتحديث دليل الشركات، مما يقضي تماماً على أخطاء القيود المعلقة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETUP-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-setup">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SETUP-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. مسار الإعداد</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            التحديث الديناميكي اللحظي لحالة الإعداد
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                إجراء إعادة تحميل تلقائي (<code>_setup_reload_action</code>) وتحديث حقول الإنجاز المحسوبة (<code>setup_next_step</code>) لتحديث مربعات الاختيار والأختام الزمنية فور اكتمال كل مرحلة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                تجربة مستخدم تفاعلية وسلسة ترشد المحاسب للخطوة التالية بوضوح دون الحاجة لتحديث صفحة المتصفح يدوياً بعد كل خطوة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETUP-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-setup">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SETUP-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. مسار الإعداد</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            ربط الحسابات ثنائي الطبقات مع التحليل المالي
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                هيكل ربط يجمع بين رؤوس حسابات إيزي الرئيسية (مثل الرأس 1 لإيراد الغرف، والرأس 10 لذمم الشركات) مع إمكانية التخصيص التفصيلي لكل بند وإسناد مراكز التكلفة التحليلية له.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                إتاحة ترحيل إيرادات منافذ معينة أو خدمات خاصة إلى مراكز تكلفة مستقلة بدقة، دون الحاجة لتعديل شجرة الحسابات العامة للفندق.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETUP-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-setup">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SETUP-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. مسار الإعداد</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            مصفوفة مراجعة قواعد السندات المولدة مسبقاً
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                إجراء <code>action_prepare_voucher_account_rules</code> يولد 28 سطراً مسبقاً يغطي كافة سيناريوهات الواجهات (المبيعات، الدفعات، المرتجعات، تحويلات الفوليو، عمولات الشركات).
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                توفير شاشة مراجعة شاملة للمدقق المالي توضح التوجيه المحاسبي الافتراضي لكل نوع سند فندقي، وتمنع المفاجآت أو التوجيهات غير المرغوبة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETUP-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-setup">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SETUP-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. مسار الإعداد</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            ربط دفاتر طرق الدفع البنكية والنقدية
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                إسناد طرق الدفع المسحوبة من إيزي (الرأس 6: مدى، فيزا، ماستر كارد، نقد، تحويل بنكي) إلى دفاتر يومية البنوك والصناديق الخاصة بالفندق في أودو.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                ضمان ترحيل أموال عمليات البطاقات الائتمانية وأجهزة نقاط البيع مباشرة لحسابات التسوية البنكية الصحيحة، مما يسهل المطابقة البنكية اليومية.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETUP-06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-setup">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SETUP-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. مسار الإعداد</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            ربط منافذ البيع المتعددة ومجموعات المخزون
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                نموذج استكشاف المنافذ (<code>ezee.optimus.outlet</code>) يربط منافذ البيع المختلفة (لاونج اللوبي، المطعم الرئيسي، خدمة الغرف، قاعة الاحتفالات) بحسابات الإيرادات المخصصة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                فصل إيرادات المشروبات والمقاهي عن مبيعات المطاعم والوجبات، وتمكين مدراء الأغذية والمشروبات من استخراج تقارير أرباح وخسائر مستقلة لكل منفذ.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== المحور 6: التدقيق الليلي والتنبيهات الآلية ==================== -->
+
+      <!-- CRON-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-night">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">CRON-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. التدقيق الليلي</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">
+            المزامنة الليلية المجدولة تلقائياً عند الواحدة ظهراً بتوقيت الرياض
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                جدولة تنفيذ دورية آلية في أودو (<code>ir_cron_pms_sync_all</code> و<code>ir_cron_ezee_optimus_daily</code>) تعمل يومياً عند الساعة 10:00 UTC (تمام الساعة 13:00 بتوقيت الرياض) لمزامنة اليوم السابق.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20">
+              <span class="font-bold text-rose-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                التوافق التام مع الدورة الفندقية الواقعية: ضمان إقفال جميع مغادرات الصباح وتسويات التدقيق الليلي في إيزي قبل أن يقوم أودو بسحب بيانات اليوم السابق وترحيلها.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRON-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-night">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">CRON-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. التدقيق الليلي</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">
+            تخزين تاريخ العمل الفندقي المؤقت مع فترة سماح 7 أيام
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                نظام ذاكرة مؤقتة لتاريخ العمل الفندقي بمدة صلاحية 15 دقيقة وفترة سماح تصل إلى 7 أيام، يجلب تاريخ العمل من واجهة تسجيل الدخول دون إعادة تعيين مسار الإعداد.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20">
+              <span class="font-bold text-rose-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                تقليل استهلاك اتصالات الربط مع سيرفرات إيزي مع منع مزامنة أيام عمل مفتوحة لم يقفلها الاستقبال بعد، مما يحمي الدفاتر من سحب بيانات غير مكتملة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRON-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-night">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">CRON-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. التدقيق الليلي</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">
+            التحديث الاستباقي الخفيف لدليل الشركات قبل المزامنة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                إجراء آلي سريع (<code>_scheduled_refresh_company_directory</code>) ينطلق لحظات قبل بدء المزامنة المالية المجدولة لفحص وجود أي شركات جديدة سُجلت خلال اليوم وإضافتها.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20">
+              <span class="font-bold text-rose-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                ضمان ربط جميع حجوزات الشركات المحولة أمس بشركاء معتمدين في أودو دون ظهور بنود ذمم شركات يتيمة غير منسوبة لشريك.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRON-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-night">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">CRON-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. التدقيق الليلي</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">
+            إشعارات البريد الإلكتروني الآلية لإدارة الشركة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                نظام تنبيهات بريدية آلي في <code>res.company</code> يرسل تقريراً بتنسيق HTML للمدراء الماليين وفريق التدقيق يوضح نتائج المزامنة والأرقام المعتمدة أو التحذيرات فور انتهائها.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20">
+              <span class="font-bold text-rose-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                اطمئنان القيادة المالية يومياً باكتمال ترحيل الإيرادات، والتنبيه الفوري لأي انقطاع في الاتصال أو استثناء محاسبي قبل بدء ساعات العمل الصباحية.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRON-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-night">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">CRON-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. التدقيق الليلي</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">
+            محرك التطهير الأمني وحجب المفاتيح السرية
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                منظومة فحص أمني برمجية (<code>_safe_issue</code>) تحجب مفاتيح المصادقة، والرموز السرية، وكلمات المرور من رسائل الأخطاء وسجلات النظام ورسائل البريد المرسلة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20">
+              <span class="font-bold text-rose-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                حماية المفاتيح الحساسة لربط أنظمة الفنادق من التسرب في رسائل البريد أو سجلات المتابعة العامة، بما يتوافق مع معايير أمن المعلومات والامتثال المالي.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRON-06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-night">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">CRON-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. التدقيق الليلي</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">
+            عامل المزامنة اليدوية غير المتزامنة والمقسمة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                طابور معالجة خلفي (<code>pms.manual.sync.run</code>) يقسم فترات المزامنة التاريخية الطويلة إلى شرائح زمنية صغيرة (المبيعات حد أقصى 7 أيام، والواجهات الأخرى 31 يوماً) تنفذ في الخلفية.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20">
+              <span class="font-bold text-rose-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                تمكين المحاسبين من مزامنة فترات تاريخية تصل لعدة أشهر دفعة واحدة دون مواجهة أخطاء انقطاع الاتصال (HTTP 504 Timeouts) ودون تجميد شاشات العمل.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== المحور 7: عزل الشركات المتعددة والحماية ==================== -->
+
+      <!-- SEC-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">SEC-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. أمان الشركات</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">
+            قواعد أمان وعزل بيانات الشركات الصارمة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                قواعد أمان مستوى السجل (<code>record_rules.xml</code>) في أودو تعزل سجلات الربط وبيانات الفنادق والقيود المحاسبية وتمنع الوصول إليها إلا لمستخدمي الشركة المحددة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-950/30 border border-teal-500/20">
+              <span class="font-bold text-teal-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                عزل كامل وسري للبيانات المالية بين فنادق المجموعة؛ بحيث لا يمكن لمحاسبي فندق سويس بلو جازان الاطلاع على حسابات أو إيرادات فندق سويس بلو جدة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEC-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">SEC-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. أمان الشركات</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">
+            استقلالية بيانات الاعتماد للفنادق الستة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                إدارة مستقلة لبيانات الدخول وأكواد الربط والدفاتر المحاسبية لكل فندق من فنادق المجموعة الستة (جدة، جازان، الزهراء، السامر، الرياض، الروضة).
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-950/30 border border-teal-500/20">
+              <span class="font-bold text-teal-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                إمكانية إضافة فندق جديد، أو إيقاف المزامنة مؤقتاً لأحد الفروع للصيانة دون أي تأثير على سير المزامنة اليومية لبقية فنادق المجموعة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEC-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">SEC-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. أمان الشركات</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">
+            حاجز استبعاد الكيانات غير الفندقية للمجموعة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                حظر برمجي قطعي مدمج في الشيفرة البرمجية يمنع المصانع الثلاثة (جرين وود، المصنع الوطني، وتصاميم الوطن) والشركة القابضة المختلطة من أي عمليات مزامنة فندقية.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-950/30 border border-teal-500/20">
+              <span class="font-bold text-teal-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                حماية شجرة حسابات المصانع والشركات الشقيقة من تسرب أي قيود فندقية إليها عن طريق الخطأ أثناء عمليات الربط أو التهيئة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEC-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">SEC-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. أمان الشركات</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">
+            التحكم في الوصول المبني على الأدوار الوظيفية (RBAC)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                مجموعات صلاحيات دقيقة تميز بين <em>مدير تكامل نظام الفنادق</em> والمستخدم العادي، وتحصر صلاحيات تعديل بيانات الاتصال وربط الحسابات بكبار الماليين.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-950/30 border border-teal-500/20">
+              <span class="font-bold text-teal-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                منع الموظفين غير المخولين من تغيير توجيه الحسابات أو تشغيل مزامنات عشوائية لفترات سابقة قد تؤثر على توازن الحسابات المعتمدة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEC-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">SEC-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. أمان الشركات</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">
+            القفل الأمني الصارم لمعالج حذف بيانات الاختبار
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                فحص آلي لاسم قاعدة البيانات (<code>_assert_staging_database</code>) مع اشتراط كتابة عبارة تأكيد نصية دقيقة (<code>DELETE STAGING DATA</code> أو <code>حذف بيانات الاختبار</code>).
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-950/30 border border-teal-500/20">
+              <span class="font-bold text-teal-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                حاجز حماية قطعي يمنع تشغيل أدوات تنظيف البيانات التجريبية على بيئة الإنتاج الحية نهائياً، مما يحمي سجلات الفنادق المحاسبية من أي حذف غير مقصود.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== المحور 8: التقارير والتعريب اللحظي ==================== -->
+
+      <!-- REP-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-report">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">REP-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. التقارير والتعريب</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            سند التدقيق المالي اليومي المطبوع بتنسيق أفقي (A4)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                تقرير PDF رسمي فاخر (<code>daily_summary_journal_print</code>) مصمم بتنسيق أفقي بالهوية الزمردية لمجموعة الوتد، بترويسة عربية إنجليزية وتفصيل كامل لذمم الشركات وتوازن القيد.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                إصدار سندات قيد رسمية معتمدة قابلة للتوقيع والأرشفة الورقية مع تقرير التدقيق الليلي لمدراء الفنادق والمراجعين الماليين الداخليين والخارجيين.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REP-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-report">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">REP-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. التقارير والتعريب</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            مركز التعريب والترجمة اللحظية المباشرة (24 منطقة تشغيلية)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                قاموس مصطلحات في قاعدة البيانات (<code>pms.translation.label</code>) يغطي 24 منطقة في النظام، يتيح تعديل وتخصيص المسميات العربية والإنجليزية فورياً دون الحاجة لتعديل البرمجيات.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                تمكين فريق المحاسبة من تعديل مسميات الحقول بما يتناسب مع المصطلحات الإدارية الداخلية للفنادق فوراً وبكل سهولة دون الحاجة لتدخل المبرمجين.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REP-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-report">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">REP-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. التقارير والتعريب</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            الأرشفة التقنية الدقيقة لبيانات الربط الخام (JSON/XML)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                حفظ دائم في <code>pms.sync.log</code> لكامل حزم البيانات الخام الصادرة والواردة من واجهات إيزي مع عرض منظم مرقم الأسطر لكل عملية مزامنة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                دليل تدقيقي وتقني قاطع يثبت بالضبط ما استلمه النظام من إيزي في أي يوم سابق، مما يحسم أي خلاف حول أسباب فروق الحسابات أو الحركات الملغاة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REP-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-report">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">REP-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. التقارير والتعريب</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            معالج البحث الاستقصائي داخل البيانات الخام
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                نافذة بحث تفاعلية (<code>pms.sync.log.payload.search.wizard</code>) تتيح البحث برقم الحركة الفندقية، أو اسم النزيل، أو رقم الفوليو، أو المبلغ داخل آلاف أسطر البيانات المؤرشفة.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                توفير ساعات من البحث والتدقيق اليدوي عند الرغبة في تتبع فاتورة نزيل معينة والتأكد من كيفية تسجيلها وترحيلها في القيود المحاسبية.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REP-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-report">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">REP-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. التقارير والتعريب</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            ملاحظات التدقيق المهيكلة وتصنيف مستويات الخطورة
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">ما هي هذه الميزة:</span>
+              <p class="text-slate-400 leading-relaxed">
+                سجل تدقيق مالي متخصص (<code>pms.sync.log.audit.note</code>) يسجل الفروقات المكتشفة مصنفة حسب الأهمية (معلومات، تحذير، خطأ)، مع حفظ المبلغ المتوقع والمبلغ الفعلي والقيد المرتبط.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">الفائدة التشغيلية الواقعية:</span>
+              <p class="text-slate-300 leading-relaxed">
+                تزويد لجان المراجعة والتدقيق الداخلي بسجل دائم وموثق لجميع الاستثناءات المحاسبية والإجراءات التصحيحية التي اتخذها النظام تلقائياً.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Empty Search State -->
+    <div id="no-results" class="hidden glass-card rounded-2xl p-12 text-center max-w-md mx-auto space-y-3">
+      <div class="w-12 h-12 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center mx-auto">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <h3 class="text-base font-bold text-white">لا توجد ميزات تطابق بحثك</h3>
+      <p class="text-xs text-slate-400">جرب البحث باسم حساب مختلف، أو امسح شريط البحث لإظهار كافة الميزات.</p>
+      <button onclick="clearSearch()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition">
+        إعادة ضبط البحث
+      </button>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="flex justify-center pt-8">
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-semibold text-slate-400 hover:text-white hover:border-slate-700 transition">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+        العودة للأعلى
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-16 border-t border-slate-800/80 py-8 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4">
+      <p>مجموعة الوتد · دليل ميزات نظام أوزو لموصل إيزي وأودو · بدعم من دبي في القاهرة</p>
+    </div>
+  </footer>
+
+  <!-- Spotlight & Filter Script -->
+  <script>
+    // Mouse Spotlight Effect
+    document.querySelectorAll('.spotlight-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    function filterFeatures() {
+      const items = document.querySelectorAll('.feature-item');
+      let visibleCount = 0;
+      const query = searchQuery.trim().toLowerCase();
+
+      items.forEach(item => {
+        const catMatch = currentCategory === 'all' || item.getAttribute('data-category') === currentCategory;
+        const textContent = item.textContent.toLowerCase();
+        const searchMatch = !query || textContent.includes(query);
+
+        if (catMatch && searchMatch) {
+          item.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      document.getElementById('visible-count').textContent = visibleCount;
+      const noResults = document.getElementById('no-results');
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+    }
+
+    function setCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      filterFeatures();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val;
+      const clearBtn = document.getElementById('clear-search');
+      if (val.trim()) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      filterFeatures();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('search-input');
+      input.value = '';
+      searchQuery = '';
+      document.getElementById('clear-search').classList.add('hidden');
+      setCategory('all', document.querySelector('.category-pill[data-cat="all"]'));
+      filterFeatures();
+    }
+
+    function scrollPillRail(amount) {
+      const rail = document.getElementById('category-rail');
+      rail.scrollBy({ left: amount, behavior: 'smooth' });
+    }
+
+    function updateRailScrollIndicators() {
+      const rail = document.getElementById('category-rail');
+      const leftBtn = document.getElementById('rail-scroll-left');
+      const rightBtn = document.getElementById('rail-scroll-right');
+      const fadeLeft = document.getElementById('rail-fade-left');
+      const fadeRight = document.getElementById('rail-fade-right');
+
+      const scrollLeft = rail.scrollLeft;
+      const maxScroll = Math.abs(rail.scrollWidth - rail.clientWidth);
+
+      // In RTL, scrollLeft can be negative or positive depending on browser implementation
+      if (Math.abs(scrollLeft) > 10) {
+        rightBtn.classList.remove('opacity-0', 'pointer-events-none');
+        fadeRight.classList.remove('opacity-0');
+      } else {
+        rightBtn.classList.add('opacity-0', 'pointer-events-none');
+        fadeRight.classList.add('opacity-0');
+      }
+
+      if (Math.abs(scrollLeft) < maxScroll - 10) {
+        leftBtn.classList.remove('opacity-0', 'pointer-events-none');
+        fadeLeft.classList.remove('opacity-0');
+      } else {
+        leftBtn.classList.add('opacity-0', 'pointer-events-none');
+        fadeLeft.classList.add('opacity-0');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', updateRailScrollIndicators);
+    window.addEventListener('resize', updateRailScrollIndicators);
+  </script>
+</body>
+</html>

@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Ozoo (eZee-Odoo Connector) — Standard Operating Procedures (SOPs) | WD Group</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.7); }
+
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-nav {
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.16), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    @keyframes modalBackdrop { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalDialog {
+      0% { opacity: 0; transform: scale(0.95) translateY(12px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-backdrop-anim { animation: modalBackdrop 0.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .modal-dialog-anim { animation: modalDialog 0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    .tab-btn.active {
+      background: rgba(79, 70, 229, 0.25);
+      border-color: rgba(99, 102, 241, 0.6);
+      color: #a5b4fc;
+    }
+  </style>
+</head>
+<body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-indigo-600 selection:text-white pb-20 relative">
+
+  <!-- Ambient Glow Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-20 -left-40 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]"></div>
+    <div class="ambient-orb-2 absolute top-1/3 -right-40 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <!-- STICKY HEADER -->
+  <header class="sticky top-0 z-50 glass-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3.5">
+        <a href="/manuals/wdgroup/ezeeodooconnector" class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-500 via-indigo-600 to-blue-800 flex items-center justify-center text-white font-black shadow-lg shadow-indigo-500/25 border border-indigo-400/40 hover:scale-105 transition-transform">
+          OZ
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white">OZOO CONNECTOR</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/30">
+              Operations SOPs
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            Standard Operating Procedures, Reconciliation Runbooks &amp; Financial Governance Protocols
+          </p>
+        </div>
+      </div>
+
+      <!-- Navigation & Language Links -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/manuals/wdgroup/ezeeodooconnector/features-en" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition">
+          Switch to Features →
+        </a>
+        <a href="/manuals/wdgroup/ezeeodooconnector/sops-ar" class="px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 text-xs font-bold font-['IBM_Plex_Sans_Arabic'] transition">
+          العربية (RTL)
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 space-y-8">
+    
+    <!-- Hero Banner -->
+    <div class="text-center max-w-3xl mx-auto space-y-3">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-xs font-semibold text-indigo-300 uppercase tracking-wider">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+        Step-by-Step Accounting Execution Manual
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+        Connector <span class="bg-gradient-to-r from-indigo-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent">Operations SOPs</span>
+      </h1>
+      <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+        Click any procedure to launch a focused modal detailing operational roles, step-by-step instructions, expected accounting entries, verification metrics, and risk mitigation protocols.
+      </p>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="glass-card rounded-2xl p-4 border border-slate-800/80 shadow-xl space-y-4">
+      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+        
+        <!-- Search Input -->
+        <div class="relative flex-1 max-w-md" id="sop-search-container">
+          <input 
+            type="text" 
+            id="sop-search"
+            placeholder="Search procedures by code, role, title, or keyword..."
+            oninput="handleSearch(this.value)"
+            class="w-full px-4 py-2.5 pl-10 rounded-xl bg-slate-900 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+          >
+          <svg class="w-4 h-4 text-slate-500 absolute left-3.5 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+        <div class="text-xs text-slate-400 font-mono flex items-center gap-2">
+          <span>Active Procedures:</span>
+          <span id="active-count" class="px-2 py-0.5 rounded-md bg-indigo-600/30 text-indigo-300 font-bold border border-indigo-500/40">20</span>
+        </div>
+
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar text-xs" id="filter-container">
+        <button onclick="setFilter('all')" class="tab-btn active px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition">
+          All Procedures (20)
+        </button>
+        <button onclick="setFilter('onboarding')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition">
+          1. Onboarding &amp; Setup (4)
+        </button>
+        <button onclick="setFilter('daily')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition">
+          2. Night Audit &amp; Daily Recon (4)
+        </button>
+        <button onclick="setFilter('city')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition">
+          3. City Ledger &amp; Corporate (3)
+        </button>
+        <button onclick="setFilter('pos')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition">
+          4. POS &amp; Duplication Guards (3)
+        </button>
+        <button onclick="setFilter('diagnostics')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition">
+          5. Diagnostics &amp; Forensic Audit (3)
+        </button>
+        <button onclick="setFilter('admin')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition">
+          6. Admin &amp; Localization (3)
+        </button>
+      </div>
+    </div>
+
+    <!-- SOP Cards Grid -->
+    <div id="sop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Injected by JavaScript -->
+    </div>
+
+  </main>
+
+  <!-- SOP MODAL DIALOG -->
+  <div id="modal-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md modal-backdrop-anim overflow-y-auto">
+    <div class="relative w-full max-w-3xl glass-card rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl modal-dialog-anim my-8 bg-slate-900/95 max-h-[90vh] flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-800 shrink-0">
+        <div>
+          <div class="flex items-center gap-2 mb-1.5">
+            <span id="modal-sop-code" class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"></span>
+            <span id="modal-sop-pillar" class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider"></span>
+            <span id="modal-sop-role" class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300"></span>
+          </div>
+          <h2 id="modal-sop-title" class="text-xl sm:text-2xl font-extrabold text-white leading-snug"></h2>
+        </div>
+        <button onclick="closeSopModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition shrink-0">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Modal Scrollable Body -->
+      <div class="overflow-y-auto py-5 space-y-6 pr-1 custom-scrollbar text-sm" id="modal-sop-content">
+        <!-- Injected by openSopModal() -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-4 border-t border-slate-800 flex items-center justify-between shrink-0 text-xs">
+        <span class="text-slate-400 font-mono">WD Group Standard Operating Procedure · Ozoo Connector v4.0</span>
+        <button onclick="closeSopModal()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition">
+          Done Reviewing
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SOPs Data & Script -->
+  <script>
+    const sopsData = [
+      {
+        id: "sop-01",
+        code: "SOP-OZO-01",
+        category: "onboarding",
+        pillarName: "1. Onboarding & Setup",
+        role: "Financial Controller / Implementation Engineer",
+        title: "Sequenced PMS Hotel Configuration & Connection Onboarding",
+        description: "Enforcing the linear 6-step setup workflow on pms.credentials to onboard a hotel property safely without incomplete master data.",
+        objective: "Establish an authenticated, validated API connection to eZee Absolute PMS and populate prerequisite accounts and partner directories before any financial transactions are synchronized.",
+        prerequisites: "1) Odoo System Administrator or PMS Integration Manager privileges. 2) Valid eZee Hotel Code and Auth Code. 3) Standard PMS journal (PMSD) created in Odoo for the target hotel.",
+        steps: [
+          "Navigate to eZee PMS Integration → Configuration → Hotels Configuration and open or create the target hotel record.",
+          "Select Sync Mode as 'Journal Daily Summary' (or 'Detailed Transactions' if folio-level invoices are explicitly required by executive approval).",
+          "Enter Hotel Code, Auth Code, Default PMS Journal, and Company. Verify the form fields, then click 'Test Connection'. Confirm connection success banner.",
+          "Click the newly unlocked button 'Pull Master Data'. The system fetches account headers, tax mappings, payment types, and the company directory from eZee.",
+          "Click 'Prepare Voucher Rules'. Review the 28 pre-populated voucher rule rows in the redirected view, ensuring default debit/credit accounts meet corporate accounting policy.",
+          "Click 'Create / Update Odoo Partners'. The system matches eZee city-ledger companies to Odoo res.partner records using the 15-digit VAT number, UnkID, and name waterfall.",
+          "Verify that 'Ready for Manual Sync' displays True with a green checkbox, indicating the hotel onboarding sequence is complete."
+        ],
+        entries: "No financial entries are posted during onboarding. Master data records are created in pms.account.mapping, pms.tax.mapping, pms.payment.mapping, and res.partner.",
+        verification: "Open Hotel Configuration and confirm: Connection Tested = True, Master Data Pulled = True, Voucher Rules Prepared = True, Partners Created = True, and Next Step displays 'Ready for Manual Sync'.",
+        caution: "Never click 'Pull Master Data' while a sync is actively running. Modifying sync mode after transactions exist is blocked by the system to prevent mixed accounting entries."
+      },
+      {
+        id: "sop-02",
+        code: "SOP-OZO-02",
+        category: "onboarding",
+        pillarName: "1. Onboarding & Setup",
+        role: "F&B Controller / Systems Administrator",
+        title: "POS Outlet Onboarding & Default Account Mapping (Optimus)",
+        description: "Configuring an eZee Optimus POS property, discovering dining outlets, creating default GL accounts, and enforcing room posting safeguards.",
+        objective: "Connect an eZee Optimus point-of-sale property to Odoo, pull dining outlets and inventory categories, and establish default accounting rules.",
+        prerequisites: "1) PMS Integration Manager role. 2) Optimus Company ID and Auth Code. 3) Company default POS sales journal.",
+        steps: [
+          "Navigate to eZee Optimus → Configuration → POS Configuration and open the company record.",
+          "Select Sales Sync Mode as 'Journal Daily Summary'. Ensure 'Exclude Room Postings from POS Sales' is checked.",
+          "Input the Optimus Company ID and Auth Code. Click 'Test Connection' and verify the success notification.",
+          "Click 'Pull Master Data'. The connector queries XERO_GET_OUTLET and imported account mappings, discovering outlets like Lobby Cafe and Restaurant.",
+          "Click 'Create/Update POS Accounts'. The system creates standard POS accounts (Sales Revenue, Output VAT, Tips Clearing, Room Posting Receivable) if missing.",
+          "Click 'Prepare Voucher Rules'. Review the default voucher scenarios for sales, room postings, and purchases.",
+          "Verify that 'Ready for Manual Sync' is marked True."
+        ],
+        entries: "Creates missing account.account records with codes 411001 (POS Revenue), 214001 (Output VAT), 121002 (Room Posting Receivable), and 214002 (Tips Clearing).",
+        verification: "Check the Outlets menu to verify all restaurant terminals appear active with mapped revenue accounts.",
+        caution: "Ensure 'Exclude Room Postings' remains enabled for any POS operating within a hotel property to prevent double-counting food and beverage revenue."
+      },
+      {
+        id: "sop-03",
+        code: "SOP-OZO-03",
+        category: "city",
+        pillarName: "3. City Ledger & Corporate",
+        role: "Credit Controller / Senior Accountant",
+        title: "Corporate Partner Directory Synchronization & VAT Verification",
+        description: "Auditing corporate accounts imported from eZee, verifying KSA VAT/CR numbers, and establishing clean partner links in Odoo.",
+        objective: "Ensure all corporate clients with City Ledger credit facilities are verified in Odoo with valid 15-digit ZATCA tax identification numbers.",
+        prerequisites: "1) Accountant role with contact edit permissions. 2) Pulled Master Data in PMS configuration.",
+        steps: [
+          "Navigate to eZee PMS Integration → Partner Directory → Company Mapping.",
+          "Filter by 'Missing VAT' using the custom search filter to isolate corporate accounts lacking tax registration numbers.",
+          "Cross-reference company records against commercial registration (CR) documents provided by corporate sales.",
+          "Input the verified 15-digit VAT number in the company mapping row and save.",
+          "Click 'Sync Directory Partners' to push updated tax IDs into the canonical Odoo res.partner master file.",
+          "Confirm that property_account_receivable_id is pointed to the dedicated City Ledger asset receivable account."
+        ],
+        entries: "Updates res.partner fields: vat, ezee_company_vat, ezee_company_unkid, and property_account_receivable_id.",
+        verification: "Run the Odoo Partner list view filtered by 'eZee City Ledger Company' and verify zero blank entries in the Tax ID column.",
+        caution: "Never manually merge two Odoo partners that have distinct eZee UnkIDs without using the finance-approved alias workflow (SOP-OZO-04)."
+      },
+      {
+        id: "sop-04",
+        code: "SOP-OZO-04",
+        category: "city",
+        pillarName: "3. City Ledger & Corporate",
+        role: "Financial Controller",
+        title: "Multi-Branch Corporate Partner Alias Approval",
+        description: "Mapping multiple operational eZee company variations to a single parent Odoo corporate partner without data loss.",
+        objective: "Consolidate credit balances and aged receivables for enterprise clients with multiple regional branch accounts in eZee into a single Odoo parent ledger.",
+        prerequisites: "1) Financial Controller approval. 2) Both branch mapping rows exist in pms.company.mapping.",
+        steps: [
+          "Open eZee PMS Integration → Partner Directory → Company Mapping.",
+          "Locate the secondary branch record (e.g., 'Saudi Aramco - Western Branch').",
+          "In the 'Linked Odoo Partner' field, select the canonical parent partner ('Saudi Aramco Head Office').",
+          "Toggle the 'Alias Approved' checkbox to True.",
+          "Click Save. The system flags this mapping row as a validated alias.",
+          "Verify that subsequent daily summary syncs stamp City Ledger journal lines with the canonical parent partner ID while preserving the branch name in the breakdown."
+        ],
+        entries: "Future daily summary city ledger lines stamp move_line.partner_id with the parent company ID while breakdown line retains raw branch text.",
+        verification: "Open Odoo Partner Ledger for the parent company and confirm movements from both branches appear consolidated under one credit balance.",
+        caution: "Do not approve aliases across legally distinct entities. Aliases must only be used for branches or divisions of the same registered tax entity."
+      },
+      {
+        id: "sop-05",
+        code: "SOP-OZO-05",
+        category: "daily",
+        pillarName: "2. Night Audit & Daily Recon",
+        role: "Night Auditor / Morning Accountant",
+        title: "Daily Automated Night Audit Sync Verification (1:00 PM AST)",
+        description: "Standard morning review protocol verifying that the automated 13:00 AST cron job executed cleanly for yesterday's hotel operations.",
+        objective: "Confirm that yesterday's revenue, guest ledger, city ledger, and settlement movements synchronized accurately into Odoo accounting.",
+        prerequisites: "1) General Ledger user access. 2) Official eZee Absolute General Manager Report for yesterday.",
+        steps: [
+          "Log into Odoo at 13:15 AST (following the 13:00 AST scheduled cron execution).",
+          "Navigate to Accounting → Accounting → Miscellaneous Operations (PMS Daily Summary Journal).",
+          "Filter by Date = Yesterday and verify a posted journal entry with reference prefix 'DSUM-YYYY-MM-DD' exists for each hotel.",
+          "Open the journal entry and click the 'Manager Layout' tab.",
+          "Compare the figures in the 'Today' column against yesterday's printed eZee Manager Report: Room Charges, Municipality 2.5%, VAT 15%, and Payments.",
+          "Confirm the entry state is 'Posted' and total debits equal total credits.",
+          "Check your email inbox for the automated 'PMS Daily Sync Success' report."
+        ],
+        entries: "Posted entry in PMS Daily Summary journal (e.g. PMSD 65). Debits: Cash/Bank, City Ledger. Credits: Room Revenue, Extra Charges, VAT, Municipality Fees.",
+        verification: "The Manager Layout HTML totals must match the eZee Manager Report within ±0.05 SAR (rounding halalas).",
+        caution: "If the scheduled entry is missing, check the Sync Logs menu immediately before attempting a manual sync to avoid duplicate runs."
+      },
+      {
+        id: "sop-06",
+        code: "SOP-OZO-06",
+        category: "daily",
+        pillarName: "2. Night Audit & Daily Recon",
+        role: "Hotel Chief Accountant",
+        title: "General Manager Report Daily Reconciliation Protocol",
+        description: "Formal reconciliation routine comparing the in-system Manager Layout tab against operational PMS cash drawers and settlement logs.",
+        objective: "Formally validate all 7 revenue and settlement sections of the daily journal entry before closing the daily audit file.",
+        prerequisites: "1) Posted DSUM entry in Odoo. 2) Signed cashier shift closure reports.",
+        steps: [
+          "Open the posted DSUM entry for the target hotel and date in Odoo.",
+          "Inspect Section 1 (Room Charges): Verify Room Charges + No Show Revenue + Cancellation Revenue match gross room sales.",
+          "Inspect Section 2 (Extra Charges): Cross-reference laundry, coffee shop, and breakfast totals against departmental tickets.",
+          "Inspect Section 3 (Taxes & Fees): Verify Municipality Fee equals 2.5% of net lodging and VAT equals 15% of taxable supplies.",
+          "Inspect Section 4 (Payments): Verify MADA, Visa, and Cash payments equal POS terminal batch closeout slips and physical bank deposit slips.",
+          "Inspect Section 5 (City Ledger): Check 'Charges Raised' and 'Payment Received' against corporate invoicing requests.",
+          "Inspect Section 6 (Guest Ledger): Verify Guest Ledger Closing Balance equals opening balance plus charges minus settlements.",
+          "Sign the printed audit voucher and file in the Daily Revenue Audit binder."
+        ],
+        entries: "Audit sign-off on posted entry. No new journal entries created unless an adjustment voucher is required for manual cashier shortages.",
+        verification: "Total Net Revenue + Total Tax + Total Fees strictly equals Total Payments + Total City Ledger + Total Net Advance.",
+        caution: "Never modify a posted daily summary journal entry directly in Odoo without creating an explicit reversal or adjustment entry."
+      },
+      {
+        id: "sop-07",
+        code: "SOP-OZO-07",
+        category: "city",
+        pillarName: "3. City Ledger & Corporate",
+        role: "Accounts Receivable Accountant",
+        title: "City Ledger Breakdown & Sub-Ledger Verification",
+        description: "Drilling into transactional company lines behind summary entries to reconcile company balances and resolve discrepancies.",
+        objective: "Audit individual corporate debts and settlement transactions supporting the daily summary journal entry.",
+        prerequisites: "1) Posted DSUM journal entry. 2) eZee City Ledger Detailed Transfer report.",
+        steps: [
+          "Open the target DSUM journal entry in Odoo.",
+          "Click the 'City Ledger Breakdown' tab.",
+          "Review the sub-ledger table: verify company names, eZee transaction IDs, folio numbers, and debit/credit amounts.",
+          "Alternatively, navigate to eZee PMS Integration → Financial Reports → City Ledger Breakdown for a multi-hotel pivot view.",
+          "Group the view by 'Company' and 'Movement Type' (Transfers, Receipts, Refunds).",
+          "Confirm that every line with a company debt has a valid Odoo partner linked in the 'Partner' column.",
+          "If any row shows an unlinked partner, record the eZee UnkID and execute SOP-OZO-03 to resolve."
+        ],
+        entries: "Lines in pms.daily.summary.city.ledger.line reflecting Dr City Ledger (Transfers) or Cr City Ledger (Receipts).",
+        verification: "Sum of breakdown line balances strictly equals the net City Ledger movement on the parent journal entry.",
+        caution: "Breakdown rows are cascade-deleted if the parent journal entry is unlinked during authorized staging testing."
+      },
+      {
+        id: "sop-08",
+        code: "SOP-OZO-08",
+        category: "daily",
+        pillarName: "2. Night Audit & Daily Recon",
+        role: "Senior Hotel Accountant",
+        title: "Advance Deposit Round-Trip Detection & Presentation Audit",
+        description: "Verifying that circular advance deposits, refunds, and transfers on the same date are cleanly netted in presentation.",
+        objective: "Confirm that same-day deposit cancellations do not inflate gross revenue or guest ledger turnover figures.",
+        prerequisites: "1) DSUM journal entry containing advance deposit movements.",
+        steps: [
+          "Open the DSUM entry and inspect the field 'eZee Advance Round-Trip Adjustment' (ezee_advance_roundtrip_amount).",
+          "If the field is greater than 0.00 SAR, an advance deposit round-trip occurred on that date.",
+          "Click the 'Manager Layout' tab and inspect the Advance Deposit section.",
+          "Confirm that 'Advance Deposit Collected' and 'Advance Deposit Refund' presentation rows display net amounts after subtracting the round-trip value.",
+          "Switch to the 'Journal Items' tab and verify that the raw debit and credit lines on the Advance Deposit account remain intact for audit trail integrity.",
+          "Cross-reference the folio number from the raw payload search wizard to confirm the customer deposit was refunded prior to check-in."
+        ],
+        entries: "Raw move lines retain Dr Bank / Cr Advance Deposit and Dr Advance Deposit / Cr Bank. Manager layout nets out roundtrip value.",
+        verification: "Manager report advance deposit collected equals raw receipts minus ezee_advance_roundtrip_amount.",
+        caution: "Do not attempt to delete the raw journal items. The presentation rule is designed to preserve full accounting audit trails while matching report views."
+      },
+      {
+        id: "sop-09",
+        code: "SOP-OZO-09",
+        category: "pos",
+        pillarName: "4. POS & Duplication Guards",
+        role: "Financial Controller / F&B Accountant",
+        title: "Resolving POS Room Posting Duplication Guard Blockers",
+        description: "Triaging and resolving synchronization halts caused by active PMS configurations when room postings are detected.",
+        objective: "Safely unblock POS synchronization while ensuring dining room charges are not counted in both PMS and POS ledgers.",
+        prerequisites: "1) Sync failure log indicating 'Room Posting Duplication Guard Triggered'. 2) PMS Integration Manager role.",
+        steps: [
+          "Navigate to eZee Optimus → Logs → Sync Logs and identify the failed sales synchronization run.",
+          "Verify the error message: 'Room postings must be excluded from POS sales when PMS daily summary is active'.",
+          "Open eZee Optimus → Configuration → POS Configuration for the affected hotel company.",
+          "Confirm that the matching hotel has an active PMS Configuration in Journal Daily Summary mode.",
+          "Check the box 'Exclude Room Postings from POS Sales' on the POS configuration form and save.",
+          "Re-open eZee Optimus → Sync → Manual Sync, select yesterday's date, and click 'Sync Sales Data'.",
+          "Verify that the sync completes successfully and room charges are omitted from POS revenue."
+        ],
+        entries: "POS summary entry books only non-room sales (Cash, MADA, Credit Card). Room postings flow exclusively through PMS guest folios.",
+        verification: "Confirm the new POS summary journal entry contains zero debits to POS Room Posting Receivable.",
+        caution: "Never uncheck 'Exclude Room Postings' on a POS configuration connected to a live PMS hotel unless specifically implementing Manager Parity Mode (Header 7)."
+      },
+      {
+        id: "sop-10",
+        code: "SOP-OZO-10",
+        category: "pos",
+        pillarName: "4. POS & Duplication Guards",
+        role: "Internal Auditor / Financial Controller",
+        title: "Cross-System Room Posting Clearing Audit (Wizard Execution)",
+        description: "Running the forensic audit wizard to reconcile POS room postings against PMS clearing credits and locate missing receipts.",
+        objective: "Identify and resolve discrepancies between dining bills sent from restaurant POS terminals and guest charges billed on PMS room folios.",
+        prerequisites: "1) Manager Parity Mode enabled OR historical raw sales payloads stored. 2) Auditor role.",
+        steps: [
+          "Navigate to eZee Optimus → Wizards → Room Posting Audit Wizard.",
+          "Select the target POS Configuration and date range (e.g. past 7 days).",
+          "Click 'Run Audit'. The wizard fetches raw POS sales data and compares it against posted clearing move lines.",
+          "Inspect the 'Summary' banner: check if 'Duplication Risk' or 'Clearing Exception' flags are raised.",
+          "Review the audit lines: examine the status column for each date ('OK Cleared', 'Clearing Difference', 'Missing PMS Clearing').",
+          "For any row marked 'Clearing Difference', review the 'Likely Unmatched POS Receipts' column displaying exact receipt IDs.",
+          "Cross-reference those receipt IDs in eZee Absolute to verify if a receptionist voided or discounted the dining charge on the guest folio.",
+          "Post an adjustment entry for legitimate discounts or pursue staff investigation for unauthorized folio voiding."
+        ],
+        entries: "Audit wizard is transient; generates no ledger writes. Identified adjustments are booked manually via miscellaneous journal entry.",
+        verification: "All audited days achieve 'OK Cleared' status with difference equal to 0.00 SAR.",
+        caution: "Do not automate clearing reconciliation for discrepancies exceeding 0.05 SAR. Residual differences always indicate real operational cashier variances."
+      },
+      {
+        id: "sop-11",
+        code: "SOP-OZO-11",
+        category: "pos",
+        pillarName: "4. POS & Duplication Guards",
+        role: "Cost Controller / F&B Accountant",
+        title: "POS Kitchen Purchases Daily Summary Reconciliation",
+        description: "Managing daily kitchen inventory purchases in summary mode while enforcing mutual exclusivity against vendor bills.",
+        objective: "Reconcile daily F&B raw material purchases into general ledger expense accounts without creating duplicate vendor payables.",
+        prerequisites: "1) POS Configuration set to Journal Daily Summary. 2) Daily kitchen receiving vouchers.",
+        steps: [
+          "Collect all verified kitchen delivery notes and vegetable/meat purchase vouchers for the day.",
+          "Confirm that no detailed Odoo vendor bills (in_invoice) have been manually entered for these receipts in the same date range.",
+          "Navigate to eZee Optimus → Sync → Manual Sync, check 'Sync Purchases Data', and execute for the target date.",
+          "Open Accounting → Journal Entries and inspect the posted 'EZEEPOS-PUR-DSUM' entry.",
+          "Verify that Dr Kitchen Expense (Account 511001) equals the total cost of received supplies.",
+          "Verify that Dr Input VAT (Account 115001) equals the 15% deductible tax on vendor tax invoices.",
+          "Verify that Cr Vendor Payable (Account 211001) equals the total cash/credit supplier settlement.",
+          "Attach physical delivery notes to the printed journal entry voucher."
+        ],
+        entries: "Dr 511001 POS Purchase Expense, Dr 115001 Input VAT 15%, Cr 211001 Vendor Payable / Cash Clearing.",
+        verification: "Total debits in the purchase summary entry match the total receiving log from the executive chef.",
+        caution: "If an accountant previously entered a manual vendor bill for a supplier, summary sync will be blocked. Remove the manual draft bill first."
+      },
+      {
+        id: "sop-12",
+        code: "SOP-OZO-12",
+        category: "onboarding",
+        pillarName: "1. Onboarding & Setup",
+        role: "Senior Accountant / Auditor",
+        title: "Voucher Rules Review & Default Accounting Overrides",
+        description: "Configuring custom debit and credit account routing for specific operational scenarios such as agent commissions and paid-outs.",
+        objective: "Override default connector account mappings for specific transaction types without modifying core Python source code.",
+        prerequisites: "1) Voucher rules prepared via Setup Wizard. 2) PMS Integration Manager role.",
+        steps: [
+          "Navigate to eZee PMS Integration → Configuration → Voucher Rules.",
+          "Filter by Hotel and group by 'API Type' (Sales, Receipt, Payment, Journal, Daily Summary).",
+          "Locate the specific transaction scenario requiring customization (e.g. API: Journal, Voucher: Cityledger Commission).",
+          "Open the rule form and inspect the 'Connector Default' preview.",
+          "In the 'Debit Account Override' field, select the custom expense account (e.g. 522001 Travel Agency Commission Expense).",
+          "Leave 'Credit Account Override' empty if the default guest ledger clearing credit should be maintained.",
+          "Save the rule. Future daily summary entries will route commission debits directly to the specified account.",
+          "Test by reviewing the next scheduled sync entry to verify the new account appears on the commission line."
+        ],
+        entries: "Future journal entries replace default posting accounts with the specified override accounts on matching transaction lines.",
+        verification: "Open next DSUM entry and confirm Dr Commission Expense is posted to 522001 instead of the general expense pool.",
+        caution: "Do not assign balance sheet asset accounts to expense voucher types. Overrides take immediate effect on all subsequent synchronizations."
+      },
+      {
+        id: "sop-13",
+        code: "SOP-OZO-13",
+        category: "onboarding",
+        pillarName: "1. Onboarding & Setup",
+        role: "Management Accountant / Cost Analyst",
+        title: "Analytic Cost Center Mapping for Outlets & Charge Codes",
+        description: "Assigning Odoo analytic distribution accounts to specific hotel departments, dining outlets, and ancillary charge codes.",
+        objective: "Enable granular departmental P&L reporting across rooms, banquet halls, cafes, and laundry operations.",
+        prerequisites: "1) Chart of Analytic Accounts configured in Odoo. 2) Account Mapping master data pulled.",
+        steps: [
+          "Navigate to eZee PMS Integration → Configuration → Account Mapping.",
+          "Select the hotel property and open the relevant Header mapping (e.g. Header 1: Revenue).",
+          "In the 'Mapping Lines' tab, locate the specific charge code (e.g. 'Coffee Shop Revenue').",
+          "In the 'Analytic Account' column, select the matching cost center (e.g. 'CC-102 F&B Operations').",
+          "Repeat for laundry charge codes, assigning them to 'CC-103 Housekeeping & Laundry'.",
+          "Save the mapping form.",
+          "Confirm that subsequent daily summary journal items automatically tag the analytic account on revenue credit lines."
+        ],
+        entries: "Adds analytic_distribution dictionary on matching account.move.line records during daily summary generation.",
+        verification: "Open Accounting → Reporting → Analytic Report and verify revenue figures populate under the respective cost centers.",
+        caution: "Ensure analytic accounts belong to the same legal company as the hotel property; cross-company analytic tagging will cause validation errors."
+      },
+      {
+        id: "sop-14",
+        code: "SOP-OZO-14",
+        category: "diagnostics",
+        pillarName: "5. Diagnostics & Forensic Audit",
+        role: "Hotel IT Administrator / Night Auditor",
+        title: "Stale Working Date Recovery & Manual Refresh Protocol",
+        description: "Diagnosing and resolving 'Stale value - refresh from eZee' status warnings without disrupting the hotel setup progression.",
+        objective: "Force a real-time working date refresh against the eZee authentication API when front desk audit cycles change dates.",
+        prerequisites: "1) Active hotel configuration. 2) Stored username and password on pms.credentials.",
+        steps: [
+          "Open eZee PMS Integration → Configuration → Hotels Configuration.",
+          "Inspect the 'Working Date Status' field. If it displays 'Stale value - refresh from eZee', the cached date exceeds 7 days.",
+          "Verify that valid Username and Password credentials exist on the hotel form (Auth Code alone cannot query working date).",
+          "Click the action button 'Refresh Working Date' in the form header.",
+          "The system calls the eZee login endpoint with force=True, bypassing the 15-minute TTL cache.",
+          "Verify the success notification banner: 'Working date refreshed from eZee: [Old Date] -> [New Date]'.",
+          "Confirm that 'Working Date Status' updates to 'Fresh from eZee' and setup checklist checkboxes remain intact."
+        ],
+        entries: "Updates working_date, working_date_last_checked_at, and working_date_refresh_message on pms.credentials. No ledger writes.",
+        verification: "Working Date field matches the current business date displayed on the physical eZee Absolute front desk terminal.",
+        caution: "Do not re-click 'Test Connection' to refresh dates; testing connection resets subsequent setup milestones. Use 'Refresh Working Date'."
+      },
+      {
+        id: "sop-15",
+        code: "SOP-OZO-15",
+        category: "daily",
+        pillarName: "2. Night Audit & Daily Recon",
+        role: "Chief Accountant / Financial Controller",
+        title: "Historical Period Backfill Execution (Chunked Worker)",
+        description: "Safely replaying historical accounting periods using the asynchronous background manual sync queue worker.",
+        objective: "Synchronize past weeks or months of unposted hotel transactions without triggering web server timeouts or database deadlocks.",
+        prerequisites: "1) Hotel configuration in 'Ready for Manual Sync' state. 2) Executive approval for the target date range.",
+        steps: [
+          "Navigate to eZee PMS Integration → Sync → Manual Sync.",
+          "Select the target hotel property. Specify From Date (e.g. 2026-06-01) and To Date (e.g. 2026-06-30).",
+          "Check the required API feeds: Sales, Receipts, Payments, Journals, and Incidentals.",
+          "Click 'Queue Manual Sync'. The system creates a pms.manual.sync.run record in 'Queued' state and returns immediately.",
+          "Navigate to eZee PMS Integration → Sync → Sync Runs to monitor the background worker.",
+          "The worker automatically breaks the 30-day range into 7-day sales chunks and 31-day financial chunks.",
+          "Observe the progress bar advance from 0% to 100% as done_steps increments.",
+          "Upon completion, verify the status displays 'Done' (or 'Done with Warnings') and inspect the generated daily entries."
+        ],
+        entries: "Generates one DSUM entry per calendar day in the selected date range. All entries are posted and balanced.",
+        verification: "Check Accounting → Journal Entries for the date range: exactly 30 balanced journal entries exist matching each day's manager report.",
+        caution: "Never run two historical backfills concurrently for the same hotel company. Wait for the active worker to reach 'Done' state."
+      },
+      {
+        id: "sop-16",
+        code: "SOP-OZO-16",
+        category: "diagnostics",
+        pillarName: "5. Diagnostics & Forensic Audit",
+        role: "Chief Accountant / Systems Administrator",
+        title: "Automated Sync Notification Email Diagnostics & Triaging",
+        description: "Interpreting automated HTML failure notifications, analyzing error stages, and executing corrective recovery steps.",
+        objective: "Quickly diagnose and resolve automated night audit synchronization warnings or failures delivered via email.",
+        prerequisites: "1) Received automated email with subject containing '[WARNING]' or '[FAILED]'. 2) Odoo access.",
+        steps: [
+          "Open the automated notification email. Locate the 'Failure & Warning Details' summary table.",
+          "Identify the failure metadata: Date, API Source (Sales/Receipt/Payment), Stage (Connection/Parsing/Posting), and Severity.",
+          "Inspect the 'Reason' field (passwords and API keys will be safely displayed as [REDACTED]).",
+          "If the error states 'Missing Account Mapping for Header X', navigate to Account Mapping and assign the missing GL account.",
+          "If the error states 'Connection timeout', verify the hotel's internet connectivity and eZee cloud API service availability.",
+          "Log into Odoo, open eZee PMS Integration → Logs → Sync Logs, and filter by Status = 'Failed'.",
+          "Once the root cause is resolved, navigate to Manual Sync and re-run synchronization for the single affected date."
+        ],
+        entries: "Corrective sync generates the missing daily summary journal entry for the failed date upon resolution.",
+        verification: "A follow-up email is delivered with subject prefix '[SUCCESS]' and zero items in the Failure Details table.",
+        caution: "Do not ignore 'Warning' emails; warnings typically indicate unmapped corporate partners that will cause aged receivable imbalances."
+      },
+      {
+        id: "sop-17",
+        code: "SOP-OZO-17",
+        category: "diagnostics",
+        pillarName: "5. Diagnostics & Forensic Audit",
+        role: "Internal Auditor / Technical Support",
+        title: "Forensic API Payload Inspection & Payload Search Wizard",
+        description: "Querying archived raw JSON/XML API payloads to trace specific guest transactions, room rates, or payment authorizations.",
+        objective: "Inspect the verbatim payload received from eZee on any given calendar date to settle guest billing disputes or audit queries.",
+        prerequisites: "1) Internal Auditor or Administrator privileges. 2) Target Transaction ID, Folio Number, or Date.",
+        steps: [
+          "Navigate to eZee PMS Integration → Logs → Sync Logs.",
+          "Locate the log record for the target hotel, API type (e.g. Sales), and date. Open the record.",
+          "Click the 'Formatted Response Payload' tab to view the syntax-highlighted JSON/XML structure with line numbers.",
+          "To search within the payload, click the action button 'Search Payload' in the form header.",
+          "In the search wizard, enter the search term (e.g. Folio Number 'F-10294' or Guest Name 'Al-Otaibi').",
+          "Select Scope as 'Response Payload' (or 'Both') and click 'Search'.",
+          "The wizard highlights the exact line numbers and matching data segments containing the query term.",
+          "Extract the raw transaction timestamp and rate breakdown for audit file documentation."
+        ],
+        entries: "Read-only forensic inspection. Generates an audit note in pms.sync.log.audit.note if the user flags a discrepancy.",
+        verification: "The searched folio number is located and confirms whether eZee transmitted the charge as room revenue or an extra charge.",
+        caution: "Raw payloads are confidential and contain guest names and folio details; ensure exports comply with data privacy policies."
+      },
+      {
+        id: "sop-18",
+        code: "SOP-OZO-18",
+        category: "admin",
+        pillarName: "6. Admin & Localization",
+        role: "Hotel Chief Accountant / Financial Controller",
+        title: "Generating & Printing Daily Summary Journal Vouchers",
+        description: "Printing official A4 Landscape bilingual daily summary audit vouchers formatted with corporate branding for executive sign-off.",
+        objective: "Produce physical, signed accounting vouchers documenting daily revenue, tax obligations, and bank settlement proofs.",
+        prerequisites: "1) Posted DSUM journal entry. 2) PDF viewer / printer access.",
+        steps: [
+          "Navigate to Accounting → Accounting → Miscellaneous Operations and select the posted DSUM entry for the hotel.",
+          "Click the 'Print' dropdown menu in the top action bar.",
+          "Select 'Print Journal Entry' (Action: action_report_journal_entry_direct).",
+          "The system compiles the QWeb template daily_summary_journal_print.report_move_lines in A4 Landscape format.",
+          "Verify the document header: Company Name, Hotel Code, Date, PMS Journal Reference, and WD Group emerald styling.",
+          "Review the summary lines: debit and credit columns must be balanced with zero net variance.",
+          "Verify the attached 'City Ledger Breakdown' table at the bottom of the voucher listing all corporate debits.",
+          "Send the generated PDF to the printer, obtain Chief Accountant and General Manager signatures, and archive."
+        ],
+        entries: "Generates transient print wizard record in watan.journal.print.wizard; no ledger modifications.",
+        verification: "Printed document displays balanced totals matching both Odoo GL and the physical bank terminal settlement report.",
+        caution: "Always ensure the user language is set appropriately (Arabic or English) before printing; the voucher dynamically formats headers based on user language."
+      },
+      {
+        id: "sop-19",
+        code: "SOP-OZO-19",
+        category: "admin",
+        pillarName: "6. Admin & Localization",
+        role: "Financial Controller / System Administrator",
+        title: "Runtime Terminology Localization via Translation Center",
+        description: "Updating English and Arabic user interface labels across 24 operational areas directly inside the live Odoo database.",
+        objective: "Customize technical terminology and report headers to match specific hotel operational vernacular without restarting servers.",
+        prerequisites: "1) Administration / Settings privileges. 2) Translation Center menu access.",
+        steps: [
+          "Navigate to eZee PMS Integration → Configuration → Translation Center.",
+          "Filter by 'Page / Area' (e.g. 'Financial Reports' or 'Voucher Rules').",
+          "Search for the specific label requiring adjustment (e.g. English: 'City Ledger Breakdown').",
+          "Open the translation record. Inspect the fields 'Source Term (EN)' and 'Translation (AR)'.",
+          "Update the Arabic translation text (e.g. change 'تفصيل ذمم الشركات' to 'كشف حساب الشركات المدينة').",
+          "Click Save. The translation cache invalidates immediately across the active database.",
+          "Refresh the target financial report view to verify the updated Arabic terminology is live."
+        ],
+        entries: "Updates pms.translation.label records and syncs ir.translation system entries. No accounting ledger impact.",
+        verification: "Open the target menu in Arabic language context and confirm the new customized label renders properly.",
+        caution: "Do not modify the 'Key' or 'Technical Code' fields. Only edit the human-readable English and Arabic translation strings."
+      },
+      {
+        id: "sop-20",
+        code: "SOP-OZO-20",
+        category: "admin",
+        pillarName: "6. Admin & Localization",
+        role: "Database Administrator / Lead Systems Engineer",
+        title: "Safe Staging Cleanup & Test Data Purge Protocol",
+        description: "Executing controlled test data deletion in non-production staging environments with strict air-gap protection.",
+        objective: "Purge test synchronizations and generated dummy accounting entries from staging databases prior to user acceptance testing.",
+        prerequisites: "1) Explicit written approval from the Project Owner. 2) Odoo.sh STAGING environment ONLY (hard-blocked on production).",
+        steps: [
+          "Log into the verified Odoo.sh STAGING environment URL (e.g. watandesignsgroupksa-stage-*.dev.odoo.com).",
+          "Navigate to eZee Staging Cleanup → Wizards → Staging Cleanup Wizard.",
+          "Select Source: 'eZee Absolute (PMS)', 'eZee Optimus (POS)', or 'Both'.",
+          "Select the target test hotel property. Specify the exact Date From and Date To of test records to remove.",
+          "Select cleanup options: Delete Journal Entries, Delete Payments, Delete Invoices, and Delete Test Customers.",
+          "Click 'Preview Cleanup Scope'. Review the record count table verifying no production data is included.",
+          "In the 'Confirmation Text' field, type the exact required safety string: 'DELETE STAGING DATA' (or 'حذف بيانات الاختبار').",
+          "Click 'Execute Cleanup'. The system purges records in batches of 25 with rollback savepoints.",
+          "Review the generated cleanup log in Staging Cleanup → Logs to verify zero residual test entries."
+        ],
+        entries: "Permanently deletes selected test moves, payments, and contacts in the staging database only.",
+        verification: "The wizard verifies _assert_staging_database passes and the confirmation text matches. All targeted test moves are removed.",
+        caution: "NEVER attempt to bypass the staging database assertion check. This wizard is permanently prohibited from execution on production databases."
+      }
+    ];
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    // Render SOP Cards Grid
+    function renderSOPs() {
+      const grid = document.getElementById('sop-grid');
+      grid.innerHTML = '';
+
+      const filtered = sopsData.filter(sop => {
+        const matchesCat = currentFilter === 'all' || sop.category === currentFilter;
+        const q = searchQuery.trim().toLowerCase();
+        const matchesQuery = !q || 
+          sop.title.toLowerCase().includes(q) ||
+          sop.code.toLowerCase().includes(q) ||
+          sop.role.toLowerCase().includes(q) ||
+          sop.description.toLowerCase().includes(q) ||
+          sop.pillarName.toLowerCase().includes(q);
+        return matchesCat && matchesQuery;
+      });
+
+      document.getElementById('active-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full p-12 text-center glass-card rounded-2xl border border-slate-800">
+            <p class="text-sm text-slate-400 font-semibold mb-2">No standard operating procedures found matching your criteria.</p>
+            <button onclick="setFilter('all'); document.getElementById('sop-search').value=''; handleSearch('');" class="px-4 py-2 rounded-xl bg-indigo-600/30 text-indigo-300 text-xs font-bold border border-indigo-500/40">
+              Reset Filters
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(sop => {
+        const card = document.createElement('div');
+        card.className = "glass-card spotlight-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer group hover:border-indigo-500/50 transition-all duration-300";
+        card.onclick = () => openSopModal(sop.id);
+
+        let badgeColor = "bg-indigo-500/10 text-indigo-400 border-indigo-500/20";
+        if (sop.category === 'onboarding') badgeColor = "bg-amber-500/10 text-amber-400 border-amber-500/20";
+        if (sop.category === 'daily') badgeColor = "bg-blue-500/10 text-blue-400 border-blue-500/20";
+        if (sop.category === 'city') badgeColor = "bg-cyan-500/10 text-cyan-400 border-cyan-500/20";
+        if (sop.category === 'pos') badgeColor = "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
+        if (sop.category === 'diagnostics') badgeColor = "bg-rose-500/10 text-rose-400 border-rose-500/20";
+        if (sop.category === 'admin') badgeColor = "bg-purple-500/10 text-purple-400 border-purple-500/20";
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md border ${badgeColor}">
+                ${sop.code}
+              </span>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 truncate max-w-[180px]" title="${sop.role}">
+                ${sop.role}
+              </span>
+            </div>
+            <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">
+              ${sop.pillarName}
+            </div>
+            <h3 class="text-base font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors leading-snug">
+              ${sop.title}
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              ${sop.description}
+            </p>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-indigo-400 font-semibold group-hover:translate-x-1 transition-transform">
+            <span>Click to Open Full Procedure</span>
+            <span>→</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Filter by Pillar
+    function setFilter(cat) {
+      currentFilter = cat;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(`'${cat}'`));
+      if (activeBtn) activeBtn.classList.add('active');
+      renderSOPs();
+    }
+
+    // Search Filter
+    function handleSearch(val) {
+      searchQuery = val;
+      renderSOPs();
+    }
+
+    // Open Modal
+    function openSopModal(id) {
+      const sop = sopsData.find(s => s.id === id);
+      if (!sop) return;
+
+      document.getElementById('modal-sop-code').textContent = sop.code;
+      document.getElementById('modal-sop-pillar').textContent = sop.pillarName;
+      document.getElementById('modal-sop-role').textContent = "Role: " + sop.role;
+      document.getElementById('modal-sop-title').textContent = sop.title;
+
+      const stepsHtml = sop.steps.map((step, idx) => `
+        <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-indigo-600 text-white font-bold text-[11px] shrink-0 mt-0.5">${idx + 1}</span>
+          <span class="leading-relaxed text-slate-300 text-xs">${step}</span>
+        </li>
+      `).join('');
+
+      document.getElementById('modal-sop-content').innerHTML = `
+        <div class="space-y-4">
+          <!-- Section 1: Objective & Scope -->
+          <div class="p-3.5 rounded-xl bg-indigo-950/20 border border-indigo-500/20">
+            <span class="text-indigo-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">1. Operational Objective</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.objective}</p>
+          </div>
+
+          <!-- Section 2: Prerequisites -->
+          <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+            <span class="text-slate-400 font-bold block mb-1 uppercase tracking-wider text-[11px]">2. Prerequisites &amp; System Permissions</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.prerequisites}</p>
+          </div>
+
+          <!-- Section 3: Step-by-Step Procedure -->
+          <div class="space-y-2">
+            <span class="text-white font-bold block uppercase tracking-wider text-[11px]">3. Step-by-Step Execution Sequence</span>
+            <ul class="space-y-2">
+              ${stepsHtml}
+            </ul>
+          </div>
+
+          <!-- Section 4: Expected Entries -->
+          <div class="p-3.5 rounded-xl bg-blue-950/20 border border-blue-500/20">
+            <span class="text-blue-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">4. Expected Accounting Entries &amp; Technical Records</span>
+            <p class="text-slate-300 leading-relaxed text-xs font-mono">${sop.entries}</p>
+          </div>
+
+          <!-- Section 5: Verification -->
+          <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/20">
+            <span class="text-emerald-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">5. Quality Verification &amp; Success Metric</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.verification}</p>
+          </div>
+
+          <!-- Section 6: Caution -->
+          <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/20">
+            <span class="text-rose-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">6. Operational Caution &amp; Risk Mitigation</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.caution}</p>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modal-overlay').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close Modal
+    function closeSopModal() {
+      document.getElementById('modal-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSopModal();
+    });
+
+    // Close on backdrop click
+    document.getElementById('modal-overlay').addEventListener('click', (e) => {
+      if (e.target.id === 'modal-overlay') closeSopModal();
+    });
+
+    // Initial Render
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSOPs();
+    });
+  </script>
+</body>
+</html>

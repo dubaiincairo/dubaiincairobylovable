@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>نظام أوزو (موصل إيزي - أودو) — إجراءات التشغيل القياسية (SOPs) | مجموعة الوتد</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+      direction: rtl;
+      text-align: right;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.7); }
+
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-nav {
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.16), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    @keyframes modalBackdrop { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalDialog {
+      0% { opacity: 0; transform: scale(0.95) translateY(12px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-backdrop-anim { animation: modalBackdrop 0.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .modal-dialog-anim { animation: modalDialog 0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    .tab-btn.active {
+      background: rgba(79, 70, 229, 0.25);
+      border-color: rgba(99, 102, 241, 0.6);
+      color: #a5b4fc;
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-indigo-600 selection:text-white pb-20 relative">
+
+  <!-- Ambient Glow Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-20 -right-40 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]"></div>
+    <div class="ambient-orb-2 absolute top-1/3 -left-40 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <!-- STICKY HEADER -->
+  <header class="sticky top-0 z-50 glass-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3.5">
+        <a href="/manuals/wdgroup/ezeeodooconnector/ar" class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-500 via-indigo-600 to-blue-800 flex items-center justify-center text-white font-black shadow-lg shadow-indigo-500/25 border border-indigo-400/40 hover:scale-105 transition-transform">
+          OZ
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white">موصل أوزو (إيزي - أودو)</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/30">
+              إجراءات التشغيل القياسية (SOPs)
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            أدلة التشغيل القياسية، بروتوكولات المراجعة اليومية، وكتيبات الحوكمة المالية لفنادق مجموعة الوتد
+          </p>
+        </div>
+      </div>
+
+      <!-- Navigation & Language Links -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/manuals/wdgroup/ezeeodooconnector/features-ar" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition">
+          الانتقال لدليل الميزات ←
+        </a>
+        <a href="/manuals/wdgroup/ezeeodooconnector/sops-en" class="px-3 py-1.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 text-xs font-bold font-sans transition">
+          English (LTR)
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 space-y-8">
+    
+    <!-- Hero Banner -->
+    <div class="text-center max-w-3xl mx-auto space-y-3">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-xs font-semibold text-indigo-300 uppercase tracking-wider">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+        كتيب إجراءات العمل المحاسبية والتشغيلية المعتمدة
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+        إجراءات التشغيل القياسية <span class="bg-gradient-to-r from-indigo-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent">لموصل أوزو</span>
+      </h1>
+      <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+        انقر على أي إجراء تشغيلي لفتح نافذة تفاعلية مركزة تستعرض الدور الوظيفي المسؤول، الخطوات التنفيذية خطوة بخطوة، القيود المحاسبية المتوقعة، معايير التحقق، وبروتوكولات الحد من المخاطر.
+      </p>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="glass-card rounded-2xl p-4 border border-slate-800/80 shadow-xl space-y-4">
+      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+        
+        <!-- Search Input -->
+        <div class="relative flex-1 max-w-md" id="sop-search-container">
+          <input 
+            type="text" 
+            id="sop-search"
+            placeholder="ابحث برمز الإجراء، الدور الوظيفي، العنوان، أو الكلمة المفتاحية..."
+            oninput="handleSearch(this.value)"
+            class="w-full px-4 py-2.5 pr-10 rounded-xl bg-slate-900 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+          >
+          <svg class="w-4 h-4 text-slate-500 absolute right-3.5 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+        <div class="text-xs text-slate-400 font-mono flex items-center gap-2">
+          <span>الإجراءات المتاحة:</span>
+          <span id="active-count" class="px-2 py-0.5 rounded-md bg-indigo-600/30 text-indigo-300 font-bold border border-indigo-500/40">20</span>
+        </div>
+
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar text-xs" id="filter-container">
+        <button onclick="setFilter('all')" class="tab-btn active px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+          جميع الإجراءات (20)
+        </button>
+        <button onclick="setFilter('onboarding')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+          1. التهيئة والربط الأولي (4)
+        </button>
+        <button onclick="setFilter('daily')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+          2. المراجعة الليلية والمطابقة اليومية (4)
+        </button>
+        <button onclick="setFilter('city')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+          3. ذمم الشركات والعملاء (3)
+        </button>
+        <button onclick="setFilter('pos')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+          4. نقاط البيع وحماية الازدواج (3)
+        </button>
+        <button onclick="setFilter('diagnostics')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+          5. التشخيص والتدقيق الجنائي (3)
+        </button>
+        <button onclick="setFilter('admin')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+          6. الإدارة والتوطين والطباعة (3)
+        </button>
+      </div>
+    </div>
+
+    <!-- SOP Cards Grid -->
+    <div id="sop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Injected by JavaScript -->
+    </div>
+
+  </main>
+
+  <!-- SOP MODAL DIALOG -->
+  <div id="modal-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-md modal-backdrop-anim overflow-y-auto">
+    <div class="relative w-full max-w-3xl glass-card rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl modal-dialog-anim my-8 bg-slate-900/95 max-h-[90vh] flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-800 shrink-0">
+        <div>
+          <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+            <span id="modal-sop-code" class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"></span>
+            <span id="modal-sop-pillar" class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider"></span>
+            <span id="modal-sop-role" class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300"></span>
+          </div>
+          <h2 id="modal-sop-title" class="text-xl sm:text-2xl font-extrabold text-white leading-snug"></h2>
+        </div>
+        <button onclick="closeSopModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition shrink-0">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Modal Scrollable Body -->
+      <div class="overflow-y-auto py-5 space-y-6 pl-1 custom-scrollbar text-sm" id="modal-sop-content">
+        <!-- Injected by openSopModal() -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-4 border-t border-slate-800 flex items-center justify-between shrink-0 text-xs">
+        <span class="text-slate-400 font-mono">إجراءات التشغيل القياسية المعتمدة · مجموعة الوتد · موصل أوزو v4.0</span>
+        <button onclick="closeSopModal()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition">
+          إغلاق والمتابعة
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SOPs Data & Script -->
+  <script>
+    const sopsData = [
+      {
+        id: "sop-01",
+        code: "SOP-OZO-01",
+        category: "onboarding",
+        pillarName: "1. التهيئة والربط الأولي",
+        role: "المدير المالي / مهندس التكامل والربط",
+        title: "تهيئة وإعداد ربط الفندق بنظام إيزي وفق التسلسل السداسي الإلزامي",
+        description: "تنفيذ خطوات التهيئة الست المتسلسلة على سجل pms.credentials لإعداد الفندق بأمان تام ومنع المزامنة بدون اكتمال البيانات الرئيسية.",
+        objective: "تأسيس اتصال آمن وموثق مع واجهة برمجة تطبيقات نظام إيزي (eZee Absolute PMS)، وتعبئة شجرة الحسابات والضرائب والشركاء قبل ترحيل أي قيود محاسبية.",
+        prerequisites: "1) صلاحيات مدير تكامل الفنادق (PMS Integration Manager). 2) كود الفندق وكود المصادقة (Hotel Code & Auth Code). 3) وجود دفتر يومية مخصص للفندق في أودو (PMSD).",
+        steps: [
+          "الانتقال إلى: تكامل نظام إيزي للفنادق ← الإعدادات ← إعدادات الفنادق، وافتح أو أنشئ سجل الفندق المطلوب.",
+          "تحديد نمط المزامنة على: 'ملخص اليومية اليومي' (Journal Daily Summary)، وتجنب النمط التفصيلي إلا بموافقة مالية كتابية.",
+          "إدخال كود الفندق، كود المصادقة، دفتر اليومية الافتراضي، والشركة القانونية التابع لها الفندق، ثم النقر على زر 'اختبار الاتصال' والتأكد من ظهور إشعار النجاح الأخضر.",
+          "النقر على الزر النشط حديثاً 'سحب البيانات الأساسية' (Pull Master Data)، حيث يجلب النظام الحسابات والضرائب وطرق الدفع ودليل الشركات من إيزي.",
+          "النقر على 'تجهيز قواعد القيود المحاسبية' (Prepare Voucher Rules) ومراجعة 28 قاعدة محددة مسبقاً لحسابات المدين والدائن وفق السياسة المالية للمجموعة.",
+          "النقر على 'إنشاء / تحديث شركاء أودو' (Create / Update Odoo Partners) لمطابقة شركات ذمم النزلاء بسجلات الشركاء في أودو بناءً على الرقم الضريبي المكون من 15 رقماً وكود UnkID.",
+          "التحقق من أن مؤشر 'جاهز للمزامنة اليدوية' (Ready for Manual Sync) أصبح مفعلّاً بعلامة خضراء، مما يعلن اكتمال تهيئة الفندق بنجاح."
+        ],
+        entries: "لا يتم ترحيل أي قيود محاسبية أثناء التهيئة؛ تنشأ فقط سجلات في جداول pms.account.mapping وpms.tax.mapping وpms.payment.mapping وres.partner.",
+        verification: "فتح بطاقة الفندق والتأكد من: تم فحص الاتصال = نعم، تم سحب البيانات = نعم، تم إعداد القواعد = نعم، تم إنشاء الشركاء = نعم، والمرحلة التالية هي 'جاهز للمزامنة اليدوية'.",
+        caution: "يُحظر النقر على زر 'سحب البيانات الأساسية' أثناء تشغيل مزامنة جارية. تغيير نمط المزامنة بعد وجود قيود مرحلة محظور برمجياً لحماية سلامة الدفاتر."
+      },
+      {
+        id: "sop-02",
+        code: "SOP-OZO-02",
+        category: "onboarding",
+        pillarName: "1. التهيئة والربط الأولي",
+        role: "مراقب تكاليف الأغذية والمشروبات / مسؤول الأنظمة",
+        title: "تهيئة منافذ نقاط البيع وربط حسابات الإيرادات والضريبة الافتراضية (Optimus)",
+        description: "إعداد منافذ نقاط بيع المطاعم والمقاهي بنظام إيزي أوبتيموس، وإنشاء الحسابات الافتراضية، وتفعيل دروع منع ازدواج إيراد الغرف.",
+        objective: "ربط مطاعم ومنافذ الفندق بنظام أودو، وسحب فئات المبيعات والمخزون، وبناء توجيه محاسبي دقيق لمبيعات الأغذية والمشروبات.",
+        prerequisites: "1) صلاحيات إدارة تكامل نقاط البيع. 2) كود شركة أوبتيموس وكود المصادقة. 3) دفتر يومية مبيعات نقاط البيع المخصص.",
+        steps: [
+          "الانتقال إلى: إيزي أوبتيموس ← الإعدادات ← إعدادات نقاط البيع، وافتح سجل المنفذ أو الشركة.",
+          "تحديد نمط مزامنة المبيعات على 'ملخص اليومية اليومي' مع التحقق الإلزامي من تفعيل خيار 'استبعاد مبيعات الغرف من مبيعات نقاط البيع'.",
+          "إدخال كود الشركة وكود المصادقة، ثم النقر على زر 'اختبار الاتصال' والتأكد من صحة الاعتماد.",
+          "النقر على 'سحب البيانات الأساسية' لاستدعاء المنافذ ومجموعات الأصناف من إيزي أوبتيموس.",
+          "النقر على 'إنشاء/تحديث حسابات نقاط البيع' لإنشاء الحسابات المفقودة آلياً (إيراد المطعم، ضريبة المخرجات، حساب وسيط الترحيل للغرف، وحساب الإكراميات).",
+          "النقر على 'تجهيز قواعد القيود المحاسبية' لمراجعة سيناريوهات المبيعات والمشتريات.",
+          "التحقق من اكتمال خطوة 'جاهز للمزامنة اليدوية'."
+        ],
+        entries: "توليد حسابات أستاذ عام جديدة إذا لم تكن موجودة: 411001 (إيراد مبيعات نقاط البيع)، 214001 (ضريبة القيمة المضافة)، 121002 (وسيط ترحيل الغرف)، و214002 (أمانات الإكراميات).",
+        verification: "مراجعة قائمة المنافذ والتأكد من ظهور جميع أجهزة الكاشير والمقاهي بالحسابات الدائنة والمدينة الصحيحة.",
+        caution: "تأكد من بقاء خيار 'استبعاد مبيعات الغرف' مفعلاً لأي نقطة بيع تعمل داخل مبنى فندقي، لمنع مضاعفة احتساب مبيعات الوجبات."
+      },
+      {
+        id: "sop-03",
+        code: "SOP-OZO-03",
+        category: "city",
+        pillarName: "3. ذمم الشركات والعملاء",
+        role: "مراقب الائتمان / المحاسب الأول",
+        title: "مزامنة وتدقيق دليل الشركاء والشركات والتحقق من الأرقام الضريبية (ZATCA)",
+        description: "تدقيق الحسابات والشركات المسحوبة من إيزي، والتحقق من صحة الرقم الضريبي السعودي المكون من 15 رقماً، وربطها بسجلات أودو المعتمدة.",
+        objective: "ضمان توثيق جميع الشركات المستفيدة من التسهيلات الائتمانية الفندقية في أودو بأرقام ضريبية وسجلات تجارية صحيحة ومتوافقة مع هيئة الزكاة والضريبة والجمارك.",
+        prerequisites: "1) صلاحيات محاسب مع إذن تعديل جهات الاتصال. 2) اكتمال سحب البيانات الأساسية للفندق.",
+        steps: [
+          "الانتقال إلى: تكامل نظام إيزي للفنادق ← دليل الشركاء ← ربط الشركات (Company Mapping).",
+          "تطبيق عامل التصفية المخصص 'رقم ضريبي مفقود' لعزل الشركات التي لا تمتلك أرقاماً ضريبية مسجلة.",
+          "مطابقة أسماء الشركات مع عقود المبيعات والشهادات الضريبية والسجلات التجارية الرسمية.",
+          "إدخال الرقم الضريبي النظامي (15 رقماً تبدأ وتنتهي برقم 3) في حقل الرقم الضريبي بسجل المطابقة وحفظ التعديل.",
+          "النقر على 'مزامنة دليل الشركاء' (Sync Directory Partners) لتحديث بيانات الشريك في دفتر أودو الرئيسي.",
+          "التأكد من توجيه حقل 'حساب الذمم المدينة' إلى حساب ذمم الشركات الآجلة الفندقي المخصص."
+        ],
+        entries: "تحديث حقول الشريك في جدول res.partner: vat، ezee_company_vat، ezee_company_unkid، وproperty_account_receivable_id.",
+        verification: "فتح قائمة الشركاء في أودو بتصفية 'شركات إيزي المدينة' والتحقق من خلو عمود الرقم الضريبي من أي قيود فارغة.",
+        caution: "يُحظر دمج شريكين يمتلكان كودين مختلفين (UnkID) في إيزي يدوياً في أودو، دون استخدام مسار اعتماد الاسم الرديف المعتمد مالياً (SOP-OZO-04)."
+      },
+      {
+        id: "sop-04",
+        code: "SOP-OZO-04",
+        category: "city",
+        pillarName: "3. ذمم الشركات والعملاء",
+        role: "المدير المالي",
+        title: "اعتماد الأسماء الرديفة لفروع الشركات المتعددة (Corporate Partner Alias Approval)",
+        description: "ربط مسميات فروع الشركات المتعددة في نظام إيزي بحساب شريك رئيسي واحد موحد في أودو دون فقدان تفاصيل الفروع.",
+        objective: "توحيد الأرصدة المدينة ومتابعة أعمار الديون لكبار العملاء والشركات التي تمتلك عدة فروع تشغيلية مسجلة في إيزي ضمن ميزان مراجعة موحد في أودو.",
+        prerequisites: "1) موافقة كتابية من المدير المالي. 2) وجود سجلات الفروع في جدول pms.company.mapping.",
+        steps: [
+          "الانتقال إلى: تكامل نظام إيزي للفنادق ← دليل الشركاء ← ربط الشركات.",
+          "تحديد سجل الفرع التشغيلي الثانوي (مثال: 'أرامكو السعودية - فرع المنطقة الغربية').",
+          "في حقل 'شريك أودو المرتبط'، اختيار الشريك الأم المعتمد ('أرامكو السعودية - الإدارة العامة').",
+          "تفعيل خانة الاختيار 'تم اعتماد الاسم الرديف' (Alias Approved).",
+          "حفظ التعديل، حيث يُصنف النظام هذا الفرع كاسم رديف رسمي ومعتمد.",
+          "التأكد من أن المزامنات اللاحقة ترحل أسطر اليومية إلى حساب الشريك الأم في الأستاذ العام مع الاحتفاظ باسم الفرع التشغيلي في كشف التفصيل."
+        ],
+        entries: "أسطر اليومية اللاحقة تسجل partner_id باسم الشريك الأم المعتمد، بينما يحتفظ سطر التفصيل باسم الفرع الفعلي ورقم الفاتورة.",
+        verification: "فتح كشف حساب الشريك الأم في أودو والتأكد من إدراج حركات جميع الفروع التابعة له تحت رصيد مالي واحد.",
+        caution: "يُمنع دمج شركات ذات كيانات ضريبية أو سجلات تجارية مختلفة تحت مظلة اسم رديف واحد؛ يُقتصر الاستخدام على فروع نفس المنشأة القانونية."
+      },
+      {
+        id: "sop-05",
+        code: "SOP-OZO-05",
+        category: "daily",
+        pillarName: "2. المراجعة الليلية والمطابقة اليومية",
+        role: "المراجع الليلي / محاسب الفترة الصباحية",
+        title: "التحقق اليومي من مزامنة التدقيق الليلي التلقائية (الساعة 1:00 ظهراً بتوقيت مكة المكرمة)",
+        description: "بروتوكول التحقق الصباحي للتأكد من اكتمال تنفيذ مهمة المزامنة التلقائية المجدولة (Cron Job) لعمليات الفندق عن اليوم السابق.",
+        objective: "التأكد من انتقال إيرادات الغرف والخدمات ومتحصلات السداد وحركات ذمم النزلاء والشركات لليوم السابق إلى قيود أودو بدقة تامة.",
+        prerequisites: "1) صلاحيات مستخدم اليومية العامة في أودو. 2) تقرير المدير العام المطبوع من نظام إيزي (eZee General Manager Report) لليوم السابق.",
+        steps: [
+          "تسجيل الدخول إلى أودو الساعة 1:15 ظهراً بتوقيت مكة (عقب انتهاء التنفيذ التلقائي المحدد في الساعة 13:00).",
+          "الانتقال إلى: المحاسبة ← العمليات المتنوعة (دفتر ملخص اليومية الفندقي PMSD).",
+          "تصفية السجلات بتاريخ = أمس، والتحقق من وجود قيد مرحل يبدأ رقمه بالمرجع: 'DSUM-YYYY-MM-DD' لكل فندق من الفنادق الستة.",
+          "فتح القيد المرحل والنقر على تبويب 'عرض المدير المالي العام' (Manager Layout).",
+          "مقارنة أرقام عمود 'اليوم' مع تقرير المدير العام المطبوع من إيزي: مبيعات الغرف، رسم البلدية 2.5%، الضريبة 15%، والمتحصلات.",
+          "التأكد من أن حالة القيد هي 'مرحل' (Posted) وتساوي إجمالي الطرف المدين مع الطرف الدائن تماماً.",
+          "التحقق من استلام إشعار النجاح عبر البريد الإلكتروني الآلي 'PMS Daily Sync Success'."
+        ],
+        entries: "قيد مرحل في دفتر الملخص اليومي (PMSD 65). المدين: النقدية، البنك، ذمم الشركات، النزلاء. الدائن: إيرادات الغرف، الإضافات، ضريبة المخرجات، رسوم البلدية.",
+        verification: "تطابق إجماليات تبويب تقرير المدير المالي مع تقرير إيزي الورقي بهامش لا يتجاوز ±0.05 ريال (فروق هللات التقريب).",
+        caution: "إذا لم تجد القيد المجدول، افتح قائمة سجلات المزامنة (Sync Logs) لمعرفة السبب قبل النقر على المزامنة اليدوية تجنباً لتكرار العمليات."
+      },
+      {
+        id: "sop-06",
+        code: "SOP-OZO-06",
+        category: "daily",
+        pillarName: "2. المراجعة الليلية والمطابقة اليومية",
+        role: "رئيس حسابات الفندق",
+        title: "بروتوكول المطابقة اليومية لتقرير المدير العام وإغلاق الصناديق",
+        description: "إجراءات المطابقة المعتمدة لمقارنة الأقسام السبعة في تبويب تقرير المدير مع صناديق الكاشير ومتحصلات الشبكة البنكية الفعلية.",
+        objective: "المصادقة الرسمية على الأقسام السبعة المكونة لقيد اليومية الفندقي وإثبات الإيرادات والمتحصلات قبل أرشفة ملف التدقيق اليومي.",
+        prerequisites: "1) قيد DSUM مرحل في أودو. 2) تقارير إغلاق ورديات موظفي الاستقبال ومحاضر تسليم النقدية.",
+        steps: [
+          "فتح قيد DSUM المرحل للفندق والتاريخ المحدد في نظام أودو.",
+          "تدقيق القسم 1 (إيرادات الغرف): التحقق من أن إيراد الغرف + عدم الحضور (No-Show) + رسوم الإلغاء تطابق إجمالي مبيعات الإيواء.",
+          "تدقيق القسم 2 (الخدمات الإضافية): مطابقة إيرادات المغسلة، الكوفي شوب، ووجبات الإفطار مع إيصالات الأقسام التشغيلية.",
+          "تدقيق القسم 3 (الضرائب والرسوم): التأكد من أن رسم البلدية يعادل 2.5% من الإيواء الصافي، وضريبة القيمة المضافة تعادل 15% من المبيعات الخاضعة.",
+          "تدقيق القسم 4 (طرق الدفع): مطابقة مبالغ مدى، وفيزا، والنقد مع إيصالات إغلاق أجهزة نقاط البيع البنكية وقسائم الإيداع النقدي.",
+          "تدقيق القسم 5 (ذمم الشركات): فحص الذمم المرفوعة وسدادات الشركات المباشرة مقارنة بطلبات الفوترة المعتمدة.",
+          "تدقيق القسم 6 (أرصدة النزلاء): التأكد من أن الرصيد الختامي لنزلاء الفندق يساوي الرصيد الافتتاحي زائداً الرسوم ناقصاً التحصيلات.",
+          "التوقيع على سند التدقيق المطبوع وختمه وإيداعه في حافظة المبيعات اليومية."
+        ],
+        entries: "توقيع واعتماد محاسبي على القيد المرحل. لا يتم إنشاء قيود جديدة إلا في حال وجود عجز نقدي في الصندوق يتطلب قيد تسوية.",
+        verification: "المعادلة الذهبية: إجمالي الإيراد الصافي + إجمالي الضرائب والرسوم = إجمالي المتحصلات + حركات ذمم الشركات + صافي الأمانات المقدمة.",
+        caution: "يُحظر تماماً التعديل المباشر على أسطر القيد اليومي المرحل في أودو دون إصدار قيد عكسي أو قيد تسوية معتمد."
+      },
+      {
+        id: "sop-07",
+        code: "SOP-OZO-07",
+        category: "city",
+        pillarName: "3. ذمم الشركات والعملاء",
+        role: "محاسب حسابات المدينين والشركات",
+        title: "تدقيق كشف تفصيل ذمم الشركات ومطابقة دفتر الأستاذ الفرعي",
+        description: "الغوص في تفاصيل حركات الشركات التابعة لقيد الملخص اليومي لمطابقة أرصدة المنشآت وحل أي فروقات ائتمانية.",
+        objective: "تدقيق معاملات الشركات الفردية وحركات الفواتير والتحصيلات التي تدعم قيد اليومية الإجمالي في أودو.",
+        prerequisites: "1) قيد DSUM مرحل. 2) تقرير كشف تحويلات ذمم الشركات التفصيلي الصادر من نظام إيزي.",
+        steps: [
+          "فتح قيد DSUM المستهدف في أودو.",
+          "النقر على تبويب 'تفصيل ذمم الشركات' (City Ledger Breakdown).",
+          "مراجعة جدول الأستاذ الفرعي: التحقق من أسماء الشركات، أرقام حركات إيزي، أرقام الفواتير الفندقية (Folio)، والمبالغ المدينة والدائنة.",
+          "أو التوجه إلى: تكامل نظام إيزي للفنادق ← التقارير المالية ← تفصيل ذمم الشركات، لاستعراض تقرير تحليلي متعدد الفنادق.",
+          "تجميع العرض حسب: 'الشركة' و'نوع الحركة' (تحويل ذمة، تحصيل، استرداد).",
+          "التحقق من أن كل حركة تحمل اسم شريك معتمد في عمود 'شريك أودو'.",
+          "إذا ظهر سطر بدون شريك مرتبط، يتم استخراج كود UnkID وتنفيذ إجراءات الربط وفق المعيار (SOP-OZO-03)."
+        ],
+        entries: "أسطر جدول pms.daily.summary.city.ledger.line التي تمثل قيد مدين ذمم شركات (تحويلات فواتير) أو دائن ذمم شركات (سدادات).",
+        verification: "مجموع أرصدة أسطر تفصيل الشركات يتطابق تماماً مع صافي حركة حساب ذمم الشركات في القيد الرئيسي.",
+        caution: "أسطر التفصيل مرتبطة برمجياً بالحذف التتابعي (cascade) في حال تم حذف القيد الرئيسي أثناء الاختبارات المعتمدة في بيئة التطوير."
+      },
+      {
+        id: "sop-08",
+        code: "SOP-OZO-08",
+        category: "daily",
+        pillarName: "2. المراجعة الليلية والمطابقة اليومية",
+        role: "المحاسب الأول للفندق",
+        title: "تدقيق واكتشاف حركات إلغاء وتحويل الأمانات في نفس اليوم (Round-Trip Audit)",
+        description: "التحقق من المعالجة الدقيقة لحركات سداد واسترداد وتحويل أمانات الحجز التي تمت في نفس يوم العمل لمنع تضخيم الإيرادات.",
+        objective: "التأكد من أن إلغاءات الدفعات المقدمة الفورية لا تتسبب في تضخيم غير واقعي لأرقام الإيرادات الإجمالية أو دوران أرصدة النزلاء.",
+        prerequisites: "1) قيد DSUM يحتوي على حركات أمانات مقدمة (Advance Deposits).",
+        steps: [
+          "فتح قيد DSUM وفحص الحقل المالي 'تسوية أمانات إيزي في نفس اليوم' (ezee_advance_roundtrip_amount).",
+          "إذا كانت قيمة الحقل أكبر من 0.00 ريال، فهذا يعني وقوع حركة استرداد أو تحويل فورية لأمانة حجز في نفس يوم قبضها.",
+          "النقر على تبويب 'عرض المدير المالي العام' والاطلاع على قسم الدفعات المقدمة.",
+          "التأكد من أن سطري 'الأمانات المقبوضة' و'الأمانات المستردة' يعرضان القيم الصافية بعد خصم مبلغ الحركة الدائرية.",
+          "الانتقال إلى تبويب 'عناصر اليومية' (Journal Items) والتأكد من بقاء القيود المدينة والدائنة الأصلية كما هي حفاظاً على مسار التدقيق القانوني.",
+          "استخدام معالج البحث في البيانات المرجعية للتأكد من رقم حجز النزيل وتاريخ الإلغاء الفعلي."
+        ],
+        entries: "عناصر اليومية الأصلية تحتفظ بـ: مدين البنك / دائن الأمانات، ومدين الأمانات / دائن البنك. تبويب المدير يعرض الأثر الصافي.",
+        verification: "رقم الأمانات المقبوضة في تقرير المدير يساوي المقبوض الفعلي ناقصاً قيمة الحقل ezee_advance_roundtrip_amount.",
+        caution: "لا تحاول حذف أو تسوية عناصر اليومية الأصلية يدوياً؛ القاعدة العرضية صممت خصيصاً للمطابقة البصرية مع الحفاظ على سلامة القيود."
+      },
+      {
+        id: "sop-09",
+        code: "SOP-OZO-09",
+        category: "pos",
+        pillarName: "4. نقاط البيع وحماية الازدواج",
+        role: "المدير المالي / محاسب الأغذية والمشروبات",
+        title: "معالجة توقف المزامنة الناتج عن درع منع ازدواج فواتير الغرف (Duplication Guard)",
+        description: "تشخيص وحل إيقاف مزامنة المبيعات بسبب وجود نظام فندقي نشط مع رصد فواتير محولة على غرف النزلاء.",
+        objective: "إعادة تفعيل مزامنة مبيعات المطاعم بأمان مع ضمان عدم تكرار قيد وجبات النزلاء في كل من نظام الفندق ونقاط البيع.",
+        prerequisites: "1) سجل خطأ يفيد بـ: 'Room Posting Duplication Guard Triggered'. 2) صلاحيات إدارة التكامل.",
+        steps: [
+          "الانتقال إلى: إيزي أوبتيموس ← السجلات ← سجلات المزامنة وتحديد العملية المتوقفة.",
+          "التحقق من نص رسالة النظام: 'يجب استبعاد مبيعات الغرف من نقاط البيع عند تفعيل ملخص اليومية الفندقي'.",
+          "الانتقال إلى: إيزي أوبتيموس ← الإعدادات ← إعدادات نقاط البيع لشركة الفندق المتأثرة.",
+          "التأكد من أن الفندق يمتلك إعدادات فندقية نشطة بنمط الملخص اليومي (Journal Daily Summary).",
+          "تفعيل الخيار الإلزامي 'استبعاد مبيعات الغرف من مبيعات نقاط البيع' في بطاقة الإعدادات وحفظها.",
+          "العودة إلى: إيزي أوبتيموس ← المزامنة ← المزامنة اليدوية، وتحديد تاريخ الأمس، والنقر على 'مزامنة مبيعات نقاط البيع'.",
+          "التأكد من اكتمال المزامنة بنجاح واستبعاد فواتير الغرف من إيراد نقاط البيع المباشر."
+        ],
+        entries: "قيد ملخص نقاط البيع يثبت فقط المبيعات الخارجية المباشرة (نقداً، مدى، فيزا). فواتير الغرف ترحل حصرياً عبر قيود فندق إيزي.",
+        verification: "التحقق من أن قيد نقاط البيع اليومي لا يحتوي على أي أسطر مدينة في حساب وسيط ترحيل الغرف.",
+        caution: "لا تقم أبداً بإلغاء تفعيل درع استبعاد الغرف في فندق قيد التشغيل الفعلي إلا في حال تطبيق نمط المطابقة الموسعة (Header 7)."
+      },
+      {
+        id: "sop-10",
+        code: "SOP-OZO-10",
+        category: "pos",
+        pillarName: "4. نقاط البيع وحماية الازدواج",
+        role: "المراجع الداخلي / المدير المالي",
+        title: "التدقيق الجنائي الشامل لحساب وسيط ترحيل مبيعات الغرف (Clearing Audit Wizard)",
+        description: "تشغيل معالج الفحص المالي لمطابقة فواتير المطاعم المحولة على الغرف مع قيود الوسيط واكتشاف الفواتير المفقودة.",
+        objective: "تحديد الفروقات بين فواتير وجبات الطعام الصادرة من نقاط بيع المطاعم والمبالغ المقيدة فعلياً على فواتير نزلاء الفندق.",
+        prerequisites: "1) تفعيل نمط مطابقة المدير العام أو وجود البيانات المرجعية الأولية. 2) صلاحيات المراجع المالي.",
+        steps: [
+          "الانتقال إلى: إيزي أوبتيموس ← معالجات التدقيق ← معالج تدقيق وسيط ترحيل الغرف (Room Posting Audit Wizard).",
+          "اختيار إعدادات نقاط البيع وتحديد النطاق الزمني للمراجعة (مثال: آخر 7 أيام).",
+          "النقر على 'تشغيل التدقيق' (Run Audit). يقوم المعالج بجلب فواتير نقاط البيع ومقارنتها مع حركات حساب الوسيط المقيدة.",
+          "فحص مؤشرات 'ملخص التدقيق': التأكد من عدم وجود تحذير 'مخاطر تكرار' (Duplication Risk) أو 'فروقات ترحيل' (Clearing Exception).",
+          "مراجعة جدول الحركات اليومية: التحقق من عمود الحالة لكل يوم ('تمت التسوية بالكامل'، 'يوجد فرق وسيط'، 'حركة مفقودة').",
+          "في حال ظهور 'يوجد فرق وسيط'، راجع عمود 'الفواتير غير المطابقة' لمعرفة أرقام الإيصالات بدقة.",
+          "البحث عن أرقام الإيصالات في نظام إيزي للتأكد مما إذا كان موظف الاستقبال قد ألغى الوجبة أو قدم خصماً عليها.",
+          "إصدار قيد تسوية بالخصم المعتمد أو توجيه استفسار لإدارة الفندق بشأن إلغاء الرسوم دون تصريح."
+        ],
+        entries: "المعالج تحليلي استعراضي مؤقت؛ لا يولد قيوداً تلقائية. القيود التصحيحية تسجل يدوياً عبر قيود اليومية المتنوعة.",
+        verification: "تحقيق حالة 'تمت التسوية بالكامل' (OK Cleared) لجميع الأيام محل التدقيق بفارق 0.00 ريال.",
+        caution: "لا تقم بتسوية الفروقات التي تتجاوز 0.05 ريال آلياً، فالفروق المادية تدل على فروقات حقيقية في صناديق الكاشير أو فواتير النزلاء."
+      },
+      {
+        id: "sop-11",
+        code: "SOP-OZO-11",
+        category: "pos",
+        pillarName: "4. نقاط البيع وحماية الازدواج",
+        role: "مراقب التكاليف / محاسب الأغذية والمشروبات",
+        title: "المطابقة اليومية لمشتريات مطابخ نقاط البيع وقيد اليومية الملخص",
+        description: "إدارة مشتريات الخضار واللحوم اليومية بنمط اليومية الملخص مع حماية الدفاتر من تكرار فواتير الموردين.",
+        objective: "إثبات مصاريف التموين والمشتريات اليومية للمطابخ في حسابات المصروفات دون التسبب في ازدواجية ذمم الموردين.",
+        prerequisites: "1) ضبط إعدادات نقاط البيع على نمط الملخص اليومي للمشتريات. 2) أذون استلام المطبخ المعتمدة.",
+        steps: [
+          "جمع فواتير وسندات استلام الخضار والفواكه واللحوم المعتمدة من رئيس الطهاة عن اليوم.",
+          "التأكد من عدم قيام المحاسب بإدخال فواتير موردين تفصيلية يدوية (Vendor Bills) لنفس المشتريات في أودو.",
+          "الانتقال إلى: إيزي أوبتيموس ← المزامنة ← المزامنة اليدوية، وتفعيل 'مزامنة مشتريات نقاط البيع' عن التاريخ المستهدف.",
+          "فتح: المحاسبة ← عناصر اليومية، وفحص القيد المنشأ برمز: 'EZEEPOS-PUR-DSUM'.",
+          "التحقق من أن مدين حساب مصروفات المطبخ (511001) يطابق إجمالي تكلفة البضاعة المستلمة.",
+          "التحقق من أن مدين ضريبة المدخلات 15% (115001) يطابق الضريبة المستحقة على فواتير الموردين الضريبية.",
+          "التحقق من أن دائن حساب ذمم الموردين أو وسيط السداد (211001) يطابق إجمالي المبلغ المدفوع أو المستحق.",
+          "إرفاق سندات الاستلام الأصلية بالقيد المطبوع وحفظها في أرشيف المشتريات."
+        ],
+        entries: "مدين: 511001 مصروف مشتريات نقاط البيع، مدين: 115001 ضريبة القيمة المضافة للمدخلات 15%، دائن: 211001 ذمم الموردين / وسيط النقدية.",
+        verification: "إجمالي أطراف القيد المدين يطابق بيان الاستلام اليومي المعتمد من إدارة التشغيل والمستودعات.",
+        caution: "إذا سُجلت فاتورة مورد يدوية سابقة لنفس اليوم، سيتوقف النظام لمنع الازدواج. يجب حذف مسودة الفاتورة اليدوية أولاً."
+      },
+      {
+        id: "sop-12",
+        code: "SOP-OZO-12",
+        category: "onboarding",
+        pillarName: "1. التهيئة والربط الأولي",
+        role: "المحاسب الأول / مراجع الحسابات",
+        title: "مراجعة قواعد القيود المحاسبية وتخصيص حسابات التوجيه المالي",
+        description: "تخصيص التوجيه المحاسبي للمدين والدائن لسيناريوهات تشغيلية محددة مثل عمولات وكلاء السفر والمصروفات النثرية.",
+        objective: "تعديل الحسابات الافتراضية لقواعد القيود في الموصل لتلائم متطلبات الدليل المحاسبي دون الحاجة لتعديل الكود البرمجي.",
+        prerequisites: "1) إعداد قواعد القيود مسبقاً عبر معالج التهيئة. 2) صلاحيات إدارة تكامل الفنادق.",
+        steps: [
+          "الانتقال إلى: تكامل نظام إيزي للفنادق ← الإعدادات ← قواعد القيود المحاسبية (Voucher Rules).",
+          "تصفية القائمة حسب الفندق والتجميع بنمط واجهة البرمجة (مبيعات، مقبوضات، مدفوعات، تسويات، ملخص يومي).",
+          "اختيار الحركة المراد تعديل توجيهها (مثال: عمولات وكلاء السياحة بالذمم الآجلة Cityledger Commission).",
+          "فتح بطاقة القاعدة والاطلاع على المعاينة الافتراضية للنظام.",
+          "في حقل 'تخصيص الحساب المدين' (Debit Account Override)، اختيار حساب المصروف المخصص (مثال: 522001 مصروف عمولات وكلاء السياحة).",
+          "ترك حقل 'تخصيص الحساب الدائن' فارغاً إذا كان التوجيه الافتراضي لحساب وسيط النزلاء صحيحاً.",
+          "حفظ القاعدة. ستقوم المزامنات اليومية القادمة بتوجيه مبالغ العمولة فوراً إلى الحساب المحدد.",
+          "مراجعة القيد المولد في اليوم التالي للتأكد من استخدام رقم الحساب الجديد في سطر العمولة."
+        ],
+        entries: "القيود اليومية اللاحقة تستبدل الحسابات الافتراضية بالحسابات المخصصة على أسطر المعاملات المطابقة.",
+        verification: "فتح قيد DSUM التالي والتأكد من توجيه مدين عمولة الوكلاء لحساب 522001 بدلاً من مجمع المصروفات العمومية.",
+        caution: "لا تقم بربط حسابات أصول ميزانية عمومية بقواعد المصروفات. تسري التعديلات فورياً على جميع المزامنات اللاحقة."
+      },
+      {
+        id: "sop-13",
+        code: "SOP-OZO-13",
+        category: "onboarding",
+        pillarName: "1. التهيئة والربط الأولي",
+        role: "محاسب التكاليف / المحلل المالي",
+        title: "ربط مراكز التكلفة التحليلية بمنافذ الفندق ورموز الرسوم",
+        description: "تعيين حسابات التوزيع التحليلي في أودو لمختلف أقسام الفندق ومنافذ البيع ورموز الخدمات التابعة.",
+        objective: "تمكين استخراج تقارير الأرباح والخسائر التفصيلية لكل قسم تشغيلي (الغرف، قاعات الحفلات، المقاهي، المغسلة).",
+        prerequisites: "1) شجرة مراكز التكلفة التحليلية مهيأة في أودو. 2) سحب بيانات ربط الحسابات للفندق.",
+        steps: [
+          "الانتقال إلى: تكامل نظام إيزي للفنادق ← الإعدادات ← ربط الحسابات (Account Mapping).",
+          "اختيار الفندق المستهدف وفتح بطاقة تصنيف الإيرادات (Header 1: Revenue).",
+          "في تبويب 'أسطر المطابقة'، البحث عن رمز الخدمة المطلوب (مثال: إيراد مقهى اللوبي Coffee Shop Revenue).",
+          "في عمود 'الحساب التحليلي' (Analytic Account)، اختيار مركز التكلفة المقابل (مثال: CC-102 قطاع الأغذية والمشروبات).",
+          "تكرار الإجراء لخدمات المغسلة واختيار 'CC-103 قطاع النظافة والمغاسل'.",
+          "حفظ بطاقة الربط.",
+          "التحقق من أن أسطر اليومية اليومية اللاحقة تقوم تلقائياً بوسم مركز التكلفة على أسطر الإيراد الدائنة."
+        ],
+        entries: "إضافة قاموس التوزيع التحليلي (analytic_distribution) على أسطر اليومية account.move.line المطابقة.",
+        verification: "الانتقال إلى: المحاسبة ← التقارير ← التقارير التحليلية، والتأكد من تدفق الإيرادات تحت مراكز التكلفة المحددة.",
+        caution: "تأكد من تبعية الحسابات التحليلية لنفس الشركة القانونية التابع لها الفندق؛ وسم حساب تحليلي لشركة أخرى يسبب أخطاء ترحيل."
+      },
+      {
+        id: "sop-14",
+        code: "SOP-OZO-14",
+        category: "diagnostics",
+        pillarName: "5. التشخيص والتدقيق الجنائي",
+        role: "مسؤول تقنية الفندق / المراجع الليلي",
+        title: "معالجة تحذير قدم تاريخ العمل وتحديثه يدوياً من خوادم إيزي",
+        description: "تشخيص وحل تحذيرات 'تاريخ قديم بحاجة لتحديث' (Stale value) دون المساس بخطوات تهيئة الفندق المكتملة.",
+        objective: "إجبار النظام على تحديث تاريخ العمل الفعلي فورياً من خوادم إيزي عند تغيير تاريخ العمل بالاستقبال دون انتظار انتهاء الكاش المؤقت.",
+        prerequisites: "1) إعدادات فندقية نشطة. 2) حفظ اسم المستخدم وكلمة المرور الخاصة بواجهة برمجة إيزي في سجل الفندق.",
+        steps: [
+          "الانتقال إلى: تكامل نظام إيزي للفنادق ← الإعدادات ← إعدادات الفنادق.",
+          "فحص حقل 'حالة تاريخ العمل'؛ إذا ظهرت الرسالة 'قيمة قديمة - يلزم التحديث من إيزي'، فهذا يعني تجاوز الكاش 7 أيام.",
+          "التأكد من وجود اسم المستخدم وكلمة المرور الصحيحة في بطاقة الفندق (حيث لا يكفي كود المصادقة لاستدعاء تاريخ العمل).",
+          "النقر على زر الإجراء في رأس الصفحة 'تحديث تاريخ العمل' (Refresh Working Date).",
+          "يتصل النظام مباشرة بواجهة الدخول في إيزي متجاوزاً الكاش المؤقت (force=True).",
+          "التحقق من ظهور رسالة النجاح: 'تم تحديث تاريخ العمل من إيزي: [التاريخ القديم] -> [التاريخ الحديث]'."
+        ],
+        entries: "تحديث حقول working_date وworking_date_last_checked_at في سجل pms.credentials؛ دون أي أثر محاسبي.",
+        verification: "تطابق تاريخ العمل المعروض في شاشة أودو مع التاريخ الفعلي المعروض على شاشات كاونتر الاستقبال في الفندق.",
+        caution: "لا تقم بإعادة النقر على زر 'اختبار الاتصال' لتحديث التاريخ، لأن اختبار الاتصال يعيد تصفير مراحل الإعداد التالية. استخدم حصراً زر 'تحديث تاريخ العمل'."
+      },
+      {
+        id: "sop-15",
+        code: "SOP-OZO-15",
+        category: "daily",
+        pillarName: "2. المراجعة الليلية والمطابقة اليومية",
+        role: "رئيس الحسابات / المدير المالي",
+        title: "المزامنة الاسترجاعية للفترات التاريخية السابقة عبر طابور المعالجة المجدولة",
+        description: "إعادة استيراد وترحيل قيود فترات محاسبية سابقة بأمان عبر طابور المعالجة الخلفية المجزأة لمنع تجمد الخوادم.",
+        objective: "مزامنة أسابيع أو أشهر سابقة من حركات الفندق غير المرحلة دون التسبب في انقطاع جلسة العمل أو إرهاق قاعدة البيانات.",
+        prerequisites: "1) وصول بطاقة الفندق لحالة 'جاهز للمزامنة اليدوية'. 2) اعتماد مالي للنطاق الزمني المطلوب ترحيله.",
+        steps: [
+          "الانتقال إلى: تكامل نظام إيزي للفنادق ← المزامنة ← المزامنة اليدوية.",
+          "اختيار الفندق المطلوب. تحديد تاريخ البداية (مثال: 2026-06-01) وتاريخ النهاية (مثال: 2026-06-30).",
+          "تحديد واجهات البيانات المطلوبة: المبيعات، المقبوضات، المدفوعات، قيود اليومية، والخدمات الإضافية.",
+          "النقر على زر 'إدراج في طابور المزامنة اليدوية' (Queue Manual Sync)، حيث ينشئ النظام سجلاً في طابور العمليات الخلفية.",
+          "الانتقال إلى: تكامل نظام إيزي للفنادق ← المزامنة ← عمليات المزامنة (Sync Runs) لمتابعة تقدم المهمة.",
+          "يقوم المحرك الخلفي تلقائياً بتقسيم الفترة إلى كتل أسبوعية للمبيعات وكتل شهرية للبيانات المالية.",
+          "متابعة شريط التقدم من 0% إلى 100% مع تزايد عدد الخطوات المنجزة.",
+          "عند الانتهاء، التأكد من تحول الحالة إلى 'تم بنجاح' (Done) ومراجعة القيود اليومية المولدة."
+        ],
+        entries: "توليد قيد ملخص يومي واحد (DSUM) لكل يوم تقويمي في النطاق الزمني؛ جميعها مرحلة ومتوازنة.",
+        verification: "فحص قيود اليومية عن الشهر: وجود 30 قيداً متوازناً يطابق كل منها تقرير المدير العام الصادر عن ذلك اليوم.",
+        caution: "يُمنع تشغيل عمليتي استرجاع تاريخي لنفس الفندق في وقت متزامن. انتظر وصول العملية الحالية لحالة 'تم بنجاح'."
+      },
+      {
+        id: "sop-16",
+        code: "SOP-OZO-16",
+        category: "diagnostics",
+        pillarName: "5. التشخيص والتدقيق الجنائي",
+        role: "رئيس الحسابات / مسؤول الأنظمة",
+        title: "تشخيص وتحليل إشعارات البريد الإلكتروني الآلية ومعالجة التنبيهات",
+        description: "قراءة وتحليل رسائل الفشل والتحذير الواردة آلياً عبر البريد الإلكتروني، وتحديد مرحلة الخطأ، وتنفيذ المعالجة التصحيحية.",
+        objective: "سرعة تدارك ومعالجة أي توقف أو نقص في بيانات المزامنة اليومية الواردة في الإشعار الفوري للإدارة المالية.",
+        prerequisites: "1) استلام بريد يحمل في عنوانه '[WARNING]' أو '[FAILED]'. 2) صلاحيات الدخول لنظام أودو.",
+        steps: [
+          "فتح الإيميل الآلي والاطلاع على جدول 'تفاصيل الأخطاء والتحذيرات' (Failure & Warning Details).",
+          "تحديد بيانات الخطأ: التاريخ، مصدر الواجهة (مبيعات/مقبوضات/مدفوعات)، المرحلة (اتصال/معالجة/ترحيل)، ودرجة الأهمية.",
+          "قراءة حقل 'السبب' (حيث يتم حجب كلمات المرور تلقائياً بنص [REDACTED] للأمان).",
+          "إذا كان الخطأ 'حساب غير مربوط للتصنيف X'، توجه إلى ربط الحسابات وقم بتعيين الحساب المالي المفقود.",
+          "إذا كان الخطأ 'انقطاع الاتصال بالخادم'، تحقق من استقرار شبكة الإنترنت في الفندق وجاهزية سحابة إيزي.",
+          "تسجيل الدخول إلى أودو، وفتح: سجلات المزامنة وتصفية الحالات على 'فشلت'.",
+          "بعد معالجة السبب الجذري، التوجه إلى المزامنة اليدوية وإعادة تشغيل مزامنة ذلك اليوم المحدد فقط."
+        ],
+        entries: "المزامنة التصحيحية تولد قيد الملخص اليومي المفقود عن اليوم المتعثر فور معالجة السبب.",
+        verification: "وصول رسالة بريد إلكتروني تالية تبدأ بـ '[SUCCESS]' مع خلو جدول الأخطاء من أي بنود.",
+        caution: "لا تتجاهل إيميلات 'التحذير' (Warning)، فالتحذير غالباً ما يشير إلى شريك تجاري غير مربوط قد يتسبب في خلل بأعمار الديون."
+      },
+      {
+        id: "sop-17",
+        code: "SOP-OZO-17",
+        category: "diagnostics",
+        pillarName: "5. التشخيص والتدقيق الجنائي",
+        role: "المراجع الداخلي / الدعم الفني المالي",
+        title: "التفتيش الجنائي في البيانات المرجعية الخام واستخدام معالج البحث",
+        description: "استعراض والبحث في نصوص استجابات واجهة البرمجة (JSON/XML) المؤرشفة لتتبع حركات نزيل أو أسعار غرف محددة.",
+        objective: "استرجاع النص الحرفي للمعاملات المستلمة من إيزي في أي يوم تاريخي لفض نزاعات الفواتير مع النزلاء أو الرد على استفسارات المراجعة.",
+        prerequisites: "1) صلاحيات المراجع الداخلي أو مدير النظام. 2) رقم الحركة، رقم الحجز (Folio)، أو التاريخ.",
+        steps: [
+          "الانتقال إلى: تكامل نظام إيزي للفنادق ← السجلات ← سجلات المزامنة (Sync Logs).",
+          "تحديد سجل اليومية للفندق المستهدف، ونوع الواجهة (مثال: المبيعات)، والتاريخ، وافتح السجل.",
+          "النقر على تبويب 'نص الاستجابة المنسق' (Formatted Response Payload) لاستعراض بنية JSON/XML المرقمة الأسطر.",
+          "للبحث السريع، النقر على زر الإجراء في أعلى الشاشة 'البحث في البيانات الخام' (Search Payload).",
+          "في معالج البحث، إدخال الكلمة المراد تتبعها (مثال: رقم الحجز 'F-10294' أو اسم النزيل).",
+          "تحديد نطاق البحث: 'نص الاستجابة' ثم النقر على زر 'بحث'.",
+          "يعرض المعالج أرقام الأسطر المطابقة بدقة والنصوص المحيطة بها.",
+          "توثيق التوقيت وتفاصيل التسعير لدعم الموقف المالي في ملف التدقيق."
+        ],
+        entries: "إجراء قراءة استقصائي فقط؛ يتيح تدوين ملاحظة تدقيق في pms.sync.log.audit.note عند رصد أي ملاحظة.",
+        verification: "العثور على رقم الحجز وتأكيد ما إذا كان إيزي قد أرسل الرسوم كإيراد غرفة أو كرسوم خدمة إضافية.",
+        caution: "تحتوي البيانات الخام على معلومات شخصية وأسماء نزلاء؛ يجب الالتزام الصارم بسياسات سرية وحماية البيانات."
+      },
+      {
+        id: "sop-18",
+        code: "SOP-OZO-18",
+        category: "admin",
+        pillarName: "6. الإدارة والتوطين والطباعة",
+        role: "رئيس حسابات الفندق / المدير المالي",
+        title: "توليد وطباعة سندات قيد الملخص اليومي المعتمدة للإدارة",
+        description: "طباعة سندات القيد اليومي الرسمية بتنسيق A4 أفقي ثنائي اللغة بهوية مجموعة الوتد لاعتمادها وتوقيعها رسمياً.",
+        objective: "إصدار مستند محاسبي ورقي معتمد يوثق الإيرادات والالتزامات الضريبية ومطابقة إغلاق الصناديق لتوقيع الإدارة العليا وأرشفته.",
+        prerequisites: "1) قيد DSUM مرحل. 2) توفر طابعة متصلة أو قارئ ملفات PDF.",
+        steps: [
+          "الانتقال إلى: المحاسبة ← العمليات المتنوعة واختيار قيد DSUM المرحل للفندق المطلوب.",
+          "النقر على قائمة 'طباعة' في شريط الإجراءات العلوي.",
+          "اختيار 'طباعة قيد اليومية' (Print Journal Entry).",
+          "يقوم النظام بتجميع قالب الطباعة QWeb بتنسيق A4 أفقي رسمي وأنيق.",
+          "التحقق من ترويسة السند: اسم الشركة، كود الفندق، التاريخ، مرجع القيد، والشعار الأخضر الزمردي للمجموعة.",
+          "مراجعة أسطر الملخص: تطابق إجمالي المدين مع إجمالي الدائن مع انعدام أي فروقات حسابية.",
+          "التأكد من إدراج جدول 'تفصيل ذمم الشركات' في نهاية السند شاملاً كافة الذمم المرفوعة.",
+          "طباعة المستند، والحصول على توقيع رئيس الحسابات والمدير العام، وأرشفته في السجل الورقي."
+        ],
+        entries: "إنشاء سجل طباعة مؤقت في معالج watan.journal.print.wizard؛ دون أي تعديل على الدفاتر المحاسبية.",
+        verification: "السند المطبوع يعرض إجماليات متوازنة تطابق دفاتر أودو وإغلاقات الشبكة النقدية تماماً.",
+        caution: "تأكد من ضبط لغة واجهة المستخدم على العربية لطباعة الترويسات والمصطلحات المعتمدة محلياً."
+      },
+      {
+        id: "sop-19",
+        code: "SOP-OZO-19",
+        category: "admin",
+        pillarName: "6. الإدارة والتوطين والطباعة",
+        role: "المدير المالي / مدير النظام",
+        title: "تعديل المصطلحات والتعريب المباشر عبر مركز الترجمة الفوري",
+        description: "تحديث وتخصيص مسميات واجهات النظام والتقارير المالية باللغتين العربية والإنجليزية في قاعدة البيانات مباشرة.",
+        objective: "مواءمة المصطلحات الفنية والترجمات المحاسبية مع العرف التشغيلي للفندق دون الحاجة لتعديل ملفات الكود أو إعادة تشغيل الخوادم.",
+        prerequisites: "1) صلاحيات إدارية في أودو. 2) الوصول لقائمة مركز الترجمة الفوري.",
+        steps: [
+          "الانتقال إلى: تكامل نظام إيزي للفنادق ← الإعدادات ← مركز الترجمة (Translation Center).",
+          "تصفية السجلات حسب 'الصفحة / المجال' (مثال: التقارير المالية أو قواعد القيود).",
+          "البحث عن المصطلح المطلوب تعديله (مثال بالإنجليزية: 'City Ledger Breakdown').",
+          "فتح بطاقة المصطلح والاطلاع على حقلي 'المصطلح الأصلي (EN)' و'الترجمة الحالية (AR)'.",
+          "تعديل النص العربي (مثال: تعديل 'تفصيل ذمم الشركات' إلى 'كشف حساب الشركات المدينة المعتمدة').",
+          "النقر على حفظ. يقوم النظام بإلغاء الكاش وتحديث الظهور في قاعدة البيانات فورياً.",
+          "تحديث شاشة التقرير المالي المستهدف للتأكد من ظهور المسمى العربي الجديد."
+        ],
+        entries: "تحديث سجلات جدول pms.translation.label ومزامنة سجلات ترجمة النظام ir.translation؛ بلا أثر محاسبي.",
+        verification: "فتح الشاشة المعنية بالواجهة العربية والتأكد من تطبيق التسمية المحاسبية المخصصة بدقة.",
+        caution: "لا تقم بتعديل كود المصطلح البرمجي (Key / Technical Code). قم حصراً بتعديل نصوص الترجمة المقروءة."
+      },
+      {
+        id: "sop-20",
+        code: "SOP-OZO-20",
+        category: "admin",
+        pillarName: "6. الإدارة والتوطين والطباعة",
+        role: "مدير قواعد البيانات / كبير مهندسي الأنظمة",
+        title: "بروتوكول التطهير الآمن لبيانات الاختبار في بيئات التطوير (Staging Cleanup)",
+        description: "تنفيذ الحذف المنظم لبيانات وقيود الاختبار في بيئات Odoo.sh التجريبية مع الحماية المطلقة لقواعد البيانات الحية.",
+        objective: "تنظيف بيئات الاختبار التجريبية من القيود الوهمية والشركاء التجريبيين قبل بدء اختبارات قبول المستخدم (UAT).",
+        prerequisites: "1) موافقة كتابية صريحة من مالك المشروع. 2) العمل حصراً على بيئة اختبار تجريبية Odoo.sh STAGING (محظور كلياً على الإنتاج).",
+        steps: [
+          "تسجيل الدخول إلى رابط بيئة الاختبار التجريبية المعتمدة (مثال: watandesignsgroupksa-stage-*.dev.odoo.com).",
+          "الانتقال إلى: تطهير بيانات الاختبار ← المعالجات ← معالج تطهير بيانات الاختبار (Staging Cleanup Wizard).",
+          "تحديد المصدر: 'نظام الفندق إيزي'، أو 'نقاط البيع أوبتيموس'، أو 'كلاهما'.",
+          "اختيار الفندق التجريبي، وتحديد النطاق الزمني الدقيق للقيود التجريبية المراد إزالتها.",
+          "تحديد خيارات الحذف: حذف قيود اليومية، حذف المدفوعات، حذف الفواتير، وحذف العملاء التجريبيين.",
+          "النقر على 'معاينة نطاق الحذف' لمراجعة إحصائية عدد السجلات والتأكد من عدم اشتمالها على بيانات فعلية.",
+          "في حقل نص التأكيد، كتابة العبارة الأمنية الإلزامية بدقة: 'حذف بيانات الاختبار' أو 'DELETE STAGING DATA'.",
+          "النقر على 'تنفيذ عملية التطهير'. ينفذ النظام الحذف على دفعات متتالية من 25 سجلاً مع نقاط حفظ تراجعية.",
+          "الاطلاع على تقرير التطهير النهائي في سجلات النظام والتأكد من تصفير العمليات التجريبية."
+        ],
+        entries: "حذف نهائي للقيود والمدفوعات والشركاء المحددة في بيئة الاختبار التجريبية فقط.",
+        verification: "اجتياز فحص التحقق البرمجي _assert_staging_database ومطابقة عبارة التأكيد، مع إزالة كافة السجلات المستهدفة.",
+        caution: "يُحظر منعاً باتاً محاولة تجاوز فحص بيئة الاختبار. هذه الأداة معطلة ومحظورة تماماً ببرمجيات أمان صارمة على خوادم الإنتاج الحية."
+      }
+    ];
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    // Render SOP Cards Grid
+    function renderSOPs() {
+      const grid = document.getElementById('sop-grid');
+      grid.innerHTML = '';
+
+      const filtered = sopsData.filter(sop => {
+        const matchesCat = currentFilter === 'all' || sop.category === currentFilter;
+        const q = searchQuery.trim().toLowerCase();
+        const matchesQuery = !q || 
+          sop.title.toLowerCase().includes(q) ||
+          sop.code.toLowerCase().includes(q) ||
+          sop.role.toLowerCase().includes(q) ||
+          sop.description.toLowerCase().includes(q) ||
+          sop.pillarName.toLowerCase().includes(q);
+        return matchesCat && matchesQuery;
+      });
+
+      document.getElementById('active-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full p-12 text-center glass-card rounded-2xl border border-slate-800">
+            <p class="text-sm text-slate-400 font-semibold mb-2">لم يتم العثور على إجراءات تشغيلية تطابق معايير البحث.</p>
+            <button onclick="setFilter('all'); document.getElementById('sop-search').value=''; handleSearch('');" class="px-4 py-2 rounded-xl bg-indigo-600/30 text-indigo-300 text-xs font-bold border border-indigo-500/40">
+              إعادة ضبط عوامل التصفية
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(sop => {
+        const card = document.createElement('div');
+        card.className = "glass-card spotlight-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer group hover:border-indigo-500/50 transition-all duration-300 text-right";
+        card.onclick = () => openSopModal(sop.id);
+
+        let badgeColor = "bg-indigo-500/10 text-indigo-400 border-indigo-500/20";
+        if (sop.category === 'onboarding') badgeColor = "bg-amber-500/10 text-amber-400 border-amber-500/20";
+        if (sop.category === 'daily') badgeColor = "bg-blue-500/10 text-blue-400 border-blue-500/20";
+        if (sop.category === 'city') badgeColor = "bg-cyan-500/10 text-cyan-400 border-cyan-500/20";
+        if (sop.category === 'pos') badgeColor = "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
+        if (sop.category === 'diagnostics') badgeColor = "bg-rose-500/10 text-rose-400 border-rose-500/20";
+        if (sop.category === 'admin') badgeColor = "bg-purple-500/10 text-purple-400 border-purple-500/20";
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md border ${badgeColor}">
+                ${sop.code}
+              </span>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 truncate max-w-[180px]" title="${sop.role}">
+                ${sop.role}
+              </span>
+            </div>
+            <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">
+              ${sop.pillarName}
+            </div>
+            <h3 class="text-base font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors leading-snug">
+              ${sop.title}
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              ${sop.description}
+            </p>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-indigo-400 font-semibold group-hover:-translate-x-1 transition-transform">
+            <span>عرض تفاصيل الإجراء الكامل</span>
+            <span>←</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Filter by Pillar
+    function setFilter(cat) {
+      currentFilter = cat;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(`'${cat}'`));
+      if (activeBtn) activeBtn.classList.add('active');
+      renderSOPs();
+    }
+
+    // Search Filter
+    function handleSearch(val) {
+      searchQuery = val;
+      renderSOPs();
+    }
+
+    // Open Modal
+    function openSopModal(id) {
+      const sop = sopsData.find(s => s.id === id);
+      if (!sop) return;
+
+      document.getElementById('modal-sop-code').textContent = sop.code;
+      document.getElementById('modal-sop-pillar').textContent = sop.pillarName;
+      document.getElementById('modal-sop-role').textContent = "الدور: " + sop.role;
+      document.getElementById('modal-sop-title').textContent = sop.title;
+
+      const stepsHtml = sop.steps.map((step, idx) => `
+        <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-indigo-600 text-white font-bold text-[11px] shrink-0 mt-0.5">${idx + 1}</span>
+          <span class="leading-relaxed text-slate-300 text-xs">${step}</span>
+        </li>
+      `).join('');
+
+      document.getElementById('modal-sop-content').innerHTML = `
+        <div class="space-y-4 text-right">
+          <!-- Section 1: Objective & Scope -->
+          <div class="p-3.5 rounded-xl bg-indigo-950/20 border border-indigo-500/20">
+            <span class="text-indigo-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">1. الهدف التشغيلي ونطاق الإجراء</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.objective}</p>
+          </div>
+
+          <!-- Section 2: Prerequisites -->
+          <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+            <span class="text-slate-400 font-bold block mb-1 uppercase tracking-wider text-[11px]">2. المتطلبات المسبقة وصلاحيات النظام</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.prerequisites}</p>
+          </div>
+
+          <!-- Section 3: Step-by-Step Procedure -->
+          <div class="space-y-2">
+            <span class="text-white font-bold block uppercase tracking-wider text-[11px]">3. تسلسل خطوات التنفيذ خطوة بخطوة</span>
+            <ul class="space-y-2">
+              ${stepsHtml}
+            </ul>
+          </div>
+
+          <!-- Section 4: Expected Entries -->
+          <div class="p-3.5 rounded-xl bg-blue-950/20 border border-blue-500/20">
+            <span class="text-blue-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">4. القيود المحاسبية والسجلات الفنية المتوقعة</span>
+            <p class="text-slate-300 leading-relaxed text-xs font-mono">${sop.entries}</p>
+          </div>
+
+          <!-- Section 5: Verification -->
+          <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/20">
+            <span class="text-emerald-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">5. معايير التحقق وجودة التنفيذ</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.verification}</p>
+          </div>
+
+          <!-- Section 6: Caution -->
+          <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/20">
+            <span class="text-rose-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">6. التنبيهات التشغيلية وإدارة المخاطر</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.caution}</p>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modal-overlay').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close Modal
+    function closeSopModal() {
+      document.getElementById('modal-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSopModal();
+    });
+
+    // Close on backdrop click
+    document.getElementById('modal-overlay').addEventListener('click', (e) => {
+      if (e.target.id === 'modal-overlay') closeSopModal();
+    });
+
+    // Initial Render
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSOPs();
+    });
+  </script>
+</body>
+</html>

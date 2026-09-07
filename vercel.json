@@ -85,6 +85,22 @@
       "destination": "/manuals/wdgroup/ezeeodooconnector/ar.html"
     },
     {
+      "source": "/manuals/wdgroup/ezeeodooconnector/features-en",
+      "destination": "/manuals/wdgroup/ezeeodooconnector/features-en.html"
+    },
+    {
+      "source": "/manuals/wdgroup/ezeeodooconnector/features-ar",
+      "destination": "/manuals/wdgroup/ezeeodooconnector/features-ar.html"
+    },
+    {
+      "source": "/manuals/wdgroup/ezeeodooconnector/sops-en",
+      "destination": "/manuals/wdgroup/ezeeodooconnector/sops-en.html"
+    },
+    {
+      "source": "/manuals/wdgroup/ezeeodooconnector/sops-ar",
+      "destination": "/manuals/wdgroup/ezeeodooconnector/sops-ar.html"
+    },
+    {
       "source": "/manuals/wdgroup/wdgroupwebsite",
       "destination": "/manuals/wdgroup/wdgroupwebsite/index.html"
     },
