@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>كتالوج الميزات والقدرات التشغيلية — موقع ومنصة مجموعة وتـن القابضة (wd-group-website) | مجموعة وتـن</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #08090C;
+      color: #f1f5f9;
+      font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+      direction: rtl;
+      text-align: right;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 17, 23, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(37, 99, 235, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(37, 99, 235, 0.7); }
+
+    .glass-card {
+      background: rgba(15, 17, 23, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(37, 99, 235, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-nav {
+      background: rgba(8, 9, 12, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(37, 99, 235, 0.12), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .category-pill {
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.875rem;
+      border-radius: 0.875rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 17, 23, 0.7);
+      color: #94a3b8;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      flex-shrink: 0;
+      font-family: 'IBM Plex Sans Arabic', sans-serif;
+    }
+    .category-pill:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: #f1f5f9;
+      transform: translateY(-1px);
+    }
+    .category-pill.active {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      border-color: rgba(147, 197, 253, 0.6);
+      color: #ffffff;
+      box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.45);
+      transform: translateY(-1px);
+    }
+    .category-pill .pill-badge {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      padding: 0.125rem 0.45rem;
+      border-radius: 9999px;
+      background: rgba(15, 17, 23, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.2s ease;
+    }
+    .category-pill.active .pill-badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body class="selection:bg-blue-600 selection:text-white pb-24">
+
+  <!-- خلفية متدرجة ديناميكية -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-20 -right-40 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px]"></div>
+    <div class="ambient-orb-2 absolute top-1/2 -left-40 w-[550px] h-[550px] bg-indigo-600/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <!-- شريط الملاحة العلوي الثابت -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- شعار المجموعة وعنوان الصفحة -->
+      <div class="flex items-center gap-3.5">
+        <a href="/manuals/wdgroup/ar#project-03" class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-800 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/25 border border-blue-400/40 hover:scale-105 transition-transform" title="الرجوع إلى بوابة الدليل الرئيسية">
+          WD
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-base sm:text-lg tracking-tight text-white">مجموعة وتـن القابضة</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/30 font-mono">
+              المشروع 03
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            كتالوج الميزات والقدرات التشغيلية الشاملة للمنصة وبوابة الإدارة التنفيذية
+          </p>
+        </div>
+      </div>
+
+      <!-- أزرار الإجراءات والتحويل واللغة -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/manuals/wdgroup/ar#project-03" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700/80 transition">
+          <span>←</span>
+          <span>بوابة وتـن</span>
+        </a>
+        <a href="/manuals/wdgroup/wdgroupwebsite/sops-ar" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-xs font-bold text-blue-300 border border-blue-500/40 transition">
+          <span>إجراءات التشغيل (SOPs)</span>
+          <span>←</span>
+        </a>
+        <a href="/manuals/wdgroup/wdgroupwebsite/features-en" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 font-mono transition" title="English Version">
+          EN
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- الحاوية الرئيسية -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+
+    <!-- لافتة الترحيب والرؤية المؤسسية -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 relative overflow-hidden">
+      <div class="relative z-10 max-w-4xl space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+          <span>46 ميزة تشغيلية عبر 8 ركائز استراتيجية متكاملة</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+          المرجع الشامل لميزات موقع ومنصة مجموعة وتـن القابضة (<span class="font-mono text-blue-400">wd-group-website</span>)
+        </h1>
+        <p class="text-sm text-slate-300 leading-relaxed">
+          وثيقة تقنية وتشغيلية موحدة تستعرض كافة إمكانيات الواجهة المؤسسية الفاخرة، متجر أثاث جرين وود الراقي، لوحة القيادة التنفيذية، وإدارة مسار المبيعات واستقطاب الكفاءات، مبنية وفق أحدث معايير Next.js وربط Odoo 19 وقواعد بيانات Supabase الموثقة.
+        </p>
+      </div>
+    </div>
+
+    <!-- شريط التصفية والبحث الثابت -->
+    <div class="sticky top-20 z-30 pt-2 pb-3 glass-nav border-y border-slate-800/80 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        
+        <!-- مسار الركائز القابل للتمرير الأفقي -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1" id="category-filters">
+          <button onclick="filterCategory('all')" class="category-pill active" data-category="all">
+            <span>كافة الميزات</span>
+            <span class="pill-badge">46</span>
+          </button>
+          <button onclick="filterCategory('pillar-1')" class="category-pill" data-category="pillar-1">
+            <span>1. الهوية المؤسسية والمعمارية</span>
+            <span class="pill-badge">6</span>
+          </button>
+          <button onclick="filterCategory('pillar-2')" class="category-pill" data-category="pillar-2">
+            <span>2. محفظة القطاعات الاستراتيجية</span>
+            <span class="pill-badge">6</span>
+          </button>
+          <button onclick="filterCategory('pillar-3')" class="category-pill" data-category="pillar-3">
+            <span>3. المتجر ومعرض الأثاث الفاخر</span>
+            <span class="pill-badge">6</span>
+          </button>
+          <button onclick="filterCategory('pillar-4')" class="category-pill" data-category="pillar-4">
+            <span>4. لوحة الإدارة والعمليات</span>
+            <span class="pill-badge">6</span>
+          </button>
+          <button onclick="filterCategory('pillar-5')" class="category-pill" data-category="pillar-5">
+            <span>5. طلبات B2B وإدارة الفرص</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-6')" class="category-pill" data-category="pillar-6">
+            <span>6. استقطاب الكفاءات والتوظيف</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-7')" class="category-pill" data-category="pillar-7">
+            <span>7. المساعد الذكي والاتصالات</span>
+            <span class="pill-badge">6</span>
+          </button>
+          <button onclick="filterCategory('pillar-8')" class="category-pill" data-category="pillar-8">
+            <span>8. الحوكمة والأمن والبنية التحتية</span>
+            <span class="pill-badge">6</span>
+          </button>
+        </div>
+
+        <!-- حقل البحث الفوري -->
+        <div class="relative w-48 sm:w-64 flex-shrink-0" id="search-container">
+          <input 
+            type="text" 
+            id="feature-search"
+            placeholder="ابحث في الميزات أو الأكواد..." 
+            oninput="handleSearch(this.value)"
+            class="w-full px-3.5 py-1.5 pr-9 rounded-xl bg-slate-900 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition text-right"
+          >
+          <svg class="w-4 h-4 text-slate-500 absolute right-3 top-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ملخص النتائج والعداد النشط -->
+    <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+      <div class="flex items-center gap-2">
+        <span>عرض الفئة:</span>
+        <span id="active-category-label" class="font-bold text-white">كافة الميزات</span>
+      </div>
+      <div class="font-mono">
+        <span id="filtered-count" class="font-bold text-blue-400">46</span> من إجمالي 46 ميزة نشطة
+      </div>
+    </div>
+
+    <!-- شبكة الميزات (46 ميزة مقسمة على 8 ركائز وفق المعيار المزدوج) -->
+    <div class="space-y-12" id="features-container">
+
+      <!-- ========================================================================= -->
+      <!-- الركيزة 1: الهوية المؤسسية وهيكلية المجموعة القابضة (6 ميزات)            -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-1">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">الركيزة 1: الهوية المؤسسية وهيكلية المجموعة القابضة</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">6 ميزات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-01 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-01</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">تصميم الواجهة وتجربة المستخدم</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">لغة التصميم الفاخرة بالأوبسيديان الداكن وعارض الفيديو البصري التفاعلي</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                نظام تصميم متطور في Next.js يرتكز على لوحة ألوان الأوبسيديان العميقة (<code class="font-mono text-[11px] text-blue-300">#08090C</code>، <code class="font-mono text-[11px] text-blue-300">#040507</code>، <code class="font-mono text-[11px] text-blue-300">#0F1117</code>) مع تدرجات الياقوت الأزرق الملكي (<code class="font-mono text-[11px] text-blue-300">#2563EB</code>) والدرجات الرملية الذهبية (<code class="font-mono text-[11px] text-amber-300">#C9A86A</code>)، مع تأثيرات الزجاج الضبابي ومكون مشغل الفيديو المسرّع بالعتاد (<code class="font-mono text-[11px]">HeroSectionVideo.tsx</code>).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                يبرز المكانة السيادية لمجموعة وتـن ككيان استثماري رائد وموثوق، ويعزز الثقة الفورية لدى الشركاء الحكوميين وكبار المستثمرين والمؤسسات بالتوافق مع مستهدفات رؤية المملكة 2030.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-02 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-02</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الحوكمة القانونية والضريبية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">الهوية القانونية المعتمدة، السجل التجاري 5950011057 والربط الضريبي</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تذييل ديناميكي وبطاقات اتصال تفاعلية ثنائية اللغة توثق السجل التجاري المعتمد (<code class="font-mono text-[11px] text-blue-300">CR: 5950011057</code>) والرقم الضريبي المسجل بهيئة الزكاة والضريبة والجمارك (<code class="font-mono text-[11px] text-blue-300">VAT: 300865965100003</code>) باسم <em class="text-slate-200">شركة تصاميم الوطن المحدودة</em> مع إحداثيات المقر الرئيسي بطريق الملك عبدالعزيز بنجران.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                يمكّن لجان المشتريات الحكومية والجهات الرقابية والمؤسسات المصرفية من استكمال متطلبات التدقيق الإلزامي والحوكمة فوراً دون الحاجة لمراسلات ورقية تمهيدية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-03 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-03</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">القيادة التنفيذية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">حوكمة الإدارة التنفيذية وعرض رسالة الرئيس التنفيذي التوجيهية</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                مكون قيادي مخصص (<code class="font-mono text-[11px]">CEOQuote.tsx</code>) ولوحة إدارة محتوى تنفيذية (<code class="font-mono text-[11px]">/admin/content/leadership</code>) يعرض رؤية الرئيس التنفيذي المهندس محمد علي صالح الشيباني، استراتيجية التوسع، وقنوات التواصل المباشر مع المكتب التنفيذي (<code class="font-mono text-[11px]">ceo@wdgroup.online</code>).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                يضفي الشفافية والمسؤولية القيادية على الصفقات الاستراتيجية، ويعزز التواصل المباشر بين قيادات القطاع العام والخاص مع صاحب القرار النهائي في المجموعة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-04 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-04</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الاستراتيجية والرؤية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">مصفوفة مواءمة القيم المؤسسية ومستهدفات رؤية المملكة 2030</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                وحدة متكاملة للتخطيط الاستراتيجي (<code class="font-mono text-[11px]">VisionMissionValues.tsx</code>) توثق ركائز الجودة، توطين الصناعة، الاستدامة البيئية، وتوسيع القدرات التشغيلية للمصانع والفنادق تماشياً مع مؤشرات الأداء الوطنية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                يؤهل المجموعة لنيل الأفضلية في عقود المحتوى المحلي ومشاريع صندوق الاستثمارات العامة (PIF) عبر إثبات الالتزام بتصنيع المنتجات داخل مدن المملكة وتوطين الكفاءات.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-05 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-05</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">التكامل والتعاون المؤسسي</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">مصفوفة التكامل بين القطاعات وسلسلة القيمة المضافة المغلقة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                مخطط هيكلي تفاعلي (<code class="font-mono text-[11px]">HoldingSynergy.tsx</code>) يوضح دورة التكامل الاقتصادي بين مصانع جرين وود التي تصنع وتورّد الأثاث، شركة تصاميم الوطن التي تنفذ أعمال المقاولات والديكور، وفنادق سويس بلو التي تدير العمليات التشغيلية الفندقية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                يقدم عرض قيمة متفرداً للعملاء الاستثماريين (Turnkey Hospitality Solutions) بالحصول على التصميم والتصنيع والتشغيل الفندقي تحت مظلة كيان سعودي واحد متكامل.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-06 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-06</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">مؤشرات الأداء التشغيلية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">شريط مؤشرات الأداء الحية والعدادات الرقمية التفاعلية للمجموعة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                مكون عدادات رقمية متحركة (<code class="font-mono text-[11px]">AnimatedCounter.tsx</code>) يعتمد على IntersectionObserver ويعرض تلقائياً إحصائيات المجموعة: 6 منشآت فندقية، 3 مصانع أتمتة، +500 مشروع منفذ، و+1,200 وحدة فندقية تحت الإدارة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                يبرهن على الحجم السوقي الحقيقي للمجموعة في الثواني الخمس الأولى من تصفح الموقع، مما يضاعف معدلات التحويل للفرص الاستثمارية الكبرى.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- الركيزة 2: محفظة القطاعات الاستراتيجية للكيان القابض (6 ميزات)            -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-2">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">الركيزة 2: محفظة القطاعات الاستراتيجية للكيان القابض</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">6 ميزات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-07 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-07</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">قطاع الضيافة</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">بوابة قطاع الضيافة واستعراض منظومة فنادق سويس بلو الستة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                صفحة متخصصة (<code class="font-mono text-[11px]">/sectors/hospitality</code>) تستعرض العقارات الفندقية الستة للمجموعة (فندق سويس بلو جدة، سويس بلو ريزيدنس شرق وغرب جدة، سويس بلو بلازا جازان، فيناس الرياض، وتوليب الروضة الرياض) مع روابط الحجز وتفاصيل الغرف.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                توحيد إدارة السمعة المؤسسية لمنظومة الفنادق، ورفع ولاء النزلاء عبر استعراض التغطية الجغرافية الواسعة للعلامة في المدن والمناطق الرئيسية بالمملكة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-08 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-08</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">قطاع الصناعة والإنتاج</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">بوابة قطاع الصناعة واستعراض خطوط إنتاج مصانع جرين وود الثلاثة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                مركز رقمي متقدم (<code class="font-mono text-[11px]">/sectors/manufacturing</code>) يوثق البنية التحتية لمصانع جرين وود في الرياض ونجران، قدرات مناشير CNC الدقيقة، كبائن دهان البولي يوريثان الآلية، وتصنيع الأثاث الفندقي والمكتبي الفاخر.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                يثبت الجاهزية الصناعية لاستلام طلبيات التأثيث الضخمة للأبراج والمجمعات السكنية والمشاريع الفندقية الكبرى، مع ضمان أعلى معايير الجودة وسرعة التسليم.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-09 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-09</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">قطاع المقاولات والهندسة</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">بوابة قطاع المقاولات واستعراض حلول التشطيبات المتكاملة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                واجهة هندسية تفاعلية (<code class="font-mono text-[11px]">/sectors/contracting</code>) توثق أعمال شركة تصاميم الوطن المحدودة في المقاولات العامة، الديكور الداخلي، أعمال النجارة المعمارية، والأعمال الكهروميكانيكية (MEP) للمشاريع الفندقية والتجارية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                يمنح المطورين العقاريين ثقة كاملة بالقدرة على تسليم المشاريع الإنشائية والتأثيثية بنظام المفتاح (Turnkey Delivery) وفق الجداول الزمنية المحددة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-10 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-10</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">التنقل البصري والتفاعل</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">محور القطاعات التفاعلي ومبدل السمات البصرية الديناميكي</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                مكون متقدم (<code class="font-mono text-[11px]">SectorsHub.tsx</code>) يدير الانتقال السلس بين علامات التبويب الثلاثة للقطاعات مع تبديل ديناميكي لسمات الألوان (أزرق ملكي للضيافة، رمادي صناعي للتصنيع، وبرونزي ذهبي للمقاولات) مع مؤثرات حركية خفيفة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                يمكن الزائر من استيعاب مجالات أعمال المجموعة المتعددة خلال ثوانٍ معدودة دون تشتت، مما يرفع مدة التفاعل ومعدل طلب عروض الأسعار.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-11 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-11</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">العلامات التجارية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">عارض العلامات التجارية التفاعلي وشارات الهوية البصرية للشركات</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                شريط متحرك دائري (<code class="font-mono text-[11px]">BrandPortfolio.tsx</code>) يعرض شعارات الكيانات الشقيقة (سويس بلو، جرين وود، تصاميم الوطن) متضمناً بطاقات تفاعلية تعرض نبذة عن كل علامة، موقعها الإلكتروني، وأبرز إنجازاتها.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                يعزز قيمة العلامة الأم (Holding Brand Equity) ويوفر انتقالاً سلساً لحركة الزوار بين مختلف منصات ومواقع شركات المجموعة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-12 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-12</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الثقة وشهادات العملاء</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">شبكة آراء العملاء وشهادات الاعتماد المؤسسي للمشاريع الكبرى</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                مكون شبكي موثق (<code class="font-mono text-[11px]">HomeTestimonials.tsx</code>) مدمج مع لوحة التحكم لنشر توصيات واعتمادات كبار العملاء في قطاعات الضيافة، المقاولات، وتأثيث الفنادق والمقرات المؤسسية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                يقدم إثباتاً عملياً للريادة والموثوقية (Social Proof)، مما يسهل اعتماد العروض الفنية لدى لجان المشتريات ومكاتب الاستشارات الهندسية.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- الركيزة 3: المتجر الإلكتروني ومعرض الأثاث الفاخر لجرين وود (6 ميزات)        -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-3">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">الركيزة 3: المتجر الإلكتروني ومعرض الأثاث الفاخر لجرين وود</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">6 ميزات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-13 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-13</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">التجارة الإلكترونية للأثاث</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">معرض أثاث جرين وود الفاخر والكتالوج الرقمي الشامل للمنتجات</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                صفحة كتالوج رقمي وتفاصيل منتجات متقدمة (<code class="font-mono text-[11px]">/furniture</code>) تتيح تصفح التشكيلات الفاخرة، غرف النوم، أطقم المعيشة، المكاتب التنفيذية، وقطع الديكور مع تصنيفات دقيقة ومخططات القياسات الفنية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تحويل قدرات مصانع جرين وود إلى قناة بيع رقمية مباشرة (D2C & B2B) تعمل على مدار الساعة، مما يخفض تكلفة معارض الأثاث التقليدية بنسبة تفوق 40%.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-14 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-14</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">تخصيص الخامات والمواصفات</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">مُهيئ الأقمشة والخامات وألوان الدهان ومقاسات الأثاث المخصصة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                محرك تهيئة تفاعلي (<code class="font-mono text-[11px]">lib/furnitureData.ts</code>) يتيح للعميل اختيار نوع القماش (مخمل، كتان، جلد طبيعي)، درجات دهان الأخشاب (جوز طبيعي، بلوط أسود، بيج دافئ)، وتعديل الأبعاد مع احتساب السعر تلقائياً.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                إلغاء أخطاء الطلبيات الخاصة بالمصانع، وتوفير تجربة تفصيل أثاث راقية تلبي متطلبات مصممي الديكور الداخلي وأصحاب القصور والفنادق الفاخرة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-15 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-15</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الواقع المعزز والأبعاد الثلاثية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">المعاينة ثلاثية الأبعاد وتقنية الواقع المعزز (AR) للمساحات الواقعية</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                عارض نماذج ثلاثية الأبعاد مدمج (<code class="font-mono text-[11px]">model-viewer</code>) يدعم صيغ GLTF/USDZ لتمكين العميل من معاينة قطعة الأثاث بزاوية 360 درجة وإسقاطها داخل غرفته مباشرة عبر كاميرا الهاتف الذكي بقياساتها الحقيقية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تقليل معدلات إرجاع الأثاث بنسبة تزيد عن 85% نتيجة ملاءمة الأبعاد مسبقاً، وتقديم تجربة تسوق تقنية تماثل كبرى المتاجر العالمية الفاخرة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-16 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-16</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">خدمة العملاء والتتبع</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">بوابة التتبع المباشر لطلبات تصنيع الأثاث برقم الطلب ورقم الجوال</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                بوابة تتبع مستقلة وسريعة (<code class="font-mono text-[11px]">/furniture/track</code>) تتيح للعميل إدخال الرقم المرجعي للطلب ورقم الجوال للاطلاع على الخط الزمني الفعلي للتصنيع: قيد المراجعة ← قص الأخشاب ← التجميع والدهان ← التنجيد ← الشحن والتوصيل.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تخفيف الضغط على مركز الاتصال وخدمة العملاء، وبناء شفافية تشغيلية كاملة تمنح العميل راحة البال خلال فترة تصنيع طلبيات الأثاث المفصلة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-17 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-17</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">السداد والخدمات اللوجستية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">إتمام الطلب متعدد الخطوات مع خيارات التركيب الفاخر والتثبيت الجداري</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                نظام دفع وإتمام طلبات متقدم (<code class="font-mono text-[11px]">/furniture/checkout</code>) يتضمن حساب الضرائب والشحن تلقائياً، إدخال العناوين الوطنية، وخيارات إضافية لخدمات الفنيين المعتمدين (توصيل فائق العناية، تجميع الأثاث، والتثبيت الآمن بالجدران).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تقديم تجربة استلام وتركيب متكاملة بدون متاعب للعميل، وزيادة متوسط قيمة سلة الشراء من خلال تقديم خدمات التركيب الاحترافية الإضافية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-18 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-18</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الربط مع تخطيط الموارد ERP</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">قناة المزامنة الآلية مع نظام Odoo ERP للمنتجات والأسعار والمخزون</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                مكتبة ربط متطورة عبر بروتوكول XML-RPC (<code class="font-mono text-[11px]">lib/odoo/odooClient.ts</code>) تزامن الأصناف والمخزون الحي والأسعار وفواتير العملاء مباشرة بين متجر جرين وود الإلكتروني ونظام Odoo 19 ERP المركزي للمصانع.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                منع بيع أصناف غير متوفرة خاماتها، وتحديث الأسعار المركزية بضغطة زر واحدة دون الحاجة لإدخال يدوي مزدوج في المتجر ونظام إدارة المصانع.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- الركيزة 4: لوحة الإدارة التنفيذية والعمليات المتكاملة (6 ميزات)            -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">الركيزة 4: لوحة الإدارة التنفيذية والعمليات المتكاملة</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">6 ميزات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-19 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-19</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الأمن وإدارة الصلاحيات</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">بوابة تسجيل الدخول الإداري الآمن وتحديد الصلاحيات المرتكزة على الأدوار</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                بوابة تسجيل دخول آمنة (<code class="font-mono text-[11px]">/admin/login</code>) مدعومة بطبقة حماية وسيطة (<code class="font-mono text-[11px]">middleware.ts</code>) تدير جلسات العمل وتفرض 6 مستويات صلاحيات: المالك (<code class="font-mono text-[11px]">owner</code>)، المدير العام، محرر المحتوى، مسؤول المبيعات CRM، مسؤول التوظيف HR، ومستخدم القراءة فقط.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حماية البيانات المالية وطلبات التوظيف والمبيعات الحساسة، ومنع أي تعديلات غير مصرح بها على محتوى الموقع أو الكتالوج.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-20 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-20</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">لوحة القيادة التنفيذية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">لوحة قيادة مؤشرات الأداء التشغيلية وموجز الأنشطة والعمليات الفورية</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                شاشة تحكم مركزية (<code class="font-mono text-[11px]">/admin</code>) تعرض للقيادة التنفيذية إجمالي المبيعات، الطلبات المعلقة، الاستفسارات التجارية الجديدة، المتقدمين الجدد للوظائف، وسجل الأنشطة الحديث في مكان واحد.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تمكين الرئيس التنفيذي ومديري القطاعات من اتخاذ قرارات سريعة مبنية على أرقام تشغيلية دقيقة في الوقت الفعلي دون الحاجة لطلب تقارير يدوية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-21 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-21</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">إدارة المتجر والمبيعات</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">وحدة إدارة المتجر الإلكتروني الشاملة ذات الأقسام التشغيلية الثمانية</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                لوحة عمليات المتجر (<code class="font-mono text-[11px]">/admin/ecommerce</code>) المتضمنة 8 أقسام فرعية: النظرة العامة، إدارة الطلبات، كتالوج المنتجات، مراقبة المخزون، قاعدة العملاء، التحليلات والتقارير، الحملات الترويجية، وإعدادات المتجر.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                التحكم الكامل في دورة التجارة الإلكترونية للأثاث من نقطة إضافة المنتج وحتى التحصيل المالي ومتابعة رضا العميل دون مغادرة النظام.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-22 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-22</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">سلسلة تصنيع وتوصيل الطلبات</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">إدارة دورة حياة الطلبات متعددة المراحل والتوجيه الآلي للمصانع</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                محرك تتبع الطلبات في لوحة الإدارة (<code class="font-mono text-[11px]">OrdersTab.tsx</code>) يتيح تحديث الحالات التشغيلية (قيد الانتظار ← قيد المعالجة ← في خط الإنتاج بالمصنع ← قيد الشحن ← تم التسليم والتركيب) وتعيين المصنع المنفذ.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                منع تأخير تسليم الأثاث، ومراقبة أداء مصانع المجموعة في الالتزام بأوقات الإنتاج المتفق عليها مع العملاء.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-23 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-23</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">المخزون والمواد الخام</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">مراقبة مخزون المواد الخام بالمصانع وتنبيهات مستويات إعادة الطلب</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                قسم مراقبة المخزون (<code class="font-mono text-[11px]">InventoryTab.tsx</code>) الذي يوضح كميات ألواح الخشب، رولات الأقمشة، الإكسسوارات المعدنية، والدهانات المتوفرة في مستودعات مصانع الرياض ونجران مع مؤشرات انخفاض المخزون.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تجنب توقف خطوط الإنتاج بسبب نفاد الخامات، وتخطيط عمليات الشراء المسبقة للمواد الخام بأسعار تنافسية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-24 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-24</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">المستندات والفواتير</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">سندات التسليم والفواتير التجارية وإيصالات القبض القابلة للطباعة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                قوالب فواتير وسندات استلام متوافقة مع الطباعة المباشرة (<code class="font-mono text-[11px]">OrdersTab.tsx</code>) تحمل شعار المجموعة، الرقم الضريبي، تفاصيل المنتج والخامات، وتوقيعات الاستلام الخاصة بفريق التركيب والعميل.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                توثيق عملية تسليم الأثاث قانونياً ومحاسبياً، وتوفير إثبات خطي باستلام وتركيب القطع لضمان حقوق كافة الأطراف.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- الركيزة 5: إدارة علاقات العملاء وطلبات B2B التجارية (5 ميزات)             -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">الركيزة 5: إدارة علاقات العملاء وطلبات B2B التجارية</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">5 ميزات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-25 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-25</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">استقبال الطلبات الذكي</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">نموذج الاستفسارات التجارية متعدد القطاعات والموجه الآلي الذكي</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                نموذج تفاعلي متقدم (<code class="font-mono text-[11px]">/contact</code>) يسمح للعميل باختيار القطاع المعني (ضيافة، تصنيع، مقاولات، أو استثمار عام) وتحديد الميزانية المقدرة وحجم المشروع مع توجيه الطلب آلياً إلى القسم المختص.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                القضاء على التأخير في معالجة طلبات الشركات، ورفع نسبة إغلاق الصفقات عبر إيصال العميل مباشرة إلى مهندس المبيعات المختص في نفس يوم العمل.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-26 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-26</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الصفقات الاستراتيجية والمناقصات</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">المسار الاستراتيجي لتحويل المشاريع الحكومية والفرص الكبرى للمكتب التنفيذي</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                منطق برمجي في خادم التطبيق (<code class="font-mono text-[11px]">/api/contact</code>) يفحص قيمة ومستوى الاستفسار، وعند تصنيف الطلب كمناقصة حكومية أو استثمار استراتيجي أو تأثيث برج فندقي، يتم إشعار مكتب الرئيس التنفيذي فوراً عبر البريد ورسائل WhatsApp.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                ضمان عدم ضياع أي فرصة كبرى أو مناقصة مليونية في صندوق البريد العام، وسرعة الاستجابة بأعلى درجات الاهتمام والجاهزية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-27 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-27</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">إدارة الفرص والمبيعات CRM</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">لوحة إدارة مراحل واستفسارات العملاء CRM والتحويل لمبيعات نشطة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                وحدة إدارة علاقات العملاء في لوحة التحكم (<code class="font-mono text-[11px]">/admin/crm/inquiries</code>) التي تنظم الطلبات بحالات دقيقة (جديد، قيد المتابعة، تم تقديم عرض سعر، مؤهل للشراكة، مغلق/تم التعاقد).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                رؤية واضحة ومباشرة لخط سير الصفقات (Sales Pipeline) وتمكين إدارة المجموعة من متابعة أداء فريق تطوير الأعمال وتحقيق الأهداف البيعية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-28 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-28</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">التعاون الداخلي والتوثيق</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">نافذة تفاصيل العميل والملاحظات الداخلية وسجل متابعات فريق المبيعات</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                درج جانبي تفاعلي (<code class="font-mono text-[11px]">LeadDetailDrawer.tsx</code>) يتيح لمسؤولي المبيعات تدوين ملخص المكالمات الهاتفية، إرفاق عروض الأسعار، وتسجيل التوصيات الفنية لكل عميل بشكل سري ومحمي.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حفظ الذاكرة المؤسسية للمحادثات مع العملاء، بحيث يمكن لأي عضو بالفريق متابعة العميل باحترافية تامة في حال غياب الموظف المسؤول.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-29 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-29</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الاتصالات التلقائية والبريد</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">محرك الإرسال البريدي متعدد القنوات التلقائي عبر خوادم Resend وBrevo</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                محرك بريدي مدمج في (<code class="font-mono text-[11px]">lib/email/</code>) يرسل إشعارات تأكيد استلام الطلب فورياً للعميل برسائل رسمية أنيقة، مع إرسال تنبيهات داخلية مشفرة لفرق المبيعات المختصة لكل قطاع.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تأكيد احترافية المجموعة وانضباطها التقني في عيون العملاء والشركاء منذ اللحظة الأولى للتواصل.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- الركيزة 6: استقطاب الكفاءات والكوادر البشرية ونظام التوظيف (5 ميزات)       -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">الركيزة 6: استقطاب الكفاءات والكوادر البشرية ونظام التوظيف</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">5 ميزات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-30 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-30</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">بوابة التوظيف العامة</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">بوابة الوظائف الشاغرة العامة مع تصنيف الأقسام والمدن ومستويات الخبرة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                بوابة التوظيف المخصصة (<code class="font-mono text-[11px]">/careers</code>) التي تعرض الوظائف المتاحة في مصانع الأثاث، الفنادق، إدارة المقاولات، أو المقر الرئيسي مع أدوات فلترة לפי المدينة والقطاع ونموذج تقديم إلكتروني مباشر.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                استقطاب أفضل الكوادر والمهندسين السعوديين والمحترفين دون الاعتماد على منصات التوظيف الوسيطة باهظة التكلفة، ودعم مستهدفات التوطين (نطاقات).
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-31 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-31</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">إدارة ونشر الشواغر</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">محرر وناشر الوظائف الإلكتروني وتحديد متطلبات التأهيل والشروط</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                وحدة نشر الشواغر في لوحة الإدارة (<code class="font-mono text-[11px]">/admin/hr/jobs</code>) التي تتيح لمسؤولي الموارد البشرية إنشاء إعلانات الوظائف وتحديد المسمى والوصف والمهام والشروط وسنوات الخبرة المطلوبة وتاريخ إغلاق التقديم.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                السرعة الفائقة في فتح وإغلاق الشواغر التوظيفية للمشاريع الفندقية والمصانع الجديدة بمجرد صدور الموافقات التشغيلية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-32 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-32</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">نظام تتبع المتقدمين ATS</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">نظام تتبع المتقدمين (ATS) وإدارة خط سير وفرز طلبات التوظيف</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                كونسول الموارد البشرية المتطور (<code class="font-mono text-[11px]">/admin/hr/applications</code>) الذي يرتب طلبات التوظيف وفق مراحل المقابلات: تم التقديم ← القائمة المختصرة ← المقابلة الأولية ← المقابلة الفنية ← العرض الوظيفي ← تم التعيين.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تنظيم كامل لعمليات التوظيف ومنع ضياع السير الذاتية المتميزة، وتقليص زمن التعيين من شهور إلى أيام معدودة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-33 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-33</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">تقييم الكفاءات</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">نافذة تقييم المرشحين بالنجوم وتدوين الملاحظات السرية للمقابلات</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                درج فحص المرشحين (<code class="font-mono text-[11px]">CandidateDrawer.tsx</code>) الذي يتيح لفريق المقابلات وضع تقييم من 1 إلى 5 نجوم لكل مرشح، وكتابة ملخص نقاط القوة والراتب المتوقع والتوصية النهائية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                مقارنة عادلة وموضوعية بين المتقدمين واختيار الكفاءة الأنسب لكل منصب قيادي أو تشغيلي في المجموعة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-34 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-34</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">حماية وسرية البيانات</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">التخزين السحابي المشفر للسير الذاتية ومستندات المتقدمين في Supabase Storage</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                نظام تخزين آمن ومحمي بالصلاحيات (<code class="font-mono text-[11px]">/api/careers</code>) يقوم برفع ملفات PDF للسير الذاتية وتشفيرها داخل حاوية خاصة (<code class="font-mono text-[11px]">resumes</code>) في Supabase مع روابط وصول مؤقتة فقط.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                الامتثال الكامل لنظام حماية البيانات الشخصية السعودي (PDPL) وحماية خصوصية وأرقام هواتف المرشحين من أي تسريب.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- الركيزة 7: المساعد الذكي وقنوات الاتصالات المتكاملة (6 ميزات)              -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-7">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">الركيزة 7: المساعد الذكي وقنوات الاتصالات المتكاملة</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">6 ميزات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-35 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-35</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">المساعد الذكي التوليدي</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">المساعد الذكي التنفيذي المعتمد على OpenAI ChatKit للإجابة الفورية</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                واجهة محادثة ذكية مدمجة (<code class="font-mono text-[11px]">/api/chatkit</code>) تدعم اللغة العربية والإنجليزية وتوفر إجابات فورية ودقيقة عن خدمات المجموعة، أسعار الأثاث، مواقع الفنادق، وتقديم عروض الأسعار.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                خدمة عملاء فائقة السرعة على مدار الساعة طوال أيام الأسبوع دون توقف، وتوجيه الزوار مباشرة إلى قنوات الشراء وحجز الغرف.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-36 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-36</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">قاعدة المعرفة والذكاء الاصطناعي</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">تخصيص وتغذية قاعدة معرفة الذكاء الاصطناعي وصياغة التوجيهات المؤسسية</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                لوحة تحكم مرنة لتغذية المساعد الذكي بحقائق المجموعة، السياسات الداخلية، خطط الأسعار، وقوائم الممنوعات لضمان عدم اختلاق معلومات غير دقيقة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                انضباط الإجابات المقدمة للعملاء وضمان تمثيل العلامة التجارية للمجموعة بأعلى معايير اللباقة والدقة التجارية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-37 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-37</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">قوالب الرسائل البريدية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">محرر قوالب البريد الإلكتروني للمنظومة والمعاينة المباشرة قبل الإرسال</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                وحدة متخصصة (<code class="font-mono text-[11px]">/admin/system/emails</code>) تتيح تعديل نصوص ورسائل تأكيد الطلبات، استلام السير الذاتية، وإشعارات الشحن مع المعاينة الفورية لكافة مقاسات الشاشات والهواتف.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                الحفاظ على هوية بصرية موحدة وراقية في كافة المراسلات الرسمية للمجموعة دون الحاجة لتدخل مبرمجين خارجيين.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-38 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-38</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">التنبيهات الفورية عبر الواتساب</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">تنبيهات WhatsApp Business Cloud الفورية للطلبات والاستفسارات الهامة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                ربط واجهة برمجة تطبيقات WhatsApp الرسمية لإرسال رسائل آلية فورية لهواتف مديري القطاعات والمبيعات عند ورود طلب شراء كبير أو مناقصة مستعجلة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                الاستجابة للفرص البيعية خلال دقائق حتى أثناء تنقل مسؤولي المبيعات خارج مكاتبهم، مما يضاعف رضا العملاء والقدرة التنافسية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-39 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-39</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الحسابات البنكية والتحويلات</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">سجل الحسابات البنكية المعتمدة للمجموعة وتعليمات الحوالات الرسمية</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                واجهة موثقة وآمنة (<code class="font-mono text-[11px]">/api/banking</code>) تعرض الآيبان (IBAN) وأسماء البنوك المعتمدة باسم <em class="text-slate-200">شركة تصاميم الوطن المحدودة</em> مع إمكانية نسخ رقم الآيبان بضغطة واحدة وتوليد كود QR للتحويل البنكي السريع.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تأمين عمليات السداد المالي ضد أخطاء التحويل البنكي، ومنع أي محاولات احتيال عبر توثيق أرقام الحسابات الرسمية فقط.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-40 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-40</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">المكتبة والوسائط الرقمية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">مدير الأصول الرقمية (DAM) ومكتبة الصور ومقاطع الفيديو الترويجية</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                وحدة إدارة الوسائط في لوحة التحكم (<code class="font-mono text-[11px]">/admin/media</code>) تتيح رفع وتنظيم وضغط صور الفنادق والمصانع ومقاطع الفيديو بدقة 4K مع توليد صيغ WebP الحديثة تلقائياً لتسريع التصفح.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                سرعة تحميل فائقة لصفحات الموقع وتوفير الوقت لفريق التسويق في تحديث الصور والحملات الإعلانية.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- الركيزة 8: الحوكمة، الأمن السيبراني والبنية التحتية (6 ميزات)              -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-8">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">الركيزة 8: الحوكمة، الأمن السيبراني والبنية التحتية</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">6 ميزات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-41 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-41</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">حماية بيئة المعاينة والتطوير</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">بوابة الحماية بكلمة مرور للموقع الشامل لبيئات التطوير والمعاينة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                طبقة حماية طرفية على مستوى الحافة (<code class="font-mono text-[11px]">middleware.ts</code>) مع متغير بيئي (<code class="font-mono text-[11px]">SITE_PASSWORD</code>) تمنع الوصول للجمهور ومحركات البحث إلى نطاق المعاينة (<code class="font-mono text-[11px]">test.wdgroup.online</code>) إلا بعد إدخال كلمة المرور المعتمدة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تمكين الإدارة من مراجعة الميزات والأسعار الجديدة بسرية تامة قبل إطلاقها رسمياً للجمهور.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-42 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-42</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">سجل الرقابة والتدقيق الأمني</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">سجل التدقيق الأمني الشامل وتتبع العمليات وعناوين IP للمستخدمين</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                وحدة التدقيق الأمني (<code class="font-mono text-[11px]">/admin/system/audit-logs</code>) التي تسجل كل إجراء في لوحة التحكم (تسجيل الدخول، تعديل الأسعار، تغيير حالات الطلبات، حذف الملفات) متضمناً اسم الموظف والتوقيت وعنوان IP والمتصفح.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حوكمة تشغيلية صارمة تمنع التلاعب بالأسعار أو البيانات وتسهل التحقيق الداخلي في أي خطأ إداري بسرعة ودقة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-43 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-43</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">إدارة المفاتيح والربط</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">خزنة المفاتيح المشفرة وإدارة أسرار واجهات الربط والتكاملات API</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                بطاقة تكاملات آمنة (<code class="font-mono text-[11px]">IntegrationsSecretsCard.tsx</code>) تتيح للإدارة تحديث مفاتيح Odoo ERP، خوادم البريد، وOpenAI دون لمس الكود البرمجي مع إخفاء المفاتيح السرية بنجوم الحماية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حماية أسرار النظام التقنية وتمكين مهندس الدعم من تحديث الروابط والتكاملات فورياً دون الحاجة لإعادة نشر الكود.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-44 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-44</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">تحسين محركات البحث SEO</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">محرك تحسين محركات البحث والبيانات المنظمة JSON-LD وبطاقات التواصل</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                وحدة إدارة السيو (<code class="font-mono text-[11px]">/admin/seo</code>) التي تتيح تخصيص العناوين والكلمات المفتاحية لكل صفحة، وبناء مخططات Schema المنظمة (Organization, Corporation, Product) لتعريف محرك بحث Google بكيانات المجموعة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تصدر نتائج البحث في المملكة للكلمات الهامة (أثاث فندقي، مصانع أخشاب، مقاولات فنادق) وجذب حركة زوار عضوية مجانية ذات قيمة تجارية عالية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-45 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-45</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الفهرسة والأرشفة الرقمية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">خريطة الموقع الديناميكية وموجه ملف Robots.txt البرمجي المؤتمت</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                مسارات توليد ديناميكية في Next.js (<code class="font-mono text-[11px]">sitemap.ts</code> و<code class="font-mono text-[11px]">robots.ts</code>) تقوم بتحديث روابط المنتجات والفنادق والوظائف تلقائياً فور نشرها وإرسالها لعناكب الفهرسة مع عزل لوحة الإدارة من الفهرسة.
+              </p>
+            </div>
+
+            <div class="p-4xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5 p-4 rounded-xl">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                أرشفة سريعة للمنتجات الجديدة في غضون ساعات من إطلاقها، مما يمنع ظهور صفحات قديمة أو مفقودة للزوار.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-46 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-46</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">مراقبة استقرار الخوادم</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">مراقب صحة النظام الفوري ومحرك تشخيص زمن الاستجابة وقواعد البيانات</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">ما هي هذه الميزة؟ (القدرات التقنية)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                شاشة تشخيص حية في لوحة الإدارة (<code class="font-mono text-[11px]">/admin/system/health</code>) تفحص الاتصال بقاعدة بيانات Supabase، خوادم Odoo، بوابات الدفع، وزمن استجابة الشبكة (Latency) مع إبراز أي خلل باللون الأحمر فوراً.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                استمرارية تشغيل النظام بنسبة 99.9% والتدخل الاستباقي لمعالجة أي بطء قبل أن يتأثر به عملاء المتجر أو الفنادق.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- تذييل الصفحة الرسمي للمجموعة -->
+    <footer class="mt-16 pt-8 pb-12 border-t border-slate-800/80 text-center text-xs text-slate-500 space-y-3">
+      <div class="flex flex-wrap items-center justify-center gap-4 text-slate-400 font-medium">
+        <span>شركة تصاميم الوطن المحدودة (Watan Designs Ltd.)</span>
+        <span class="text-slate-700">•</span>
+        <span class="font-mono">السجل التجاري: 5950011057</span>
+        <span class="text-slate-700">•</span>
+        <span class="font-mono">الرقم الضريبي: 300865965100003</span>
+      </div>
+      <p>طريق الملك عبدالعزيز، الخالدية، نجران، المملكة العربية السعودية</p>
+      <div class="flex justify-center gap-4 pt-2 text-[11px] text-slate-400">
+        <a href="https://test.wdgroup.online" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 underline">بوابة المعاينة (test.wdgroup.online)</a>
+        <span>•</span>
+        <a href="https://wdgroup.online" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 underline">الموقع الحي (wdgroup.online)</a>
+        <span>•</span>
+        <a href="/manuals/wdgroup/ar#project-03" class="hover:text-blue-400 underline">العودة لدليل العمليات الرئيسي</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- سكربت تفاعلي للبحث والتصفية وحركة المؤشر -->
+  <script>
+    const pillarTitles = {
+      'all': 'كافة الميزات',
+      'pillar-1': '1. الهوية المؤسسية والمعمارية',
+      'pillar-2': '2. محفظة القطاعات الاستراتيجية',
+      'pillar-3': '3. المتجر ومعرض الأثاث الفاخر',
+      'pillar-4': '4. لوحة الإدارة والعمليات',
+      'pillar-5': '5. طلبات B2B وإدارة الفرص',
+      'pillar-6': '6. استقطاب الكفاءات والتوظيف',
+      'pillar-7': '7. المساعد الذكي والاتصالات',
+      'pillar-8': '8. الحوكمة والأمن والبنية التحتية'
+    };
+
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    function filterCategory(cat) {
+      activeCategory = cat;
+      
+      // Update pills UI
+      document.querySelectorAll('.category-pill').forEach(pill => {
+        pill.classList.toggle('active', pill.getAttribute('data-category') === cat);
+      });
+
+      document.getElementById('active-category-label').textContent = pillarTitles[cat] || 'كافة الميزات';
+      applyFilters();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim().toLowerCase();
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const items = document.querySelectorAll('.feature-item');
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const itemPillar = item.getAttribute('data-pillar');
+        const itemText = item.textContent.toLowerCase();
+
+        const matchesCat = (activeCategory === 'all' || itemPillar === activeCategory);
+        const matchesSearch = (!searchQuery || itemText.includes(searchQuery));
+
+        if (matchesCat && matchesSearch) {
+          item.style.display = 'block';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Show/Hide section containers if empty
+      document.querySelectorAll('.pillar-section').forEach(sec => {
+        const secPillar = sec.getAttribute('data-pillar');
+        const hasVisible = Array.from(sec.querySelectorAll('.feature-item')).some(it => it.style.display !== 'none');
+        sec.style.display = hasVisible ? 'block' : 'none';
+      });
+
+      document.getElementById('filtered-count').textContent = visibleCount;
+    }
+
+    // Spotlight cursor effect
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+  </script>
+</body>
+</html>

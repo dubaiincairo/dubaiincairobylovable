@@ -102,15 +102,31 @@
     },
     {
       "source": "/manuals/wdgroup/wdgroupwebsite",
-      "destination": "/manuals/wdgroup/wdgroupwebsite/index.html"
+      "destination": "/manuals/wdgroup/index.html"
     },
     {
       "source": "/manuals/wdgroup/wdgroupwebsite/",
-      "destination": "/manuals/wdgroup/wdgroupwebsite/index.html"
+      "destination": "/manuals/wdgroup/index.html"
     },
     {
       "source": "/manuals/wdgroup/wdgroupwebsite/ar",
-      "destination": "/manuals/wdgroup/wdgroupwebsite/ar.html"
+      "destination": "/manuals/wdgroup/ar.html"
+    },
+    {
+      "source": "/manuals/wdgroup/wdgroupwebsite/features-en",
+      "destination": "/manuals/wdgroup/wdgroupwebsite/features-en.html"
+    },
+    {
+      "source": "/manuals/wdgroup/wdgroupwebsite/features-ar",
+      "destination": "/manuals/wdgroup/wdgroupwebsite/features-ar.html"
+    },
+    {
+      "source": "/manuals/wdgroup/wdgroupwebsite/sops-en",
+      "destination": "/manuals/wdgroup/wdgroupwebsite/sops-en.html"
+    },
+    {
+      "source": "/manuals/wdgroup/wdgroupwebsite/sops-ar",
+      "destination": "/manuals/wdgroup/wdgroupwebsite/sops-ar.html"
     },
     {
       "source": "/manuals/wdgroup/internalcommunication",
