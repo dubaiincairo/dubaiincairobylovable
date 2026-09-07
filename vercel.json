@@ -73,10 +73,6 @@
       "destination": "/manuals/wdgroup/swissbluewebsite/sops-ar.html"
     },
     {
-      "source": "/manuals/wdgroup/swissbluewebsite/manual",
-      "destination": "/manuals/wdgroup/swissbluewebsite/manual.html"
-    },
-    {
       "source": "/manuals/wdgroup/ezeeodooconnector",
       "destination": "/manuals/wdgroup/ezeeodooconnector/index.html"
     },
