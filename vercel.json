@@ -130,15 +130,31 @@
     },
     {
       "source": "/manuals/wdgroup/internalcommunication",
-      "destination": "/manuals/wdgroup/internalcommunication/index.html"
+      "destination": "/manuals/wdgroup/index.html"
     },
     {
       "source": "/manuals/wdgroup/internalcommunication/",
-      "destination": "/manuals/wdgroup/internalcommunication/index.html"
+      "destination": "/manuals/wdgroup/index.html"
     },
     {
       "source": "/manuals/wdgroup/internalcommunication/ar",
-      "destination": "/manuals/wdgroup/internalcommunication/ar.html"
+      "destination": "/manuals/wdgroup/ar.html"
+    },
+    {
+      "source": "/manuals/wdgroup/internalcommunication/features-en",
+      "destination": "/manuals/wdgroup/internalcommunication/features-en.html"
+    },
+    {
+      "source": "/manuals/wdgroup/internalcommunication/features-ar",
+      "destination": "/manuals/wdgroup/internalcommunication/features-ar.html"
+    },
+    {
+      "source": "/manuals/wdgroup/internalcommunication/sops-en",
+      "destination": "/manuals/wdgroup/internalcommunication/sops-en.html"
+    },
+    {
+      "source": "/manuals/wdgroup/internalcommunication/sops-ar",
+      "destination": "/manuals/wdgroup/internalcommunication/sops-ar.html"
     },
     {
       "source": "/manuals/wdgroup/odooerp",
@@ -175,6 +191,18 @@
     {
       "source": "/manuals/ezeeodooconnector/:path*",
       "destination": "/manuals/wdgroup/ezeeodooconnector/:path*"
+    },
+    {
+      "source": "/manuals/internalcommunication",
+      "destination": "/manuals/wdgroup/index.html"
+    },
+    {
+      "source": "/manuals/internalcommunication/",
+      "destination": "/manuals/wdgroup/index.html"
+    },
+    {
+      "source": "/manuals/internalcommunication/:path*",
+      "destination": "/manuals/wdgroup/internalcommunication/:path*"
     },
     {
       "source": "/manuals/:path*",

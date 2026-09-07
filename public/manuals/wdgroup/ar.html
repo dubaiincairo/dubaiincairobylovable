@@ -199,22 +199,50 @@
       </div>
 
       <!-- المشروع 4: منظومة التواصل الداخلي المؤسسي (زوهو) -->
-      <div class="glass-card rounded-2xl p-6 sm:p-7 flex items-center justify-between flex-wrap gap-4 hover:border-teal-500/50 transition">
-        <div class="space-y-1.5">
-          <div class="flex items-center gap-2">
-            <span class="px-2.5 py-0.5 rounded-md bg-teal-500/20 text-teal-400 border border-teal-500/30 text-xs font-mono font-bold">المشروع 04</span>
-            <h2 class="text-lg sm:text-xl font-bold text-white">منظومة التواصل الداخلي المؤسسي (زوهو ميل + كليك)</h2>
-            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] font-semibold">
-              🟢 تشغيلي معتمد
-            </span>
+      <div id="project-04" class="glass-card rounded-2xl p-6 sm:p-7 border-teal-500/40 bg-slate-900/80 shadow-2xl relative group">
+        <div class="flex items-start justify-between flex-wrap gap-4 mb-5">
+          <div>
+            <div class="flex items-center gap-2.5 mb-1.5">
+              <span class="px-2.5 py-0.5 rounded-md bg-teal-500/20 text-teal-400 border border-teal-500/30 text-xs font-mono font-bold">المشروع 04</span>
+              <h2 class="text-xl sm:text-2xl font-bold text-white group-hover:text-teal-300 transition-colors">
+                منظومة الاتصالات المؤسسية الداخلية (Zoho Mail + Cliq + Clips)
+              </h2>
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] font-semibold animate-pulse">
+                🟢 جاهز للاعتماد
+              </span>
+            </div>
+            <p class="text-sm text-slate-400 leading-relaxed max-w-3xl">
+              إدارة وتأمين البريد الإلكتروني المشفر متعدد النطاقات (2048-بت DKIM و SPF و DMARC)، صناديق البريد المشتركة المقاومة لتعارض الردود، توبولوجيا قنوات Cliq اللحظية، وإجراءات تسليم المناوبات غير المتزامنة عبر Zoho Clips.
+            </p>
           </div>
-          <p class="text-xs sm:text-sm text-slate-400 max-w-2xl">
-            إدارة البريد الإلكتروني المؤسسي، صناديق الأقسام، بروتوكولات الحماية والتشفير، وقنوات التعاون الداخلي اللحظي.
-          </p>
         </div>
-        <a href="/manuals/wdgroup/internalcommunication/ar" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition flex items-center gap-1">
-          <span>استعراض التوثيق</span> &larr;
-        </a>
+
+        <!-- الأقسام الفرعية لمنظومة التواصل الداخلي -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-800">
+          <a href="/manuals/wdgroup/internalcommunication/features-ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-teal-600/20 border border-slate-700 hover:border-teal-500/50 transition flex flex-col justify-between group/link">
+            <div>
+              <div class="flex items-center justify-between text-xs font-semibold text-teal-400 mb-1.5">
+                <span>كتالوج المزايا الشامل</span>
+                <span class="font-mono text-[10px] text-slate-400">40 ميزة تشغيلية · 8 محاور</span>
+              </div>
+              <h3 class="text-sm font-bold text-white group-hover/link:text-teal-300 mb-1">دليل المزايا والقدرات</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">عرض ثنائي المفاهيم للفوائد التشغيلية والقدرات التقنية، وتصفية تصنيفية سريعة وبحث فوري.</p>
+            </div>
+            <span class="text-xs font-semibold text-teal-400 mt-3 flex items-center justify-end gap-1">استعراض دليل المزايا &larr;</span>
+          </a>
+
+          <a href="/manuals/wdgroup/internalcommunication/sops-ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-teal-600/20 border border-slate-700 hover:border-teal-500/50 transition flex flex-col justify-between group/link">
+            <div>
+              <div class="flex items-center justify-between text-xs font-semibold text-teal-400 mb-1.5">
+                <span>نوافذ تفاعلية منبثقة</span>
+                <span class="font-mono text-[10px] text-slate-400">20 إجراء تشغيلي</span>
+              </div>
+              <h3 class="text-sm font-bold text-white group-hover/link:text-teal-300 mb-1">إجراءات العمل القياسية (SOPs)</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">خطوات إجرائية تفصيلية، الصلاحيات المطلوبة، وضوابط منع الأخطاء ومعايير التدقيق عبر نوافذ تفاعلية.</p>
+            </div>
+            <span class="text-xs font-semibold text-teal-400 mt-3 flex items-center justify-end gap-1">استعراض إجراءات العمل &larr;</span>
+          </a>
+        </div>
       </div>
 
       <!-- المشروع 5: تطبيق نظام أودو للمصانع الثلاثة -->

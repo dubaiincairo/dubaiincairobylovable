@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منظومة الاتصالات المؤسسية الداخلية (Zoho Mail + Cliq + Clips) — إجراءات التشغيل القياسية (SOPs) | مجموعة الوطن القابضة</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      background-color: #08090C;
+      color: #f1f5f9;
+      font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+      direction: rtl;
+      text-align: right;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 17, 23, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(20, 184, 166, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(20, 184, 166, 0.7); }
+
+    /* Glassmorphism */
+    .glass-card {
+      background: rgba(15, 17, 23, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateZ(0);
+    }
+    .glass-card:hover {
+      border-color: rgba(20, 184, 166, 0.45);
+      transform: translateY(-3px) translateZ(0);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+    .glass-nav {
+      background: rgba(8, 9, 12, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Spotlight Card */
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(20, 184, 166, 0.14), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    /* Modal Animation */
+    @keyframes modalBackdrop { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalDialog {
+      0% { opacity: 0; transform: scale(0.95) translateY(12px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-backdrop-anim { animation: modalBackdrop 0.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .modal-dialog-anim { animation: modalDialog 0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    /* Ambient Floating Orbs */
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    /* Active Filter Tab */
+    .tab-btn.active {
+      background: rgba(20, 184, 166, 0.25);
+      border-color: rgba(45, 212, 191, 0.6);
+      color: #5eead4;
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Print Styles */
+    @media print {
+      body { background: #ffffff !important; color: #0f172a !important; }
+      .no-print, header, .ambient-orb-1, .ambient-orb-2, #modal-overlay, #filter-container, #sop-search-container { display: none !important; }
+      .glass-card { background: #ffffff !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid !important; }
+      .text-white { color: #0f172a !important; }
+      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+    }
+  </style>
+</head>
+<body class="selection:bg-teal-600 selection:text-white pb-24 relative">
+
+  <!-- Ambient Glow Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-20 -right-40 w-[550px] h-[550px] bg-teal-600/10 rounded-full blur-[140px]"></div>
+    <div class="ambient-orb-2 absolute top-1/3 -left-40 w-[600px] h-[600px] bg-emerald-600/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <!-- STICKY HEADER -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3.5">
+        <a href="/manuals/wdgroup/ar#project-04" class="w-10 h-10 rounded-2xl bg-gradient-to-br from-teal-500 via-teal-600 to-emerald-800 flex items-center justify-center text-white font-black shadow-lg shadow-teal-500/25 border border-teal-400/40 hover:scale-105 transition-transform" title="العودة لبوابة الإدارة الرئيسية">
+          WD
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-base sm:text-lg tracking-tight text-white">مجموعة الوطن القابضة</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/30 font-mono">
+              المشروع 04
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            إجراءات التشغيل القياسية للاتصالات المؤسسية (Zoho Mail + Cliq + Clips)
+          </p>
+        </div>
+      </div>
+
+      <!-- Navigation & Language Links -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/manuals/wdgroup/ar#project-04" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700/80 transition">
+          <span>←</span>
+          <span>بوابة العمليات</span>
+        </a>
+        <a href="/manuals/wdgroup/internalcommunication/features-ar" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-teal-600/20 hover:bg-teal-600/30 text-xs font-bold text-teal-300 border border-teal-500/40 transition">
+          <span>دليل المزايا الكامل</span>
+          <span>←</span>
+        </a>
+        <a href="/manuals/wdgroup/internalcommunication/sops-en" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 font-mono transition" title="English Version">
+          EN
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+
+    <!-- HERO BANNER -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 relative overflow-hidden">
+      <div class="relative z-10 max-w-4xl space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-xs font-semibold text-teal-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
+          <span>20 إجراء تشغيل قياسي تفاعلي بنظام النوافذ المنبثقة المنظمة</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+          دليل إجراءات التشغيل القياسية للاتصالات المؤسسية (<span class="font-mono text-teal-400">internalcommunication</span>)
+        </h1>
+        <p class="text-sm text-slate-300 leading-relaxed">
+          أدلة التشغيل القياسية لمهندسي النظم، مديري الإدارات، مشرفي المصانع، وفرق الدعم التشغيلي لإدارة البنية التحتية للبريد المشفر متعدد النطاقات (DKIM/DMARC)، صناديق البريد المشتركة المقاومة للتعارض، توبولوجيا قنوات Cliq اللحظية، وإجراءات تسليم المناوبات غير المتزامنة عبر Zoho Clips. انقر على أي بطاقة لعرض الإجراء المفصل في 6 أقسام مهيكلة.
+        </p>
+      </div>
+    </div>
+
+    <!-- STICKY FILTER & SEARCH RAIL -->
+    <div class="sticky top-20 z-30 pt-2 pb-3 glass-nav border-y border-slate-800/80 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8" id="filter-container">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        
+        <!-- Scrollable Category Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1" id="category-tabs">
+          <button onclick="setFilter('all')" class="tab-btn active px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>كافة الإجراءات</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">20</span>
+          </button>
+          <button onclick="setFilter('dns')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>التشفير ونظام النطاقات</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">3</span>
+          </button>
+          <button onclick="setFilter('identity')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>إدارة الهوية والوصول</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">4</span>
+          </button>
+          <button onclick="setFilter('shared')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>صناديق البريد المشتركة</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">3</span>
+          </button>
+          <button onclick="setFilter('cliq')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>قنوات Cliq والاجتماعات</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">4</span>
+          </button>
+          <button onclick="setFilter('clips')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>مقاطع الفيديو Clips</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">1</span>
+          </button>
+          <button onclick="setFilter('governance')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>الامتثال ومنع التسريب DLP</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">3</span>
+          </button>
+          <button onclick="setFilter('operations')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>التشغيل وخطط الطوارئ</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">2</span>
+          </button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="relative w-48 sm:w-64 flex-shrink-0" id="sop-search-container">
+          <input 
+            type="text" 
+            id="sop-search"
+            placeholder="البحث في الإجراءات..." 
+            oninput="handleSearch(this.value)"
+            class="w-full px-3.5 py-1.5 pr-9 rounded-xl bg-slate-900 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition"
+          >
+          <svg class="w-4 h-4 text-slate-500 absolute right-3 top-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Active Count Summary -->
+    <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+      <div>
+        <span>عرض التصنيف: </span>
+        <span id="active-category-label" class="font-bold text-white">كافة الإجراءات</span>
+      </div>
+      <div class="font-mono">
+        <span id="active-count" class="font-bold text-teal-400">20</span> من أصل 20 إجراء معتمد
+      </div>
+    </div>
+
+    <!-- SOP GRID (Populated by JavaScript) -->
+    <div id="sop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+    <!-- FOOTER -->
+    <footer class="mt-16 pt-8 pb-12 border-t border-slate-800/80 text-center text-xs text-slate-500 space-y-3">
+      <div class="flex flex-wrap items-center justify-center gap-4 text-slate-400 font-medium">
+        <span>شركة تصاميم الوطن المحدودة (Watan Designs Ltd.)</span>
+        <span class="text-slate-700">•</span>
+        <span class="font-mono">س.ت: 5950011057</span>
+        <span class="text-slate-700">•</span>
+        <span class="font-mono">الرقم الضريبي: 300865965100003</span>
+      </div>
+      <p>طريق الملك عبدالعزيز، حي الخالدية، نجران، المملكة العربية السعودية</p>
+      <div class="flex justify-center gap-4 pt-2 text-[11px] text-slate-400">
+        <a href="https://test.wdgroup.online" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 underline">بوابة المعاينة (test.wdgroup.online)</a>
+        <span>•</span>
+        <a href="https://wdgroup.online" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 underline">الموقع الحي (wdgroup.online)</a>
+        <span>•</span>
+        <a href="/manuals/wdgroup/ar#project-04" class="hover:text-teal-400 underline">العودة لبوابة العمليات المركزية</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- INTERACTIVE POPUP MODAL (6-SECTION STANDARD) -->
+  <div id="modal-overlay" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6 overflow-y-auto modal-backdrop-anim">
+    <div class="glass-card spotlight-card w-full max-w-3xl rounded-3xl border border-slate-700/80 p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto relative modal-dialog-anim text-right">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-800">
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="modal-sop-code" class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20"></span>
+            <span id="modal-sop-pillar" class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider"></span>
+            <span id="modal-sop-role" class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300"></span>
+          </div>
+          <h2 id="modal-sop-title" class="text-xl sm:text-2xl font-extrabold text-white leading-tight"></h2>
+        </div>
+
+        <!-- Close Button -->
+        <button onclick="closeSopModal()" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white transition shrink-0">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body (6 Structured Sections) -->
+      <div id="modal-sop-content" class="space-y-5 text-sm"></div>
+
+      <!-- Modal Footer -->
+      <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+        <div class="flex items-center gap-2">
+          <span>المعيار المؤسسي:</span>
+          <span class="font-mono text-teal-400">WDG-COM-V1</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copyModalContent()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <span id="copy-btn-text">نسخ نص الإجراء</span>
+          </button>
+          <button onclick="closeSopModal()" class="px-4 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold transition">
+            إغلاق
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    const sopsData = [
+      {
+        id: "sop-com-01",
+        code: "SOP-COM-01",
+        category: "dns",
+        pillarName: "التشفير ونظام النطاقات",
+        role: "كبير مديري النظم / مهندس أمن السحابة",
+        title: "تدقيق الصحة التشفيرية لنظام النطاقات DNS وسياسات DMARC متعددة النطاقات",
+        description: "دليل تدقيق دوري للتحقق من توافق توقيعات DKIM بمفتاح 2048-بت، تضمينات SPF، والتطبيق الصارم لسياسات DMARC عبر نطاقات المجموعة القابضة.",
+        objective: "القضاء التام على ثغرات انتحال البريد (Spoofing)، وضمان وصول البريد بنسبة 99.9% لصندوق الوارد، وتلبية المعايير الأمنية العالمية لمكافحة التصيد لنطاقات wdgroup.online و swissbluehotels.com و watandesigns.com.",
+        prerequisites: "صلاحيات الوصول للوحة تحكم Cloudflare / مسجل النطاقات؛ صلاحيات المشرف الأكبر (Super Administrator) في لوحة إدارة Zoho Mail.",
+        steps: [
+          "تسجيل الدخول إلى لوحة إدارة Cloudflare DNS للنطاق الرئيسي (wdgroup.online) والنطاقات التابعة (swissbluehotels.com و watandesigns.com).",
+          "فحص سجل SPF من نوع TXT: التأكد من القيمة 'v=spf1 include:zoho.com ~all' بدقة دون تجاوز الحد الأقصى البالغ 10 عمليات بحث DNS.",
+          "التحقق من سجل DKIM تحت المحدد 'zmail._domainkey': مطابقة المفتاح العام RSA بطول 2048-بت مع القيمة المولدة في لوحة إدارة Zoho.",
+          "فحص وتفعيل سجل DMARC تحت الاسم المضيف '_dmarc': التأكد من ضبط السياسة 'v=DMARC1; p=quarantine; pct=100; rua=mailto:dmarc-reports@wdgroup.online; ruf=mailto:dmarc-forensics@wdgroup.online; sp=quarantine; aspf=r; adkim=r'.",
+          "التحقق من أولويات سجلات تبادل البريد MX: السجل الأساسي (mx.zoho.com بأولوية 10)، السجل الثانوي (mx2.zoho.com بأولوية 20)، وسجل الطوارئ الاحتياطي (mx3.zoho.com بأولوية 50).",
+          "تنفيذ استعلام تدقيق خارجي عبر الطرفية: 'dig +short TXT wdgroup.online' و 'dig +short TXT zmail._domainkey.wdgroup.online'.",
+          "الانتقال إلى لوحة تحكم Zoho Mail Admin > النطاقات > مؤشرات الصحة، والتأكد من ظهور علامات التحقق الخضراء لجميع السجلات."
+        ],
+        verification: "إرسال رسالة اختبارية موقعة إلى خادم بريد خارجي مستقل (مثل Gmail أو Outlook). فحص ترويسة الرسالة البريدية (Authentication-Results) والتأكد من نجاح اختبارات spf=pass و dkim=pass و dmarc=pass بنسبة تطابق 100%.",
+        caution: "يُحظر إجراء أي تعديلات على سجلات MX أو DKIM خلال ساعات الذروة التشغيلية، لتجنب تأخير تسليم الرسائل بسبب فترات التخزين المؤقت لـ DNS (TTL)."
+      },
+      {
+        id: "sop-com-02",
+        code: "SOP-COM-02",
+        category: "identity",
+        pillarName: "إدارة الهوية والوصول",
+        role: "مسؤول العمليات التقنية / مسجل النظم",
+        title: "تهيئة صناديق البريد للموظفين الجدد وتخصيص المجموعات الإدارية",
+        description: "إجراء قياسي شامل لإنشاء حسابات البريد الإلكتروني للموظفين الجدد وتعيين حصص التخزين وربطهم بالمجموعات التنظيمية والقنوات الرسمية.",
+        objective: "تزويد الكوادر الوظيفية الجديدة بحسابات بريد مشفرة وآمنة وفق معايير التسمية المؤسسية وسعات التخزين المحددة والمجموعات الوظيفية الدقيقة.",
+        prerequisites: "نموذج مباشرة عمل معتمد وموقع من إدارة الموارد البشرية؛ صلاحيات إدارة المستخدمين (User Management) في لوحة Zoho Mail Admin.",
+        steps: [
+          "تسجيل الدخول إلى لوحة إدارة Zoho Mail على الرابط https://mailadmin.zoho.com باستخدام الحساب الإداري المعتمد.",
+          "الانتقال إلى تبويب 'إدارة المستخدمين' (User Management) والضغط على زر '+ إضافة مستخدم' (+ Add User).",
+          "إدخال بيانات الموظف وفق معيار التسمية المؤسسي: الاسم الأول، اسم العائلة، وعنوان البريد بالصيغة 'first.last@wdgroup.online' (أو النطاق المعتمد للقطاع الفندقي أو الصناعي).",
+          "تعيين كلمة مرور مؤقتة مطابقة لسياسة التعقيد المؤسسية (12 خانة على الأقل تحوي أحرفاً كبيرة وصغيرة وأرقاماً ورموزاً)، وتفعيل خيار 'إلزام المستخدم بتغيير كلمة المرور عند أول تسجيل دخول'.",
+          "تحديد باقة التخزين المعتمدة: موظف تشغيلي قياسي (10 جيجابايت)، مشرف قسم (25 جيجابايت)، قيادة تنفيذية / VIP (50 جيجابايت).",
+          "من تبويب 'المجموعات' (Groups)، إدراج الموظف في المجموعات الإلزامية العامة (#all-employees) والمجموعات الإدارية المتخصصة (#riyadh-plant أو #sales-team أو #finishing-dept).",
+          "ضبط تصاريح البروتوكولات: تقييد الوصول عبر بروتوكولات IMAP/POP وقصره على تطبيقات الويب وتطبيق الجوال المشفر، وضبط النطاق الزمني على توقيت الرياض (GMT+3).",
+          "إرسال حقيبة التهيئة والترحيب الرسمية متضمنة بيانات الدخول المؤقتة ودليل تفعيل التحقق الثنائي (2FA) الإلزامي إلى وسيلة الاتصال المعتمدة للموظف."
+        ],
+        verification: "تسجيل الدخول بالحساب الجديد من نافذة تصفح خفي، والتأكد من ظهور مطالبة تغيير كلمة المرور فوراً، وتحميل التوقيع المؤسسي الافتراضي وظهور مجلدات المجموعات المعينة.",
+        caution: "يُمنع منعاً باتاً إنشاء حسابات عامة أو مجهولة المصدر (مثل 'worker1@' أو 'accountant@') دون ربطها المباشر بسجل وظيفي وشخصي معتمد."
+      },
+      {
+        id: "sop-com-03",
+        code: "SOP-COM-03",
+        category: "identity",
+        pillarName: "إدارة الهوية والوصول",
+        role: "كافة منسوبي المجموعة / منسق تهيئة الموارد البشرية",
+        title: "التفعيل الإلزامي للمصادقة الثنائية (2FA) وتسجيل جهاز OneAuth بالبصمة الحيوية",
+        description: "بروتوكول الأمان الإلزامي لربط الأجهزة الذكية للموظفين بتطبيق Zoho OneAuth وتفعيل الإشعارات اللحظية والبصمة الحيوية وأكواد الطوارئ.",
+        objective: "القضاء التام على مخاطر سرقة الحسابات واختراق كلمات المرور من خلال فرض التحقق البيومتري متعدد العوامل عبر كافة بيئات العمل المكتبية والمتنقلة.",
+        prerequisites: "هاتف ذكي للموظف (نظام iOS 15+ أو Android 10+)؛ بيانات تسجيل الدخول المؤقتة المسلمة من قسم تقنية المعلومات.",
+        steps: [
+          "تحميل وتثبيت تطبيق 'Zoho OneAuth' الرسمي من متجر تطبيقات Apple App Store أو Google Play Store.",
+          "فتح متصفح مكتبي آمن، والانتقال إلى الرابط https://mail.zoho.com، وتسجيل الدخول ببريد العمل وكلمة المرور المؤقتة.",
+          "إتمام خطوة تغيير كلمة المرور وتعيين كلمة سر شخصية قوية.",
+          "عند ظهور شاشة 'إعداد التحقق الثنائي الإلزامي'، اختيار 'Zoho OneAuth' كطريقة مصادقة أساسية.",
+          "فتح تطبيق OneAuth على الهاتف، والضغط على 'إضافة حساب' (Add Account)، ومسح رمز الاستجابة السريعة (QR Code) الظاهر على شاشة الكمبيوتر.",
+          "تفعيل المصادقة البيومترية في التطبيق: تفعيل بصمة الوجه (Face ID) أو بصمة الإصبع (Touch ID / Fingerprint) لاعتماد طلبات الدخول الفورية.",
+          "ظهور شاشة أكواد الطوارئ الاحتياطية (10 رموز): نسخ الأكواد وطباعتها وحفظها في مكان آمن وغير رقمي (يُحظر حفظها كصور غير مشفرة بالجوال).",
+          "إجراء اختبار تحقق: اعتماد إشعار الدخول التجريبي الفوري على شاشة الهاتف لإتمام عملية الربط بنجاح."
+        ],
+        verification: "تسجيل الخروج من المتصفح وإعادة تسجيل الدخول، والتأكد من إرسال إشعار فوري للشاشة الذكية يطالب بالبصمة الحيوية ورفض تسجيل الدخول في حال عدم الاعتماد.",
+        caution: "يُحظر مشاركة إشعارات المصادقة أو أكواد OTP مع أي شخص بما في ذلك موظفي الدعم الفني، حيث لا يطلب قسم تقنية المعلومات هذه الرموز تحت أي ظرف."
+      },
+      {
+        id: "sop-com-04",
+        code: "SOP-COM-04",
+        category: "operations",
+        pillarName: "الهوية المؤسسية والقوالب",
+        role: "أخصائي حوكمة الهوية والتسويق المؤسسي",
+        title: "نشر التوقيعات البريدية المؤسسية الموحدة (HTML) وتحديث بيانات السجل والضريبة",
+        description: "دليل حوكمة لفرض توقيعات بريدية رسمية بصيغة HTML متوافقة مع الهوية وشاشات الجوال، وتتضمن إخلاء المسؤولية القانوني وبيانات السجل والضريبة.",
+        objective: "ضمان توحيد الهوية البصرية للمجموعة، والامتثال للأنظمة التجارية والإفصاح عن السجل التجاري والرقم الضريبي في كافة المراسلات الصادرة.",
+        prerequisites: "اعتماد إدارة التسويق للقالب البصري؛ صلاحيات إدارة البريد (Mail Administration) في لوحة Zoho Mail Admin.",
+        steps: [
+          "فتح لوحة إدارة Zoho Mail > إعدادات المنظمة > التوقيعات وإخلاء المسؤولية (Signatures / Disclaimer).",
+          "الضغط على 'إضافة توقيع عام للمنظمة' واختيار قطاع المجموعة المستهدف (مجموعة الوطن القابضة، فنادق سويس بلو، أو مصانع جرين وود).",
+          "إدراج كود HTML المتجاوب والمصمم خصيصاً ليحتوي على شعارات المتجهات SVG والخطوط المعتمدة وتناسق الألوان المؤسسية.",
+          "إدراج المتغيرات البرمجية الديناميكية لسحب بيانات الموظف تلقائياً: ${User.DisplayName} و ${User.JobTitle} و ${User.Department} و ${User.MobileNumber} و ${User.EmailAddress}.",
+          "تضمين التذييل النظامي الإلزامي: 'شركة تصاميم الوطن المحدودة (س.ت: 5950011057، الرقم الضريبي: 300865965100003). تحتوي هذه الرسالة ومرفقاتها على معلومات سرية وخاصة موجهة حصراً للمرسل إليه'.",
+          "تفعيل خيار: 'قفل تعديل التوقيع للمستخدمين' (Lock user modifications) لمنع تغيير الألوان أو الخطوط أو حذف الإشعارات النظامية.",
+          "تحديد قواعد الإدراج: إدراج التوقيع تلقائياً في الرسائل الجديدة ورسائل الرد وإعادة التوجيه.",
+          "الضغط على 'تعميم على مستوى المنظمة' مع تحديد التطبيق الفوري."
+        ],
+        verification: "إرسال رسالة اختبارية من حساب موظف إلى بريد خارجي، والتأكد من سلامة ظهور الشعار والبيانات الشخصية المسترجعة تلقائياً وتذييل السجل التجاري والضريبة.",
+        caution: "يُمنع استخدام صور Base64 نقطية ضخمة داخل كود التوقيع، ويجب استضافة الشعارات على روابط شبكة تسليم المحتوى (CDN) عالية السرعة لتفادي ثقل حجم الرسائل."
+      },
+      {
+        id: "sop-com-05",
+        code: "SOP-COM-05",
+        category: "shared",
+        pillarName: "صناديق البريد المشتركة",
+        role: "مشرف فرز المبيعات والدعم / منسق خدمة العملاء",
+        title: "فرز ومعالجة استفسارات العملاء في صناديق البريد المشتركة دون تعارض (Zero Collision)",
+        description: "إجراء تشغيلي لإدارة صناديق الأقسام المشتركة (sales@ و procurement@ و support@) مع استشعار التواجد اللحظي والتعليقات الداخلية وتعيين التذاكر.",
+        objective: "منع ازدواجية الردود للعملاء، وضمان عدم تفويت أي مراسلة تجارية، والحفاظ على شفافية التعاون الداخلي بين أعضاء الفريق الواحد.",
+        prerequisites: "عضوية معتمدة في صندوق البريد المشترك المعني؛ تسجيل الدخول لواجهة الويب في Zoho Mail.",
+        steps: [
+          "فتح واجهة Zoho Mail على الرابط https://mail.zoho.com وتوسيع قسم 'صناديق البريد المشتركة' (Shared Mailboxes) من القائمة الجانبية.",
+          "اختيار صندوق الفريق المستهدف (مثل 'sales@wdgroup.online' أو 'procurement@wdgroup.online').",
+          "استعراض الرسائل غير المفرزة والمرتبة زمنياً حسب أولوية وتاريخ الوصول.",
+          "ملاحظة مؤشر التواجد اللحظي (Collision Detector): في حال ظهور أيقونة عين أو صورة زميل بجوار الرسالة، يُحظر البدء في الرد لوجود زميل يقوم بتحرير الرد حالياً.",
+          "لاستلام الرسالة، النقر على قائمة 'تعيين المسؤول' (Assignee) واختيار اسمك، لتتحول حالة الرسالة فوراً إلى 'قيد المعالجة' أمام باقي أعضاء الفريق.",
+          "للتشاور الداخلي قبل الرد، فتح درج 'التعليقات الداخلية' (Internal Comments) على يمين الرسالة وكتابة استفسارك مع إشارة '@اسم-الزميل' دون أن يرى العميل هذه الملاحظات.",
+          "صياغة الرد بالاعتماد على القالب المؤسسي المعتمد ومراجعة بنود الأسعار والعقود، ثم الضغط على 'إرسال من البريد المشترك'.",
+          "تحديث وسم الحالة إلى 'مكتمل' (Resolved) أو 'بانتظار رد العميل' وفق اتفاقيات مستوى الخدمة (SLA)."
+        ],
+        verification: "فتح صندوق البريد المشترك من جهاز زميل آخر، والتأكد من ظهور تعيينك الفوري وملاحظاتك الداخلية فور تدوينها دون الحاجة لإعادة تحميل الصفحة.",
+        caution: "يُحظر الرد على استفسارات العملاء الواردة للصناديق المشتركة عبر بريدك الشخصي، ويجب أن تصدر جميع المراسلات من عنوان الصندوق المشترك المعتمد."
+      },
+      {
+        id: "sop-com-06",
+        code: "SOP-COM-06",
+        category: "clips",
+        pillarName: "مقاطع الفيديو التقنية Clips",
+        role: "مشرفو المصانع / مهندسو مراقبة الجودة",
+        title: "تسجيل مقاطع الفيديو التقنية غير المتزامنة (Zoho Clips) لتوثيق أعطال الماكينات وعيوب الجودة",
+        description: "مسار عمل قياسي لتسجيل وتوضيح ومشاركة مقاطع فيديو عالية الدقة للشاشات وكاميرات المصنع لشرح أعطال ماكينات CNC وعيوب التصنيع غير المتزامنة.",
+        objective: "تسريع معالجة الأعطال بين المصانع في الرياض ونجران وجدة، تقليص الاجتماعات غير الضرورية، وتوفير مرجع مرئي موثق للمشاكل التقنية الميدانية.",
+        prerequisites: "تطبيق Zoho Cliq المكتبي مثبت مع تفعيل إضافة Zoho Clips؛ توفر كاميرا وميكروفون يعملان بدقة في محطة العمل بالمصنع.",
+        steps: [
+          "من داخل تطبيق Zoho Cliq المكتبي أو عبر المتصفح، الضغط على أيقونة 'Clips' الموجودة في الشريط السفلي.",
+          "تحديد نطاق التسجيل: 'الشاشة + الكاميرا'، 'الشاشة فقط'، أو 'الكاميرا فقط' بناءً على طبيعة العطل الهندسي أو المكتبي.",
+          "اختيار الشاشة التي تعرض برنامج التصميم CAD أو لوحة تحكم ماكينة CNC أو شاشة الخطأ في ERP، والتحقق من نقاء مؤشر الصوت.",
+          "الضغط على 'بدء التسجيل' (مع عد تنازلي مدته 3 ثوانٍ).",
+          "شرح العطل بوضوح: استعراض مسار القطع، خطأ الكود، أو العيب الهيكلي في الخشب مع تقديم تعليق صوتي مركز.",
+          "استخدام أداة القلم التفاعلي المدمجة في الشاشة لرسم دوائر وتأشير نقاط الخلل أو المقاسات المنحرفة أثناء التسجيل.",
+          "إنهاء التسجيل (بحد أقصى 5 دقائق للشروح الفنية السريعة) والضغط على 'إتمام التسجيل'.",
+          "معاينة المقطع المسجل وإضافة عنوان وصفي واضح (مثل 'CNC-Router-Axis-Drift-Riyadh-2026-09') وإضافة فواصل زمنية عند الحاجة.",
+          "الضغط على 'مشاركة في القناة'، واختيار قنوات الصيانة والجودة (#plant-maintenance أو #finishing-dept) وإرسال المقطع."
+        ],
+        verification: "فتح القناة المستهدفة في Cliq من جهاز هاتف أو حاسوب آخر، والتأكد من تشغيل الفيديو بدقة 1080p ونقاء الصوت ووضوح الشروحات الرسومية.",
+        caution: "تأكد من عدم تصوير أي بيانات مالية سرية أو عقود تجارية خاصة بالعملاء أو مخططات لم يتم تسجيل حقوقها أثناء التقاط الشاشة والمصنع."
+      },
+      {
+        id: "sop-com-07",
+        code: "SOP-COM-07",
+        category: "cliq",
+        pillarName: "قنوات Cliq والاجتماعات",
+        role: "مشرفو الوردية / مدراء خطوط الإنتاج بالمصانع",
+        title: "تنفيذ تسليم المناوبات بين المصانع عبر قنوات Cliq المهيكلة",
+        description: "بروتوكول يومي ملزم لتوثيق تسليم الوردية، ومعدلات الإنجاز، ونسب الهدر، وتوقف الماكينات، والطلبيات ذات الأولوية بين ورديات النهار والليل.",
+        objective: "منع انقطاع الإنتاج في مصانع الرياض ونجران، وضمان استمرارية الجودة والمحاسبية الدقيقة بين أقسام النجارة والدهان والتشطيب.",
+        prerequisites: "حساب معتمد لمشرف الوردية؛ صلاحيات المشاركة في قنوات تسليم المناوبات (#shift-handover و #plant-1-timber و #plant-2-fabrication).",
+        steps: [
+          "قبل انتهاء الوردية بنصف ساعة، حصر البيانات الميدانية: عدد القطع المكتملة، حالة الماكينات العاملة والمتوقفة، ونسبة الهدر في الأخشاب.",
+          "الانتقال إلى قناة تسليم الوردية المخصصة في Cliq (مثل '#riyadh-shift-handover').",
+          "الضغط على اختصار نموذج تسليم الوردية عبر البوت (+ Handover Template) لإدراج الجدول المهيكل المعتمد.",
+          "تعبئة الحقول المطلوبة: اسم مشرف الوردية المسلّمة، اسم مشرف الوردية المستلمة، التاريخ، ورمز الوردية (أ أو ب).",
+          "إدخال الإحصائيات الرقمية: الإنتاج المستهدف مقابل الفعلي، ساعات توقف الماكينات وأسبابها، وأي نقص في المواد الخام أو الغراء والدهانات.",
+          "تحديد أوامر الشغل العاجلة: الإشارة للمشاريع الفندقية والتجارية ذات الأولوية (مثل: 'أبواب قاعة سويس بلو جدة \u2014 الدفعة 3 جاهزة للدهان الأساسي').",
+          "إرفاق صور موثقة لنظافة صالة الإنتاج وسلامة ترتيب أدوات القطع في دواليب العدة.",
+          "إجراء إشارة مباشرة (@username) لمشرف الوردية المستلمة ونشر التقرير.",
+          "يقوم المشرف المستلم بمراجعة التقرير ميدانياً والرد بتعليق تأكيد رسمي ('تم الاستلام ومعاينة المعدات ومطابقة الكميات')."
+        ],
+        verification: "التحقق من اكتمال عناصر التقرير في القناة، وتأكيد المشرف المستلم، وتثبيت الرسالة في أعلى القناة لمدة 24 ساعة كمرجع تشغيلي.",
+        caution: "لا يعتبر تسليم الوردية مكتملاً نظامياً إلا بعد إقرار المشرف المستلم رقمياً في القناة، ويُحظر مغادرة المشرف المسلّم للمصنع قبل هذا الإقرار."
+      },
+      {
+        id: "sop-com-08",
+        code: "SOP-COM-08",
+        category: "cliq",
+        pillarName: "قنوات Cliq والاجتماعات",
+        role: "مدراء الإدارات / مدراء المشاريع والعمليات",
+        title: "عقد الاجتماعات واللقاءات السريعة (Huddles) الصوتية والمرئية دون ترتيب مسبق",
+        description: "إجراء تشغيلي لإطلاق جلسات نقاش مرئية وصوتية فورية بنقرة واحدة داخل قنوات Cliq لمعالجة المشاكل الهندسية العاجلة بدون تعقيدات الجدولة.",
+        objective: "حل الاختناقات الهندسية واللوجستية الطارئة في دقائق معدودة، وتقليص تبادل الإيميلات الطويلة وإلغاء هدر الوقت في تنسيق المواعيد.",
+        prerequisites: "تطبيق Zoho Cliq المكتبي أو تطبيق الجوال؛ اتصال إنترنت مؤسسي مستقر؛ سماعة رأس مزودة بخاصية عزل الضوضاء.",
+        steps: [
+          "التوجه مباشرة إلى القناة التشغيلية المعنية بالمشكلة الطارئة (مثل '#finishing-dept' أو '#contracting-site-team').",
+          "الضغط على أيقونة السماعة 'Start Huddle' الموجودة في الزاوية العلوية لشريط القناة.",
+          "تحديد نمط الاجتماع: 'صوتي فقط' (للنقاشات الشفهية السريعة) أو 'مرئي مع مشاركة الشاشة' (لمعاينة المخططات وجداول الكميات).",
+          "يرسل نظام Cliq إشعاراً صوتياً خفيفاً وشريطاً عائماً لأعضاء القناة المتصلين يحمل زر 'انضمام للقاء' (Join Huddle).",
+          "بمجرد انضمام الأطراف، يمكن للمنسق الضغط على 'مشاركة الشاشة' لعرض المخططات الهندسية CAD أو أوامر توريد Odoo ERP أو مستندات PDF.",
+          "تفعيل ميزة 'عزل ضوضاء المصنع' (Noise Suppression) في إعدادات الصوت لإلغاء صوت ماكينات CNC وضجيج الورش.",
+          "إدارة جلسة العمل بتركيز تام (المدة الموصى بها: 5 إلى 15 دقيقة كحد أقصى).",
+          "في ختام اللقاء، يكتب منسق الجلسة نقاط القرارات المتفق عليها في رسالة مختصرة مثبتة في القناة.",
+          "الضغط على زر 'إنهاء اللقاء' لإغلاق الجلسة."
+        ],
+        verification: "فحص سجل القناة الآلي: يقوم Cliq تلقائياً بتسجيل إشعار ملخص يتضمن مدة اللقاء اللحظي وقائمة المشاركين وتوقيت الإغلاق.",
+        caution: "تجنب ترك غرف الاجتماعات المفتوحة نشطة دون مشاركين، ويجب إنهاء الجلسة فور انتهاء النقاش للحفاظ على نطاق التردد وسرعة الشبكة."
+      },
+      {
+        id: "sop-com-09",
+        code: "SOP-COM-09",
+        category: "cliq",
+        pillarName: "قنوات Cliq والاجتماعات",
+        role: "مسؤول إدارة Cliq / مسؤول أمن المعلومات",
+        title: "إدارة صلاحيات القنوات وتخصيص الغرف الإدارية والسرية المشفرة",
+        description: "معيار حوكمة لإنشاء القنوات العامة والقنوات الخاصة والغرف السرية المشفرة لمجلس الإدارة وإدارة قواعد الاحتفاظ بالرسائل.",
+        objective: "حماية المراسلات والقرارات المالية والاستراتيجية والقانونية الحساسة من الوصول غير المصرح به، مع الحفاظ على مرونة التعاون بين الفرق.",
+        prerequisites: "صلاحيات المشرف العام (Channel Admin / Super Admin) في لوحة إدارة Zoho Cliq.",
+        steps: [
+          "الدخول إلى لوحة إدارة Zoho Cliq عبر الرابط https://cliq.zoho.com/admin.",
+          "اختيار تبويب 'القنوات' (Channels) من قائمة الحوكمة والضغط على زر '+ إنشاء قناة' (+ Create Channel).",
+          "تحديد مستوى سرية القناة: 'عامة على مستوى المنظمة'، 'خاصة بالقسم' (مرتبطة تلقائياً بالهيكل الوظيفي)، أو 'سرية' (Secret - مخفية تماماً عن البحث).",
+          "تطبيق معايير التسمية المعتمدة: بادئة '#dept-' للأقسام، '#plant-' لمصانع الإنتاج، أو '#exec-' لغرف القيادة التنفيذية.",
+          "بالنسبة للقنوات التنفيذية والسرية (مثل '#exec-board')، تفعيل خيارات: 'تشفير سجل المحادثات'، 'حظر مشاركة الضيوف الخارجيين'، و'منع إعادة توجيه الرسائل'.",
+          "تحديد نطاق رؤية السجل للأعضاء الجدد: حظر رؤية المحادثات السابقة للمنضمين الجدد أو السماح بالاطلاع من تاريخ الانضمام فقط.",
+          "ضبط سياسة الاحتفاظ بالرسائل (Retention Policy): 365 يوماً للقنوات التشغيلية، 90 يوماً للقنوات المؤقتة، وحفظ دائم مع الحجز القانوني للقنوات التنفيذية.",
+          "تعيين المشرفين المعتمدين للقناة وحفظ الإعدادات."
+        ],
+        verification: "تسجيل الدخول بحساب موظف عادي غير مصرح له، والتحقق من عدم ظهور القنوات السرية في نتائج البحث واستحالة الوصول إليها دون دعوة رسمية مشفرة.",
+        caution: "يُحظر منعاً باتاً إضافة موردين أو مقاولين خارجيين إلى القنوات الداخلية، ويجب إنشاء قنوات ضيوف مستقلة ذات صلاحيات محدودة للغاية."
+      },
+      {
+        id: "sop-com-10",
+        code: "SOP-COM-10",
+        category: "shared",
+        pillarName: "صناديق البريد المشتركة",
+        role: "مسؤول النظم المؤسسية / مهندس تقنية المعلومات",
+        title: "ضبط قوائم التوزيع البريدي التلقائية للأقسام وإدارة الأسماء المستعارة (Aliases)",
+        description: "إجراء قياسي لإنشاء وتحديث القوائم البريدية الإدارية، وتطبيق بوابات الإشراف والتحكم في صلاحيات الإرسال، وتوجيه الأسماء البديلة.",
+        objective: "ضمان وصول التعاميم والمراسلات الرسمية لجميع المستهدفين بدقة، ومنع رسائل السبام الداخلية، وتنظيم تدفق المراسلات بين كيانات المجموعة.",
+        prerequisites: "صلاحيات إدارة المجموعات (Group Admin) في لوحة Zoho Mail Admin؛ الهيكل التنظيمي المحدث من الموارد البشرية.",
+        steps: [
+          "فتح لوحة إدارة Zoho Mail والانتقال إلى تبويب 'المجموعات' > 'قوائم التوزيع' (Distribution Lists).",
+          "الضغط على '+ إنشاء قائمة توزيع' وإدخال العنوان الرسمي (مثل 'all-riyadh@wdgroup.online' أو 'directors@swissbluehotels.com').",
+          "تحديد معايير العضوية: اختيار 'المزامنة الديناميكية' لإدراج الموظفين تلقائياً بناءً على حقول القسم ومقر العمل في سجلات الموارد البشرية.",
+          "ضبط صلاحيات الإرسال: تعيين القائمة كـ 'خاضعة للإشراف' (Moderated) لقوائم الشركة العامة، لمنع إرسال أي موظف بريداً جماعياً دون موافقة الإدارة.",
+          "تحديد المشرفين المعتمدين للقائمة (مثل مدير الموارد البشرية ومساعد المدير العام التنفيذي).",
+          "ضبط بوابات مكافحة السبام: حظر استقبال الرسائل من عناوين الإنترنت الخارجية غير المصرح بها على قوائم التوزيع الداخلية.",
+          "إضافة الأسماء المستعارة الوظيفية: توجيه العناوين الفرعية (مثل 'timber-support@' أو 'furniture-quote@') لصب رسائلها في القائمة المعتمدة.",
+          "حفظ التغييرات واختبار مزامنة الأعضاء."
+        ],
+        verification: "إرسال رسالة تجريبية من حساب غير مصرح له إلى القائمة الخاضعة للإشراف، والتأكد من وصول إشعار للمرسل يفيد بتعليق الرسالة لحين اعتماد المشرف.",
+        caution: "يُحظر ترك القوائم البريدية الشاملة مفتوحة للإرسال الحر دون إشراف، لتفادي حوادث 'الرد على الكل' المربكة للعمليات الإنتاجية."
+      },
+      {
+        id: "sop-com-11",
+        code: "SOP-COM-11",
+        category: "governance",
+        pillarName: "الامتثال وحماية البيانات DLP",
+        role: "مسؤول أمن المعلومات / مدير الالتزام والحوكمة",
+        title: "تطبيق سياسات منع تسريب البيانات (DLP) وفحص المرفقات الحساسة الصادرة",
+        description: "بروتوكول أمني متقدم لضبط خوارزميات فحص المحتوى الصادر واعتراض تسريب أرقام الهويات والعقود المصرفية والمخططات الهندسية.",
+        objective: "منع التسريب العرضي أو المتعمد للبيانات الحساسة وأسرار التصنيع وعروض المناقصات التجارية الخاصة برؤية 2030 عبر البريد الإلكتروني.",
+        prerequisites: "صلاحيات إدارة الأمان والامتثال في لوحة Zoho Mail Admin؛ وثيقة تصنيف البيانات المعتمدة لمجموعة الوطن.",
+        steps: [
+          "الانتقال إلى لوحة Zoho Mail Admin > الأمان والامتثال > منع فقدان البيانات (Data Loss Prevention - DLP).",
+          "الضغط على 'إنشاء سياسة DLP' وتسميتها 'حماية البيانات الحساسة للمجموعة'.",
+          "تحديد أنماط الاكتشاف: إضافة تعابير قياسية (Regex) للهوية الوطنية والإقامة السعودية (10 خانات تبدأ بـ 1 أو 2)، وحسابات الآيبان المصرفية ('SA[0-9]{22}').",
+          "إضافة قواميس الكلمات المفتاحية المحمية: إدراج مصطلحات سرية مثل ('مناقصة تجارية'، 'قوائم مالية غير مدققة'، 'كود CNC خاص'، 'مواصفات تصنيع').",
+          "تحديد قيود امتدادات الملفات: فحص ملفات المخططات الهندسية (.dwg, .dxf, .step) والمجلدات المضغوطة المرسلة لحسابات بريد شخصية خارجية.",
+          "ضبط إجراءات الإنفاذ: اختيار 'الحجز في الحجر الصحي مع إشعار المسؤول' للانتهاكات الحرجة، أو 'الحظر وتنبيه المرسل' للوثائق السرية.",
+          "صياغة رسالة التنبيه النظامية للموظف: 'تم حجز رسالتك لمخالفتها سياسة حماية بيانات مجموعة الوطن القابضة لاحتوائها على بيانات مؤسسية مقيدة'.",
+          "تفعيل السياسة ومراقبة لوحة الحوادث اللحظية."
+        ],
+        verification: "إجراء اختبار إرسال رسالة لبريد خارجي تحوي رقماً تجريبياً لصيغة الهوية الوطنية، والتأكد من حظر الرسالة فوراً وتحويلها لحجر الأمان وإشعار مسؤول الأمن.",
+        caution: "مراجعة سجلات الحجز الصحي يومياً، والتأكد من عدم تعطيل المراسلات التجارية النظامية المعتمدة مع البنوك والجهات الحكومية الرسمية."
+      },
+      {
+        id: "sop-com-12",
+        code: "SOP-COM-12",
+        category: "governance",
+        pillarName: "الامتثال وحماية البيانات DLP",
+        role: "المستشار القانوني / مسؤول الامتثال القضائي",
+        title: "فرض الحجز القانوني (Legal Hold) والبحث والتحري الرقمي eDiscovery لحفظ الأدلة",
+        description: "إجراءات حفظ الأدلة القضائية وتجميد البريد الإلكتروني في قضايا النزاعات وحفظ السجلات بشكل غير قابل للتعديل واستخراج الأرشيف المشفر.",
+        objective: "ضمان الحجية القانونية والامتثال للأنظمة القضائية في حفظ السجلات البريدية ومنع تلاعب المستخدمين بالرسائل في النزاعات التعاقدية أو المالية.",
+        prerequisites: "توجيه خطي معتمد من الإدارة القانونية أو الإدارة العليا؛ صلاحيات مسؤول التحري eDiscovery في لوحة Zoho Mail.",
+        steps: [
+          "فتح لوحة إدارة Zoho Mail والانتقال إلى بوابة 'التحري والأرشفة القضائية' (eDiscovery & Archival).",
+          "الدخول إلى قسم 'الحجز القانوني' (Legal Holds) والضغط على '+ إنشاء قضية حجز قانوني'.",
+          "إدخال مرجع القضية: رقم المعاملة القضائية، ملف التحكيم، أو كود التدقيق المالي الداخلي.",
+          "تحديد الأشخاص المعنيين (Custodians): اختيار حسابات البريد الإلكتروني وصناديق البريد المشتركة الخاضعة لإجراءات التحقيق.",
+          "تحديد النطاق الزمني: تعيين تاريخ البداية والنهاية (أو اختيار 'حفظ غير محدد المدة' للقضايا المنظورة).",
+          "تفعيل الحجز: بمجرد التطبيق، لا يستطيع المستخدم حذف أو تعديل أي رسالة نهائياً، ويتم حفظ كافة المحذوفات تلقائياً في المستودع المشفر الآمن.",
+          "لاسترجاع الأدلة، التوجه إلى 'البحث والتحري' (eDiscovery Search)، وكتابة استعلامات البحث المنطقية (مثل: 'عقد AND نجران AND توريد').",
+          "معاينة نتائج المراسلات، وإنشاء حزمة تصدير واختيار 'أرشيف PST/EML مشفر مع كود تجزئة SHA-256'.",
+          "تنزيل الحزمة المحمية بكلمة مرور وتوثيق سلسلة الحيازة الجنائية (Chain of Custody)."
+        ],
+        verification: "التأكد من تضمين كود التجزئة SHA-256 في تقرير التحري، ومطابقته التامة مع الحزمة المحملة لضمان عدم تعرض الأدلة لأي تعديل.",
+        caution: "يُعتبر فرض الحجز القانوني إجراءً فائق السرية، ويُحظر إبلاغ الموظف الخاضع للحجز إلا بتوجيه كتابي صريح من المستشار القانوني العام للمجموعة."
+      },
+      {
+        id: "sop-com-13",
+        code: "SOP-COM-13",
+        category: "identity",
+        pillarName: "إدارة الهوية والوصول",
+        role: "مسؤول أمن تقنية المعلومات / ضابط نوبة النظم",
+        title: "الإنهاء الفوري للحسابات ومسح الأجهزة المتنقلة عن بعد للموظفين المنتهية خدماتهم",
+        description: "دليل تشغيلي طارئ يُنفذ خلال 15 دقيقة لإلغاء صلاحيات الدخول، ومسح بيانات البريد من الهواتف عن بعد، وحماية الملكية الفكرية للمجموعة.",
+        objective: "منع أي وصول غير مصرح به للأنظمة والمراسلات بعد انتهاء العلاقة التعاقدية، وتأمين وثائق المصانع، وتحويل المراسلات لخلفاء الموظفين بسلاسة.",
+        prerequisites: "إشعار رسمي بإنهاء الخدمة من إدارة الموارد البشرية؛ صلاحيات مسؤول أمن النظم في لوحة إدارة Zoho.",
+        steps: [
+          "فور استلام إشعار إنهاء الخدمة، تسجيل الدخول فوراً للوحة Zoho Mail Admin > إدارة المستخدمين.",
+          "البحث عن حساب الموظف المنتهية خدماته، والضغط على زر 'القفل الأمني الفوري' (Emergency Lock).",
+          "اختيار 'إنهاء كافة الجلسات النشطة' (Terminate All Active Sessions): يؤدي ذلك لقطع الاتصال فوراً من الويب والهواتف وتطبيق Cliq.",
+          "إجراء المسح المؤسسي للأجهزة عن بعد: الانتقال إلى 'إدارة الأجهزة المتنقلة' > اختيار جهاز الموظف المسجل، وتنفيذ 'مسح الحاوية المؤسسية' (Corporate Container Wipe) لحذف الإيميلات والملفات دون المساس بصور الموظف الشخصية.",
+          "إعادة تعيين كلمة المرور إلى مفتاح عشوائي معقد بطول 32 خانة، وتعطيل رموز تجاوز التحقق الثنائي.",
+          "تفعيل إعادة توجيه البريد (Email Forwarding): توجيه كافة الرسائل الواردة مستقبلاً إلى بريد مدير القسم أو الموظف البديل.",
+          "ضبط رد آلي داخلي: 'نود إحاطتكم بانتهاء العلاقة التعاقدية للموظف مع مجموعة الوطن، وللمعاملات يرجى التواصل مع department-lead@wdgroup.online'.",
+          "تحويل الحساب إلى 'أرشيف مشترك غير نشط' لحفظ السجلات التاريخية واستعادة ترخيص Zoho وإتاحته لموظف جديد."
+        ],
+        verification: "محاولة تسجيل الدخول ببيانات الموظف القديمة على الويب وتطبيق الجوال، والتأكد من الرفض الفوري وظهور إشعار 'الحساب معطل / تم رفض الوصول'.",
+        caution: "يُحظر حذف صندوق بريد الموظف نهائياً فور خروجه، وتلزم سياسة المجموعة بالاحتفاظ بالأرشيف لمدة لا تقل عن 24 شهراً لمتابعة الضمانات وعقود التوريد."
+      },
+      {
+        id: "sop-com-14",
+        code: "SOP-COM-14",
+        category: "cliq",
+        pillarName: "قنوات Cliq والاجتماعات",
+        role: "مهندس DevOps / أخصائي تكامل النظم",
+        title: "برمجة وربط بوتات وإشعارات خطافات الويب (Webhooks) من أنظمة ERP في قنوات التشغيل",
+        description: "مسار عمل تقني لإنشاء خطافات الويب واستقبال التنبيهات اللحظية من أنظمة Odoo 19 ERP ومحرك حجز الفنادق eZee ومستودعات البرمجة داخل قنوات Cliq.",
+        objective: "تمكين المشرفين من متابعة أعطال الماكينات، استثناءات أوامر التصنيع، وأخطاء مزامنة الفنادق في قنوات الفريق اللحظية مع أزرار تفاعلية.",
+        prerequisites: "صلاحيات مطور (Developer / Bot Admin) في Zoho Cliq؛ صلاحيات الوصول البرمجي للنظام الخارجي (Odoo / eZee / GitHub).",
+        steps: [
+          "فتح تطبيق Zoho Cliq والانتقال إلى تبويب 'التكاملات والربط' > 'خطافات الويب الواردة' (Incoming Webhooks).",
+          "الضغط على '+ إنشاء خطاف وارد جديد'، وتحديد الاسم التعريفي (مثل 'Odoo-Production-Alerts-Bot') واختيار القناة المستهدفة (#factory-ops).",
+          "نسخ رابط نقطة النهاية (Endpoint URL) الفريد المتضمن رمز المصادقة الآمن.",
+          "في النظام الخارجي (مثل كود الربط في Odoo 19 أو موصل eZee)، إعداد طلب الإرسال HTTP POST بصيغة JSON.",
+          "هيكلة بطاقة الرسالة التفاعلية: تضمين الحقول ('العنوان'، 'النمط البصري'، 'شارة الأهمية العاجلة'، وحقول 'رقم أمر الشغل، الماكينة، والتوقيت').",
+          "إضافة أزرار تفاعلية في البطاقة: رابط مباشر لفتح المعاملة في نظام Odoo وزر لتأكيد استلام المشرف للإشعار.",
+          "إرسال حمولة اختبارية (Test Payload) للتحقق من سلامة العرض وسرعة الوصول.",
+          "تثبيت دليل ومعايير الربط في ملاحظات القناة لضمان المتابعة الفنية المستمرة."
+        ],
+        verification: "تنفيذ معاملة تجريبية في نظام Odoo (مثل إنشاء أمر شراء ذي قيمة مرتفعة)، والتأكد من ظهور بطاقة التنبيه التفاعلية في قناة Cliq خلال ثانيتين فقط.",
+        caution: "عامل روابط Webhook كبيانات سرية فائقة الخطورة، حيث يتيح الرابط لأي جهة إرسال رسائل غير موثقة داخل القنوات المؤسسية للمجموعة."
+      },
+      {
+        id: "sop-com-15",
+        code: "SOP-COM-15",
+        category: "identity",
+        pillarName: "إدارة الهوية والوصول",
+        role: "فني دعم تقنية المعلومات / الدعم الفني الميداني",
+        title: "معالجة حالات استعصاء الدخول وإعادة مزامنة رموز المصادقة TOTP للموظفين",
+        description: "دليل الدعم الفني لمساعدة الموظفين العالقين بسبب فقدان الهواتف، نسيان كلمات المرور، أو اختلال التزامن الزمني لأكواد OneAuth.",
+        objective: "استعادة إنتاجية الموظف بسرعة وأمان، مع التحقق الصارم من الهوية لمنع عمليات الاحتيال وانتحال الشخصية وسرقة الحسابات الوظيفية.",
+        prerequisites: "نظام تذاكر الدعم الفني؛ صلاحيات فني الدعم (Helpdesk Admin) في لوحة إدارة Zoho؛ وسيلة اتصال موثقة وخارجية مع الموظف.",
+        steps: [
+          "عند استلام بلاغ تعذر الدخول، يُحظر إعادة ضبط الحساب عبر رسائل الدردشة غير الموثقة، ويجب إجراء مكالمة هاتفية موثقة على رقم الموظف المعتمد بالموارد البشرية.",
+          "التحقق من الهوية: طلب رقم الهوية الوطنية/الإقامة، اسم المدير المباشر، والرقم الوظيفي للموظف.",
+          "بعد التأكد التام من الهوية، الدخول إلى لوحة إدارة Zoho Mail > إدارة المستخدمين.",
+          "فتح سجل تدقيق تسجيل الدخول للموظف لمعرفة سبب الحظر (مثل: تكرار إدخال كلمة المرور بالخطأ، أو فارق التوقيت في رمز TOTP).",
+          "في حال استبدال أو فقدان الهاتف: الضغط على 'توليد كود طوارئ مؤقت' (صالح للاستخدام لمرة واحدة وخلال 15 دقيقة فقط).",
+          "إملاء الكود المؤقت للموظف شفهياً عبر الهاتف الآمن.",
+          "توجيه الموظف لتسجيل الدخول، وإلغاء ربط هاتفه القديم المفقود، وتثبيت وتفعيل التطبيق فوراً على هاتفه الجديد وفق الإجراء SOP-COM-03.",
+          "في حال اختلال التوقيت: توجيه المستخدم لفتح إعدادات تطبيق OneAuth والضغط على 'مزامنة الوقت الآن' (Sync Time Now).",
+          "تدوين خطوات الإغلاق في تذكرة الدعم الفني وإغلاق المعاملة."
+        ],
+        verification: "مراقبة سجلات الدخول والتأكد من نجاح الموظف في تسجيل الدخول عبر الجهاز الجديد وإلغاء صلاحية كود الطوارئ المؤقت.",
+        caution: "يُحظر منعاً باتاً إلغاء التحقق الثنائي (2FA) بشكل دائم لأي موظف، ويقتصر الإجراء على إصدار كود تجاوز مؤقت محدد بالدقائق."
+      },
+      {
+        id: "sop-com-16",
+        code: "SOP-COM-16",
+        category: "dns",
+        pillarName: "التشفير ونظام النطاقات",
+        role: "محلل الأمن السيبراني / أخصائي أمن البريد",
+        title: "حماية صناديق القيادات التنفيذية (VIP) والتصدي لانتحال الشخصية المتقدم",
+        description: "دليل تعزيز الحماية لصناديق الإدارة العليا ضد هجمات اختراق البريد المؤسسي (BEC)، تزييف أسماء العرض، ورسائل التحويل المالي الاحتيالية.",
+        objective: "تحصين حسابات رئيس مجلس الإدارة والمدير العام التنفيذي ومدراء القطاعات ضد الهجمات السيبرانية الموجهة ومحاولات انتحال العلامة التجارية.",
+        prerequisites: "صلاحيات مسؤول إدارة التهديدات والأمان في Zoho Mail؛ قائمة حسابات القيادات التنفيذية المستهدفة بالحماية.",
+        steps: [
+          "الدخول إلى لوحة Zoho Mail Admin > الأمان والامتثال > الحماية من التهديدات السيبرانية.",
+          "الانتقال إلى قسم 'مكافحة الانتحال وحماية اسم العرض' (Anti-Spoofing & Display Name Protection) والضغط على 'إضافة شخصية محمية VIP'.",
+          "تسجيل الأسماء الرسمية والصيغ الشائعة لأسماء القيادات (مثل: 'Mohammed Ali Saleh Al-Shaibani' و 'م. محمد علي الشيباني').",
+          "ضبط قاعدة تزييف الاسم: إذا ورد بريد خارجي يحمل اسم عرض يطابق أي قيادي ولكنه صادر من نطاق خارجي، يتم تحويله فوراً إلى 'الحجر الصحي المشدد'.",
+          "تفعيل شريط التحذير الخارجي الإلزامي: إدراج تنبيه أحمر في ترويسة الرسائل الخارجية: 'تحذير: هذه الرسالة واردة من خارج مجموعة الوطن، تأكد من صحة المرسل قبل فتح المرفقات أو اعتماد أي تعاملات مالية'.",
+          "حظر إعادة التوجيه التلقائي الخارجي: تعطيل قواعد التوجيه لحسابات البريد الشخصية لكافة حسابات الإدارة العليا.",
+          "تفعيل خوارزميات الذكاء الاصطناعي لاكتشاف العبارات الاحتيالية المريبة (مثل: 'تحويل بنكي عاجل'، 'طلب سري من المدير العام').",
+          "تفعيل إشعارات SMS و Cliq الفورية لفريق الأمن السيبراني فور رصد أي محاولة انتحال لشخصية قيادية."
+        ],
+        verification: "تنفيذ اختبار محاكاة بإرسال رسالة من خدمة بريد مجانية خارجية تحمل اسم المدير العام، والتأكد من اعتراضها واحتجازها في الحجر وإطلاق تنبيه الأمان فوراً.",
+        caution: "اختبار قواعد انتحال الاسم بعناية لتجنب حجز المراسلات المشروعة للقيادات عند مشاركتهم في لجان حكومية أو غرف تجارية خارجية معتمدة."
+      },
+      {
+        id: "sop-com-17",
+        code: "SOP-COM-17",
+        category: "shared",
+        pillarName: "صناديق البريد المشتركة",
+        role: "كافة موظفي المجموعة / المساعدون التنفيذيون",
+        title: "ضبط رسائل الرد التلقائي الرسمية (Out of Office) وتفويض المهام أثناء الإجازات",
+        description: "معيار رسمي لتفعيل رسائل الرد الآلي ثنائية اللغة وتفويض متابعة البريد لزملاء العمل أثناء الإجازات السنوية أو المهمات الميدانية الرسمية.",
+        objective: "الحفاظ على انسيابية الأعمال، وضمان عدم إهمال طلبات العملاء، وعكس الصورة الاحترافية لمجموعة الوطن القابضة أثناء غياب الموظف.",
+        prerequisites: "إشعار إجازة معتمد في نظام الموارد البشرية؛ تسجيل الدخول لبريد Zoho Mail عبر الويب.",
+        steps: [
+          "في واجهة بريد Zoho Mail، الضغط على أيقونة الإعدادات (الترس) في الزاوية العلوية واختيار 'خارج المكتب / الرد الآلي' (Out of Office).",
+          "تحويل خيار 'تفعيل الرد الآلي' إلى حالة التشغيل (Active).",
+          "تحديد النطاق الزمني بالساعة واليوم: ضبط تاريخ البداية مع بدء الإجازة المعتمدة وتاريخ الانتهاء مع توقيت العودة للعمل.",
+          "تخصيص ردين منفصلين (للجهات الخارجية والزملاء الداخليين):",
+          "الرد الخارجي (ثنائي اللغة عربي/إنجليزي): 'شكراً لتواصلكم مع مجموعة الوطن القابضة. أود إحاطتكم بتواجدي في إجازة سنوية حتى تاريخ [اليوم] مع محدودية متابعة البريد. للمواضيع العاجلة المتعلقة بالمبيعات والتوريد يرجى التواصل مع الزميل [الاسم، المنصب، البريد، الهاتف]'.",
+          "الرد الداخلي: توضيح زميل العمل البديل المكلف بمتابعة ملفات المصانع، وموقع الوثائق المشتركة على السحابة، ورقم الطوارئ للاتصال في الحالات القصوى.",
+          "في حال الرغبة في تفويض متابعة الصندوق للمساعد التنفيذي: التوجه إلى الإعدادات > حسابات البريد > تفويض الوصول (Access Delegation) ومنح صلاحية 'قراءة فقط' أو 'مفوض'.",
+          "الضغط على 'حفظ وتفعيل'."
+        ],
+        verification: "إرسال رسالة تجريبية من حساب بريد بديل للتأكد من وصول الرد الآلي فوراً بتنسيق سليم ووضوح بيانات الموظف البديل المكلف.",
+        caution: "يُحظر كتابة تفاصيل السفر أو حجوزات الطيران أو أرقام عقود مالية خاصة في نص الرد الآلي لتفادي استغلالها في الهندسة الاجتماعية."
+      },
+      {
+        id: "sop-com-18",
+        code: "SOP-COM-18",
+        category: "dns",
+        pillarName: "التشفير ونظام النطاقات",
+        role: "مسؤول أنظمة البريد / مهندس العمليات الأمنية SecOps",
+        title: "إدارة الحجر الصحي للرسائل المشبوهة وقوائم النطاقات الموثوقة (Whitelisting)",
+        description: "إجراء تشغيلي يومي لتدقيق طوابير الرسائل المحجوزة، تصحيح قرارات الحجز الخاطئ، وإدارة القوائم البيضاء للشركاء والبنوك والجهات الحكومية.",
+        objective: "ضمان عدم فقدان المراسلات الحكومية والمصرفية الهامة، مع استمرار الحجب الفعال لرسائل التصيد والبرمجيات الخبيثة الموجهة للمجموعة.",
+        prerequisites: "صلاحيات مسؤول الأمان في Zoho Mail؛ جدول التدقيق اليومي المعتمد للحجر الصحي.",
+        steps: [
+          "الدخول إلى لوحة حماية البريد في Zoho Mail > التحكم في البريد العشوائي والحجر الصحي عند الساعة 09:00 صباحاً و 03:00 مساءً يومياً.",
+          "استعراض طابور الرسائل المحجوزة على مستوى المنظمة وفرزها حسب نطاق المرسل ونقاط التقييم وسبب الحجز.",
+          "فحص الترويسات الأمنية للرسائل المشبوهة: التأكد من نتائج SPF وصحة توقيع DKIM وتوافق DMARC.",
+          "في حال التأكد من مشروعية رسالة واردة من جهة حكومية أو بنكية موثقة (مثل هيئة الزكاة والضريبة والجمارك أو البنوك المعتمدة): الضغط على 'إفراج وتعلم' (Release & Learn) لتسليمها للموظف وتحسين دقة النظام.",
+          "لإدراج شريك أعمال استراتيجي في القائمة البيضاء الدائمة: الانتقال إلى 'النطاقات الموثوقة' (Whitelisted Domains)، وإضافة النطاق مع إلزام شرط 'نجاح فحص SPF' لمنع استغلال القائمة في التزييف.",
+          "في حال اكتشاف محاولة تصيد أو برمجية خبيثة مستحدثة: النقر على 'تصيد خبيث وإدراج بالقائمة السوداء'، واستخراج عنوان IP والنطاق وتعميم الحظر.",
+          "أرشفة السجل الأسبوعي لرفعه في تقرير الأمن السيبراني الدوري."
+        ],
+        verification: "التأكد من وصول الرسائل المفرج عنها إلى صندوق الوارد للموظف المعني خلال 60 ثانية مع وجود وسم إداري يوضح الإفراج الرقابي.",
+        caution: "يُمنع منعاً باتاً إضافة نطاقات البريد العامة المجانية (مثل gmail.com أو yahoo.com) إلى القائمة البيضاء الشاملة للمنظمة، ويقتصر الإدراج على نطاقات الشركات الموثقة."
+      },
+      {
+        id: "sop-com-19",
+        code: "SOP-COM-19",
+        category: "operations",
+        pillarName: "التشغيل وخطط الطوارئ",
+        role: "ضابط نوبة العمليات / المشرف العام لتقنية المعلومات",
+        title: "خطة الطوارئ وتصعيد انقطاع الاتصالات من الدرجة الأولى (P1) إلى فريق دبي في القاهرة",
+        description: "بروتوكول إدارة الحوادث الحرجة عند تعطل خوادم البريد أو قنوات Cliq وتفعيل خطوط الطوارئ الموازية والتصعيد الهندسي الفوري لفريق الدعم المتقدم.",
+        objective: "استعادة قنوات التواصل الحيوية للمجموعة ضمن اتفاقيات مستوى الخدمة الصارمة، وتشغيل خطوط الإدارة البديلة، وتقديم تقارير شفافة للإدارة العليا.",
+        prerequisites: "تفويض رسمي لضابط النوبة؛ الوصول لقناة البث الطارئة لمدراء المصانع؛ بيانات الاتصال المباشر لغرفة عمليات دبي في القاهرة (Dubai in Cairo).",
+        steps: [
+          "عند رصد توقف عام لخدمات البريد أو انقطاع اتصال Cliq (يؤثر على أكثر من 10 موظفين متزامنين)، إعلان حالة الطوارئ من الدرجة الأولى (P1 Incident).",
+          "فحص مؤشرات السحابة العالمية: فتح https://status.zoho.com ولوحة Cloudflare للتحقق مما إذا كان العطل عاماً أو متعلقاً بالنطاقات الداخلية.",
+          "تنفيذ فحوصات تشخيصية سريعة من الطرفية: فحص دقة استجابة النطاق ('dig +trace mx.zoho.com') واختبار المنافذ ('nc -zv mx.zoho.com 25').",
+          "تفعيل خط الطوارئ الموازي: إطلاق بث إداري عبر قناة WhatsApp Business VIP المعتمدة لإخطار مدراء المصانع ورؤساء القطاعات بالانقطاع.",
+          "بدء التصعيد المباشر إلى فريق الدعم الهندسي المتقدم في دبي في القاهرة عبر الخط الساخن ونظام التذاكر الطارئ مع إرفاق حزمة التشخيص الفني.",
+          "توجيه المصانع لتشغيل خطط العمل الورقية والميدانية البديلة لضمان عدم توقف خطوط الإنتاج والقص في مصانع الأخشاب.",
+          "متابعة المعالجة الهندسية مع فريق دبي في القاهرة، وتقديم إحاطات هاتفية كل 30 دقيقة للمدير العام التنفيذي للمجموعة.",
+          "فور استعادة الخدمة، إجراء اختبارات إرسال شاملة عبر النطاقات الثلاثة، وإغلاق حالة الطوارئ، وإصدار تقرير تحليل الأسباب الجذرية (RCA) خلال 24 ساعة."
+        ],
+        verification: "التأكد من نجاح تدفق الرسائل عبر النطاقات الثلاثة، واستعادة اتصال WebSockets لتطبيق Cliq على الحواسب والهواتف، وتوقيع محضر الإغلاق الفني.",
+        caution: "أثناء انقطاع البريد العام، يُحظر إجراء تعديلات عشوائية على سجلات DNS دون التنسيق المباشر مع كبار مهندسي النظم في دبي في القاهرة."
+      },
+      {
+        id: "sop-com-20",
+        code: "SOP-COM-20",
+        category: "governance",
+        pillarName: "الامتثال وحماية البيانات DLP",
+        role: "رئيس البنية التحتية المؤسسية / مهندس السعة والتخزين",
+        title: "ترشيد السعات التخزينية ربع السنوي وأرشفة صناديق البريد القديمة",
+        description: "دليل تخطيط السعة لتدقيق استهلاك مساحات التخزين، ضغط المرفقات الضخمة، وأرشفة حسابات الموظفين المنتهية خدماتهم لتوفير تكاليف التراخيص.",
+        objective: "منع امتلاء صناديق البريد، القضاء على تكاليف التراخيص غير المستغلة، والحفاظ على الكفاءة التشغيلية العالية لبيئة العمل السحابية.",
+        prerequisites: "صلاحيات مسؤول التخزين في Zoho Mail Admin؛ الجدول المعتمد لتخطيط السعة ربع السنوي لمجموعة الوطن.",
+        steps: [
+          "الدخول إلى لوحة إدارة Zoho Mail > إدارة التخزين (Storage Management) في نهاية كل ربع سنة مالية.",
+          "استخراج تقرير استهلاك السعة على مستوى المنظمة، وترتيب حسابات الموظفين تنازلياً حسب نسبة الامتلاء.",
+          "تحديد الحسابات التي تجاوزت 85% من سعتها التخزينية المخصصة (أكثر من 8.5 جيجابايت للباقة القياسية).",
+          "إرسال إشعارات تنظيف آلية للموظفين تتضمن إرشادات حذف المرفقات القديمة وتفريغ سلات المهملات وأرشفة مراسلات المشاريع المنتهية.",
+          "تشغيل أداة ضغط المرفقات الآلية (Zoho Attachment Optimization) على الحسابات التي تحوي مرفقات ضخمة غير مضغوطة تتجاوز 25 ميجابايت.",
+          "حصر حسابات الموظفين الذين غادروا الشركة منذ أكثر من 180 يوماً: تصدير أرشيفهم الكامل إلى مستودع التخزين السحابي البارد والمشفر، ثم حذف الحساب الفعلي لاسترداد الترخيص المؤسسي وإتاحته لموظف جديد.",
+          "مراجعة سعات الصناديق المشتركة (sales@ و procurement@) وزيادة السعة الاحتياطية لتفادي ارتداد إيميلات العملاء.",
+          "رفع التقرير ربع السنوي لكفاءة التخزين والتراخيص إلى المدير العام التنفيذي والمدير المالي."
+        ],
+        verification: "التأكد من انخفاض معدل الامتلاء العام للمنظمة دون 70%، وظهور التراخيص المستردة في لوحة التراخيص المتاحة للاستخدام.",
+        caution: "يُحظر حذف أي حساب موظف قديم دون مراجعة قائمة الحجز القانوني (SOP-COM-12) للتأكد من عدم وجود نزاع قضائي يتطلب حفظ سجلاته."
+      }
+    ];
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function renderSOPs() {
+      const grid = document.getElementById('sop-grid');
+      const filtered = sopsData.filter(sop => {
+        const matchesCategory = (currentFilter === 'all') || (sop.category === currentFilter);
+        const q = searchQuery.toLowerCase().trim();
+        const matchesSearch = !q || 
+          sop.title.toLowerCase().includes(q) ||
+          sop.code.toLowerCase().includes(q) ||
+          sop.pillarName.toLowerCase().includes(q) ||
+          sop.description.toLowerCase().includes(q) ||
+          sop.role.toLowerCase().includes(q);
+        return matchesCategory && matchesSearch;
+      });
+
+      document.getElementById('active-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mx-auto text-slate-500">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <p class="text-sm text-slate-400 font-medium">لا توجد إجراءات تشغيلية مطابقة لمعايير البحث الحالية.</p>
+            <button onclick="setFilter('all'); document.getElementById('sop-search').value=''; handleSearch('');" class="px-4 py-2 rounded-xl bg-teal-600/20 text-teal-300 border border-teal-500/30 text-xs font-semibold hover:bg-teal-600/30 transition">
+              إعادة ضبط الفلاتر
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(sop => `
+        <div onclick="openSopModal('${sop.id}')" class="glass-card spotlight-card rounded-2xl p-5 border border-slate-800/80 hover:border-teal-500/50 cursor-pointer flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">
+                ${sop.code}
+              </span>
+              <span class="text-[11px] font-semibold text-slate-400 font-mono">
+                ${sop.pillarName}
+              </span>
+            </div>
+
+            <h3 class="text-base font-bold text-white group-hover:text-teal-300 transition-colors leading-snug">
+              ${sop.title}
+            </h3>
+
+            <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+              ${sop.description}
+            </p>
+          </div>
+
+          <div class="pt-4 mt-4 border-t border-slate-800/60 flex items-center justify-between text-xs">
+            <span class="text-[11px] text-slate-400 truncate max-w-[180px]">
+              <span class="text-slate-500">المسؤول:</span> ${sop.role}
+            </span>
+            <span class="inline-flex items-center gap-1 text-teal-400 font-semibold group-hover:-translate-x-0.5 transition-transform text-xs">
+              <span>عرض الإجراء</span>
+              <span>←</span>
+            </span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setFilter(cat) {
+      currentFilter = cat;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.currentTarget.classList.add('active');
+      const labels = {
+        'all': 'كافة الإجراءات',
+        'dns': 'التشفير ونظام النطاقات',
+        'identity': 'إدارة الهوية والوصول',
+        'shared': 'صناديق البريد المشتركة',
+        'cliq': 'قنوات Cliq والاجتماعات',
+        'clips': 'مقاطع الفيديو Clips',
+        'governance': 'الامتثال ومنع التسريب DLP',
+        'operations': 'التشغيل وخطط الطوارئ'
+      };
+      document.getElementById('active-category-label').textContent = labels[cat] || 'كافة الإجراءات';
+      renderSOPs();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val;
+      renderSOPs();
+    }
+
+    function openSopModal(id) {
+      const sop = sopsData.find(s => s.id === id);
+      if (!sop) return;
+
+      document.getElementById('modal-sop-code').textContent = sop.code;
+      document.getElementById('modal-sop-pillar').textContent = sop.pillarName;
+      document.getElementById('modal-sop-role').textContent = "المسؤول: " + sop.role;
+      document.getElementById('modal-sop-title').textContent = sop.title;
+
+      const stepsHtml = sop.steps.map((step, idx) => `
+        <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-teal-600 text-white font-bold text-[11px] shrink-0 mt-0.5">${idx + 1}</span>
+          <span class="leading-relaxed text-slate-300 text-xs">${step}</span>
+        </li>
+      `).join('');
+
+      document.getElementById('modal-sop-content').innerHTML = `
+        <div class="space-y-4">
+          <!-- Section 1: Objective & Scope -->
+          <div class="p-3.5 rounded-xl bg-teal-950/20 border border-teal-500/20">
+            <span class="text-teal-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">1. الهدف والنطاق التشغيلي</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.objective}</p>
+          </div>
+
+          <!-- Section 2: Prerequisites -->
+          <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+            <span class="text-slate-400 font-bold block mb-1 uppercase tracking-wider text-[11px]">2. المتطلبات المسبقة وصلاحيات النظام</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.prerequisites}</p>
+          </div>
+
+          <!-- Section 3: Step-by-Step Procedure -->
+          <div class="space-y-2">
+            <span class="text-white font-bold block uppercase tracking-wider text-[11px]">3. تسلسل خطوات التنفيذ الإجرائية</span>
+            <ul class="space-y-2">
+              ${stepsHtml}
+            </ul>
+          </div>
+
+          <!-- Section 4: Verification -->
+          <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/20">
+            <span class="text-emerald-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">4. معايير التحقق وجودة الإنجاز</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.verification}</p>
+          </div>
+
+          <!-- Section 5: Caution -->
+          <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/20">
+            <span class="text-rose-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">5. المحاذير والمخاطر التشغيلية</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.caution}</p>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modal-overlay').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSopModal() {
+      document.getElementById('modal-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function copyModalContent() {
+      const title = document.getElementById('modal-sop-title').textContent;
+      const content = document.getElementById('modal-sop-content').innerText;
+      navigator.clipboard.writeText(title + "\n\n" + content).then(() => {
+        const btn = document.getElementById('copy-btn-text');
+        btn.textContent = "تم النسخ للحافظة!";
+        setTimeout(() => { btn.textContent = "نسخ نص الإجراء"; }, 2000);
+      });
+    }
+
+    // Spotlight Mouse Tracker
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSopModal();
+    });
+
+    // Close modal on click outside
+    document.getElementById('modal-overlay').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('modal-overlay')) closeSopModal();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSOPs();
+    });
+  </script>
+</body>
+</html>
