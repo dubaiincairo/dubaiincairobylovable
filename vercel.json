@@ -33,6 +33,30 @@
       "destination": "/proposals/yerkab/:path*"
     },
     {
+      "source": "/manuals/login",
+      "destination": "/manuals/login.html"
+    },
+    {
+      "source": "/manuals/login/",
+      "destination": "/manuals/login.html"
+    },
+    {
+      "source": "/portal/login",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/portal/login/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/portal",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/portal/",
+      "destination": "/index.html"
+    },
+    {
       "source": "/manuals/wdgroup",
       "destination": "/manuals/wdgroup/index.html"
     },

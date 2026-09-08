@@ -25,6 +25,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import PartnerLogin from "./pages/PartnerLogin";
 import PartnerTimeTracker from "./pages/PartnerTimeTracker";
 import HospitalityApi from "./pages/HospitalityApi";
+import ClientPortalLogin from "./pages/ClientPortalLogin";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
@@ -39,7 +40,7 @@ import GoogleIntegrations from "./components/GoogleIntegrations";
 
 const queryClient = new QueryClient();
 
-const CHROMELESS_PATHS = ["/login", "/admin", "/reset-password", "/partner"];
+const CHROMELESS_PATHS = ["/login", "/admin", "/reset-password", "/partner", "/portal", "/manuals/login", "/client/login"];
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -87,6 +88,10 @@ const AnimatedRoutes = () => {
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/partner/login" element={<PartnerLogin />} />
           <Route path="/partner" element={<PartnerTimeTracker />} />
+          <Route path="/portal/login" element={<ClientPortalLogin />} />
+          <Route path="/portal" element={<Navigate to="/portal/login" replace />} />
+          <Route path="/manuals/login" element={<ClientPortalLogin />} />
+          <Route path="/client/login" element={<ClientPortalLogin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
