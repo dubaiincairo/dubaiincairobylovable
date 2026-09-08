@@ -1,4 +1,36 @@
 {
+  "redirects": [
+    {
+      "source": "/portal/login",
+      "destination": "/portal",
+      "permanent": true
+    },
+    {
+      "source": "/portal/login/",
+      "destination": "/portal",
+      "permanent": true
+    },
+    {
+      "source": "/client/login",
+      "destination": "/portal",
+      "permanent": true
+    },
+    {
+      "source": "/client/login/",
+      "destination": "/portal",
+      "permanent": true
+    },
+    {
+      "source": "/manuals/login",
+      "destination": "/portal",
+      "permanent": true
+    },
+    {
+      "source": "/manuals/login/",
+      "destination": "/portal",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/saudihospitalityweb",
@@ -31,22 +63,6 @@
     {
       "source": "/proposals/yerkab/:path*",
       "destination": "/proposals/yerkab/:path*"
-    },
-    {
-      "source": "/manuals/login",
-      "destination": "/manuals/login.html"
-    },
-    {
-      "source": "/manuals/login/",
-      "destination": "/manuals/login.html"
-    },
-    {
-      "source": "/portal/login",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/portal/login/",
-      "destination": "/index.html"
     },
     {
       "source": "/portal",
