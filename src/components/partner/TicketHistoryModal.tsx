@@ -42,13 +42,23 @@ export default function TicketHistoryModal({ open, onClose, tickets, lang }: Pro
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "resolved":
-        return <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/40">Resolved</Badge>;
+        return <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/40">{isRtl ? "تم الحل" : "Resolved"}</Badge>;
       case "in_progress":
-        return <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/40">In Progress</Badge>;
+        return <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/40">{isRtl ? "قيد المعالجة" : "In Progress"}</Badge>;
       case "closed":
-        return <Badge className="bg-zinc-500/20 text-zinc-300 border-zinc-500/40">Closed</Badge>;
+        return <Badge className="bg-zinc-500/20 text-zinc-300 border-zinc-500/40">{isRtl ? "مغلقة" : "Closed"}</Badge>;
       default:
-        return <Badge className="bg-amber-500/20 text-amber-300 border-amber-500/40">Open</Badge>;
+        return <Badge className="bg-amber-500/20 text-amber-300 border-amber-500/40">{isRtl ? "مفتوحة" : "Open"}</Badge>;
+    }
+  };
+
+  const getPriorityLabel = (p: string) => {
+    if (!isRtl) return p;
+    switch (p) {
+      case "critical": return "حرج";
+      case "high": return "عالي";
+      case "medium": return "متوسط";
+      default: return "عادي";
     }
   };
 
@@ -75,7 +85,7 @@ export default function TicketHistoryModal({ open, onClose, tickets, lang }: Pro
               {t.historyTitle}
             </span>
             <span className="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-primary/15 text-primary border border-primary/30">
-              {tickets.length} {lang === "ar" ? "تذاكر مسجلة" : "Logged"}
+              {tickets.length} {lang === "ar" ? "تذاكر مسجلة" : "Logged Tickets"}
             </span>
           </DialogTitle>
         </DialogHeader>
@@ -93,22 +103,34 @@ export default function TicketHistoryModal({ open, onClose, tickets, lang }: Pro
             />
           </div>
 
-          {/* System filter pills */}
+          {/* System filter pills strictly separated */}
           <div className="inline-flex rounded-xl border border-border/70 bg-card/50 p-1 text-xs gap-1 shrink-0 overflow-x-auto">
-            {["all", "odoo", "ezee", "ozoo"].map((sys) => (
-              <button
-                type="button"
-                key={sys}
-                onClick={() => setFilterSystem(sys)}
-                className={`px-3 py-1 rounded-lg font-medium transition-colors uppercase text-[11px] ${
-                  filterSystem === sys
-                    ? "bg-primary text-primary-foreground font-bold shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {sys === "all" ? t.historyFilterAll : sys}
-              </button>
-            ))}
+            {["all", "odoo", "ezee", "ozoo"].map((sys) => {
+              const label =
+                sys === "all"
+                  ? t.historyFilterAll
+                  : isRtl
+                  ? sys === "odoo"
+                    ? "أودو"
+                    : sys === "ezee"
+                    ? "إيزي"
+                    : "أوزو"
+                  : sys.toUpperCase();
+              return (
+                <button
+                  type="button"
+                  key={sys}
+                  onClick={() => setFilterSystem(sys)}
+                  className={`px-3 py-1 rounded-lg font-medium transition-colors text-[11px] ${
+                    filterSystem === sys
+                      ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -148,7 +170,7 @@ export default function TicketHistoryModal({ open, onClose, tickets, lang }: Pro
                         size="icon"
                         className="h-6 w-6 text-muted-foreground hover:text-foreground"
                         onClick={() => handleCopy(ticket.ticket_number)}
-                        title="Copy Ticket ID"
+                        title={isRtl ? "نسخ رقم التذكرة" : "Copy Ticket ID"}
                       >
                         {copiedId === ticket.ticket_number ? (
                           <Check className="w-3.5 h-3.5 text-emerald-400" />
@@ -161,7 +183,7 @@ export default function TicketHistoryModal({ open, onClose, tickets, lang }: Pro
                     <div className="flex items-center gap-2">
                       {getStatusBadge(ticket.status || "open")}
                       <Badge variant="outline" className="text-[11px] capitalize border-border/60 font-mono">
-                        {ticket.priority}
+                        {getPriorityLabel(ticket.priority)}
                       </Badge>
                     </div>
                   </div>
@@ -187,7 +209,7 @@ export default function TicketHistoryModal({ open, onClose, tickets, lang }: Pro
                           className="inline-flex items-center gap-1 text-primary hover:underline"
                         >
                           <ExternalLink className="w-3 h-3" />
-                          <span>Link</span>
+                          <span>{isRtl ? "الرابط" : "Link"}</span>
                         </a>
                       )}
                     </div>

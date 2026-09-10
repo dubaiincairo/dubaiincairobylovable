@@ -44,10 +44,15 @@ import { ticketTranslations } from "@/lib/ticketTranslations";
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
 const DAYS = Array.from({ length: 7 }, (_, i) => i);
 
-const formatHourShort = (hour: number) => {
-  const d = new Date();
-  d.setHours(hour, 0, 0, 0);
-  return format(d, "h a");
+const formatHourDisplay = (hour: number, isRtl: boolean) => {
+  if (!isRtl) {
+    const d = new Date();
+    d.setHours(hour, 0, 0, 0);
+    return format(d, "h a");
+  }
+  const period = hour >= 12 ? "م" : "ص";
+  const h = hour % 12 === 0 ? 12 : hour % 12;
+  return `${h}:00 ${period}`;
 };
 
 const toDateKey = (date: Date) => format(date, "yyyy-MM-dd");
@@ -60,18 +65,21 @@ interface EditingTarget {
 
 const STORAGE_LOCAL_TICKETS = "dubaiincairo_submitted_tickets_v1";
 
+const AR_DAY_NAMES = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+
 const PartnerTimeTracker = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialTab = searchParams.get("tab") === "worksheet" ? "worksheet" : "tickets";
   const [activeTab, setActiveTab] = useState<"tickets" | "worksheet">(initialTab);
 
-  // Bilingual Language State (English / Arabic)
-  const [lang, setLang] = useState<"en" | "ar">("ar");
+  // Strictly isolate default language: default to English unless ?lang=ar is explicitly requested
+  const initialLang = searchParams.get("lang") === "ar" ? "ar" : "en";
+  const [lang, setLang] = useState<"en" | "ar">(initialLang);
   const isRtl = lang === "ar";
   const t = ticketTranslations[lang];
 
   useSEO({
-    title: isRtl ? "بوابة الشركاء والدعم الفني | دبي في القاهرة" : "Partner & Client Portal | Dubai in Cairo",
+    title: isRtl ? "بوابة الشركاء والعمليات | دبي في القاهرة" : "Partner & Client Portal | Dubai in Cairo",
     description: isRtl
       ? "البوابة التنفيذية المعتمدة لرفع تذاكر الدعم الفني لأنظمة أودو وإيزي وأوزو، وسجل أعمال المستقلين."
       : "Executive portal for client support tickets (Odoo, eZee, Ozoo) and freelancer worksheet time tracking.",
@@ -166,7 +174,18 @@ const PartnerTimeTracker = () => {
   // Update tab in URL query params
   const handleTabChange = (tab: "tickets" | "worksheet") => {
     setActiveTab(tab);
-    setSearchParams({ tab });
+    const params = new URLSearchParams(searchParams);
+    params.set("tab", tab);
+    setSearchParams(params, { replace: true });
+  };
+
+  // Toggle Language Handler with URL persistence
+  const handleLanguageToggle = () => {
+    const nextLang = lang === "ar" ? "en" : "ar";
+    setLang(nextLang);
+    const params = new URLSearchParams(searchParams);
+    params.set("lang", nextLang);
+    setSearchParams(params, { replace: true });
   };
 
   // Load entries for the visible week if authenticated
@@ -185,7 +204,7 @@ const PartnerTimeTracker = () => {
       .order("hour", { ascending: true })
       .then(({ data, error }) => {
         if (error) {
-          toast({ title: "Couldn't load entries", description: error.message, variant: "destructive" });
+          toast({ title: isRtl ? "تعذر تحميل السجلات" : "Couldn't load entries", description: error.message, variant: "destructive" });
           setLoadingEntries(false);
           return;
         }
@@ -196,7 +215,7 @@ const PartnerTimeTracker = () => {
         setEntries(map);
         setLoadingEntries(false);
       });
-  }, [isPartnerUser, weekStart, toast]);
+  }, [isPartnerUser, weekStart, toast, isRtl]);
 
   const totalHoursThisWeek = Object.keys(entries).length;
 
@@ -235,13 +254,13 @@ const PartnerTimeTracker = () => {
 
     setSaving(false);
     if (result.error) {
-      toast({ title: "Couldn't save entry", description: result.error.message, variant: "destructive" });
+      toast({ title: isRtl ? "تعذر حفظ الإدخال" : "Couldn't save entry", description: result.error.message, variant: "destructive" });
       return;
     }
     const saved = result.data as TimeEntry;
     setEntries((prev) => ({ ...prev, [entryKey(saved.entry_date, saved.hour)]: saved }));
     setTarget(null);
-    toast({ title: target.entry ? "Entry updated" : "Hour logged" });
+    toast({ title: target.entry ? (isRtl ? "تم تعديل السجل" : "Entry updated") : (isRtl ? "تم تسجيل الساعة" : "Hour logged") });
   };
 
   const handleDelete = async () => {
@@ -250,7 +269,7 @@ const PartnerTimeTracker = () => {
     const { error } = await supabase.from("time_entries").delete().eq("id", target.entry.id);
     setDeleting(false);
     if (error) {
-      toast({ title: "Couldn't delete", description: error.message, variant: "destructive" });
+      toast({ title: isRtl ? "تعذر الحذف" : "Couldn't delete", description: error.message, variant: "destructive" });
       return;
     }
     setEntries((prev) => {
@@ -259,7 +278,7 @@ const PartnerTimeTracker = () => {
       return next;
     });
     setTarget(null);
-    toast({ title: "Entry deleted" });
+    toast({ title: isRtl ? "تم حذف السجل بنجاح" : "Entry deleted" });
   };
 
   const handleSignOut = async () => {
@@ -301,7 +320,10 @@ const PartnerTimeTracker = () => {
   const goNextWeek = () => setWeekAnchor((d) => addWeeks(d, 1));
   const goToday = () => setWeekAnchor(new Date());
 
-  const weekLabel = `${format(weekStart, "MMM d")} – ${format(addDays(weekStart, 6), "MMM d, yyyy")}`;
+  const weekEnd = addDays(weekStart, 6);
+  const weekLabel = isRtl
+    ? `${new Intl.DateTimeFormat("ar-EG", { month: "short", day: "numeric" }).format(weekStart)} – ${new Intl.DateTimeFormat("ar-EG", { month: "short", day: "numeric", year: "numeric" }).format(weekEnd)}`
+    : `${format(weekStart, "MMM d")} – ${format(weekEnd, "MMM d, yyyy")}`;
 
   if (!authReady) {
     return (
@@ -332,11 +354,11 @@ const PartnerTimeTracker = () => {
           <div className="flex items-center gap-4 text-muted-foreground">
             <Link to="/portal" className="hover:text-primary transition-colors flex items-center gap-1">
               <BookOpen className="w-3 h-3" />
-              <span>{isRtl ? "أدلة العمليات (SOPs)" : "Client Deliverables"}</span>
+              <span>{isRtl ? "أدلة العمليات المعتمدة" : "Client Deliverables (SOPs)"}</span>
             </Link>
             <span>·</span>
             <Link to="/" className="hover:text-primary transition-colors">
-              {isRtl ? "الموقع الرئيسي" : "Website"}
+              {isRtl ? "الموقع الرئيسي" : "Main Website"}
             </Link>
           </div>
         </div>
@@ -349,7 +371,9 @@ const PartnerTimeTracker = () => {
           <div className="flex items-center gap-3">
             <a href="/" className="font-display font-bold text-base inline-flex items-center gap-2.5">
               <span className="w-2.5 h-2.5 rounded-full bg-primary shadow-sm shadow-primary/50" />
-              <span className="text-gradient-gold tracking-tight">Dubai in Cairo</span>
+              <span className="text-gradient-gold tracking-tight">
+                {isRtl ? "دبي في القاهرة" : "Dubai in Cairo"}
+              </span>
               <span className="hidden sm:inline text-muted-foreground/60 font-normal">|</span>
               <span className="hidden sm:inline text-xs text-muted-foreground font-medium">
                 {isRtl ? "بوابة الشركاء والعمليات" : "Operations Desk"}
@@ -359,15 +383,15 @@ const PartnerTimeTracker = () => {
 
           {/* Controls: Language Switcher + Tickets History + User Session */}
           <div className="flex items-center gap-2 md:gap-2.5">
-            {/* Language Switcher */}
+            {/* Language Switcher strictly isolated */}
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setLang(lang === "ar" ? "en" : "ar")}
+              onClick={handleLanguageToggle}
               className="h-8.5 px-3 text-xs font-semibold gap-1.5 border-border/80 bg-card/60 hover:bg-card rounded-xl transition-all"
             >
               <Languages className="w-3.5 h-3.5 text-primary" />
-              <span>{lang === "ar" ? "English" : "العربية"}</span>
+              <span>{isRtl ? "التحويل للإنجليزية" : "Switch to Arabic"}</span>
             </Button>
 
             {/* My Tickets Button */}
@@ -533,7 +557,7 @@ const PartnerTimeTracker = () => {
 
                 {/* Grid */}
                 <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-xl">
-                  {/* Day headers */}
+                  {/* Day headers strictly isolated */}
                   <div
                     className="grid border-b border-border bg-background/50"
                     style={{ gridTemplateColumns: "70px repeat(7, minmax(0, 1fr))" }}
@@ -546,6 +570,8 @@ const PartnerTimeTracker = () => {
                         (acc, h) => (entries[entryKey(dayKey, h)] ? acc + 1 : acc),
                         0,
                       );
+                      const dayName = isRtl ? AR_DAY_NAMES[day.getDay()] : format(day, "EEE");
+
                       return (
                         <div
                           key={dayKey}
@@ -555,7 +581,7 @@ const PartnerTimeTracker = () => {
                           )}
                         >
                           <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
-                            {format(day, "EEE")}
+                            {dayName}
                           </div>
                           <div className={cn(
                             "font-display font-bold text-base leading-none mt-0.5",
@@ -588,9 +614,9 @@ const PartnerTimeTracker = () => {
                         className="grid border-b border-border/60 last:border-b-0"
                         style={{ gridTemplateColumns: "70px repeat(7, minmax(0, 1fr))" }}
                       >
-                        {/* Hour label */}
+                        {/* Hour label strictly isolated */}
                         <div className="px-2 py-1 text-[10px] text-muted-foreground text-right font-mono leading-tight border-r border-border/60 flex items-start justify-end pt-1.5">
-                          {formatHourShort(hour)}
+                          {formatHourDisplay(hour, isRtl)}
                         </div>
 
                         {weekDays.map((day) => {
@@ -612,8 +638,10 @@ const PartnerTimeTracker = () => {
                               )}
                               aria-label={
                                 entry
-                                  ? `${entry.title} — ${format(day, "EEEE")} at ${formatHourShort(hour)}`
-                                  : `Log work for ${format(day, "EEEE")} at ${formatHourShort(hour)}`
+                                  ? `${entry.title} — ${isRtl ? AR_DAY_NAMES[day.getDay()] : format(day, "EEEE")} at ${formatHourDisplay(hour, isRtl)}`
+                                  : isRtl
+                                  ? `تسجيل عمل ليوم ${AR_DAY_NAMES[day.getDay()]} الساعة ${formatHourDisplay(hour, isRtl)}`
+                                  : `Log work for ${format(day, "EEEE")} at ${formatHourDisplay(hour, isRtl)}`
                               }
                             >
                               {entry ? (
@@ -743,6 +771,7 @@ const PartnerTimeTracker = () => {
         hour={target?.hour ?? null}
         saving={saving}
         deleting={deleting}
+        lang={lang}
         onClose={() => setTarget(null)}
         onSave={handleSave}
         onDelete={handleDelete}

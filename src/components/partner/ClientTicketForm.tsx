@@ -40,6 +40,7 @@ import {
   ClientTicket,
   SYSTEM_META,
   BRANCH_OPTIONS_EN,
+  BRANCH_OPTIONS_AR,
 } from "@/types/tickets";
 import { ticketTranslations } from "@/lib/ticketTranslations";
 
@@ -83,6 +84,9 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
   const t = ticketTranslations[lang];
   const isRtl = lang === "ar";
   const { toast } = useToast();
+
+  // Branch options strictly isolated by language
+  const branchOptions = isRtl ? BRANCH_OPTIONS_AR : BRANCH_OPTIONS_EN;
 
   // Form state
   const [system, setSystem] = useState<TicketSystem>("odoo");
@@ -297,12 +301,12 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
       if (recordingFile && recordingMode === "file") {
         const directVideoUrl = await uploadAttachment(recordingFile, "tickets/recordings");
         uploadedRecordingUrl = uploadedRecordingUrl
-          ? `${directVideoUrl} | Cloud Link: ${uploadedRecordingUrl}`
+          ? `${directVideoUrl} | ${isRtl ? "رابط سحابي" : "Cloud Link"}: ${uploadedRecordingUrl}`
           : directVideoUrl;
       }
 
-      // 2. Resolve final branch label
-      const selectedBranchObj = BRANCH_OPTIONS_EN.find((b) => b.id === branch);
+      // 2. Resolve final branch label strictly according to active language
+      const selectedBranchObj = branchOptions.find((b) => b.id === branch);
       const branchLabel =
         branch === "other"
           ? customBranch.trim() || (isRtl ? "فرع آخر غير محدد" : "Other unspecified branch")
@@ -477,14 +481,23 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
 
   const handleCopyTicketSummary = () => {
     if (!successTicket) return;
-    const summaryText = `[TICKET ${successTicket.ticket_number}]
-System: ${successTicket.system.toUpperCase()}
+    const summaryText = isRtl
+      ? `[تذكرة الدعم الفني ${successTicket.ticket_number}]
+المنظومة: ${successTicket.system.toUpperCase()}
+الفرع: ${successTicket.branch}
+الأولوية: ${successTicket.priority.toUpperCase()}
+العنوان: ${successTicket.title}
+الرابط: ${successTicket.issue_url || "لا يوجد"}
+مقدم الطلب: ${successTicket.client_name} (${successTicket.client_email})
+تاريخ التوثيق: ${new Date(successTicket.created_at || "").toLocaleString("ar-EG")}`
+      : `[SUPPORT TICKET ${successTicket.ticket_number}]
+Platform: ${successTicket.system.toUpperCase()}
 Branch: ${successTicket.branch}
 Priority: ${successTicket.priority.toUpperCase()}
 Title: ${successTicket.title}
 URL: ${successTicket.issue_url || "N/A"}
 Submitter: ${successTicket.client_name} (${successTicket.client_email})
-Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
+Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
 
     navigator.clipboard.writeText(summaryText);
     setCopiedSummary(true);
@@ -494,8 +507,8 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
   const getWhatsAppMessageUrl = () => {
     if (!successTicket) return "#";
     const text = isRtl
-      ? `مرحباً، تم رفع تذكرة دعم فني جديدة برقم المرجع: *${successTicket.ticket_number}*\nالنظام: *${successTicket.system.toUpperCase()}*\nالفرع: *${successTicket.branch}*\nالملخص: *${successTicket.title}*\nيرجى المتابعة.`
-      : `Hello, a new support ticket has been submitted with reference: *${successTicket.ticket_number}*\nSystem: *${successTicket.system.toUpperCase()}*\nBranch: *${successTicket.branch}*\nTitle: *${successTicket.title}*\nPlease follow up.`;
+      ? `مرحباً، تم رفع تذكرة دعم فني جديدة برقم المرجع: *${successTicket.ticket_number}*\nالمنظومة: *${successTicket.system.toUpperCase()}*\nالفرع: *${successTicket.branch}*\nالملخص: *${successTicket.title}*\nيرجى المتابعة.`
+      : `Hello, a new support ticket has been submitted with reference: *${successTicket.ticket_number}*\nPlatform: *${successTicket.system.toUpperCase()}*\nBranch: *${successTicket.branch}*\nTitle: *${successTicket.title}*\nPlease follow up.`;
     return `https://wa.me/201099990099?text=${encodeURIComponent(text)}`;
   };
 
@@ -577,10 +590,10 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
               <div className="mt-1.5 flex items-center gap-2">
                 <Badge className="bg-primary/20 text-primary border-primary/40 font-mono text-xs px-2.5 py-0.5">
                   {successTicket.priority === "critical"
-                    ? "< 2 Hours"
+                    ? (isRtl ? "أقل من ساعتين" : "< 2 Hours")
                     : successTicket.priority === "high"
-                    ? "4 - 8 Hours"
-                    : "12 - 24 Hours"}
+                    ? (isRtl ? "4 إلى 8 ساعات" : "4 - 8 Hours")
+                    : (isRtl ? "12 إلى 24 ساعة" : "12 - 24 Hours")}
                 </Badge>
                 <span className="text-xs text-muted-foreground flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -673,7 +686,7 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
       {/* ── MAIN TICKET SUBMISSION FORM ──────────────────────────────────────── */}
       <form onSubmit={handleSubmit} className="space-y-8">
         
-        {/* 1. Software System Selection */}
+        {/* 1. Software Platform Selection */}
         <section className="space-y-3.5">
           <div className="flex items-center justify-between">
             <h3 className="text-base md:text-lg font-display font-semibold text-foreground flex items-center gap-2">
@@ -681,7 +694,7 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
               {t.selectSystemTitle}
             </h3>
             <span className="text-[11px] font-mono text-muted-foreground uppercase">
-              Step 1 of 6
+              {isRtl ? "الخطوة 1 من 6" : "Step 1 of 6"}
             </span>
           </div>
           <p className="text-xs text-muted-foreground">
@@ -730,7 +743,7 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
                       variant="outline"
                       className="text-[10px] px-2 py-0.5 border-border/60 uppercase font-mono tracking-wider font-semibold"
                     >
-                      {meta.badge}
+                      {isRtl ? meta.badgeAr : meta.badgeEn}
                     </Badge>
                   </div>
 
@@ -738,29 +751,16 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
                     {isRtl ? meta.subtitleAr : meta.subtitleEn}
                   </p>
 
-                  {/* Feature Tags */}
+                  {/* Feature Tags strictly separated */}
                   <div className="mt-3 flex flex-wrap gap-1.5 pt-2 border-t border-border/40">
-                    {sysKey === "odoo" && (
-                      <>
-                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Invoicing</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">POS</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Inventory</span>
-                      </>
-                    )}
-                    {sysKey === "ezee" && (
-                      <>
-                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Frontdesk PMS</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Folios</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Rate Plans</span>
-                      </>
-                    )}
-                    {sysKey === "ozoo" && (
-                      <>
-                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Live Sync</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Middleware</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Webhooks</span>
-                      </>
-                    )}
+                    {(isRtl ? meta.tagsAr : meta.tagsEn).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
 
                   {/* Active Radio Badge */}
@@ -793,23 +793,33 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
             </div>
             <p className="text-xs text-muted-foreground">{t.branchDesc}</p>
 
-            {/* Quick Branch Selection Chips */}
+            {/* Quick Branch Selection Chips strictly separated */}
             <div className="flex flex-wrap gap-1.5 pt-1">
-              {[
-                { id: "swiss_blue_khobar", short: isRtl ? "الخبر" : "Al Khobar" },
-                { id: "swiss_blue_riyadh", short: isRtl ? "الرياض" : "Riyadh" },
-                { id: "swiss_blue_jeddah", short: isRtl ? "جدة" : "Jeddah" },
-                { id: "swiss_blue_jubail", short: isRtl ? "الجبيل" : "Al Jubail" },
-                { id: "wd_group_hq", short: isRtl ? "المقر الرئيسي" : "WD HQ" },
-                { id: "other", short: isRtl ? "+ فرع آخر" : "+ Other" },
-              ].map((chip) => (
+              {(isRtl
+                ? [
+                    { id: "swiss_blue_khobar", short: "الخبر" },
+                    { id: "swiss_blue_riyadh", short: "الرياض" },
+                    { id: "swiss_blue_jeddah", short: "جدة" },
+                    { id: "swiss_blue_jubail", short: "الجبيل" },
+                    { id: "wd_group_hq", short: "المقر الرئيسي" },
+                    { id: "other", short: "+ فرع آخر" },
+                  ]
+                : [
+                    { id: "swiss_blue_khobar", short: "Al Khobar" },
+                    { id: "swiss_blue_riyadh", short: "Riyadh" },
+                    { id: "swiss_blue_jeddah", short: "Jeddah" },
+                    { id: "swiss_blue_jubail", short: "Al Jubail" },
+                    { id: "wd_group_hq", short: "WD HQ" },
+                    { id: "other", short: "+ Other" },
+                  ]
+              ).map((chip) => (
                 <button
                   type="button"
                   key={chip.id}
                   onClick={() => setBranch(chip.id)}
                   className={`text-xs px-2.5 py-1 rounded-lg border font-medium transition-colors ${
                     branch === chip.id
-                      ? "border-primary bg-primary/15 text-primary"
+                      ? "border-primary bg-primary/15 text-primary font-bold"
                       : "border-border/60 bg-card/40 text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -823,7 +833,7 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
               onChange={(e) => setBranch(e.target.value)}
               className="w-full rounded-xl border border-border/80 bg-background px-3.5 py-2.5 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary mt-2"
             >
-              {BRANCH_OPTIONS_EN.map((opt) => (
+              {branchOptions.map((opt) => (
                 <option key={opt.id} value={opt.id}>
                   {opt.label}
                 </option>
@@ -893,7 +903,7 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
                 id: "normal" as TicketPriority,
                 label: t.priorityNormal,
                 desc: t.priorityNormalDesc,
-                sla: "24-48h",
+                sla: isRtl ? "24-48 ساعة" : "24-48h",
                 color: "border-emerald-500/40 text-emerald-400 bg-emerald-500/5",
                 activeColor: "border-emerald-500 bg-emerald-500/15 ring-1 ring-emerald-500 shadow-md shadow-emerald-500/10",
                 dot: "bg-emerald-500",
@@ -902,7 +912,7 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
                 id: "medium" as TicketPriority,
                 label: t.priorityMedium,
                 desc: t.priorityMediumDesc,
-                sla: "12-24h",
+                sla: isRtl ? "12-24 ساعة" : "12-24h",
                 color: "border-amber-500/40 text-amber-400 bg-amber-500/5",
                 activeColor: "border-amber-500 bg-amber-500/15 ring-1 ring-amber-500 shadow-md shadow-amber-500/10",
                 dot: "bg-amber-500",
@@ -911,7 +921,7 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
                 id: "high" as TicketPriority,
                 label: t.priorityHigh,
                 desc: t.priorityHighDesc,
-                sla: "4-8h",
+                sla: isRtl ? "4-8 ساعات" : "4-8h",
                 color: "border-orange-500/40 text-orange-400 bg-orange-500/5",
                 activeColor: "border-orange-500 bg-orange-500/15 ring-1 ring-orange-500 shadow-md shadow-orange-500/10",
                 dot: "bg-orange-500 animate-pulse",
@@ -920,7 +930,7 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
                 id: "critical" as TicketPriority,
                 label: t.priorityCritical,
                 desc: t.priorityCriticalDesc,
-                sla: "< 2h",
+                sla: isRtl ? "أقل من ساعتين" : "< 2h",
                 color: "border-rose-500/40 text-rose-400 bg-rose-500/5",
                 activeColor: "border-rose-500 bg-rose-500/20 ring-1 ring-rose-500 shadow-md shadow-rose-500/20",
                 dot: "bg-rose-500 animate-ping",
@@ -1066,10 +1076,10 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
                   />
                   <div className="min-w-0 flex-1">
                     <p className="text-xs font-bold text-foreground truncate">
-                      {screenshotFile?.name || "clipboard-screenshot.png"}
+                      {screenshotFile?.name || "screenshot.png"}
                     </p>
                     <p className="text-[11px] text-muted-foreground font-mono mt-0.5">
-                      {screenshotFile ? `${(screenshotFile.size / 1024).toFixed(1)} KB` : "Ready to upload"}
+                      {screenshotFile ? `${(screenshotFile.size / 1024).toFixed(1)} KB` : (isRtl ? "جاهز للرفع" : "Ready to upload")}
                     </p>
                     <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400 font-medium mt-1">
                       <FileCheck2 className="w-3 h-3" />
@@ -1134,7 +1144,7 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
                     type="button"
                     onClick={() => setRecordingMode("file")}
                     className={`px-2 py-0.5 rounded-md font-medium transition-colors ${
-                      recordingMode === "file" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
+                      recordingMode === "file" ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground"
                     }`}
                   >
                     {t.tabVideoFile}
@@ -1143,7 +1153,7 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
                     type="button"
                     onClick={() => setRecordingMode("link")}
                     className={`px-2 py-0.5 rounded-md font-medium transition-colors ${
-                      recordingMode === "link" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
+                      recordingMode === "link" ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground"
                     }`}
                   >
                     {t.tabLoomLink}
@@ -1169,7 +1179,7 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
                             {recordingFile?.name || "recording.mp4"}
                           </p>
                           <p className="text-[11px] text-muted-foreground font-mono">
-                            {recordingFile ? `${(recordingFile.size / (1024 * 1024)).toFixed(2)} MB` : "Ready"}
+                            {recordingFile ? `${(recordingFile.size / (1024 * 1024)).toFixed(2)} MB` : (isRtl ? "جاهز" : "Ready")}
                           </p>
                         </div>
                         <Button
@@ -1234,8 +1244,8 @@ Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
                   />
                   <p className="text-[11px] text-muted-foreground">
                     {isRtl
-                      ? "يدعم روابط Loom و Google Drive و CleanShot و YouTube (غير مدرج)."
-                      : "Supports Loom, Google Drive, CleanShot, and unlisted video links."}
+                      ? "يدعم روابط الفيديو السحابية المباشرة."
+                      : "Supports cloud recording links from Loom, Google Drive, or CleanShot."}
                   </p>
                 </div>
               )}

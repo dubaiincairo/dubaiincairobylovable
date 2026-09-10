@@ -170,7 +170,7 @@ export const ticketTranslations = {
     templateFolioSyncDesc: `ملخص البلاغ: فشل الترحيل التلقائي للفاتورة من نظام إيزي إلى أودو بعد إجراء المغادرة.
 • خطوات الحدوث: تم إتمام عملية تسجيل المغادرة في نظام إيزي للفاتورة رقم #...
 • النتيجة المتوقعة: إنشاء قيد وفاتورة مسودة في أودو خلال 60 ثانية.
-• ما حدث فعلياً: ظلت حالة الفاتورة معلقة وظهر تنبيه يفيد بـ "Sync timeout / خطأ في مطابقة الحسابات".`,
+• ما حدث فعلياً: ظلت حالة الفاتورة معلقة وظهر تنبيه يفيد بـ "مهلة المزامنة انتهت / خطأ في مطابقة الحسابات".`,
 
     templateVatCalcTitle: "[فواتير] خطأ في احتساب ضريبة القيمة المضافة",
     templateVatCalcDesc: `ملخص البلاغ: عدم تطابق احتساب الضريبة (15%) بين الفاتورة في نظام الفندق وإشعار أودو.
@@ -198,8 +198,8 @@ export const ticketTranslations = {
     customBranchPlaceholder: "اكتب اسم الفرع أو الموقع بالتفصيل...",
 
     // URL & Context
-    urlTitle: "3. رابط الصفحة أو مسار الشاشة (URL)",
-    urlPlaceholder: "https://erp.swissbluehotels.com/web#menu_id=... أو رابط الشاشة",
+    urlTitle: "3. رابط الصفحة أو مسار الشاشة المباشر",
+    urlPlaceholder: "رابط الصفحة أو مسار الشاشة المباشر...",
     urlHelper: "ضع رابط الشاشة أو الصفحة المباشرة التي ظهرت بها المشكلة لتسريع الفحص.",
     pasteUrlBtn: "لصق من الحافظة",
     validUrlBadge: "رابط صالح",
@@ -227,18 +227,18 @@ export const ticketTranslations = {
     // Attachments
     attachmentsTitle: "6. المرفقات (لقطات الشاشة والتسجيل المرئي)",
     attachmentsDesc: "المرفقات المرئية تختصر زمن التشخيص والحل بنسبة تزيد عن 80%.",
-    screenshotLabel: "رفع لقطة شاشة (Screenshot - صورة)",
+    screenshotLabel: "رفع لقطة شاشة توضيحية",
     screenshotDragActive: "أفلت لقطة الشاشة هنا...",
     screenshotPrompt: "اسحب وأفلت لقطة الشاشة هنا، أو اضغط للاختيار",
-    screenshotSubtext: "الملفات المدعومة: PNG, JPG, WebP (حتى 10 ميجابايت) — تلميح: يمكنك الضغط على ⌘+V للصق لقطة الشاشة من الحافظة مباشرة",
+    screenshotSubtext: "الملفات المدعومة: صور JPG أو PNG أو WebP (حتى 10 ميجابايت) — تلميح: يمكنك الضغط على ⌘+V للصق لقطة الشاشة من الحافظة مباشرة",
     pastedScreenshotSuccess: "تم التقاط ولصق لقطة الشاشة من الحافظة بنجاح!",
     tabVideoFile: "رفع ملف فيديو مباشر",
-    tabLoomLink: "وضع رابط سحابي (Loom / Drive)",
-    screenRecordingLabel: "تسجيل الشاشة بالفيديو (ملف أو رابط لوم)",
-    videoUploadPrompt: "رفع فيديو توضيحي (MP4, WebM, MOV)",
+    tabLoomLink: "وضع رابط فيديو سحابي",
+    screenRecordingLabel: "تسجيل الشاشة بالفيديو",
+    videoUploadPrompt: "رفع فيديو توضيحي",
     videoUploadSubtext: "اسحب وأفلت ملف الفيديو أو اضغط للاختيار (حتى 50 ميجابايت)",
-    orPasteLoom: "أو ضع رابط تسجيل فيديو سحابي (Loom / Drive / CleanShot)",
-    loomPlaceholder: "https://www.loom.com/share/... أو رابط Google Drive",
+    orPasteLoom: "أو ضع رابط تسجيل فيديو سحابي مباشر",
+    loomPlaceholder: "رابط تسجيل الفيديو السحابي المباشر...",
     removeFile: "حذف الملف",
 
     // Submitter Info
@@ -247,7 +247,7 @@ export const ticketTranslations = {
     nameLabel: "الاسم الكامل *",
     namePlaceholder: "مثال: أحمد المنصور",
     emailLabel: "البريد الإلكتروني المهني *",
-    emailPlaceholder: "name@swissbluehotels.com",
+    emailPlaceholder: "name@example.com",
     phoneLabel: "رقم الجوال أو واتساب (اختياري)",
     phonePlaceholder: "966501234567+",
     rememberMeLabel: "حفظ بيانات التواصل على هذا الجهاز لتسهيل رفع التذاكر القادمة",
@@ -268,7 +268,7 @@ export const ticketTranslations = {
     // Success Modal
     successHeading: "تم استلام التذكرة وتفعيل الإشعارات بنجاح!",
     successSubheading: "تم تسجيل البلاغ في المنظومة وإرسال إشعار فوري لفريق الدعم ولبريدك الإلكتروني.",
-    ticketIdLabel: "رقم التذكرة المرجعي (Ticket ID)",
+    ticketIdLabel: "رقم التذكرة المرجعي",
     copyTicketId: "نسخ رقم التذكرة",
     copied: "تم النسخ!",
     notificationSentNote: "تم إرسال نسخة إلكترونية وتأكيد الاستلام إلى بريدك وإلى إدارة العمليات المركزية.",
