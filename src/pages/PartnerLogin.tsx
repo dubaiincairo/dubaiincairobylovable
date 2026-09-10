@@ -164,7 +164,19 @@ const PartnerLogin = () => {
             : "Already have an account? Sign in →"}
         </button>
 
-        <div className="mt-8 text-center">
+        <div className="mt-6 p-3.5 rounded-xl border border-primary/30 bg-primary/5 text-center">
+          <p className="text-xs text-foreground/90 font-medium mb-1">
+            Need to submit an Odoo, eZee, or Ozoo support ticket?
+          </p>
+          <a
+            href="/partner?tab=tickets"
+            className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1"
+          >
+            Submit a Client Support Ticket →
+          </a>
+        </div>
+
+        <div className="mt-6 text-center">
           <a href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             ← Back to website
           </a>

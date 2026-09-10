@@ -119,8 +119,8 @@ const Footer = () => {
               Privacy Policy
             </Link>
             <span className="text-border">·</span>
-            <Link to="/partner/login" className="hover:text-primary transition-colors duration-200">
-              Partner Sign In
+            <Link to="/partner" className="hover:text-primary transition-colors duration-200">
+              Partner & Support Portal
             </Link>
           </div>
         </div>

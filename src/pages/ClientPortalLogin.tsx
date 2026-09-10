@@ -770,7 +770,12 @@ export default function ClientPortalLogin() {
         )}
 
         {/* Footer info */}
-        <div className="text-center text-[11px] text-zinc-500 pt-1 space-y-1">
+        <div className="text-center text-[11px] text-zinc-500 pt-1 space-y-2">
+          <p>
+            <Link to="/partner?tab=tickets" className="text-amber-400 hover:text-amber-300 font-medium inline-flex items-center gap-1 transition-colors">
+              {isRtl ? "هل ترغب في رفع تذكرة دعم فني لأنظمة أودو أو إيزي أو أوزو؟ اضغط هنا ←" : "Need Odoo, eZee, or Ozoo Technical Support? Submit a Ticket Here →"}
+            </Link>
+          </p>
           <p>
             {isRtl
               ? "دبي في القاهرة للأعمال © 2026 · بوابة العملاء السرية والمحمية"
