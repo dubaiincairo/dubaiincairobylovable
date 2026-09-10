@@ -41,33 +41,33 @@ export const ticketTranslations = {
 • Actual result: Screen froze with loading spinner / error popup.`,
 
     // Branch selection
-    branchTitle: "2. Hotel / Business Branch",
+    branchTitle: "2. Branch / Property",
     branchDesc: "Select the operational branch or property affected.",
     quickBranchLabel: "Quick Select:",
-    branchSelectPlaceholder: "Select branch location...",
-    customBranchPlaceholder: "Enter custom branch or facility name...",
+    branchSelectPlaceholder: "Select branch...",
+    customBranchPlaceholder: "Enter branch name...",
 
     // URL & Context
-    urlTitle: "3. Incident URL or Screen Location",
-    urlPlaceholder: "https://erp.swissbluehotels.com/web#menu_id=... or screen link",
-    urlHelper: "Paste the exact browser link or screen path where the issue occurred.",
+    urlTitle: "3. Incident URL",
+    urlPlaceholder: "https://... or page URL",
+    urlHelper: "Paste the page link where the issue occurred.",
     pasteUrlBtn: "Paste from Clipboard",
-    validUrlBadge: "Valid URL format",
+    validUrlBadge: "Valid URL",
 
     // Priority
-    priorityTitle: "4. Incident Priority & SLA",
+    priorityTitle: "4. Priority",
     priorityNormal: "Normal",
-    priorityNormalDesc: "Routine inquiry or minor question (SLA: 24-48h)",
+    priorityNormalDesc: "Routine inquiry or minor issue",
     priorityMedium: "Medium",
-    priorityMediumDesc: "Operational impact with workaround (SLA: 12-24h)",
+    priorityMediumDesc: "Operational impact with workaround",
     priorityHigh: "High",
-    priorityHighDesc: "Major workflow blocked / partial outage (SLA: 4-8h)",
-    priorityCritical: "Critical Blocker",
-    priorityCriticalDesc: "System down / check-in stopped / total blocker (SLA: < 2h)",
+    priorityHighDesc: "Major workflow blocked",
+    priorityCritical: "Critical",
+    priorityCriticalDesc: "System down or urgent blocker",
 
     // Title & Description
-    ticketSummaryTitle: "5. Ticket Summary & Full Description",
-    ticketSummaryPlaceholder: "e.g. Invoices failing to synchronize from eZee to Odoo after checkout",
+    ticketSummaryTitle: "5. Ticket Summary",
+    ticketSummaryPlaceholder: "Brief summary of the issue",
     descPlaceholder: `Please describe the incident in detail:
 • What were you doing when the issue occurred?
 • What was the expected result?
@@ -75,36 +75,36 @@ export const ticketTranslations = {
     charCount: "characters",
 
     // Attachments
-    attachmentsTitle: "6. Attachments (Screenshots & Video Recording)",
-    attachmentsDesc: "Visual proof accelerates issue diagnosis and resolution.",
-    screenshotLabel: "Upload Screenshot (PNG, JPG, WebP)",
+    attachmentsTitle: "6. Attachments",
+    attachmentsDesc: "Attach a screenshot or screen recording to accelerate resolution.",
+    screenshotLabel: "Screenshot",
     screenshotDragActive: "Drop screenshot here...",
-    screenshotPrompt: "Drag & drop screenshot here, or click to browse",
-    screenshotSubtext: "Supported: JPG, PNG, WebP (Max 10MB) — Tip: Press ⌘+V to paste directly from clipboard",
+    screenshotPrompt: "Drop screenshot here, or click to browse",
+    screenshotSubtext: "JPG, PNG, WebP up to 10MB · Paste with ⌘+V",
     pastedScreenshotSuccess: "Screenshot captured from clipboard!",
-    tabVideoFile: "Upload Video File",
-    tabLoomLink: "Paste Cloud / Loom Link",
-    screenRecordingLabel: "Screen Recording (Video File or Loom Link)",
-    videoUploadPrompt: "Upload video file (MP4, WebM, MOV)",
-    videoUploadSubtext: "Drag & drop or click to upload (Max 50MB)",
-    orPasteLoom: "Paste Loom / Google Drive / CleanShot Link",
-    loomPlaceholder: "https://www.loom.com/share/... or Google Drive URL",
+    tabVideoFile: "Upload Video",
+    tabLoomLink: "Video Link",
+    screenRecordingLabel: "Screen Recording",
+    videoUploadPrompt: "Upload Video (MP4, WebM, MOV)",
+    videoUploadSubtext: "Drop video or click to upload (Max 50MB)",
+    orPasteLoom: "Paste Video Link",
+    loomPlaceholder: "https://loom.com/share/... or Google Drive URL",
     removeFile: "Remove file",
 
     // Submitter Info
-    submitterTitle: "7. Submitter Contact Information",
+    submitterTitle: "7. Contact Information",
     submitterDesc: "We will send status updates and ticket notifications to this address.",
-    nameLabel: "Your Full Name *",
+    nameLabel: "Full Name *",
     namePlaceholder: "e.g. Ahmed Al-Mansoor",
-    emailLabel: "Work Email Address *",
+    emailLabel: "Work Email *",
     emailPlaceholder: "name@swissbluehotels.com",
-    phoneLabel: "Phone / WhatsApp Number (Optional)",
+    phoneLabel: "Phone / WhatsApp (Optional)",
     phonePlaceholder: "+966 50 123 4567",
-    rememberMeLabel: "Remember my contact details on this device for future tickets",
+    rememberMeLabel: "Remember my details on this device",
 
     // Actions
-    submitBtn: "Submit Support Ticket",
-    submittingBtn: "Submitting & Dispatched Alerts...",
+    submitBtn: "Submit Ticket",
+    submittingBtn: "Submitting Ticket...",
     shortcutHint: "Press ⌘ + Enter to submit",
 
     // Alerts & Notifications
@@ -191,32 +191,32 @@ export const ticketTranslations = {
 • ما حدث فعلياً: تجمد الشاشة أو ظهور نافذة خطأ تمنع إتمام الإجراء.`,
 
     // Branch selection
-    branchTitle: "2. الفرع أو المنشأة الفندقية",
+    branchTitle: "2. المنشأة أو الفرع",
     branchDesc: "اختر الموقع أو الفرع المتأثر بالمشكلة.",
     quickBranchLabel: "اختيار سريع:",
     branchSelectPlaceholder: "اختر الفرع المتأثر...",
     customBranchPlaceholder: "اكتب اسم الفرع أو الموقع بالتفصيل...",
 
     // URL & Context
-    urlTitle: "3. رابط الصفحة أو مسار الشاشة المباشر",
+    urlTitle: "3. رابط الشاشة أو الصفحة",
     urlPlaceholder: "رابط الصفحة أو مسار الشاشة المباشر...",
     urlHelper: "ضع رابط الشاشة أو الصفحة المباشرة التي ظهرت بها المشكلة لتسريع الفحص.",
     pasteUrlBtn: "لصق من الحافظة",
     validUrlBadge: "رابط صالح",
 
     // Priority
-    priorityTitle: "4. مستوى الأهمية ودرجة الطوارئ المعتمدة",
-    priorityNormal: "عادي / روتيني",
-    priorityNormalDesc: "استفسار روتيني أو تعديل غير عاجل (خلال 24-48 ساعة)",
-    priorityMedium: "متوسط الأهمية",
-    priorityMediumDesc: "تأثير جزئي على سير العمل مع وجود بديل مؤقت (خلال 12-24 ساعة)",
-    priorityHigh: "عالي الأولوية",
-    priorityHighDesc: "تعطل مسار عمل أساسي أو خلل وظيفي بارز (خلال 4-8 ساعات)",
-    priorityCritical: "حرج جداً (توقف كلي)",
-    priorityCriticalDesc: "توقف النظام كلياً أو تعطل تسجيل الدخول للنزلاء (استجابة فورية < ساعتين)",
+    priorityTitle: "4. درجة الأولوية",
+    priorityNormal: "عادي",
+    priorityNormalDesc: "استفسار روتيني أو طلب غير عاجل",
+    priorityMedium: "متوسط",
+    priorityMediumDesc: "تأثير جزئي على سير العمل مع وجود بديل مؤقت",
+    priorityHigh: "عالي",
+    priorityHighDesc: "تعطل مسار عمل أساسي أو خلل وظيفي بارز",
+    priorityCritical: "حرج",
+    priorityCriticalDesc: "توقف النظام كلياً أو عطل حرج",
 
     // Title & Description
-    ticketSummaryTitle: "5. ملخص المشكلة والتفاصيل الكاملة",
+    ticketSummaryTitle: "5. ملخص المشكلة",
     ticketSummaryPlaceholder: "مثال: فشل ترحيل الفواتير آلياً من نظام إيزي إلى أودو بعد الخروج",
     descPlaceholder: `يرجى تدوين تفاصيل الخلل بدقة:
 • ماذا كنت تفعل بالضبط عند حدوث المشكلة؟
@@ -225,36 +225,36 @@ export const ticketTranslations = {
     charCount: "حرف",
 
     // Attachments
-    attachmentsTitle: "6. المرفقات (لقطات الشاشة والتسجيل المرئي)",
-    attachmentsDesc: "المرفقات المرئية تختصر زمن التشخيص والحل بنسبة تزيد عن 80%.",
-    screenshotLabel: "رفع لقطة شاشة توضيحية",
+    attachmentsTitle: "6. المرفقات",
+    attachmentsDesc: "إرفاق لقطة شاشة أو تسجيل فيديو لتسريع الفحص والمعالجة.",
+    screenshotLabel: "لقطة شاشة",
     screenshotDragActive: "أفلت لقطة الشاشة هنا...",
-    screenshotPrompt: "اسحب وأفلت لقطة الشاشة هنا، أو اضغط للاختيار",
-    screenshotSubtext: "الملفات المدعومة: صور JPG أو PNG أو WebP (حتى 10 ميجابايت) — تلميح: يمكنك الضغط على ⌘+V للصق لقطة الشاشة من الحافظة مباشرة",
+    screenshotPrompt: "اسحب لقطة الشاشة أو اضغط للاختيار",
+    screenshotSubtext: "ملفات PNG أو JPG حتى 10 ميجابايت · أو لصق (⌘+V)",
     pastedScreenshotSuccess: "تم التقاط ولصق لقطة الشاشة من الحافظة بنجاح!",
-    tabVideoFile: "رفع ملف فيديو مباشر",
-    tabLoomLink: "وضع رابط فيديو سحابي",
-    screenRecordingLabel: "تسجيل الشاشة بالفيديو",
-    videoUploadPrompt: "رفع فيديو توضيحي",
-    videoUploadSubtext: "اسحب وأفلت ملف الفيديو أو اضغط للاختيار (حتى 50 ميجابايت)",
-    orPasteLoom: "أو ضع رابط تسجيل فيديو سحابي مباشر",
+    tabVideoFile: "رفع فيديو",
+    tabLoomLink: "رابط فيديو",
+    screenRecordingLabel: "تسجيل الشاشة",
+    videoUploadPrompt: "رفع فيديو (MP4, WebM, MOV)",
+    videoUploadSubtext: "اسحب الفيديو أو اضغط للاختيار (حتى 50 ميجابايت)",
+    orPasteLoom: "وضع رابط فيديو سحابي",
     loomPlaceholder: "رابط تسجيل الفيديو السحابي المباشر...",
     removeFile: "حذف الملف",
 
     // Submitter Info
-    submitterTitle: "7. بيانات مقدم التذكرة للتواصل والإشعارات",
+    submitterTitle: "7. بيانات التواصل",
     submitterDesc: "سيتم إرسال إشعارات التحديث وتأكيد استلام التذكرة إلى هذا البريد فوراً.",
-    nameLabel: "الاسم الكامل *",
+    nameLabel: "الاسم بالكامل *",
     namePlaceholder: "مثال: أحمد المنصور",
-    emailLabel: "البريد الإلكتروني المهني *",
+    emailLabel: "البريد المهني *",
     emailPlaceholder: "name@example.com",
-    phoneLabel: "رقم الجوال أو واتساب (اختياري)",
+    phoneLabel: "الهاتف / واتساب (اختياري)",
     phonePlaceholder: "966501234567+",
     rememberMeLabel: "حفظ بيانات التواصل على هذا الجهاز لتسهيل رفع التذاكر القادمة",
 
     // Actions
-    submitBtn: "إرسال تذكرة الدعم الفني المعتمدة",
-    submittingBtn: "جاري الرفع وتفعيل الإشعارات الفورية...",
+    submitBtn: "إرسال التذكرة",
+    submittingBtn: "جاري إرسال التذكرة وتفعيل الإشعارات...",
     shortcutHint: "اضغط ⌘ + Enter للإرسال السريع",
 
     // Alerts & Notifications

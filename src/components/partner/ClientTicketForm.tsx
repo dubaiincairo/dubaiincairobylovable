@@ -898,7 +898,7 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label className="block text-xs font-semibold text-muted-foreground">
-                {isRtl ? "تفاصيل المشكلة والخطوات" : "Detailed Steps & Observations"}
+                {isRtl ? "تفاصيل المشكلة" : "Description"}
               </label>
               <span className="text-[11px] text-muted-foreground font-mono">
                 {description.length} {t.charCount}
@@ -1120,8 +1120,8 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                   />
                   <p className="text-[11px] text-muted-foreground">
                     {isRtl
-                      ? "يدعم روابط الفيديو السحابية المباشرة."
-                      : "Supports cloud recording links from Loom, Google Drive, or CleanShot."}
+                      ? "يدعم روابط لوم أو جوجل درايف المباشرة."
+                      : "Supports direct Loom or Google Drive links."}
                   </p>
                 </div>
               )}
