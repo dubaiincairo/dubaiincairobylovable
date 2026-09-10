@@ -38,20 +38,28 @@ export interface TicketFormState {
 }
 
 export const BRANCH_OPTIONS_EN = [
-  { id: "swiss_blue_khobar", label: "Swiss Blue Al Khobar" },
-  { id: "swiss_blue_riyadh", label: "Swiss Blue Riyadh" },
-  { id: "swiss_blue_jeddah", label: "Swiss Blue Jeddah" },
-  { id: "swiss_blue_jubail", label: "Swiss Blue Al Jubail" },
-  { id: "wd_group_hq", label: "WD Group Headquarters" },
-  { id: "other", label: "Other Branch / Location" },
+  { id: "swiss_blue_jeddah", label: "SwissBlue Hotel Jeddah" },
+  { id: "swiss_blue_jazan", label: "SwissBlue Apartment Hotel Jazan" },
+  { id: "swiss_blue_alzahra", label: "SwissBlue Serviced Apartments Alzahra (Jeddah)" },
+  { id: "swiss_blue_alsamer", label: "SwissBlue Serviced Apartments Alsamer (Jeddah)" },
+  { id: "vinas_riyadh", label: "Vinas Riyadh Serviced Apartments" },
+  { id: "tulip_alrawdha", label: "Tulip Alrawdha Serviced Apartments (Riyadh)" },
+  { id: "greenwood_factory", label: "GreenWood Factory for Furniture & Decor (Najran)" },
+  { id: "national_factory", label: "National Factory for Furniture & Aluminum (Riyadh)" },
+  { id: "watan_designs_factory", label: "Watan Designs Furniture Factory (Riyadh)" },
+  { id: "other", label: "Other Location / Branch" },
 ];
 
 export const BRANCH_OPTIONS_AR = [
-  { id: "swiss_blue_khobar", label: "فندق سويس بلو الخبر" },
-  { id: "swiss_blue_riyadh", label: "فندق سويس بلو الرياض" },
   { id: "swiss_blue_jeddah", label: "فندق سويس بلو جدة" },
-  { id: "swiss_blue_jubail", label: "فندق سويس بلو الجبيل" },
-  { id: "wd_group_hq", label: "المقر الرئيسي لمجموعة دبليو دي للأعمال" },
+  { id: "swiss_blue_jazan", label: "سويس بلو للشقق الفندقية جازان" },
+  { id: "swiss_blue_alzahra", label: "سويس بلو للشقق المخدومة الزهراء (جدة)" },
+  { id: "swiss_blue_alsamer", label: "سويس بلو للشقق المخدومة السامر (جدة)" },
+  { id: "vinas_riyadh", label: "شقق فيناس المخدومة الرياض" },
+  { id: "tulip_alrawdha", label: "شقق توليب الروضة المخدومة (الرياض)" },
+  { id: "greenwood_factory", label: "مصنع الأخشاب الخضراء للأثاث والديكورات (نجران)" },
+  { id: "national_factory", label: "المصنع الوطني للأثاث والألومنيوم (الرياض)" },
+  { id: "watan_designs_factory", label: "مصنع تصاميم الوطن للأثاث (الرياض)" },
   { id: "other", label: "فرع أو موقع آخر" },
 ];
 

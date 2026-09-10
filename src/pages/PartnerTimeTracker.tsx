@@ -475,12 +475,7 @@ const PartnerTimeTracker = () => {
                 )}
               >
                 <Ticket className="w-4 h-4 shrink-0" />
-                <div className="text-start">
-                  <div>{t.tabTickets}</div>
-                  <div className={cn("text-[10px] font-normal hidden sm:block", activeTab === "tickets" ? "text-slate-900/90 font-medium" : "opacity-75")}>
-                    {t.tabTicketsSub}
-                  </div>
-                </div>
+                <span>{t.tabTickets}</span>
               </button>
 
               {/* Tab 2: Freelancer Worksheet */}
@@ -495,12 +490,7 @@ const PartnerTimeTracker = () => {
                 )}
               >
                 <Briefcase className="w-4 h-4 shrink-0" />
-                <div className="text-start">
-                  <div>{t.tabWorksheet}</div>
-                  <div className={cn("text-[10px] font-normal hidden sm:block", activeTab === "worksheet" ? "text-slate-900/90 font-medium" : "opacity-75")}>
-                    {t.tabWorksheetSub}
-                  </div>
-                </div>
+                <span>{t.tabWorksheet}</span>
               </button>
             </div>
           </div>
