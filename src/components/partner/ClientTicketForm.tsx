@@ -743,60 +743,66 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
         </section>
 
         {/* 2. Branch & URL Location */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
           {/* Branch selection */}
           <div className="space-y-2">
-            <label className="block text-sm font-display font-semibold text-foreground flex items-center gap-1.5">
-              <Building2 className="w-4 h-4 text-primary" />
-              {t.branchTitle}
-            </label>
-            <p className="text-xs text-muted-foreground">{t.branchDesc}</p>
+            <div className="min-h-[46px] flex flex-col justify-end">
+              <label className="block text-sm font-display font-semibold text-foreground flex items-center gap-1.5">
+                <Building2 className="w-4 h-4 text-primary shrink-0" />
+                <span>{t.branchTitle}</span>
+              </label>
+              <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{t.branchDesc}</p>
+            </div>
 
-            <select
-              value={branch}
-              onChange={(e) => setBranch(e.target.value)}
-              className="w-full rounded-xl border border-border/80 bg-background px-3.5 py-2.5 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary mt-1"
-            >
-              {branchOptions.map((opt) => (
-                <option key={opt.id} value={opt.id}>
-                  {opt.label}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                value={branch}
+                onChange={(e) => setBranch(e.target.value)}
+                className="w-full h-11 rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
+              >
+                {branchOptions.map((opt) => (
+                  <option key={opt.id} value={opt.id}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
 
-            {branch === "other" && (
-              <Input
-                value={customBranch}
-                onChange={(e) => setCustomBranch(e.target.value)}
-                placeholder={t.customBranchPlaceholder}
-                className="mt-2 bg-background border-border/80 animate-in fade-in"
-                autoFocus
-              />
-            )}
+              {branch === "other" && (
+                <Input
+                  value={customBranch}
+                  onChange={(e) => setCustomBranch(e.target.value)}
+                  placeholder={t.customBranchPlaceholder}
+                  className="mt-2 bg-background border-border/80 h-11 animate-in fade-in"
+                  autoFocus
+                />
+              )}
+            </div>
           </div>
 
           {/* Incident URL */}
           <div className="space-y-2">
-            <label className="block text-sm font-display font-semibold text-foreground flex items-center gap-1.5">
-              <LinkIcon className="w-4 h-4 text-primary" />
-              {t.urlTitle}
-            </label>
-            <p className="text-xs text-muted-foreground">{t.urlHelper}</p>
+            <div className="min-h-[46px] flex flex-col justify-end">
+              <label className="block text-sm font-display font-semibold text-foreground flex items-center gap-1.5">
+                <LinkIcon className="w-4 h-4 text-primary shrink-0" />
+                <span>{t.urlTitle}</span>
+              </label>
+              <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{t.urlHelper}</p>
+            </div>
 
-            <div className="relative mt-1">
+            <div className="relative">
               <Input
                 type="url"
                 value={issueUrl}
                 onChange={(e) => setIssueUrl(e.target.value)}
                 placeholder={t.urlPlaceholder}
-                className="bg-background border-border/80 text-sm font-mono placeholder:font-sans pe-10"
+                className="w-full h-11 bg-background border-border/80 text-sm font-mono placeholder:font-sans pe-10"
                 dir="ltr"
               />
               <button
                 type="button"
                 onClick={handlePasteUrlFromClipboard}
                 title={t.pasteUrlBtn}
-                className="absolute end-2 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-primary transition-colors"
+                className="absolute end-2 top-1/2 -translate-y-1/2 p-2 text-muted-foreground hover:text-primary transition-colors rounded-lg"
               >
                 <ClipboardPaste className="w-4 h-4" />
               </button>
@@ -927,13 +933,18 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
             {/* Screenshot upload zone */}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold text-foreground/90 flex items-center gap-1.5">
-                <ImageIcon className="w-3.5 h-3.5 text-primary" />
-                {t.screenshotLabel}
-              </label>
+              <div className="h-9 flex items-center justify-between">
+                <label className="text-xs font-semibold text-foreground/90 flex items-center gap-1.5">
+                  <ImageIcon className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>{t.screenshotLabel}</span>
+                </label>
+                <span className="text-[10px] text-muted-foreground font-mono bg-muted/40 px-2 py-0.5 rounded-md border border-border/50">
+                  ⌘+V
+                </span>
+              </div>
 
               <input
                 ref={screenshotInputRef}
@@ -944,11 +955,11 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
               />
 
               {screenshotPreview ? (
-                <div className="relative rounded-2xl border border-primary/40 bg-card/70 p-3.5 flex items-center gap-3.5 shadow-lg shadow-black/40">
+                <div className="relative rounded-2xl border border-primary/40 bg-card/70 p-4 h-[170px] flex items-center gap-3.5 shadow-lg shadow-black/40">
                   <img
                     src={screenshotPreview}
                     alt="Screenshot preview"
-                    className="w-20 h-20 rounded-xl object-cover border border-border/80 shrink-0 bg-background"
+                    className="w-24 h-24 rounded-xl object-cover border border-border/80 shrink-0 bg-background"
                   />
                   <div className="min-w-0 flex-1">
                     <p className="text-xs font-bold text-foreground truncate">
@@ -989,13 +1000,13 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                     handleScreenshotChange(e.dataTransfer.files?.[0] || null);
                   }}
                   onClick={() => screenshotInputRef.current?.click()}
-                  className={`cursor-pointer rounded-2xl border-2 border-dashed p-6 text-center transition-all ${
+                  className={`cursor-pointer rounded-2xl border-2 border-dashed p-4 text-center transition-all h-[170px] flex flex-col items-center justify-center ${
                     screenshotDragging
                       ? "border-primary bg-primary/15 scale-[1.01]"
                       : "border-border/70 bg-card/30 hover:bg-card/60 hover:border-primary/60"
                   }`}
                 >
-                  <ImageIcon className="w-8 h-8 mx-auto text-primary/80 mb-2" />
+                  <ImageIcon className="w-7 h-7 mx-auto text-primary/80 mb-2 shrink-0" />
                   <p className="text-xs font-semibold text-foreground">
                     {screenshotDragging ? t.screenshotDragActive : t.screenshotPrompt}
                   </p>
@@ -1008,10 +1019,10 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
 
             {/* Screen recording: Segmented Upload vs Loom Link */}
             <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="block text-xs font-semibold text-foreground/90 flex items-center gap-1.5">
-                  <FileVideo className="w-3.5 h-3.5 text-primary" />
-                  {t.screenRecordingLabel}
+              <div className="h-9 flex items-center justify-between">
+                <label className="text-xs font-semibold text-foreground/90 flex items-center gap-1.5">
+                  <FileVideo className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>{t.screenRecordingLabel}</span>
                 </label>
 
                 {/* Sub-tabs */}
@@ -1019,8 +1030,10 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                   <button
                     type="button"
                     onClick={() => setRecordingMode("file")}
-                    className={`px-2 py-0.5 rounded-md font-medium transition-colors ${
-                      recordingMode === "file" ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground"
+                    className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
+                      recordingMode === "file"
+                        ? "bg-primary text-primary-foreground font-bold"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     {t.tabVideoFile}
@@ -1028,8 +1041,10 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                   <button
                     type="button"
                     onClick={() => setRecordingMode("link")}
-                    className={`px-2 py-0.5 rounded-md font-medium transition-colors ${
-                      recordingMode === "link" ? "bg-primary text-primary-foreground font-bold" : "text-muted-foreground"
+                    className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
+                      recordingMode === "link"
+                        ? "bg-primary text-primary-foreground font-bold"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     {t.tabLoomLink}
@@ -1048,7 +1063,7 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                   />
 
                   {recordingPreview ? (
-                    <div className="relative rounded-2xl border border-primary/40 bg-card/70 p-3 space-y-2 shadow-lg">
+                    <div className="relative rounded-2xl border border-primary/40 bg-card/70 p-3 h-[170px] flex flex-col justify-between shadow-lg">
                       <div className="flex items-center justify-between">
                         <div className="min-w-0 flex-1">
                           <p className="text-xs font-bold text-foreground truncate">
@@ -1062,21 +1077,21 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                           type="button"
                           variant="ghost"
                           size="icon"
-                          className="h-8 w-8 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-full"
+                          className="h-7 w-7 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-full"
                           onClick={() => {
                             setRecordingFile(null);
                             setRecordingPreview(null);
                           }}
                           title={t.removeFile}
                         >
-                          <X className="w-4 h-4" />
+                          <X className="w-3.5 h-3.5" />
                         </Button>
                       </div>
 
                       <video
                         src={recordingPreview}
                         controls
-                        className="w-full max-h-36 rounded-xl bg-black border border-border/80"
+                        className="w-full h-24 rounded-xl bg-black border border-border/80 object-contain"
                       />
                     </div>
                   ) : (
@@ -1092,13 +1107,13 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                         handleRecordingChange(e.dataTransfer.files?.[0] || null);
                       }}
                       onClick={() => recordingInputRef.current?.click()}
-                      className={`cursor-pointer rounded-2xl border-2 border-dashed p-6 text-center transition-all ${
+                      className={`cursor-pointer rounded-2xl border-2 border-dashed p-4 text-center transition-all h-[170px] flex flex-col items-center justify-center ${
                         videoDragging
                           ? "border-primary bg-primary/15 scale-[1.01]"
                           : "border-border/70 bg-card/30 hover:bg-card/60 hover:border-primary/60"
                       }`}
                     >
-                      <FileVideo className="w-8 h-8 mx-auto text-primary/80 mb-2" />
+                      <FileVideo className="w-7 h-7 mx-auto text-primary/80 mb-2 shrink-0" />
                       <p className="text-xs font-semibold text-foreground">
                         {t.videoUploadPrompt}
                       </p>
@@ -1109,13 +1124,17 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                   )}
                 </>
               ) : (
-                <div className="space-y-2 pt-1">
+                <div className="rounded-2xl border border-border/70 bg-card/30 p-4 h-[170px] flex flex-col justify-center space-y-2.5">
+                  <div className="flex items-center gap-1.5 text-foreground/90 text-xs font-semibold">
+                    <LinkIcon className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>{t.orPasteLoom}</span>
+                  </div>
                   <Input
                     type="url"
                     value={screenRecordingLink}
                     onChange={(e) => setScreenRecordingLink(e.target.value)}
                     placeholder={t.loomPlaceholder}
-                    className="bg-background border-border/80 text-xs font-mono placeholder:font-sans h-11"
+                    className="bg-background border-border/80 text-xs font-mono placeholder:font-sans h-11 w-full"
                     dir="ltr"
                   />
                   <p className="text-[11px] text-muted-foreground">
