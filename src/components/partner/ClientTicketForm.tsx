@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   Server,
   Layers,
@@ -18,7 +18,15 @@ import {
   Sparkles,
   MessageCircle,
   HelpCircle,
-  ExternalLink
+  ExternalLink,
+  ClipboardPaste,
+  Building2,
+  Zap,
+  CheckCheck,
+  ChevronRight,
+  ShieldCheck,
+  Video,
+  FileCheck2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,7 +39,7 @@ import {
   TicketPriority,
   ClientTicket,
   SYSTEM_META,
-  BRANCH_OPTIONS_EN
+  BRANCH_OPTIONS_EN,
 } from "@/types/tickets";
 import { ticketTranslations } from "@/lib/ticketTranslations";
 
@@ -42,6 +50,34 @@ interface Props {
 
 const STORAGE_SAVED_SUBMITTER = "dubaiincairo_ticket_submitter_v1";
 const STORAGE_LOCAL_TICKETS = "dubaiincairo_submitted_tickets_v1";
+
+// Custom System Icons & SVG Logos
+function OdooBrandIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+    </svg>
+  );
+}
+
+function EzeeBrandIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <polyline points="9 22 9 12 15 12 15 22" />
+    </svg>
+  );
+}
+
+function OzooBrandIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <circle cx="6" cy="6" r="3" />
+      <circle cx="18" cy="18" r="3" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8.5 8.5l7 7M12 4v4M12 16v4" />
+    </svg>
+  );
+}
 
 export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
   const t = ticketTranslations[lang];
@@ -66,6 +102,7 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
   // Attachments state
   const [screenshotFile, setScreenshotFile] = useState<File | null>(null);
   const [screenshotPreview, setScreenshotPreview] = useState<string | null>(null);
+  const [recordingMode, setRecordingMode] = useState<"file" | "link">("file");
   const [recordingFile, setRecordingFile] = useState<File | null>(null);
   const [recordingPreview, setRecordingPreview] = useState<string | null>(null);
   const [screenRecordingLink, setScreenRecordingLink] = useState<string>("");
@@ -74,12 +111,14 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [successTicket, setSuccessTicket] = useState<ClientTicket | null>(null);
   const [copiedSuccessId, setCopiedSuccessId] = useState<boolean>(false);
+  const [copiedSummary, setCopiedSummary] = useState<boolean>(false);
   const [screenshotDragging, setScreenshotDragging] = useState<boolean>(false);
   const [videoDragging, setVideoDragging] = useState<boolean>(false);
 
   // File input refs
   const screenshotInputRef = useRef<HTMLInputElement>(null);
   const recordingInputRef = useRef<HTMLInputElement>(null);
+  const formContainerRef = useRef<HTMLDivElement>(null);
 
   // Load remembered user data on mount
   useEffect(() => {
@@ -107,6 +146,31 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
       }
     };
   }, [screenshotPreview, recordingPreview]);
+
+  // Global Clipboard Paste Listener for Screenshots (Cmd+V / Ctrl+V)
+  const handlePaste = useCallback((e: ClipboardEvent) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf("image") !== -1) {
+        const file = items[i].getAsFile();
+        if (file) {
+          handleScreenshotChange(file);
+          toast({
+            title: isRtl ? "تم لصق لقطة الشاشة" : "Screenshot Pasted",
+            description: t.pastedScreenshotSuccess,
+          });
+          e.preventDefault();
+          break;
+        }
+      }
+    }
+  }, [isRtl, t.pastedScreenshotSuccess, toast]);
+
+  useEffect(() => {
+    window.addEventListener("paste", handlePaste);
+    return () => window.removeEventListener("paste", handlePaste);
+  }, [handlePaste]);
 
   // Handle screenshot selection
   const handleScreenshotChange = (file: File | null) => {
@@ -145,7 +209,6 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
     const ext = file.name.split(".").pop() || "bin";
     const cleanFileName = `${folder}/${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
     try {
-      // Try assets bucket first
       const { data, error } = await supabase.storage.from("assets").upload(cleanFileName, file, {
         cacheControl: "3600",
         upsert: false,
@@ -155,7 +218,7 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
         return publicUrlData.publicUrl;
       }
     } catch {
-      // Try applications bucket as fallback
+      // Fallback
     }
 
     try {
@@ -165,18 +228,45 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
         return publicUrlData.publicUrl;
       }
     } catch {
-      // Graceful fallback
+      // Fallback
     }
 
-    // Return filename placeholder if bucket upload isn't accessible
     return `local://${file.name}`;
   };
 
-  // Form submission handler
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // URL Clipboard Paste Helper
+  const handlePasteUrlFromClipboard = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text) {
+        setIssueUrl(text.trim());
+        toast({
+          title: isRtl ? "تم لصق الرابط" : "URL Pasted",
+          description: text.trim(),
+        });
+      }
+    } catch {
+      toast({
+        title: isRtl ? "تعذر الوصول للحافظة" : "Clipboard access denied",
+        description: isRtl ? "يرجى استخدام اختصار اللصق اليدوي ⌘+V" : "Please paste manually using ⌘+V",
+      });
+    }
+  };
 
-    // Validation
+  // Quick Issue Template Selector
+  const applyTemplate = (tplTitle: string, tplDesc: string) => {
+    setTitle(tplTitle);
+    setDescription(tplDesc);
+    toast({
+      title: isRtl ? "تم تطبيق النموذج" : "Template Applied",
+      description: isRtl ? "يمكنك الآن تعديل التفاصيل واستكمال الرفع." : "You can now adjust the specifics.",
+    });
+  };
+
+  // Form submission handler
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+
     if (!title.trim()) {
       toast({ title: t.errorTitle, variant: "destructive" });
       return;
@@ -204,10 +294,10 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
       if (screenshotFile) {
         uploadedScreenshotUrl = await uploadAttachment(screenshotFile, "tickets/screenshots");
       }
-      if (recordingFile) {
+      if (recordingFile && recordingMode === "file") {
         const directVideoUrl = await uploadAttachment(recordingFile, "tickets/recordings");
         uploadedRecordingUrl = uploadedRecordingUrl
-          ? `${directVideoUrl} | External Link: ${uploadedRecordingUrl}`
+          ? `${directVideoUrl} | Cloud Link: ${uploadedRecordingUrl}`
           : directVideoUrl;
       }
 
@@ -266,7 +356,7 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
         // Continue to fallback
       }
 
-      // Attempt B: Fallback to contact_submissions table if client_tickets is not yet migrated
+      // Attempt B: Fallback to contact_submissions
       if (!savedToDb) {
         try {
           const structuredMessage = `[CLIENT TICKET ${ticketNumber}]
@@ -340,11 +430,14 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
       setSuccessTicket(newTicket);
       if (onTicketSubmitted) onTicketSubmitted(newTicket);
 
+      // Scroll smoothly to success card
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
       toast({
         title: isRtl ? "تم استلام التذكرة بنجاح" : "Ticket submitted successfully",
         description: isRtl
-          ? `رقم التذكرة: ${ticketNumber} - تم إرسال الإشعارات.`
-          : `Ticket #${ticketNumber} has been logged and notifications dispatched.`,
+          ? `رقم التذكرة: ${ticketNumber} - تم تفعيل الإشعارات.`
+          : `Ticket #${ticketNumber} logged and notifications dispatched.`,
       });
 
       // Clear non-contact inputs
@@ -367,11 +460,35 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
     }
   };
 
+  // Keyboard shortcut: Cmd+Enter to submit
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit();
+    }
+  };
+
   const handleCopyTicketId = () => {
     if (!successTicket) return;
     navigator.clipboard.writeText(successTicket.ticket_number);
     setCopiedSuccessId(true);
     setTimeout(() => setCopiedSuccessId(false), 2000);
+  };
+
+  const handleCopyTicketSummary = () => {
+    if (!successTicket) return;
+    const summaryText = `[TICKET ${successTicket.ticket_number}]
+System: ${successTicket.system.toUpperCase()}
+Branch: ${successTicket.branch}
+Priority: ${successTicket.priority.toUpperCase()}
+Title: ${successTicket.title}
+URL: ${successTicket.issue_url || "N/A"}
+Submitter: ${successTicket.client_name} (${successTicket.client_email})
+Date: ${new Date(successTicket.created_at || "").toLocaleString()}`;
+
+    navigator.clipboard.writeText(summaryText);
+    setCopiedSummary(true);
+    setTimeout(() => setCopiedSummary(false), 2000);
   };
 
   const getWhatsAppMessageUrl = () => {
@@ -382,20 +499,27 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
     return `https://wa.me/201099990099?text=${encodeURIComponent(text)}`;
   };
 
+  const isValidUrl = issueUrl.trim().startsWith("http://") || issueUrl.trim().startsWith("https://");
+
   return (
-    <div className="w-full space-y-8" dir={isRtl ? "rtl" : "ltr"}>
-      {/* Success Modal / Banner */}
+    <div
+      ref={formContainerRef}
+      onKeyDown={handleKeyDown}
+      className="w-full space-y-8"
+      dir={isRtl ? "rtl" : "ltr"}
+    >
+      {/* ── SUCCESS MODAL & TIMELINE ────────────────────────────────────────── */}
       {successTicket && (
-        <div className="rounded-2xl border border-emerald-500/40 bg-gradient-to-br from-emerald-950/40 via-card to-card p-6 md:p-8 shadow-2xl relative overflow-hidden animate-in fade-in zoom-in-95 duration-300">
-          <div className="absolute top-0 right-0 left-0 h-1 bg-gradient-to-r from-emerald-500 via-primary to-emerald-400" />
+        <div className="rounded-3xl border border-primary/50 bg-gradient-to-b from-[#161208]/90 via-[#0e0c06]/95 to-background p-6 md:p-8 shadow-2xl relative overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+          <div className="absolute top-0 right-0 left-0 h-1.5 bg-gradient-to-r from-amber-500 via-primary to-yellow-300" />
           
           <div className="flex items-start justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                <CheckCircle2 className="w-6 h-6 text-emerald-400" />
+            <div className="flex items-center gap-3.5">
+              <div className="w-14 h-14 rounded-2xl bg-primary/20 border border-primary/40 flex items-center justify-center shrink-0 shadow-lg shadow-primary/10">
+                <CheckCircle2 className="w-7 h-7 text-primary" />
               </div>
               <div>
-                <h3 className="text-xl font-display font-bold text-foreground">
+                <h3 className="text-xl md:text-2xl font-display font-bold text-foreground">
                   {t.successHeading}
                 </h3>
                 <p className="text-xs md:text-sm text-muted-foreground mt-0.5">
@@ -407,7 +531,7 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
             <Button
               variant="ghost"
               size="icon"
-              className="text-muted-foreground hover:text-foreground shrink-0"
+              className="text-muted-foreground hover:text-foreground shrink-0 rounded-full"
               onClick={() => setSuccessTicket(null)}
               title={t.closeModal}
             >
@@ -415,29 +539,30 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
             </Button>
           </div>
 
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-background/60 border border-border/60 rounded-xl p-4">
+          {/* Ticket Reference & SLA Grid */}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-card/60 border border-primary/20 rounded-2xl p-5">
             <div>
               <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold block">
                 {t.ticketIdLabel}
               </span>
-              <div className="flex items-center gap-2 mt-1">
-                <span className="font-mono text-lg font-bold text-primary">
+              <div className="flex items-center gap-2 mt-1.5">
+                <span className="font-mono text-xl font-bold text-primary tracking-wide">
                   {successTicket.ticket_number}
                 </span>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleCopyTicketId}
-                  className="h-7 px-2 text-xs gap-1"
+                  className="h-7 px-2.5 text-xs gap-1 border-primary/30 bg-primary/10 hover:bg-primary/20 text-primary font-semibold"
                 >
                   {copiedSuccessId ? (
                     <>
-                      <Check className="w-3 h-3 text-emerald-400" />
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
                       <span>{t.copied}</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-3 h-3" />
+                      <Copy className="w-3.5 h-3.5" />
                       <span>{t.copyTicketId}</span>
                     </>
                   )}
@@ -449,41 +574,95 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
               <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold block">
                 {t.estimatedSla}
               </span>
-              <div className="mt-1 flex items-center gap-2">
-                <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30">
+              <div className="mt-1.5 flex items-center gap-2">
+                <Badge className="bg-primary/20 text-primary border-primary/40 font-mono text-xs px-2.5 py-0.5">
                   {successTicket.priority === "critical"
                     ? "< 2 Hours"
                     : successTicket.priority === "high"
                     ? "4 - 8 Hours"
                     : "12 - 24 Hours"}
                 </Badge>
-                <span className="text-xs text-muted-foreground">
-                  {isRtl ? "فريق العمليات متصل" : "Ops Team Active"}
+                <span className="text-xs text-muted-foreground flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  {isRtl ? "فريق العمليات متصل" : "Ops Team Assigned"}
                 </span>
               </div>
             </div>
           </div>
 
-          <p className="text-xs text-muted-foreground mt-4 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-primary shrink-0" />
-            {t.notificationSentNote}
-          </p>
+          {/* 4-Step Resolution Timeline */}
+          <div className="mt-6 pt-5 border-t border-border/60">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+              <div className="p-3 rounded-xl bg-primary/15 border border-primary/40">
+                <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center mx-auto mb-1">
+                  ✓
+                </div>
+                <div className="text-xs font-bold text-foreground">{t.stepTimeline1}</div>
+                <div className="text-[10px] text-muted-foreground">{t.stepTimeline1Sub}</div>
+              </div>
 
-          <div className="mt-5 flex flex-wrap items-center gap-3">
+              <div className="p-3 rounded-xl bg-primary/15 border border-primary/40">
+                <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center mx-auto mb-1">
+                  ✓
+                </div>
+                <div className="text-xs font-bold text-foreground">{t.stepTimeline2}</div>
+                <div className="text-[10px] text-muted-foreground">{t.stepTimeline2Sub}</div>
+              </div>
+
+              <div className="p-3 rounded-xl bg-card/50 border border-border/60">
+                <div className="w-6 h-6 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold flex items-center justify-center mx-auto mb-1 animate-pulse">
+                  3
+                </div>
+                <div className="text-xs font-bold text-foreground">{t.stepTimeline3}</div>
+                <div className="text-[10px] text-muted-foreground">{t.stepTimeline3Sub}</div>
+              </div>
+
+              <div className="p-3 rounded-xl bg-card/30 border border-border/40 opacity-70">
+                <div className="w-6 h-6 rounded-full bg-border text-muted-foreground text-xs font-bold flex items-center justify-center mx-auto mb-1">
+                  4
+                </div>
+                <div className="text-xs font-semibold text-muted-foreground">{t.stepTimeline4}</div>
+                <div className="text-[10px] text-muted-foreground">{t.stepTimeline4Sub}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Action buttons */}
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
               href={getWhatsAppMessageUrl()}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-colors shadow-lg shadow-emerald-950/40"
             >
               <MessageCircle className="w-4 h-4" />
               <span>{t.whatsappAction}</span>
             </a>
+
             <Button
               variant="outline"
               size="sm"
+              onClick={handleCopyTicketSummary}
+              className="text-xs font-semibold gap-1.5 border-border/80"
+            >
+              {copiedSummary ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{t.copiedSummary}</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5" />
+                  <span>{t.copySummaryBtn}</span>
+                </>
+              )}
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => setSuccessTicket(null)}
-              className="text-xs font-medium"
+              className="text-xs font-medium ms-auto text-muted-foreground hover:text-foreground"
             >
               {t.submitAnother}
             </Button>
@@ -491,21 +670,25 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
         </div>
       )}
 
-      {/* Main Form */}
+      {/* ── MAIN TICKET SUBMISSION FORM ──────────────────────────────────────── */}
       <form onSubmit={handleSubmit} className="space-y-8">
-        {/* 1. System Selection */}
-        <section className="space-y-3">
-          <div>
+        
+        {/* 1. Software System Selection */}
+        <section className="space-y-3.5">
+          <div className="flex items-center justify-between">
             <h3 className="text-base md:text-lg font-display font-semibold text-foreground flex items-center gap-2">
               <Layers className="w-4 h-4 text-primary" />
               {t.selectSystemTitle}
             </h3>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              {t.selectSystemDesc}
-            </p>
+            <span className="text-[11px] font-mono text-muted-foreground uppercase">
+              Step 1 of 6
+            </span>
           </div>
+          <p className="text-xs text-muted-foreground">
+            {t.selectSystemDesc}
+          </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
             {(["odoo", "ezee", "ozoo"] as TicketSystem[]).map((sysKey) => {
               const meta = SYSTEM_META[sysKey];
               const isSelected = system === sysKey;
@@ -514,64 +697,131 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
                   type="button"
                   key={sysKey}
                   onClick={() => setSystem(sysKey)}
-                  className={`relative p-4 rounded-xl border text-start transition-all duration-200 overflow-hidden ${
+                  className={`group relative p-4 rounded-2xl border text-start transition-all duration-200 overflow-hidden active:scale-[0.99] ${
                     isSelected
-                      ? "border-primary bg-primary/10 ring-1 ring-primary shadow-lg shadow-primary/5"
-                      : "border-border/60 bg-card/40 hover:bg-card/80 hover:border-border"
+                      ? "border-primary bg-gradient-to-b from-primary/15 via-card/80 to-card ring-1 ring-primary shadow-xl shadow-primary/10"
+                      : "border-border/70 bg-card/40 hover:bg-card/75 hover:border-border"
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-between mb-2.5">
+                    <div className="flex items-center gap-2.5">
                       <div
-                        className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs"
+                        className="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-xs shadow-inner"
                         style={{
                           backgroundColor: `${meta.color}25`,
                           color: meta.color,
+                          border: `1px solid ${meta.color}40`,
                         }}
                       >
-                        {sysKey === "odoo" ? "OD" : sysKey === "ezee" ? "EZ" : "OZ"}
+                        {sysKey === "odoo" ? (
+                          <OdooBrandIcon className="w-5 h-5" />
+                        ) : sysKey === "ezee" ? (
+                          <EzeeBrandIcon className="w-5 h-5" />
+                        ) : (
+                          <OzooBrandIcon className="w-5 h-5" />
+                        )}
                       </div>
                       <span className="font-display font-bold text-sm text-foreground">
                         {isRtl ? meta.nameAr : meta.nameEn}
                       </span>
                     </div>
+
                     <Badge
                       variant="outline"
-                      className="text-[10px] px-1.5 py-0 border-border/60 uppercase font-mono"
+                      className="text-[10px] px-2 py-0.5 border-border/60 uppercase font-mono tracking-wider font-semibold"
                     >
                       {meta.badge}
                     </Badge>
                   </div>
 
-                  <p className="text-xs text-muted-foreground line-clamp-2">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
                     {isRtl ? meta.subtitleAr : meta.subtitleEn}
                   </p>
 
-                  {isSelected && (
-                    <div className="absolute top-2 end-2">
-                      <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                  {/* Feature Tags */}
+                  <div className="mt-3 flex flex-wrap gap-1.5 pt-2 border-t border-border/40">
+                    {sysKey === "odoo" && (
+                      <>
+                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Invoicing</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">POS</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Inventory</span>
+                      </>
+                    )}
+                    {sysKey === "ezee" && (
+                      <>
+                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Frontdesk PMS</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Folios</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Rate Plans</span>
+                      </>
+                    )}
+                    {sysKey === "ozoo" && (
+                      <>
+                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Live Sync</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Middleware</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-md bg-background/80 text-muted-foreground border border-border/40">Webhooks</span>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Active Radio Badge */}
+                  <div className="absolute top-3 end-3">
+                    <div
+                      className={`w-4 h-4 rounded-full border flex items-center justify-center transition-all ${
+                        isSelected
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border/80 bg-background/40"
+                      }`}
+                    >
+                      {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground" />}
                     </div>
-                  )}
+                  </div>
                 </button>
               );
             })}
           </div>
         </section>
 
-        {/* 2. Branch & URL Grid */}
+        {/* 2. Branch & URL Location */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* Branch selection */}
-          <div className="space-y-2">
-            <label className="block text-sm font-display font-semibold text-foreground flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-primary" />
-              {t.branchTitle}
-            </label>
+          <div className="space-y-2.5">
+            <div className="flex items-center justify-between">
+              <label className="block text-sm font-display font-semibold text-foreground flex items-center gap-1.5">
+                <Building2 className="w-4 h-4 text-primary" />
+                {t.branchTitle}
+              </label>
+            </div>
             <p className="text-xs text-muted-foreground">{t.branchDesc}</p>
+
+            {/* Quick Branch Selection Chips */}
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              {[
+                { id: "swiss_blue_khobar", short: isRtl ? "الخبر" : "Al Khobar" },
+                { id: "swiss_blue_riyadh", short: isRtl ? "الرياض" : "Riyadh" },
+                { id: "swiss_blue_jeddah", short: isRtl ? "جدة" : "Jeddah" },
+                { id: "swiss_blue_jubail", short: isRtl ? "الجبيل" : "Al Jubail" },
+                { id: "wd_group_hq", short: isRtl ? "المقر الرئيسي" : "WD HQ" },
+                { id: "other", short: isRtl ? "+ فرع آخر" : "+ Other" },
+              ].map((chip) => (
+                <button
+                  type="button"
+                  key={chip.id}
+                  onClick={() => setBranch(chip.id)}
+                  className={`text-xs px-2.5 py-1 rounded-lg border font-medium transition-colors ${
+                    branch === chip.id
+                      ? "border-primary bg-primary/15 text-primary"
+                      : "border-border/60 bg-card/40 text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {chip.short}
+                </button>
+              ))}
+            </div>
 
             <select
               value={branch}
               onChange={(e) => setBranch(e.target.value)}
-              className="w-full rounded-xl border border-border/80 bg-background px-3.5 py-2.5 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              className="w-full rounded-xl border border-border/80 bg-background px-3.5 py-2.5 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary mt-2"
             >
               {BRANCH_OPTIONS_EN.map((opt) => (
                 <option key={opt.id} value={opt.id}>
@@ -585,34 +835,52 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
                 value={customBranch}
                 onChange={(e) => setCustomBranch(e.target.value)}
                 placeholder={t.customBranchPlaceholder}
-                className="mt-2 bg-background border-border/80"
+                className="mt-2 bg-background border-border/80 animate-in fade-in"
                 autoFocus
               />
             )}
           </div>
 
           {/* Incident URL */}
-          <div className="space-y-2">
-            <label className="block text-sm font-display font-semibold text-foreground flex items-center gap-1.5">
-              <LinkIcon className="w-3.5 h-3.5 text-primary" />
-              {t.urlTitle}
-            </label>
+          <div className="space-y-2.5">
+            <div className="flex items-center justify-between">
+              <label className="block text-sm font-display font-semibold text-foreground flex items-center gap-1.5">
+                <LinkIcon className="w-4 h-4 text-primary" />
+                {t.urlTitle}
+              </label>
+              {isValidUrl && (
+                <span className="text-[10px] text-emerald-400 font-mono inline-flex items-center gap-1">
+                  <CheckCheck className="w-3 h-3" />
+                  {t.validUrlBadge}
+                </span>
+              )}
+            </div>
             <p className="text-xs text-muted-foreground">{t.urlHelper}</p>
 
-            <Input
-              type="url"
-              value={issueUrl}
-              onChange={(e) => setIssueUrl(e.target.value)}
-              placeholder={t.urlPlaceholder}
-              className="bg-background border-border/80 text-sm font-mono placeholder:font-sans"
-              dir="ltr"
-            />
+            <div className="relative">
+              <Input
+                type="url"
+                value={issueUrl}
+                onChange={(e) => setIssueUrl(e.target.value)}
+                placeholder={t.urlPlaceholder}
+                className="bg-background border-border/80 text-sm font-mono placeholder:font-sans pe-10"
+                dir="ltr"
+              />
+              <button
+                type="button"
+                onClick={handlePasteUrlFromClipboard}
+                title={t.pasteUrlBtn}
+                className="absolute end-2 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-primary transition-colors"
+              >
+                <ClipboardPaste className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </section>
 
-        {/* 3. Priority Selector */}
+        {/* 3. Priority & Urgency Levels */}
         <section className="space-y-3">
-          <div>
+          <div className="flex items-center justify-between">
             <h3 className="text-sm md:text-base font-display font-semibold text-foreground flex items-center gap-1.5">
               <AlertTriangle className="w-4 h-4 text-primary" />
               {t.priorityTitle}
@@ -625,29 +893,37 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
                 id: "normal" as TicketPriority,
                 label: t.priorityNormal,
                 desc: t.priorityNormalDesc,
+                sla: "24-48h",
                 color: "border-emerald-500/40 text-emerald-400 bg-emerald-500/5",
-                activeColor: "border-emerald-500 bg-emerald-500/15 ring-1 ring-emerald-500",
+                activeColor: "border-emerald-500 bg-emerald-500/15 ring-1 ring-emerald-500 shadow-md shadow-emerald-500/10",
+                dot: "bg-emerald-500",
               },
               {
                 id: "medium" as TicketPriority,
                 label: t.priorityMedium,
                 desc: t.priorityMediumDesc,
+                sla: "12-24h",
                 color: "border-amber-500/40 text-amber-400 bg-amber-500/5",
-                activeColor: "border-amber-500 bg-amber-500/15 ring-1 ring-amber-500",
+                activeColor: "border-amber-500 bg-amber-500/15 ring-1 ring-amber-500 shadow-md shadow-amber-500/10",
+                dot: "bg-amber-500",
               },
               {
                 id: "high" as TicketPriority,
                 label: t.priorityHigh,
                 desc: t.priorityHighDesc,
+                sla: "4-8h",
                 color: "border-orange-500/40 text-orange-400 bg-orange-500/5",
-                activeColor: "border-orange-500 bg-orange-500/15 ring-1 ring-orange-500",
+                activeColor: "border-orange-500 bg-orange-500/15 ring-1 ring-orange-500 shadow-md shadow-orange-500/10",
+                dot: "bg-orange-500 animate-pulse",
               },
               {
                 id: "critical" as TicketPriority,
                 label: t.priorityCritical,
                 desc: t.priorityCriticalDesc,
+                sla: "< 2h",
                 color: "border-rose-500/40 text-rose-400 bg-rose-500/5",
-                activeColor: "border-rose-500 bg-rose-500/20 ring-1 ring-rose-500",
+                activeColor: "border-rose-500 bg-rose-500/20 ring-1 ring-rose-500 shadow-md shadow-rose-500/20",
+                dot: "bg-rose-500 animate-ping",
               },
             ].map((p) => {
               const isSelected = priority === p.id;
@@ -656,13 +932,18 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
                   type="button"
                   key={p.id}
                   onClick={() => setPriority(p.id)}
-                  className={`p-3 rounded-xl border text-start transition-all ${
+                  className={`p-3.5 rounded-2xl border text-start transition-all ${
                     isSelected ? p.activeColor : "border-border/60 bg-card/40 hover:bg-card/70"
                   }`}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-xs text-foreground">{p.label}</span>
-                    {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-primary" />}
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="font-semibold text-xs text-foreground flex items-center gap-1.5">
+                      <span className={`w-2 h-2 rounded-full ${p.dot}`} />
+                      {p.label}
+                    </span>
+                    <Badge variant="outline" className="text-[10px] px-1.5 py-0 font-mono border-border/60">
+                      {p.sla}
+                    </Badge>
                   </div>
                   <p className="text-[11px] text-muted-foreground mt-1 line-clamp-2">
                     {p.desc}
@@ -673,8 +954,47 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
           </div>
         </section>
 
-        {/* 4. Ticket Summary & Description */}
+        {/* 4. Quick Issue Templates & Description */}
         <section className="space-y-4">
+          {/* Quick templates chips */}
+          <div className="space-y-2">
+            <span className="text-xs font-semibold text-muted-foreground flex items-center gap-1.5">
+              <Zap className="w-3.5 h-3.5 text-primary" />
+              {t.quickTemplatesTitle}
+            </span>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => applyTemplate(t.templateFolioSyncTitle, t.templateFolioSyncDesc)}
+                className="text-xs px-3 py-1.5 rounded-xl border border-primary/20 bg-card hover:bg-primary/10 hover:border-primary/50 text-foreground/90 transition-colors"
+              >
+                {t.templateFolioSyncTitle}
+              </button>
+              <button
+                type="button"
+                onClick={() => applyTemplate(t.templateVatCalcTitle, t.templateVatCalcDesc)}
+                className="text-xs px-3 py-1.5 rounded-xl border border-primary/20 bg-card hover:bg-primary/10 hover:border-primary/50 text-foreground/90 transition-colors"
+              >
+                {t.templateVatCalcTitle}
+              </button>
+              <button
+                type="button"
+                onClick={() => applyTemplate(t.templateRoomRateTitle, t.templateRoomRateDesc)}
+                className="text-xs px-3 py-1.5 rounded-xl border border-primary/20 bg-card hover:bg-primary/10 hover:border-primary/50 text-foreground/90 transition-colors"
+              >
+                {t.templateRoomRateTitle}
+              </button>
+              <button
+                type="button"
+                onClick={() => applyTemplate(t.templateGuestCheckinTitle, t.templateGuestCheckinDesc)}
+                className="text-xs px-3 py-1.5 rounded-xl border border-primary/20 bg-card hover:bg-primary/10 hover:border-primary/50 text-foreground/90 transition-colors"
+              >
+                {t.templateGuestCheckinTitle}
+              </button>
+            </div>
+          </div>
+
+          {/* Ticket Title */}
           <div className="space-y-2">
             <label className="block text-sm font-display font-semibold text-foreground">
               {t.ticketSummaryTitle} *
@@ -684,18 +1004,27 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
               onChange={(e) => setTitle(e.target.value)}
               placeholder={t.ticketSummaryPlaceholder}
               required
-              className="bg-background border-border/80 text-sm font-medium"
+              className="bg-background border-border/80 text-sm font-medium h-11"
             />
           </div>
 
+          {/* Ticket Description */}
           <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="block text-xs font-semibold text-muted-foreground">
+                {isRtl ? "تفاصيل المشكلة والخطوات" : "Detailed Steps & Observations"}
+              </label>
+              <span className="text-[11px] text-muted-foreground font-mono">
+                {description.length} {t.charCount}
+              </span>
+            </div>
             <Textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder={t.descPlaceholder}
-              rows={5}
+              rows={6}
               required
-              className="bg-background border-border/80 text-sm leading-relaxed whitespace-pre-line"
+              className="bg-background border-border/80 text-sm leading-relaxed whitespace-pre-line font-sans"
             />
           </div>
         </section>
@@ -729,25 +1058,29 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
               />
 
               {screenshotPreview ? (
-                <div className="relative rounded-xl border border-border bg-card/60 p-3 flex items-center gap-3">
+                <div className="relative rounded-2xl border border-primary/40 bg-card/70 p-3.5 flex items-center gap-3.5 shadow-lg shadow-black/40">
                   <img
                     src={screenshotPreview}
                     alt="Screenshot preview"
-                    className="w-16 h-16 rounded-lg object-cover border border-border/80 shrink-0"
+                    className="w-20 h-20 rounded-xl object-cover border border-border/80 shrink-0 bg-background"
                   />
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs font-medium text-foreground truncate">
-                      {screenshotFile?.name || "screenshot.png"}
+                    <p className="text-xs font-bold text-foreground truncate">
+                      {screenshotFile?.name || "clipboard-screenshot.png"}
                     </p>
-                    <p className="text-[11px] text-muted-foreground font-mono">
-                      {screenshotFile ? `${(screenshotFile.size / 1024).toFixed(1)} KB` : "Uploaded"}
+                    <p className="text-[11px] text-muted-foreground font-mono mt-0.5">
+                      {screenshotFile ? `${(screenshotFile.size / 1024).toFixed(1)} KB` : "Ready to upload"}
                     </p>
+                    <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400 font-medium mt-1">
+                      <FileCheck2 className="w-3 h-3" />
+                      {isRtl ? "تم إرفاق الصورة" : "Image attached"}
+                    </span>
                   </div>
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10"
+                    className="h-8 w-8 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-full"
                     onClick={() => {
                       setScreenshotFile(null);
                       setScreenshotPreview(null);
@@ -770,118 +1103,151 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
                     handleScreenshotChange(e.dataTransfer.files?.[0] || null);
                   }}
                   onClick={() => screenshotInputRef.current?.click()}
-                  className={`cursor-pointer rounded-xl border-2 border-dashed p-5 text-center transition-all ${
+                  className={`cursor-pointer rounded-2xl border-2 border-dashed p-6 text-center transition-all ${
                     screenshotDragging
-                      ? "border-primary bg-primary/10"
+                      ? "border-primary bg-primary/15 scale-[1.01]"
                       : "border-border/70 bg-card/30 hover:bg-card/60 hover:border-primary/60"
                   }`}
                 >
-                  <ImageIcon className="w-7 h-7 mx-auto text-primary/70 mb-2" />
-                  <p className="text-xs font-medium text-foreground">
+                  <ImageIcon className="w-8 h-8 mx-auto text-primary/80 mb-2" />
+                  <p className="text-xs font-semibold text-foreground">
                     {screenshotDragging ? t.screenshotDragActive : t.screenshotPrompt}
                   </p>
-                  <p className="text-[11px] text-muted-foreground mt-1">
+                  <p className="text-[11px] text-muted-foreground mt-1 max-w-xs mx-auto leading-relaxed">
                     {t.screenshotSubtext}
                   </p>
                 </div>
               )}
             </div>
 
-            {/* Screen recording upload + Loom Link zone */}
+            {/* Screen recording: Segmented Upload vs Loom Link */}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold text-foreground/90 flex items-center gap-1.5">
-                <FileVideo className="w-3.5 h-3.5 text-primary" />
-                {t.screenRecordingLabel}
-              </label>
+              <div className="flex items-center justify-between">
+                <label className="block text-xs font-semibold text-foreground/90 flex items-center gap-1.5">
+                  <FileVideo className="w-3.5 h-3.5 text-primary" />
+                  {t.screenRecordingLabel}
+                </label>
 
-              <input
-                ref={recordingInputRef}
-                type="file"
-                accept="video/mp4,video/webm,video/quicktime"
-                className="hidden"
-                onChange={(e) => handleRecordingChange(e.target.files?.[0] || null)}
-              />
+                {/* Sub-tabs */}
+                <div className="inline-flex rounded-lg border border-border/80 bg-background/60 p-0.5 text-[10px]">
+                  <button
+                    type="button"
+                    onClick={() => setRecordingMode("file")}
+                    className={`px-2 py-0.5 rounded-md font-medium transition-colors ${
+                      recordingMode === "file" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
+                    }`}
+                  >
+                    {t.tabVideoFile}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setRecordingMode("link")}
+                    className={`px-2 py-0.5 rounded-md font-medium transition-colors ${
+                      recordingMode === "link" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
+                    }`}
+                  >
+                    {t.tabLoomLink}
+                  </button>
+                </div>
+              </div>
 
-              {recordingPreview ? (
-                <div className="relative rounded-xl border border-border bg-card/60 p-3 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs font-medium text-foreground truncate">
-                        {recordingFile?.name || "recording.mp4"}
+              {recordingMode === "file" ? (
+                <>
+                  <input
+                    ref={recordingInputRef}
+                    type="file"
+                    accept="video/mp4,video/webm,video/quicktime"
+                    className="hidden"
+                    onChange={(e) => handleRecordingChange(e.target.files?.[0] || null)}
+                  />
+
+                  {recordingPreview ? (
+                    <div className="relative rounded-2xl border border-primary/40 bg-card/70 p-3 space-y-2 shadow-lg">
+                      <div className="flex items-center justify-between">
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs font-bold text-foreground truncate">
+                            {recordingFile?.name || "recording.mp4"}
+                          </p>
+                          <p className="text-[11px] text-muted-foreground font-mono">
+                            {recordingFile ? `${(recordingFile.size / (1024 * 1024)).toFixed(2)} MB` : "Ready"}
+                          </p>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-full"
+                          onClick={() => {
+                            setRecordingFile(null);
+                            setRecordingPreview(null);
+                          }}
+                          title={t.removeFile}
+                        >
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+
+                      <video
+                        src={recordingPreview}
+                        controls
+                        className="w-full max-h-36 rounded-xl bg-black border border-border/80"
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                        setVideoDragging(true);
+                      }}
+                      onDragLeave={() => setVideoDragging(false)}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        setVideoDragging(false);
+                        handleRecordingChange(e.dataTransfer.files?.[0] || null);
+                      }}
+                      onClick={() => recordingInputRef.current?.click()}
+                      className={`cursor-pointer rounded-2xl border-2 border-dashed p-6 text-center transition-all ${
+                        videoDragging
+                          ? "border-primary bg-primary/15 scale-[1.01]"
+                          : "border-border/70 bg-card/30 hover:bg-card/60 hover:border-primary/60"
+                      }`}
+                    >
+                      <FileVideo className="w-8 h-8 mx-auto text-primary/80 mb-2" />
+                      <p className="text-xs font-semibold text-foreground">
+                        {t.videoUploadPrompt}
                       </p>
-                      <p className="text-[11px] text-muted-foreground font-mono">
-                        {recordingFile ? `${(recordingFile.size / (1024 * 1024)).toFixed(2)} MB` : "Ready"}
+                      <p className="text-[11px] text-muted-foreground mt-1">
+                        {t.videoUploadSubtext}
                       </p>
                     </div>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10"
-                      onClick={() => {
-                        setRecordingFile(null);
-                        setRecordingPreview(null);
-                      }}
-                      title={t.removeFile}
-                    >
-                      <X className="w-4 h-4" />
-                    </Button>
-                  </div>
-
-                  <video
-                    src={recordingPreview}
-                    controls
-                    className="w-full max-h-36 rounded-lg bg-black border border-border/80"
-                  />
-                </div>
+                  )}
+                </>
               ) : (
-                <div
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    setVideoDragging(true);
-                  }}
-                  onDragLeave={() => setVideoDragging(false)}
-                  onDrop={(e) => {
-                    e.preventDefault();
-                    setVideoDragging(false);
-                    handleRecordingChange(e.dataTransfer.files?.[0] || null);
-                  }}
-                  onClick={() => recordingInputRef.current?.click()}
-                  className={`cursor-pointer rounded-xl border-2 border-dashed p-4 text-center transition-all ${
-                    videoDragging
-                      ? "border-primary bg-primary/10"
-                      : "border-border/70 bg-card/30 hover:bg-card/60 hover:border-primary/60"
-                  }`}
-                >
-                  <FileVideo className="w-7 h-7 mx-auto text-primary/70 mb-1.5" />
-                  <p className="text-xs font-medium text-foreground">
-                    {t.videoUploadPrompt}
-                  </p>
-                  <p className="text-[11px] text-muted-foreground mt-0.5">
-                    {t.videoUploadSubtext}
+                <div className="space-y-2 pt-1">
+                  <Input
+                    type="url"
+                    value={screenRecordingLink}
+                    onChange={(e) => setScreenRecordingLink(e.target.value)}
+                    placeholder={t.loomPlaceholder}
+                    className="bg-background border-border/80 text-xs font-mono placeholder:font-sans h-11"
+                    dir="ltr"
+                  />
+                  <p className="text-[11px] text-muted-foreground">
+                    {isRtl
+                      ? "يدعم روابط Loom و Google Drive و CleanShot و YouTube (غير مدرج)."
+                      : "Supports Loom, Google Drive, CleanShot, and unlisted video links."}
                   </p>
                 </div>
               )}
-
-              {/* Cloud / Loom link input */}
-              <div className="pt-1">
-                <Input
-                  type="url"
-                  value={screenRecordingLink}
-                  onChange={(e) => setScreenRecordingLink(e.target.value)}
-                  placeholder={t.loomPlaceholder}
-                  className="bg-background border-border/80 text-xs font-mono placeholder:font-sans"
-                  dir="ltr"
-                />
-              </div>
             </div>
           </div>
         </section>
 
         {/* 6. Submitter Contact Info */}
-        <section className="space-y-4 rounded-xl border border-border/60 bg-card/30 p-4 md:p-5">
+        <section className="space-y-4 rounded-2xl border border-border/70 bg-card/40 p-5 md:p-6 backdrop-blur-sm">
           <div>
-            <h3 className="text-sm md:text-base font-display font-semibold text-foreground">
+            <h3 className="text-sm md:text-base font-display font-semibold text-foreground flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-primary" />
               {t.submitterTitle}
             </h3>
             <p className="text-xs text-muted-foreground mt-0.5">
@@ -899,7 +1265,7 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
                 onChange={(e) => setClientName(e.target.value)}
                 placeholder={t.namePlaceholder}
                 required
-                className="bg-background border-border/80 text-sm"
+                className="bg-background border-border/80 text-sm h-10"
               />
             </div>
 
@@ -913,7 +1279,7 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
                 onChange={(e) => setClientEmail(e.target.value)}
                 placeholder={t.emailPlaceholder}
                 required
-                className="bg-background border-border/80 text-sm"
+                className="bg-background border-border/80 text-sm h-10"
                 dir="ltr"
               />
             </div>
@@ -927,44 +1293,48 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
                 value={clientPhone}
                 onChange={(e) => setClientPhone(e.target.value)}
                 placeholder={t.phonePlaceholder}
-                className="bg-background border-border/80 text-sm font-mono"
+                className="bg-background border-border/80 text-sm font-mono h-10"
                 dir="ltr"
               />
             </div>
           </div>
 
-          <label className="flex items-center gap-2 pt-1 cursor-pointer">
+          <label className="flex items-center gap-2.5 pt-1 cursor-pointer select-none">
             <input
               type="checkbox"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
-              className="rounded border-border bg-background text-primary focus:ring-primary h-4 w-4"
+              className="rounded border-border bg-background text-primary focus:ring-primary h-4 w-4 accent-amber-500"
             />
-            <span className="text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               {t.rememberMeLabel}
             </span>
           </label>
         </section>
 
-        {/* 7. Submit Button */}
-        <div className="pt-2">
+        {/* 7. Submit Action Area */}
+        <div className="pt-2 space-y-2 text-center">
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-12 text-sm md:text-base font-display font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 gap-2"
+            className="w-full h-13 text-sm md:text-base font-display font-bold bg-gradient-to-r from-amber-500 via-primary to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 shadow-xl shadow-primary/25 rounded-2xl gap-2 transition-all active:scale-[0.99] cursor-pointer"
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
                 <span>{t.submittingBtn}</span>
               </>
             ) : (
               <>
-                <Send className="w-4 h-4" />
+                <Send className="w-5 h-5 text-slate-950" />
                 <span>{t.submitBtn}</span>
               </>
             )}
           </Button>
+
+          <p className="text-[11px] text-muted-foreground font-mono">
+            {t.shortcutHint}
+          </p>
         </div>
       </form>
     </div>

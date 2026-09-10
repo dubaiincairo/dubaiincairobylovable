@@ -22,6 +22,9 @@ import {
   ShieldCheck,
   CheckCircle2,
   ExternalLink,
+  BookOpen,
+  ArrowUpRight,
+  Radio,
 } from "lucide-react";
 import {
   addDays,
@@ -68,9 +71,9 @@ const PartnerTimeTracker = () => {
   const t = ticketTranslations[lang];
 
   useSEO({
-    title: isRtl ? "بوابة الشركاء والعملاء | دبي في القاهرة" : "Partner & Client Portal | Dubai in Cairo",
+    title: isRtl ? "بوابة الشركاء والدعم الفني | دبي في القاهرة" : "Partner & Client Portal | Dubai in Cairo",
     description: isRtl
-      ? "البوابة التنفيذية الموحدة لرفع تذاكر الدعم الفني لأنظمة أودو وإيزي وأوزو، وسجل أعمال المستقلين."
+      ? "البوابة التنفيذية المعتمدة لرفع تذاكر الدعم الفني لأنظمة أودو وإيزي وأوزو، وسجل أعمال المستقلين."
       : "Executive portal for client support tickets (Odoo, eZee, Ozoo) and freelancer worksheet time tracking.",
     noindex: true,
   });
@@ -87,7 +90,7 @@ const PartnerTimeTracker = () => {
   const [recentTickets, setRecentTickets] = useState<ClientTicket[]>([]);
   const [historyOpen, setHistoryOpen] = useState(false);
 
-  // Inline Freelancer Login State (if unauthenticated and clicks worksheet tab)
+  // Inline Freelancer Login State
   const [inlineEmail, setInlineEmail] = useState("");
   const [inlinePassword, setInlinePassword] = useState("");
   const [inlineLoggingIn, setInlineLoggingIn] = useState(false);
@@ -127,7 +130,7 @@ const PartnerTimeTracker = () => {
     loadStoredTickets();
   }, []);
 
-  // ── Auth Check (Non-blocking: allow tickets tab without mandatory login) ─────
+  // Auth Check
   useEffect(() => {
     let cancelled = false;
     supabase.auth.getUser().then(({ data }) => {
@@ -166,7 +169,7 @@ const PartnerTimeTracker = () => {
     setSearchParams({ tab });
   };
 
-  // ── Load entries for the visible week if authenticated ──────────────────────
+  // Load entries for the visible week if authenticated
   useEffect(() => {
     if (!isPartnerUser) return;
     setLoadingEntries(true);
@@ -195,7 +198,6 @@ const PartnerTimeTracker = () => {
       });
   }, [isPartnerUser, weekStart, toast]);
 
-  // Timesheet hour click & saving handlers
   const totalHoursThisWeek = Object.keys(entries).length;
 
   const handleCellClick = (date: Date, hour: number) => {
@@ -314,29 +316,55 @@ const PartnerTimeTracker = () => {
       className="min-h-screen bg-background text-foreground transition-all duration-200"
       dir={isRtl ? "rtl" : "ltr"}
     >
-      {/* Executive Header */}
-      <header className="sticky top-0 z-30 border-b border-border/70 bg-background/90 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80">
+      {/* ── TOP OPERATIONAL BAR ──────────────────────────────────────────────── */}
+      <div className="border-b border-border/40 bg-[#0d0f17] text-[11px] py-1.5 px-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="text-muted-foreground font-medium">
+              {t.systemsStatusLive}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4 text-muted-foreground">
+            <Link to="/portal" className="hover:text-primary transition-colors flex items-center gap-1">
+              <BookOpen className="w-3 h-3" />
+              <span>{isRtl ? "أدلة العمليات (SOPs)" : "Client Deliverables"}</span>
+            </Link>
+            <span>·</span>
+            <Link to="/" className="hover:text-primary transition-colors">
+              {isRtl ? "الموقع الرئيسي" : "Website"}
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* ── EXECUTIVE HEADER ────────────────────────────────────────────────── */}
+      <header className="sticky top-0 z-30 border-b border-border/70 bg-background/95 backdrop-blur-2xl supports-[backdrop-filter]:bg-background/85">
         <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-4">
-          {/* Brand & Portal Label */}
+          {/* Brand & Portal Badge */}
           <div className="flex items-center gap-3">
-            <a href="/" className="font-display font-bold text-base inline-flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-primary" />
-              <span className="text-gradient-gold">Dubai in Cairo</span>
-              <span className="hidden sm:inline text-muted-foreground font-normal">·</span>
-              <span className="hidden sm:inline text-xs text-muted-foreground">
-                {isRtl ? "بوابة الشركاء والدعم الفني" : "Partner & Client Portal"}
+            <a href="/" className="font-display font-bold text-base inline-flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-primary shadow-sm shadow-primary/50" />
+              <span className="text-gradient-gold tracking-tight">Dubai in Cairo</span>
+              <span className="hidden sm:inline text-muted-foreground/60 font-normal">|</span>
+              <span className="hidden sm:inline text-xs text-muted-foreground font-medium">
+                {isRtl ? "بوابة الشركاء والعمليات" : "Operations Desk"}
               </span>
             </a>
           </div>
 
-          {/* Controls: Language Switcher + Tickets History + Sign In/Out */}
-          <div className="flex items-center gap-2.5">
+          {/* Controls: Language Switcher + Tickets History + User Session */}
+          <div className="flex items-center gap-2 md:gap-2.5">
             {/* Language Switcher */}
             <Button
               variant="outline"
               size="sm"
               onClick={() => setLang(lang === "ar" ? "en" : "ar")}
-              className="h-8 px-2.5 text-xs font-semibold gap-1.5 border-border/80 bg-card/50 hover:bg-card"
+              className="h-8.5 px-3 text-xs font-semibold gap-1.5 border-border/80 bg-card/60 hover:bg-card rounded-xl transition-all"
             >
               <Languages className="w-3.5 h-3.5 text-primary" />
               <span>{lang === "ar" ? "English" : "العربية"}</span>
@@ -350,12 +378,12 @@ const PartnerTimeTracker = () => {
                 loadStoredTickets();
                 setHistoryOpen(true);
               }}
-              className="h-8 px-2.5 text-xs font-semibold gap-1.5 border-border/80 bg-card/50 hover:bg-card"
+              className="h-8.5 px-3 text-xs font-semibold gap-1.5 border-border/80 bg-card/60 hover:bg-card rounded-xl transition-all"
             >
               <History className="w-3.5 h-3.5 text-primary" />
               <span className="hidden sm:inline">{t.myTicketsBtn}</span>
               {recentTickets.length > 0 && (
-                <span className="font-mono text-[10px] px-1.5 py-0.2 rounded-full bg-primary/20 text-primary">
+                <span className="font-mono text-[10px] px-1.5 py-0.2 rounded-full bg-primary/20 text-primary font-bold">
                   {recentTickets.length}
                 </span>
               )}
@@ -364,14 +392,14 @@ const PartnerTimeTracker = () => {
             {/* User Session */}
             {isPartnerUser ? (
               <div className="flex items-center gap-2">
-                <span className="hidden md:inline text-xs text-muted-foreground font-mono truncate max-w-[150px]">
+                <span className="hidden md:inline text-xs text-muted-foreground font-mono truncate max-w-[140px]">
                   {userEmail}
                 </span>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={handleSignOut}
-                  className="h-8 px-2.5 text-xs text-muted-foreground hover:text-foreground"
+                  className="h-8.5 px-2.5 text-xs text-muted-foreground hover:text-foreground rounded-xl"
                 >
                   <LogOut className="w-3.5 h-3.5 mx-1" />
                   <span className="hidden sm:inline">{isRtl ? "خروج" : "Sign out"}</span>
@@ -382,7 +410,7 @@ const PartnerTimeTracker = () => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-8 px-2.5 text-xs text-muted-foreground hover:text-foreground"
+                  className="h-8.5 px-2.5 text-xs text-muted-foreground hover:text-foreground rounded-xl"
                 >
                   <Lock className="w-3.5 h-3.5 mx-1" />
                   <span className="hidden sm:inline">{isRtl ? "دخول الشركاء" : "Partner Login"}</span>
@@ -393,39 +421,39 @@ const PartnerTimeTracker = () => {
         </div>
       </header>
 
-      {/* Hero & Navigation Switcher */}
-      <div className="border-b border-border/50 bg-card/20 py-6 md:py-8">
+      {/* ── HERO & MASTER WORKFLOW SWITCHER ─────────────────────────────────── */}
+      <div className="border-b border-border/50 bg-gradient-to-b from-card/30 via-background to-background py-8 md:py-10">
         <div className="max-w-4xl mx-auto px-4 md:px-6 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-semibold">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-semibold">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>{t.portalBadge}</span>
           </div>
 
-          <h1 className="text-2xl md:text-4xl font-display font-bold text-foreground">
+          <h1 className="text-2xl md:text-4xl font-display font-bold text-foreground tracking-tight">
             {t.portalTitle}
           </h1>
-          <p className="text-xs md:text-sm text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xs md:text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             {t.portalSubtitle}
           </p>
 
-          {/* Master Workflow Switcher Pills */}
-          <div className="pt-2 flex justify-center">
-            <div className="p-1 rounded-2xl bg-card border border-border/80 shadow-lg inline-flex items-center gap-1.5 max-w-full overflow-x-auto">
+          {/* Master Workflow Switcher Segmented Control */}
+          <div className="pt-3 flex justify-center">
+            <div className="p-1.5 rounded-2xl bg-card/80 border border-border/90 shadow-2xl shadow-black/60 inline-flex items-center gap-2 max-w-full overflow-x-auto backdrop-blur-lg">
               {/* Tab 1: Client Tickets */}
               <button
                 type="button"
                 onClick={() => handleTabChange("tickets")}
                 className={cn(
-                  "px-4 md:px-6 py-2.5 rounded-xl text-xs md:text-sm font-display font-semibold transition-all flex items-center gap-2 shrink-0",
+                  "px-5 md:px-7 py-3 rounded-xl text-xs md:text-sm font-display font-semibold transition-all flex items-center gap-2.5 shrink-0 active:scale-[0.99]",
                   activeTab === "tickets"
-                    ? "bg-primary text-primary-foreground shadow-md shadow-primary/25"
-                    : "text-muted-foreground hover:text-foreground hover:bg-background/50",
+                    ? "bg-gradient-to-r from-amber-500 via-primary to-yellow-500 text-slate-950 shadow-lg shadow-primary/25 font-bold"
+                    : "text-muted-foreground hover:text-foreground hover:bg-background/60",
                 )}
               >
-                <Ticket className="w-4 h-4" />
+                <Ticket className="w-4 h-4 shrink-0" />
                 <div className="text-start">
                   <div>{t.tabTickets}</div>
-                  <div className="text-[10px] font-normal opacity-85 hidden sm:block">
+                  <div className={cn("text-[10px] font-normal hidden sm:block", activeTab === "tickets" ? "text-slate-900/90 font-medium" : "opacity-75")}>
                     {t.tabTicketsSub}
                   </div>
                 </div>
@@ -436,16 +464,16 @@ const PartnerTimeTracker = () => {
                 type="button"
                 onClick={() => handleTabChange("worksheet")}
                 className={cn(
-                  "px-4 md:px-6 py-2.5 rounded-xl text-xs md:text-sm font-display font-semibold transition-all flex items-center gap-2 shrink-0",
+                  "px-5 md:px-7 py-3 rounded-xl text-xs md:text-sm font-display font-semibold transition-all flex items-center gap-2.5 shrink-0 active:scale-[0.99]",
                   activeTab === "worksheet"
-                    ? "bg-primary text-primary-foreground shadow-md shadow-primary/25"
-                    : "text-muted-foreground hover:text-foreground hover:bg-background/50",
+                    ? "bg-gradient-to-r from-amber-500 via-primary to-yellow-500 text-slate-950 shadow-lg shadow-primary/25 font-bold"
+                    : "text-muted-foreground hover:text-foreground hover:bg-background/60",
                 )}
               >
-                <Briefcase className="w-4 h-4" />
+                <Briefcase className="w-4 h-4 shrink-0" />
                 <div className="text-start">
                   <div>{t.tabWorksheet}</div>
-                  <div className="text-[10px] font-normal opacity-85 hidden sm:block">
+                  <div className={cn("text-[10px] font-normal hidden sm:block", activeTab === "worksheet" ? "text-slate-900/90 font-medium" : "opacity-75")}>
                     {t.tabWorksheetSub}
                   </div>
                 </div>
@@ -455,11 +483,11 @@ const PartnerTimeTracker = () => {
         </div>
       </div>
 
-      {/* Main Content Area */}
+      {/* ── MAIN CONTENT WORKSPACE ──────────────────────────────────────────── */}
       <main className="max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-12">
         {/* WORKFLOW 1: CLIENT SUPPORT TICKETS */}
         {activeTab === "tickets" && (
-          <div className="animate-in fade-in duration-300">
+          <div className="animate-in fade-in zoom-in-98 duration-300">
             <div className="max-w-3xl mx-auto">
               <ClientTicketForm
                 lang={lang}
@@ -473,39 +501,41 @@ const PartnerTimeTracker = () => {
 
         {/* WORKFLOW 2: FREELANCER WORKSHEET */}
         {activeTab === "worksheet" && (
-          <div className="animate-in fade-in duration-300">
+          <div className="animate-in fade-in zoom-in-98 duration-300">
             {isPartnerUser ? (
               <div className="space-y-6">
                 {/* Week navigation + summary */}
-                <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center justify-between gap-3 bg-card/40 p-4 rounded-2xl border border-border/70">
                   <div className="flex items-center gap-2">
-                    <Button variant="outline" size="sm" onClick={goPrevWeek} aria-label="Previous week">
+                    <Button variant="outline" size="sm" onClick={goPrevWeek} aria-label="Previous week" className="h-9 w-9 p-0 rounded-xl">
                       <ChevronLeft className="w-4 h-4" aria-hidden="true" />
                     </Button>
-                    <Button variant="outline" size="sm" onClick={goToday} className="font-display">
+                    <Button variant="outline" size="sm" onClick={goToday} className="font-display h-9 rounded-xl">
                       <CalendarIcon className="w-3.5 h-3.5 mr-1.5" aria-hidden="true" />
-                      Today
+                      {isRtl ? "اليوم" : "Today"}
                     </Button>
-                    <Button variant="outline" size="sm" onClick={goNextWeek} aria-label="Next week">
+                    <Button variant="outline" size="sm" onClick={goNextWeek} aria-label="Next week" className="h-9 w-9 p-0 rounded-xl">
                       <ChevronRight className="w-4 h-4" aria-hidden="true" />
                     </Button>
-                    <h2 className="ml-2 font-display font-semibold text-base md:text-lg">{weekLabel}</h2>
+                    <h2 className="ml-2 font-display font-bold text-base md:text-lg">{weekLabel}</h2>
                   </div>
 
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border bg-card">
-                    <Clock className="w-3.5 h-3.5 text-primary" aria-hidden="true" />
-                    <span className="text-xs text-muted-foreground">This week</span>
-                    <span className="font-display font-bold text-base">
-                      {totalHoursThisWeek}<span className="text-muted-foreground font-normal">h</span>
+                  <div className="flex items-center gap-2.5 px-4 py-2 rounded-xl border border-primary/30 bg-primary/10">
+                    <Clock className="w-4 h-4 text-primary" aria-hidden="true" />
+                    <span className="text-xs text-muted-foreground font-medium">
+                      {isRtl ? "إجمالي الساعات هذا الأسبوع:" : "This week total:"}
+                    </span>
+                    <span className="font-display font-bold text-lg text-primary">
+                      {totalHoursThisWeek}<span className="text-xs text-muted-foreground font-normal">h</span>
                     </span>
                   </div>
                 </div>
 
                 {/* Grid */}
-                <div className="rounded-xl border border-border bg-card overflow-hidden">
+                <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-xl">
                   {/* Day headers */}
                   <div
-                    className="grid border-b border-border bg-background/40"
+                    className="grid border-b border-border bg-background/50"
                     style={{ gridTemplateColumns: "70px repeat(7, minmax(0, 1fr))" }}
                   >
                     <div className="px-2 py-2.5 text-[10px] uppercase tracking-wider text-muted-foreground" />
@@ -521,20 +551,20 @@ const PartnerTimeTracker = () => {
                           key={dayKey}
                           className={cn(
                             "px-2 py-2 text-center border-l border-border",
-                            today && "bg-primary/5",
+                            today && "bg-primary/10",
                           )}
                         >
-                          <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                          <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
                             {format(day, "EEE")}
                           </div>
                           <div className={cn(
                             "font-display font-bold text-base leading-none mt-0.5",
-                            today && "text-primary",
+                            today && "text-primary font-extrabold",
                           )}>
                             {format(day, "d")}
                           </div>
                           {dayTotal > 0 && (
-                            <div className="text-[10px] text-primary/80 mt-0.5 font-mono">
+                            <div className="text-[10px] text-primary mt-0.5 font-mono font-bold">
                               {dayTotal}h
                             </div>
                           )}
@@ -547,7 +577,7 @@ const PartnerTimeTracker = () => {
                   <div className="max-h-[calc(100vh-260px)] overflow-y-auto relative">
                     {loadingEntries && (
                       <div className="absolute inset-0 z-10 flex items-center justify-center bg-card/60 backdrop-blur-sm">
-                        <Loader2 className="w-5 h-5 animate-spin text-primary" aria-hidden="true" />
+                        <Loader2 className="w-6 h-6 animate-spin text-primary" aria-hidden="true" />
                       </div>
                     )}
 
@@ -592,7 +622,7 @@ const PartnerTimeTracker = () => {
                                     {entry.title}
                                   </div>
                                   {entry.project && (
-                                    <div className="text-[9px] text-primary/90 truncate font-mono uppercase tracking-wider">
+                                    <div className="text-[9px] text-primary/90 truncate font-mono uppercase tracking-wider font-bold">
                                       {entry.project}
                                     </div>
                                   )}
@@ -618,18 +648,18 @@ const PartnerTimeTracker = () => {
                 </p>
               </div>
             ) : (
-              /* Inline Partner Sign In card if user is not authenticated */
+              /* Inline Partner Sign In card */
               <div className="max-w-md mx-auto py-8">
-                <div className="rounded-2xl border border-border/80 bg-card p-6 md:p-8 shadow-xl text-center space-y-5">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto">
-                    <Briefcase className="w-6 h-6 text-primary" />
+                <div className="rounded-3xl border border-border/80 bg-card/90 p-6 md:p-8 shadow-2xl text-center space-y-5 backdrop-blur-xl">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto shadow-inner">
+                    <Briefcase className="w-7 h-7 text-primary" />
                   </div>
 
                   <div>
                     <h3 className="text-xl font-display font-bold text-foreground">
                       {isRtl ? "تسجيل دخول الشركاء والمستقلين" : "Freelancer & Partner Sign In"}
                     </h3>
-                    <p className="text-xs text-muted-foreground mt-1">
+                    <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
                       {isRtl
                         ? "يرجى تسجيل الدخول بحساب الشريك لاستعراض وتعديل جدول ساعات العمل الأسبوعي الخاص بك."
                         : "Sign in with your partner credentials to view and log your weekly project worksheet hours."}
@@ -647,7 +677,7 @@ const PartnerTimeTracker = () => {
                         onChange={(e) => setInlineEmail(e.target.value)}
                         placeholder="freelancer@partner.com"
                         required
-                        className="w-full rounded-xl border border-border/80 bg-background px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
+                        className="w-full rounded-xl border border-border/80 bg-background px-3.5 py-2.5 text-sm text-foreground focus:border-primary focus:outline-none"
                       />
                     </div>
 
@@ -661,14 +691,14 @@ const PartnerTimeTracker = () => {
                         onChange={(e) => setInlinePassword(e.target.value)}
                         placeholder="••••••••"
                         required
-                        className="w-full rounded-xl border border-border/80 bg-background px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
+                        className="w-full rounded-xl border border-border/80 bg-background px-3.5 py-2.5 text-sm text-foreground focus:border-primary focus:outline-none"
                       />
                     </div>
 
                     <Button
                       type="submit"
                       disabled={inlineLoggingIn}
-                      className="w-full h-10 font-display font-bold text-sm bg-primary hover:bg-primary/90 text-primary-foreground gap-1.5 mt-2"
+                      className="w-full h-11 font-display font-bold text-sm bg-primary hover:bg-primary/90 text-primary-foreground gap-1.5 mt-2 rounded-xl"
                     >
                       {inlineLoggingIn ? (
                         <Loader2 className="w-4 h-4 animate-spin" />
@@ -681,12 +711,13 @@ const PartnerTimeTracker = () => {
                     </Button>
                   </form>
 
-                  <div className="pt-2 border-t border-border/60 text-xs text-muted-foreground">
+                  <div className="pt-3 border-t border-border/60 text-xs text-muted-foreground">
                     <Link
                       to="/partner/login"
-                      className="text-primary hover:underline font-medium"
+                      className="text-primary hover:underline font-medium inline-flex items-center gap-1"
                     >
-                      {isRtl ? "إنشاء حساب شريك جديد أو استعادة كلمة المرور" : "Need an account or full sign-in page?"}
+                      <span>{isRtl ? "إنشاء حساب شريك جديد أو استعادة كلمة المرور" : "Need an account or full sign-in page?"}</span>
+                      <ArrowUpRight className="w-3 h-3" />
                     </Link>
                   </div>
                 </div>

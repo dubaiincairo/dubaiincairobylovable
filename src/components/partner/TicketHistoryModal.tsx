@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Copy, Check, Clock, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  ExternalLink,
+  Copy,
+  Check,
+  Clock,
+  AlertTriangle,
+  CheckCircle2,
+  Search,
+  Filter,
+  Layers,
+  Building2,
+  Calendar,
+} from "lucide-react";
 import { ClientTicket, SYSTEM_META, TicketSystem } from "@/types/tickets";
 import { ticketTranslations } from "@/lib/ticketTranslations";
 
@@ -16,7 +29,9 @@ interface Props {
 export default function TicketHistoryModal({ open, onClose, tickets, lang }: Props) {
   const t = ticketTranslations[lang];
   const isRtl = lang === "ar";
-  const [copiedId, setCopiedId] = React.useState<string | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [filterSystem, setFilterSystem] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const handleCopy = (id: string) => {
     navigator.clipboard.writeText(id);
@@ -37,39 +52,90 @@ export default function TicketHistoryModal({ open, onClose, tickets, lang }: Pro
     }
   };
 
+  const filteredTickets = tickets.filter((tkt) => {
+    const matchesSystem = filterSystem === "all" || tkt.system === filterSystem;
+    const matchesSearch =
+      searchQuery === "" ||
+      tkt.ticket_number.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      tkt.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      tkt.branch.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesSystem && matchesSearch;
+  });
+
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent
-        className="max-w-3xl max-h-[85vh] overflow-y-auto bg-[#0a0d14]/95 border-border/60 text-foreground backdrop-blur-xl"
+        className="max-w-3xl max-h-[88vh] overflow-y-auto bg-[#0a0d14]/95 border-border/80 text-foreground backdrop-blur-2xl rounded-3xl p-6"
         dir={isRtl ? "rtl" : "ltr"}
       >
-        <DialogHeader>
-          <DialogTitle className="text-xl font-display font-semibold flex items-center justify-between">
-            <span>{t.historyTitle}</span>
-            <span className="text-xs font-mono font-normal px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
-              {tickets.length} {lang === "ar" ? "تذاكر" : "Tickets"}
+        <DialogHeader className="pb-3 border-b border-border/60">
+          <DialogTitle className="text-xl md:text-2xl font-display font-bold flex items-center justify-between">
+            <span className="flex items-center gap-2">
+              <Clock className="w-5 h-5 text-primary" />
+              {t.historyTitle}
+            </span>
+            <span className="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-primary/15 text-primary border border-primary/30">
+              {tickets.length} {lang === "ar" ? "تذاكر مسجلة" : "Logged"}
             </span>
           </DialogTitle>
         </DialogHeader>
 
-        {tickets.length === 0 ? (
-          <div className="py-12 text-center text-muted-foreground text-sm">
-            <Clock className="w-10 h-10 mx-auto mb-3 opacity-30 text-primary" />
-            <p>{t.historyEmpty}</p>
+        {/* Filter & Search Bar */}
+        <div className="flex flex-col sm:flex-row gap-3 pt-2">
+          {/* Search input */}
+          <div className="relative flex-1">
+            <Search className="w-4 h-4 absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={isRtl ? "بحث برقم التذكرة أو العنوان أو الفرع..." : "Search by ID, title, or branch..."}
+              className="bg-background/80 border-border/70 ps-9 h-10 text-xs rounded-xl"
+            />
+          </div>
+
+          {/* System filter pills */}
+          <div className="inline-flex rounded-xl border border-border/70 bg-card/50 p-1 text-xs gap-1 shrink-0 overflow-x-auto">
+            {["all", "odoo", "ezee", "ozoo"].map((sys) => (
+              <button
+                type="button"
+                key={sys}
+                onClick={() => setFilterSystem(sys)}
+                className={`px-3 py-1 rounded-lg font-medium transition-colors uppercase text-[11px] ${
+                  filterSystem === sys
+                    ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {sys === "all" ? t.historyFilterAll : sys}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Tickets List */}
+        {filteredTickets.length === 0 ? (
+          <div className="py-16 text-center text-muted-foreground text-sm space-y-2">
+            <Clock className="w-12 h-12 mx-auto opacity-30 text-primary" />
+            <p className="font-medium">{t.historyEmpty}</p>
+            {searchQuery && (
+              <p className="text-xs opacity-75">
+                {isRtl ? "لا توجد نتائج تطابق معايير البحث." : "No results match your search filter."}
+              </p>
+            )}
           </div>
         ) : (
-          <div className="space-y-4 mt-3">
-            {tickets.map((ticket) => {
+          <div className="space-y-3.5 mt-2">
+            {filteredTickets.map((ticket) => {
               const meta = SYSTEM_META[ticket.system as TicketSystem] || SYSTEM_META.odoo;
               return (
                 <div
                   key={ticket.ticket_number}
-                  className="p-4 rounded-xl border border-border/60 bg-card/40 hover:bg-card/70 transition-all space-y-3"
+                  className="p-4 rounded-2xl border border-border/70 bg-card/40 hover:bg-card/75 transition-all space-y-3 shadow-sm hover:border-primary/40"
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/40 pb-2.5">
                     <div className="flex items-center gap-2">
                       <span
-                        className="px-2.5 py-0.5 rounded-md text-xs font-semibold"
+                        className="px-2.5 py-0.5 rounded-lg text-xs font-bold"
                         style={{ backgroundColor: `${meta.color}20`, color: meta.color }}
                       >
                         {isRtl ? meta.nameAr : meta.nameEn}
@@ -94,7 +160,7 @@ export default function TicketHistoryModal({ open, onClose, tickets, lang }: Pro
 
                     <div className="flex items-center gap-2">
                       {getStatusBadge(ticket.status || "open")}
-                      <Badge variant="outline" className="text-[11px] capitalize border-border/60">
+                      <Badge variant="outline" className="text-[11px] capitalize border-border/60 font-mono">
                         {ticket.priority}
                       </Badge>
                     </div>
@@ -102,14 +168,15 @@ export default function TicketHistoryModal({ open, onClose, tickets, lang }: Pro
 
                   <div>
                     <h4 className="font-semibold text-sm text-foreground">{ticket.title}</h4>
-                    <p className="text-xs text-muted-foreground line-clamp-2 mt-1 whitespace-pre-line">
+                    <p className="text-xs text-muted-foreground line-clamp-3 mt-1.5 whitespace-pre-line leading-relaxed">
                       {ticket.description}
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-between text-[11px] text-muted-foreground gap-2 pt-1">
+                  <div className="flex flex-wrap items-center justify-between text-[11px] text-muted-foreground gap-2 pt-1 border-t border-border/30">
                     <div className="flex items-center gap-3">
-                      <span>
+                      <span className="flex items-center gap-1">
+                        <Building2 className="w-3 h-3 text-primary" />
                         <strong className="text-foreground/70">{t.historyBranch}</strong> {ticket.branch}
                       </span>
                       {ticket.issue_url && (
@@ -125,7 +192,8 @@ export default function TicketHistoryModal({ open, onClose, tickets, lang }: Pro
                       )}
                     </div>
                     {ticket.created_at && (
-                      <span className="font-mono">
+                      <span className="font-mono flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
                         {new Date(ticket.created_at).toLocaleDateString(isRtl ? "ar-EG" : "en-US", {
                           month: "short",
                           day: "numeric",
