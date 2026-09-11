@@ -385,10 +385,10 @@ const PartnerTimeTracker = () => {
           <div className="flex items-center gap-2 md:gap-2.5">
             {/* Language Switcher strictly isolated */}
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={handleLanguageToggle}
-              className="h-8.5 px-3 text-xs font-semibold gap-1.5 border-border/80 bg-card/60 hover:bg-card rounded-xl transition-all"
+              className="h-8.5 px-3 text-xs font-semibold gap-1.5 border border-border/80 bg-card/60 hover:bg-card text-foreground hover:text-foreground hover:border-primary/50 rounded-xl transition-all shadow-sm"
             >
               <Languages className="w-3.5 h-3.5 text-primary" />
               <span>{isRtl ? "التحويل للإنجليزية" : "Switch to Arabic"}</span>
@@ -396,13 +396,13 @@ const PartnerTimeTracker = () => {
 
             {/* My Tickets Button */}
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={() => {
                 loadStoredTickets();
                 setHistoryOpen(true);
               }}
-              className="h-8.5 px-3 text-xs font-semibold gap-1.5 border-border/80 bg-card/60 hover:bg-card rounded-xl transition-all"
+              className="h-8.5 px-3 text-xs font-semibold gap-1.5 border border-border/80 bg-card/60 hover:bg-card text-foreground hover:text-foreground hover:border-primary/50 rounded-xl transition-all shadow-sm"
             >
               <History className="w-3.5 h-3.5 text-primary" />
               <span className="hidden sm:inline">{t.myTicketsBtn}</span>

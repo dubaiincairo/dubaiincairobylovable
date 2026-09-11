@@ -44,9 +44,9 @@ export const BRANCH_OPTIONS_EN = [
   { id: "swiss_blue_alsamer", label: "SwissBlue Serviced Apartments Alsamer (Jeddah)" },
   { id: "vinas_riyadh", label: "Vinas Riyadh Serviced Apartments" },
   { id: "tulip_alrawdha", label: "Tulip Alrawdha Serviced Apartments (Riyadh)" },
-  { id: "greenwood_factory", label: "GreenWood Factory for Furniture & Decor (Najran)" },
-  { id: "national_factory", label: "National Factory for Furniture & Aluminum (Riyadh)" },
-  { id: "watan_designs_factory", label: "Watan Designs Furniture Factory (Riyadh)" },
+  { id: "greenwood_factory", label: "GreenWood Factory for Furniture & Decor (Riyadh)" },
+  { id: "national_factory", label: "National Factory for Furniture & Aluminum (Najran)" },
+  { id: "watan_designs_factory", label: "Watan Designs Furniture Factory (Najran)" },
   { id: "other", label: "Other Location / Branch" },
 ];
 
@@ -57,9 +57,9 @@ export const BRANCH_OPTIONS_AR = [
   { id: "swiss_blue_alsamer", label: "سويس بلو للشقق المخدومة السامر (جدة)" },
   { id: "vinas_riyadh", label: "شقق فيناس المخدومة الرياض" },
   { id: "tulip_alrawdha", label: "شقق توليب الروضة المخدومة (الرياض)" },
-  { id: "greenwood_factory", label: "مصنع الأخشاب الخضراء للأثاث والديكورات (نجران)" },
-  { id: "national_factory", label: "المصنع الوطني للأثاث والألومنيوم (الرياض)" },
-  { id: "watan_designs_factory", label: "مصنع تصاميم الوطن للأثاث (الرياض)" },
+  { id: "greenwood_factory", label: "مصنع الأخشاب الخضراء للأثاث والديكورات (الرياض)" },
+  { id: "national_factory", label: "المصنع الوطني للأثاث والألومنيوم (نجران)" },
+  { id: "watan_designs_factory", label: "مصنع تصاميم الوطن للأثاث (نجران)" },
   { id: "other", label: "فرع أو موقع آخر" },
 ];
 
@@ -104,7 +104,7 @@ export const SYSTEM_META: Record<
   },
   ozoo: {
     nameEn: "Ozoo Connector",
-    nameAr: "مربط أوزو للربط اللحظي",
+    nameAr: "برنامج أوزو للربط المحاسبي",
     subtitleEn: "Real-time sync middleware connecting eZee & Odoo",
     subtitleAr: "المحول الذكي للربط اللحظي بين نظام إيزي وأودو",
     color: "#f59e0b",

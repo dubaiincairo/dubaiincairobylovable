@@ -25,6 +25,7 @@ import {
   ShieldCheck,
   Video,
   FileCheck2,
+  ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -250,7 +251,7 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
     } catch {
       toast({
         title: isRtl ? "تعذر الوصول للحافظة" : "Clipboard access denied",
-        description: isRtl ? "يرجى استخدام اختصار اللصق اليدوي ⌘+V" : "Please paste manually using ⌘+V",
+        description: isRtl ? "يرجى استخدام اختصار اللصق ⌘+V أو Ctrl+V" : "Please paste using ⌘+V or Ctrl+V",
       });
     }
   };
@@ -754,18 +755,21 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
               <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{t.branchDesc}</p>
             </div>
 
-            <div className="relative">
+            <div className="relative group">
               <select
                 value={branch}
                 onChange={(e) => setBranch(e.target.value)}
-                className="w-full h-11 rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
+                className="w-full h-11 rounded-xl border border-border/80 bg-background ps-3.5 pe-10 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer"
               >
                 {branchOptions.map((opt) => (
-                  <option key={opt.id} value={opt.id}>
+                  <option key={opt.id} value={opt.id} className="bg-card text-foreground py-1">
                     {opt.label}
                   </option>
                 ))}
               </select>
+              <div className="pointer-events-none absolute end-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-6 h-6 rounded-lg bg-primary/10 border border-primary/20 text-primary group-hover:bg-primary/20 transition-all">
+                <ChevronDown className="w-3.5 h-3.5 text-primary" />
+              </div>
 
               {branch === "other" && (
                 <Input
@@ -795,14 +799,18 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                 value={issueUrl}
                 onChange={(e) => setIssueUrl(e.target.value)}
                 placeholder={t.urlPlaceholder}
-                className="w-full h-11 bg-background border-border/80 text-sm font-mono placeholder:font-sans pe-10"
-                dir="ltr"
+                className={`w-full h-11 bg-background border-border/80 text-sm font-mono placeholder:font-sans ${
+                  isRtl ? "pl-11 pr-3.5" : "pr-11 pl-3.5"
+                }`}
+                dir={issueUrl ? "ltr" : undefined}
               />
               <button
                 type="button"
                 onClick={handlePasteUrlFromClipboard}
                 title={t.pasteUrlBtn}
-                className="absolute end-2 top-1/2 -translate-y-1/2 p-2 text-muted-foreground hover:text-primary transition-colors rounded-lg"
+                className={`absolute ${
+                  isRtl ? "left-2" : "right-2"
+                } top-1/2 -translate-y-1/2 p-2 text-muted-foreground hover:text-primary transition-colors rounded-lg`}
               >
                 <ClipboardPaste className="w-4 h-4" />
               </button>
@@ -942,7 +950,7 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                   <span>{t.screenshotLabel}</span>
                 </label>
                 <span className="text-[10px] text-muted-foreground font-mono bg-muted/40 px-2 py-0.5 rounded-md border border-border/50">
-                  ⌘+V
+                  ⌘+V / Ctrl+V
                 </span>
               </div>
 
