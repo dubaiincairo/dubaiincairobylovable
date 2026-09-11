@@ -104,7 +104,7 @@ export const SYSTEM_META: Record<
   },
   ozoo: {
     nameEn: "Ozoo Connector",
-    nameAr: "برنامج أوزو للربط المحاسبي",
+    nameAr: "برنامج أوزو المحاسبي",
     subtitleEn: "Real-time sync middleware connecting eZee & Odoo",
     subtitleAr: "المحول الذكي للربط اللحظي بين نظام إيزي وأودو",
     color: "#f59e0b",
