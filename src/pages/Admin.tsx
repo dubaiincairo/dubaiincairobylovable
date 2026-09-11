@@ -11,7 +11,7 @@ import {
   Upload, ImageIcon, GripVertical, Mail, Menu, LayoutDashboard, MessageSquare,
   Globe, Check, Info,
   Home, BarChart3, FileText, Zap, Sparkles, LayoutGrid, User, MapPin, ScrollText,
-  Palette, Wrench, Boxes, Building2, Workflow, Compass, Link2, Handshake, TrendingUp, type LucideIcon,
+  Palette, Wrench, Boxes, Building2, Workflow, Compass, Link2, Handshake, TrendingUp, LifeBuoy, type LucideIcon,
 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { contentRegistry, sectionOrder, sectionLabels, type ContentField } from "@/lib/contentRegistry";
@@ -26,6 +26,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { DashboardPanel } from "@/components/admin/DashboardPanel";
 import { ContactSubmissionsPanel } from "@/components/admin/ContactSubmissionsPanel";
+import { SupportTicketsPanel } from "@/components/admin/SupportTicketsPanel";
 import { TestimonialsPanel } from "@/components/admin/TestimonialsPanel";
 import { JobApplicationsPanel } from "@/components/admin/JobApplicationsPanel";
 
@@ -505,6 +506,7 @@ const Admin = () => {
 
         {adminTab === "dashboard"    && <DashboardPanel />}
         {adminTab === "seo"          && <SEOPanel dbValues={dbValues} edited={edited} onChange={handleChange} onSave={handleSave} saving={saving} />}
+        {adminTab === "tickets"      && <SupportTicketsPanel />}
         {adminTab === "contacts"     && <ContactSubmissionsPanel />}
         {adminTab === "applications" && <JobApplicationsPanel />}
         {adminTab === "testimonials" && <TestimonialsPanel logActivity={(action, label) => logActivity(action, "testimonial", label)} />}
@@ -794,7 +796,7 @@ const Admin = () => {
 
 // ─── SidebarContent ───────────────────────────────────────────────────────────
 
-type AdminTab = "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "clients" | "contacts" | "applications";
+type AdminTab = "dashboard" | "content" | "seo" | "case-studies" | "jobs" | "banks" | "testimonials" | "clients" | "contacts" | "applications" | "tickets";
 
 // Grouped nav structure mirroring the website
 type SidebarGroup = {
@@ -858,6 +860,7 @@ const DATA_TABS: { id: AdminTab; label: string; icon: typeof BookOpen }[] = [
 ];
 
 const INBOX_TABS: { id: AdminTab; label: string; icon: typeof BookOpen }[] = [
+  { id: "tickets",      label: "Support Tickets", icon: LifeBuoy },
   { id: "contacts",     label: "Messages",        icon: Mail },
   { id: "applications", label: "Applications",    icon: MessageSquare },
 ];

@@ -79,6 +79,22 @@ function OzooBrandIcon({ className = "w-5 h-5" }: { className?: string }) {
   );
 }
 
+function CommandKeyIcon({ className = "w-3 h-3" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
+    </svg>
+  );
+}
+
 export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
   const t = ticketTranslations[lang];
   const isRtl = lang === "ar";
@@ -949,8 +965,16 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                   <ImageIcon className="w-3.5 h-3.5 text-primary shrink-0" />
                   <span>{t.screenshotLabel}</span>
                 </label>
-                <span className="text-[10px] text-muted-foreground font-mono bg-muted/40 px-2 py-0.5 rounded-md border border-border/50">
-                  ⌘+V / Ctrl+V
+                <span
+                  className="inline-flex items-center gap-1.5 text-[11px] leading-none text-muted-foreground bg-muted/40 px-2 py-1 rounded-md border border-border/50 font-mono select-none"
+                  dir="ltr"
+                >
+                  <span className="inline-flex items-center gap-0.5">
+                    <CommandKeyIcon className="w-3 h-3 text-muted-foreground shrink-0" />
+                    <span>+V</span>
+                  </span>
+                  <span className="text-muted-foreground/40 font-sans">/</span>
+                  <span>Ctrl+V</span>
                 </span>
               </div>
 

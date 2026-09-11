@@ -79,6 +79,11 @@ export function ContactSubmissionsPanel() {
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="font-semibold text-sm text-foreground">{s.name}</span>
                       <span className="text-xs text-muted-foreground">{s.email}</span>
+                      {s.message.includes("[CLIENT TICKET") && (
+                        <span className="text-[10px] bg-primary/10 text-primary border border-primary/20 px-1.5 py-0.5 rounded font-mono font-medium">
+                          Support Ticket
+                        </span>
+                      )}
                     </div>
                     <p className="text-xs text-muted-foreground truncate mt-0.5">{s.message}</p>
                   </div>
