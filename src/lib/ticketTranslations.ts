@@ -98,7 +98,7 @@ export const ticketTranslations = {
     namePlaceholder: "e.g. Ahmed Al-Mansoor",
     emailLabel: "Work Email *",
     emailPlaceholder: "name@swissbluehotels.com",
-    phoneLabel: "Phone / WhatsApp (Optional)",
+    phoneLabel: "WhatsApp Number *",
     phonePlaceholder: "+966 50 123 4567",
     rememberMeLabel: "Remember my details on this device",
 
@@ -114,6 +114,7 @@ export const ticketTranslations = {
     errorDesc: "Please provide a detailed description of the issue.",
     errorEmail: "Please provide a valid work email address for notifications.",
     errorName: "Please enter your name.",
+    errorPhone: "Please enter a valid Saudi mobile number starting with +966 (e.g. +966 50 123 4567).",
 
     // Success Modal
     successHeading: "Ticket Submitted Successfully!",
@@ -248,8 +249,8 @@ export const ticketTranslations = {
     namePlaceholder: "مثال: أحمد المنصور",
     emailLabel: "البريد المهني *",
     emailPlaceholder: "name@example.com",
-    phoneLabel: "الهاتف / واتساب (اختياري)",
-    phonePlaceholder: "966501234567+",
+    phoneLabel: "رقم الواتساب *",
+    phonePlaceholder: "+966 50 123 4567",
     rememberMeLabel: "حفظ بيانات التواصل على هذا الجهاز لتسهيل رفع التذاكر القادمة",
 
     // Actions
@@ -264,6 +265,7 @@ export const ticketTranslations = {
     errorDesc: "يرجى تدوين تفاصيل المشكلة وخطوات حدوثها.",
     errorEmail: "يرجى إدخال بريد إلكتروني صحيح لاستلام إشعارات التذكرة.",
     errorName: "يرجى كتابة الاسم الكامل.",
+    errorPhone: "يرجى إدخال رقم واتساب سعودي صحيح يبدأ بـ 966+ (مثال: +966 50 123 4567).",
 
     // Success Modal
     successHeading: "تم استلام التذكرة وتفعيل الإشعارات بنجاح!",

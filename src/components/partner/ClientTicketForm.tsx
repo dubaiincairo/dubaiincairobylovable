@@ -95,6 +95,38 @@ function CommandKeyIcon({ className = "w-3 h-3" }: { className?: string }) {
   );
 }
 
+// Strict Saudi Mobile Validator & Normalizer (+966 5X XXX XXXX)
+export function validateSaudiPhone(phone: string): boolean {
+  if (!phone) return false;
+  const cleaned = phone.replace(/[\s\-\(\)\.]/g, "");
+  return (
+    /^\+9665\d{8}$/.test(cleaned) ||
+    /^009665\d{8}$/.test(cleaned) ||
+    /^9665\d{8}$/.test(cleaned) ||
+    /^05\d{8}$/.test(cleaned) ||
+    /^5\d{8}$/.test(cleaned)
+  );
+}
+
+export function normalizeSaudiPhone(phone: string): string {
+  const cleaned = phone.replace(/[\s\-\(\)\.]/g, "");
+  let digits = "";
+  if (/^\+9665\d{8}$/.test(cleaned)) {
+    digits = cleaned.slice(4);
+  } else if (/^009665\d{8}$/.test(cleaned)) {
+    digits = cleaned.slice(5);
+  } else if (/^9665\d{8}$/.test(cleaned)) {
+    digits = cleaned.slice(3);
+  } else if (/^05\d{8}$/.test(cleaned)) {
+    digits = cleaned.slice(1);
+  } else if (/^5\d{8}$/.test(cleaned)) {
+    digits = cleaned;
+  } else {
+    return phone.trim();
+  }
+  return `+966 ${digits.slice(0, 2)} ${digits.slice(2, 5)} ${digits.slice(5)}`;
+}
+
 export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
   const t = ticketTranslations[lang];
   const isRtl = lang === "ar";
@@ -116,7 +148,11 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
   const [clientName, setClientName] = useState<string>("");
   const [clientEmail, setClientEmail] = useState<string>("");
   const [clientPhone, setClientPhone] = useState<string>("");
+  const [phoneTouched, setPhoneTouched] = useState<boolean>(false);
   const [rememberMe, setRememberMe] = useState<boolean>(true);
+
+  // Computed phone validity
+  const isPhoneValid = validateSaudiPhone(clientPhone);
 
   // Attachments state
   const [screenshotFile, setScreenshotFile] = useState<File | null>(null);
@@ -350,6 +386,26 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
       toast({ title: t.errorName, variant: "destructive" });
       return;
     }
+    if (!clientPhone.trim()) {
+      setPhoneTouched(true);
+      toast({
+        title: isRtl ? "رقم الواتساب مطلوب" : "WhatsApp number is required",
+        description: t.errorPhone,
+        variant: "destructive",
+      });
+      return;
+    }
+    if (!validateSaudiPhone(clientPhone)) {
+      setPhoneTouched(true);
+      toast({
+        title: isRtl ? "رقم الواتساب غير صالح" : "Invalid Saudi WhatsApp number",
+        description: t.errorPhone,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const normalizedSaudiPhone = normalizeSaudiPhone(clientPhone);
 
     setIsSubmitting(true);
 
@@ -392,7 +448,7 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
         screen_recording_url: uploadedRecordingUrl || undefined,
         client_name: clientName.trim(),
         client_email: clientEmail.trim().toLowerCase(),
-        client_phone: clientPhone.trim() || undefined,
+        client_phone: normalizedSaudiPhone,
         created_at: new Date().toISOString(),
       };
 
@@ -442,7 +498,7 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
           await supabase.from("contact_submissions").insert({
             name: clientName.trim(),
             email: clientEmail.trim().toLowerCase(),
-            phone: clientPhone.trim() || null,
+            phone: normalizedSaudiPhone,
             message: structuredMessage,
           });
         } catch {
@@ -464,7 +520,7 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
       if (rememberMe) {
         localStorage.setItem(
           STORAGE_SAVED_SUBMITTER,
-          JSON.stringify({ name: clientName, email: clientEmail, phone: clientPhone })
+          JSON.stringify({ name: clientName, email: clientEmail, phone: normalizedSaudiPhone })
         );
       }
 
@@ -483,7 +539,7 @@ Screen Recording: ${uploadedRecordingUrl || "None"}`;
               description,
               client_name: clientName,
               client_email: clientEmail,
-              client_phone: clientPhone || "N/A",
+              client_phone: normalizedSaudiPhone,
               screenshot_url: uploadedScreenshotUrl || "None",
               screen_recording_url: uploadedRecordingUrl || "None",
             },
@@ -1280,17 +1336,64 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-foreground/90">
-                {t.phoneLabel}
-              </label>
-              <Input
-                type="tel"
-                value={clientPhone}
-                onChange={(e) => setClientPhone(e.target.value)}
-                placeholder={t.phonePlaceholder}
-                className="bg-background border-border/80 text-sm font-mono h-10"
-                dir="ltr"
-              />
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-semibold text-foreground/90 flex items-center gap-1.5">
+                  <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{t.phoneLabel}</span>
+                </label>
+                <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" dir="ltr">
+                  🇸🇦 KSA (+966 5...)
+                </span>
+              </div>
+              <div className="relative">
+                <Input
+                  type="tel"
+                  value={clientPhone}
+                  onChange={(e) => {
+                    setClientPhone(e.target.value);
+                    if (!phoneTouched && e.target.value.length > 0) setPhoneTouched(true);
+                  }}
+                  onBlur={() => {
+                    setPhoneTouched(true);
+                    if (clientPhone.trim() && validateSaudiPhone(clientPhone)) {
+                      setClientPhone(normalizeSaudiPhone(clientPhone));
+                    }
+                  }}
+                  placeholder={t.phonePlaceholder}
+                  required
+                  className={`bg-background text-sm font-mono h-10 pr-9 transition-colors ${
+                    phoneTouched && clientPhone.trim()
+                      ? isPhoneValid
+                        ? "border-emerald-500/70 focus-visible:ring-emerald-500/30 text-emerald-300"
+                        : "border-red-500/80 focus-visible:ring-red-500/30 text-red-300"
+                      : "border-border/80"
+                  }`}
+                  dir="ltr"
+                />
+                <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none flex items-center">
+                  {phoneTouched && clientPhone.trim() ? (
+                    isPhoneValid ? (
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    ) : (
+                      <AlertTriangle className="w-4 h-4 text-red-400" />
+                    )
+                  ) : (
+                    <span className="text-xs text-muted-foreground/40 font-mono">KSA</span>
+                  )}
+                </div>
+              </div>
+              {phoneTouched && clientPhone.trim() && !isPhoneValid && (
+                <p className="text-[11px] text-red-400 flex items-start gap-1 font-medium animate-in fade-in">
+                  <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                  <span>{t.errorPhone}</span>
+                </p>
+              )}
+              {isPhoneValid && (
+                <p className="text-[11px] text-emerald-400 flex items-center gap-1 font-mono animate-in fade-in">
+                  <CheckCircle2 className="w-3 h-3 shrink-0" />
+                  <span>{isRtl ? "رقم جوال سعودي صحيح ومفعل للإشعارات" : "Valid KSA mobile ready for direct WhatsApp dispatch"}</span>
+                </p>
+              )}
             </div>
           </div>
 
