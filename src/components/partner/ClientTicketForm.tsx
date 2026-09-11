@@ -218,13 +218,81 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
       });
       return;
     }
+    // Storage management: cap video uploads at 15MB to protect hosting limits
+    if (file.size > 15 * 1024 * 1024) {
+      toast({
+        title: isRtl ? "حجم الفيديو يتجاوز 15 ميجابايت" : "Video exceeds 15MB limit",
+        description: isRtl
+          ? "للحفاظ على مساحة الاستضافة وسرعة المراجعة، يرجى وضع رابط سحابي مجاني (Loom أو Google Drive)."
+          : "To preserve hosting storage and ensure instant review, please paste a free Loom or Google Drive link instead.",
+        variant: "destructive",
+      });
+      setRecordingMode("link");
+      return;
+    }
     setRecordingFile(file);
     const url = URL.createObjectURL(file);
     setRecordingPreview(url);
   };
 
-  // Upload helper to Supabase Storage with graceful fallback
+  // Canvas-based client-side image compression to ultra-compact WebP/JPEG Base64 (~50-80KB)
+  const compressImageToBase64 = (file: File, maxDim = 1200, quality = 0.75): Promise<string> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let width = img.width;
+          let height = img.height;
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+            try {
+              const webpData = canvas.toDataURL("image/webp", quality);
+              if (webpData.startsWith("data:image/webp")) {
+                resolve(webpData);
+                return;
+              }
+            } catch {
+              // fallback to jpeg
+            }
+            resolve(canvas.toDataURL("image/jpeg", quality));
+          } else {
+            resolve((e.target?.result as string) || "");
+          }
+        };
+        img.onerror = () => {
+          resolve((e.target?.result as string) || "");
+        };
+        img.src = (e.target?.result as string) || "";
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  // Upload helper: stores compact Base64 for images (zero-cost, 100% reliable in admin panel)
   const uploadAttachment = async (file: File, folder: string): Promise<string> => {
+    if (file.type.startsWith("image/")) {
+      try {
+        const compressedBase64 = await compressImageToBase64(file, 1200, 0.75);
+        return compressedBase64;
+      } catch {
+        // Continue
+      }
+    }
+
     const ext = file.name.split(".").pop() || "bin";
     const cleanFileName = `${folder}/${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
     try {
@@ -234,17 +302,7 @@ export default function ClientTicketForm({ lang, onTicketSubmitted }: Props) {
       });
       if (!error && data) {
         const { data: publicUrlData } = supabase.storage.from("assets").getPublicUrl(cleanFileName);
-        return publicUrlData.publicUrl;
-      }
-    } catch {
-      // Fallback
-    }
-
-    try {
-      const { data, error } = await supabase.storage.from("applications").upload(cleanFileName, file);
-      if (!error && data) {
-        const { data: publicUrlData } = supabase.storage.from("applications").getPublicUrl(cleanFileName);
-        return publicUrlData.publicUrl;
+        if (publicUrlData?.publicUrl) return publicUrlData.publicUrl;
       }
     } catch {
       // Fallback
@@ -593,10 +651,10 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
               <div className="mt-1.5 flex items-center gap-2">
                 <Badge className="bg-primary/20 text-primary border-primary/40 font-mono text-xs px-2.5 py-0.5">
                   {successTicket.priority === "critical"
-                    ? (isRtl ? "أقل من ساعتين" : "< 2 Hours")
+                    ? (isRtl ? "أقل من 4 ساعات" : "< 4 Hours")
                     : successTicket.priority === "high"
-                    ? (isRtl ? "4 إلى 8 ساعات" : "4 - 8 Hours")
-                    : (isRtl ? "12 إلى 24 ساعة" : "12 - 24 Hours")}
+                    ? (isRtl ? "8 إلى 16 ساعة" : "8 - 16 Hours")
+                    : (isRtl ? "24 إلى 48 ساعة" : "24 - 48 Hours")}
                 </Badge>
                 <span className="text-xs text-muted-foreground flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -858,7 +916,7 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                 id: "medium" as TicketPriority,
                 label: t.priorityMedium,
                 desc: t.priorityMediumDesc,
-                sla: isRtl ? "12-24 ساعة" : "12-24h",
+                sla: isRtl ? "24-48 ساعة" : "24-48h",
                 color: "border-amber-500/40 text-amber-400 bg-amber-500/5",
                 activeColor: "border-amber-500 bg-amber-500/15 ring-1 ring-amber-500 shadow-md shadow-amber-500/10",
                 dot: "bg-amber-500",
@@ -867,7 +925,7 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                 id: "high" as TicketPriority,
                 label: t.priorityHigh,
                 desc: t.priorityHighDesc,
-                sla: isRtl ? "4-8 ساعات" : "4-8h",
+                sla: isRtl ? "8-16 ساعة" : "8-16h",
                 color: "border-orange-500/40 text-orange-400 bg-orange-500/5",
                 activeColor: "border-orange-500 bg-orange-500/15 ring-1 ring-orange-500 shadow-md shadow-orange-500/10",
                 dot: "bg-orange-500 animate-pulse",
@@ -876,7 +934,7 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                 id: "critical" as TicketPriority,
                 label: t.priorityCritical,
                 desc: t.priorityCriticalDesc,
-                sla: isRtl ? "أقل من ساعتين" : "< 2h",
+                sla: isRtl ? "أقل من 4 ساعات" : "< 4h",
                 color: "border-rose-500/40 text-rose-400 bg-rose-500/5",
                 activeColor: "border-rose-500 bg-rose-500/20 ring-1 ring-rose-500 shadow-md shadow-rose-500/20",
                 dot: "bg-rose-500 animate-ping",

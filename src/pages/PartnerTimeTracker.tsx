@@ -382,15 +382,15 @@ const PartnerTimeTracker = () => {
           </div>
 
           {/* Controls: Language Switcher + Tickets History + User Session */}
-          <div className="flex items-center gap-2 md:gap-2.5">
+          <div className="flex items-center gap-2 md:gap-3">
             {/* Language Switcher strictly isolated */}
             <Button
               variant="ghost"
               size="sm"
               onClick={handleLanguageToggle}
-              className="h-8.5 px-3 text-xs font-semibold gap-1.5 border border-border/80 bg-card/60 hover:bg-card text-foreground hover:text-foreground hover:border-primary/50 rounded-xl transition-all shadow-sm"
+              className="h-9 md:h-10 px-3.5 md:px-4 text-xs font-semibold gap-2 border border-border/80 bg-card/60 hover:bg-card text-foreground hover:text-foreground hover:border-primary/50 rounded-xl transition-all shadow-sm shrink-0"
             >
-              <Languages className="w-3.5 h-3.5 text-primary" />
+              <Languages className="w-4 h-4 text-primary shrink-0" />
               <span>{isRtl ? "التحويل للإنجليزية" : "Switch to Arabic"}</span>
             </Button>
 
@@ -402,12 +402,12 @@ const PartnerTimeTracker = () => {
                 loadStoredTickets();
                 setHistoryOpen(true);
               }}
-              className="h-8.5 px-3 text-xs font-semibold gap-1.5 border border-border/80 bg-card/60 hover:bg-card text-foreground hover:text-foreground hover:border-primary/50 rounded-xl transition-all shadow-sm"
+              className="h-9 md:h-10 ps-3.5 pe-3 md:ps-4 md:pe-3.5 text-xs font-semibold gap-2 border border-border/80 bg-card/60 hover:bg-card text-foreground hover:text-foreground hover:border-primary/50 rounded-xl transition-all shadow-sm shrink-0"
             >
-              <History className="w-3.5 h-3.5 text-primary" />
+              <History className="w-4 h-4 text-primary shrink-0" />
               <span className="hidden sm:inline">{t.myTicketsBtn}</span>
               {recentTickets.length > 0 && (
-                <span className="font-mono text-[10px] px-1.5 py-0.2 rounded-full bg-primary/20 text-primary font-bold">
+                <span className="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-primary/20 text-primary text-[11px] font-bold font-mono ms-1 ring-1 ring-primary/30">
                   {recentTickets.length}
                 </span>
               )}
@@ -423,20 +423,20 @@ const PartnerTimeTracker = () => {
                   variant="ghost"
                   size="sm"
                   onClick={handleSignOut}
-                  className="h-8.5 px-2.5 text-xs text-muted-foreground hover:text-foreground rounded-xl"
+                  className="h-9 md:h-10 px-3 text-xs text-muted-foreground hover:text-foreground rounded-xl"
                 >
-                  <LogOut className="w-3.5 h-3.5 mx-1" />
+                  <LogOut className="w-4 h-4 mx-1" />
                   <span className="hidden sm:inline">{isRtl ? "خروج" : "Sign out"}</span>
                 </Button>
               </div>
             ) : (
-              <Link to="/partner/login">
+              <Link to="/partner/login" className="shrink-0">
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-8.5 px-2.5 text-xs text-muted-foreground hover:text-foreground rounded-xl"
+                  className="h-9 md:h-10 px-3.5 md:px-4 text-xs font-semibold gap-2 border border-primary/30 bg-primary/10 hover:bg-primary/20 text-primary hover:text-primary rounded-xl transition-all shadow-sm"
                 >
-                  <Lock className="w-3.5 h-3.5 mx-1" />
+                  <Lock className="w-4 h-4 shrink-0" />
                   <span className="hidden sm:inline">{isRtl ? "دخول الشركاء" : "Partner Login"}</span>
                 </Button>
               </Link>

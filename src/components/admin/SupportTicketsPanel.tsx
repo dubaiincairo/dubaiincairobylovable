@@ -56,6 +56,7 @@ export function SupportTicketsPanel() {
   const [priorityFilter, setPriorityFilter] = useState<string>("all");
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [brokenImages, setBrokenImages] = useState<Record<string, boolean>>({});
 
   const loadTickets = async () => {
     setLoading(true);
@@ -555,15 +556,22 @@ ${t.screenshot_url ? `Screenshot: ${t.screenshot_url}\n` : ""}${t.screen_recordi
                           {t.screenshot_url && (
                             <button
                               onClick={() => setPreviewImage(t.screenshot_url || null)}
-                              className="group flex items-center gap-2 p-2 rounded-xl border border-border/80 bg-card hover:border-primary/50 transition-all text-xs text-foreground"
+                              className="group flex items-center gap-2.5 p-2 rounded-xl border border-border/80 bg-card hover:border-primary/50 transition-all text-xs text-foreground"
                             >
-                              <img
-                                src={t.screenshot_url}
-                                alt="Screenshot"
-                                className="w-10 h-10 rounded-lg object-cover border border-border/80 group-hover:scale-105 transition-transform"
-                              />
+                              {brokenImages[t.id] ? (
+                                <div className="w-10 h-10 rounded-lg bg-muted/60 border border-border/80 flex items-center justify-center text-muted-foreground shrink-0">
+                                  <ImageIcon className="w-5 h-5 text-muted-foreground/60" />
+                                </div>
+                              ) : (
+                                <img
+                                  src={t.screenshot_url}
+                                  alt="Screenshot"
+                                  onError={() => setBrokenImages((prev) => ({ ...prev, [t.id]: true }))}
+                                  className="w-10 h-10 rounded-lg object-cover border border-border/80 group-hover:scale-105 transition-transform shrink-0 bg-background"
+                                />
+                              )}
                               <span className="font-medium group-hover:text-primary transition-colors">
-                                View Screenshot
+                                {brokenImages[t.id] ? "Attachment Unreadable" : "View Screenshot"}
                               </span>
                             </button>
                           )}
@@ -655,20 +663,35 @@ ${t.screenshot_url ? `Screenshot: ${t.screenshot_url}\n` : ""}${t.screen_recordi
       {/* Screenshot Fullscreen Modal */}
       {previewImage && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in"
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in"
           onClick={() => setPreviewImage(null)}
         >
-          <div className="relative max-w-4xl max-h-[90vh] bg-card rounded-2xl p-2 border border-border shadow-2xl">
-            <button
-              onClick={() => setPreviewImage(null)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-black/60 text-white hover:bg-black transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
+          <div
+            className="relative max-w-5xl max-h-[92vh] bg-card rounded-2xl p-3.5 border border-border shadow-2xl flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-full flex items-center justify-between pb-2.5 mb-2.5 border-b border-border/60 text-xs text-muted-foreground">
+              <span className="font-semibold text-foreground flex items-center gap-1.5">
+                <ImageIcon className="w-4 h-4 text-primary" /> Screenshot Proof
+              </span>
+              <div className="flex items-center gap-2">
+                <Button size="sm" variant="outline" className="h-7 text-xs gap-1.5" asChild>
+                  <a href={previewImage} download="support-ticket-screenshot.png">
+                    Download Image
+                  </a>
+                </Button>
+                <button
+                  onClick={() => setPreviewImage(null)}
+                  className="p-1.5 rounded-lg bg-muted/60 hover:bg-muted text-foreground transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
             <img
               src={previewImage}
               alt="Screenshot Preview"
-              className="max-h-[85vh] w-auto rounded-xl object-contain"
+              className="max-h-[80vh] w-auto max-w-full rounded-xl object-contain bg-background/50"
             />
           </div>
         </div>
