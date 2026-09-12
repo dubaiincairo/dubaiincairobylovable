@@ -1336,9 +1336,8 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-foreground/90 flex items-center gap-1.5">
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-                <span>{t.phoneLabel}</span>
+              <label className="block text-xs font-semibold text-foreground/90">
+                {t.phoneLabel}
               </label>
               <div className="relative">
                 <Input
