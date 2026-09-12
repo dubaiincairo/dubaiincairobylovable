@@ -1336,15 +1336,10 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
             </div>
 
             <div className="space-y-1.5">
-              <div className="flex items-center justify-between">
-                <label className="text-xs font-semibold text-foreground/90 flex items-center gap-1.5">
-                  <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>{t.phoneLabel}</span>
-                </label>
-                <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" dir="ltr">
-                  🇸🇦 KSA (+966 5...)
-                </span>
-              </div>
+              <label className="block text-xs font-semibold text-foreground/90 flex items-center gap-1.5">
+                <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                <span>{t.phoneLabel}</span>
+              </label>
               <div className="relative">
                 <Input
                   type="tel"
@@ -1370,17 +1365,15 @@ Timestamp: ${new Date(successTicket.created_at || "").toLocaleString("en-US")}`;
                   }`}
                   dir="ltr"
                 />
-                <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none flex items-center">
-                  {phoneTouched && clientPhone.trim() ? (
-                    isPhoneValid ? (
+                {phoneTouched && clientPhone.trim() && (
+                  <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none flex items-center">
+                    {isPhoneValid ? (
                       <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                     ) : (
                       <AlertTriangle className="w-4 h-4 text-red-400" />
-                    )
-                  ) : (
-                    <span className="text-xs text-muted-foreground/40 font-mono">KSA</span>
-                  )}
-                </div>
+                    )}
+                  </div>
+                )}
               </div>
               {phoneTouched && clientPhone.trim() && !isPhoneValid && (
                 <p className="text-[11px] text-red-400 flex items-start gap-1 font-medium animate-in fade-in">
