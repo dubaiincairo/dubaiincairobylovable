@@ -59,6 +59,18 @@
       "destination": "/digital_marketing_strategy.html"
     },
     {
+      "source": "/market-insights",
+      "destination": "/market-insights/index.html"
+    },
+    {
+      "source": "/portal/wdgroup/market-insights",
+      "destination": "/portal/wdgroup/market-insights/index.html"
+    },
+    {
+      "source": "/client-portal/wdgroup/market-insights",
+      "destination": "/portal/wdgroup/market-insights/index.html"
+    },
+    {
       "source": "/portal/wdgroup",
       "destination": "/portal/wdgroup/index.html"
     },

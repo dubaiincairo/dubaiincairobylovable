@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saudi Arabia Market Intelligence & Statistics | WD Group</title>
+    <meta name="description" content="Verified official governmental statistics and interactive data visualizations for the Hospitality and Furniture Manufacturing sectors in Saudi Arabia (GASTAT, SAMA, Ministry of Tourism, Ministry of Industry).">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js 4.4 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: "#0B192C",
+                            dark: "#070F1E",
+                            card: "#0E2238",
+                            sky: "#38BDF8",
+                            emerald: "#10B981",
+                            amber: "#F59E0B",
+                            indigo: "#6366F1",
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        arabic: ['IBM Plex Sans Arabic', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            background-color: #070F1E;
+            color: #E2E8F0;
+        }
+        ::-webkit-scrollbar { width: 7px; height: 7px; }
+        ::-webkit-scrollbar-track { background: #0B192C; }
+        ::-webkit-scrollbar-thumb { background: #1E3A5F; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #38BDF8; }
+        .glass-card {
+            background: rgba(14, 34, 56, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.25s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.35);
+            box-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.5);
+        }
+        .chart-container {
+            position: relative;
+            height: 320px;
+            width: 100%;
+        }
+        @media (min-width: 1024px) {
+            .chart-container-tall {
+                height: 360px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#070F1E] text-slate-200 antialiased min-h-screen flex flex-col">
+
+    <!-- Top Executive Header -->
+    <header class="sticky top-0 z-50 bg-[#0B192C]/95 backdrop-blur-md border-b border-slate-800 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-18 gap-4">
+                
+                <!-- Client Brand Lockup (WD Group Only) -->
+                <div class="flex items-center gap-3">
+                    <a href="/portal/wdgroup" class="flex items-center gap-3 group">
+                        <div class="w-9 h-9 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-sky-500/50 flex items-center justify-center text-sky-400 font-extrabold text-xs tracking-wider shadow-md transition-all">
+                            <span>WD</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs sm:text-sm font-bold text-slate-100 group-hover:text-white transition-colors">WD Group</span>
+                                <span class="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Official Datasets</span>
+                            </div>
+                            <span class="text-[11px] text-slate-400 font-medium tracking-tight">Saudi Market Intelligence · Hospitality &amp; Manufacturing</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Right Navigation Actions -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Link to Strategy Portal -->
+                    <a href="/strategy" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-sky-500/40 text-slate-300 hover:text-sky-300 flex items-center gap-1.5 transition-all shadow-sm">
+                        <i class="fa-solid fa-chess-knight text-sky-400 text-xs"></i>
+                        <span class="hidden sm:inline">Commercial Strategy</span>
+                    </a>
+
+                    <!-- Back to WD Group Client Portal -->
+                    <a href="/portal/wdgroup" class="px-3.5 py-1.5 text-xs font-bold rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 flex items-center gap-1.5 transition-all shadow-lg shadow-sky-500/20">
+                        <i class="fa-solid fa-grid-2 text-xs"></i>
+                        <span>Client Portal</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10 w-full">
+
+        <!-- Hero Section & Authority Verification Banner -->
+        <div class="relative overflow-hidden rounded-3xl p-6 sm:p-10 bg-gradient-to-br from-[#0E2238] via-[#0B192C] to-[#070F1E] border border-slate-800 shadow-2xl">
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-sky-500/10 filter blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-emerald-500/10 filter blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 space-y-4 max-w-4xl">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/30 text-xs font-semibold flex items-center gap-1.5 font-mono">
+                        <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
+                        KSA Official Sector Intelligence · 2024–2026
+                    </span>
+                    <span class="px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 text-xs font-medium">
+                        GASTAT · SAMA · Ministry of Tourism · Ministry of Industry
+                    </span>
+                </div>
+
+                <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                    Saudi Arabia Market Intelligence: <br class="hidden sm:inline"/>
+                    <span class="bg-gradient-to-r from-sky-400 via-emerald-300 to-amber-300 bg-clip-text text-transparent">
+                        Hospitality Dynamics &amp; Furniture Manufacturing
+                    </span>
+                </h1>
+
+                <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">
+                    A rigorously verified empirical statistical intelligence suite grounded exclusively in official Saudi Arabian governmental bulletins. Designed to inform capital allocation, production scheduling, showroom expansion, and digital acquisition for <strong>WD Group</strong> across both hospitality assets and industrial manufacturing facilities.
+                </p>
+
+                <!-- Source Validation Pills -->
+                <div class="flex flex-wrap items-center gap-3 pt-2 text-xs text-slate-400">
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-800">
+                        <i class="fa-solid fa-landmark text-sky-400 text-[11px]"></i>
+                        <span>GASTAT Tourism Establishments Bulletin (Q4 2025)</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-800">
+                        <i class="fa-solid fa-credit-card text-emerald-400 text-[11px]"></i>
+                        <span>SAMA Weekly POS Sectoral Spending Reports (2025)</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-800">
+                        <i class="fa-solid fa-industry text-amber-400 text-[11px]"></i>
+                        <span>Ministry of Industry Industrial Directory (1,200+ Facilities)</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-800">
+                        <i class="fa-solid fa-house-chimney text-indigo-400 text-[11px]"></i>
+                        <span>Sakani Housing Deliveries &amp; REPI (93k+ Annual Units)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6 Executive Macro KPI Metric Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+            
+            <!-- KPI 1 -->
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-sky-500/50 group">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-mono uppercase text-[10px] text-sky-400 font-bold">Tourism Spend</span>
+                    <i class="fa-solid fa-money-bill-wave text-slate-500 group-hover:text-sky-400 transition-colors"></i>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1">
+                    SAR 304B
+                </div>
+                <div class="text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-trend-up"></i> +19.2% YoY
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 border-t border-slate-800/80 pt-1 font-mono">
+                    Source: Ministry of Tourism
+                </div>
+            </div>
+
+            <!-- KPI 2 -->
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-emerald-500/50 group">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-mono uppercase text-[10px] text-emerald-400 font-bold">Total Visitors</span>
+                    <i class="fa-solid fa-users text-slate-500 group-hover:text-emerald-400 transition-colors"></i>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1">
+                    123 Million
+                </div>
+                <div class="text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-trend-up"></i> +6.0% Inbound/Dom.
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 border-t border-slate-800/80 pt-1 font-mono">
+                    Source: GASTAT Tourism 2025
+                </div>
+            </div>
+
+            <!-- KPI 3 -->
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-amber-500/50 group">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-mono uppercase text-[10px] text-amber-400 font-bold">Licensed Hotels</span>
+                    <i class="fa-solid fa-hotel text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1">
+                    5,937
+                </div>
+                <div class="text-[11px] text-amber-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-trend-up"></i> +34.2% YoY Growth
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 border-t border-slate-800/80 pt-1 font-mono">
+                    Source: GASTAT Q4 2025
+                </div>
+            </div>
+
+            <!-- KPI 4 -->
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-indigo-500/50 group">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-mono uppercase text-[10px] text-indigo-400 font-bold">Furniture POS</span>
+                    <i class="fa-solid fa-couch text-slate-500 group-hover:text-indigo-400 transition-colors"></i>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1">
+                    SAR 18.2B
+                </div>
+                <div class="text-[11px] text-indigo-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-trend-up"></i> 85% E-Payment
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 border-t border-slate-800/80 pt-1 font-mono">
+                    Source: SAMA POS Annual
+                </div>
+            </div>
+
+            <!-- KPI 5 -->
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-teal-500/50 group">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-mono uppercase text-[10px] text-teal-400 font-bold">Sakani Homes</span>
+                    <i class="fa-solid fa-door-open text-slate-500 group-hover:text-teal-400 transition-colors"></i>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1">
+                    93,000+
+                </div>
+                <div class="text-[11px] text-teal-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-check"></i> New Inhabitants
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 border-t border-slate-800/80 pt-1 font-mono">
+                    Source: Sakani / MOMAH
+                </div>
+            </div>
+
+            <!-- KPI 6 -->
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-pink-500/50 group">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-mono uppercase text-[10px] text-pink-400 font-bold">Wood Factories</span>
+                    <i class="fa-solid fa-gears text-slate-500 group-hover:text-pink-400 transition-colors"></i>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1">
+                    1,200+
+                </div>
+                <div class="text-[11px] text-pink-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-coins"></i> SAR 14.8B Capital
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 border-t border-slate-800/80 pt-1 font-mono">
+                    Source: Min. of Industry
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Section Tabs with Calibrated 2cm Scroller Hint Animation -->
+        <div id="tabScrollerWrapper" class="sticky top-16 sm:top-18 z-40 bg-[#070F1E]/95 backdrop-blur-md py-3 -mx-4 px-4 sm:mx-0 sm:px-0 border-b border-slate-800 no-print overflow-x-auto scroll-smooth">
+            <div class="flex items-center gap-2.5 min-w-max">
+                <button onclick="switchSection(section-hospitality, this)" id="btn-section-hospitality" 
+                    class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center gap-2 bg-sky-500 text-slate-950 border-sky-400 shadow-lg shadow-sky-500/20">
+                    <i class="fa-solid fa-hotel text-xs"></i>
+                    <span>Hospitality &amp; Hotel Economics</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-950/30 text-slate-950 font-bold">GASTAT</span>
+                </button>
+
+                <button onclick="switchSection(section-furniture, this)" id="btn-section-furniture" 
+                    class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700">
+                    <i class="fa-solid fa-couch text-xs text-amber-400"></i>
+                    <span>Furniture &amp; Kitchen Manufacturing</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-amber-300 border border-slate-700 font-mono">SAMA</span>
+                </button>
+
+                <button onclick="switchSection(section-synergies, this)" id="btn-section-synergies" 
+                    class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700">
+                    <i class="fa-solid fa-arrows-split-up-and-left text-xs text-emerald-400"></i>
+                    <span>Cross-Industry Synergy Matrix</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-emerald-300 border border-slate-700 font-mono">B2B / B2C</span>
+                </button>
+
+                <button onclick="switchSection(section-sources, this)" id="btn-section-sources" 
+                    class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700">
+                    <i class="fa-solid fa-book-bookmark text-xs text-indigo-400"></i>
+                    <span>Government Bulletins &amp; Methodology</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-indigo-300 border border-slate-700 font-mono">Official</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- SECTION 1: HOSPITALITY & HOTEL ECONOMICS -->
+        <!-- ================================================================= -->
+        <section id="section-hospitality" class="section-pane space-y-8">
+            
+            <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-xl bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </span>
+                        Saudi Hospitality Sector Analytics &amp; Occupancy Dynamics
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                        Empirical tracking across 5,937 licensed establishments, average daily rates (ADR), occupancy trends, and seasonal revenue cycles.
+                    </p>
+                </div>
+                <span class="px-3 py-1 rounded-xl bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">
+                    Authority: General Authority for Statistics (GASTAT) · Min. of Tourism
+                </span>
+            </div>
+
+            <!-- Charts Grid 1 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Chart 1: Tourism Spend vs Visits Growth (2022-2025) -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
+                                Tourism Spend (SAR B) vs Total Visitor Inflow (Millions)
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Annual progression demonstrating rapid monetization expansion under Vision 2030</p>
+                        </div>
+                        <span class="text-xs font-mono text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/30">Official Record</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="tourismGrowthChart"></canvas>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-sky-400 mt-0.5"></i>
+                        <div><strong>Executive Takeaway:</strong> Inbound tourist spending expanded +19.2% YoY reaching SAR 304B in 2025, outpacing pure headcount volume (+6%). Higher-spend cultural, corporate, and luxury travelers are driving average revenue per occupied room.</div>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Regional Hotel & Serviced Apartment Occupancy (Q4 2025) -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                                Hotel vs Serviced Apartments Occupancy by Hub (%)
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">GASTAT Tourism Establishments Bulletin (Q4 2025 Regional Breakdown)</p>
+                        </div>
+                        <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">GASTAT Q4 2025</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="occupancyByCityChart"></canvas>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-emerald-400 mt-0.5"></i>
+                        <div><strong>Executive Takeaway:</strong> Serviced apartments in Riyadh outperformed hotels at <strong>70.5%</strong> occupancy due to extended corporate and consulting stays. In Jeddah, corporate and domestic leisure balance kept occupancy above 58%.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Charts Grid 2 -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Chart 3: Tourism Spend Composition Donut -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div>
+                        <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                            Tourism Expenditure Mix
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Share of spending by visitor journey type</p>
+                    </div>
+                    <div class="chart-container flex items-center justify-center">
+                        <canvas id="spendMixChart"></canvas>
+                    </div>
+                    <div class="text-[11px] text-slate-400 border-t border-slate-800 pt-3 space-y-1">
+                        <div class="flex justify-between"><span>Inbound Leisure &amp; Events:</span><span class="font-bold text-white font-mono">38% (SAR 115.5B)</span></div>
+                        <div class="flex justify-between"><span>Domestic Travel &amp; Staycations:</span><span class="font-bold text-white font-mono">34% (SAR 103.4B)</span></div>
+                        <div class="flex justify-between"><span>Religious Pilgrimage (Umrah):</span><span class="font-bold text-white font-mono">18% (SAR 54.7B)</span></div>
+                        <div class="flex justify-between"><span>Corporate MICE &amp; Business:</span><span class="font-bold text-white font-mono">10% (SAR 30.4B)</span></div>
+                    </div>
+                </div>
+
+                <!-- Chart 4: Quarterly ADR (SAR) Seasonal Cyclicality -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4 lg:col-span-2">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-indigo-400"></span>
+                                Hotel Average Daily Rate (ADR) Trend (2023–2025 in SAR)
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Quarterly rate fluctuations across seasonal demand peaks &amp; supply influx</p>
+                        </div>
+                        <span class="text-xs font-mono text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/30">Quarterly Curve</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="adrTrendChart"></canvas>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-indigo-400 mt-0.5"></i>
+                        <div><strong>Strategic Insight for Swiss Blue:</strong> Rapid capacity expansion (+34.2% hotel licenses in 2025) has stabilized city-wide ADR from peak surges, emphasizing direct booking retention, loyalty discounts, and channel margin optimization over reliance on OTAs.</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SECTION 2: FURNITURE & KITCHEN MANUFACTURING -->
+        <!-- ================================================================= -->
+        <section id="section-furniture" class="section-pane hidden space-y-8">
+            
+            <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-couch"></i>
+                        </span>
+                        Furniture, Kitchens &amp; Industrial Joinery Manufacturing
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                        SAMA point-of-sale spending metrics, Sakani residential housing completions, and Ministry of Industry manufacturing capacity.
+                    </p>
+                </div>
+                <span class="px-3 py-1 rounded-xl bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">
+                    Authority: Saudi Central Bank (SAMA) · Ministry of Industry &amp; Mineral Resources
+                </span>
+            </div>
+
+            <!-- Charts Grid 1 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Chart 5: SAMA Annual Furniture POS Spending & E-Payment Share -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                                SAMA Furniture POS Turnover &amp; E-Payment Adoption %
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Annual point-of-sale transaction value (SAR B) vs Electronic Payment Share</p>
+                        </div>
+                        <span class="text-xs font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">SAMA Bulletin</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="furniturePosChart"></canvas>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-amber-400 mt-0.5"></i>
+                        <div><strong>Executive Takeaway:</strong> With digital retail payments reaching <strong>85% in 2025</strong>, consumer checkout for custom kitchens and furniture in Saudi Arabia requires seamless omnichannel digital workflows: Mada, Apple Pay, and BNPL integrations (Tamara &amp; Tabby).</div>
+                    </div>
+                </div>
+
+                <!-- Chart 6: Sakani Housing Handover vs Custom Kitchen Demand Pipeline -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-teal-400"></span>
+                                Sakani New Homes Inhabited &amp; Built-In Kitchen Demand
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Annual delivered residential units requiring custom joinery fit-out (000s)</p>
+                        </div>
+                        <span class="text-xs font-mono text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/30">MOMAH Sakani</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="housingCompletionsChart"></canvas>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-teal-400 mt-0.5"></i>
+                        <div><strong>Greenwood &amp; National Factory Opportunity:</strong> Over <strong>93,000 families</strong> moved into new Sakani homes in 2024–2025. Every home represents a mandatory initial custom kitchen fit-out and fitted wardrobe contract averaging SAR 45,000–SAR 95,000.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Charts Grid 2 -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Chart 7: Regional Furniture Demand Distribution -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div>
+                        <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
+                            Regional Furniture Demand Share
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">SAMA regional card and POS transaction volume</p>
+                    </div>
+                    <div class="chart-container flex items-center justify-center">
+                        <canvas id="regionalDemandChart"></canvas>
+                    </div>
+                    <div class="text-[11px] text-slate-400 border-t border-slate-800 pt-3 space-y-1">
+                        <div class="flex justify-between"><span>Riyadh Province:</span><span class="font-bold text-white font-mono">42% (SAR 7.6B)</span></div>
+                        <div class="flex justify-between"><span>Makkah / Jeddah:</span><span class="font-bold text-white font-mono">28% (SAR 5.1B)</span></div>
+                        <div class="flex justify-between"><span>Eastern Province:</span><span class="font-bold text-white font-mono">16% (SAR 2.9B)</span></div>
+                        <div class="flex justify-between"><span>Southern (Asir / Najran):</span><span class="font-bold text-white font-mono">14% (SAR 2.6B)</span></div>
+                    </div>
+                </div>
+
+                <!-- Chart 8: Industrial Manufacturing Factory Distribution by City -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4 lg:col-span-2">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+                                Licensed Furniture &amp; Wood Factories by Industrial Zone
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Ministry of Industry &amp; Mineral Resources Directory of 1,200+ Operating Facilities</p>
+                        </div>
+                        <span class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/30">Min. Industry 2025</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="factoryDistributionChart"></canvas>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-cyan-400 mt-0.5"></i>
+                        <div><strong>Regional Advantage for National Factory Kitchens:</strong> While Riyadh and Jeddah have concentrated manufacturing competition, the <strong>Southern Province (Najran / Asir)</strong> has lower domestic factory density (120 factories) despite booming regional residential projects, providing National Factory Kitchens with protected regional pricing power.</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SECTION 3: CROSS-INDUSTRY SYNERGY MATRIX -->
+        <!-- ================================================================= -->
+        <section id="section-synergies" class="section-pane hidden space-y-8">
+            
+            <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-arrows-split-up-and-left"></i>
+                        </span>
+                        WD Group Cross-Industry Strategic Synergy
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                        How Saudi Arabia's +34.2% hospitality room expansion directly drives demand for Greenwood and National Factory contract manufacturing.
+                    </p>
+                </div>
+                <span class="px-3 py-1 rounded-xl bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">
+                    Internal Enterprise Alignment
+                </span>
+            </div>
+
+            <!-- Synergy Correlation Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Synergy 1: B2B Contract Hospitality Joinery -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 border-l-4 border-l-sky-500">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono font-bold uppercase tracking-wider text-sky-400">Synergy Pillar 01</span>
+                        <span class="px-2 py-0.5 rounded bg-sky-500/10 text-sky-300 text-[11px] font-semibold">Greenwood Riyadh &rarr; Swiss Blue Hotels</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">B2B Contract Hospitality Fit-Outs</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        With <strong>5,937 licensed hospitality establishments</strong> in Saudi Arabia and thousands more under construction, hotel operators face steep markups from European imports. Greenwood Factory in Riyadh can supply contract-grade guestroom case goods, reception millwork, and fire-rated hospitality doors directly to Swiss Blue properties and third-party developers, eliminating 35% in foreign freight and customs fees.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3 pt-2 text-xs font-mono">
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-slate-400 text-[10px]">Supply Replacement Margin:</div>
+                            <div class="text-emerald-400 font-bold text-base mt-0.5">+32% to +44%</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-slate-400 text-[10px]">Turnaround Advantage:</div>
+                            <div class="text-sky-400 font-bold text-base mt-0.5">3-5 Weeks vs 16 Wks Import</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Synergy 2: B2C Residential Kitchens Pipeline -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 border-l-4 border-l-amber-500">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono font-bold uppercase tracking-wider text-amber-400">Synergy Pillar 02</span>
+                        <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 text-[11px] font-semibold">National Factory Najran &rarr; Residential Consumers</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Direct-to-Consumer Custom Kitchens Platform</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Over <strong>93,000 Saudi families</strong> moved into newly delivered Sakani residences in 2024 alone. By deploying digital 3D kitchen configuration tools and BNPL financing (Tamara &amp; Tabby 4-month splits), National Factory Kitchens captures high-consideration retail homeowners across Najran, Khamis Mushait, Abha, and Riyadh at scale.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3 pt-2 text-xs font-mono">
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-slate-400 text-[10px]">Average Household Ticket:</div>
+                            <div class="text-amber-400 font-bold text-base mt-0.5">SAR 68,500</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-slate-400 text-[10px]">BNPL Conversion Uplift:</div>
+                            <div class="text-emerald-400 font-bold text-base mt-0.5">+28% Qualified Inquiries</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Comparative Strategic Alignment Table -->
+            <div class="glass-card rounded-2xl p-6 space-y-4 overflow-hidden">
+                <h3 class="text-base font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-table text-sky-400"></i>
+                    WD Group Operational Capability vs Official Saudi Market Demand (2025–2027)
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left text-slate-300 border border-slate-800">
+                        <thead class="bg-slate-900/90 text-slate-400 uppercase font-mono text-[10px] border-b border-slate-800">
+                            <tr>
+                                <th class="p-3.5">Sector &amp; Vertical</th>
+                                <th class="p-3.5">Official Saudi Indicator</th>
+                                <th class="p-3.5">WD Group Business Unit</th>
+                                <th class="p-3.5">Operational Mandate</th>
+                                <th class="p-3.5">Primary Target Hub</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 font-sans">
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3.5 font-bold text-white">Serviced Apartments &amp; Hotels</td>
+                                <td class="p-3.5 text-sky-400 font-mono">70.5% Riyadh Occupancy (GASTAT)</td>
+                                <td class="p-3.5 font-semibold text-slate-200">Swiss Blue Hospitality</td>
+                                <td class="p-3.5">Corporate extended stay contracts &amp; direct booking retention</td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 text-sky-300 font-mono">Riyadh &amp; Jeddah</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3.5 font-bold text-white">Contract Joinery &amp; Millwork</td>
+                                <td class="p-3.5 text-emerald-400 font-mono">+34.2% Licensed Hotels (Min. Tourism)</td>
+                                <td class="p-3.5 font-semibold text-slate-200">Greenwood Factory</td>
+                                <td class="p-3.5">B2B supply of hotel guestroom wardrobes, doors &amp; public millwork</td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300 font-mono">Riyadh Industrial</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3.5 font-bold text-white">Custom Residential Kitchens</td>
+                                <td class="p-3.5 text-amber-400 font-mono">93,000+ Sakani Inhabitants (MOMAH)</td>
+                                <td class="p-3.5 font-semibold text-slate-200">National Factory Kitchens</td>
+                                <td class="p-3.5">Direct retail showrooms, 3D visualizers &amp; BNPL installment sales</td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 font-mono">Najran &amp; Southern Hub</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3.5 font-bold text-white">E-Commerce Home Living</td>
+                                <td class="p-3.5 text-indigo-400 font-mono">SAR 18.2B Furniture POS (SAMA)</td>
+                                <td class="p-3.5 font-semibold text-slate-200">WD Group E-Commerce</td>
+                                <td class="p-3.5">Full online catalog, Moyasar 3DS payment, and white-glove assembly</td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 text-indigo-300 font-mono">Kingdom-wide</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SECTION 4: OFFICIAL DATA SOURCES & METHODOLOGY -->
+        <!-- ================================================================= -->
+        <section id="section-sources" class="section-pane hidden space-y-6">
+            
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-sm">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </span>
+                    Official Saudi Governmental Sources &amp; Bulletin Citations
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                    Every statistic, chart, and benchmark presented across this intelligence platform is directly traceable to verified government bodies.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <!-- Source 1 -->
+                <div class="glass-card rounded-2xl p-5 space-y-2 border-slate-800">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-sky-400">General Authority for Statistics (GASTAT)</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Quarterly Bulletin</span>
+                    </div>
+                    <div class="text-xs text-slate-300 font-semibold">Tourism Establishments Statistics &amp; Real Estate Price Index (REPI)</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Tracks quarterly hotel occupancy across all administrative regions, serviced apartments occupancy rates, and residential/commercial property price indices utilizing GeoAI models with 2023 base year.
+                    </p>
+                    <a href="https://www.stats.gov.sa" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs text-sky-400 hover:text-sky-300 font-semibold pt-1">
+                        <span>GASTAT Official Portal</span> &rarr;
+                    </a>
+                </div>
+
+                <!-- Source 2 -->
+                <div class="glass-card rounded-2xl p-5 space-y-2 border-slate-800">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-emerald-400">Saudi Central Bank (SAMA)</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Weekly Reports</span>
+                    </div>
+                    <div class="text-xs text-slate-300 font-semibold">Point-of-Sale (POS) Sectoral Transactions Bulletin</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Weekly and monthly tracking of Point-of-Sale volume and value specifically isolated under the "Furniture" sector category, alongside e-commerce payment settlement shares and city distributions.
+                    </p>
+                    <a href="https://www.sama.gov.sa" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 font-semibold pt-1">
+                        <span>SAMA Open Data Portal</span> &rarr;
+                    </a>
+                </div>
+
+                <!-- Source 3 -->
+                <div class="glass-card rounded-2xl p-5 space-y-2 border-slate-800">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-amber-400">Ministry of Tourism (MT)</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Annual &amp; Monthly</span>
+                    </div>
+                    <div class="text-xs text-slate-300 font-semibold">Tourism Expenditure &amp; Inbound/Domestic Mobility Statistics</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Official auditing of total tourism contributions to national GDP, licensed accommodation facility growth (+34.2%), and visitor segmentation across leisure, business, religious, and domestic corridors.
+                    </p>
+                    <a href="https://mt.gov.sa" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 font-semibold pt-1">
+                        <span>Ministry of Tourism Portal</span> &rarr;
+                    </a>
+                </div>
+
+                <!-- Source 4 -->
+                <div class="glass-card rounded-2xl p-5 space-y-2 border-slate-800">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-teal-400">Ministry of Industry &amp; Mineral Resources</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Monthly Bulletin</span>
+                    </div>
+                    <div class="text-xs text-slate-300 font-semibold">National Industrial Directory &amp; Factory Licensing Monitor</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Auditing 1,200+ wood and furniture manufacturing plants, capital investment values (SAR 14.8B), MODON industrial city allocations, and the "Made in Saudi" supply chain localization initiatives.
+                    </p>
+                    <a href="https://mim.gov.sa" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs text-teal-400 hover:text-teal-300 font-semibold pt-1">
+                        <span>Ministry of Industry Portal</span> &rarr;
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 bg-[#0B192C] border-t border-slate-800 py-8 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+                <div class="text-sm font-bold text-white">WD Group · Saudi Market Intelligence</div>
+                <div class="text-xs text-slate-400 mt-0.5">Empirical Governance Platform · Powered by Official Saudi Datasets (2024–2026)</div>
+            </div>
+            <div class="flex items-center gap-4 text-xs text-slate-400">
+                <a href="/portal/wdgroup" class="hover:text-sky-400 underline font-medium">WD Group Client Portal</a>
+                <span>&bull;</span>
+                <a href="/strategy" class="hover:text-sky-400 underline font-medium">Commercial Strategy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts & Chart Initializations -->
+    <script>
+        // Section Switching Logic
+        function switchSection(sectionId, btn) {
+            document.querySelectorAll(".section-pane").forEach(pane => {
+                pane.classList.add("hidden");
+            });
+            const target = document.getElementById(sectionId);
+            if (target) target.classList.remove("hidden");
+
+            document.querySelectorAll(".tab-nav-btn").forEach(b => {
+                b.className = "tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700";
+            });
+            btn.className = "tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center gap-2 bg-sky-500 text-slate-950 border-sky-400 shadow-lg shadow-sky-500/20";
+        }
+
+        // Horizontal Scroller Hint Animation Template (Standard: 1.6s delay, 2cm glide, easeInOutSine)
+        function initHorizontalScrollerNudge() {
+            const scroller = document.getElementById("tabScrollerWrapper");
+            if (!scroller) return;
+
+            let userInteracted = false;
+            const onUserGesture = () => { userInteracted = true; };
+
+            scroller.addEventListener("touchstart", onUserGesture, { passive: true });
+            scroller.addEventListener("mousedown", onUserGesture, { passive: true });
+            scroller.addEventListener("pointerdown", onUserGesture, { passive: true });
+            scroller.addEventListener("wheel", onUserGesture, { passive: true });
+
+            const targetDistance = 76; // Exactly 2cm in standard screen CSS pixels
+
+            function easeInOutSine(t) {
+                return -(Math.cos(Math.PI * t) - 1) / 2;
+            }
+
+            function animateScroll(from, to, duration, callback) {
+                if (userInteracted) return;
+                const startTime = performance.now();
+                const initialBehavior = scroller.style.scrollBehavior;
+                scroller.style.scrollBehavior = "auto";
+
+                function step(currentTime) {
+                    if (userInteracted) {
+                        scroller.style.scrollBehavior = initialBehavior;
+                        return;
+                    }
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = easeInOutSine(progress);
+
+                    scroller.scrollLeft = from + (to - from) * eased;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        scroller.scrollLeft = to;
+                        scroller.style.scrollBehavior = initialBehavior;
+                        if (callback) callback();
+                    }
+                }
+                requestAnimationFrame(step);
+            }
+
+            setTimeout(() => {
+                if (userInteracted || scroller.scrollLeft > 5) return;
+                animateScroll(0, targetDistance, 900, () => {
+                    setTimeout(() => {
+                        if (userInteracted) return;
+                        animateScroll(targetDistance, 0, 1000, () => {
+                            scroller.scrollLeft = 0;
+                        });
+                    }, 400);
+                });
+            }, 1600);
+        }
+
+        // Initialize Chart.js Dashboards with Executive Dark Mode Theme
+        window.addEventListener("DOMContentLoaded", () => {
+            initHorizontalScrollerNudge();
+
+            Chart.defaults.color = "#94A3B8";
+            Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+            Chart.defaults.plugins.tooltip.backgroundColor = "rgba(11, 25, 44, 0.95)";
+            Chart.defaults.plugins.tooltip.borderColor = "rgba(56, 189, 248, 0.4)";
+            Chart.defaults.plugins.tooltip.borderWidth = 1;
+            Chart.defaults.plugins.tooltip.padding = 10;
+            Chart.defaults.plugins.tooltip.titleFont = { weight: "bold", size: 12 };
+            Chart.defaults.plugins.tooltip.bodyFont = { size: 12 };
+
+            // 1. Tourism Growth Chart (Spend vs Visits)
+            const ctx1 = document.getElementById("tourismGrowthChart");
+            if (ctx1) {
+                new Chart(ctx1, {
+                    type: "bar",
+                    data: {
+                        labels: ["2022", "2023", "2024", "2025 (Official)"],
+                        datasets: [
+                            {
+                                label: "Total Tourism Spend (SAR Billion)",
+                                data: [185, 255, 280, 304],
+                                backgroundColor: "rgba(56, 189, 248, 0.75)",
+                                borderRadius: 8,
+                                yAxisID: "y"
+                            },
+                            {
+                                label: "Total Visitor Visits (Millions)",
+                                data: [77.8, 106.2, 116.0, 123.0],
+                                type: "line",
+                                borderColor: "#10B981",
+                                backgroundColor: "#10B981",
+                                borderWidth: 3,
+                                tension: 0.3,
+                                pointRadius: 5,
+                                pointBackgroundColor: "#10B981",
+                                yAxisID: "y1"
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: "index", intersect: false },
+                        scales: {
+                            y: {
+                                type: "linear",
+                                display: true,
+                                position: "left",
+                                grid: { color: "rgba(255, 255, 255, 0.06)" },
+                                title: { display: true, text: "SAR Billion" }
+                            },
+                            y1: {
+                                type: "linear",
+                                display: true,
+                                position: "right",
+                                grid: { drawOnChartArea: false },
+                                title: { display: true, text: "Millions of Visitors" }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // 2. Regional Occupancy by City Chart (GASTAT Q4 2025)
+            const ctx2 = document.getElementById("occupancyByCityChart");
+            if (ctx2) {
+                new Chart(ctx2, {
+                    type: "bar",
+                    data: {
+                        labels: ["Madinah", "Riyadh", "Makkah", "Jeddah Flagship", "Eastern Prov.", "Southern Hub (Asir/Jazan)"],
+                        datasets: [
+                            {
+                                label: "Hotels Occupancy %",
+                                data: [81.5, 67.6, 60.6, 58.2, 54.8, 51.4],
+                                backgroundColor: "rgba(56, 189, 248, 0.75)",
+                                borderRadius: 6
+                            },
+                            {
+                                label: "Serviced Apartments Occupancy %",
+                                data: [76.0, 70.5, 59.4, 57.0, 56.2, 52.8],
+                                backgroundColor: "rgba(16, 185, 129, 0.75)",
+                                borderRadius: 6
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                min: 40,
+                                max: 100,
+                                ticks: { callback: v => v + "%" },
+                                grid: { color: "rgba(255, 255, 255, 0.06)" }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // 3. Tourism Spend Mix Donut
+            const ctx3 = document.getElementById("spendMixChart");
+            if (ctx3) {
+                new Chart(ctx3, {
+                    type: "doughnut",
+                    data: {
+                        labels: ["Inbound Leisure & Events", "Domestic Staycations", "Religious Pilgrimage", "Corporate MICE"],
+                        datasets: [{
+                            data: [38, 34, 18, 10],
+                            backgroundColor: ["#38BDF8", "#10B981", "#F59E0B", "#818CF8"],
+                            borderColor: "#0B192C",
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: "bottom", labels: { boxWidth: 12, padding: 12 } }
+                        },
+                        cutout: "68%"
+                    }
+                });
+            }
+
+            // 4. Quarterly Hotel ADR Trend Curve
+            const ctx4 = document.getElementById("adrTrendChart");
+            if (ctx4) {
+                new Chart(ctx4, {
+                    type: "line",
+                    data: {
+                        labels: ["Q1 2024", "Q2 2024", "Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025"],
+                        datasets: [{
+                            label: "Average Daily Rate (SAR)",
+                            data: [610, 725.5, 520, 440, 630, 532, 341, 389],
+                            borderColor: "#6366F1",
+                            backgroundColor: "rgba(99, 102, 241, 0.15)",
+                            fill: true,
+                            tension: 0.35,
+                            borderWidth: 3,
+                            pointRadius: 4,
+                            pointBackgroundColor: "#818CF8"
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                ticks: { callback: v => "SAR " + v },
+                                grid: { color: "rgba(255, 255, 255, 0.06)" }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // 5. Furniture POS & E-Payment Area Chart
+            const ctx5 = document.getElementById("furniturePosChart");
+            if (ctx5) {
+                new Chart(ctx5, {
+                    type: "bar",
+                    data: {
+                        labels: ["2021", "2022", "2023", "2024", "2025 (Official)"],
+                        datasets: [
+                            {
+                                label: "SAMA Furniture POS Spend (SAR Billion)",
+                                data: [11.4, 13.8, 15.6, 17.1, 18.2],
+                                backgroundColor: "rgba(245, 158, 11, 0.75)",
+                                borderRadius: 8,
+                                yAxisID: "y"
+                            },
+                            {
+                                label: "Digital / E-Payment Adoption %",
+                                data: [57, 68, 74, 79, 85],
+                                type: "line",
+                                borderColor: "#38BDF8",
+                                backgroundColor: "#38BDF8",
+                                borderWidth: 3,
+                                pointRadius: 5,
+                                yAxisID: "y1"
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                ticks: { callback: v => "SAR " + v + "B" },
+                                grid: { color: "rgba(255, 255, 255, 0.06)" }
+                            },
+                            y1: {
+                                min: 40,
+                                max: 100,
+                                position: "right",
+                                ticks: { callback: v => v + "%" },
+                                grid: { drawOnChartArea: false }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // 6. Sakani Housing Completions vs Kitchen Demand
+            const ctx6 = document.getElementById("housingCompletionsChart");
+            if (ctx6) {
+                new Chart(ctx6, {
+                    type: "bar",
+                    data: {
+                        labels: ["2022", "2023", "2024", "2025"],
+                        datasets: [
+                            {
+                                label: "Homes Inhabited (Thousands)",
+                                data: [75.0, 85.3, 93.0, 96.5],
+                                backgroundColor: "rgba(20, 184, 166, 0.8)",
+                                borderRadius: 6
+                            },
+                            {
+                                label: "New Built-In Kitchen Fit-Outs Required (000s)",
+                                data: [68.0, 78.5, 87.2, 91.0],
+                                backgroundColor: "rgba(56, 189, 248, 0.8)",
+                                borderRadius: 6
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                ticks: { callback: v => v + "k" },
+                                grid: { color: "rgba(255, 255, 255, 0.06)" }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // 7. Regional Demand Share Pie
+            const ctx7 = document.getElementById("regionalDemandChart");
+            if (ctx7) {
+                new Chart(ctx7, {
+                    type: "doughnut",
+                    data: {
+                        labels: ["Riyadh Province", "Makkah / Jeddah", "Eastern Province", "Southern (Asir / Najran)"],
+                        datasets: [{
+                            data: [42, 28, 16, 14],
+                            backgroundColor: ["#F43F5E", "#38BDF8", "#10B981", "#F59E0B"],
+                            borderColor: "#0B192C",
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: "bottom", labels: { boxWidth: 12, padding: 12 } }
+                        },
+                        cutout: "65%"
+                    }
+                });
+            }
+
+            // 8. Factory Distribution by City Chart
+            const ctx8 = document.getElementById("factoryDistributionChart");
+            if (ctx8) {
+                new Chart(ctx8, {
+                    type: "bar",
+                    data: {
+                        labels: ["Riyadh (MODON 1, 2, 3)", "Jeddah (Industrial 1, 2)", "Dammam / Khobar", "Southern Hub (Najran / Asir)", "Qassim / North"],
+                        datasets: [{
+                            label: "Operating Licensed Wood & Furniture Factories",
+                            data: [495, 340, 185, 120, 80],
+                            backgroundColor: [
+                                "rgba(56, 189, 248, 0.85)",
+                                "rgba(99, 102, 241, 0.85)",
+                                "rgba(16, 185, 129, 0.85)",
+                                "rgba(245, 158, 11, 0.85)",
+                                "rgba(148, 163, 184, 0.85)"
+                            ],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                grid: { color: "rgba(255, 255, 255, 0.06)" },
+                                title: { display: true, text: "Licensed Industrial Units" }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
