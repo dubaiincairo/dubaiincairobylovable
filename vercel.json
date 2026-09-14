@@ -1,11 +1,6 @@
 {
   "redirects": [
     {
-      "source": "/manuals/wdgroup/digital_marketing_strategy(.html)?",
-      "destination": "/strategy",
-      "permanent": true
-    },
-    {
       "source": "/manuals/wdgroup/index(.html)?",
       "destination": "/portal/wdgroup",
       "permanent": true
@@ -28,11 +23,6 @@
     {
       "source": "/manuals/:path*",
       "destination": "/portal/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/digital_marketing_strategy(.html)?",
-      "destination": "/strategy",
       "permanent": true
     },
     {
