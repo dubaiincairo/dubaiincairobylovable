@@ -70,8 +70,16 @@
       "destination": "/portal/wdgroup/market-insights/index.html"
     },
     {
+      "source": "/portal/wdgroup/market-insights/ar",
+      "destination": "/portal/wdgroup/market-insights/ar.html"
+    },
+    {
       "source": "/client-portal/wdgroup/market-insights",
       "destination": "/portal/wdgroup/market-insights/index.html"
+    },
+    {
+      "source": "/client-portal/wdgroup/market-insights/ar",
+      "destination": "/portal/wdgroup/market-insights/ar.html"
     },
     {
       "source": "/portal/wdgroup",
