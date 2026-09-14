@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Marketing & Commercial Growth Strategy | Swiss Blue Hospitality & WD Group</title>
-    <meta name="description" content="Confidential Digital Marketing and Commercial Growth Strategy for Swiss Blue Hospitality and WD Group Manufacturing across Saudi Arabia.">
+    <title>Digital Marketing & Commercial Growth Strategy | WD Group</title>
+    <meta name="description" content="Confidential Digital Marketing and Commercial Growth Strategy for WD Group Manufacturing and Commercial Operations across Saudi Arabia.">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome 6 -->
@@ -102,15 +102,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 sm:h-18 gap-4">
                 
-                <!-- Enhanced Customer Name UI Composition (Upper Left) -->
+                <!-- Enhanced Customer Name UI Composition (Upper Left - WD Group Only) -->
                 <div class="flex items-center gap-3">
                     <a href="index.html" class="flex items-center gap-3 group">
-                        <div class="w-9 h-9 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-sky-500/50 flex items-center justify-center text-sky-400 font-bold text-xs tracking-wider shadow-md transition-all">
-                            <span>SB<span class="text-slate-500 text-[10px] mx-0.5">•</span>WD</span>
+                        <div class="w-9 h-9 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-sky-500/50 flex items-center justify-center text-sky-400 font-extrabold text-xs tracking-wider shadow-md transition-all">
+                            <span>WD</span>
                         </div>
                         <div class="flex flex-col">
                             <div class="flex items-center gap-2">
-                                <span class="text-xs sm:text-sm font-bold text-slate-100 group-hover:text-white transition-colors">Swiss Blue <span class="text-slate-500 font-normal">&amp;</span> WD Group</span>
+                                <span class="text-xs sm:text-sm font-bold text-slate-100 group-hover:text-white transition-colors">WD Group</span>
                                 <span class="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-slate-800/90 text-slate-400 border border-slate-700/80">Confidential</span>
                             </div>
                             <span class="text-[11px] text-slate-400 font-medium tracking-tight">Commercial Growth Strategy <span class="text-slate-600">•</span> 2026–2029</span>
@@ -2772,7 +2772,7 @@
     <footer class="mt-16 bg-[#0B192C] border-t border-slate-800 py-8 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-                <div class="text-sm font-bold text-white">WD Group &bull; Swiss Blue Hospitality</div>
+                <div class="text-sm font-bold text-white">WD Group</div>
                 <div class="text-xs text-slate-400 mt-0.5">Confidential Commercial Strategy &bull; Saudi Arabia Growth Platform (2026–2029)</div>
             </div>
             <div class="flex items-center gap-4 text-xs text-slate-400">
@@ -3015,27 +3015,35 @@
             resultsPanel.classList.add('hidden');
         }
 
-        // Horizontal Scroller Nudge Animation
+        // Horizontal Scroller Nudge Animation (Visual hint: move 2cm right then back to starting position)
         function initHorizontalScrollerNudge() {
             const scroller = document.getElementById('tabScrollerWrapper');
             if (!scroller) return;
 
-            let userTouched = false;
-            const stopAnimation = () => { userTouched = true; };
+            let userInteracted = false;
+            const onUserGesture = () => { userInteracted = true; };
 
-            scroller.addEventListener('scroll', stopAnimation, { once: true, passive: true });
-            scroller.addEventListener('touchstart', stopAnimation, { once: true, passive: true });
-            scroller.addEventListener('mousedown', stopAnimation, { once: true, passive: true });
+            // Listen only to direct user gestures so the animation does not self-cancel on programmatic scroll
+            scroller.addEventListener('touchstart', onUserGesture, { passive: true });
+            scroller.addEventListener('mousedown', onUserGesture, { passive: true });
+            scroller.addEventListener('pointerdown', onUserGesture, { passive: true });
+            scroller.addEventListener('wheel', onUserGesture, { passive: true });
+
+            // Exactly 2 centimeters in standard screen CSS pixels (1cm ≈ 37.8px -> 2cm ≈ 76px)
+            const twoCentimetersPx = 76;
 
             setTimeout(() => {
-                if (userTouched || scroller.scrollLeft > 10) return;
-                scroller.scrollTo({ left: 140, behavior: 'smooth' });
+                if (userInteracted || scroller.scrollLeft > 5) return;
 
+                // Move 2 centimeters to the right
+                scroller.scrollTo({ left: twoCentimetersPx, behavior: 'smooth' });
+
+                // Dwell briefly then smoothly return back to normal starting position (0)
                 setTimeout(() => {
-                    if (userTouched) return;
+                    if (userInteracted) return;
                     scroller.scrollTo({ left: 0, behavior: 'smooth' });
-                }, 650);
-            }, 800);
+                }, 450);
+            }, 600);
         }
 
         window.addEventListener('DOMContentLoaded', () => {

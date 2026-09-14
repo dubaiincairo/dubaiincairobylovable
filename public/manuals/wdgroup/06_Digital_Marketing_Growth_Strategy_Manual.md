@@ -1,8 +1,8 @@
 # CONFIDENTIAL STRATEGY REPORT: Digital Marketing and Commercial Growth Strategy
-## Swiss Blue Hospitality and WD Group Manufacturing
-### Saudi Arabia Market Strategy for Five Hospitality Properties and Three Manufacturing Businesses
+## WD Group Commercial & Manufacturing Platform
+### Saudi Arabia Market Strategy for Hospitality Properties and Manufacturing Businesses
 
-> **Prepared for:** WD Group and Swiss Blue  
+> **Prepared for:** WD Group  
 > **Strategic Horizon:** 2026 to 2029 | **Implementation Horizon:** First 12 Months  
 > **Research Cut-Off:** 14 September 2026 | **Document Status:** Management Strategy Draft for Validation Before Deployment  
 > **Corporate Alignment:** Dubai in Cairo Commercial Architecture & Operations Portfolio
