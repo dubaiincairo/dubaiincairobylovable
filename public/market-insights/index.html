@@ -172,13 +172,15 @@
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
             
             <!-- KPI 1 -->
-            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-sky-500/50 group">
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-sky-500/50 group transition-all duration-300 hover:-translate-y-1">
                 <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
                     <span class="font-mono uppercase text-[10px] text-sky-400 font-bold">Tourism Spend</span>
                     <i class="fa-solid fa-money-bill-wave text-slate-500 group-hover:text-sky-400 transition-colors"></i>
                 </div>
-                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1">
-                    SAR 304B
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1 flex items-baseline">
+                    <span class="text-sky-400 mr-1 text-base font-bold">SAR</span>
+                    <span class="kpi-counter" data-target="304">0</span>
+                    <span class="text-sky-400 ml-0.5 text-base font-bold">B</span>
                 </div>
                 <div class="text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
                     <i class="fa-solid fa-arrow-trend-up"></i> +19.2% YoY
@@ -189,13 +191,14 @@
             </div>
 
             <!-- KPI 2 -->
-            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-emerald-500/50 group">
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-emerald-500/50 group transition-all duration-300 hover:-translate-y-1">
                 <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
                     <span class="font-mono uppercase text-[10px] text-emerald-400 font-bold">Total Visitors</span>
                     <i class="fa-solid fa-users text-slate-500 group-hover:text-emerald-400 transition-colors"></i>
                 </div>
-                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1">
-                    123 Million
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1 flex items-baseline">
+                    <span class="kpi-counter" data-target="123">0</span>
+                    <span class="text-emerald-400 ml-1 text-base font-bold">Million</span>
                 </div>
                 <div class="text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
                     <i class="fa-solid fa-arrow-trend-up"></i> +6.0% Inbound/Dom.
@@ -206,13 +209,13 @@
             </div>
 
             <!-- KPI 3 -->
-            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-amber-500/50 group">
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-amber-500/50 group transition-all duration-300 hover:-translate-y-1">
                 <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
                     <span class="font-mono uppercase text-[10px] text-amber-400 font-bold">Licensed Hotels</span>
                     <i class="fa-solid fa-hotel text-slate-500 group-hover:text-amber-400 transition-colors"></i>
                 </div>
-                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1">
-                    5,937
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1 flex items-baseline">
+                    <span class="kpi-counter" data-target="5937" data-format="comma">0</span>
                 </div>
                 <div class="text-[11px] text-amber-400 font-semibold flex items-center gap-1">
                     <i class="fa-solid fa-arrow-trend-up"></i> +34.2% YoY Growth
@@ -223,13 +226,15 @@
             </div>
 
             <!-- KPI 4 -->
-            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-indigo-500/50 group">
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-indigo-500/50 group transition-all duration-300 hover:-translate-y-1">
                 <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
                     <span class="font-mono uppercase text-[10px] text-indigo-400 font-bold">Furniture POS</span>
                     <i class="fa-solid fa-couch text-slate-500 group-hover:text-indigo-400 transition-colors"></i>
                 </div>
-                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1">
-                    SAR 18.2B
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1 flex items-baseline">
+                    <span class="text-indigo-400 mr-1 text-base font-bold">SAR</span>
+                    <span class="kpi-counter" data-target="18.2" data-decimals="1">0.0</span>
+                    <span class="text-indigo-400 ml-0.5 text-base font-bold">B</span>
                 </div>
                 <div class="text-[11px] text-indigo-400 font-semibold flex items-center gap-1">
                     <i class="fa-solid fa-arrow-trend-up"></i> 85% E-Payment
@@ -240,13 +245,14 @@
             </div>
 
             <!-- KPI 5 -->
-            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-teal-500/50 group">
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-teal-500/50 group transition-all duration-300 hover:-translate-y-1">
                 <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
                     <span class="font-mono uppercase text-[10px] text-teal-400 font-bold">Sakani Homes</span>
                     <i class="fa-solid fa-door-open text-slate-500 group-hover:text-teal-400 transition-colors"></i>
                 </div>
-                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1">
-                    93,000+
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1 flex items-baseline">
+                    <span class="kpi-counter" data-target="93000" data-format="comma">0</span>
+                    <span class="text-teal-400 ml-0.5 text-base font-bold">+</span>
                 </div>
                 <div class="text-[11px] text-teal-400 font-semibold flex items-center gap-1">
                     <i class="fa-solid fa-check"></i> New Inhabitants
@@ -257,13 +263,14 @@
             </div>
 
             <!-- KPI 6 -->
-            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-pink-500/50 group">
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-pink-500/50 group transition-all duration-300 hover:-translate-y-1">
                 <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
                     <span class="font-mono uppercase text-[10px] text-pink-400 font-bold">Wood Factories</span>
                     <i class="fa-solid fa-gears text-slate-500 group-hover:text-pink-400 transition-colors"></i>
                 </div>
-                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1">
-                    1,200+
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1 flex items-baseline">
+                    <span class="kpi-counter" data-target="1200" data-format="comma">0</span>
+                    <span class="text-pink-400 ml-0.5 text-base font-bold">+</span>
                 </div>
                 <div class="text-[11px] text-pink-400 font-semibold flex items-center gap-1">
                     <i class="fa-solid fa-coins"></i> SAR 14.8B Capital
@@ -275,36 +282,42 @@
 
         </div>
 
-        <!-- Section Tabs with Calibrated 2cm Scroller Hint Animation -->
-        <div id="tabScrollerWrapper" class="sticky top-16 sm:top-18 z-40 bg-[#070F1E]/95 backdrop-blur-md py-3 -mx-4 px-4 sm:mx-0 sm:px-0 border-b border-slate-800 no-print overflow-x-auto scroll-smooth">
-            <div class="flex items-center gap-2.5 min-w-max">
-                <button onclick="switchSection(section-hospitality, this)" id="btn-section-hospitality" 
-                    class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center gap-2 bg-sky-500 text-slate-950 border-sky-400 shadow-lg shadow-sky-500/20">
-                    <i class="fa-solid fa-hotel text-xs"></i>
-                    <span>Hospitality &amp; Hotel Economics</span>
-                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-950/30 text-slate-950 font-bold">GASTAT</span>
-                </button>
+        <!-- Section Tabs with Calibrated 2cm Scroller Hint Animation & Fade Indicators -->
+        <div class="relative sticky top-16 sm:top-18 z-40 bg-[#070F1E]/95 backdrop-blur-md py-3 -mx-4 px-4 sm:mx-0 sm:px-0 border-b border-slate-800 no-print">
+            <!-- Left & Right Gradient Scroll Fade Indicators for Luxury Feel -->
+            <div id="scrollHintLeft" class="pointer-events-none absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#070F1E] to-transparent z-10 opacity-0 transition-opacity duration-300"></div>
+            <div id="scrollHintRight" class="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#070F1E] to-transparent z-10 opacity-100 transition-opacity duration-300"></div>
 
-                <button onclick="switchSection(section-furniture, this)" id="btn-section-furniture" 
-                    class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700">
-                    <i class="fa-solid fa-couch text-xs text-amber-400"></i>
-                    <span>Furniture &amp; Kitchen Manufacturing</span>
-                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-amber-300 border border-slate-700 font-mono">SAMA</span>
-                </button>
+            <div id="tabScrollerWrapper" class="overflow-x-auto select-none" style="scrollbar-width: thin; -webkit-overflow-scrolling: touch;">
+                <div class="flex items-center gap-2.5 min-w-max pb-1">
+                    <button onclick="switchSection('section-hospitality', this)" id="btn-section-hospitality" 
+                        class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center gap-2 bg-sky-500 text-slate-950 border-sky-400 shadow-lg shadow-sky-500/20 cursor-pointer">
+                        <i class="fa-solid fa-hotel text-xs"></i>
+                        <span>Hospitality &amp; Hotel Economics</span>
+                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-950/30 text-slate-950 font-bold">GASTAT</span>
+                    </button>
 
-                <button onclick="switchSection(section-synergies, this)" id="btn-section-synergies" 
-                    class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700">
-                    <i class="fa-solid fa-arrows-split-up-and-left text-xs text-emerald-400"></i>
-                    <span>Cross-Industry Synergy Matrix</span>
-                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-emerald-300 border border-slate-700 font-mono">B2B / B2C</span>
-                </button>
+                    <button onclick="switchSection('section-furniture', this)" id="btn-section-furniture" 
+                        class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700 cursor-pointer">
+                        <i class="fa-solid fa-couch text-xs text-amber-400"></i>
+                        <span>Furniture &amp; Kitchen Manufacturing</span>
+                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-amber-300 border border-slate-700 font-mono">SAMA</span>
+                    </button>
 
-                <button onclick="switchSection(section-sources, this)" id="btn-section-sources" 
-                    class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700">
-                    <i class="fa-solid fa-book-bookmark text-xs text-indigo-400"></i>
-                    <span>Government Bulletins &amp; Methodology</span>
-                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-indigo-300 border border-slate-700 font-mono">Official</span>
-                </button>
+                    <button onclick="switchSection('section-synergies', this)" id="btn-section-synergies" 
+                        class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700 cursor-pointer">
+                        <i class="fa-solid fa-arrows-split-up-and-left text-xs text-emerald-400"></i>
+                        <span>Cross-Industry Synergy Matrix</span>
+                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-emerald-300 border border-slate-700 font-mono">B2B / B2C</span>
+                    </button>
+
+                    <button onclick="switchSection('section-sources', this)" id="btn-section-sources" 
+                        class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700 cursor-pointer">
+                        <i class="fa-solid fa-book-bookmark text-xs text-indigo-400"></i>
+                        <span>Government Bulletins &amp; Methodology</span>
+                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-indigo-300 border border-slate-700 font-mono">Official</span>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -335,7 +348,7 @@
                 
                 <!-- Chart 1: Tourism Spend vs Visits Growth (2022-2025) -->
                 <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
                         <div>
                             <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
@@ -343,7 +356,11 @@
                             </h3>
                             <p class="text-xs text-slate-400 mt-0.5">Annual progression demonstrating rapid monetization expansion under Vision 2030</p>
                         </div>
-                        <span class="text-xs font-mono text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/30">Official Record</span>
+                        <div class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-[11px]">
+                            <button onclick="toggleGrowthDataset('all', this)" class="btn-growth-filter px-2.5 py-1 rounded-lg font-bold bg-sky-500/20 text-sky-300 border border-sky-500/40 transition-all cursor-pointer">Combined</button>
+                            <button onclick="toggleGrowthDataset('spend', this)" class="btn-growth-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">Spend Only</button>
+                            <button onclick="toggleGrowthDataset('visits', this)" class="btn-growth-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">Visits Only</button>
+                        </div>
                     </div>
                     <div class="chart-container">
                         <canvas id="tourismGrowthChart"></canvas>
@@ -356,7 +373,7 @@
 
                 <!-- Chart 2: Regional Hotel & Serviced Apartment Occupancy (Q4 2025) -->
                 <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
                         <div>
                             <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
@@ -364,7 +381,11 @@
                             </h3>
                             <p class="text-xs text-slate-400 mt-0.5">GASTAT Tourism Establishments Bulletin (Q4 2025 Regional Breakdown)</p>
                         </div>
-                        <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">GASTAT Q4 2025</span>
+                        <div class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-[11px]">
+                            <button onclick="toggleOccDataset('all', this)" class="btn-occ-filter px-2.5 py-1 rounded-lg font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition-all cursor-pointer">All Units</button>
+                            <button onclick="toggleOccDataset('hotels', this)" class="btn-occ-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">Hotels</button>
+                            <button onclick="toggleOccDataset('apartments', this)" class="btn-occ-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">Apartments</button>
+                        </div>
                     </div>
                     <div class="chart-container">
                         <canvas id="occupancyByCityChart"></canvas>
@@ -452,7 +473,7 @@
                 
                 <!-- Chart 5: SAMA Annual Furniture POS Spending & E-Payment Share -->
                 <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
                         <div>
                             <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
@@ -460,7 +481,11 @@
                             </h3>
                             <p class="text-xs text-slate-400 mt-0.5">Annual point-of-sale transaction value (SAR B) vs Electronic Payment Share</p>
                         </div>
-                        <span class="text-xs font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">SAMA Bulletin</span>
+                        <div class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-[11px]">
+                            <button onclick="togglePosDataset('all', this)" class="btn-pos-filter px-2.5 py-1 rounded-lg font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 transition-all cursor-pointer">Combined</button>
+                            <button onclick="togglePosDataset('value', this)" class="btn-pos-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">POS Value</button>
+                            <button onclick="togglePosDataset('digital', this)" class="btn-pos-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">Digital %</button>
+                        </div>
                     </div>
                     <div class="chart-container">
                         <canvas id="furniturePosChart"></canvas>
@@ -473,7 +498,7 @@
 
                 <!-- Chart 6: Sakani Housing Handover vs Custom Kitchen Demand Pipeline -->
                 <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
                         <div>
                             <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-teal-400"></span>
@@ -481,7 +506,11 @@
                             </h3>
                             <p class="text-xs text-slate-400 mt-0.5">Annual delivered residential units requiring custom joinery fit-out (000s)</p>
                         </div>
-                        <span class="text-xs font-mono text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/30">MOMAH Sakani</span>
+                        <div class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-[11px]">
+                            <button onclick="toggleHousingDataset('all', this)" class="btn-housing-filter px-2.5 py-1 rounded-lg font-bold bg-teal-500/20 text-teal-300 border border-teal-500/40 transition-all cursor-pointer">Combined</button>
+                            <button onclick="toggleHousingDataset('homes', this)" class="btn-housing-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">Inhabited</button>
+                            <button onclick="toggleHousingDataset('kitchens', this)" class="btn-housing-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">Kitchens</button>
+                        </div>
                     </div>
                     <div class="chart-container">
                         <canvas id="housingCompletionsChart"></canvas>
@@ -611,6 +640,48 @@
                     </div>
                 </div>
 
+            </div>
+
+            <!-- Interactive Live Procurement Synergy Value Simulator -->
+            <div class="glass-card rounded-2xl p-6 border-slate-800 space-y-4 bg-gradient-to-br from-slate-900/90 to-[#0B192C]">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-calculator"></i>
+                            </span>
+                            Interactive Hospitality Fit-Out &amp; Supply Chain Synergy Calculator
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1">Calculate direct savings when furnishing hotel expansions through Greenwood Factory vs imported European joinery</p>
+                    </div>
+                    <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/30">Dynamic Simulation</span>
+                </div>
+                <div class="space-y-3 pt-3">
+                    <div class="flex items-center justify-between text-xs font-semibold">
+                        <span class="text-slate-300">Target Hotel Rooms / Suites Expansion:</span>
+                        <span id="roomCountLabel" class="text-sky-400 font-mono text-sm font-bold bg-sky-500/10 px-2.5 py-0.5 rounded border border-sky-500/30">120 Rooms</span>
+                    </div>
+                    <input type="range" id="roomCountSlider" min="20" max="600" step="10" value="120" oninput="updateSynergySimulator(this.value)" 
+                        class="w-full accent-sky-400 cursor-pointer h-2 bg-slate-800 rounded-lg">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 text-xs">
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-[10px] text-slate-400">Import Procurement Cost:</div>
+                            <div id="simImportCost" class="text-slate-200 font-bold text-sm sm:text-base font-mono mt-1">SAR 3,360,000</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-[10px] text-slate-400">Greenwood Local Cost:</div>
+                            <div id="simLocalCost" class="text-sky-400 font-bold text-sm sm:text-base font-mono mt-1">SAR 2,220,000</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-emerald-500/40 bg-emerald-950/20">
+                            <div class="text-[10px] text-emerald-400 font-semibold">Direct Internal Savings:</div>
+                            <div id="simSavings" class="text-emerald-400 font-bold text-sm sm:text-base font-mono mt-1">SAR 1,140,000 (34%)</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-[10px] text-slate-400">Lead Time Advantage:</div>
+                            <div id="simTimeSaved" class="text-amber-400 font-bold text-sm sm:text-base font-mono mt-1">11 Weeks Faster</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Comparative Strategic Alignment Table -->
@@ -768,34 +839,67 @@
 
     <!-- Interactive Scripts & Chart Initializations -->
     <script>
-        // Section Switching Logic
+        // Global chart registry for dynamic resizing & animations
+        window.charts = {};
+
+        // Section Switching Logic with Dynamic Chart Animation Trigger
         function switchSection(sectionId, btn) {
             document.querySelectorAll(".section-pane").forEach(pane => {
                 pane.classList.add("hidden");
             });
             const target = document.getElementById(sectionId);
-            if (target) target.classList.remove("hidden");
+            if (target) {
+                target.classList.remove("hidden");
+            }
 
+            // Update Tab Button Active Styles
             document.querySelectorAll(".tab-nav-btn").forEach(b => {
-                b.className = "tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700";
+                b.className = "tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700 cursor-pointer";
             });
-            btn.className = "tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center gap-2 bg-sky-500 text-slate-950 border-sky-400 shadow-lg shadow-sky-500/20";
+            btn.className = "tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center gap-2 bg-sky-500 text-slate-950 border-sky-400 shadow-lg shadow-sky-500/20 cursor-pointer";
+
+            // Smoothly scroll active button into view in the horizontal scroller
+            try {
+                btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+            } catch (e) {}
+
+            // Re-animate and resize all charts in the newly shown section
+            setTimeout(() => {
+                window.dispatchEvent(new Event("resize"));
+                Object.values(window.charts).forEach(chart => {
+                    if (chart && chart.canvas && chart.canvas.offsetParent !== null) {
+                        chart.resize();
+                        chart.reset();
+                        chart.update({
+                            duration: 1000,
+                            easing: "easeOutQuart"
+                        });
+                    }
+                });
+            }, 50);
         }
 
-        // Horizontal Scroller Hint Animation Template (Standard: 1.6s delay, 2cm glide, easeInOutSine)
-        function initHorizontalScrollerNudge() {
-            const scroller = document.getElementById("tabScrollerWrapper");
+        // Horizontal Scroller Hint Animation Template (Standard Luxury 2cm Specification)
+        function attachScrollerHintAnimation(target, options = {}) {
+            const scroller = typeof target === "string" ? document.querySelector(target) : target;
             if (!scroller) return;
+
+            const {
+                delay = 1600,
+                distance = 76,       // Exactly 2cm in standard screen pixels
+                forwardTime = 900,   // ms
+                pauseTime = 400,     // ms
+                returnTime = 1000    // ms
+            } = options;
 
             let userInteracted = false;
             const onUserGesture = () => { userInteracted = true; };
 
+            // Listen strictly to physical user gestures
             scroller.addEventListener("touchstart", onUserGesture, { passive: true });
             scroller.addEventListener("mousedown", onUserGesture, { passive: true });
             scroller.addEventListener("pointerdown", onUserGesture, { passive: true });
             scroller.addEventListener("wheel", onUserGesture, { passive: true });
-
-            const targetDistance = 76; // Exactly 2cm in standard screen CSS pixels
 
             function easeInOutSine(t) {
                 return -(Math.cos(Math.PI * t) - 1) / 2;
@@ -805,7 +909,7 @@
                 if (userInteracted) return;
                 const startTime = performance.now();
                 const initialBehavior = scroller.style.scrollBehavior;
-                scroller.style.scrollBehavior = "auto";
+                scroller.style.scrollBehavior = "auto"; // Prevent native smooth scroll fighting RAF
 
                 function step(currentTime) {
                     if (userInteracted) {
@@ -830,22 +934,189 @@
             }
 
             setTimeout(() => {
+                // Abort if user has already interacted or scrolled
                 if (userInteracted || scroller.scrollLeft > 5) return;
-                animateScroll(0, targetDistance, 900, () => {
+
+                animateScroll(0, distance, forwardTime, () => {
                     setTimeout(() => {
                         if (userInteracted) return;
-                        animateScroll(targetDistance, 0, 1000, () => {
+                        animateScroll(distance, 0, returnTime, () => {
                             scroller.scrollLeft = 0;
                         });
-                    }, 400);
+                    }, pauseTime);
                 });
-            }, 1600);
+            }, delay);
+
+            // Add Mouse Drag-to-Scroll Support for Desktop
+            let isDragging = false;
+            let startX, scrollLeftStart;
+            scroller.addEventListener("mousedown", (e) => {
+                isDragging = true;
+                startX = e.pageX - scroller.offsetLeft;
+                scrollLeftStart = scroller.scrollLeft;
+            });
+            window.addEventListener("mouseup", () => { isDragging = false; });
+            scroller.addEventListener("mousemove", (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - scroller.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                scroller.scrollLeft = scrollLeftStart - walk;
+            });
+
+            // Update Left and Right Gradient Indicators on Scroll
+            function updateFadeIndicators() {
+                const leftFade = document.getElementById("scrollHintLeft");
+                const rightFade = document.getElementById("scrollHintRight");
+                if (leftFade) leftFade.style.opacity = scroller.scrollLeft > 8 ? "1" : "0";
+                if (rightFade) rightFade.style.opacity = (scroller.scrollLeft + scroller.clientWidth < scroller.scrollWidth - 8) ? "1" : "0";
+            }
+            scroller.addEventListener("scroll", updateFadeIndicators, { passive: true });
+            window.addEventListener("resize", updateFadeIndicators, { passive: true });
+            setTimeout(updateFadeIndicators, 100);
         }
 
-        // Initialize Chart.js Dashboards with Executive Dark Mode Theme
-        window.addEventListener("DOMContentLoaded", () => {
-            initHorizontalScrollerNudge();
+        // Dynamic KPI Number Counters Animation
+        function initKpiCounters() {
+            const counters = document.querySelectorAll(".kpi-counter");
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute("data-target"));
+                const decimals = parseInt(counter.getAttribute("data-decimals") || "0", 10);
+                const formatComma = counter.getAttribute("data-format") === "comma";
+                const duration = 1600;
+                const startTime = performance.now();
 
+                function updateCount(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // easeOutExpo
+                    const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                    const currentVal = target * ease;
+
+                    if (decimals > 0) {
+                        counter.textContent = currentVal.toFixed(decimals);
+                    } else {
+                        const rounded = Math.floor(currentVal);
+                        counter.textContent = formatComma ? rounded.toLocaleString() : rounded;
+                    }
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        if (decimals > 0) {
+                            counter.textContent = target.toFixed(decimals);
+                        } else {
+                            counter.textContent = formatComma ? target.toLocaleString() : target;
+                        }
+                    }
+                }
+                requestAnimationFrame(updateCount);
+            });
+        }
+
+        // Interactive Chart Dataset Filter Toggles
+        function toggleGrowthDataset(mode, btn) {
+            const chart = window.charts.tourismGrowth;
+            if (!chart) return;
+            document.querySelectorAll(".btn-growth-filter").forEach(b => {
+                b.className = "btn-growth-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer";
+            });
+            btn.className = "btn-growth-filter px-2.5 py-1 rounded-lg font-bold bg-sky-500/20 text-sky-300 border border-sky-500/40 transition-all cursor-pointer";
+
+            if (mode === "all") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, true);
+            } else if (mode === "spend") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, false);
+            } else if (mode === "visits") {
+                chart.setDatasetVisibility(0, false);
+                chart.setDatasetVisibility(1, true);
+            }
+            chart.update();
+        }
+
+        function toggleOccDataset(mode, btn) {
+            const chart = window.charts.occupancy;
+            if (!chart) return;
+            document.querySelectorAll(".btn-occ-filter").forEach(b => {
+                b.className = "btn-occ-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer";
+            });
+            btn.className = "btn-occ-filter px-2.5 py-1 rounded-lg font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition-all cursor-pointer";
+
+            if (mode === "all") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, true);
+            } else if (mode === "hotels") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, false);
+            } else if (mode === "apartments") {
+                chart.setDatasetVisibility(0, false);
+                chart.setDatasetVisibility(1, true);
+            }
+            chart.update();
+        }
+
+        function togglePosDataset(mode, btn) {
+            const chart = window.charts.furniturePos;
+            if (!chart) return;
+            document.querySelectorAll(".btn-pos-filter").forEach(b => {
+                b.className = "btn-pos-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer";
+            });
+            btn.className = "btn-pos-filter px-2.5 py-1 rounded-lg font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 transition-all cursor-pointer";
+
+            if (mode === "all") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, true);
+            } else if (mode === "value") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, false);
+            } else if (mode === "digital") {
+                chart.setDatasetVisibility(0, false);
+                chart.setDatasetVisibility(1, true);
+            }
+            chart.update();
+        }
+
+        function toggleHousingDataset(mode, btn) {
+            const chart = window.charts.housing;
+            if (!chart) return;
+            document.querySelectorAll(".btn-housing-filter").forEach(b => {
+                b.className = "btn-housing-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer";
+            });
+            btn.className = "btn-housing-filter px-2.5 py-1 rounded-lg font-bold bg-teal-500/20 text-teal-300 border border-teal-500/40 transition-all cursor-pointer";
+
+            if (mode === "all") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, true);
+            } else if (mode === "homes") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, false);
+            } else if (mode === "kitchens") {
+                chart.setDatasetVisibility(0, false);
+                chart.setDatasetVisibility(1, true);
+            }
+            chart.update();
+        }
+
+        // Interactive Synergy Value Simulator
+        function updateSynergySimulator(rooms) {
+            const roomCount = parseInt(rooms, 10);
+            const importPerRoom = 28000;
+            const localPerRoom = 18500;
+            const importTotal = roomCount * importPerRoom;
+            const localTotal = roomCount * localPerRoom;
+            const savingsTotal = importTotal - localTotal;
+            const savingsPercent = Math.round((savingsTotal / importTotal) * 100);
+
+            document.getElementById("roomCountLabel").textContent = roomCount + " Rooms";
+            document.getElementById("simImportCost").textContent = "SAR " + importTotal.toLocaleString();
+            document.getElementById("simLocalCost").textContent = "SAR " + localTotal.toLocaleString();
+            document.getElementById("simSavings").textContent = "SAR " + savingsTotal.toLocaleString() + " (" + savingsPercent + "%)";
+        }
+
+        // Initialize All Charts with Dynamic Progressive Animations
+        function initCharts() {
             Chart.defaults.color = "#94A3B8";
             Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
             Chart.defaults.plugins.tooltip.backgroundColor = "rgba(11, 25, 44, 0.95)";
@@ -855,10 +1126,23 @@
             Chart.defaults.plugins.tooltip.titleFont = { weight: "bold", size: 12 };
             Chart.defaults.plugins.tooltip.bodyFont = { size: 12 };
 
-            // 1. Tourism Growth Chart (Spend vs Visits)
+            // Progressive Animation Config
+            const progressiveAnimation = {
+                duration: 1200,
+                easing: "easeOutQuart",
+                delay: (context) => {
+                    let delay = 0;
+                    if (context.type === "data" && context.mode === "default") {
+                        delay = context.dataIndex * 80 + context.datasetIndex * 140;
+                    }
+                    return delay;
+                }
+            };
+
+            // 1. Tourism Growth Chart
             const ctx1 = document.getElementById("tourismGrowthChart");
             if (ctx1) {
-                new Chart(ctx1, {
+                window.charts.tourismGrowth = new Chart(ctx1, {
                     type: "bar",
                     data: {
                         labels: ["2022", "2023", "2024", "2025 (Official)"],
@@ -867,6 +1151,7 @@
                                 label: "Total Tourism Spend (SAR Billion)",
                                 data: [185, 255, 280, 304],
                                 backgroundColor: "rgba(56, 189, 248, 0.75)",
+                                hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
                                 borderRadius: 8,
                                 yAxisID: "y"
                             },
@@ -879,6 +1164,7 @@
                                 borderWidth: 3,
                                 tension: 0.3,
                                 pointRadius: 5,
+                                pointHoverRadius: 8,
                                 pointBackgroundColor: "#10B981",
                                 yAxisID: "y1"
                             }
@@ -887,6 +1173,7 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        animation: progressiveAnimation,
                         interaction: { mode: "index", intersect: false },
                         scales: {
                             y: {
@@ -909,10 +1196,10 @@
                 });
             }
 
-            // 2. Regional Occupancy by City Chart (GASTAT Q4 2025)
+            // 2. Regional Occupancy Chart
             const ctx2 = document.getElementById("occupancyByCityChart");
             if (ctx2) {
-                new Chart(ctx2, {
+                window.charts.occupancy = new Chart(ctx2, {
                     type: "bar",
                     data: {
                         labels: ["Madinah", "Riyadh", "Makkah", "Jeddah Flagship", "Eastern Prov.", "Southern Hub (Asir/Jazan)"],
@@ -921,12 +1208,14 @@
                                 label: "Hotels Occupancy %",
                                 data: [81.5, 67.6, 60.6, 58.2, 54.8, 51.4],
                                 backgroundColor: "rgba(56, 189, 248, 0.75)",
+                                hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
                                 borderRadius: 6
                             },
                             {
                                 label: "Serviced Apartments Occupancy %",
                                 data: [76.0, 70.5, 59.4, 57.0, 56.2, 52.8],
                                 backgroundColor: "rgba(16, 185, 129, 0.75)",
+                                hoverBackgroundColor: "rgba(16, 185, 129, 0.95)",
                                 borderRadius: 6
                             }
                         ]
@@ -934,6 +1223,7 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        animation: progressiveAnimation,
                         scales: {
                             y: {
                                 min: 40,
@@ -950,13 +1240,14 @@
             // 3. Tourism Spend Mix Donut
             const ctx3 = document.getElementById("spendMixChart");
             if (ctx3) {
-                new Chart(ctx3, {
+                window.charts.spendMix = new Chart(ctx3, {
                     type: "doughnut",
                     data: {
                         labels: ["Inbound Leisure & Events", "Domestic Staycations", "Religious Pilgrimage", "Corporate MICE"],
                         datasets: [{
                             data: [38, 34, 18, 10],
                             backgroundColor: ["#38BDF8", "#10B981", "#F59E0B", "#818CF8"],
+                            hoverOffset: 8,
                             borderColor: "#0B192C",
                             borderWidth: 3
                         }]
@@ -964,6 +1255,12 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true,
+                            duration: 1400,
+                            easing: "easeOutCirc"
+                        },
                         plugins: {
                             legend: { position: "bottom", labels: { boxWidth: 12, padding: 12 } }
                         },
@@ -972,10 +1269,10 @@
                 });
             }
 
-            // 4. Quarterly Hotel ADR Trend Curve
+            // 4. Quarterly ADR Trend Curve
             const ctx4 = document.getElementById("adrTrendChart");
             if (ctx4) {
-                new Chart(ctx4, {
+                window.charts.adrTrend = new Chart(ctx4, {
                     type: "line",
                     data: {
                         labels: ["Q1 2024", "Q2 2024", "Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025"],
@@ -988,12 +1285,17 @@
                             tension: 0.35,
                             borderWidth: 3,
                             pointRadius: 4,
+                            pointHoverRadius: 8,
                             pointBackgroundColor: "#818CF8"
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        animation: {
+                            duration: 1500,
+                            easing: "easeOutQuart"
+                        },
                         scales: {
                             y: {
                                 ticks: { callback: v => "SAR " + v },
@@ -1008,7 +1310,7 @@
             // 5. Furniture POS & E-Payment Area Chart
             const ctx5 = document.getElementById("furniturePosChart");
             if (ctx5) {
-                new Chart(ctx5, {
+                window.charts.furniturePos = new Chart(ctx5, {
                     type: "bar",
                     data: {
                         labels: ["2021", "2022", "2023", "2024", "2025 (Official)"],
@@ -1017,6 +1319,7 @@
                                 label: "SAMA Furniture POS Spend (SAR Billion)",
                                 data: [11.4, 13.8, 15.6, 17.1, 18.2],
                                 backgroundColor: "rgba(245, 158, 11, 0.75)",
+                                hoverBackgroundColor: "rgba(245, 158, 11, 0.95)",
                                 borderRadius: 8,
                                 yAxisID: "y"
                             },
@@ -1028,6 +1331,7 @@
                                 backgroundColor: "#38BDF8",
                                 borderWidth: 3,
                                 pointRadius: 5,
+                                pointHoverRadius: 8,
                                 yAxisID: "y1"
                             }
                         ]
@@ -1035,6 +1339,7 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        animation: progressiveAnimation,
                         scales: {
                             y: {
                                 ticks: { callback: v => "SAR " + v + "B" },
@@ -1056,7 +1361,7 @@
             // 6. Sakani Housing Completions vs Kitchen Demand
             const ctx6 = document.getElementById("housingCompletionsChart");
             if (ctx6) {
-                new Chart(ctx6, {
+                window.charts.housing = new Chart(ctx6, {
                     type: "bar",
                     data: {
                         labels: ["2022", "2023", "2024", "2025"],
@@ -1065,12 +1370,14 @@
                                 label: "Homes Inhabited (Thousands)",
                                 data: [75.0, 85.3, 93.0, 96.5],
                                 backgroundColor: "rgba(20, 184, 166, 0.8)",
+                                hoverBackgroundColor: "rgba(20, 184, 166, 0.95)",
                                 borderRadius: 6
                             },
                             {
                                 label: "New Built-In Kitchen Fit-Outs Required (000s)",
                                 data: [68.0, 78.5, 87.2, 91.0],
                                 backgroundColor: "rgba(56, 189, 248, 0.8)",
+                                hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
                                 borderRadius: 6
                             }
                         ]
@@ -1078,6 +1385,7 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        animation: progressiveAnimation,
                         scales: {
                             y: {
                                 ticks: { callback: v => v + "k" },
@@ -1092,13 +1400,14 @@
             // 7. Regional Demand Share Pie
             const ctx7 = document.getElementById("regionalDemandChart");
             if (ctx7) {
-                new Chart(ctx7, {
+                window.charts.regionalDemand = new Chart(ctx7, {
                     type: "doughnut",
                     data: {
                         labels: ["Riyadh Province", "Makkah / Jeddah", "Eastern Province", "Southern (Asir / Najran)"],
                         datasets: [{
                             data: [42, 28, 16, 14],
                             backgroundColor: ["#F43F5E", "#38BDF8", "#10B981", "#F59E0B"],
+                            hoverOffset: 8,
                             borderColor: "#0B192C",
                             borderWidth: 3
                         }]
@@ -1106,6 +1415,12 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true,
+                            duration: 1400,
+                            easing: "easeOutCirc"
+                        },
                         plugins: {
                             legend: { position: "bottom", labels: { boxWidth: 12, padding: 12 } }
                         },
@@ -1117,7 +1432,7 @@
             // 8. Factory Distribution by City Chart
             const ctx8 = document.getElementById("factoryDistributionChart");
             if (ctx8) {
-                new Chart(ctx8, {
+                window.charts.factoryDistribution = new Chart(ctx8, {
                     type: "bar",
                     data: {
                         labels: ["Riyadh (MODON 1, 2, 3)", "Jeddah (Industrial 1, 2)", "Dammam / Khobar", "Southern Hub (Najran / Asir)", "Qassim / North"],
@@ -1137,6 +1452,7 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        animation: progressiveAnimation,
                         scales: {
                             y: {
                                 grid: { color: "rgba(255, 255, 255, 0.06)" },
@@ -1147,8 +1463,20 @@
                     }
                 });
             }
+        }
 
-        });
+        // Startup Bootstrapper (Fires immediately or on DOM ready)
+        function bootstrapDashboard() {
+            attachScrollerHintAnimation("#tabScrollerWrapper");
+            initKpiCounters();
+            initCharts();
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", bootstrapDashboard);
+        } else {
+            bootstrapDashboard();
+        }
     </script>
 </body>
 </html>
