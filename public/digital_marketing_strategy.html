@@ -56,6 +56,15 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #38BDF8;
         }
+        @keyframes targetPulse {
+            0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(56, 189, 248, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+        }
+        .chapter-highlight {
+            animation: targetPulse 1.8s cubic-bezier(0, 0, 0.2, 1);
+            border-color: rgba(56, 189, 248, 0.8) !important;
+        }
         @media print {
             .no-print { display: none !important; }
             .tab-pane { display: block !important; }
@@ -68,92 +77,349 @@
     <!-- Top Executive Banner -->
     <header class="sticky top-0 z-50 bg-[#0B192C]/95 backdrop-blur-md border-b border-slate-800 shadow-xl no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16 sm:h-20 gap-4">
+            <div class="flex items-center justify-between h-16 sm:h-18 gap-4">
                 
-                <!-- Brand Title & Navigation -->
+                <!-- Enhanced Customer Name UI Composition (Upper Left) -->
                 <div class="flex items-center gap-3">
                     <a href="index.html" class="flex items-center gap-3 group">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-500 flex items-center justify-center text-white font-black shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
-                            <i class="fa-solid fa-chart-pie text-lg"></i>
+                        <!-- Elegant Minimalist Monogram Badge -->
+                        <div class="w-9 h-9 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-sky-500/50 flex items-center justify-center text-sky-400 font-bold text-xs tracking-wider shadow-md transition-all">
+                            <span>SB<span class="text-slate-500 text-[10px] mx-0.5">•</span>WD</span>
                         </div>
-                        <div>
+                        <div class="flex flex-col">
                             <div class="flex items-center gap-2">
-                                <span class="text-xs font-bold uppercase tracking-widest text-sky-400">WD Group &amp; Swiss Blue</span>
-                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/40 font-semibold tracking-wide uppercase">Confidential</span>
+                                <span class="text-xs sm:text-sm font-bold text-slate-100 group-hover:text-white transition-colors">Swiss Blue <span class="text-slate-500 font-normal">&amp;</span> WD Group</span>
+                                <span class="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-slate-800/90 text-slate-400 border border-slate-700/80">Confidential</span>
                             </div>
-                            <h1 class="text-sm sm:text-base font-bold text-white tracking-tight group-hover:text-sky-300 transition-colors">Digital Marketing &amp; Commercial Growth Strategy</h1>
+                            <span class="text-[11px] text-slate-400 font-medium tracking-tight">Commercial Growth Strategy <span class="text-slate-600">•</span> 2026–2029</span>
                         </div>
                     </a>
                 </div>
 
-                <!-- Live Search & Actions -->
-                <div class="flex items-center gap-2 sm:gap-4">
-                    <!-- Search Input -->
-                    <div class="relative hidden md:block w-64 lg:w-80">
+                <!-- Right Header Actions (Enhanced Custom Chapter Navigator & Search) -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Live Search Input -->
+                    <div class="relative hidden lg:block w-64">
                         <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                        <input type="text" id="liveSearchInput" placeholder="Search 36 chapters, tables, metrics..." 
-                            class="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg bg-slate-900/90 border border-slate-700 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 transition-all">
+                        <input type="text" id="liveSearchInput" placeholder="Search strategy, tables, metrics..." 
+                            class="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl bg-slate-900/90 border border-slate-700 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 transition-all">
                     </div>
 
-                    <!-- Quick Jump Dropdown -->
-                    <select id="quickJumpSelect" class="text-xs bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-300 focus:outline-none focus:border-sky-400">
-                        <option value="">Jump to Chapter...</option>
-<option value="chapter-1">Ch 1: Executive mandate</option>
-<option value="chapter-2">Ch 2: Evidence protocol facts inferences and</option>
-<option value="chapter-3">Ch 3: Strategic research methodology</option>
-<option value="chapter-4">Ch 4: Saudi economic and demand context</option>
-<option value="chapter-5">Ch 5: Hospitality category economics</option>
-<option value="chapter-6">Ch 6: Furniture and kitchen category economi</option>
-<option value="chapter-7">Ch 7: PESTLE analysis</option>
-<option value="chapter-8">Ch 8: Porters Five Forces</option>
-<option value="chapter-9">Ch 9: Current brand and digital asset diagno</option>
-<option value="chapter-10">Ch 10: Competitive positioning and white spac</option>
-<option value="chapter-11">Ch 11: Portfolio architecture</option>
-<option value="chapter-12">Ch 12: Corporate strategic objectives</option>
-<option value="chapter-13">Ch 13: Brand positioning platform</option>
-<option value="chapter-14">Ch 14: Messaging architecture</option>
-<option value="chapter-15">Ch 15: Brand voice and language governance</option>
-<option value="chapter-16">Ch 16: Customer segmentation and priority mar</option>
-<option value="chapter-17">Ch 17: Jobs to Be Done and purchase barriers</option>
-<option value="chapter-18">Ch 18: Hospitality property strategies</option>
-<option value="chapter-19">Ch 19: Hospitality revenue management</option>
-<option value="chapter-20">Ch 20: Furniture customization system</option>
-<option value="chapter-21">Ch 21: National Factory and Najran showroom s</option>
-<option value="chapter-22">Ch 22: E commerce blueprint</option>
-<option value="chapter-23">Ch 23: Customer service as competitive advant</option>
-<option value="chapter-24">Ch 24: Channel strategy</option>
-<option value="chapter-25">Ch 25: Content operating system</option>
-<option value="chapter-26">Ch 26: SEO and local discovery</option>
-<option value="chapter-27">Ch 27: CRM loyalty and lifecycle management</option>
-<option value="chapter-28">Ch 28: Media investment and budget architectu</option>
-<option value="chapter-29">Ch 29: Measurement and commercial dashboard</option>
-<option value="chapter-30">Ch 30: Experimentation programme</option>
-<option value="chapter-31">Ch 31: Twelve month implementation roadmap</option>
-<option value="chapter-32">Ch 32: Governance and operating model</option>
-<option value="chapter-33">Ch 33: Principal risks and mitigations</option>
-<option value="chapter-34">Ch 34: Management validation agenda</option>
-<option value="chapter-35">Ch 35: Strategic scorecard</option>
-<option value="chapter-36">Ch 36: Final strategic conclusion</option>
-<option value="appendix-a">Appendix A: First 90 day deliverables</option>
-<option value="appendix-b">Appendix B: Sample hospitality lead routing lo</option>
-<option value="appendix-c">Appendix C: Sample furniture qualification log</option>
-<option value="appendix-d">Appendix D: Source register and research notes</option>
-                    </select>
+                    <!-- Custom Luxury Chapter Navigator Dropdown (Replacing Native Select) -->
+                    <div class="relative" id="chapterDropdownContainer">
+                        <button id="chapterDropdownBtn" type="button" onclick="toggleChapterDropdown()" 
+                            class="text-xs bg-slate-900/90 hover:bg-slate-850 border border-slate-700 hover:border-sky-500/50 rounded-xl px-3 py-1.5 text-slate-200 flex items-center gap-2 shadow-sm transition-all focus:outline-none focus:ring-1 focus:ring-sky-400">
+                            <i class="fa-solid fa-list-ol text-sky-400 text-[11px]"></i>
+                            <span id="selectedChapterLabel" class="font-medium">Jump to Chapter...</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200" id="dropdownChevron"></i>
+                        </button>
 
-                    <!-- Toggle Reader Mode Button -->
-                    <button id="toggleViewBtn" onclick="toggleViewMode()" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 flex items-center gap-1.5 transition-all" title="Toggle between Tabbed View and Complete Reader View">
-                        <i class="fa-solid fa-book-open text-sky-400"></i>
-                        <span class="hidden sm:inline" id="viewModeText">All-in-One</span>
-                    </button>
+                        <!-- Floating Chapter Popover -->
+                        <div id="chapterDropdownMenu" 
+                            class="hidden absolute right-0 mt-2 w-80 sm:w-96 max-h-[460px] rounded-2xl bg-[#0B192C]/95 backdrop-blur-xl border border-slate-700 shadow-2xl z-50 flex flex-col transition-all">
+                            
+                            <!-- Search inside dropdown -->
+                            <div class="p-2.5 border-b border-slate-800 bg-slate-900/70 flex items-center gap-2">
+                                <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs pl-1"></i>
+                                <input type="text" id="chapterFilterInput" placeholder="Filter 36 chapters..." 
+                                    class="w-full text-xs bg-transparent border-none text-white placeholder-slate-500 focus:outline-none focus:ring-0">
+                                <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[9px] bg-slate-800 border border-slate-700 rounded text-slate-400 font-mono">ESC</kbd>
+                            </div>
+
+                            <!-- List of chapters -->
+                            <div class="overflow-y-auto divide-y divide-slate-800/50 p-1.5 text-xs max-h-[380px]" id="chapterDropdownList">
+                                <div onclick="navigateToChapter('chapter-1')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">1</span>
+                                        <span class="truncate font-medium">Executive mandate</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-2')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">2</span>
+                                        <span class="truncate font-medium">Evidence protocol facts inferences and recommendations</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-3')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">3</span>
+                                        <span class="truncate font-medium">Strategic research methodology</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-4')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">4</span>
+                                        <span class="truncate font-medium">Saudi economic and demand context</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-5')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">5</span>
+                                        <span class="truncate font-medium">Hospitality category economics</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-6')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">6</span>
+                                        <span class="truncate font-medium">Furniture and kitchen category economics</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-7')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">7</span>
+                                        <span class="truncate font-medium">PESTLE analysis</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-8')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">8</span>
+                                        <span class="truncate font-medium">Porters Five Forces</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-9')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">9</span>
+                                        <span class="truncate font-medium">Current brand and digital asset diagnosis</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-10')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">10</span>
+                                        <span class="truncate font-medium">Competitive positioning and white space analysis</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-11')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">11</span>
+                                        <span class="truncate font-medium">Portfolio architecture</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-12')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">12</span>
+                                        <span class="truncate font-medium">Corporate strategic objectives</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-13')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">13</span>
+                                        <span class="truncate font-medium">Brand positioning platform</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-14')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">14</span>
+                                        <span class="truncate font-medium">Messaging architecture</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-15')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">15</span>
+                                        <span class="truncate font-medium">Brand voice and language governance</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-16')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">16</span>
+                                        <span class="truncate font-medium">Customer segmentation and priority markets</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-17')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">17</span>
+                                        <span class="truncate font-medium">Jobs to Be Done and purchase barriers</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-18')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">18</span>
+                                        <span class="truncate font-medium">Hospitality property strategies</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-19')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">19</span>
+                                        <span class="truncate font-medium">Hospitality revenue management</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-20')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">20</span>
+                                        <span class="truncate font-medium">Furniture customization system</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-21')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">21</span>
+                                        <span class="truncate font-medium">National Factory and Najran showroom strategy</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-22')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">22</span>
+                                        <span class="truncate font-medium">E commerce blueprint</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-23')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">23</span>
+                                        <span class="truncate font-medium">Customer service as competitive advantage</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-24')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">24</span>
+                                        <span class="truncate font-medium">Channel strategy</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-25')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">25</span>
+                                        <span class="truncate font-medium">Content operating system</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-26')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">26</span>
+                                        <span class="truncate font-medium">SEO and local discovery</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-27')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">27</span>
+                                        <span class="truncate font-medium">CRM loyalty and lifecycle management</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-28')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">28</span>
+                                        <span class="truncate font-medium">Media investment and budget architecture</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-29')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">29</span>
+                                        <span class="truncate font-medium">Measurement and commercial dashboard</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-30')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">30</span>
+                                        <span class="truncate font-medium">Experimentation programme</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-31')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">31</span>
+                                        <span class="truncate font-medium">Twelve month implementation roadmap</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-32')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">32</span>
+                                        <span class="truncate font-medium">Governance and operating model</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-33')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">33</span>
+                                        <span class="truncate font-medium">Principal risks and mitigations</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-34')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">34</span>
+                                        <span class="truncate font-medium">Management validation agenda</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-35')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">35</span>
+                                        <span class="truncate font-medium">Strategic scorecard</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('chapter-36')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center border border-slate-700/60 group-hover:border-sky-500/40">36</span>
+                                        <span class="truncate font-medium">Final strategic conclusion</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('appendix-a')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="px-1.5 py-0.5 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-bold text-[9px] uppercase border border-slate-700/60 group-hover:border-sky-500/40">Appendix A</span>
+                                        <span class="truncate font-medium">First 90 day deliverables</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('appendix-b')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="px-1.5 py-0.5 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-bold text-[9px] uppercase border border-slate-700/60 group-hover:border-sky-500/40">Appendix B</span>
+                                        <span class="truncate font-medium">Sample hospitality lead routing logic</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('appendix-c')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="px-1.5 py-0.5 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-bold text-[9px] uppercase border border-slate-700/60 group-hover:border-sky-500/40">Appendix C</span>
+                                        <span class="truncate font-medium">Sample furniture qualification logic</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                                <div onclick="navigateToChapter('appendix-d')" class="chapter-nav-item p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between text-slate-300 hover:text-white transition-colors group">
+                                    <div class="flex items-center gap-2.5 truncate">
+                                        <span class="px-1.5 py-0.5 rounded-lg bg-slate-800 group-hover:bg-sky-500/20 text-sky-400 font-bold text-[9px] uppercase border border-slate-700/60 group-hover:border-sky-500/40">Appendix D</span>
+                                        <span class="truncate font-medium">Source register and research notes</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-500 group-hover:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Print / Export Button -->
-                    <button onclick="window.print()" class="p-2 text-xs rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-sky-400 transition-all" title="Print or Export as PDF">
+                    <button onclick="window.print()" class="p-2 text-xs rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-sky-400 transition-all" title="Print or Export as PDF">
                         <i class="fa-solid fa-print"></i>
                     </button>
 
                     <!-- Back to Main Portal -->
-                    <a href="index.html" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-750 border border-slate-700 text-slate-200 hover:text-sky-300 flex items-center gap-1.5 transition-all">
-                        <i class="fa-solid fa-house"></i>
+                    <a href="index.html" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 text-slate-200 hover:text-sky-300 flex items-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-house text-[11px]"></i>
                         <span class="hidden sm:inline">Portal</span>
                     </a>
                 </div>
@@ -221,8 +487,8 @@
             </div>
         </div>
 
-        <!-- 10 Master Thematic Tabs -->
-        <div class="sticky top-16 sm:top-20 z-40 bg-[#070F1E]/95 backdrop-blur-md py-3 -mx-4 px-4 sm:mx-0 sm:px-0 border-b border-slate-800 mb-8 no-print overflow-x-auto">
+        <!-- 10 Master Thematic Tabs Rail with Scroll Hint Simulation Animation -->
+        <div id="tabScrollerWrapper" class="sticky top-16 sm:top-18 z-40 bg-[#070F1E]/95 backdrop-blur-md py-3 -mx-4 px-4 sm:mx-0 sm:px-0 border-b border-slate-800 mb-8 no-print overflow-x-auto scroll-smooth">
             <div class="flex items-center gap-2 min-w-max pb-1" id="tabButtonsContainer">
                 <button onclick="switchTab('tab-1')" id="btn-tab-1" 
                     class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm border transition-all flex items-center gap-2 bg-sky-500 text-slate-950 font-bold shadow-lg shadow-sky-500/20 border-sky-400">
@@ -317,7 +583,7 @@
                         Chapters: 1, 2, 3, 4
                     </div>
                 </div>
-                <article id="chapter-1" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-1" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">1</span>
@@ -351,7 +617,7 @@
 <div class="py-2 px-3.5 rounded-lg bg-slate-800/40 my-2 border-l-2 border-amber-500/40 text-slate-300 text-sm leading-relaxed">9. Develop a 12-month execution operating model with clear ownership, tests, stage gates and performance reviews.</div>
                     </div>
                 </article>
-                <article id="chapter-2" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-2" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">2</span>
@@ -400,7 +666,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">This distinction matters because public-facing claims must be defensible. "Best quality" is a management view that may guide internal portfolio architecture, but it should not be published as an objective market superlative without evidence. Externally, Swiss Blue Hotel Jeddah should be described as the group's flagship or highest-service expression. Similarly, quality claims for furniture should be supported by specifications, samples, warranties, inspection records and case studies, rather than generic adjectives.</p>
                     </div>
                 </article>
-                <article id="chapter-3" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-3" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">3</span>
@@ -417,7 +683,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">The strategy intentionally avoids false precision. Budget ranges and target improvements are planning hypotheses until WD Group supplies revenue, margin, capacity, lead, occupancy and conversion baselines.</p>
                     </div>
                 </article>
-                <article id="chapter-4" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-4" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">4</span>
@@ -461,7 +727,7 @@
                         Chapters: 5, 6, 7, 8
                     </div>
                 </div>
-                <article id="chapter-5" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-5" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">5</span>
@@ -485,7 +751,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">The correct KPI is not direct-booking share in isolation. It is net revenue and contribution after commission, media cost, rate discount and servicing cost.</p>
                     </div>
                 </article>
-                <article id="chapter-6" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-6" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">6</span>
@@ -556,7 +822,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">The National Factory's kitchens require a hybrid commerce model. The website should inspire, qualify, configure and book the showroom visit. The Najran showroom should validate materials, measurements and preferences. The digital account should then preserve the design, quotation, payment schedule, production status, installation date and service history. This is not a conflict between e-commerce and physical retail. It is an integrated phygital journey.</p>
                     </div>
                 </article>
-                <article id="chapter-7" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-7" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">7</span>
@@ -608,7 +874,7 @@
   </tbody></table></div>
                     </div>
                 </article>
-                <article id="chapter-8" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-8" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">8</span>
@@ -650,7 +916,7 @@
                         Chapters: 9, 10, 11, 12, 13
                     </div>
                 </div>
-                <article id="chapter-9" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-9" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">9</span>
@@ -674,7 +940,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">These competitors establish the minimum category expectation. WD Group cannot claim differentiation merely by adding online payment, kitchen measurement or WhatsApp. Its differentiation must arise from how these elements work together to make customization faster, clearer, financially accessible and more accountable.</p>
                     </div>
                 </article>
-                <article id="chapter-10" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-10" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">10</span>
@@ -765,7 +1031,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">The defensible white space is not "custom furniture" in words. It is professionally managed customization with commercial accessibility.</p>
                     </div>
                 </article>
-                <article id="chapter-11" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-11" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">11</span>
@@ -860,7 +1126,7 @@
   </tbody></table></div>
                     </div>
                 </article>
-                <article id="chapter-12" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-12" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">12</span>
@@ -883,7 +1149,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">These objectives must be re-based after 60 days of clean tracking.</p>
                     </div>
                 </article>
-                <article id="chapter-13" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-13" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">13</span>
@@ -925,7 +1191,7 @@
                         Chapters: 14, 15, 16, 17
                     </div>
                 </div>
-                <article id="chapter-14" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-14" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">14</span>
@@ -953,7 +1219,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">Value-property proof: Actual layouts, bedroom count, guest capacity, monthly-stay terms, practical amenities, location information and responsive support.</p>
                     </div>
                 </article>
-                <article id="chapter-15" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-15" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">15</span>
@@ -1008,7 +1274,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">Prohibited or controlled claims include "the best," "highest quality," "guaranteed lowest price," "instant custom furniture," "lifetime" and "free" unless legal, financial and operational evidence exists. Comparative references to Turkish competitors should remain in internal sales strategy. Public messaging should focus on customer outcomes rather than disparaging origin-based competition.</p>
                     </div>
                 </article>
-                <article id="chapter-16" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-16" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">16</span>
@@ -1052,7 +1318,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">This segment needs local confidence. The customer often wants to see finishes, discuss layout, understand storage, verify what is included and know who will respond after installation. The showroom should operate as a design-and-decision environment rather than a static product display.</p>
                     </div>
                 </article>
-                <article id="chapter-17" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-17" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">17</span>
@@ -1144,7 +1410,7 @@
                         Chapters: 18, 19
                     </div>
                 </div>
-                <article id="chapter-18" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-18" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">18</span>
@@ -1215,7 +1481,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">The Jazan property should remain a demand-capture project until an approved opening date, inventory configuration and operating plan exist. A pre-opening page can collect interest by segment: family, corporate, monthly or supplier. Paid media should remain limited until booking inventory is genuinely available. Premature awareness can create disappointment and waste.</p>
                     </div>
                 </article>
-                <article id="chapter-19" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-19" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">19</span>
@@ -1257,7 +1523,7 @@
                         Chapters: 20, 21
                     </div>
                 </div>
-                <article id="chapter-20" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-20" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">20</span>
@@ -1316,7 +1582,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">The most persuasive content formats are:</p>
                     </div>
                 </article>
-                <article id="chapter-21" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-21" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">21</span>
@@ -1400,7 +1666,7 @@
                         Chapters: 22, 23
                     </div>
                 </div>
-                <article id="chapter-22" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-22" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">22</span>
@@ -1428,7 +1694,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">Every event should include customer-consented identifiers where appropriate, source, campaign, product family, configuration class, city and value. The purpose is not surveillance. It is to identify friction and improve the journey within Saudi data-protection requirements.</p>
                     </div>
                 </article>
-                <article id="chapter-23" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-23" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">23</span>
@@ -1513,7 +1779,7 @@
                         Chapters: 24, 25, 26, 27
                     </div>
                 </div>
-                <article id="chapter-24" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-24" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">24</span>
@@ -1540,7 +1806,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">For each priority account, document likely projects, decision-makers, current suppliers, opportunity hypothesis, proof asset, next action and relationship owner. Measure meetings, qualified opportunities, proposal value, win rate and time to close.</p>
                     </div>
                 </article>
-                <article id="chapter-25" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-25" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">25</span>
@@ -1622,7 +1888,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">The calendar should reserve 20% of capacity for events, demand changes, operational proof and learning. Production should be batched by property and factory, but editing must preserve distinct positioning.</p>
                     </div>
                 </article>
-                <article id="chapter-26" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-26" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">26</span>
@@ -1640,7 +1906,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">Technical priorities include crawlable bilingual architecture, unique metadata, structured data, correct canonicalization, page speed, image optimization, booking and product schema, event tracking and stable local-business information.</p>
                     </div>
                 </article>
-                <article id="chapter-27" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-27" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">27</span>
@@ -1694,7 +1960,7 @@
                         Chapters: 28, 29, 30
                     </div>
                 </div>
-                <article id="chapter-28" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-28" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">28</span>
@@ -1803,7 +2069,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">The group should calculate marginal return, not only average return. A campaign with a strong historical return can become inefficient as spend increases.</p>
                     </div>
                 </article>
-                <article id="chapter-29" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-29" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">29</span>
@@ -1950,7 +2216,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">This prevents branded Search, retargeting or discount campaigns from claiming demand that was already likely to convert.</p>
                     </div>
                 </article>
-                <article id="chapter-30" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-30" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">30</span>
@@ -2064,7 +2330,7 @@
                         Chapters: 31, 32, 33, 34, 35, 36
                     </div>
                 </div>
-                <article id="chapter-31" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-31" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">31</span>
@@ -2083,7 +2349,7 @@
 <h3 class="text-xl font-bold text-amber-300 mt-8 mb-4 flex items-center gap-2"><span class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 text-sm font-semibold">Phase 6</span> months 10 to 12 institutionalize growth</h3>
                     </div>
                 </article>
-                <article id="chapter-32" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-32" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">32</span>
@@ -2152,7 +2418,7 @@
   </tbody></table></div>
                     </div>
                 </article>
-                <article id="chapter-33" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-33" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">33</span>
@@ -2235,7 +2501,7 @@
   </tbody></table></div>
                     </div>
                 </article>
-                <article id="chapter-34" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-34" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">34</span>
@@ -2252,7 +2518,7 @@
 <h3 class="text-xl font-bold text-amber-300 mt-8 mb-4">Technology and data validation</h3>
                     </div>
                 </article>
-                <article id="chapter-35" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-35" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">35</span>
@@ -2296,7 +2562,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">Each quarterly review should consider all four perspectives. A rise in sales accompanied by delayed installation, rising complaints or cash-flow deterioration does not represent strategic success.</p>
                     </div>
                 </article>
-                <article id="chapter-36" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm">
+                <article id="chapter-36" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold flex items-center justify-center text-sm font-mono">36</span>
@@ -2315,7 +2581,7 @@
 <p class="my-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">The recommended strategic sequence is non-negotiable: establish market and portfolio truth; define differentiated propositions; build the operational capability behind those propositions; design the digital and physical conversion journey; activate demand; and scale only after contribution, service and capacity are proven.</p>
                     </div>
                 </article>
-                <article id="appendix-a" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-sky-500/30 shadow-xl backdrop-blur-sm">
+                <article id="appendix-a" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-sky-500/30 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="px-2.5 py-1 rounded-lg bg-sky-500/20 border border-sky-500/40 text-sky-300 font-bold text-xs uppercase tracking-wide">Appendix A</span>
@@ -2398,7 +2664,7 @@
   </tbody></table></div>
                     </div>
                 </article>
-                <article id="appendix-b" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-sky-500/30 shadow-xl backdrop-blur-sm">
+                <article id="appendix-b" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-sky-500/30 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="px-2.5 py-1 rounded-lg bg-sky-500/20 border border-sky-500/40 text-sky-300 font-bold text-xs uppercase tracking-wide">Appendix B</span>
@@ -2421,7 +2687,7 @@
 <div class="py-2 px-3.5 rounded-lg bg-slate-800/40 my-2 border-l-2 border-amber-500/40 text-slate-300 text-sm leading-relaxed">10. Record recommendation, result and reason for loss.</div>
                     </div>
                 </article>
-                <article id="appendix-c" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-sky-500/30 shadow-xl backdrop-blur-sm">
+                <article id="appendix-c" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-sky-500/30 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="px-2.5 py-1 rounded-lg bg-sky-500/20 border border-sky-500/40 text-sky-300 font-bold text-xs uppercase tracking-wide">Appendix C</span>
@@ -2444,7 +2710,7 @@
 <div class="py-2 px-3.5 rounded-lg bg-slate-800/40 my-2 border-l-2 border-amber-500/40 text-slate-300 text-sm leading-relaxed">10. Record next action, owner and deadline in CRM.</div>
                     </div>
                 </article>
-                <article id="appendix-d" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-sky-500/30 shadow-xl backdrop-blur-sm">
+                <article id="appendix-d" class="chapter-card p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-sky-500/30 shadow-xl backdrop-blur-sm transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                         <div class="flex items-center gap-3">
                             <span class="px-2.5 py-1 rounded-lg bg-sky-500/20 border border-sky-500/40 text-sky-300 font-bold text-xs uppercase tracking-wide">Appendix D</span>
@@ -2497,13 +2763,8 @@
 
     <!-- Interactive JavaScript -->
     <script>
-        let isReaderMode = false;
-
+        // Tab switching logic
         function switchTab(tabId) {
-            if (isReaderMode) {
-                toggleViewMode();
-            }
-            
             document.querySelectorAll('.tab-pane').forEach(el => {
                 el.style.display = 'none';
             });
@@ -2537,35 +2798,90 @@
             history.replaceState(null, null, '#' + tabId);
         }
 
-        function toggleViewMode() {
-            isReaderMode = !isReaderMode;
-            const btnText = document.getElementById('viewModeText');
-            if (isReaderMode) {
-                document.querySelectorAll('.tab-pane').forEach(el => {
-                    el.style.display = 'block';
-                });
-                btnText.textContent = "Tabbed View";
+        // Custom Chapter Dropdown Logic
+        function toggleChapterDropdown(forceClose = false) {
+            const menu = document.getElementById('chapterDropdownMenu');
+            const chevron = document.getElementById('dropdownChevron');
+            if (!menu) return;
+
+            if (forceClose || !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+                if (chevron) chevron.style.transform = 'rotate(0deg)';
             } else {
-                btnText.textContent = "All-in-One";
-                switchTab('tab-1');
+                menu.classList.remove('hidden');
+                if (chevron) chevron.style.transform = 'rotate(180deg)';
+                const input = document.getElementById('chapterFilterInput');
+                if (input) {
+                    input.value = '';
+                    filterChapters('');
+                    setTimeout(() => input.focus(), 50);
+                }
             }
         }
 
-        document.getElementById('quickJumpSelect').addEventListener('change', function(e) {
-            const targetId = e.target.value;
-            if (!targetId) return;
-
-            const el = document.getElementById(targetId);
-            if (el) {
-                const tabPane = el.closest('.tab-pane');
-                if (tabPane && !isReaderMode) {
-                    switchTab(tabPane.id);
-                }
-                setTimeout(() => {
-                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const container = document.getElementById('chapterDropdownContainer');
+            if (container && !container.contains(e.target)) {
+                toggleChapterDropdown(true);
             }
         });
+
+        // Close dropdown on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                toggleChapterDropdown(true);
+            }
+        });
+
+        // Filter chapters in custom dropdown
+        const filterInput = document.getElementById('chapterFilterInput');
+        if (filterInput) {
+            filterInput.addEventListener('input', function(e) {
+                filterChapters(e.target.value.toLowerCase().trim());
+            });
+        }
+
+        function filterChapters(q) {
+            const items = document.querySelectorAll('.chapter-nav-item');
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (!q || text.includes(q)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Navigate to chapter from custom dropdown
+        function navigateToChapter(targetId) {
+            toggleChapterDropdown(true);
+            const el = document.getElementById(targetId);
+            if (!el) return;
+
+            const tabPane = el.closest('.tab-pane');
+            if (tabPane) {
+                switchTab(tabPane.id);
+            }
+
+            // Update button label
+            const labelEl = document.getElementById('selectedChapterLabel');
+            const titleEl = el.querySelector('h2');
+            if (labelEl && titleEl) {
+                const shortTitle = titleEl.textContent.length > 24 ? titleEl.textContent.substring(0, 22) + '...' : titleEl.textContent;
+                labelEl.textContent = shortTitle;
+            }
+
+            setTimeout(() => {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Visual feedback pulse highlight
+                el.classList.add('chapter-highlight');
+                setTimeout(() => {
+                    el.classList.remove('chapter-highlight');
+                }, 2000);
+            }, 150);
+        }
 
         function copyChapterLink(anchorId) {
             const url = window.location.origin + window.location.pathname + '#' + anchorId;
@@ -2574,63 +2890,95 @@
             });
         }
 
+        // Live Search across all chapters
         const searchInput = document.getElementById('liveSearchInput');
         const resultsPanel = document.getElementById('searchResultsPanel');
         const resultsList = document.getElementById('searchResultsList');
         const queryLabel = document.getElementById('searchQueryLabel');
 
-        searchInput.addEventListener('input', function(e) {
-            const q = e.target.value.trim().toLowerCase();
-            if (q.length < 2) {
-                resultsPanel.classList.add('hidden');
-                return;
-            }
+        if (searchInput) {
+            searchInput.addEventListener('input', function(e) {
+                const q = e.target.value.trim().toLowerCase();
+                if (q.length < 2) {
+                    resultsPanel.classList.add('hidden');
+                    return;
+                }
 
-            resultsPanel.classList.remove('hidden');
-            queryLabel.textContent = `"${q}"`;
-            resultsList.innerHTML = '';
+                resultsPanel.classList.remove('hidden');
+                queryLabel.textContent = `"${q}"`;
+                resultsList.innerHTML = '';
 
-            const cards = document.querySelectorAll('.chapter-card');
-            let matchCount = 0;
+                const cards = document.querySelectorAll('.chapter-card');
+                let matchCount = 0;
 
-            cards.forEach(card => {
-                const text = card.textContent.toLowerCase();
-                if (text.includes(q)) {
-                    matchCount++;
-                    const titleEl = card.querySelector('h2');
-                    const title = titleEl ? titleEl.textContent : card.id;
-                    const tabPane = card.closest('.tab-pane');
-                    const tabId = tabPane ? tabPane.id : 'tab-1';
+                cards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(q)) {
+                        matchCount++;
+                        const titleEl = card.querySelector('h2');
+                        const title = titleEl ? titleEl.textContent : card.id;
+                        const tabPane = card.closest('.tab-pane');
+                        const tabId = tabPane ? tabPane.id : 'tab-1';
 
-                    const item = document.createElement('div');
-                    item.className = 'p-3 rounded-lg bg-slate-800/80 hover:bg-slate-750 border border-slate-700 cursor-pointer flex items-center justify-between text-xs transition-colors';
-                    item.innerHTML = `
-                        <div>
-                            <span class="font-bold text-sky-400">${title}</span>
-                            <span class="text-slate-400 ml-2">in ${tabPane ? tabPane.querySelector('h3').textContent : 'Strategy'}</span>
-                        </div>
-                        <i class="fa-solid fa-arrow-right text-slate-400"></i>
-                    `;
-                    item.onclick = function() {
-                        switchTab(tabId);
-                        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        resultsPanel.classList.add('hidden');
-                    };
-                    resultsList.appendChild(item);
+                        const item = document.createElement('div');
+                        item.className = 'p-3 rounded-lg bg-slate-800/80 hover:bg-slate-750 border border-slate-700 cursor-pointer flex items-center justify-between text-xs transition-colors';
+                        item.innerHTML = `
+                            <div>
+                                <span class="font-bold text-sky-400">${title}</span>
+                                <span class="text-slate-400 ml-2">in ${tabPane ? tabPane.querySelector('h3').textContent : 'Strategy'}</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right text-slate-400"></i>
+                        `;
+                        item.onclick = function() {
+                            switchTab(tabId);
+                            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            resultsPanel.classList.add('hidden');
+                            card.classList.add('chapter-highlight');
+                            setTimeout(() => card.classList.remove('chapter-highlight'), 2000);
+                        };
+                        resultsList.appendChild(item);
+                    }
+                });
+
+                if (matchCount === 0) {
+                    resultsList.innerHTML = '<div class="text-xs text-slate-400 py-2">No matching sections found. Try a different keyword like "pricing", "Jeddah", "Greenwood", "kitchens", or "BNPL".</div>';
                 }
             });
-
-            if (matchCount === 0) {
-                resultsList.innerHTML = '<div class="text-xs text-slate-400 py-2">No matching sections found. Try a different keyword like "pricing", "Jeddah", "Greenwood", "kitchens", or "BNPL".</div>';
-            }
-        });
+        }
 
         function clearSearch() {
-            searchInput.value = '';
+            if (searchInput) searchInput.value = '';
             resultsPanel.classList.add('hidden');
         }
 
+        // Horizontal Scroller Nudge Animation (Visual cue that horizontal scrolling is possible)
+        function initHorizontalScrollerNudge() {
+            const scroller = document.getElementById('tabScrollerWrapper');
+            if (!scroller) return;
+
+            let userTouched = false;
+            const stopAnimation = () => { userTouched = true; };
+
+            scroller.addEventListener('scroll', stopAnimation, { once: true, passive: true });
+            scroller.addEventListener('touchstart', stopAnimation, { once: true, passive: true });
+            scroller.addEventListener('mousedown', stopAnimation, { once: true, passive: true });
+
+            // Run smooth nudge simulation after 700ms
+            setTimeout(() => {
+                if (userTouched || scroller.scrollLeft > 10) return;
+                scroller.scrollTo({ left: 140, behavior: 'smooth' });
+
+                setTimeout(() => {
+                    if (userTouched) return;
+                    scroller.scrollTo({ left: 0, behavior: 'smooth' });
+                }, 650);
+            }, 800);
+        }
+
+        // Initialization
         window.addEventListener('DOMContentLoaded', () => {
+            initHorizontalScrollerNudge();
+
             const hash = window.location.hash.replace('#', '');
             if (hash) {
                 if (hash.startsWith('tab-')) {
@@ -2644,6 +2992,8 @@
                         }
                         setTimeout(() => {
                             el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            el.classList.add('chapter-highlight');
+                            setTimeout(() => el.classList.remove('chapter-highlight'), 2000);
                         }, 200);
                     }
                 }
