@@ -52,6 +52,16 @@
         ::-webkit-scrollbar-track { background: #0B192C; }
         ::-webkit-scrollbar-thumb { background: #1E3A5F; border-radius: 9999px; }
         ::-webkit-scrollbar-thumb:hover { background: #38BDF8; }
+        /* Completely hide native scrollbar on horizontal tab scroller */
+        #tabScrollerWrapper {
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+        #tabScrollerWrapper::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
         .glass-card {
             background: rgba(14, 34, 56, 0.75);
             backdrop-filter: blur(16px);
@@ -288,34 +298,34 @@
             <div id="scrollHintLeft" class="pointer-events-none absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#070F1E] to-transparent z-10 opacity-0 transition-opacity duration-300"></div>
             <div id="scrollHintRight" class="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#070F1E] to-transparent z-10 opacity-100 transition-opacity duration-300"></div>
 
-            <div id="tabScrollerWrapper" class="overflow-x-auto select-none" style="scrollbar-width: thin; -webkit-overflow-scrolling: touch;">
+            <div id="tabScrollerWrapper" class="overflow-x-auto select-none" style="scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch;">
                 <div class="flex items-center gap-2.5 min-w-max pb-1">
                     <button onclick="switchSection('section-hospitality', this)" id="btn-section-hospitality" 
                         class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center gap-2 bg-sky-500 text-slate-950 border-sky-400 shadow-lg shadow-sky-500/20 cursor-pointer">
                         <i class="fa-solid fa-hotel text-xs"></i>
                         <span>Hospitality &amp; Hotel Economics</span>
-                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-950/30 text-slate-950 font-bold">GASTAT</span>
+                        <span class="tab-badge text-[10px] px-1.5 py-0.5 rounded-full bg-slate-950 text-sky-200 border border-slate-900 font-mono font-bold shadow-sm" data-color="text-sky-300 border border-slate-700">GASTAT</span>
                     </button>
 
                     <button onclick="switchSection('section-furniture', this)" id="btn-section-furniture" 
                         class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700 cursor-pointer">
                         <i class="fa-solid fa-couch text-xs text-amber-400"></i>
                         <span>Furniture &amp; Kitchen Manufacturing</span>
-                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-amber-300 border border-slate-700 font-mono">SAMA</span>
+                        <span class="tab-badge text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-amber-300 border border-slate-700 font-mono font-medium" data-color="text-amber-300 border border-slate-700">SAMA</span>
                     </button>
 
                     <button onclick="switchSection('section-synergies', this)" id="btn-section-synergies" 
                         class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700 cursor-pointer">
                         <i class="fa-solid fa-arrows-split-up-and-left text-xs text-emerald-400"></i>
                         <span>Cross-Industry Synergy Matrix</span>
-                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-emerald-300 border border-slate-700 font-mono">B2B / B2C</span>
+                        <span class="tab-badge text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-emerald-300 border border-slate-700 font-mono font-medium" data-color="text-emerald-300 border border-slate-700">B2B / B2C</span>
                     </button>
 
                     <button onclick="switchSection('section-sources', this)" id="btn-section-sources" 
                         class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700 cursor-pointer">
                         <i class="fa-solid fa-book-bookmark text-xs text-indigo-400"></i>
                         <span>Government Bulletins &amp; Methodology</span>
-                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-indigo-300 border border-slate-700 font-mono">Official</span>
+                        <span class="tab-badge text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-indigo-300 border border-slate-700 font-mono font-medium" data-color="text-indigo-300 border border-slate-700">Official</span>
                     </button>
                 </div>
             </div>
@@ -542,7 +552,7 @@
                         <div class="flex justify-between"><span>Riyadh Province:</span><span class="font-bold text-white font-mono">42% (SAR 7.6B)</span></div>
                         <div class="flex justify-between"><span>Makkah / Jeddah:</span><span class="font-bold text-white font-mono">28% (SAR 5.1B)</span></div>
                         <div class="flex justify-between"><span>Eastern Province:</span><span class="font-bold text-white font-mono">16% (SAR 2.9B)</span></div>
-                        <div class="flex justify-between"><span>Southern (Asir / Najran):</span><span class="font-bold text-white font-mono">14% (SAR 2.6B)</span></div>
+                        <div class="flex justify-between"><span>Southern Province:</span><span class="font-bold text-white font-mono">14% (SAR 2.6B)</span></div>
                     </div>
                 </div>
 
@@ -563,7 +573,7 @@
                     </div>
                     <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
                         <i class="fa-solid fa-circle-info text-cyan-400 mt-0.5"></i>
-                        <div><strong>Regional Advantage for National Factory Kitchens:</strong> While Riyadh and Jeddah have concentrated manufacturing competition, the <strong>Southern Province (Najran / Asir)</strong> has lower domestic factory density (120 factories) despite booming regional residential projects, providing National Factory Kitchens with protected regional pricing power.</div>
+                        <div><strong>Regional Advantage for National Factory Kitchens:</strong> While Riyadh and Jeddah have concentrated manufacturing competition, the <strong>Southern Province</strong> has lower domestic factory density (120 factories) despite booming regional residential projects, providing National Factory Kitchens with protected regional pricing power.</div>
                     </div>
                 </div>
 
@@ -622,11 +632,11 @@
                 <div class="glass-card rounded-2xl p-6 space-y-4 border-l-4 border-l-amber-500">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-mono font-bold uppercase tracking-wider text-amber-400">Synergy Pillar 02</span>
-                        <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 text-[11px] font-semibold">National Factory Najran &rarr; Residential Consumers</span>
+                        <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 text-[11px] font-semibold">National Factory Kitchens &rarr; Residential Consumers</span>
                     </div>
                     <h3 class="text-lg font-bold text-white">Direct-to-Consumer Custom Kitchens Platform</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Over <strong>93,000 Saudi families</strong> moved into newly delivered Sakani residences in 2024 alone. By deploying digital 3D kitchen configuration tools and BNPL financing (Tamara &amp; Tabby 4-month splits), National Factory Kitchens captures high-consideration retail homeowners across Najran, Khamis Mushait, Abha, and Riyadh at scale.
+                        Over <strong>93,000 Saudi families</strong> moved into newly delivered Sakani residences in 2024 alone. By deploying digital 3D kitchen configuration tools and BNPL financing (Tamara &amp; Tabby 4-month splits), National Factory Kitchens captures high-consideration retail homeowners across Khamis Mushait, Abha, and Riyadh at scale.
                     </p>
                     <div class="grid grid-cols-2 gap-3 pt-2 text-xs font-mono">
                         <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
@@ -721,7 +731,7 @@
                                 <td class="p-3.5 text-amber-400 font-mono">93,000+ Sakani Inhabitants (MOMAH)</td>
                                 <td class="p-3.5 font-semibold text-slate-200">National Factory Kitchens</td>
                                 <td class="p-3.5">Direct retail showrooms, 3D visualizers &amp; BNPL installment sales</td>
-                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 font-mono">Najran &amp; Southern Hub</span></td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 font-mono whitespace-nowrap">Southern Hub</span></td>
                             </tr>
                             <tr class="hover:bg-slate-800/40">
                                 <td class="p-3.5 font-bold text-white">E-Commerce Home Living</td>
@@ -852,11 +862,20 @@
                 target.classList.remove("hidden");
             }
 
-            // Update Tab Button Active Styles
+            // Update Tab Button Active Styles & Badges
             document.querySelectorAll(".tab-nav-btn").forEach(b => {
                 b.className = "tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700 cursor-pointer";
+                const badge = b.querySelector(".tab-badge");
+                if (badge) {
+                    const colorClasses = badge.getAttribute("data-color") || "text-slate-300 border border-slate-700";
+                    badge.className = `tab-badge text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 font-mono font-medium ${colorClasses}`;
+                }
             });
             btn.className = "tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center gap-2 bg-sky-500 text-slate-950 border-sky-400 shadow-lg shadow-sky-500/20 cursor-pointer";
+            const activeBadge = btn.querySelector(".tab-badge");
+            if (activeBadge) {
+                activeBadge.className = "tab-badge text-[10px] px-1.5 py-0.5 rounded-full bg-slate-950 text-sky-200 border border-slate-900 font-mono font-bold shadow-sm";
+            }
 
             // Smoothly scroll active button into view in the horizontal scroller
             try {
@@ -1126,6 +1145,19 @@
             Chart.defaults.plugins.tooltip.titleFont = { weight: "bold", size: 12 };
             Chart.defaults.plugins.tooltip.bodyFont = { size: 12 };
 
+            // Standardize legend labels so all rectangles across all charts have EXACTLY the same area and dimensions
+            Chart.defaults.plugins.legend.labels.boxWidth = 28;
+            Chart.defaults.plugins.legend.labels.boxHeight = 12;
+            const defaultGenLabels = Chart.defaults.plugins.legend.labels.generateLabels;
+            Chart.defaults.plugins.legend.labels.generateLabels = function(chart) {
+                const items = defaultGenLabels.call(this, chart);
+                items.forEach(item => {
+                    item.lineWidth = 0;
+                    item.strokeStyle = "transparent";
+                });
+                return items;
+            };
+
             // Progressive Animation Config
             const progressiveAnimation = {
                 duration: 1200,
@@ -1153,7 +1185,8 @@
                                 backgroundColor: "rgba(56, 189, 248, 0.75)",
                                 hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
                                 borderRadius: 8,
-                                yAxisID: "y"
+                                yAxisID: "y",
+                                order: 2
                             },
                             {
                                 label: "Total Visitor Visits (Millions)",
@@ -1163,10 +1196,13 @@
                                 backgroundColor: "#10B981",
                                 borderWidth: 3,
                                 tension: 0.3,
-                                pointRadius: 5,
-                                pointHoverRadius: 8,
+                                pointRadius: 6,
+                                pointHoverRadius: 9,
                                 pointBackgroundColor: "#10B981",
-                                yAxisID: "y1"
+                                pointBorderColor: "#FFFFFF",
+                                pointBorderWidth: 2,
+                                yAxisID: "y1",
+                                order: 1
                             }
                         ]
                     },
@@ -1175,6 +1211,23 @@
                         maintainAspectRatio: false,
                         animation: progressiveAnimation,
                         interaction: { mode: "index", intersect: false },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    boxWidth: 28,
+                                    boxHeight: 12,
+                                    generateLabels: function(chart) {
+                                        const items = Chart.defaults.plugins.legend.labels.generateLabels.call(this, chart);
+                                        items.forEach(item => {
+                                            item.lineWidth = 0;
+                                            item.strokeStyle = "transparent";
+                                        });
+                                        return items;
+                                    }
+                                }
+                            }
+                        },
                         scales: {
                             y: {
                                 type: "linear",
@@ -1321,7 +1374,8 @@
                                 backgroundColor: "rgba(245, 158, 11, 0.75)",
                                 hoverBackgroundColor: "rgba(245, 158, 11, 0.95)",
                                 borderRadius: 8,
-                                yAxisID: "y"
+                                yAxisID: "y",
+                                order: 2
                             },
                             {
                                 label: "Digital / E-Payment Adoption %",
@@ -1330,9 +1384,13 @@
                                 borderColor: "#38BDF8",
                                 backgroundColor: "#38BDF8",
                                 borderWidth: 3,
-                                pointRadius: 5,
-                                pointHoverRadius: 8,
-                                yAxisID: "y1"
+                                pointRadius: 6,
+                                pointHoverRadius: 9,
+                                pointBackgroundColor: "#38BDF8",
+                                pointBorderColor: "#FFFFFF",
+                                pointBorderWidth: 2,
+                                yAxisID: "y1",
+                                order: 1
                             }
                         ]
                     },
@@ -1340,6 +1398,23 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         animation: progressiveAnimation,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    boxWidth: 28,
+                                    boxHeight: 12,
+                                    generateLabels: function(chart) {
+                                        const items = Chart.defaults.plugins.legend.labels.generateLabels.call(this, chart);
+                                        items.forEach(item => {
+                                            item.lineWidth = 0;
+                                            item.strokeStyle = "transparent";
+                                        });
+                                        return items;
+                                    }
+                                }
+                            }
+                        },
                         scales: {
                             y: {
                                 ticks: { callback: v => "SAR " + v + "B" },
@@ -1403,7 +1478,7 @@
                 window.charts.regionalDemand = new Chart(ctx7, {
                     type: "doughnut",
                     data: {
-                        labels: ["Riyadh Province", "Makkah / Jeddah", "Eastern Province", "Southern (Asir / Najran)"],
+                        labels: ["Riyadh Province", "Makkah / Jeddah", "Eastern Province", "Southern Province (Asir)"],
                         datasets: [{
                             data: [42, 28, 16, 14],
                             backgroundColor: ["#F43F5E", "#38BDF8", "#10B981", "#F59E0B"],
@@ -1435,7 +1510,7 @@
                 window.charts.factoryDistribution = new Chart(ctx8, {
                     type: "bar",
                     data: {
-                        labels: ["Riyadh (MODON 1, 2, 3)", "Jeddah (Industrial 1, 2)", "Dammam / Khobar", "Southern Hub (Najran / Asir)", "Qassim / North"],
+                        labels: ["Riyadh (MODON 1, 2, 3)", "Jeddah (Industrial 1, 2)", "Dammam / Khobar", "Southern Hub (Asir)", "Qassim / North"],
                         datasets: [{
                             label: "Operating Licensed Wood & Furniture Factories",
                             data: [495, 340, 185, 120, 80],
