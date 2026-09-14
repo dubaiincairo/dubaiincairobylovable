@@ -39,28 +39,31 @@
       "source": "/manuals/login",
       "destination": "/portal",
       "permanent": true
+    },
+    {
+      "source": "/strategy",
+      "destination": "/portal/wdgroup/strategy",
+      "permanent": true
+    },
+    {
+      "source": "/digital-marketing-strategy",
+      "destination": "/portal/wdgroup/strategy",
+      "permanent": true
+    },
+    {
+      "source": "/market-insights",
+      "destination": "/portal/wdgroup/market-insights",
+      "permanent": true
     }
   ],
   "rewrites": [
     {
-      "source": "/strategy",
-      "destination": "/digital_marketing_strategy.html"
-    },
-    {
-      "source": "/digital-marketing-strategy",
-      "destination": "/digital_marketing_strategy.html"
-    },
-    {
       "source": "/portal/wdgroup/strategy",
-      "destination": "/digital_marketing_strategy.html"
+      "destination": "/portal/wdgroup/strategy/index.html"
     },
     {
       "source": "/client-portal/wdgroup/strategy",
-      "destination": "/digital_marketing_strategy.html"
-    },
-    {
-      "source": "/market-insights",
-      "destination": "/market-insights/index.html"
+      "destination": "/portal/wdgroup/strategy/index.html"
     },
     {
       "source": "/portal/wdgroup/market-insights",
