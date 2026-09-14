@@ -249,6 +249,18 @@
       "destination": "/manuals/:path*"
     },
     {
+      "source": "/digital_marketing_strategy",
+      "destination": "/digital_marketing_strategy.html"
+    },
+    {
+      "source": "/digital_marketing_strategy.html",
+      "destination": "/digital_marketing_strategy.html"
+    },
+    {
+      "source": "/06_Digital_Marketing_Growth_Strategy_Manual.md",
+      "destination": "/06_Digital_Marketing_Growth_Strategy_Manual.md"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
