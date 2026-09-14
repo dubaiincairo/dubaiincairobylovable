@@ -3015,7 +3015,7 @@
             resultsPanel.classList.add('hidden');
         }
 
-        // Horizontal Scroller Nudge Animation (Visual hint: move 2cm right then back to starting position)
+        // Horizontal Scroller Nudge Animation (Visual hint: slow, silky-smooth 2cm nudge & return)
         function initHorizontalScrollerNudge() {
             const scroller = document.getElementById('tabScrollerWrapper');
             if (!scroller) return;
@@ -3023,27 +3023,64 @@
             let userInteracted = false;
             const onUserGesture = () => { userInteracted = true; };
 
-            // Listen only to direct user gestures so the animation does not self-cancel on programmatic scroll
+            // Listen only to direct user gestures so the animation does not self-cancel
             scroller.addEventListener('touchstart', onUserGesture, { passive: true });
             scroller.addEventListener('mousedown', onUserGesture, { passive: true });
             scroller.addEventListener('pointerdown', onUserGesture, { passive: true });
             scroller.addEventListener('wheel', onUserGesture, { passive: true });
 
             // Exactly 2 centimeters in standard screen CSS pixels (1cm ≈ 37.8px -> 2cm ≈ 76px)
-            const twoCentimetersPx = 76;
+            const targetDistance = 76;
 
+            // Ultra-smooth sine easing (zero velocity at start and finish, perfectly natural motion)
+            function easeInOutSine(t) {
+                return -(Math.cos(Math.PI * t) - 1) / 2;
+            }
+
+            function animateScroll(from, to, duration, callback) {
+                if (userInteracted) return;
+                const startTime = performance.now();
+                const initialBehavior = scroller.style.scrollBehavior;
+                scroller.style.scrollBehavior = 'auto'; // Prevent native browser smooth scroll from conflicting
+
+                function step(currentTime) {
+                    if (userInteracted) {
+                        scroller.style.scrollBehavior = initialBehavior;
+                        return;
+                    }
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = easeInOutSine(progress);
+
+                    scroller.scrollLeft = from + (to - from) * eased;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        scroller.scrollLeft = to;
+                        scroller.style.scrollBehavior = initialBehavior;
+                        if (callback) callback();
+                    }
+                }
+                requestAnimationFrame(step);
+            }
+
+            // Delayed by 1.6s (1s additional delay after page load)
             setTimeout(() => {
                 if (userInteracted || scroller.scrollLeft > 5) return;
 
-                // Move 2 centimeters to the right
-                scroller.scrollTo({ left: twoCentimetersPx, behavior: 'smooth' });
-
-                // Dwell briefly then smoothly return back to normal starting position (0)
-                setTimeout(() => {
-                    if (userInteracted) return;
-                    scroller.scrollTo({ left: 0, behavior: 'smooth' });
-                }, 450);
-            }, 600);
+                // Slow and smooth glide 2cm right over 900ms
+                animateScroll(0, targetDistance, 900, () => {
+                    // Gentle 400ms dwell at the 2cm mark
+                    setTimeout(() => {
+                        if (userInteracted) return;
+                        // Slow, silky glide back to the starting normal position over 1000ms
+                        animateScroll(targetDistance, 0, 1000, () => {
+                            scroller.scrollLeft = 0;
+                        });
+                    }, 400);
+                });
+            }, 1600);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
