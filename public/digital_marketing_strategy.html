@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Marketing Growth Strategy & Attribution Hub — Dubai in Cairo</title>
+  
+  <!-- Tailwind CSS allowlisted in Antigravity -->
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    html[dir="rtl"] body {
+      font-family: 'IBM Plex Sans Arabic', sans-serif;
+      text-align: right;
+    }
+
+    /* Modern Glassmorphism & GPU Acceleration */
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateZ(0);
+    }
+    .glass-card:hover {
+      border-color: rgba(59, 130, 246, 0.45);
+      transform: translateY(-3px) translateZ(0);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+    }
+    .glass-nav {
+      background: rgba(11, 17, 29, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Interactive Spotlight Card System */
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.16), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Ambient Floating Orbs */
+    @keyframes orbFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, -30px) scale(1.08); }
+    }
+    @keyframes orbFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, 35px) scale(1.06); }
+    }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    /* Tab Switch Animation */
+    @keyframes tabEnter {
+      0% { opacity: 0; transform: translateY(10px) scale(0.995); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .tab-content:not(.hidden) {
+      animation: tabEnter 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.7); }
+
+    /* Print Stylesheet */
+    @media print {
+      body { background: #ffffff !important; color: #0f172a !important; }
+      .no-print, header, #scroll-progress-bar, .ambient-orb-1, .ambient-orb-2, #search-wrap, #tabs-nav {
+        display: none !important;
+      }
+      .glass-card, .spotlight-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        break-inside: avoid !important;
+      }
+      .text-white { color: #0f172a !important; }
+      .text-slate-400, .text-slate-300 { color: #475569 !important; }
+    }
+  </style>
+</head>
+<body class="relative flex flex-col justify-between py-8 px-4 sm:px-6 lg:px-8 selection:bg-blue-600 selection:text-white">
+
+  <!-- Ambient Glow Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-10 -left-40 w-[550px] h-[550px] bg-blue-600/15 rounded-full blur-[130px]"></div>
+    <div class="ambient-orb-2 absolute top-1/2 -right-40 w-[600px] h-[600px] bg-indigo-600/15 rounded-full blur-[140px]"></div>
+    <div class="absolute bottom-10 left-1/3 w-[450px] h-[450px] bg-cyan-600/10 rounded-full blur-[120px]"></div>
+  </div>
+
+  <!-- STICKY TOP NAV -->
+  <header class="sticky top-0 z-50 glass-nav rounded-2xl max-w-7xl mx-auto w-full px-4 sm:px-6 py-3.5 mb-8 shadow-2xl">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 via-indigo-600 to-cyan-500 flex items-center justify-center text-white font-extrabold text-sm shadow-lg shadow-blue-500/30">
+          MKT
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-base sm:text-lg text-white tracking-tight">DUBAI IN CAIRO</span>
+            <span class="text-blue-400 font-bold">•</span>
+            <span class="text-xs font-semibold text-slate-400" id="nav-system-label">Project 06: Digital Marketing Growth Strategy</span>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold">LIVE STRATEGY</span>
+          </div>
+          <p class="text-[11px] text-slate-400">Omnichannel Acquisition, MarTech Server-Side Infrastructure &amp; Conversion Attribution</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="Print Strategy / Save PDF">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+        </button>
+
+        <a href="index.html" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold transition flex items-center gap-1.5">
+          <span>← Back to Master Hub</span>
+        </a>
+
+        <!-- Bilingual Switcher -->
+        <div class="bg-slate-800/90 p-1 rounded-xl border border-slate-700 flex items-center">
+          <button id="lang-en" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm">
+            EN
+          </button>
+          <button id="lang-ar" onclick="setLanguage('ar')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white">
+            عربي
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress-bar" class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-blue-500 via-indigo-400 to-cyan-400 w-0 transition-[width] duration-75"></div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="relative z-10 max-w-7xl mx-auto w-full space-y-8">
+
+    <!-- HERO SECTION -->
+    <section class="glass-card rounded-3xl p-6 sm:p-10 border-blue-500/30 bg-gradient-to-b from-slate-900/90 via-slate-900/70 to-[#0c1220] shadow-2xl relative overflow-hidden">
+      <div class="relative z-10 space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="hero-tag">ENTERPRISE GROWTH &amp; DEMAND-GENERATION ENGINE</span>
+          </div>
+          <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+            <span class="px-3 py-1 rounded-lg bg-slate-800 border border-slate-700">Doc ID: DIC-DOC-MKT-006</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-800 border border-slate-700">Version 1.0 (Sept 2026)</span>
+          </div>
+        </div>
+
+        <div class="space-y-3 max-w-4xl">
+          <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight" id="hero-title">
+            Digital Marketing Growth Strategy &amp; <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent">Attribution Hub</span>
+          </h1>
+          <p class="text-base sm:text-lg text-slate-300 leading-relaxed" id="hero-desc">
+            An omnichannel performance marketing architecture designed to systematically drive direct guest bookings for Swiss Blue Hotels (bypassing 18%–25% OTA commissions) and attract high-value commercial wood joinery &amp; luxury furniture buyers for WD Group.
+          </p>
+        </div>
+
+        <!-- 4 TOP KPI SUMMARY CARDS (SPOTLIGHT) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-blue-500/50 transition">
+            <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Target Blended MER</div>
+            <div class="text-2xl sm:text-3xl font-black text-blue-400 mt-1">5.5x</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">Ecosystem Revenue / Ad Spend</div>
+          </div>
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-emerald-500/50 transition">
+            <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Direct Booking Share</div>
+            <div class="text-2xl sm:text-3xl font-black text-emerald-400 mt-1">&gt; 45%</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">Direct vs OTA Commissions</div>
+          </div>
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-indigo-500/50 transition">
+            <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Server-Side Match</div>
+            <div class="text-2xl sm:text-3xl font-black text-indigo-400 mt-1">9.1 / 10</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">Meta CAPI &amp; GTM SS Match</div>
+          </div>
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition">
+            <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Lead-to-WhatsApp</div>
+            <div class="text-2xl sm:text-3xl font-black text-amber-400 mt-1">&lt; 30s</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">Automated Cloud API Ping</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEARCH & CONTROLS BAR -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-3.5 rounded-2xl glass-card border-slate-800" id="search-wrap">
+      <div class="relative w-full sm:w-96">
+        <input type="text" id="filter-input" oninput="filterCards()" placeholder="Search channels, ad strategies, SOPs, metrics..." class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-4 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-blue-500 transition">
+      </div>
+      <div class="flex items-center gap-2 text-xs text-slate-400">
+        <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+        <span>Click any SOP card to open interactive step-by-step modal</span>
+      </div>
+    </div>
+
+    <!-- STICKY PILLAR / SECTION NAVIGATION TABS -->
+    <div class="sticky top-20 z-40 bg-[#0b0f19]/90 backdrop-blur-md pt-2 pb-3 border-b border-slate-800" id="tabs-nav">
+      <div class="flex items-center gap-2 overflow-x-auto scroll-touch pb-1">
+        <button onclick="switchTab('personas')" id="tab-btn-personas" class="tab-btn active px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-500/25">
+          <span>01. Brand &amp; Personas</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-white/20 text-[11px]">ICP</span>
+        </button>
+        <button onclick="switchTab('paid')" id="tab-btn-paid" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>02. Paid Ad Playbooks</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">Google · Meta · Snap</span>
+        </button>
+        <button onclick="switchTab('seo')" id="tab-btn-seo" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>03. SEO &amp; Local Maps</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">GBP · Schema</span>
+        </button>
+        <button onclick="switchTab('cro')" id="tab-btn-cro" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>04. Funnel &amp; CRO</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">Recovery</span>
+        </button>
+        <button onclick="switchTab('automation')" id="tab-btn-automation" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>05. Automation &amp; CRM</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">WhatsApp · Zoho</span>
+        </button>
+        <button onclick="switchTab('martech')" id="tab-btn-martech" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>06. MarTech &amp; CAPI</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">Server-Side</span>
+        </button>
+        <button onclick="switchTab('budget')" id="tab-btn-budget" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>07. Budget &amp; Simulator</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">Interactive</span>
+        </button>
+        <button onclick="switchTab('sops')" id="tab-btn-sops" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-amber-400 hover:text-white hover:bg-amber-600/20 border border-amber-500/30">
+          <span>08. Execution SOPs</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-amber-500/20 text-[11px]">6 Playbooks</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB PANELS -->
+    <div id="tab-panels" class="space-y-6">
+
+      <!-- ================================================================= -->
+      <!-- TAB 1: BRAND ARCHITECTURE & PERSONA MATRIX -->
+      <!-- ================================================================= -->
+      <div id="tab-panel-personas" class="tab-content space-y-6">
+        <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span>Ideal Customer Profiles (ICP) &amp; Persona Matrix</span>
+            <span class="px-2.5 py-0.5 rounded-md bg-blue-500/20 text-blue-300 text-xs font-mono">Pillar 01</span>
+          </h2>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Precision targeting maps prospective customers into 4 distinct Saudi high-intent brackets, preventing wasted ad impressions and driving superior conversion value.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Persona 1 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3">
+            <div class="flex items-center justify-between text-xs text-blue-400 font-semibold">
+              <span>Swiss Blue Hotels</span>
+              <span class="px-2 py-0.5 rounded-full bg-blue-500/20">Corporate &amp; Extended Stay</span>
+            </div>
+            <h3 class="text-lg font-bold text-white">The Riyadh Executive &amp; Consultant</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              <strong>Demographics:</strong> Age 30–52, Saudi &amp; GCC professionals, management consultants, engineers on 2–6 week project assignments in Riyadh.
+            </p>
+            <div class="text-xs text-slate-400 space-y-1 pt-2 border-t border-slate-800">
+              <p><strong>Primary Motivators:</strong> Ultra-fast Wi-Fi, quiet workspace, kitchenettes for meal flexibility, seamless corporate invoicing, location proximity to Olaya/KAFD.</p>
+              <p><strong>Target Acquisition Channel:</strong> Google Search ("شقق فندقية شمال الرياض"), LinkedIn Sponsored Updates, Google Hotel Ads.</p>
+            </div>
+          </div>
+
+          <!-- Persona 2 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3">
+            <div class="flex items-center justify-between text-xs text-emerald-400 font-semibold">
+              <span>Swiss Blue Hotels</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-500/20">Leisure &amp; Family</span>
+            </div>
+            <h3 class="text-lg font-bold text-white">The GCC Weekend Family &amp; Staycationer</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              <strong>Demographics:</strong> Families from Eastern Province, Jeddah, Kuwait, UAE visiting Riyadh for Riyadh Season, medical appointments, or family gatherings.
+            </p>
+            <div class="text-xs text-slate-400 space-y-1 pt-2 border-t border-slate-800">
+              <p><strong>Primary Motivators:</strong> Multi-room suites, privacy, cleanliness, free covered parking, children-friendly living spaces.</p>
+              <p><strong>Target Acquisition Channel:</strong> Snapchat AR Filters, Instagram Reels showcase, TikTok family travel creator partnerships.</p>
+            </div>
+          </div>
+
+          <!-- Persona 3 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3">
+            <div class="flex items-center justify-between text-xs text-amber-400 font-semibold">
+              <span>WD Group</span>
+              <span class="px-2 py-0.5 rounded-full bg-amber-500/20">Luxury Retail / HNWI</span>
+            </div>
+            <h3 class="text-lg font-bold text-white">The Private Villa Owner (Saudi HNWI)</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              <strong>Demographics:</strong> Age 35–60, Saudi nationals building or refurbishing high-end private villas in Riyadh (Al-Hada, Al-Malqa, Al-Nakheel).
+            </p>
+            <div class="text-xs text-slate-400 space-y-1 pt-2 border-t border-slate-800">
+              <p><strong>Primary Motivators:</strong> Solid wood craftsmanship, bespoke sizing, weather-resistant exterior doors, 25-year structural warranty, prestige.</p>
+              <p><strong>Target Acquisition Channel:</strong> Meta Advantage+ Catalog, Instagram high-aesthetic Reels, wood sample swatch box lead magnet.</p>
+            </div>
+          </div>
+
+          <!-- Persona 4 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3">
+            <div class="flex items-center justify-between text-xs text-purple-400 font-semibold">
+              <span>WD Group</span>
+              <span class="px-2 py-0.5 rounded-full bg-purple-500/20">Commercial B2B</span>
+            </div>
+            <h3 class="text-lg font-bold text-white">The Architectural Specifier &amp; Contractor</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              <strong>Demographics:</strong> Interior design directors, hospitality fit-out managers, procurement consultants executing boutique hotels and corporate offices.
+            </p>
+            <div class="text-xs text-slate-400 space-y-1 pt-2 border-t border-slate-800">
+              <p><strong>Primary Motivators:</strong> Strict BOM adherence, factory production capacity (3 plants), fire-rated doors, ZATCA Phase 2 compliance, credit terms.</p>
+              <p><strong>Target Acquisition Channel:</strong> LinkedIn ABM campaigns, Google B2B Search ("توريد ابواب خشب فنادق"), industry whitepapers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- TAB 2: PAID AD PLAYBOOKS -->
+      <!-- ================================================================= -->
+      <div id="tab-panel-paid" class="tab-content hidden space-y-6">
+        <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span>Omnichannel Paid Media Playbooks</span>
+            <span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 text-xs font-mono">Pillar 02</span>
+          </h2>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Multi-platform campaign structures engineered for maximum Saudi market penetration across Google, Meta, Snapchat, and TikTok.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Channel 1: Google Ads -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">Google Ads Engine</span>
+              <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-[11px] font-mono">Search &amp; PMax</span>
+            </div>
+            <h3 class="text-base font-bold text-white">High-Intent Capture &amp; Hotel Ads</h3>
+            <ul class="text-xs text-slate-300 space-y-2 leading-relaxed">
+              <li>• <strong>Brand Defense:</strong> 100% impression share on "Swiss Blue", preventing OTAs from stealing brand equity.</li>
+              <li>• <strong>Google Hotel Ads:</strong> Direct rates integrated with Google Maps and Travel with "Official Site" badge.</li>
+              <li>• <strong>PMax for eCommerce:</strong> Merchant Center dynamic feed displaying WD Group furniture with live inventory across YouTube &amp; Search.</li>
+            </ul>
+            <div class="pt-3 border-t border-slate-800 flex justify-between text-xs text-slate-400">
+              <span>Target ROAS: <strong>6.5x</strong></span>
+              <span>CPA: <strong>&lt; 42 SAR</strong></span>
+            </div>
+          </div>
+
+          <!-- Channel 2: Meta Ads Stack -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Meta (Instagram &amp; FB)</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-[11px] font-mono">ASC &amp; Reels</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Visual Discovery &amp; Instant Forms</h3>
+            <ul class="text-xs text-slate-300 space-y-2 leading-relaxed">
+              <li>• <strong>Advantage+ Shopping (ASC):</strong> Algorithmic creative matching serving personalized catalog collections to Saudi luxury buyers.</li>
+              <li>• <strong>Craftsmanship Reels:</strong> 9:16 vertical videos of CNC wood cutting and hand-finishing at the Najran and Riyadh plants.</li>
+              <li>• <strong>Instant Native Forms:</strong> Sub-second mobile lead capture with pre-filled Saudi mobile verification.</li>
+            </ul>
+            <div class="pt-3 border-t border-slate-800 flex justify-between text-xs text-slate-400">
+              <span>Target ROAS: <strong>4.8x</strong></span>
+              <span>Lead CPA: <strong>&lt; 75 SAR</strong></span>
+            </div>
+          </div>
+
+          <!-- Channel 3: Snapchat & TikTok -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Snapchat &amp; TikTok</span>
+              <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[11px] font-mono">AR &amp; Spark Ads</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Saudi Demographic Dominance</h3>
+            <ul class="text-xs text-slate-300 space-y-2 leading-relaxed">
+              <li>• <strong>Snapchat AR Lenses:</strong> Prospective villa owners place virtual doors and furniture inside their homes.</li>
+              <li>• <strong>Dynamic Product Ads (DPA):</strong> Retargeting hotel visitors who checked specific room availability.</li>
+              <li>• <strong>TikTok Spark Ads:</strong> Boosting organic reviews from verified Saudi lifestyle creators for authentic reach.</li>
+            </ul>
+            <div class="pt-3 border-t border-slate-800 flex justify-between text-xs text-slate-400">
+              <span>Target ROAS: <strong>4.2x</strong></span>
+              <span>Video Hook: <strong>&gt; 42%</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- TAB 3: SEO & LOCAL SEARCH -->
+      <!-- ================================================================= -->
+      <div id="tab-panel-seo" class="tab-content hidden space-y-6">
+        <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span>Organic Authority, Schema &amp; Local Maps Mastery</span>
+            <span class="px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 text-xs font-mono">Pillar 03</span>
+          </h2>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Capturing high-converting local organic traffic through audited Google Business Profiles and microdata schema.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Local Search Architecture</span>
+            <h3 class="text-lg font-bold text-white">Google Business Profile (GBP) Optimization</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Managing verified profiles across all 6 Swiss Blue properties and WD Group showrooms in Riyadh, Najran, and Jeddah:
+            </p>
+            <ul class="text-xs text-slate-400 space-y-1.5 pt-2">
+              <li>• <strong>Exact NAP Consistency:</strong> Arabic and English standardized registration matching municipal trade registers.</li>
+              <li>• <strong>Automated Review Generation:</strong> WhatsApp triggers sent 3 hours post-stay; target 15+ verified 5-star reviews weekly.</li>
+              <li>• <strong>Local Pack Dominance:</strong> Ranking #1 in Google Maps 3-Pack for "شقق فندقية حي الروضة" and "معارض ابواب خشب الرياض".</li>
+            </ul>
+          </div>
+
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3">
+            <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Technical SEO &amp; Schema</span>
+            <h3 class="text-lg font-bold text-white">Structured Data &amp; Core Web Vitals</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Injecting automated JSON-LD structured data into Next.js App Router for rich snippets:
+            </p>
+            <ul class="text-xs text-slate-400 space-y-1.5 pt-2">
+              <li>• <code>@type: Hotel</code> &amp; <code>LodgingBusiness</code> with live amenities, pricing, geo coordinates, and room containment.</li>
+              <li>• <code>@type: Product</code> with ZATCA GTIN, price currency (SAR), reviews, and stock availability.</li>
+              <li>• <strong>Sub-Second Speed:</strong> LCP &lt; 1.2s, INP &lt; 100ms, and zero Cumulative Layout Shift (CLS).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- TAB 4: CRO & FUNNEL ARCHITECTURE -->
+      <!-- ================================================================= -->
+      <div id="tab-panel-cro" class="tab-content hidden space-y-6">
+        <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span>Conversion Rate Optimization (CRO) &amp; Abandonment Recovery</span>
+            <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-300 text-xs font-mono">Pillar 04</span>
+          </h2>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Eliminating checkout friction and deploying psychological incentives that systematically recover abandoned carts and incomplete hotel bookings.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Stage 1: In-Flight</span>
+            <h3 class="text-base font-bold text-white">Frictionless Checkout</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              1-Click Mada &amp; Apple Pay via Moyasar; Tamara &amp; Tabby 4-month zero-interest installments; transparent live pricing compared against OTAs.
+            </p>
+          </div>
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Stage 2: +15 Mins</span>
+            <h3 class="text-base font-bold text-white">Instant WhatsApp Ping</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Automated message via WhatsApp Cloud API offering concierge booking assistance or instant custom size confirmation for furniture buyers.
+            </p>
+          </div>
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3">
+            <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">Stage 3: +24 Hours</span>
+            <h3 class="text-base font-bold text-white">Dynamic Retargeting &amp; Perk</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Dynamic ad showing the exact suite or furniture item viewed, bundled with complimentary late check-out or free white-glove installation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- TAB 5: MARKETING AUTOMATION & CRM -->
+      <!-- ================================================================= -->
+      <div id="tab-panel-automation" class="tab-content hidden space-y-6">
+        <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span>Marketing Automation &amp; CRM Architecture</span>
+            <span class="px-2.5 py-0.5 rounded-md bg-teal-500/20 text-teal-300 text-xs font-mono">Pillar 05</span>
+          </h2>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Unifying WhatsApp Business Cloud API, Zoho CRM, and Odoo 19 ERP into an automated, zero-latency lead distribution system.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <h3 class="text-base font-bold text-white">Automated Lead Routing Topology</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs">
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700 space-y-1">
+              <span class="text-blue-400 font-bold">1. Webhook Capture</span>
+              <p class="text-slate-300">Lead submits form or RFQ on Swiss Blue or WD Group.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700 space-y-1">
+              <span class="text-emerald-400 font-bold">2. Instant WhatsApp</span>
+              <p class="text-slate-300">Meta Cloud API sends branded Arabic greeting &amp; PDF catalog.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700 space-y-1">
+              <span class="text-indigo-400 font-bold">3. Zoho CRM Sync</span>
+              <p class="text-slate-300">Record auto-created with full UTM tags and lead score.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700 space-y-1">
+              <span class="text-amber-400 font-bold">4. Sales Cliq Alert</span>
+              <p class="text-slate-300">On-duty engineer pinged with a 15-min SLA response countdown.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- TAB 6: MARTECH STACK & SERVER-SIDE TRACKING -->
+      <!-- ================================================================= -->
+      <div id="tab-panel-martech" class="tab-content hidden space-y-6">
+        <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span>MarTech Infrastructure &amp; Server-Side Tracking (CAPI)</span>
+            <span class="px-2.5 py-0.5 rounded-md bg-cyan-500/20 text-cyan-300 text-xs font-mono">Pillar 06</span>
+          </h2>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            100% signal preservation bypassing iOS ad-blockers via Google Tag Manager Server-Side on Cloud Run, Meta CAPI, and GA4 BigQuery.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3">
+            <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Server-Side Proxy Architecture</span>
+            <h3 class="text-base font-bold text-white">Google Cloud Run GTM Proxy</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Client requests post to first-party subdomain <code>stg.dubaiincairo.com</code>. The container normalizes and securely SHA-256 hashes customer phone and email before dispatching to Meta CAPI, Google Ads, and TikTok APIs.
+            </p>
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-[11px] font-mono text-slate-400">
+              <code>deduplication_key = event_name + transaction_id</code><br>
+              <code>match_rate = 98.4% (Zero Over-counting)</code>
+            </div>
+          </div>
+
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3">
+            <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">Attribution Intelligence</span>
+            <h3 class="text-base font-bold text-white">Data-Driven Attribution (DDA)</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Evaluating holistic customer journey touchpoints across TikTok inspiration, Google Search intent, and WhatsApp checkout assistance. Evaluated through Blended Marketing Efficiency Ratio (MER).
+            </p>
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-[11px] font-mono text-slate-400">
+              <code>MER = Total Revenue (SAR) / Total Ad Spend (SAR)</code><br>
+              <code>Target: MER &gt; 5.5x across ecosystem</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- TAB 7: BUDGET ALLOCATION & INTERACTIVE ROAS SIMULATOR -->
+      <!-- ================================================================= -->
+      <div id="tab-panel-budget" class="tab-content hidden space-y-6">
+        <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span>Budget Allocation &amp; Interactive ROAS Simulator</span>
+            <span class="px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 text-xs font-mono">Pillar 07</span>
+          </h2>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Simulate ad spend scaling, projected direct booking volumes, commercial fit-out leads, and expected net profit.
+          </p>
+        </div>
+
+        <!-- SIMULATOR CONTROLS & OUTPUT -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="glass-card rounded-2xl p-6 space-y-5 lg:col-span-1">
+            <h3 class="text-base font-bold text-white">Spend Control Slider</h3>
+            <div class="space-y-2">
+              <div class="flex justify-between text-xs">
+                <span class="text-slate-400">Monthly Ad Budget</span>
+                <span class="text-blue-400 font-bold font-mono" id="budget-display">100,000 SAR</span>
+              </div>
+              <input type="range" id="budget-slider" min="20000" max="300000" step="5000" value="100000" oninput="calculateSimulator()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                <span>20k SAR</span>
+                <span>150k SAR</span>
+                <span>300k SAR</span>
+              </div>
+            </div>
+
+            <div class="space-y-2 pt-2 border-t border-slate-800">
+              <label class="text-xs text-slate-400">Target Efficiency Mode</label>
+              <select id="efficiency-mode" onchange="calculateSimulator()" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
+                <option value="conservative">Conservative (ROAS: 4.2x)</option>
+                <option value="target" selected>Target Baseline (ROAS: 5.5x)</option>
+                <option value="aggressive">Aggressive Peak Season (ROAS: 7.2x)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6 space-y-4 lg:col-span-2">
+            <h3 class="text-base font-bold text-white">Projected Performance Output</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+              <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700">
+                <span class="text-[11px] text-slate-400 block">Gross Revenue</span>
+                <span class="text-lg sm:text-xl font-bold text-emerald-400 font-mono mt-1 block" id="out-revenue">550,000 SAR</span>
+              </div>
+              <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700">
+                <span class="text-[11px] text-slate-400 block">Swiss Blue Bookings</span>
+                <span class="text-lg sm:text-xl font-bold text-blue-400 font-mono mt-1 block" id="out-bookings">920 Stays</span>
+              </div>
+              <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700">
+                <span class="text-[11px] text-slate-400 block">WD Furniture Leads</span>
+                <span class="text-lg sm:text-xl font-bold text-amber-400 font-mono mt-1 block" id="out-leads">350 RFQs</span>
+              </div>
+              <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700">
+                <span class="text-[11px] text-slate-400 block">Commission Saved</span>
+                <span class="text-lg sm:text-xl font-bold text-purple-400 font-mono mt-1 block" id="out-saved">98,000 SAR</span>
+              </div>
+            </div>
+
+            <!-- Recommended Channel Breakdown for Selected Budget -->
+            <div class="pt-4 border-t border-slate-800 space-y-2">
+              <span class="text-xs font-semibold text-slate-300 block">Recommended Channel Distribution</span>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800">
+                  <span class="text-blue-400 font-bold block">Google Ads (40%)</span>
+                  <span class="text-slate-300 font-mono text-[11px]" id="dist-google">40,000 SAR</span>
+                </div>
+                <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800">
+                  <span class="text-indigo-400 font-bold block">Meta Stack (30%)</span>
+                  <span class="text-slate-300 font-mono text-[11px]" id="dist-meta">30,000 SAR</span>
+                </div>
+                <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800">
+                  <span class="text-amber-400 font-bold block">Snap &amp; TikTok (25%)</span>
+                  <span class="text-slate-300 font-mono text-[11px]" id="dist-snap">25,000 SAR</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- TAB 8: EXECUTION SOPS -->
+      <!-- ================================================================= -->
+      <div id="tab-panel-sops" class="tab-content hidden space-y-6">
+        <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span>Standard Operating Procedures (SOPs)</span>
+            <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-300 text-xs font-mono">Pillar 08</span>
+          </h2>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Click any procedure card to view detailed step-by-step triggers, operational checklists, and escalation rules.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- SOP 1 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3 cursor-pointer hover:border-blue-500/60 transition" onclick="openSopModal('SOP MKT-01: Weekly Paid Ad Campaign Launch & A/B Creative Testing', 'Performance Marketing Specialist', '1. Export previous 7-day creative reports from Meta & Google.\\n2. Pause underperforming ads (ROAS < 3.0x or CTR < 1.2%).\\n3. Deploy 3 new creative variations (1 hook video, 1 UGC review, 1 carousel).\\n4. Apply standardized UTM tracking parameters.\\n5. Test with 15% daily budget allocation for 72 hours before scaling.')">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-mono text-blue-400 font-bold">SOP MKT-01</span>
+              <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-[10px]">Weekly</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Paid Ad Campaign Launch &amp; A/B Testing</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Routine creative refresh protocol to prevent ad fatigue and identify high-converting Saudi visual hooks.</p>
+            <span class="text-xs text-blue-400 font-semibold flex items-center gap-1 pt-2">Open Full Procedure →</span>
+          </div>
+
+          <!-- SOP 2 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3 cursor-pointer hover:border-emerald-500/60 transition" onclick="openSopModal('SOP MKT-02: Daily ROAS & Spend Monitoring & Anomaly Escalation', 'Media Buyer / Marketing Officer', '1. Log into Google Ads, Meta, and Snapchat Ads Manager at 10:00 and 17:00.\\n2. Confirm spend pacing is within ±10% of daily target cap.\\n3. Check CPA benchmarks (Swiss Blue <= 45 SAR, WD Group <= 85 SAR).\\n4. If CPA exceeds threshold by > 35% for 2 consecutive days, check booking engine uptime and payment gateway status.\\n5. Narrow audience targeting or revert to winning creatives.')">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-mono text-emerald-400 font-bold">SOP MKT-02</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px]">Daily (2x)</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Daily ROAS &amp; Spend Monitoring</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Pacing check and immediate CPA anomaly identification to protect client budget efficiency.</p>
+            <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1 pt-2">Open Full Procedure →</span>
+          </div>
+
+          <!-- SOP 3 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3 cursor-pointer hover:border-indigo-500/60 transition" onclick="openSopModal('SOP MKT-03: Server-Side Tracking Health & Deduplication Audit', 'MarTech Engineer / Webmaster', '1. Open Meta Events Manager -> Select Master Pixel.\\n2. Verify Event Quality Match Score for Purchase and Lead is >= 8.5/10.\\n3. Check deduplication rate between browser and server is > 98%.\\n4. Verify Google Ads Enhanced Conversions status is Active.\\n5. Check Cloud Run GTM container CPU utilization (< 40%) and SSL validity.')">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-mono text-indigo-400 font-bold">SOP MKT-03</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-[10px]">Bi-weekly</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Tracking Health &amp; CAPI Audit</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Auditing server-side proxy event match scores and cryptographic parameter hashing.</p>
+            <span class="text-xs text-indigo-400 font-semibold flex items-center gap-1 pt-2">Open Full Procedure →</span>
+          </div>
+
+          <!-- SOP 4 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3 cursor-pointer hover:border-teal-500/60 transition" onclick="openSopModal('SOP MKT-04: WhatsApp Automated Workflow & CRM Sync Audit', 'CRM Administrator', '1. Submit test inquiry form on website.\\n2. Verify automated WhatsApp confirmation arrives within 30 seconds.\\n3. Check Zoho CRM for automatic record creation and UTM attribution.\\n4. Confirm internal Zoho Cliq alert pinged on-duty sales engineer.\\n5. Verify lead status reflects in Odoo 19 ERP.')">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-mono text-teal-400 font-bold">SOP MKT-04</span>
+              <span class="px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 text-[10px]">Weekly</span>
+            </div>
+            <h3 class="text-base font-bold text-white">WhatsApp &amp; CRM Sync Verification</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">End-to-end verification of customer lead routing from website to WhatsApp and Odoo CRM.</p>
+            <span class="text-xs text-teal-400 font-semibold flex items-center gap-1 pt-2">Open Full Procedure →</span>
+          </div>
+
+          <!-- SOP 5 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3 cursor-pointer hover:border-amber-500/60 transition" onclick="openSopModal('SOP MKT-05: Local SEO & Google Business Review Velocity', 'Brand Reputation Officer', '1. Log into Google Business Profile Manager for all 6 properties.\\n2. Respond to positive reviews (4-5 stars) in Arabic within 12 hours.\\n3. For negative reviews (1-3 stars), investigate incident with Hotel GM, draft response, and file ticket.\\n4. Ensure weekly review velocity >= 15 verified reviews per hotel.')">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-mono text-amber-400 font-bold">SOP MKT-05</span>
+              <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px]">Daily</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Local SEO &amp; Google Reviews</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Maintaining Google Maps 3-Pack rankings and 4.6+ star hospitality reputation.</p>
+            <span class="text-xs text-amber-400 font-semibold flex items-center gap-1 pt-2">Open Full Procedure →</span>
+          </div>
+
+          <!-- SOP 6 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-3 cursor-pointer hover:border-purple-500/60 transition" onclick="openSopModal('SOP MKT-06: Seasonal Campaign & Banner Synchronization', 'Creative Director / Content Admin', '1. Finalize seasonal promotion 14 days in advance.\\n2. Prepare approved creative assets in 1:1, 9:16, and 16:9 ratios.\\n3. Log into Sanity CMS Studio (swissblue.sa/studio) and update bilingual promo banners.\\n4. Enable time-gated promotional popup in frontend.\\n5. Schedule matching paid ads on Google, Meta, and Snap to launch at 00:01.')">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-mono text-purple-400 font-bold">SOP MKT-06</span>
+              <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[10px]">Seasonal</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Seasonal Campaign &amp; CMS Sync</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Coordinated launch of website banners, Sanity CMS popups, and ad creative for Saudi holidays.</p>
+            <span class="text-xs text-purple-400 font-semibold flex items-center gap-1 pt-2">Open Full Procedure →</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- INTERACTIVE SOP POPUP MODAL -->
+    <div id="sop-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden">
+      <div class="glass-card rounded-3xl p-6 sm:p-8 max-w-2xl w-full border-blue-500/40 bg-slate-900/95 shadow-2xl space-y-5">
+        <div class="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
+          <div>
+            <span id="modal-role" class="text-xs text-blue-400 font-mono font-bold uppercase tracking-wider block mb-1">Designated Role</span>
+            <h3 id="modal-title" class="text-lg sm:text-xl font-bold text-white">SOP Procedure Title</h3>
+          </div>
+          <button onclick="closeModal()" class="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition">
+            ✕
+          </button>
+        </div>
+        <div class="text-xs sm:text-sm text-slate-300 space-y-3 leading-relaxed max-h-[60vh] overflow-y-auto pr-2" id="modal-body">
+          <!-- Populated by JS -->
+        </div>
+        <div class="flex justify-end pt-3 border-t border-slate-800">
+          <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white shadow-lg shadow-blue-500/25 transition">
+            Close Procedure
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="pt-10 pb-6 text-center text-xs text-slate-500 border-t border-slate-800/80 space-y-2">
+      <p>Dubai in Cairo &copy; 2026 · Digital Marketing Growth Strategy &amp; Attribution Hub</p>
+      <p class="text-slate-600">Enterprise Omnichannel Ad Operations · 100% Cloud Verified</p>
+    </footer>
+
+  </main>
+
+  <!-- JAVASCRIPT ENGINE -->
+  <script>
+    // Tab Switcher
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      const activePanel = document.getElementById('tab-panel-' + tabId);
+      if (activePanel) activePanel.classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-500/25');
+        btn.classList.add('bg-slate-800/90', 'text-slate-400');
+      });
+
+      const activeBtn = document.getElementById('tab-btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-800/90', 'text-slate-400');
+        activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-500/25');
+      }
+    }
+
+    // Modal Controller
+    function openSopModal(title, role, bodyText) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-role').textContent = 'Designated Role: ' + role;
+      
+      const formattedHtml = bodyText.split('\\n').map(line => {
+        return `<p class="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50">${line}</p>`;
+      }).join('');
+      
+      document.getElementById('modal-body').innerHTML = formattedHtml;
+      document.getElementById('sop-modal').classList.remove('hidden');
+    }
+    function closeModal() {
+      document.getElementById('sop-modal').classList.add('hidden');
+    }
+
+    // Interactive ROAS Simulator
+    function calculateSimulator() {
+      const budget = parseInt(document.getElementById('budget-slider').value);
+      const mode = document.getElementById('efficiency-mode').value;
+      
+      document.getElementById('budget-display').textContent = budget.toLocaleString() + ' SAR';
+      
+      let multiplier = 5.5;
+      if (mode === 'conservative') multiplier = 4.2;
+      if (mode === 'aggressive') multiplier = 7.2;
+
+      const grossRev = Math.round(budget * multiplier);
+      const bookings = Math.round((budget * 0.45) / 48); // avg 48 SAR CPA
+      const leads = Math.round((budget * 0.35) / 95);    // avg 95 SAR CPA
+      const commissionSaved = Math.round((bookings * 550) * 0.20); // 20% OTA savings on 550 SAR booking
+
+      document.getElementById('out-revenue').textContent = grossRev.toLocaleString() + ' SAR';
+      document.getElementById('out-bookings').textContent = bookings.toLocaleString() + ' Stays';
+      document.getElementById('out-leads').textContent = leads.toLocaleString() + ' RFQs';
+      document.getElementById('out-saved').textContent = commissionSaved.toLocaleString() + ' SAR';
+
+      document.getElementById('dist-google').textContent = Math.round(budget * 0.40).toLocaleString() + ' SAR';
+      document.getElementById('dist-meta').textContent = Math.round(budget * 0.30).toLocaleString() + ' SAR';
+      document.getElementById('dist-snap').textContent = Math.round(budget * 0.25).toLocaleString() + ' SAR';
+    }
+
+    // Search Filter
+    function filterCards() {
+      const q = document.getElementById('filter-input').value.toLowerCase();
+      document.querySelectorAll('.tab-content:not(.hidden) .glass-card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(q)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Spotlight Mouse Tracker
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // Scroll Progress
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('scroll-progress-bar').style.width = scrolled + '%';
+    });
+
+    // Language Switcher
+    function setLanguage(lang) {
+      const html = document.documentElement;
+      if (lang === 'ar') {
+        html.setAttribute('dir', 'rtl');
+        html.setAttribute('lang', 'ar');
+        document.getElementById('lang-ar').classList.add('bg-blue-600', 'text-white');
+        document.getElementById('lang-ar').classList.remove('text-slate-400');
+        document.getElementById('lang-en').classList.remove('bg-blue-600', 'text-white');
+        document.getElementById('lang-en').classList.add('text-slate-400');
+        document.getElementById('nav-system-label').textContent = 'المشروع 06: استراتيجية التسويق الرقمي ومنظومة التتبع';
+        document.getElementById('hero-title').innerHTML = 'استراتيجية النمو والتسويق الرقمي و <span class="bg-gradient-to-l from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">منظومة الإسناد الذكية</span>';
+        document.getElementById('hero-desc').textContent = 'منظومة تسويقية متكاملة متعددة القنوات مصممة لمضاعفة الحجوزات المباشرة لسلسلة فنادق سويس بلو (وتوفير عمولات منصات الحجز البالغة 18%–25%) واستقطاب طلبات تصنيع الأخشاب الفاخرة لمجموعة دبليو دي للأعمال.';
+      } else {
+        html.setAttribute('dir', 'ltr');
+        html.setAttribute('lang', 'en');
+        document.getElementById('lang-en').classList.add('bg-blue-600', 'text-white');
+        document.getElementById('lang-en').classList.remove('text-slate-400');
+        document.getElementById('lang-ar').classList.remove('bg-blue-600', 'text-white');
+        document.getElementById('lang-ar').classList.add('text-slate-400');
+        document.getElementById('nav-system-label').textContent = 'Project 06: Digital Marketing Growth Strategy';
+        document.getElementById('hero-title').innerHTML = 'Digital Marketing Growth Strategy &amp; <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent">Attribution Hub</span>';
+        document.getElementById('hero-desc').textContent = 'An omnichannel performance marketing architecture designed to systematically drive direct guest bookings for Swiss Blue Hotels (bypassing 18%–25% OTA commissions) and attract high-value commercial wood joinery & luxury furniture buyers for WD Group.';
+      }
+    }
+
+    // Initialize Simulator on load
+    calculateSimulator();
+  </script>
+</body>
+</html>
