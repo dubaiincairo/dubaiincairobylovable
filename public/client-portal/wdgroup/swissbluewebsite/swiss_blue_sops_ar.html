@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فنادق سويس بلو — إجراءات تشغيل وإدارة الموقع الإلكتروني (SOPs)</title>
+  
+  <!-- Google Fonts: IBM Plex Sans Arabic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS allowlisted in Antigravity -->
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  
+  <style>
+    *, *::before, *::after {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.7); }
+
+    /* Glassmorphism */
+    .glass-card {
+      background: rgba(19, 29, 46, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateZ(0);
+    }
+    .glass-card:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      transform: translateY(-3px) translateZ(0);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5);
+    }
+    .glass-nav {
+      background: rgba(11, 17, 29, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Spotlight Card */
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.16), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    /* Modal Animation */
+    @keyframes modalBackdrop { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalDialog {
+      0% { opacity: 0; transform: scale(0.95) translateY(12px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-backdrop-anim { animation: modalBackdrop 0.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .modal-dialog-anim { animation: modalDialog 0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    /* Ambient Floating Orbs */
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    /* Active Filter Tab */
+    .tab-btn.active {
+      background: rgba(37, 99, 235, 0.25);
+      border-color: rgba(59, 130, 246, 0.6);
+      color: #93c5fd;
+    }
+
+    /* Print Styles */
+    @media print {
+      body { background: #ffffff !important; color: #0f172a !important; }
+      .no-print, header, .ambient-orb-1, .ambient-orb-2, #modal-overlay, #filter-container, #sop-search-container { display: none !important; }
+      .glass-card { background: #ffffff !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid !important; }
+      .text-white { color: #0f172a !important; }
+      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+    }
+  </style>
+</head>
+<body class="bg-[#0b0f19] text-[#f8fafc] antialiased min-h-screen selection:bg-blue-600 selection:text-white pb-20 relative text-right">
+
+  <!-- هالات الإضاءة الخلفية المتحركة -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-20 -right-40 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+    <div class="ambient-orb-2 absolute top-1/3 -left-40 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <!-- الشريط العلوي الثابت -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-800 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/25 border border-blue-400/40 font-mono">
+          SB
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white">فنادق سويس بلو</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/30">
+              إجراءات تشغيل الموقع الإلكتروني
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            دليل بروتوكولات حوكمة المحتوى وإدارة المنصة الرقمية للموظفين
+          </p>
+        </div>
+      </div>
+
+      <!-- أدوات التنقل واللغة -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/manuals/wdgroup/swissbluewebsite/features-ar" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition">
+          الانتقال إلى دليل المميزات ←
+        </a>
+        <a href="/manuals/wdgroup/swissbluewebsite/sops-en" class="px-3 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-xs font-bold text-blue-300 border border-blue-500/30 transition font-mono">
+          English (100% LTR)
+        </a>
+        <a href="/manuals/wdgroup/swissbluewebsite/ar" class="hidden md:inline-flex px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white transition shadow-lg shadow-blue-500/20">
+          منصة سويس بلو
+        </a>
+        <a href="/manuals/wdgroup/ar" class="hidden lg:inline-flex px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition">
+          بوابة مجموعة دبليو دي للأعمال
+        </a>
+        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="طباعة أو تصدير ملف بي دي إف">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- المحتوى الرئيسي -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8 relative z-10">
+
+    <!-- لافتة التقديم التنفيذية -->
+    <section class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-6 sm:p-10 shadow-2xl">
+      <div class="space-y-4 max-w-4xl">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-300 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+          <span>إدارة وحوكمة المنصة الرقمية • 20 إجراء تشغيل معتمد وموثق</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          إجراءات تشغيل الموقع الإلكتروني (SOPs)
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          خطوات إجرائية معتمدة وموجهة لفرق التسويق، مدراء المحتوى، منسقي مبيعات الشركات، مسؤولي الموارد البشرية، والدعم التقني. يركز هذا الدليل حصرياً على حوكمة الموقع الإلكتروني، تحديث قاعدة معرفة الذكاء الاصطناعي، ضغط وإدارة الصور، فرز طلبات الإدارة الخلفية، وصيانة مسارات الإشعارات السحابية.
+        </p>
+      </div>
+
+      <!-- حقل البحث والإحصائيات -->
+      <div class="mt-8 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4" id="sop-search-container">
+        <div class="relative w-full sm:w-96">
+          <input type="text" id="sop-search" oninput="handleSearch(this.value)" placeholder="ابحث عن الإجراء بالعنوان، الدور الوظيفي، أو الكود..." class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-blue-500 transition">
+        </div>
+        <div class="flex items-center gap-4 text-xs font-mono">
+          <div class="px-3 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700">
+            <span class="text-slate-400 font-sans">إجمالي الإجراءات:</span>
+            <span class="text-blue-400 font-bold mr-1.5" id="active-count">20</span>
+          </div>
+          <div class="text-slate-400 hidden md:block">
+            <span>نظام المحتوى:</span>
+            <span class="text-cyan-400 font-bold mx-1">Sanity Studio v3</span>
+            <span class="text-slate-600 mx-1.5">|</span>
+            <span>الشبكة السحابية:</span>
+            <span class="text-purple-400 font-bold mx-1">Vercel Edge CDN</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- شريط تصفية المحاور التشغيلية -->
+    <section class="space-y-2 no-print" id="filter-container">
+      <div class="flex items-center justify-between">
+        <span class="text-xs uppercase tracking-wider font-bold text-slate-400">تصفية حسب المحور التشغيلي للموقع</span>
+        <span class="text-[11px] text-slate-500">مرر أفقياً للاطلاع على كافة المحاور</span>
+      </div>
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="pillar-tabs">
+        <button onclick="setFilter('all')" class="tab-btn active shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          كافة الإجراءات (20)
+        </button>
+        <button onclick="setFilter('ai')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          1. المساعد الذكي وقاعدة المعرفة (3)
+        </button>
+        <button onclick="setFilter('media')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          2. الوسائط المرئية وإدارة الصور (2)
+        </button>
+        <button onclick="setFilter('cms')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          3. إدارة المحتوى والحملات التسويقية (3)
+        </button>
+        <button onclick="setFilter('admin')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          4. فرز طلبات الإدارة الخلفية (4)
+        </button>
+        <button onclick="setFilter('notify')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          5. مسارات الإشعارات والربط البرمجي (3)
+        </button>
+        <button onclick="setFilter('security')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          6. الأمان، الكاش والامتثال النظامي (5)
+        </button>
+      </div>
+    </section>
+
+    <!-- شبكة بطاقات الإجراءات (يتم ملؤها عبر الجافاسكريبت) -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="sops-grid">
+      <!-- يتم حقن البطاقات تلقائياً -->
+    </section>
+
+  </main>
+
+  <!-- النافذة المنبثقة التفاعلية -->
+  <div id="modal-overlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden modal-backdrop-anim">
+    <div class="glass-card modal-dialog-anim rounded-2xl max-w-2xl w-full p-6 sm:p-8 space-y-6 border border-slate-700 bg-slate-900/95 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      
+      <!-- ترويسة النافذة المنبثقة -->
+      <div class="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/20 text-blue-300" id="modal-sop-code">SOP-SB-WEB-01</span>
+            <span class="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-300" id="modal-sop-pillar">المحور</span>
+            <span class="text-xs text-slate-400 block sm:inline" id="modal-sop-role">المسؤول: الأخصائي</span>
+          </div>
+          <h2 class="text-xl font-extrabold text-white mt-2" id="modal-sop-title">عنوان الإجراء التشغيلي</h2>
+        </div>
+        <button onclick="closeSopModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- محتوى الإجراء المنظم -->
+      <div class="space-y-5 text-xs text-slate-300" id="modal-sop-content">
+        <!-- يتم الحقن عبر الجافاسكريبت -->
+      </div>
+
+      <!-- أزرار الإجراءات السفلية -->
+      <div class="flex items-center justify-between pt-4 border-t border-slate-800">
+        <button onclick="copyModalContent()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs flex items-center gap-1.5 transition">
+          <svg class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+          <span id="copy-btn-text">نسخ خطوات الإجراء</span>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button onclick="window.print()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition">
+            طباعة الإجراء
+          </button>
+          <button onclick="closeSopModal()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-lg shadow-blue-500/25">
+            إغلاق النافذة
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // قاعدة بيانات إجراءات تشغيل الموقع الإلكتروني (20 إجراءً معتمداً باللغة العربية)
+    const sopsData = [
+      {
+        id: 0,
+        code: "SOP-SB-WEB-01",
+        category: "ai",
+        pillarName: "المساعد الذكي وقاعدة المعرفة",
+        role: "أخصائي التسويق / منسق العمليات",
+        title: "تحديث قاعدة معرفة المساعد الذكي والأسئلة الشائعة",
+        description: "مزامنة وتحديث سياسات الفنادق، أوقات تسجيل الوصول، المرافق والخدمات، والإرشادات السياحية ضمن سياق المساعد الذكي دون الحاجة لأي تعديل برمجي.",
+        objective: "ضمان تقديم المساعد الذكي الثنائي اللغة (OpenAI gpt-4o و Google Gemini) لمعلومات فندقية دقيقة ومحدثة على مدار الساعة ودون أي هلوسة في الإجابات.",
+        prerequisites: "حساب Google Workspace رسمي ومعتمد للوصول إلى استوديو إدارة المحتوى على الرابط https://swissblue.sa/studio.",
+        steps: [
+          "الدخول إلى الرابط https://swissblue.sa/studio عبر متصفح كروم وتسجيل الدخول بالبريد المؤسسي المعتمد.",
+          "من القائمة الجانبية للاستوديو، النقر على قسم 'قاعدة معرفة الذكاء الاصطناعي' (AI Knowledge Base) أو 'الأسئلة الشائعة'.",
+          "اختيار الفندق أو الفرع المستهدف (مثل: توليب الروضة للشقق المخدومة أو فيناس الرياض).",
+          "تحديث بيانات السياسات التشغيلية في كلا الحقلين العربي والإنجليزي بالتزامن (مثل: موعد الدخول القياسي 15:00، المغادرة 12:00، شروط النقل وتوفر المواقف).",
+          "في حال إغلاق أو تعديل أي خدمة مؤقتاً، يجب تحديث المعلومة في الاستوديو لمنع المساعد الذكي من تقديم وعود غير متاحة للنزلاء.",
+          "النقر على زر النشر الأخضر (Publish) أسفل الشاشة لحفظ ونشر التعديلات فورياً.",
+          "فتح نافذة محادثة تجريبية على الموقع بوضع التصفح الخفي وتوجيه سؤال تجريبي للتأكد من استجابة المساعد بالسياسة المحدثة."
+        ],
+        verification: "يقوم المساعد الذكي بالرد على أسئلة النزلاء باللغتين العربية والإنجليزية بدقة تامة وبما يطابق التحديثات المنشورة حديثاً.",
+        caution: "يُحظر تماماً إدخال هوامش الأرباح المالية السرية أو أرقام الهواتف الشخصية للموظفين ضمن نصوص المساعد الذكي."
+      },
+      {
+        id: 1,
+        code: "SOP-SB-WEB-02",
+        category: "ai",
+        pillarName: "المساعد الذكي وقاعدة المعرفة",
+        role: "مشرف علاقات النزلاء / ضبط الجودة",
+        title: "تدقيق سجلات محادثات الذكاء الاصطناعي وتصحيح الإجابات الغامضة",
+        description: "مراجعة دورية منتظمة لمحادثات النزلاء الحقيقية مع المساعد الذكي، واكتشاف الإجابات الغامضة أو الحالات الخاصة وسد الفجوات المعرفية.",
+        objective: "الارتقاء المستمر بجودة الحوار الذكي ومنع تكرار أسئلة التوضيح أو فقدان النزلاء أثناء تصفحهم للموقع.",
+        prerequisites: "صلاحية الوصول إلى لوحة تحكم الإدارة على الرابط `/admin/submissions/chat-leads` واستوديو Sanity.",
+        steps: [
+          "تسجيل الدخول إلى لوحة إدارة سويس بلو عبر الرابط swissblue.sa/admin.",
+          "الانتقال إلى تبويب 'استفسارات ومحادثات المساعد الذكي' لمراجعة سلاسل الحوار الأخيرة.",
+          "تصفية المحادثات التي كرر فيها النزيل سؤاله أو طلب التحدث مع موظف خدمة بشري.",
+          "تحديد السياسة غير المفهومة أو المصطلح الناقص (مثل: شروط اصطحاب الحيوانات الأليفة، رسوم السرير الإضافي، شروط استرداد التأمين).",
+          "صياغة الإجابة الفندقية الرسمية المعتمدة بالتنسيق مع الإدارة العامة.",
+          "الدخول إلى استوديو المحتوى وإضافة السؤال والإجابة المعتمدة كزوج جديد ضمن الأسئلة الشائعة للفندق.",
+          "نشر التعديل لتحديث التوجيه البرمجي للمساعد عبر نماذج الذكاء الاصطناعي فورياً."
+        ],
+        verification: "الاستفسارات المستقبلية المشابهة تتلقى إجابات فورية ودقيقة وموثقة من المساعد الآلي دون ارتباك.",
+        caution: "يجب تحويل أي استفسار يتعلق بنزاعات مالية أو مطالبات تعويض فورياً إلى مدير الفترة البشري وتجنب الرد الآلي عليها."
+      },
+      {
+        id: 2,
+        code: "SOP-SB-WEB-03",
+        category: "ai",
+        pillarName: "المساعد الذكي وقاعدة المعرفة",
+        role: "مسؤول النظم والتقنية / DevOps",
+        title: "إدارة حدود استهلاك الدردشة والوقاية من الهجمات الآلية",
+        description: "مراقبة وضبط حدود الاستهلاك السحابية عبر Upstash Redis لمنع استنزاف باقات الذكاء الاصطناعي والتصدي لهجمات الروبوتات.",
+        objective: "حماية ميزانية الذكاء الاصطناعي للمنصة من الاستنزاف والتصدي لمحاولات الكشط الآلي مع الحفاظ على سرعة وسلاسة الدردشة للنزلاء الحقيقيين.",
+        prerequisites: "صلاحية الدخول الإداري إلى لوحة Upstash Redis والمتغيرات البيئية في منصة Vercel.",
+        steps: [
+          "فتح لوحة تحكم Upstash Redis وفحص تقارير حركة المرور والطلبات البرمجية على المسار `/api/chat`.",
+          "التحقق من سريان حد الاستهلاك القياسي لكل عنوان IP (20 رسالة في الدقيقة الواحدة).",
+          "في حال حظر أحد عناوين IP الخاصة بالمكتب الرئيسي بالخطأ أثناء الاختبار، يتم إضافته إلى قائمة الاستثناءات في الـ Middleware.",
+          "في حال رصد روبوتات تحاول إرسال مئات الطلبات المتتالية، يتم حظر نطاق الشبكة المعني على مستوى جدار الحماية في Vercel Edge.",
+          "مراجعة لوحة استهلاك الـ Tokens الشهرية في OpenAI و Gemini لمطابقتها مع الميزانية المقررة."
+        ],
+        verification: "تعمل نافذة المحادثة بسلاسة تامة للنزلاء الطبيعيين، مع الرفض الفوري برمز الخطأ 429 لأي روبوتات متكررة.",
+        caution: "يُمنع منعاً باتاً إلغاء حدود الاستهلاك (Rate Limiting) على المسارات العامة لأن ذلك يعرض المنصة لفواتير باهظة."
+      },
+      {
+        id: 3,
+        code: "SOP-SB-WEB-04",
+        category: "media",
+        pillarName: "الوسائط المرئية وإدارة الصور",
+        role: "أخصائي التسويق / المصمم الجرافيكي",
+        title: "رفع وتحديث الصور الاحترافية للفنادق والغرف في Sanity",
+        description: "رفع وتحديث الصور المعمارية والفوتوغرافية للغرف والواجهات مع الالتزام بالمعايير القياسية للضغط لضمان تحميل الصفحة في أقل من ثانيتين.",
+        objective: "إبراز الفخامة الفندقية في كافة فئات الغرف مع تطبيق معايير الضغط الصارمة لحماية مؤشرات أداء الويب الأساسية من Google (Core Web Vitals).",
+        prerequisites: "صلاحية الوصول إلى استوديو Sanity v3 وبرنامج ضغط صور متقدم (مثل Adobe Photoshop أو Squoosh).",
+        steps: [
+          "استلام الصور المعمارية عالية الجودة المعتمدة من المصور الرسمي بعد اعتمادها من الإدارة.",
+          "تحويل كافة الصور إلى صيغة WebP الحديثة مع التأكد الصارم من أن حجم الملف أقل من 350 كيلوبايت للصورة الواحدة.",
+          "ضبط الأبعاد: 1920x1080 بكسل لواجهات العرض الرئيسية (Hero)، و 1080x1080 للصور المربعة ومعارض الغرف.",
+          "الدخول إلى Sanity Studio عبر swissblue.sa/studio ➔ قسم الفنادق ➔ اختيار الفندق المستهدف (مثل سويس بلو جدة).",
+          "الانتقال إلى معرض صور الغرف، حذف الصور القديمة أو المنخفضة الجودة، ورفع الصور الجديدة بصيغة WebP.",
+          "كتابة النص البديل (Alt Text) باللغتين العربية والإنجليزية لتعزيز محركات البحث وتوافق إمكانية الوصول.",
+          "النقر على زر النشر (Publish) ومعاينة تناسق الصور على شاشات الجوال والحواسيب."
+        ],
+        verification: "تظهر الصور بأعلى درجات الوضوح والجاذبية مع حفاظ الموقع على زمن تحميل LCP أقل من 2.2 ثانية.",
+        caution: "يُمنع منعاً باتاً رفع صور خام من الكاميرا مباشرة بصيغة JPEG بحجم يتجاوز 3 ميغابايت لتجنب إبطاء تصفح الجوال."
+      },
+      {
+        id: 4,
+        code: "SOP-SB-WEB-05",
+        category: "media",
+        pillarName: "الوسائط المرئية وإدارة الصور",
+        role: "صانع المحتوى / مسؤول التسويق",
+        title: "نشر الفيديوهات الترويجية والجولات الافتراضية 360 درجة",
+        description: "دمج المقاطع الترويجية القصيرة والجولات التفاعلية الافتراضية للغرف والمرافق دون التأثير على سرعة تصفح الجوال.",
+        objective: "تعزيز الجاذبية الفندقية والقصة البصرية للعلامة التجارية عبر مقاطع الفيديو والجولات الافتراضية السلسة.",
+        prerequisites: "صلاحية تعديل حقول الوسائط في Sanity Studio، ومقاطع فيديو MP4 مضغوطة بحجم أقل من 5 ميغابايت.",
+        steps: [
+          "تجهيز مقطع فيديو ترويجي قصير (مدة 10 إلى 15 ثانية كحد أقصى، بحجم أقل من 5 ميغابايت وبدون مسار صوتي مدمج).",
+          "تسجيل الدخول إلى Sanity Studio ➔ محتوى الموقع العام أو تفاصيل الفندق ➔ حقل وسائط الواجهة (Hero Media).",
+          "رفع ملف الفيديو المضغوط أو إدخال رابط العرض الآمن من شبكة CDN أو Vimeo.",
+          "التأكد من تفعيل سمات التشغيل الآمن للفيديو الصامت: التشغيل التلقائي الصامت، التكرار، والتشغيل المضمن داخل الصفحة.",
+          "رفع صورة غلاف بديلة (Poster Frame) عالية الجودة بصيغة WebP لتظهر عند بطء الاتصال بالإنترنت.",
+          "النقر على زر النشر (Publish) واختبار تشغيل الفيديو على متصفحات Safari و Chrome على أجهزة الجوال."
+        ],
+        verification: "يعمل الفيديو في خلفية الصفحة بتكرار سلس وصامت تماماً، مع ظهور صورة الغلاف البديلة فورياً عند بطء الاتصال.",
+        caution: "يُحظر تفعيل الصوت التلقائي في أي مقاطع على الموقع لمنع إزعاج الزوار وحظر المتصفحات للتشغيل التلقائي."
+      },
+      {
+        id: 5,
+        code: "SOP-SB-WEB-06",
+        category: "cms",
+        pillarName: "إدارة المحتوى والحملات التسويقية",
+        role: "مسؤول التسويق / مدير الموقع",
+        title: "نشر البنرات الموسمية وسلايدر الحملات الترويجية",
+        description: "إطلاق حملات العطلات، اليوم الوطني، عروض يوم التأسيس، والخصومات الموسمية في واجهات الموقع دون الحاجة لمطورين.",
+        objective: "تمكين فريق التسويق من إطلاق وتحديث الحملات الإعلانية وشارات الخصم باللغتين العربية والإنجليزية خلال دقائق معدودة وبصفر تدخل برمجي.",
+        prerequisites: "صلاحية الدخول إلى Sanity Studio والنصوص التسويقية المعتمدة باللغتين.",
+        steps: [
+          "تسجيل الدخول إلى استوديو إدارة المحتوى عبر swissblue.sa/studio.",
+          "من القائمة الجانبية، الانتقال إلى 'محتوى الموقع العام' ➔ 'البنرات الترويجية والعروض'.",
+          "إدخال العنوان الرئيسي، الوصف الإعلاني، ونص زر الإجراء باللغتين العربية والإنجليزية بالتوازي لضمان التوافق التام.",
+          "تحديد مسار الرابط للزر الأساسي (مثل: صفحة الشقق المخدومة `/apartments` أو نموذج التواصل بكود الخصم).",
+          "ضبط شارات العرض الترويجي والعد التنازلي (مثل: عرض اليوم الوطني - خصم 20%).",
+          "تحديد تاريخ ووقت انطلاق الحملة وتاريخ الانتهاء التلقائي للبنر.",
+          "النقر على زر النشر (Publish) والتحقق من ظهور البنر بشكل متناسق في واجهات اليمين لليسار (العربية) واليسار لليمين (الإنجليزية)."
+        ],
+        verification: "ظهور البنر الإعلاني بشكل متجاوب وجذاب على أجهزة الحاسوب والجوال في اللغتين مع تفعيل التوجيه الصحيح للأزرار.",
+        caution: "مراعاة تناسق الخطوط العربية وملاءمة النصوص لشاشات الهواتف الضيقة لتجنب تداخل السطور والكلمات."
+      },
+      {
+        id: 6,
+        code: "SOP-SB-WEB-07",
+        category: "cms",
+        pillarName: "إدارة المحتوى والحملات التسويقية",
+        role: "مشرف التسويق / منسق العمليات",
+        title: "تحديث قائمة المرافق وشارات الحالة التشغيلية (قريباً)",
+        description: "تحديث وتدقيق مرافق الفنادق والتأكد من إرفاق الشارات التنبيهية لأي خدمات قيد الإطلاق لتفادي سوء الفهم.",
+        objective: "منع الخلافات مع النزلاء عند تسجيل الوصول ومنع الشكاوى المتعلقة بالإعلانات المضللة حول مرافق غير متوفرة.",
+        prerequisites: "صلاحية تعديل مخطط الفنادق في Sanity Studio.",
+        steps: [
+          "الدخول إلى Sanity Studio ➔ الفنادق ➔ اختيار الفندق المعني.",
+          "التمرير إلى قائمة المرافق المعتمدة (مثل: إنترنت مجاني، مطبخ صغير، خدمة صف السيارات، تنظيف يومي).",
+          "تحديد أو إلغاء تحديد المرافق وفقاً للجاهزية التشغيلية الفعلية للفندق في الوقت الحالي.",
+          "قاعدة صارمة لفندقي توليب الروضة وفيناس الرياض: التأكد من عدم إدراج مطعم داخلي. وفي حال إظهار خدمة بوفيه الإفطار، يجب إلزامياً كتابة '(قريباً)' بالعربية و '(Soon)' بالإنجليزية.",
+          "التأكد من قيام النظام الآلي بإظهار الشارة الزرقاء التنبيهية بجانب الخدمة في بطاقة الفندق على الموقع.",
+          "النقر على زر النشر الأخضر."
+        ],
+        verification: "تظهر بطاقات المرافق بشفافية تامة مع تمييز الخدمات قيد التجهيز بوضوح، مما يمنع أي شكاوى عند الوصول.",
+        caution: "يُحظر وضع مرافق لا وجود لها على أرض الواقع؛ إظهار خدمات غير متاحة يعرض الفندق لمخالفات بلدية وتجارية."
+      },
+      {
+        id: 7,
+        code: "SOP-SB-WEB-08",
+        category: "cms",
+        pillarName: "إدارة المحتوى والحملات التسويقية",
+        role: "مدير العمليات / المشرف التسويقي المعتمد",
+        title: "إضافة فندق أو فرع جديد إلى محفظة الموقع الإلكتروني",
+        description: "نشر صفحة فندقية أو مجمع شقق فندقية جديد بالكامل ضمن خريطة الموقع وقوائم التنقل دون كتابة أي كود برمجي.",
+        objective: "التوسع الفوري وإتاحة الفروع الجديدة للحجز والاستفسار بمجرد استحواذ أو تشغيل سويس بلو لأي أصل فندقي جديد.",
+        prerequisites: "بيانات الفندق الجديد، أنواع الغرف، أرقام التواصل الرسمية، والصور المعتمدة.",
+        steps: [
+          "الدخول إلى Sanity Studio ➔ الفنادق ➔ النقر على زر 'إنشاء مستند جديد' (Create New Document).",
+          "إدخال اسم الفندق بالعربية والإنجليزية، وتحديد المدينة (الرياض، جدة، جازان)، والرابط المخصص (Slug).",
+          "إدخال أرقام هواتف الاستقبال، رقم واتساب المعتمد، العنوان الوطني، وإحداثيات خريطة جوجل التفاعلية.",
+          "إضافة فئات الغرف المتوفرة (اسم الغرفة، توزيع الأسرّة، المساحة بالمتر المربع، السعة القصوى، وأبرز المزايا).",
+          "رفع صور الواجهة ومعارض الغرف المصغرة بصيغة WebP.",
+          "إدخال الأسئلة الشائعة الخاصة بالفرع وأبرز المعالم والمسافات القريبة منه.",
+          "النقر على نشر؛ حيث يقوم نظام Next.js بإنشاء المسار الجديد تلقائياً وإضافته لقوائم البحث والتنقل."
+        ],
+        verification: "تصبح صفحة الفندق متاحة على الرابط الرسمي باللغتين العربية والإنجليزية مع عمل نموذج التواصل وحقول الحجز فورياً.",
+        caution: "التأكد من كتابة الرابط المخصص (Slug) بأحرف إنجليزية صغيرة مفصولة بشرطات ودون مسافات لحماية روابط الـ SEO."
+      },
+      {
+        id: 8,
+        code: "SOP-SB-WEB-09",
+        category: "admin",
+        pillarName: "فرز طلبات الإدارة الخلفية",
+        role: "منسق مبيعات الشركات / مسؤول عقود B2B",
+        title: "فرز ومتابعة طلبات الشركات وقاعات الفعاليات (/admin/submissions/b2b)",
+        description: "معالجة طلبات إقامة المجموعات، عقود الشركات، وقاعات الاجتماعات الواردة عبر الموقع وفق اتفاقية خدمة أقصاها ساعتان.",
+        objective: "رفع معدل إغلاق عقود الشركات وحجوزات الفعاليات الكبرى عبر سرعة الاستجابة والتحقق من الأرقام الضريبية الرسمية.",
+        prerequisites: "حساب دخول إلى لوحة الإدارة على المسار `/admin/submissions/b2b` ونماذج عروض الأسعار الرسمية.",
+        steps: [
+          "استلام الإشعار الآلي عبر البريد ومن خلال تنبيه الواتساب بوجود طلب B2B جديد.",
+          "تسجيل الدخول إلى swissblue.sa/admin والانتقال إلى تبويب 'طلبات الشركات والفعاليات'.",
+          "مراجعة تفاصيل الطلب: اسم المنشأة، الرقم الضريبي، تواريخ الفعالية، عدد الغرف، ونوع التجهيز المطلوب.",
+          "التحقق من صحة الرقم الضريبي للشركة عبر البوابة الرسمية لهيئة الزكاة والضريبة والجمارك (ZATCA).",
+          "تغيير حالة الطلب في اللوحة إلى 'قيد المتابعة' (In Progress) لتأكيد تولي الطلب ومنع تكرار التواصل من زميل آخر.",
+          "إعداد عرض السعر الرسمي المتوافق مع باقات سويس بلو وإرساله للعميل عبر البريد أو التواصل هاتفياً خلال ساعتين.",
+          "تحديث الحالة في لوحة الإدارة إلى 'تم التعاقد' أو 'مؤرشف' بعد استكمال الإجراءات."
+        ],
+        verification: "تحول حالة الطلب في اللوحة إلى مكتمل مع توثيق وقت وسجل المتابعة بالكامل.",
+        caution: "التحقق الإلزامي من الرقم الضريبي لتفادي طلبات الشراء الوهمية أو طلبات التسهيلات الائتمانية غير المعتمدة."
+      },
+      {
+        id: 9,
+        code: "SOP-SB-WEB-10",
+        category: "admin",
+        pillarName: "فرز طلبات الإدارة الخلفية",
+        role: "منسق الموارد البشرية / أخصائي الاستقطاب",
+        title: "فرز طلبات التوظيف واستعراض السير الذاتية المرفقة (PDF)",
+        description: "مراجعة ملفات المتقدمين للوظائف الواردة عبر صفحة `/careers`، واستعراض ملفات الـ PDF المرفقة بأمان وأرشفة المرشحين.",
+        objective: "توفير تكاليف بوابات التوظيف الخارجية وتوحيد استقطاب الكفاءات الفندقية مباشرة عبر البنية السحابية التابعة للموقع.",
+        prerequisites: "تسجيل الدخول إلى لوحة `/admin/submissions/careers` والوصول إلى بريد `careers@swissblue.sa`.",
+        steps: [
+          "فتح لوحة التحكم قسم 'طلبات التوظيف' للاطلاع على بيانات المرشحين الجدد.",
+          "مراجعة بيانات المتقدم: الاسم، رقم الجوال، القسم المطلوب (استقبال، إشراف داخلي، صيانة، مبيعات)، وسنوات الخبرة.",
+          "النقر على رابط السيرة الذاتية لفتح ملف الـ PDF المشفر المرفق تلقائياً بالطلب السحابي.",
+          "مطابقة مؤهلات المرشح مع الشواغر الوظيفية المتاحة في الفنادق المعنية.",
+          "الرد مباشرة على البريد الآلي الوارد لدعوة المرشح للمقابلة الشخصية أو إرسال نموذج الاعتذار المهني المعتمد.",
+          "تحديث حالة المتقدم في اللوحة إلى 'مرشح للمقابلة'، 'مقبول'، أو 'مؤرشف'."
+        ],
+        verification: "توثيق حالة المرشح في السجل السحابي وأرشفة سيرته الذاتية بما يتوافق مع سياسات الموارد البشرية.",
+        caution: "يُحظر منعاً باتاً نقل السير الذاتية أو بيانات المتقدمين الشخصية إلى أي وسائط تخزين خارجية غير مصرح بها."
+      },
+      {
+        id: 10,
+        code: "SOP-SB-WEB-11",
+        category: "admin",
+        pillarName: "فرز طلبات الإدارة الخلفية",
+        role: "سكرتير الإدارة التنفيذية / مدير تطوير الأعمال",
+        title: "فرز طلبات المستثمرين وشراكات تشغيل الفنادق",
+        description: "إدارة طلبات الملاك والمستثمرين العقاريين الراغبين في إسناد إدارة وتشغيل أصولهم الفندقية لعلامة سويس بلو.",
+        objective: "تسريع وتيرة التوسع التشغيلي لسويس بلو ورفع الفرص الاستثمارية الكبرى مباشرة إلى قيادة مجموعة دبليو دي للأعمال.",
+        prerequisites: "صلاحية تنفيذية للدخول إلى لوحة `/admin/submissions/investors` و `/admin/submissions/partner`.",
+        steps: [
+          "متابعة طابور طلبات المستثمرين في لوحة الإدارة الخلفية للموقع.",
+          "استخراج بيانات الأصل العقاري: المدينة، الحي، عدد الغرف الكلي، التصنيف الحالي، وتوفر التراخيص البلدية والسياحية.",
+          "إجراء تقييم أولي لمدى توافق العقار مع معايير وهوية فنادق سويس بلو.",
+          "تحديث حالة السجل في اللوحة إلى 'قيد المراجعة التنفيذية'.",
+          "إعداد ملخص الفرصة الاستثمارية ورفعه مباشرة إلى مكتب رئيس مجلس الإدارة وقيادة مجموعة دبليو دي للأعمال.",
+          "إرسال اتفاقية عدم الإفصاح (NDA) وملف التعريف الإداري لسويس بلو للمستثمر."
+        ],
+        verification: "تسجيل الطلب والرد المبدئي خلال 24 ساعة كحد أقصى وتصعيده للمراجعة القيادية.",
+        caution: "الحفاظ الصارم على سرية البيانات التشغيلية ومؤشرات العوائد؛ لا تُرسل أي أرقام مالية إلا بعد توقيع اتفاقية السرية."
+      },
+      {
+        id: 11,
+        code: "SOP-SB-WEB-12",
+        category: "admin",
+        pillarName: "فرز طلبات الإدارة الخلفية",
+        role: "مدير الفترة / مشرف الجودة وضيافة النزلاء",
+        title: "معالجة استفسارات وملاحظات النزلاء والدعم الفني",
+        description: "فرز وحل الاستفسارات العامة وملاحظات النزلاء الواردة عبر نماذج الموقع وصفحة اتصل بنا خلال ساعة واحدة.",
+        objective: "التعامل الاستباقي مع أي تجربة غير مرضية للنزيل وحل مشكلته فورياً قبل تحولها إلى تقييم سلبي على منصات التقييم العامة.",
+        prerequisites: "الوصول إلى قسم `/admin/submissions/support` و `/admin/submissions/contact` في اللوحة.",
+        steps: [
+          "معاينة التذاكر الواردة في طابور الدعم الفني ونماذج الاتصال العام.",
+          "تصنيف نوع التذكرة: استفسار عام، مفقودات، طلب فاتورة ضريبية، أو ملاحظة على تجربة الإقامة.",
+          "في حالات الشكاوى والملاحظات، يجب الاتصال هاتفياً بالنزيل أو مراسلته عبر الواتساب خلال 60 دقيقة كحد أقصى.",
+          "التنسيق مع مدير الفندق المعني لاتخاذ الإجراء التعويضي السريع (مثل: تعديل الفاتورة، خطاب اعتذار، أو ترقية في الإقامة القادمة).",
+          "توثيق الإجراء التصحيحي في خانة الملاحظات داخل اللوحة.",
+          "تحويل حالة التذكرة إلى 'تم الحل' (Resolved)."
+        ],
+        verification: "إغلاق التذكرة بنجاح مع تسجيل رضا النزيل وتوثيق الإجراء في تقرير الجودة الأسبوعي.",
+        caution: "عدم تجاهل أي ملاحظة واردة؛ الاستجابة السريعة عبر الموقع تحمي تقييم الفندق على خرائط جوجل وبوكينج."
+      },
+      {
+        id: 12,
+        code: "SOP-SB-WEB-13",
+        category: "notify",
+        pillarName: "مسارات الإشعارات والربط البرمجي",
+        role: "مسؤول النظم والشبكات",
+        title: "إدارة مسارات إشعارات البريد السحابي عبر Brevo",
+        description: "ضبط وصيانة محرك إرسال رسائل البريد الإلكتروني الفورية (Brevo SMTP) وتوجيه الإشعارات إلى البريد المعتمد لكل قسم.",
+        objective: "ضمان وصول إشعارات استمارات العملاء وحجوزاتهم فورياً بنسبة 100% ودون الوقوع في مجلد الرسائل غير المرغوبة (Spam).",
+        prerequisites: "صلاحية إدارة على موقع app.brevo.com والمتغيرات البيئية لمشروع Vercel.",
+        steps: [
+          "الدخول إلى إعدادات المتغيرات البيئية في مشروع Vercel.",
+          "التحقق من بريد الوجهة لكل مسار: بريد الحجوزات، بريد التوظيف، وبريد مبيعات الشركات.",
+          "فتح لوحة Brevo ➔ قسم النطاقات والمرسلين، والتأكد من تفعيل سجلات التحقق SPF و DKIM و DMARC لنطاق swissblue.sa.",
+          "التأكد من أن قوالب الرسائل البرمجية تحتوي على المتغيرات المتطابقة مع مخرجات الموقع (الاسم، الجوال، نص الرسالة).",
+          "إرسال استمارة تجريبية على بيئة الاختبار للتأكد من وصول البريد خلال 5 ثوانٍ مع صحة عنوان الرد التلقائي (Reply-To)."
+        ],
+        verification: "وصول رسالة البريد فورياً، مع توثيق حالة الإرسال بنجاح داخل سجلات Brevo.",
+        caution: "يُحظر تغيير مفاتيح الربط البرمجي (API Keys) في بيئة الإنتاج أثناء ساعات الذروة دون اختبار مسبق."
+      },
+      {
+        id: 13,
+        code: "SOP-SB-WEB-14",
+        category: "notify",
+        pillarName: "مسارات الإشعارات والربط البرمجي",
+        role: "فني الدعم التقني / منسق العمليات",
+        title: "إدارة قوالب Meta WhatsApp Cloud API وتنبيهات أجهزة الاستقبال",
+        description: "صيانة محرك إشعارات الواتساب السحابي الذي يرسل تنبيهات فورية إلى أجهزة الجوال لدى موظفي الاستقبال.",
+        objective: "إطلاق تنبيه صوتي فوري على أجهزة الاستقبال خلال 3 ثوانٍ فقط من إرسال أي استفسار على الموقع.",
+        prerequisites: "صلاحية الدخول إلى بوابة مطوري Meta وإعدادات المتغيرات البيئية في Vercel.",
+        steps: [
+          "الانتقال إلى Meta Business Suite ➔ مدير الواتساب ➔ قوالب الرسائل.",
+          "التأكد من أن القالب المعتمد `new_form_submission` يحمل حالة 'معتمد' (Approved).",
+          "التحقق من أن حمولة البيانات تحتوي بدقة على 5 متغيرات مرتبة: النوع، الاسم، البريد، الجوال، وملخص الطلب.",
+          "التأكد من أن رقم هاتف الاستقبال المعتمد في المتغير `WHATSAPP_TO` مكتوب بصيغة E.164 الدولية دون مسافات أو إشارة + (مثال: 9665XXXXXXXX).",
+          "إجراء إرسال تجريبي من الموقع والتأكد من انطلاق صوت التنبيه على هاتف الاستقبال خلال 3 ثوانٍ."
+        ],
+        verification: "استلام رسالة التنبيه عبر الواتساب فورياً وبكافة التفاصيل المنسقة داخل القالب.",
+        caution: "يُحظر تعديل نص قالب الواتساب دون إعادة اعتماده من Meta؛ أي تعديل غير معتمد يوقف التنبيهات برمز الخطأ 132000."
+      },
+      {
+        id: 14,
+        code: "SOP-SB-WEB-15",
+        category: "notify",
+        pillarName: "مسارات الإشعارات والربط البرمجي",
+        role: "أخصائي الدعم الفني والبرمجي",
+        title: "تشخيص وحل انقطاع إشعارات Brevo 401 وأخطاء الواتساب",
+        description: "اكتشاف ومعالجة أعطال تسليم الإشعارات الفورية عبر البريد الإلكتروني ورسائل الواتساب بسرعة وكفاءة.",
+        objective: "القضاء على أوقات توقف مسارات الإشعارات الناتجة عن تبدل عناوين الـ IP في الخوادم السحابية أو اختلاف هياكل البيانات.",
+        prerequisites: "بيانات الدخول الإداري لـ Brevo وسجلات التشغيل الحية في Vercel.",
+        steps: [
+          "في حال توقف وصول الإشعارات فجأة، يتم فتح سجلات تشغيل Vercel وتصفية المسار بالبحث عن `/api/forms/*`.",
+          "إذا ظهر الخطأ `Brevo 401 Unauthorized: unrecognised IP address`: يتم تسجيل الدخول إلى app.brevo.com ➔ الأمان ➔ Authorized IPs.",
+          "التأكد الصارم من أن خيار 'Authorized IPs' معطل تماماً (لأن Vercel يعمل عبر خوادم سحابية ذات عناوين IP متغيرة).",
+          "إذا أظهرت سجلات الواتساب الخطأ `Error 132000`: يتم التحقق من أن عدد المتغيرات المرسلة يساوي 5 متغيرات بالضبط.",
+          "إرسال طلب تجريبي عبر صفحة اتصل بنا للتأكد من استعادة عمل كافة الإشعارات."
+        ],
+        verification: "نجاح استلام الإشعارات التجريبية وظهور رمز الاستجابة الناجح HTTP 200 في سجلات الخادم.",
+        caution: "يُحظر نهائياً إعادة تفعيل ميزة تقييد عناوين الـ IP في Brevo أثناء العمل بالبنية السحابية Serverless."
+      },
+      {
+        id: 15,
+        code: "SOP-SB-WEB-16",
+        category: "security",
+        pillarName: "الأمان، الكاش والامتثال النظامي",
+        role: "المدير العام / مسؤول أمان الأنظمة",
+        title: "إدارة وإنهاء صلاحيات حسابات لوحة الإدارة واستوديو المحتوى",
+        description: "تطبيق معايير صارمة لإدارة الهويات والصلاحيات للموظفين المصرح لهم بالدخول إلى لوحة الإدارة واستوديو Sanity.",
+        objective: "منع التعديلات غير المصرح بها على محتوى الموقع وحماية بيانات استفسارات العملاء الحساسة عبر الصلاحيات المبنية على الأدوار.",
+        prerequisites: "صلاحية المدير الرئيسي للوحة التحكم وحساب المدير في منصة Sanity.",
+        steps: [
+          "إنشاء الحساب الجديد وربطه حصرياً بالبريد المؤسسي الرسمي للموظف `@swissblue.sa`.",
+          "تحديد الصلاحية بدقة وفقاً للمهام: محرر محتوى (صور ونصوص فقط)، مبيعات (طلبات B2B)، أو مدير نظام (كامل الصلاحيات).",
+          "إلزام الموظف بإنشاء كلمة مرور قوية وتفعيل التحقق بخطوتين (2FA).",
+          "عند انتهاء خدمة أي موظف أو نقله، يتم إلغاء حسابه وسحب الصلاحيات فورياً خلال 60 دقيقة من مغادرته.",
+          "مراجعة قائمة الحسابات النشطة شهرياً لحذف أي حسابات لم تعد مستخدمة."
+        ],
+        verification: "عدم قدرة الموظف المغادر على الدخول للنظام، وتطابق وصول الموظفين الحاليين مع حدود أدوارهم فقط.",
+        caution: "يُمنع منعاً باتاً استخدام حسابات دخول عامة أو مشتركة بين الموظفين لضمان المساءلة الفردية عن كل تعديل."
+      },
+      {
+        id: 16,
+        code: "SOP-SB-WEB-17",
+        category: "security",
+        pillarName: "الأمان، الكاش والامتثال النظامي",
+        role: "أخصائي الدعم الفني / مسؤول الموقع",
+        title: "تحديث الكاش السحابي الفوري عبر شبكة Vercel Edge CDN",
+        description: "فرض التحديث الفوري للذاكرة المؤقتة لشبكة التوزيع السحابية عند عدم ظهور التعديلات المنشورة في Sanity مباشرة للزوار.",
+        objective: "ضمان وصول التعديلات الطارئة، مثل الأسعار العاجلة أو بنرات الإعلانات الهامة، إلى كافة خوادم الكاش العالمية خلال ثوانٍ معدودة.",
+        prerequisites: "المفتاح السري لإعادة التحقق الآمن ورابط مسار `/api/revalidate`.",
+        steps: [
+          "معاينة الصفحة المستهدفة على swissblue.sa باستخدام متصفح خفي للتأكد من حالة ظهور المحتوى.",
+          "إذا لم تنعكس التعديلات المنشورة في Sanity، يتم فحص سجلات الـ Webhooks في Sanity للتحقق من أسباب تعثر الإرسال.",
+          "إرسال طلب يدوي لإعادة التحقق عبر المسار البرمجي المخصص مع تمرير المفتاح السري والموقع المستهدف.",
+          "كخيار بديل، يتم النقر على إعادة النشر السريع (Redeploy) من لوحة Vercel دون إعادة بناء الكود بالكامل.",
+          "تحديث الصفحة في المتصفح بالتحديث الإجباري (Ctrl+F5 أو Cmd+Shift+R) للتأكد من تقديم أحدث نسخة كاش."
+        ],
+        verification: "ظهور التعديلات المحدثة فورياً على كافة المتصفحات مع تسجيل `HIT` لبيانات الكاش الجديدة.",
+        caution: "تجنب مسح الكاش الشامل أثناء فترات ذروة الزيارات والبحث للحفاظ على أعلى سرعة استجابة للموقع."
+      },
+      {
+        id: 17,
+        code: "SOP-SB-WEB-18",
+        category: "security",
+        pillarName: "الأمان، الكاش والامتثال النظامي",
+        role: "مساعد التسويق / منسق الهوية الفندقية",
+        title: "نشر وتحديث آراء وتقييمات النزلاء المعتمدة على الموقع",
+        description: "انتقاء وتدقيق ونشر التقييمات الإيجابية الحقيقية للنزلاء على صفحات الفنادق والغرف لتعزيز الثقة ورفع التحويل.",
+        objective: "زيادة ثقة الزوار الجدد في جودة فنادق سويس بلو ورفع معدلات الحجز المباشر عبر إبراز التقييمات الإيجابية الموثقة.",
+        prerequisites: "صلاحية الوصول إلى تبويب 'آراء النزلاء' (Testimonials) في Sanity Studio.",
+        steps: [
+          "اختيار تقييمات 5 نجوم الحقيقية والمميزة من الملف الرسمي على خرائط جوجل ونماذج التقييم المعتمدة بعد الإقامة.",
+          "فتح Sanity Studio ➔ قسم 'آراء النزلاء' ➔ النقر على 'إضافة تقييم جديد'.",
+          "إدخال اسم النزيل، المدينة أو الدولة، الفندق الذي أقام فيه، عدد النجوم، ونص التقييم.",
+          "إدخال الترجمة باللغتين العربية والإنجليزية لضمان تكافؤ الظهور في كلا الواجهتين.",
+          "إرفاق صورة النزيل أو علم دولته إن وُجد.",
+          "النقر على زر النشر ومعاينة ظهور التقييم في شريط الآراء على صفحة الفندق المعني."
+        ],
+        verification: "عرض التقييم الجديد ضمن السلايدر التفاعلي بتنسيق جذاب ونجوم تقييم ملونة في كلا اللغتين.",
+        caution: "يُحظر تماماً نشر أي تقييمات وهمية أو مفبركة؛ حيث تشترط الأنظمة التجارية الشفافية التامة في عرض آراء المستهلكين."
+      },
+      {
+        id: 18,
+        code: "SOP-SB-WEB-19",
+        category: "security",
+        pillarName: "الأمان، الكاش والامتثال النظامي",
+        role: "المستشار القانوني / مسؤول الامتثال والجودة",
+        title: "تحديث تراخيص وزارة السياحة والسياسات القانونية في التذييل",
+        description: "ضمان الامتثال التام مع متطلبات وزارة السياحة والأنظمة البلدية ونظام حماية البيانات الشخصية السعودي (PDPL).",
+        objective: "حماية العلامة الفندقية من المخالفات البلدية وغرامات وزارة السياحة عبر استيفاء كافة المتطلبات النظامية في واجهة الموقع.",
+        prerequisites: "صلاحية تعديل إعدادات التذييل والصفحات القانونية في Sanity Studio.",
+        steps: [
+          "مراجعة شهادات تجديد تراخيص وزارة السياحة الرسمية لكافة الفنادق والشقق الستة التابعة للمجموعة.",
+          "الدخول إلى Sanity Studio ➔ إعدادات الموقع ➔ الإفصاحات القانونية وتذييل الصفحة (Footer).",
+          "التأكد من ظهور أرقام تراخيص وزارة السياحة السارية، رقم السجل التجاري، والرقم الضريبي في تذييل كافة الصفحات.",
+          "مراجعة سياسة الخصوصية (`/privacy`) وشروط الاستخدام (`/terms`) ومطابقتها مع نظام حماية البيانات الشخصية (PDPL).",
+          "النقر على نشر لتعميم التحديثات القانونية على كافة صفحات ومسارات الموقع عالمياً."
+        ],
+        verification: "ظهور بيانات التراخيص والاعتمادات الرسمية بوضوح تام في أسفل صفحات الموقع العربي والإنجليزي.",
+        caution: "تشغيل منصة فندقية بتراخيص سياحية منتهية أو غير ظاهرة يعرض المنصة لغرامات نظامية فورية من الجهات المختصة."
+      },
+      {
+        id: 19,
+        code: "SOP-SB-WEB-20",
+        category: "security",
+        pillarName: "الأمان، الكاش والامتثال النظامي",
+        role: "مدير الفترة / المدير العام",
+        title: "بروتوكول تصعيد الأعطال الطارئة إلى دبي في القاهرة (SLA)",
+        description: "الإبلاغ السريع عن الأعطال الجسيمة، توقف الموقع بالكامل، أو تعطل استمارات الحجز والتواصل وفق اتفاقية الدعم الفني.",
+        objective: "تفعيل الدعم الهندسي المباشر على مدار الساعة لإنقاذ المنصة واستعادة التشغيل الكامل خلال أقل من ساعتين.",
+        prerequisites: "أرقام الطوارئ الساخنة وقنوات التواصل المباشرة مع شركة دبي في القاهرة.",
+        steps: [
+          "التأكد من أن العطل عام ومستمر على أكثر من جهاز وعبر شبكات اتصال متعددة (بيانات الجوال وشبكات Wi-Fi مختلفة).",
+          "تحديد رمز الخطأ الظاهر (مثل: 500 خطأ خادم داخلي، 502 تعطل البوابة، أو تعطل شهادة الأمان SSL).",
+          "تجهيز تقرير البلاغ الطارئ: البيئة (الإنتاج الرسمي)، الأولوية (P1 - طارئ جداً)، الروابط المتأثرة، ووقت الحدوث.",
+          "إرسال البريد إلى `support@dubaiincairo.com` بعنوان: `[SWISS BLUE] - P1 CRITICAL - Website Outage`.",
+          "الاتصال فورياً بالخط الساخن المخصص للطوارئ لدى دبي في القاهرة لتفعيل اتفاقية الاستجابة في أقل من 30 دقيقة.",
+          "إبلاغ الإدارة التنفيذية ومتابعة تقرير المعالجة الهندسي حتى عودة الموقع للعمل بكفاءة 100%."
+        ],
+        verification: "تأكيد استلام البلاغ من فريق دبي في القاهرة خلال 30 دقيقة وبدء المعالجة الهندسية فورياً.",
+        caution: "يُخصص تصعيد الطوارئ P1 حصرياً للتوقف الكلي للموقع أو تعطل الاستمارات؛ الطلبات غير العاجلة تتبع مسارات الدعم العادية."
+      }
+    ];
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    // دالة بناء وعرض البطاقات
+    function renderSOPs() {
+      const grid = document.getElementById('sops-grid');
+      grid.innerHTML = '';
+
+      const filtered = sopsData.filter(sop => {
+        const matchesCat = currentFilter === 'all' || sop.category === currentFilter;
+        const q = searchQuery.toLowerCase().trim();
+        const matchesQuery = !q || 
+          sop.title.toLowerCase().includes(q) ||
+          sop.code.toLowerCase().includes(q) ||
+          sop.role.toLowerCase().includes(q) ||
+          sop.description.toLowerCase().includes(q) ||
+          sop.pillarName.toLowerCase().includes(q);
+        return matchesCat && matchesQuery;
+      });
+
+      document.getElementById('active-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full p-12 text-center glass-card rounded-2xl border border-slate-800">
+            <p class="text-sm text-slate-400 font-semibold mb-2">لم يتم العثور على أي إجراءات تشغيل تطابق معايير البحث الحالية.</p>
+            <button onclick="setFilter('all'); document.getElementById('sop-search').value=''; handleSearch('');" class="px-4 py-2 rounded-xl bg-blue-600/30 text-blue-300 text-xs font-bold border border-blue-500/40">
+              إعادة تعيين عوامل التصفية
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(sop => {
+        const card = document.createElement('div');
+        card.className = "glass-card spotlight-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer group hover:border-blue-500/50 transition-all duration-300 text-right";
+        card.onclick = () => openSopModal(sop.id);
+
+        let badgeColor = "bg-blue-500/10 text-blue-400 border-blue-500/20";
+        if (sop.category === 'ai') badgeColor = "bg-cyan-500/10 text-cyan-400 border-cyan-500/20";
+        if (sop.category === 'media') badgeColor = "bg-purple-500/10 text-purple-400 border-purple-500/20";
+        if (sop.category === 'cms') badgeColor = "bg-amber-500/10 text-amber-400 border-amber-500/20";
+        if (sop.category === 'admin') badgeColor = "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
+        if (sop.category === 'notify') badgeColor = "bg-indigo-500/10 text-indigo-400 border-indigo-500/20";
+        if (sop.category === 'security') badgeColor = "bg-rose-500/10 text-rose-400 border-rose-500/20";
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md border ${badgeColor}">
+                ${sop.code}
+              </span>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 truncate max-w-[180px]" title="${sop.role}">
+                ${sop.role}
+              </span>
+            </div>
+            <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">
+              ${sop.pillarName}
+            </div>
+            <h3 class="text-base font-bold text-white mb-2 group-hover:text-blue-300 transition-colors leading-snug">
+              ${sop.title}
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              ${sop.description}
+            </p>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-blue-400 font-semibold group-hover:-translate-x-1 transition-transform">
+            <span>عرض خطوات الإجراء بالتفصيل</span>
+            <span>←</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // التصفية حسب المحور
+    function setFilter(cat) {
+      currentFilter = cat;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(`'${cat}'`));
+      if (activeBtn) activeBtn.classList.add('active');
+      renderSOPs();
+    }
+
+    // البحث اللحظي
+    function handleSearch(val) {
+      searchQuery = val;
+      renderSOPs();
+    }
+
+    // فتح النافذة المنبثقة
+    function openSopModal(id) {
+      const sop = sopsData.find(s => s.id === id);
+      if (!sop) return;
+
+      document.getElementById('modal-sop-code').textContent = sop.code;
+      document.getElementById('modal-sop-pillar').textContent = sop.pillarName;
+      document.getElementById('modal-sop-role').textContent = "الدور المسؤول: " + sop.role;
+      document.getElementById('modal-sop-title').textContent = sop.title;
+
+      const stepsHtml = sop.steps.map((step, idx) => `
+        <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white font-bold text-[11px] shrink-0 mt-0.5 font-mono">${idx + 1}</span>
+          <span class="leading-relaxed text-slate-300 text-xs">${step}</span>
+        </li>
+      `).join('');
+
+      document.getElementById('modal-sop-content').innerHTML = `
+        <div class="space-y-4 text-right">
+          <!-- القسم الأول: الهدف والنطاق -->
+          <div class="p-3.5 rounded-xl bg-blue-950/20 border border-blue-500/20">
+            <span class="text-blue-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">1. الهدف التشغيلي للإجراء</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.objective}</p>
+          </div>
+
+          <!-- القسم الثاني: المتطلبات المسبقة -->
+          <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+            <span class="text-slate-400 font-bold block mb-1 uppercase tracking-wider text-[11px]">2. المتطلبات والأنظمة المستخدمة</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.prerequisites}</p>
+          </div>
+
+          <!-- القسم الثالث: خطوات التنفيذ -->
+          <div class="space-y-2">
+            <span class="text-white font-bold block uppercase tracking-wider text-[11px]">3. تسلسل خطوات التنفيذ المعتمدة</span>
+            <ul class="space-y-2">
+              ${stepsHtml}
+            </ul>
+          </div>
+
+          <!-- القسم الرابع: التحقق والنجاح -->
+          <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/20">
+            <span class="text-emerald-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">4. معيار التحقق وضبط الجودة</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.verification}</p>
+          </div>
+
+          <!-- القسم الخامس: المخاطر والمحاذير -->
+          <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/20">
+            <span class="text-rose-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">5. التنبيهات التشغيلية وإدارة المخاطر</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.caution}</p>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modal-overlay').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSopModal() {
+      document.getElementById('modal-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // نسخ المحتوى
+    function copyModalContent() {
+      const title = document.getElementById('modal-sop-title').textContent;
+      const content = document.getElementById('modal-sop-content').innerText;
+      navigator.clipboard.writeText(title + "\n\n" + content).then(() => {
+        const btn = document.getElementById('copy-btn-text');
+        btn.textContent = "تم نسخ الإجراء بنجاح!";
+        setTimeout(() => { btn.textContent = "نسخ خطوات الإجراء"; }, 2000);
+      });
+    }
+
+    // تتبع حركة الفأرة للمؤثرات الضوئية
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    // إغلاق النافذة بزر Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSopModal();
+    });
+
+    // العرض المبدئي عند التحميل
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSOPs();
+    });
+  </script>
+</body>
+</html>

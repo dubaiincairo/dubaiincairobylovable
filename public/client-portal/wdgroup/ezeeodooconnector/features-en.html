@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Ozoo (eZee-Odoo Connector) — Complete Features Catalog | WD Group</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.7); }
+
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-nav {
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(99, 102, 241, 0.12), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .category-pill {
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.875rem;
+      border-radius: 0.875rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.7);
+      color: #94a3b8;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .category-pill:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: #f1f5f9;
+      transform: translateY(-1px);
+    }
+    .category-pill.active {
+      background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+      border-color: rgba(165, 180, 252, 0.6);
+      color: #ffffff;
+      box-shadow: 0 8px 20px -4px rgba(99, 102, 241, 0.45);
+      transform: translateY(-1px);
+    }
+    .category-pill .pill-badge {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      padding: 0.125rem 0.45rem;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.2s ease;
+    }
+    .category-pill.active .pill-badge {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen text-slate-100 flex flex-col justify-between selection:bg-indigo-600 selection:text-white pb-16">
+
+  <!-- Ambient Glow Background -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute -top-40 -left-40 w-[600px] h-[600px] bg-indigo-600/15 rounded-full blur-[140px]"></div>
+    <div class="ambient-orb-2 absolute top-1/3 -right-40 w-[550px] h-[550px] bg-blue-600/15 rounded-full blur-[140px]"></div>
+    <div class="absolute -bottom-40 left-1/3 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[130px]"></div>
+  </div>
+
+  <!-- Sticky Top Navigation -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-4">
+        
+        <!-- Left: Brand / Title -->
+        <div class="flex items-center gap-3 min-w-0">
+          <a href="/manuals/wdgroup#project-02" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center font-black text-white text-lg shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
+              OZ
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="font-extrabold text-sm sm:text-base text-white truncate tracking-tight">Ozoo Connector</span>
+                <span class="px-2 py-0.5 text-[10px] font-bold font-mono uppercase rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">v4.0</span>
+              </div>
+              <p class="text-xs text-slate-400 hidden sm:block truncate">eZee Absolute PMS &amp; Optimus POS Integration with Odoo 19</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Right: Actions -->
+        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          <a href="/manuals/wdgroup" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold border border-slate-700 transition">
+            ← WD Group Portal
+          </a>
+          <a href="/manuals/wdgroup/ezeeodooconnector/sops-en" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition">
+            <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+            <span class="hidden sm:inline">Operations SOPs (20)</span>
+            <span class="sm:hidden">SOPs</span>
+          </a>
+
+          <a href="/manuals/wdgroup/ezeeodooconnector/features-ar" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 text-xs font-bold font-['IBM_Plex_Sans_Arabic'] transition">
+            العربية (RTL)
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 w-full space-y-8">
+
+    <!-- Hero Header -->
+    <div class="text-center max-w-3xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-xs font-semibold text-indigo-300 uppercase tracking-wider">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Audited Hospitality Accounting &amp; Synchronization Engine
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+        Complete <span class="bg-gradient-to-r from-indigo-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent">Features Catalog</span>
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+        Explore 46 core financial capabilities across 8 operational pillars, detailing exact technical mechanics alongside real-life accounting benefits.
+      </p>
+    </div>
+
+    <!-- Sticky Filter & Search Control Panel -->
+    <div class="sticky top-16 sm:top-20 z-30 py-3 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 bg-[#0b0f19]/90 backdrop-blur-xl border-y border-slate-800/80 shadow-2xl">
+      <div class="max-w-7xl mx-auto space-y-3">
+        
+        <!-- Search & Quick Stats -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <div class="relative flex-1 max-w-md">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Search features by name, code, GL account, API, or benefit..." 
+              oninput="handleSearch(this.value)"
+              class="w-full pl-9 pr-8 py-2 rounded-xl bg-slate-900/90 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+            >
+            <button 
+              id="clear-search" 
+              onclick="clearSearch()" 
+              class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-slate-300"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+
+          <!-- Counter Stats -->
+          <div class="flex items-center gap-3 text-xs text-slate-400 font-mono self-end sm:self-center">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800">
+              Showing <strong id="visible-count" class="text-indigo-400">46</strong> of 46 Features
+            </span>
+          </div>
+        </div>
+
+        <!-- Horizontal Scrollable Category Rail -->
+        <div class="relative flex items-center group">
+          <button 
+            id="rail-scroll-left" 
+            onclick="scrollPillRail(-220)" 
+            class="hidden md:flex absolute -left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-slate-900/95 border border-slate-700 items-center justify-center text-slate-300 hover:text-white hover:border-indigo-500 shadow-xl backdrop-blur-md transition-all opacity-0 pointer-events-none"
+            title="Scroll Left"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+
+          <div id="rail-fade-left" class="pointer-events-none absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0b0f19] to-transparent z-10 opacity-0 transition-opacity"></div>
+
+          <div 
+            id="category-rail" 
+            onscroll="updateRailScrollIndicators()" 
+            class="flex items-center gap-2 overflow-x-auto py-1 px-1 scroll-smooth no-scrollbar w-full"
+          >
+            <button onclick="setCategory('all', this)" class="category-pill active" data-cat="all">
+              <span>All Pillars</span>
+              <span class="pill-badge">46</span>
+            </button>
+
+            <button onclick="setCategory('cat-gl', this)" class="category-pill" data-cat="cat-gl">
+              <span>1. GL &amp; Sync Architecture</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <button onclick="setCategory('cat-city', this)" class="category-pill" data-cat="cat-city">
+              <span>2. City Ledger &amp; Corporate</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <button onclick="setCategory('cat-deposit', this)" class="category-pill" data-cat="cat-deposit">
+              <span>3. Guest Ledger &amp; Deposits</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <button onclick="setCategory('cat-pos', this)" class="category-pill" data-cat="cat-pos">
+              <span>4. POS &amp; Duplication Guards</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <button onclick="setCategory('cat-setup', this)" class="category-pill" data-cat="cat-setup">
+              <span>5. Master Data &amp; Setup</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <button onclick="setCategory('cat-night', this)" class="category-pill" data-cat="cat-night">
+              <span>6. Night Audit &amp; Alerts</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <button onclick="setCategory('cat-sec', this)" class="category-pill" data-cat="cat-sec">
+              <span>7. Multi-Company Security</span>
+              <span class="pill-badge">5</span>
+            </button>
+
+            <button onclick="setCategory('cat-report', this)" class="category-pill" data-cat="cat-report">
+              <span>8. Reports &amp; Translation</span>
+              <span class="pill-badge">5</span>
+            </button>
+          </div>
+
+          <div id="rail-fade-right" class="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0b0f19] to-transparent z-10 opacity-100 transition-opacity"></div>
+
+          <button 
+            id="rail-scroll-right" 
+            onclick="scrollPillRail(220)" 
+            class="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-slate-900/95 border border-slate-700 items-center justify-center text-slate-300 hover:text-white hover:border-indigo-500 shadow-xl backdrop-blur-md transition-all opacity-100"
+            title="Scroll Right"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div id="features-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- ==================== PILLAR 1: GL & SYNC ARCHITECTURE ==================== -->
+
+      <!-- SYNC-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-gl">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">SYNC-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. GL Architecture</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            Dual Operating Mode Architecture
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Architectural selection on <code>pms.credentials</code> between <em>Journal Daily Summary</em> (aggregates raw API feeds into one balanced GL entry per hotel/day) and <em>Detailed Transactions</em> (posts individual customer invoices and payments). The connector strictly prohibits mixing modes in the same period.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Eliminates tens of thousands of redundant folio invoices that previously clogged Odoo accounting databases, reducing database bloat by over 90% while keeping financial ledgers perfectly balanced.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNC-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-gl">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">SYNC-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. GL Architecture</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            General Manager Report Layout Parity
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Renders a native, bilingual HTML tab (<code>ezee_manager_layout_html</code>) directly inside the Odoo journal entry mirroring the official eZee General Manager report sections: Room Charges, Extra Charges, Municipality Fee 2.5%, VAT 15%, Payments, City Ledger, and Guest Ledger.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Hotel Controllers and General Managers can verify daily postings in seconds without deciphering multi-line accounting debits and credits, matching the daily PMS printout 1:1.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNC-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-gl">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">SYNC-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. GL Architecture</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            Balanced Multi-Leg Journal Posting Engine
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Automated multi-leg journal compilation algorithm that groups raw transactional records into distinct debit legs (MADA, Visa, Cash, Bank Transfer, City Ledger Transfers) and credit legs (Room Revenues, Laundry, Cafe, VAT, Municipality Fees).
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Guarantees zero out-of-balance entries in Odoo, ensuring that total debits always strictly equal total credits down to the final halala before posting is committed.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNC-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-gl">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">SYNC-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. GL Architecture</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            Government Fees &amp; VAT Tax Segregation
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Built-in classification parser (<code>manager_classification.py</code>) that distinguishes between Saudi Municipality Hospitality Fees (2.5%), standard Value Added Tax (VAT 15%), and base revenues, routing each to its specific GL liability or expense account.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Ensures 100% compliance with Saudi ZATCA and Balady regulations, preventing municipal fees from inflating taxable VAT bases or distorting net operational revenue.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNC-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-gl">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">SYNC-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. GL Architecture</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            eZee Daily Rounding Adjustment Line
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Automated residual balancer that calculates microscopic fractional differences (±0.01 to ±0.05 SAR) resulting from multiple decimal roundings in tax formulas, posting the offset to <em>eZee Daily Rounding</em>.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Prevents daily synchronization crashes caused by strict Odoo balanced-move constraints when eZee calculations round tax lines independently across hundreds of guest transactions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNC-06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-gl">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">SYNC-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">1. GL Architecture</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            Base Currency &amp; Multi-Currency Detection
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Automatically reads the hotel currency configuration (e.g. SAR) from the eZee API during authentication handshake and validates parity with the target Odoo company currency.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20">
+              <span class="font-bold text-indigo-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Guards against catastrophic currency mismatches across hotel properties, ensuring foreign exchange rate conversions are handled accurately without corrupting company financial statements.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== PILLAR 2: CITY LEDGER & CORPORATE ==================== -->
+
+      <!-- CITY-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-city">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CITY-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. City Ledger</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            City Ledger Breakdown Sub-Ledger
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Dedicated transactional breakdown model (<code>pms.daily.summary.city.ledger.line</code>) linked via <code>One2many</code> to the summary journal entry, storing company UNKID, legal name, tax ID, guest name, folio, and transaction ID.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Solves the fundamental trade-off of summary mode: keeps the General Manager report compact while allowing credit controllers to drill down into exact corporate balances at any time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITY-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-city">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CITY-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. City Ledger</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Native Odoo Partner Ledger Matching
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Stamps the official accounting journal lines under the City Ledger receivable account with the resolved Odoo partner record, splitting company movements into distinct partner-tagged lines.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Enables Odoo's native Partner Ledger and Aged Receivable reports to work seamlessly without requiring individual invoices, streamlining credit collection and corporate statements.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITY-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-city">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CITY-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. City Ledger</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Automated Partner Directory Bridge
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Pulls corporate entities from eZee Configuration (<code>descriptiontype='CITY LEDGER'</code>) into <code>pms.company.mapping</code> and creates or updates verified <code>res.partner</code> records in Odoo automatically.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Eliminates manual contact creation errors by front office and accounting teams, maintaining synchronized corporate master data across PMS and ERP systems.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITY-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-city">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CITY-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. City Ledger</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Intelligent Partner Resolution Waterfall
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Multi-tier matching algorithm that identifies corporate partners using a strict precedence waterfall: 15-digit KSA Tax VAT / CR Number $\rightarrow$ eZee UNKID $\rightarrow$ exact case-insensitive legal company name.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Prevents duplicate corporate accounts in Odoo when front office staff introduce slight spelling variations (e.g. "Aramco KSA" vs "Saudi Aramco"), linking them via tax ID.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITY-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-city">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CITY-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. City Ledger</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            Finance-Approved Partner Aliases
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Controlled field <code>alias_approved</code> on <code>pms.company.mapping</code> enabling finance controllers to link multiple operational eZee hotel accounts to one canonical Odoo corporate partner without overwriting canonical data.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Provides consolidated corporate statements for major enterprise clients operating across multiple branches or contracts, preserving granular branch identity in PMS.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITY-06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-city">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CITY-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">2. City Ledger</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+            City Ledger Resolution Diagnostics
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Diagnostic persistence layer that flags unmapped company lines during daily sync, recording the exact eZee UNKID, raw name, and reason in synchronization audit logs.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+              <span class="font-bold text-cyan-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Alerts financial accountants immediately when a new corporate account has been charged at reception before master data was mapped, enabling rapid resolution without stopping daily syncs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== PILLAR 3: GUEST LEDGER & DEPOSITS ==================== -->
+
+      <!-- DEP-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-deposit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">DEP-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. Guest Ledger</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            Advance Deposit Round-Trip Presentation Rule
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Detects circular round-trips where the same hotel, date, folio, and amount experience an Advance Deposit, Advance Refund, and Advance Transfer, storing the matched amount in <code>ezee_advance_roundtrip_amount</code>.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Eliminates artificial gross inflation in Manager Report and Guest Ledger presentation while leaving audited general ledger lines intact, matching eZee report figures to the penny.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEP-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-deposit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">DEP-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. Guest Ledger</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            Carry-Forwarded Advance Deposit Segregation
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Differentiates advance transfers originating from historical opening balances versus same-day collections, tracking the distinction in <code>ezee_advance_carry_forward_amount</code>.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Prevents double-counting of guest deposit settlements across billing periods, ensuring prior-month deposits apply cleanly against checkout charges without manual journal adjustments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEP-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-deposit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">DEP-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. Guest Ledger</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            Historical Advance Round-Trip Auto-Backfill
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Automatic migration routine (<code>_pms_backfill_advance_roundtrip_amounts_2026</code>) executed during module upgrade that recalculates presentation adjustments for all existing daily summary entries across all hotels.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Instantly repairs historical Manager Report views across months of past hotel operations without requiring destructive ledger resets or dangerous database rebuilds.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEP-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-deposit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">DEP-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. Guest Ledger</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            Detailed Folio Booking Reconciliation Engine
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Dedicated reconciliation algorithm (<code>cron_reconcile_by_booking</code>) for Detailed Transactions mode that links and reconciles posted payment move lines against customer invoices sharing identical reservation/booking IDs.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Automates folio balancing in detailed mode, eliminating the manual task of clicking "Match &amp; Reconcile" on thousands of individual guest invoices and payments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEP-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-deposit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">DEP-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. Guest Ledger</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            Paid-Out &amp; Non-Revenue Movement Isolation
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Configuration switch <code>summary_include_paid_outs</code> on <code>pms.credentials</code> matching reference FAS software, isolating staff payouts, petty expenses, and agent commissions from core revenue.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Prevents cash disbursements made from front desk drawers from artificially deflating gross room revenues, routing petty cash movements to designated expense accounts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEP-06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-deposit">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">DEP-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">3. Guest Ledger</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            Incidentals &amp; Extra Charges Segregation
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Disaggregates ancillary guest transactions (Laundry, Coffee Shop, Breakfast, Damage Fees, Late Checkout) from room accommodation sales, mapping each charge code to distinct revenue and cost centers.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+              <span class="font-bold text-purple-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Provides hotel general managers with crystal-clear departmental revenue visibility (F&amp;B vs Housekeeping vs Rooms) for departmental P&amp;L reporting and RevPAR calculations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== PILLAR 4: POS & SAFEGUARDS ==================== -->
+
+      <!-- POS-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-pos">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">POS-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. POS Integration</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            POS Sales Daily Summary Engine
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Consolidates raw restaurant and cafe sales from eZee Optimus into one balanced daily journal entry per outlet, grouping by mapped revenue account, VAT, tips clearing, and payment settlement method.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Replaces thousands of individual dining receipts with a clean, structured general ledger entry, preventing point-of-sale invoice clutter in corporate financial statements.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POS-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-pos">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">POS-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. POS Integration</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            Purchase Mutual Exclusivity Guard
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Enforces strict exclusivity for kitchen inventory purchases: if detailed vendor bills exist for a date range, summary sync is hard-blocked; if summary entries exist, detailed sync is hard-blocked.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Completely prevents double-counting F&amp;B raw food purchases, protecting hotels from paying vendors twice or artificially inflating cost-of-goods-sold (COGS) expenses.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POS-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-pos">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">POS-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. POS Integration</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            Room Posting Duplication Guard
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Automated pre-sync validator on <code>ezee.optimus.fas.config</code> that blocks POS sales synchronization if the company has an active PMS daily summary and <code>exclude_room_posting</code> is not enabled.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Guarantees that hotel dining bills charged to a guest room are never booked twice (once in POS and once in PMS folio revenue), preventing gross revenue overstatement.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POS-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-pos">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">POS-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. POS Integration</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            Manager Report Parity Clearing Engine
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Advanced paired mode where POS retains room-posting revenue and debits a Header 7 clearing account, while PMS maintains the Guest Ledger debit but credits the exact same clearing account.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Achieves 100% mathematical parity with the eZee Manager Report, allowing POS to serve as the single source of truth for outlet revenue while keeping guest receivables accurate in PMS.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POS-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-pos">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">POS-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. POS Integration</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            Asymmetric Complimentary Sales Handling
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Intentionally asymmetric accounting logic: pure POS <code>No Charge</code> receipts are excluded from revenue, while valid POS sales zeroed or discounted later on PMS folios remain recognized as POS revenue.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Exposes unauthorized front-desk folio discounts or waived dining bills as an explicit clearing anomaly signal rather than silently concealing missing restaurant revenue.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POS-06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-pos">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">POS-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">4. POS Integration</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            Room Posting Cross-System Audit Wizard
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Forensic wizard (<code>ezee.optimus.room.posting.audit.wizard</code>) comparing raw POS payloads against posted POS clearing entries and PMS credits, identifying exact unmatched receipt numbers.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
+              <span class="font-bold text-emerald-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Reduces month-end restaurant-to-hotel reconciliation audits from days of manual receipt cross-checking to a single automated click, pinpointing exact discrepancies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== PILLAR 5: MASTER DATA & SETUP ==================== -->
+
+      <!-- SETUP-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-setup">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SETUP-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. Master Data &amp; Setup</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            Linear Sequenced Setup Wizard (PMS &amp; POS)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Enforced procedural workflow on configuration forms: Mode Selection $\rightarrow$ Test Connection $\rightarrow$ Pull Master Data $\rightarrow$ Voucher Rules $\rightarrow$ Partners $\rightarrow$ Ready for Sync. Buttons unlock sequentially.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Prevents implementation engineers or hotel accountants from triggering syncs with missing charts of accounts or unmapped partners, eliminating unposted ledger errors.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETUP-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-setup">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SETUP-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. Master Data &amp; Setup</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            Dynamic UI State Progression &amp; Auto-Reload
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Client action reloader (<code>_setup_reload_action</code>) and computed progress fields (<code>setup_next_step</code>) that automatically refresh form checkboxes and timestamps upon successful step completion.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Eliminates user confusion during hotel onboarding; the system provides clear, step-by-step guidance on what to do next without requiring manual browser page refreshes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETUP-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-setup">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SETUP-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. Master Data &amp; Setup</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            Two-Tier Account Mapping with Analytics
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Structured mapping linking high-level eZee Account Headers (e.g. Header 1: Room Revenue, Header 10: City Ledger) with line-level detail overrides supporting individual analytic cost centers.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Enables specific hotel outlets or charge items to post to separate department cost centers without altering the main hotel chart of accounts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETUP-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-setup">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SETUP-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. Master Data &amp; Setup</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            Pre-Generated Voucher Rules Review Matrix
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Action <code>action_prepare_voucher_account_rules</code> generating 28 pre-populated template rows covering all feed scenarios (Sales, Advance Deposit, Refunds, Folio Transfers, City Ledger Commissions).
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Provides financial auditors with a comprehensive review surface where empty override accounts clearly indicate default posting, avoiding unexpected ledger surprises.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETUP-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-setup">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SETUP-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. Master Data &amp; Setup</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            Payment Method Journal Mapping
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Direct association in <code>pms.payment.mapping</code> mapping eZee payment methods (Header 6: MADA, Visa, Cash, Bank Transfer, GCCNet) to dedicated Odoo cash and bank journals.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Ensures POS terminal settlement funds route directly into matching bank clearing accounts, streamlining daily credit card and bank reconciliation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETUP-06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-setup">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">SETUP-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">5. Master Data &amp; Setup</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-amber-300 transition-colors">
+            Multi-Store POS Outlet Mapping
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Dedicated outlet discovery model (<code>ezee.optimus.outlet</code>) mapping distinct POS outlets (Lobby Lounge, Main Restaurant, Room Service, Banquet Hall) to dedicated revenue accounts.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/20">
+              <span class="font-bold text-amber-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Prevents restaurant beverage revenues from blending with room mini-bar sales, providing departmental P&amp;L reporting for F&amp;B managers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== PILLAR 6: NIGHT AUDIT & ALERTS ==================== -->
+
+      <!-- CRON-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-night">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">CRON-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Night Audit &amp; Alerts</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">
+            Automated Night Audit Cron at 1:00 PM AST
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Scheduled automated sync job (<code>ir_cron_pms_sync_all</code> and <code>ir_cron_ezee_optimus_daily</code>) executing daily at 10:00 UTC (strictly 13:00 Asia/Riyadh AST) for the previous business day.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20">
+              <span class="font-bold text-rose-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Aligns with real-world hotel night audit cycles: hotel check-outs and morning folio adjustments are 100% closed before Odoo imports yesterday's data, eliminating audit re-work.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRON-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-night">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">CRON-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Night Audit &amp; Alerts</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">
+            Working Date Caching with TTL &amp; Stale Grace
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Lightweight working date cache with a 15-minute TTL and 7-day stale grace period, fetching active business dates via the login endpoint without resetting setup progress.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20">
+              <span class="font-bold text-rose-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Drastically reduces redundant API calls to eZee servers while preventing accidental synchronization of unclosed current-day dates that front desk staff are actively modifying.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRON-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-night">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">CRON-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Night Audit &amp; Alerts</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">
+            Pre-Sync Lightweight Partner Directory Refresh
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Automated hook (<code>_scheduled_refresh_company_directory</code>) running immediately prior to scheduled daily financial sync, polling eZee config API to register newly added corporate clients.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20">
+              <span class="font-bold text-rose-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Ensures corporate stays checked in yesterday automatically match to an Odoo company partner during night audit, preventing unlinked city ledger movements.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRON-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-night">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">CRON-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Night Audit &amp; Alerts</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">
+            Company-Wide Sync Email Alerting
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Automated email dispatcher on <code>res.company</code> sending structured HTML sync summaries to designated financial controllers, audit teams, and executive management.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20">
+              <span class="font-bold text-rose-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Provides finance leadership with daily confirmation that night audit books are balanced, alerting them to any integration warnings or network timeouts before morning briefing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRON-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-night">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">CRON-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Night Audit &amp; Alerts</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">
+            Zero-Leak Security Redaction Engine
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Automated regular expression scrubber (<code>_safe_issue</code>) stripping authentication codes, API keys, and passwords from error logs, chatter messages, and email notifications.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20">
+              <span class="font-bold text-rose-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Prevents sensitive PMS/POS API credentials from leaking into email inboxes or audit logs, maintaining compliance with PCI-DSS and corporate security standards.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRON-06 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-night">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">CRON-06</span>
+            <span class="text-[11px] text-slate-400 font-semibold">6. Night Audit &amp; Alerts</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">
+            Asynchronous Chunked Manual Sync Worker
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Background queue runner (<code>pms.manual.sync.run</code>) breaking historical backfills into safe chunks (Sales max 7 days, other APIs max 31 days) executed via cron worker.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/20">
+              <span class="font-bold text-rose-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Allows accountants to backfill 6 months of historical hotel records without HTTP 504 Gateway Timeouts or web browser freezing during long computational jobs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== PILLAR 7: MULTI-COMPANY SECURITY ==================== -->
+
+      <!-- SEC-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">SEC-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. Multi-Company</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">
+            Strict Record Rules &amp; Environment Scoping
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Mandatory multi-company security record rules (<code>record_rules.xml</code>) restricting PMS/POS credentials, mappings, logs, and journal entries to the user's active Odoo company.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-950/30 border border-teal-500/20">
+              <span class="font-bold text-teal-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Guarantees complete financial data segregation across hotel properties; accounting staff at SwissBlue Jazan can never view or modify SwissBlue Jeddah entries.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEC-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">SEC-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. Multi-Company</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">
+            Six-Hotel Independent Credential Isolation
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Independent configuration models isolating API authentication codes, hotel codes, journals, and accounts across all 6 WD Group properties (Jeddah, Jazan, Alzahraa, Alsamer, Riyadh, Alrawdha).
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-950/30 border border-teal-500/20">
+              <span class="font-bold text-teal-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Allows individual hotels to be added, paused, or reconfigured independently without impacting or interrupting the daily night audit sync of other operating properties.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEC-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">SEC-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. Multi-Company</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">
+            Non-Hospitality Entity Exclusion Guard
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Strict exclusion boundary hardcoded in connector logic barring the three industrial factories (Green Wood, National Factory, Watan) and the mixed holding company from all PMS/POS actions.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-950/30 border border-teal-500/20">
+              <span class="font-bold text-teal-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Protects manufacturing and group holding charts of accounts from accidental hotel entries or automated sync data writes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEC-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">SEC-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. Multi-Company</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">
+            Role-Based Access Control (RBAC)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Security groups (<code>group_pms_integration_manager</code> vs User) restricting sensitive configuration actions, credential edits, and manual sync triggers to authorized financial controllers.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-950/30 border border-teal-500/20">
+              <span class="font-bold text-teal-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Prevents unauthorized hotel staff from altering GL account mappings, changing sync modes, or triggering unapproved historical accounting regenerations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEC-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-sec">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">SEC-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">7. Multi-Company</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">
+            Staging Cleanup Hard Lockout Protection
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Database assertion method (<code>_assert_staging_database</code>) and confirmation text verification (<code>DELETE STAGING DATA</code>) in <code>ezee.staging.cleanup.wizard</code>.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-950/30 border border-teal-500/20">
+              <span class="font-bold text-teal-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Provides a fail-safe air gap ensuring test data cleanup tools can never be executed on production databases, preventing catastrophic accounting data loss.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== PILLAR 8: REPORTS & TRANSLATION ==================== -->
+
+      <!-- REP-01 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-report">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">REP-01</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. Reports &amp; Translation</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            Printable Daily Summary Landscape Audit Voucher
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Official QWeb PDF report (<code>daily_summary_journal_print</code>) formatted in A4 Landscape with WD Group emerald branding, bilingual headers, debit/credit balancing, and City Ledger breakdowns.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Generates audit-ready daily vouchers for hotel General Managers and internal audit committees, signed off and archived alongside night audit reports.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REP-02 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-report">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">REP-02</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. Reports &amp; Translation</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            Live Runtime Translation Center (24 Areas)
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Centralized database localization table (<code>pms.translation.label</code>) covering 24 operational areas, enabling instant Arabic/English label updates directly in Odoo without code redeployment.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Empowers hotel accountants to customize field terminology to match internal company jargon instantly, without requiring developer intervention or server restarts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REP-03 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-report">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">REP-03</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. Reports &amp; Translation</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            High-Fidelity Raw JSON Payload Archiving
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Permanent audit storage in <code>pms.sync.log</code> archiving complete raw request and response JSON/XML payloads with line-numbered HTML formatting for every API sync interaction.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Provides indisputable technical evidence for auditing disputed transactions, showing exactly what data eZee transmitted on any given calendar date.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REP-04 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-report">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">REP-04</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. Reports &amp; Translation</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            Forensic In-Payload Search Wizard
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Action wizard (<code>pms.sync.log.payload.search.wizard</code>) allowing users to query archived raw payloads for specific transaction numbers, guest names, voucher references, or amounts.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Saves hours of technical investigation when tracing a specific guest folio or receipt from eZee to determine exactly how it was booked in Odoo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REP-05 -->
+      <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-indigo-500/50 transition-all duration-300" data-category="cat-report">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">REP-05</span>
+            <span class="text-[11px] text-slate-400 font-semibold">8. Reports &amp; Translation</span>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+            Structured Audit Notes &amp; Severity Flagging
+          </h3>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+              <span class="font-bold text-slate-300 block mb-1">What is this feature:</span>
+              <p class="text-slate-400 leading-relaxed">
+                Dedicated audit logging model (<code>pms.sync.log.audit.note</code>) recording system-detected anomalies categorized by severity (Info, Warning, Danger), expected amount, actual amount, and Odoo record ID.
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+              <span class="font-bold text-blue-300 block mb-1">Real Life Benefit:</span>
+              <p class="text-slate-300 leading-relaxed">
+                Provides internal auditors with a permanent, searchable audit trail documenting reconciliation exceptions, automated corrective actions, and historical variances.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Empty Search State -->
+    <div id="no-results" class="hidden glass-card rounded-2xl p-12 text-center max-w-md mx-auto space-y-3">
+      <div class="w-12 h-12 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center mx-auto">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <h3 class="text-base font-bold text-white">No features match your query</h3>
+      <p class="text-xs text-slate-400">Try searching for a different GL account, API type, or clear your filters.</p>
+      <button onclick="clearSearch()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition">
+        Reset Search Filters
+      </button>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="flex justify-center pt-8">
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-semibold text-slate-400 hover:text-white hover:border-slate-700 transition">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+        Back to Top
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-16 border-t border-slate-800/80 py-8 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4">
+      <p>WD Group · Ozoo (eZee-Odoo Connector) Operations Suite · Powered by Dubai in Cairo</p>
+    </div>
+  </footer>
+
+  <!-- Spotlight & Filter Script -->
+  <script>
+    // Mouse Spotlight Effect
+    document.querySelectorAll('.spotlight-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    function filterFeatures() {
+      const items = document.querySelectorAll('.feature-item');
+      let visibleCount = 0;
+      const query = searchQuery.trim().toLowerCase();
+
+      items.forEach(item => {
+        const catMatch = currentCategory === 'all' || item.getAttribute('data-category') === currentCategory;
+        const textContent = item.textContent.toLowerCase();
+        const searchMatch = !query || textContent.includes(query);
+
+        if (catMatch && searchMatch) {
+          item.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      document.getElementById('visible-count').textContent = visibleCount;
+      const noResults = document.getElementById('no-results');
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+    }
+
+    function setCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      filterFeatures();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val;
+      const clearBtn = document.getElementById('clear-search');
+      if (val.trim()) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      filterFeatures();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('search-input');
+      input.value = '';
+      searchQuery = '';
+      document.getElementById('clear-search').classList.add('hidden');
+      setCategory('all', document.querySelector('.category-pill[data-cat="all"]'));
+      filterFeatures();
+    }
+
+    function scrollPillRail(amount) {
+      const rail = document.getElementById('category-rail');
+      rail.scrollBy({ left: amount, behavior: 'smooth' });
+    }
+
+    function updateRailScrollIndicators() {
+      const rail = document.getElementById('category-rail');
+      const leftBtn = document.getElementById('rail-scroll-left');
+      const rightBtn = document.getElementById('rail-scroll-right');
+      const fadeLeft = document.getElementById('rail-fade-left');
+      const fadeRight = document.getElementById('rail-fade-right');
+
+      const scrollLeft = rail.scrollLeft;
+      const maxScroll = rail.scrollWidth - rail.clientWidth;
+
+      if (scrollLeft > 10) {
+        leftBtn.classList.remove('opacity-0', 'pointer-events-none');
+        fadeLeft.classList.remove('opacity-0');
+      } else {
+        leftBtn.classList.add('opacity-0', 'pointer-events-none');
+        fadeLeft.classList.add('opacity-0');
+      }
+
+      if (scrollLeft < maxScroll - 10) {
+        rightBtn.classList.remove('opacity-0', 'pointer-events-none');
+        fadeRight.classList.remove('opacity-0');
+      } else {
+        rightBtn.classList.add('opacity-0', 'pointer-events-none');
+        fadeRight.classList.add('opacity-0');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', updateRailScrollIndicators);
+    window.addEventListener('resize', updateRailScrollIndicators);
+  </script>
+</body>
+</html>

@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>كتالوج ميزات وقدرات منظومة التواصل الداخلي والبريد الرسمي (Zoho Mail + Cliq) | مجموعة دبليو دي للأعمال</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #08090C;
+      color: #f1f5f9;
+      font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+      direction: rtl;
+      text-align: right;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 17, 23, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(20, 184, 166, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(20, 184, 166, 0.7); }
+
+    .glass-card {
+      background: rgba(15, 17, 23, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(20, 184, 166, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-nav {
+      background: rgba(8, 9, 12, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(20, 184, 166, 0.12), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .category-pill {
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.875rem;
+      border-radius: 0.875rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 17, 23, 0.7);
+      color: #94a3b8;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      flex-shrink: 0;
+      font-family: 'IBM Plex Sans Arabic', sans-serif;
+    }
+    .category-pill:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: #f1f5f9;
+      transform: translateY(-1px);
+    }
+    .category-pill.active {
+      background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+      border-color: rgba(94, 234, 212, 0.6);
+      color: #ffffff;
+      box-shadow: 0 8px 20px -4px rgba(20, 184, 166, 0.45);
+      transform: translateY(-1px);
+    }
+    .category-pill .pill-badge {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      padding: 0.125rem 0.45rem;
+      border-radius: 9999px;
+      background: rgba(15, 17, 23, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.2s ease;
+    }
+    .category-pill.active .pill-badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body class="selection:bg-teal-600 selection:text-white pb-24">
+
+  <!-- خلفية متدرجة ديناميكية -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-20 -right-40 w-[600px] h-[600px] bg-teal-600/10 rounded-full blur-[140px]"></div>
+    <div class="ambient-orb-2 absolute top-1/2 -left-40 w-[550px] h-[550px] bg-emerald-600/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <!-- شريط الملاحة العلوي الثابت -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- شعار المجموعة وعنوان الصفحة -->
+      <div class="flex items-center gap-3.5">
+        <a href="/manuals/wdgroup/ar#project-04" class="w-10 h-10 rounded-2xl bg-gradient-to-br from-teal-500 via-teal-600 to-emerald-800 flex items-center justify-center text-white font-black shadow-lg shadow-teal-500/25 border border-teal-400/40 hover:scale-105 transition-transform" title="الرجوع لبوابة الدليل الرئيسية">
+          WD
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-base sm:text-lg tracking-tight text-white">مجموعة دبليو دي للأعمال</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/30 font-mono">
+              المشروع 04
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            منظومة التواصل الداخلي المؤسسي والبريد الرسمي (Zoho Mail + Zoho Cliq + Zoho Clips)
+          </p>
+        </div>
+      </div>
+
+      <!-- أزرار الإجراءات والتحويل واللغة -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/manuals/wdgroup/ar#project-04" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700/80 transition">
+          <span>←</span>
+          <span>بوابة مجموعة دبليو دي للأعمال</span>
+        </a>
+        <a href="/manuals/wdgroup/internalcommunication/sops-ar" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-teal-600/20 hover:bg-teal-600/30 text-xs font-bold text-teal-300 border border-teal-500/40 transition">
+          <span>إجراءات التشغيل (SOPs)</span>
+          <span>←</span>
+        </a>
+        <a href="/manuals/wdgroup/internalcommunication/features-en" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 font-mono transition" title="English Version">
+          EN
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- الحاوية الرئيسية -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+
+    <!-- لافتة الترحيب والرؤية الهندسية للمشروع -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 relative overflow-hidden">
+      <div class="relative z-10 max-w-4xl space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-xs font-semibold text-teal-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
+          <span>40 قدرة تشغيلية متقدمة عبر 8 محاور استراتيجية متكاملة</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+          المرجع الهندسي الشامل لمنظومة التواصل الداخلي والبريد الرسمي (<span class="font-mono text-teal-400">Zoho Workplace</span>)
+        </h1>
+        <p class="text-sm text-slate-300 leading-relaxed">
+          وثيقة تقنية وتشغيلية توثق البنية التحتية المتطورة للاتصالات المؤسسية التي تم تصميمها وتطبيقها لمجموعة دبليو دي للأعمال وفنادق سويس بلو ومصانع جرين وود الثلاثة وتصاميم الوطن للمقاولات. تشمل التشفير التام 2048-بت DKIM، منع تسريب البيانات DLP، النوافذ المرئية غير المتزامنة Zoho Clips، ونظام الحماية ومنع الانتحال DMARC.
+        </p>
+      </div>
+    </div>
+
+    <!-- شريط التصفية والبحث الثابت -->
+    <div class="sticky top-20 z-30 pt-2 pb-3 glass-nav border-y border-slate-800/80 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        
+        <!-- مسار الركائز القابل للتمرير الأفقي -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1" id="category-filters">
+          <button onclick="filterCategory('all')" class="category-pill active" data-category="all">
+            <span>كافة القدرات</span>
+            <span class="pill-badge">40</span>
+          </button>
+          <button onclick="filterCategory('pillar-1')" class="category-pill" data-category="pillar-1">
+            <span>1. الهوية المشفرة وحماية DNS</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-2')" class="category-pill" data-category="pillar-2">
+            <span>2. هندسة البريد والصناديق المشتركة</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-3')" class="category-pill" data-category="pillar-3">
+            <span>3. منع تسريب البيانات والأرشفة القانونية</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-4')" class="category-pill" data-category="pillar-4">
+            <span>4. قنوات كليك والمحادثات اللحظية</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-5')" class="category-pill" data-category="pillar-5">
+            <span>5. تسجيل الفيديو غير المتزامن Clips</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-6')" class="category-pill" data-category="pillar-6">
+            <span>6. الدخول الموحد والتحقق الثنائي 2FA</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-7')" class="category-pill" data-category="pillar-7">
+            <span>7. أتمتة العمليات وروبوتات الربط</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-8')" class="category-pill" data-category="pillar-8">
+            <span>8. التوقيع الموحد وتدريب الكوادر</span>
+            <span class="pill-badge">5</span>
+          </button>
+        </div>
+
+        <!-- حقل البحث الفوري -->
+        <div class="relative w-48 sm:w-64 flex-shrink-0" id="search-container">
+          <input 
+            type="text" 
+            id="feature-search"
+            placeholder="ابحث في القدرات أو الأكواد..." 
+            oninput="handleSearch(this.value)"
+            class="w-full px-3.5 py-1.5 pr-9 rounded-xl bg-slate-900 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition text-right"
+          >
+          <svg class="w-4 h-4 text-slate-500 absolute right-3 top-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ملخص النتائج والعداد النشط -->
+    <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+      <div class="flex items-center gap-2">
+        <span>عرض الفئة:</span>
+        <span id="active-category-label" class="font-bold text-white">كافة القدرات</span>
+      </div>
+      <div class="font-mono">
+        <span id="filtered-count" class="font-bold text-teal-400">40</span> من إجمالي 40 قدرة تشغيلية نشطة
+      </div>
+    </div>
+
+    <!-- شبكة القدرات (40 ميزة مقسمة على 8 محاور وفق المعيار المزدوج) -->
+    <div class="space-y-12" id="features-container">
+
+      <!-- ========================================================================= -->
+      <!-- المحور 1: الهوية المشفرة وحماية DNS متعدد النطاقات (5 قدرات)               -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-1">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">المحور 1: الهوية المشفرة وحماية DNS متعدد النطاقات</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 قدرات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-01 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-01</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">التشفير الرقمي</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">التوقيع الرقمي المشفر بمفاتيح 2048-بت DKIM لكافة رسائل البريد الصادرة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تطبيق توقيع رقمي لا تماثلي باستخدام مفاتيح تشفير RSA بطول 2048-بت عبر سجلات Cloudflare DNS TXT. يتم ختم كل رسالة بريد صادرة من نطاقات المجموعة بختم رقمي فريد في ترويسة <code class="font-mono text-[11px] text-teal-300">DKIM-Signature</code> لمنع التعديل على الرسالة أثناء انتقالها عبر الإنترنت.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                ضمان وصول عروض الأسعار والمناقصات الحكومية المليونية مباشرة إلى صناديق الوارد الرئيسية لدى العملاء والجهات الرقابية دون تصنيفها كبريد عشوائي (Spam) نهائياً.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-02 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-02</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">تفويض الإرسال المعتمد</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">محاذاة إطار سياسة المرسل (SPF) الصارمة عبر كافة النطاقات التابعة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                سجلات DNS TXT SPF دقيقة (<code class="font-mono text-[11px] text-teal-300">v=spf1 include:zoho.com ~all</code>) تحدد حصرياً نطاقات عناوين IP المصرح لها بإرسال البريد نيابة عن كيانات المجموعة (<code class="font-mono text-[11px]">wdgroup.online</code> و<code class="font-mono text-[11px]">swissbluehotels.com</code>).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حماية سمعة المجموعة ومنع القراصنة من تزوير عناوين البريد لإصدار أوامر شراء وهمية أو طلب تحويلات مالية باسم مهندسي وإداريي مجموعة دبليو دي للأعمال.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-03 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-03</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الحماية من انتحال الهوية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">تطبيق سياسة عزل الانتحال DMARC وتقارير القياس الجنائي التلقائية</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تفعيل سياسة DMARC متقدمة (<code class="font-mono text-[11px] text-teal-300">p=quarantine</code>) تلزم خوادم البريد العالمية بحجر أي رسالة تنتحل صفة المجموعة، مع إرسال تقارير جنائية XML آلية لإدارة أمن المعلومات بالمجموعة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تحصين الهوية القيادية للرئيس التنفيذي والمديرين العامين ضد هجمات الاحتيال الهندسي الموجه (CEO Fraud)، وإحباط أي محاولات للاستيلاء على مستحقات العقود.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-04 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-04</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">استقرار ترحيل البريد</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">سجلات التوجيه المزدوجة MX فائقة الاستقرار والتحويل التلقائي عند الطوارئ</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                بنية تحتية متدرجة لسجلات MX (<code class="font-mono text-[11px]">mx.zoho.com</code> أولوية 10، <code class="font-mono text-[11px]">mx2.zoho.com</code> أولوية 20، <code class="font-mono text-[11px]">mx3.zoho.com</code> أولوية 50) مع شبكة Anycast السحابية لضمان استمرارية ترحيل البريد بدون فقدان.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                جاهزية واستمرارية بنسبة 99.9% تمنع فقدان أي طلب حجز فندقي أو تأخير أوامر شراء المواد الخام للمصانع حتى في أوقات الصيانة الدولية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-05 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-05</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">إدارة النطاقات المتعددة</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">دمج وإدارة كافة نطاقات المجموعة القابضة تحت مظلة مؤسسية مركزية واحدة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تنظيم سحابي مركزي يجمع نطاقات الضيافة والمصانع والمقاولات تحت حساب مؤسسي موحد، مع إمكانية منح الموظف عناوين بريد متعددة تتبع لكل قطاع على نفس صندوق الوارد.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تخفيض تكلفة اشتراكات البريد الإلكتروني بنسبة تتجاوز 50% مقارنة بشراء حسابات منفصلة لكل شركة تابعة، وتسهيل الإشراف الإداري على كافة الموظفين.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- المحور 2: هندسة البريد والصناديق المشتركة للأقسام (5 قدرات)                 -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-2">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">المحور 2: هندسة البريد والصناديق المشتركة للأقسام</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 قدرات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-06 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-06</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">صناديق الأقسام</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">صناديق البريد المشتركة للأقسام (<code class="font-mono text-xs text-teal-300">sales@</code>, <code class="font-mono text-xs text-teal-300">orders@</code>, <code class="font-mono text-xs text-teal-300">procurement@</code>)</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                صناديق جماعية ذكية تتيح لفريق المبيعات والمشتريات والموارد البشرية إدارة المراسلات الواردة بشكل تعاوني مع صلاحيات مخصصة وتتبع هوية الموظف المجيب بدقة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                القضاء التام على ضياع استفسارات العملاء عند غياب أحد الموظفين في إجازة، حيث يمتلك باقي أفراد الفريق رؤية كاملة لكافة المحادثات ومراحل متابعتها.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-07 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-07</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">منع التضارب اللحظي</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">نظام منع تضارب الردود (Collision Prevention) وتثبيت مسار المعالجة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                مؤشرات حضور تفاعلية تظهر للزملاء في نفس اللحظة أن موظفاً معيناً يقرأ الرسالة أو يكتب رداً عليها حالياً، مع إمكانية إسناد المعاملة لموظف محدد (Assignee).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                منع إرسال ردود مكررة أو عروض أسعار متناقضة للعميل من موظفين مختلفين في نفس الوقت، والحفاظ على وقار الاحترافية المؤسسية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-08 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-08</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">دليل جهات الاتصال</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">دليل الموظفين المؤسسي العام (GAL) والمزامنة الشاملة لجهات الاتصال</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                دليل مركزي محدث سحابياً يضم أسماء كافة موظفي المجموعة، إداراتهم، تحويلاتهم الهاتفية، ومصانعهم، متاح تلقائياً عبر المتصفح وتطبيقات الجوال والكمبيوتر.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تمكين مشرفي الفنادق ومسؤولي المصانع من التواصل الفوري مع أي زميل في أي قطاع بنقرة واحدة ودون الحاجة لحفظ الأرقام يدوياً على هواتفهم.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-09 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-09</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">قوائم التوزيع</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">قوائم التوزيع البريدي الديناميكية الموجهة حسب الأدوار والمصانع</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                قوائم مراسلات برمجية (<code class="font-mono text-[11px]">engineers@wdgroup.online</code> و<code class="font-mono text-[11px]">plant1-leads@wdgroup.online</code>) تضم أعضاء القسم آلياً مع تطبيق معايير الإشراف لمنع إرسال الرسائل غير المصرح بها.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                إرسال التعاميم الفنية وجداول الصيانة الدورية لكافة مهندسي المصنع برسالة واحدة، مع ضمان شمول الموظفين الجدد تلقائياً فور تعيينهم.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-10 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-10</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">واجهة الويب المتقدمة</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">بوابة البريد السحابية الخالية من الإعلانات مع دعم العمل بدون إنترنت</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                واجهة ويب حديثة وفائقة السرعة بتقنية HTML5 PWA مزودة بذاكرة تخزين محلية، تقويم مؤسسي متكامل، وقوائم مهام مدمجة تعمل حتى أثناء انقطاع الاتصال بالشبكة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تمكين قيادات المجموعة والمهندسين من قراءة وصياغة الردود على المعاملات أثناء السفر والرحلات الجوية أو في مواقع العمل الإنشائية ذات التغطية الضعيفة.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- المحور 3: منع تسريب البيانات والامتثال والأرشفة القانونية (5 قدرات)          -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-3">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">المحور 3: منع تسريب البيانات والامتثال والأرشفة القانونية</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 قدرات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-11 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-11</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">البحث القانوني والتحقيق</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">محرك الكشف الإلكتروني (eDiscovery) والتدقيق الشامل لكافة المراسلات</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                أداة فحص وتدقيق مركزي تتيح للمستشار القانوني وإدارة الرقابة البحث بالكلمات المفتاحية والتواريخ عبر كافة صناديق البريد النشطة والمؤرشفة حتى المحذوفة منها.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                استخراج كافة الأدلة والمستندات التعاقدية خلال دقائق لحماية حقوق المجموعة القانونية والمالية في أي نزاع تجاري أو تدقيق نظامي معتمد.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-12 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-12</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الأرشفة غير القابلة للحذف</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">خزينة الأرشفة الثابتة (WORM Archival) وسياسات الاستبقاء النظامية</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حفظ آلي مشفر لكل رسالة بريد واردة أو صادرة في مساحة تخزين محمية بنظام (Write Once Read Many) تمنع حذف الرسائل نهائياً حتى لو قام المستخدم بحذفها من حسابه.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حفظ الذاكرة المؤسسية والامتثال لمتطلبات هيئة الزكاة والضريبة والجمارك (ZATCA) في الاحتفاظ بالفواتير والسجلات الرسمية لعدة سنوات.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-13 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-13</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">منع تسريب البيانات DLP</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">محرك منع تسريب البيانات (DLP) وحماية الأرقام الهندسية والمالية السرية</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                قواعد فحص أوتوماتيكية للرسائل والمرفقات ترصد الهويات الوطنية والإقامات، أرقام الآيبان البنكية، ملفات الرواتب، والمخططات الهندسية وتمنع إرسالها خارج النطاق المؤسسي دون إذن.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                منع تسريب أسرار التصاميم الفاخرة لمصانع جرين وود وقوائم الأسعار الخاصة بالشركاء، والامتثال الصارم لنظام حماية البيانات الشخصية السعودي (PDPL).
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-14 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-14</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">حظر الوصول الجغرافي</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">تقييد الوصول الإداري بعناوين IP المعتمدة والحظر الجغرافي السيبراني</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حصر لوحة التحكم الإدارية بشبكات المقرات والمصانع المعتمدة، مع تفعيل تنبيهات محاولات الدخول المشبوهة من خارج المملكة العربية السعودية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                إغلاق الباب تماماً أمام محاولات الاختراق الخارجية التي تستهدف الوصول لحسابات الإدارة التنفيذية للمجموعة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-15 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-15</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">مكافحة الفيروسات والتصيد</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">درع الذكاء الاصطناعي لمكافحة التصيد وفحص المرفقات في بيئة معزولة (Sandbox)</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                فحص فوري للروابط والمرفقات عبر خوارزميات التعلم الآلي، مع تشغيل الملفات المشبوهة في بيئة افتراضية مغلقة للتأكد من خلوها من فيروسات الفدية وبرمجيات التجسس.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حماية أجهزة المحاسبة والمصانع من الوقوع في فخ رسائل البريد الملغمة التي تهدد بتعطيل الحواسيب أو تشفير قواعد البيانات.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- المحور 4: قنوات زوهو كليك والمحادثات اللحظية المهيكلة (5 قدرات)             -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">المحور 4: قنوات زوهو كليك والمحادثات اللحظية المهيكلة</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 قدرات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-16 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-16</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">هيكلية القنوات</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">طوبولوجيا القنوات المؤسسية الهرمية (<code class="font-mono text-xs text-teal-300">#التعاميم</code>، <code class="font-mono text-xs text-teal-300">#عمليات-المصانع</code>)</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تقسيم القنوات إلى: قنوات إعلانات عامة للقراءة فقط، قنوات للمشاريع الفندقية والمصنعية، قنوات الإدارات، ومحادثات ثنائية مباشرة وموثقة بالكامل.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                إنهاء فوضى مجموعات الواتساب الشخصية غير الخاضعة للرقابة، وإرساء بيئة عمل رقمية نقية وسريعة تحفظ سرية القرارات وأرشيف المعاملات.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-17 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-17</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">عزل الصلاحيات</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">قنوات الإدارة التنفيذية والمالية السرية والمحمية بمستويات الصلاحيات</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                قواعد انضمام دقيقة تحصر قنوات القيادة (<code class="font-mono text-[11px]">#مجلس-الإدارة</code> و<code class="font-mono text-[11px]">#المالية-والرواتب</code>) بأصحاب المسميات الوظيفية المصرح لهم فقط دون إمكانية إضافتهم بالخطأ.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                سرية تامة للقرارات الاستراتيجية ومناقشات الميزانيات والخطط التوسعية للمجموعة بعيداً عن أوساط العمل التشغيلية العامة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-18 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-18</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الاجتماعات اللحظية Huddles</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">جلسات الصوت والفيديو الفورية (Huddles) ومشاركة الشاشة الهندسية المباشرة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                اتصال صوتي ومرئي فائق السرعة بتقنية WebRTC مدمج داخل القنوات يتيح إطلاق اجتماع فوري بنقرة زر واحدة ومشاركة شاشات برامج CAD وOdoo دون روابط خارجية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حل الخلافات والمشاكل الفنية بين مهندسي المصنع والمكتب الرئيسي في 5 دقائق بدلاً من انتظار مواعيد الاجتماعات الأسبوعية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-19 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-19</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">حالة التواجد الذكية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">مؤشرات التواجد الميداني الذكية وإدارة حالات ورديات المصانع</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تحديثات تلقائية لحالة الموظف (متواجد بالمكتب، في صالة الإنتاج بالمصنع، في موقع المشروع، في اجتماع، منتهي الوردية) مرتبطة بالتقويم وأجهزة الجوال.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                معرفة ما إذا كان المشرف متاحاً لمكالمة صوتية أو يتابع خط إنتاج صاخب، مما يرفع دقة التنسيق بين الإدارات.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-20 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-20</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">البحث اللحظي الشامل</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">محرك الفهرسة والبحث الشامل عبر الرسائل والمخططات الهندسية والمرفقات</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                فهرس بحث متقدم يسترجع الرسائل والصور وملفات PDF ومخططات DWG بدقة عبر كافة القنوات والمحادثات مع فلاتر المرسل وتاريخ الإرسال.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                الوصول إلى اعتماد فني أو كود دهان تم تداوله قبل عدة أشهر في 3 ثوانٍ فقط بدلاً من قضاء ساعات في البحث اليدوي.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- المحور 5: تسجيل الفيديو غير المتزامن عبر Zoho Clips (5 قدرات)               -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">المحور 5: تسجيل الفيديو غير المتزامن عبر Zoho Clips</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 قدرات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-21 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-21</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">تسجيل الشاشة</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">محرك تسجيل الشاشة والصوت بنقرة زر واحدة بدقة فائقة 1080p Full HD</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                أداة تصوير شاشة مدمجة في زوهو كليك والبريد تسجل الشاشة بالكامل أو نافذة تطبيق معين مع الصوت النقي والتعليق الصوتي المباشر دون الحاجة لبرامج خارجية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                استبدال الاجتماعات الطويلة بمقطع فيديو موجز مدته 60 ثانية يشرح خطأ في النظام أو تعديلاً في مخطط الأثاث، مما يوفر أكثر من 4.5 ساعة أسبوعياً لكل مهندس ومشرف.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-22 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-22</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">الكاميرا المدمجة PIP</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">دمج نافذة المتحدث بالكاميرا (Picture-in-Picture) لتعزيز التفاعل القيادي</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                إمكانية إظهار وجه المهندس أو المدير في دائرة مرئية في زاوية الشاشة أثناء استعراض المخطط أو التقرير، متزامنة لحظياً مع الصوت وحركة الفأرة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                إضفاء طابع احترافي وشخصي على التوجيهات الإدارية والشروحات الفنية، ورفع تركيز واستيعاب فرق العمل.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-23 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-23</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">المعالجة السحابية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">المعالجة السحابية اللحظية وتوليد روابط المشاهدة الآمنة والمباشرة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                ضغط وتحويل الفيديو سحابياً وتوليد رابط تشغيل فوري مدمج داخل المحادثة أو البريد دون الحاجة لرفع وتحميل ملفات فيديو ضخمة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                مشاهدة المقاطع التوجيهية بضغطة واحدة من أجهزة الجوال في أرض المصنع دون استهلاك باقات الإنترنت أو انتظار التنزيل.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-24 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-24</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">التشخيص الميداني الصناعي</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">توثيق أعطال مكائن المصانع بالفيديو عالي الدقة وسرعة تشخيص الصيانة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                بروتوكول تصوير بالفيديو من كاميرا الجوال لشاشات أخطاء مكائن الـ CNC ومناشير الأخشاب وإرسالها فوراً في قناة الصيانة الفنية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تقليص زمن توقف خطوط الإنتاج إلى النصف من خلال منح مهندس الصيانة رؤية دقيقة للعطل قبل تحركه لموقع المصنع ومعه قطع الغيار المطلوبة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-25 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-25</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">حماية المقاطع المشتركة</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">تشفير مقاطع الفيديو المؤسسية وحظر مشاركتها خارج النطاق الداخلي</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تشفير المقاطع المخزنة بتقنية AES-256، وحظر تنزيلها أو مشاركة روابطها مع عناوين بريد خارج نطاقات المجموعة المصرح لها.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حماية أسرار التصنيع الهندسي وخطط التوسع الفندقي من أي تسريب للشركات المنافسة أو شبكات التواصل.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- المحور 6: الدخول الموحد، التحقق الثنائي وحماية الأجهزة (5 قدرات)             -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">المحور 6: الدخول الموحد، التحقق الثنائي وحماية الأجهزة</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 قدرات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-26 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-26</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">المصادقة الثنائية 2FA</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">المصادقة الثنائية الإلزامية (2FA) عبر تطبيق الأمان Zoho OneAuth</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                سياسة أمنية إلزامية على مستوى المنظمة تمنع تسجيل الدخول لكافة الموظفين بكلمة المرور وحدها، وتتطلب تأكيداً ثنائياً عبر تطبيق OneAuth المعتمد.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                صد 99.9% من محاولات اختراق البريد الإلكتروني حتى في حال تعرض الموظف لسرقة كلمة المرور أو الوقوع في موقع تصيد احتيالي.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-27 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-27</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">التحقق البيومتري</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">الموافقة البيومترية بلمسة واحدة (بصمة الوجه/الإصبع) وأكواد TOTP غير المتصلة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تأكيد الدخول عبر إشعار دفع فوري للجوال يعتمد بصمة الوجه (FaceID) أو الإصبع، مع توفير رمز أمان زمني مكون من 6 أرقام (TOTP) يعمل حتى بدون تغطية إنترنت.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تجربة مستخدم راقية وسريعة للموظفين تغنيهم عن انتظار رسائل الـ SMS البطيئة والمكلفة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-28 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-28</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">إنهاء الخدمات الفوري</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">إلغاء الصلاحيات وسحب الجلسات النشطة للموظف المغادر بنقرة واحدة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                لوحة تحكم للموارد البشرية وتقنية المعلومات تتيح إيقاف حساب الموظف فور استقالته أو إنهاء خدماته، وإلغاء توكنات تسجيل الدخول، وتحويل بريده لمدير القسم خلال 10 ثوانٍ.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                منع أي تسريب لقواعد بيانات العملاء أو المراسلات الحساسة بعد مغادرة الموظف، وحماية الملكية الفكرية للمجموعة بنسبة 100%.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-29 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-29</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">مسح البيانات عن بُعد</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">المسح الآمن عن بُعد لبيانات البريد والمحادثات في حال فقدان الهاتف</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                إمكانية إصدار أمر مسح سحابي فوري لعزل وحذف بيانات البريد والمحادثات المؤسسية من الهاتف المفقود أو المسروق دون المساس ببيانات الموظف الشخصية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                ضمان عدم وصول أي طرف خارجي لمعلومات المجموعة في حال سقوط هاتف أحد المشرفين في الميدان أو فقده.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-30 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-30</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">سياسة كلمات المرور</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">سياسات تعقيد كلمات المرور المؤسسية والحماية من التخمين المتكرر</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                اشتراط 10 خانات على الأقل (رموز، أرقام، أحرف كبيرة وصغيرة)، تغيير دوري كل 90 يوماً، حظر استخدام كلمات المرور السابقة، وقفل الحساب مؤقتاً بعد 5 محاولات خاطئة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                فرض الانضباط الأمني ومنع الموظفين من استخدام كلمات مرور ضعيفة وسهلة التخمين.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- المحور 7: أتمتة العمليات وروبوتات الربط والتنبيهات الذكية (5 قدرات)          -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-7">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">المحور 7: أتمتة العمليات وروبوتات الربط والتنبيهات الذكية</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 قدرات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-31 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-31</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">تنبيهات المبيعات</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">روبوت تنبيهات طلبات B2B اللحظية من مواقع المجموعة لقنوات المبيعات</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                ربط عبر الويب هوك (Webhook) يستقبل نماذج التواصل من مواقع المجموعة القابضة وفنادق سويس بلو وينشر بطاقة العميل مباشرة في قناة <code class="font-mono text-[11px]">#مبيعات-B2B</code> مع تنبيه مسؤولي المبيعات.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                الاستجابة لطلبات الشركات الكبرى والمناقصات في أقل من 8 دقائق، مما يضاعف فرص الفوز بالعقود التنافسية.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-32 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-32</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">تكامل نظام أودو Odoo</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">روبوت تنبيهات مخزون خامات مصانع جرين وود المرتبط بنظام Odoo 19 ERP</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                إشعار برمجي آلي ينطلق من خادم Odoo لقناة المشتريات والمصنع عند اقتراب مخزون الأخشاب أو الدهانات أو الإسفنج من نقطة إعادة الطلب الحرجة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تأمين سلاسل الإمداد لمصانع الرياض ونجران وتفادي التأخر في تسليم أثاث الفنادق المجدولة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-33 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-33</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">تصعيد الطوارئ P1</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">أمر تصعيد الحوادث الحرجة P1 المباشر لفرق دعم دبي في القاهرة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                أمر مختصر مدمج في كليك (<code class="font-mono text-[11px]">/escalate-p1</code>) يولد تذكرة طوارئ فورية ويوجهها لمهندسي دبي في القاهرة مع تفاصيل الخلل الفني.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                استجابة هندسية حاسمة في أقل من 30 دقيقة لأي طارئ يمس منظومة البريد أو محركات الحجز الفندقي.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-34 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-34</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">تسليم الورديات المؤتمت</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">روبوت تلخيص وتوثيق تسليم ورديات المصانع بنهاية كل شفت تشغيلي</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                رسالة تذكير تلقائية تطالب مشرف الوردية المنتهية بتعبئة نموذج منظم: عدد القطع المنجزة، المكائن تحت الصيانة، والمواد المطلوبة للوردية التالية.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                انتقال سلس ومنضبط بين الورديات مع أرشيف رقمي دائم يمنع التلاوم عند حدوث أي تأخير أو خلل فني بالمصانع.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-35 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-35</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">مزامنة التقاويم</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">مزامنة المواعيد والتقاويم المشتركة والتحويل الآلي للمنطقة الزمنية بالمملكة</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تقويم مركزي يوضح أوقات فراغ وانشغال الزملاء، وينبه بمواعيد الاجتماعات عبر كليك مع مراعاة توقيت مكة المكرمة لكافة الفروع.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تنسيق اجتماعات مجالس الإدارة ومديري الفنادق في ثوانٍ معدودة دون تضارب في المواعيد.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- المحور 8: التوقيع الموحد، التدريب المؤسسي وتطبيق الهوية (5 قدرات)           -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-8">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">المحور 8: التوقيع الموحد، التدريب المؤسسي وتطبيق الهوية</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 قدرات</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-36 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-36</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">حوكمة الهوية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">محرك إدارة التوقيع المؤسسي الموحد HTML المعتمد مركزياً لكافة الموظفين</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                قالب توقيع بريد إلكتروني HTML يطبقه النظام مركزياً وإلزامياً على كافة الرسائل الصادرة، مع قفل الخطوط والشعارات وإخلاء المسؤولية القانوني.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حماية الهوية البصرية الفاخرة للمجموعة، ومنع الموظفين من استخدام شعارات قديمة أو عبارات غير مصرح بها في مراسلات الشركة.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-37 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-37</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">المتغيرات التلقائية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">الحقن الآلي لبيانات الموظف (المسمى الوظيفي، الفرع، التحويلة الهاتفية)</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                سحب تلقائي لبيانات الموظف المعتمدة من الدليل العام وحقنها في التوقيع مثل الاسم باللغتين العربية والإنجليزية، المنصب، ورقم التحويلة المباشر.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تحديث توقيع الموظف فور ترقيته أو تغيير موقعه الميداني تلقائياً ودون الحاجة لتعديل يدوي على أجهزته.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-38 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-38</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">دعم المنصات المتعددة</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">تطبيقات الكمبيوتر والجوال الأصلية لأنظمة Windows وmacOS وiOS وAndroid</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تثبيت تطبيقات أصلية فائقة الخفة على أجهزة الكمبيوتر والهواتف تتيح الإشعارات الفورية والدخول البيومتري ومزامنة الملفات المشفرة.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تجربة استخدام موحدة وسلسة تخدم كافة الموظفين سواء على أجهزة ماك بوك للإدارة، أو كمبيوترات ويندوز للمحاسبة، أو أجهزة أندرويد اللوحية للمصانع.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-39 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-39</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">التدريب والتمكين</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">أدلة تأهيل الموظفين الميدانية وحقائب التدريب بالفيديو لسرعة التبني</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                حقيبة تدريبية تفاعلية تتضمن شروحات فيديو وخطوات مكتوبة لتدريب كل موظف جديد على تفعيل 2FA، استخدام كليك، وتسجيل مقاطع كليبس.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تقليص فترة تدريب الموظف الجديد من أسابيع إلى يوم واحد فقط، وضمان التزامه التام بمعايير التواصل المؤسسي من أول ساعة عمل.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-40 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-40</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">حوكمة السعات التخزينية</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">التدقيق الدوري للسعات التخزينية وأرشفة الحسابات غير النشطة وترشيد التكاليف</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">ما هي هذه القدرة؟ (الضبط التقني)</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                تقارير إدارية ربع سنوية ترصد استهلاك المساحات السحابية، المرفقات الكبيرة المكررة، والحسابات المجمدة لتفريغ السعات وترشيد الرخص.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">العائد التشغيلي وقيمة الأعمال</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                إبقاء التكاليف السحابية للمجموعة في حدودها الاقتصادية المثلى دون أي هدر في مساحات التخزين أو رخص غير مستخدمة.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- تذييل الصفحة الرسمي للمجموعة -->
+    <footer class="mt-16 pt-8 pb-12 border-t border-slate-800/80 text-center text-xs text-slate-500 space-y-3">
+      <div class="flex flex-wrap items-center justify-center gap-4 text-slate-400 font-medium">
+        <span>شركة تصاميم الوطن المحدودة (Watan Designs Ltd.)</span>
+        <span class="text-slate-700">•</span>
+        <span class="font-mono">السجل التجاري: 5950011057</span>
+        <span class="text-slate-700">•</span>
+        <span class="font-mono">الرقم الضريبي: 300865965100003</span>
+      </div>
+      <p>طريق الملك عبدالعزيز، الخالدية، نجران، المملكة العربية السعودية</p>
+      <div class="flex justify-center gap-4 pt-2 text-[11px] text-slate-400">
+        <a href="https://mail.zoho.com" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 underline">بوابة بريد زوهو (mail.zoho.com)</a>
+        <span>•</span>
+        <a href="https://cliq.zoho.com" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 underline">منصة زوهو كليك (cliq.zoho.com)</a>
+        <span>•</span>
+        <a href="/manuals/wdgroup/ar#project-04" class="hover:text-teal-400 underline">العودة لدليل العمليات الرئيسي</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- سكربت تفاعلي للبحث والتصفية وحركة المؤشر -->
+  <script>
+    const pillarTitles = {
+      'all': 'كافة القدرات',
+      'pillar-1': '1. الهوية المشفرة وحماية DNS',
+      'pillar-2': '2. هندسة البريد والصناديق المشتركة',
+      'pillar-3': '3. منع تسريب البيانات والأرشفة القانونية',
+      'pillar-4': '4. قنوات كليك والمحادثات اللحظية',
+      'pillar-5': '5. تسجيل الفيديو غير المتزامن Clips',
+      'pillar-6': '6. الدخول الموحد والتحقق الثنائي 2FA',
+      'pillar-7': '7. أتمتة العمليات وروبوتات الربط',
+      'pillar-8': '8. التوقيع الموحد وتدريب الكوادر'
+    };
+
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    function filterCategory(cat) {
+      activeCategory = cat;
+      
+      document.querySelectorAll('.category-pill').forEach(pill => {
+        pill.classList.toggle('active', pill.getAttribute('data-category') === cat);
+      });
+
+      document.getElementById('active-category-label').textContent = pillarTitles[cat] || 'كافة القدرات';
+      applyFilters();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim().toLowerCase();
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const items = document.querySelectorAll('.feature-item');
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const itemPillar = item.getAttribute('data-pillar');
+        const itemText = item.textContent.toLowerCase();
+
+        const matchesCat = (activeCategory === 'all' || itemPillar === activeCategory);
+        const matchesSearch = (!searchQuery || itemText.includes(searchQuery));
+
+        if (matchesCat && matchesSearch) {
+          item.style.display = 'block';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      document.querySelectorAll('.pillar-section').forEach(sec => {
+        const secPillar = sec.getAttribute('data-pillar');
+        const hasVisible = Array.from(sec.querySelectorAll('.feature-item')).some(it => it.style.display !== 'none');
+        sec.style.display = hasVisible ? 'block' : 'none';
+      });
+
+      document.getElementById('filtered-count').textContent = visibleCount;
+    }
+
+    // Spotlight cursor effect
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+  </script>
+</body>
+</html>

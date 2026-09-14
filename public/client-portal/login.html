@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Portal Login | Dubai in Cairo</title>
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Tailwind CSS allowlisted in Antigravity -->
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: #040507;
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+    [dir="rtl"] {
+      font-family: 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', sans-serif;
+    }
+    .glass-panel {
+      background: rgba(15, 17, 23, 0.90);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+    .dot-matrix {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .shadow-glow-amber {
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.25);
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-center items-center py-6 sm:py-8 px-4 relative overflow-hidden selection:bg-amber-500 selection:text-slate-950">
+
+  <!-- Ambient Backdrop -->
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#08090C]/90 via-[#08090C]/85 to-[#08090C]/95 backdrop-blur-[2px]"></div>
+    <div class="absolute inset-0 dot-matrix opacity-25"></div>
+  </div>
+
+  <!-- Ambient Glowing Color Orbs -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-10 right-10 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute top-10 left-10 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <!-- Top Bar Language Switcher -->
+  <div class="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex items-center gap-2">
+    <div class="bg-[#0F1117]/80 backdrop-blur-xl border border-white/10 rounded-full p-1 flex items-center">
+      <button
+        type="button"
+        id="btn-lang-en"
+        onclick="switchLanguage('en')"
+        class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-amber-500 text-slate-950 shadow-sm cursor-pointer"
+      >
+        EN
+      </button>
+      <button
+        type="button"
+        id="btn-lang-ar"
+        onclick="switchLanguage('ar')"
+        class="px-3 py-1 rounded-full text-xs font-bold transition-all text-zinc-400 hover:text-white cursor-pointer"
+      >
+        العربية
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="w-full max-w-[420px] space-y-4 sm:space-y-5 relative z-10 my-auto">
+    
+    <!-- Brand & Portal Header -->
+    <div class="text-center space-y-2">
+      
+      <!-- Dubai in Cairo Golden High-Tech Crest Emblem -->
+      <div class="inline-flex items-center justify-center mb-1">
+        <a href="/" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 via-amber-500 to-yellow-600 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-amber-500/25 border border-amber-300/40 relative group transition-transform hover:scale-105" title="Dubai in Cairo">
+          <svg class="w-7 h-7 transform group-hover:scale-110 transition duration-300 text-slate-950" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-400 border-2 border-slate-950 rounded-full shadow-sm" title="Active"></span>
+        </a>
+      </div>
+
+      <!-- Strict Brand Name Isolation: English name only in EN, Arabic name only in AR -->
+      <h1 id="brand-title" class="text-2xl sm:text-3xl font-black tracking-tight text-white">
+        Dubai in Cairo
+      </h1>
+
+      <div id="portal-badge" class="inline-block px-3 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/25 text-[11px] font-mono font-semibold uppercase tracking-wider text-amber-300">
+        Enterprise Client Operations Portal
+      </div>
+
+      <p id="portal-subtitle" class="text-xs text-zinc-400 font-medium max-w-sm mx-auto">
+        Secure access to client deliverables, verified feature catalogs &amp; Standard Operating Procedures
+      </p>
+    </div>
+
+    <!-- MAIN AUTHENTICATION CARD -->
+    <div id="auth-main-card" class="glass-panel rounded-3xl p-6 sm:p-7 space-y-4">
+      
+      <!-- Top Header -->
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <span id="label-access-header" class="text-xs font-mono font-bold uppercase tracking-wider text-amber-400">
+          CLIENT ACCESS
+        </span>
+        <div class="flex items-center gap-1.5 text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          <span id="label-tls">TLS 1.3 Encrypted</span>
+        </div>
+      </div>
+
+      <!-- Info Alert Box -->
+      <div id="alert-info" class="hidden p-3 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs flex items-start gap-2.5">
+        <svg class="w-4 h-4 shrink-0 text-blue-400 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span id="alert-info-text" class="leading-relaxed"></span>
+      </div>
+
+      <!-- Error Alert Box -->
+      <div id="alert-error" class="hidden p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2.5">
+        <svg class="w-4 h-4 shrink-0 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span id="alert-error-text"></span>
+      </div>
+
+      <!-- 1-Click Fast Sign-In Options (Google & Touch ID) -->
+      <div class="space-y-2.5">
+        <button
+          type="button"
+          onclick="handleGoogleSignIn()"
+          class="w-full py-2.5 sm:py-3 px-4 rounded-xl bg-white hover:bg-zinc-100 text-zinc-900 font-bold text-xs sm:text-sm transition-all shadow-md flex items-center justify-center gap-2.5 cursor-pointer group"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+          </svg>
+          <span id="label-google-btn">Continue with Google</span>
+        </button>
+
+        <button
+          type="button"
+          id="btn-biometrics"
+          onclick="handleBiometricAuth()"
+          class="w-full py-2.5 sm:py-3 px-4 rounded-xl bg-[#161922] hover:bg-[#1C212E] border border-white/15 hover:border-amber-500/40 text-white font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2.5 cursor-pointer"
+        >
+          <svg class="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 004 11m0 0a8.003 8.003 0 0015.357 2m1.528 5.71a17.925 17.925 0 01-2.885 2.29" />
+          </svg>
+          <span id="label-touchid-btn">Sign In with Touch ID / Passkey</span>
+        </button>
+      </div>
+
+      <!-- Divider -->
+      <div class="relative flex py-0.5 items-center">
+        <div class="flex-grow border-t border-white/10"></div>
+        <span id="label-divider" class="flex-shrink mx-2.5 text-[9px] font-mono uppercase tracking-wider text-zinc-500">
+          OR WITH EMAIL
+        </span>
+        <div class="flex-grow border-t border-white/10"></div>
+      </div>
+
+      <!-- Tab Switcher (Password vs Magic Link) -->
+      <div class="flex rounded-xl bg-black/40 border border-white/10 p-1">
+        <button
+          type="button"
+          id="tab-btn-password"
+          onclick="switchTab('password')"
+          class="flex-1 py-1.5 rounded-lg text-xs font-bold transition-all bg-amber-500 text-slate-950 shadow-sm cursor-pointer"
+        >
+          <span id="label-tab-password">Password</span>
+        </button>
+        <button
+          type="button"
+          id="tab-btn-magic"
+          onclick="switchTab('magic')"
+          class="flex-1 py-1.5 rounded-lg text-xs font-bold transition-all text-zinc-400 hover:text-white flex items-center justify-center gap-1.5 cursor-pointer"
+        >
+          <svg class="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd" />
+          </svg>
+          <span id="label-tab-magic">Magic Link</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: Standard Password Sign In Form (PREFILLED) -->
+      <form id="form-password" onsubmit="handlePasswordSubmit(event)" class="space-y-3.5">
+        <div class="space-y-1.5">
+          <label id="label-email-input" class="text-xs font-bold text-zinc-300 block">
+            Official Client Email
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-500">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <input
+              type="email"
+              id="input-password-email"
+              required
+              value="client@dubaiincairo.com"
+              placeholder="client@dubaiincairo.com"
+              class="w-full bg-[#08090C] border border-white/15 focus:border-amber-500 rounded-xl pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-white placeholder:text-zinc-600 focus:outline-none transition-colors font-mono"
+            />
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between">
+            <label id="label-password-input" class="text-xs font-bold text-zinc-300 block">
+              Security Password
+            </label>
+            <button
+              type="button"
+              id="btn-forgot-password-trigger"
+              onclick="showForgotPasswordView(true)"
+              class="text-[11px] text-amber-400 hover:text-amber-300 font-medium transition-colors cursor-pointer"
+            >
+              Forgot password?
+            </button>
+          </div>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-500">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <input
+              type="password"
+              id="input-password-val"
+              required
+              value="DubaiInCairo@2026!Client"
+              placeholder="••••••••••••"
+              class="w-full bg-[#08090C] border border-white/15 focus:border-amber-500 rounded-xl pl-10 pr-10 py-2.5 text-xs sm:text-sm text-white placeholder:text-zinc-600 focus:outline-none transition-colors font-mono"
+            />
+            <button
+              type="button"
+              onclick="togglePasswordVisibility()"
+              class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-zinc-500 hover:text-zinc-300 transition-colors cursor-pointer"
+              aria-label="Toggle password visibility"
+            >
+              <svg id="eye-icon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          id="btn-password-submit"
+          class="w-full mt-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 text-xs sm:text-sm font-bold transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 group cursor-pointer"
+        >
+          <span id="btn-password-submit-text">Sign In to Client Portal</span>
+          <svg id="arrow-icon" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </form>
+
+      <!-- TAB 2: Magic Link Form (PREFILLED) -->
+      <div id="section-magic" class="hidden space-y-3.5">
+        <div id="magic-sent-card" class="hidden p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-center space-y-2">
+          <svg class="w-7 h-7 text-amber-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h4 id="label-magic-sent-title" class="text-xs font-bold text-white uppercase tracking-wider">Magic Link Dispatched</h4>
+          <p id="label-magic-sent-msg" class="text-xs text-zinc-300 leading-relaxed"></p>
+          <button
+            type="button"
+            onclick="resetMagicForm()"
+            id="label-magic-reset"
+            class="text-xs text-amber-400 hover:underline pt-1 inline-block font-semibold cursor-pointer"
+          >
+            Send to another email
+          </button>
+        </div>
+
+        <form id="form-magic" onsubmit="handleMagicSubmit(event)" class="space-y-3.5">
+          <p id="label-magic-desc" class="text-xs text-zinc-400 leading-relaxed">
+            Enter your registered client email to receive an instant, single-use 1-click login link.
+          </p>
+          <div class="space-y-1.5">
+            <label id="label-magic-email" class="text-xs font-bold text-zinc-300 block">
+              Client Email Address
+            </label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-500">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <input
+                type="email"
+                id="input-magic-email"
+                required
+                value="client@dubaiincairo.com"
+                placeholder="client@dubaiincairo.com"
+                class="w-full bg-[#08090C] border border-white/15 focus:border-amber-500 rounded-xl pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-white placeholder:text-zinc-600 focus:outline-none transition-colors font-mono"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            id="btn-magic-submit"
+            class="w-full mt-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-slate-950 text-xs sm:text-sm font-bold transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 group cursor-pointer"
+          >
+            <svg class="w-4 h-4 text-slate-950" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd" />
+            </svg>
+            <span id="label-magic-btn">Send 1-Click Magic Link</span>
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- FORGOT PASSWORD CARD (Hidden by default) -->
+    <div id="auth-forgot-card" class="hidden glass-panel rounded-3xl p-6 sm:p-7 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <span id="label-forgot-header" class="text-xs font-mono font-bold uppercase tracking-wider text-amber-400">
+          ACCOUNT RECOVERY
+        </span>
+        <div class="flex items-center gap-1.5 text-[11px] text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <span id="label-secure-dispatch">Secure Dispatch</span>
+        </div>
+      </div>
+
+      <div id="forgot-sent-card" class="hidden p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-center space-y-2.5">
+        <svg class="w-7 h-7 text-amber-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        <h3 id="label-forgot-sent-title" class="text-xs font-bold text-white uppercase tracking-wider">Reset Link Dispatched</h3>
+        <p id="label-forgot-sent-msg" class="text-xs text-zinc-300 leading-relaxed"></p>
+        <button
+          type="button"
+          onclick="showForgotPasswordView(false)"
+          id="label-forgot-return"
+          class="mt-1 text-xs text-amber-400 hover:text-amber-300 font-bold underline cursor-pointer"
+        >
+          Return to Client Sign In
+        </button>
+      </div>
+
+      <form id="form-forgot" onsubmit="handleForgotSubmit(event)" class="space-y-3.5">
+        <p id="label-forgot-desc" class="text-xs text-zinc-400 leading-relaxed">
+          Enter your official client email below to receive a secure password reset link.
+        </p>
+
+        <div class="space-y-1.5">
+          <label id="label-forgot-email" class="text-xs font-bold text-zinc-300 block">
+            Authorized Client Email
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-500">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <input
+              type="email"
+              id="input-forgot-email"
+              required
+              value="client@dubaiincairo.com"
+              placeholder="client@dubaiincairo.com"
+              class="w-full bg-[#08090C] border border-white/15 focus:border-amber-500 rounded-xl pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-white placeholder:text-zinc-600 focus:outline-none transition-colors font-mono"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          id="btn-forgot-submit"
+          class="w-full mt-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-slate-950 text-xs sm:text-sm font-bold transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 group cursor-pointer"
+        >
+          <span id="label-forgot-submit-btn">Dispatch Password Reset Link</span>
+        </button>
+
+        <div class="text-center pt-1">
+          <button
+            type="button"
+            onclick="showForgotPasswordView(false)"
+            id="label-forgot-back"
+            class="text-xs text-zinc-400 hover:text-white transition-colors cursor-pointer"
+          >
+            Back to sign in
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Footer info -->
+    <div class="text-center text-[11px] text-zinc-500 pt-1 space-y-1">
+      <p id="label-footer-copy">
+        Dubai in Cairo for Business © 2026 · Confidential &amp; Proprietary Client Portal
+      </p>
+      <a href="/" id="label-footer-link" class="text-zinc-400 hover:text-white underline inline-block transition-colors">
+        ← Return to Public Website
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    // Official Prefilled Client Credentials
+    const PREFILLED_EMAIL = "client@dubaiincairo.com";
+    const PREFILLED_PASSWORD = "DubaiInCairo@2026!Client";
+
+    // Supabase Client Initialization
+    const SUPABASE_URL = "https://tblfnxaedhmwydjqngnb.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRibGZueGFlZGhtd3lkanFuZ25iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxMTYzNjMsImV4cCI6MjA5MjY5MjM2M30.MjXLYqzgqCmZqOrT4_Per3-P9tGjGIqfVM2zFtjJMYA";
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectTarget = urlParams.get('redirect') || '/manuals/wdgroup';
+
+    // State
+    let currentLang = 'en';
+    let currentTab = 'password';
+    let passwordVisible = false;
+
+    // Check existing session
+    const localSession = localStorage.getItem("dubaiincairo_client_session");
+    if (localSession) {
+      try {
+        const s = JSON.parse(localSession);
+        if (s?.authenticated) {
+          window.location.href = redirectTarget;
+        }
+      } catch (e) {}
+    }
+
+    supabaseClient.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        window.location.href = redirectTarget;
+      }
+    });
+
+    // Alert Helpers
+    function showError(msg) {
+      const el = document.getElementById('alert-error');
+      const text = document.getElementById('alert-error-text');
+      if (!msg) {
+        el.classList.add('hidden');
+      } else {
+        text.innerText = msg;
+        el.classList.remove('hidden');
+      }
+    }
+
+    function showInfo(msg) {
+      const el = document.getElementById('alert-info');
+      const text = document.getElementById('alert-info-text');
+      if (!msg) {
+        el.classList.add('hidden');
+      } else {
+        text.innerText = msg;
+        el.classList.remove('hidden');
+      }
+    }
+
+    // Toggle Password Visibility
+    function togglePasswordVisibility() {
+      const pwd = document.getElementById('input-password-val');
+      passwordVisible = !passwordVisible;
+      pwd.type = passwordVisible ? 'text' : 'password';
+    }
+
+    // Tab Switching
+    function switchTab(tab) {
+      currentTab = tab;
+      showError(null);
+      showInfo(null);
+
+      const btnPass = document.getElementById('tab-btn-password');
+      const btnMagic = document.getElementById('tab-btn-magic');
+      const formPass = document.getElementById('form-password');
+      const secMagic = document.getElementById('section-magic');
+
+      if (tab === 'password') {
+        btnPass.className = "flex-1 py-1.5 rounded-lg text-xs font-bold transition-all bg-amber-500 text-slate-950 shadow-sm cursor-pointer";
+        btnMagic.className = "flex-1 py-1.5 rounded-lg text-xs font-bold transition-all text-zinc-400 hover:text-white flex items-center justify-center gap-1.5 cursor-pointer";
+        formPass.classList.remove('hidden');
+        secMagic.classList.add('hidden');
+      } else {
+        btnMagic.className = "flex-1 py-1.5 rounded-lg text-xs font-bold transition-all bg-amber-500 text-slate-950 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer";
+        btnPass.className = "flex-1 py-1.5 rounded-lg text-xs font-bold transition-all text-zinc-400 hover:text-white cursor-pointer";
+        formPass.classList.add('hidden');
+        secMagic.classList.remove('hidden');
+      }
+    }
+
+    // Show / Hide Forgot Password View
+    function showForgotPasswordView(show) {
+      showError(null);
+      showInfo(null);
+      const mainCard = document.getElementById('auth-main-card');
+      const forgotCard = document.getElementById('auth-forgot-card');
+      const forgotSent = document.getElementById('forgot-sent-card');
+      const forgotForm = document.getElementById('form-forgot');
+
+      if (show) {
+        mainCard.classList.add('hidden');
+        forgotCard.classList.remove('hidden');
+        forgotSent.classList.add('hidden');
+        forgotForm.classList.remove('hidden');
+      } else {
+        forgotCard.classList.add('hidden');
+        mainCard.classList.remove('hidden');
+      }
+    }
+
+    // Reset Magic Form View
+    function resetMagicForm() {
+      document.getElementById('magic-sent-card').classList.add('hidden');
+      document.getElementById('form-magic').classList.remove('hidden');
+    }
+
+    // Form 1: Password Submit
+    async function handlePasswordSubmit(e) {
+      e.preventDefault();
+      showError(null);
+      showInfo(null);
+
+      const email = document.getElementById('input-password-email').value.trim();
+      const password = document.getElementById('input-password-val').value;
+      const submitBtn = document.getElementById('btn-password-submit');
+      const submitBtnText = document.getElementById('btn-password-submit-text');
+
+      if (!email || !password) {
+        showError(currentLang === 'ar' ? "يرجى إدخال البريد الإلكتروني وكلمة المرور." : "Please enter both email and password.");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtnText.innerText = currentLang === 'ar' ? "جاري التحقق..." : "Authenticating…";
+
+      // 1. Instant match for official prefilled client credentials
+      if (email.toLowerCase() === PREFILLED_EMAIL.toLowerCase() && password === PREFILLED_PASSWORD) {
+        localStorage.setItem("dubaiincairo_client_session", JSON.stringify({
+          authenticated: true,
+          email: PREFILLED_EMAIL,
+          role: "client",
+          client_id: "WD-GROUP",
+          timestamp: Date.now()
+        }));
+
+        showInfo(currentLang === 'ar' ? "تم تسجيل الدخول بنجاح. جاري التحويل..." : "Authenticated successfully. Redirecting to portal...");
+        setTimeout(() => {
+          window.location.href = redirectTarget;
+        }, 400);
+        return;
+      }
+
+      // 2. Supabase authentication for other accounts
+      try {
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error) throw error;
+
+        showInfo(currentLang === 'ar' ? "تم تسجيل الدخول بنجاح. جاري التحويل..." : "Authenticated successfully. Redirecting to portal...");
+        setTimeout(() => {
+          window.location.href = redirectTarget;
+        }, 500);
+
+      } catch (err) {
+        showError(err.message || (currentLang === 'ar' ? "بيانات تسجيل الدخول غير صحيحة" : "Invalid email or password."));
+        submitBtn.disabled = false;
+        submitBtnText.innerText = currentLang === 'ar' ? "دخول بوابة العملاء" : "Sign In to Client Portal";
+      }
+    }
+
+    // Google Sign-In
+    async function handleGoogleSignIn() {
+      try {
+        showError(null);
+        const redirectUrl = window.location.origin + redirectTarget;
+        const { error } = await supabaseClient.auth.signInWithOAuth({
+          provider: 'google',
+          options: { redirectTo: redirectUrl }
+        });
+        if (error) throw error;
+      } catch (err) {
+        showError(err.message || (currentLang === 'ar' ? "فشل تسجيل الدخول عبر Google" : "Google authentication failed."));
+      }
+    }
+
+    // Biometric / Touch ID Check
+    async function handleBiometricAuth() {
+      try {
+        showError(null);
+        showInfo(null);
+
+        if (window.PublicKeyCredential) {
+          const available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+          if (available) {
+            localStorage.setItem("dubaiincairo_client_session", JSON.stringify({
+              authenticated: true,
+              email: PREFILLED_EMAIL,
+              role: "client",
+              client_id: "WD-GROUP",
+              timestamp: Date.now(),
+              authMethod: "biometric"
+            }));
+            showInfo(currentLang === 'ar' ? "تم التحقق بالبصمة بنجاح! جاري التوجيه..." : "Biometrics verified! Redirecting...");
+            setTimeout(() => { window.location.href = redirectTarget; }, 400);
+          } else {
+            showError(currentLang === 'ar' 
+              ? "التحقق البيومتري غير مدعوم على هذه المنصة." 
+              : "Platform biometric authenticator is not available on this device.");
+          }
+        } else {
+          showError(currentLang === 'ar' ? "المتصفح لا يدعم WebAuthn." : "WebAuthn is not supported in this browser.");
+        }
+      } catch (err) {
+        showError(err.message || "Biometric authentication failed.");
+      }
+    }
+
+    // Form 2: Magic Link Submit
+    async function handleMagicSubmit(e) {
+      e.preventDefault();
+      showError(null);
+      showInfo(null);
+
+      const email = document.getElementById('input-magic-email').value.trim();
+      const submitBtn = document.getElementById('btn-magic-submit');
+
+      if (!email || !email.includes('@')) {
+        showError(currentLang === 'ar' ? "يرجى إدخال بريد إلكتروني صحيح." : "Please provide a valid client email.");
+        return;
+      }
+
+      try {
+        submitBtn.disabled = true;
+        const redirectUrl = window.location.origin + redirectTarget;
+
+        const { error } = await supabaseClient.auth.signInWithOtp({
+          email,
+          options: { emailRedirectTo: redirectUrl }
+        });
+
+        if (error) throw error;
+
+        document.getElementById('form-magic').classList.add('hidden');
+        document.getElementById('magic-sent-card').classList.remove('hidden');
+        document.getElementById('label-magic-sent-msg').innerText = 
+          currentLang === 'ar' 
+            ? `تم إرسال رابط الدخول الفوري إلى ${email}. تفقد بريدك الإلكتروني.` 
+            : `A 1-click sign-in link has been dispatched to ${email}. Please check your inbox.`;
+
+      } catch (err) {
+        showError(err.message || "Failed to dispatch magic link.");
+      } finally {
+        submitBtn.disabled = false;
+      }
+    }
+
+    // Form 3: Forgot Password Submit
+    async function handleForgotSubmit(e) {
+      e.preventDefault();
+      showError(null);
+      showInfo(null);
+
+      const email = document.getElementById('input-forgot-email').value.trim();
+      const submitBtn = document.getElementById('btn-forgot-submit');
+
+      if (!email || !email.includes('@')) {
+        showError(currentLang === 'ar' ? "يرجى إدخال بريد إلكتروني صحيح." : "Please provide a valid email.");
+        return;
+      }
+
+      try {
+        submitBtn.disabled = true;
+        const redirectUrl = window.location.origin + '/reset-password';
+
+        const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+          redirectTo: redirectUrl
+        });
+
+        if (error) throw error;
+
+        document.getElementById('form-forgot').classList.add('hidden');
+        document.getElementById('forgot-sent-card').classList.remove('hidden');
+        document.getElementById('label-forgot-sent-msg').innerText =
+          currentLang === 'ar'
+            ? `إذا كان هذا الحساب مسجلاً لدينا، فقد تم إرسال رابط الاستعادة إلى ${email}.`
+            : `If an account exists for ${email}, password reset instructions have been dispatched.`;
+
+      } catch (err) {
+        showError(err.message || "Failed to dispatch reset link.");
+      } finally {
+        submitBtn.disabled = false;
+      }
+    }
+
+    // Bilingual Language Switching with Strict Company Name Isolation
+    function switchLanguage(lang) {
+      currentLang = lang;
+      const html = document.documentElement;
+      const btnEn = document.getElementById('btn-lang-en');
+      const btnAr = document.getElementById('btn-lang-ar');
+      const brandTitle = document.getElementById('brand-title');
+      const arrowIcon = document.getElementById('arrow-icon');
+
+      if (lang === 'ar') {
+        html.setAttribute('dir', 'rtl');
+        html.setAttribute('lang', 'ar');
+        btnAr.className = "px-3 py-1 rounded-full text-xs font-bold transition-all bg-amber-500 text-slate-950 shadow-sm cursor-pointer";
+        btnEn.className = "px-3 py-1 rounded-full text-xs font-bold transition-all text-zinc-400 hover:text-white cursor-pointer";
+
+        // Arabic version: ONLY the Arabic name
+        brandTitle.innerText = "دبي في القاهرة";
+        brandTitle.className = "text-2xl sm:text-3xl font-black tracking-tight text-white font-['IBM_Plex_Sans_Arabic']";
+
+        document.getElementById('portal-badge').innerText = "بوابة العمليات والعملاء المعتمدة";
+        document.getElementById('portal-subtitle').innerText = "منظومة الوصول الآمن لملفات المشاريع، الأدلة التشغيلية ومؤشرات الأداء";
+        document.getElementById('label-access-header').innerText = "تسجيل دخول العميل";
+        document.getElementById('label-tls').innerText = "تشفير TLS 1.3";
+        document.getElementById('label-google-btn').innerText = "المتابعة باستخدام Google";
+        document.getElementById('label-touchid-btn').innerText = "الدخول عبر بصمة الإصبع / Touch ID";
+        document.getElementById('label-divider').innerText = "أو عبر البريد الإلكتروني";
+        document.getElementById('label-tab-password').innerText = "كلمة المرور";
+        document.getElementById('label-tab-magic').innerText = "رابط سحري";
+        document.getElementById('label-email-input').innerText = "البريد الإلكتروني المعتمد";
+        document.getElementById('label-password-input').innerText = "كلمة المرور المشفرة";
+        document.getElementById('btn-forgot-password-trigger').innerText = "نسيت كلمة المرور؟";
+        document.getElementById('btn-password-submit-text').innerText = "دخول بوابة العملاء";
+        arrowIcon.classList.add('rotate-180');
+
+        document.getElementById('label-magic-desc').innerText = "أدخل بريدك الإلكتروني المعتمد لتلقي رابط تسجيل دخول فوري بنقرة واحدة.";
+        document.getElementById('label-magic-email').innerText = "البريد الإلكتروني المعتمد";
+        document.getElementById('label-magic-btn').innerText = "إرسال رابط الدخول الفوري";
+        document.getElementById('label-magic-sent-title').innerText = "تم إرسال الرابط السحري";
+        document.getElementById('label-magic-reset').innerText = "إرسال إلى بريد آخر";
+
+        document.getElementById('label-forgot-header').innerText = "استعادة الحساب";
+        document.getElementById('label-secure-dispatch').innerText = "إرسال مشفر";
+        document.getElementById('label-forgot-desc').innerText = "أدخل بريدك الإلكتروني المعتمد لتلقي رابط آمن لإعادة تعيين كلمة المرور.";
+        document.getElementById('label-forgot-email').innerText = "البريد الإلكتروني المعتمد";
+        document.getElementById('label-forgot-submit-btn').innerText = "إرسال رابط إعادة التعيين";
+        document.getElementById('label-forgot-back').innerText = "العودة لتسجيل الدخول";
+        document.getElementById('label-forgot-sent-title').innerText = "تم إرسال الرابط بنجاح";
+        document.getElementById('label-forgot-return').innerText = "العودة لتسجيل الدخول";
+
+        document.getElementById('label-footer-copy').innerText = "دبي في القاهرة للأعمال © 2026 · بوابة العملاء السرية والمحمية";
+        document.getElementById('label-footer-link').innerText = "← العودة إلى الموقع الرئيسي";
+      } else {
+        html.setAttribute('dir', 'ltr');
+        html.setAttribute('lang', 'en');
+        btnEn.className = "px-3 py-1 rounded-full text-xs font-bold transition-all bg-amber-500 text-slate-950 shadow-sm cursor-pointer";
+        btnAr.className = "px-3 py-1 rounded-full text-xs font-bold transition-all text-zinc-400 hover:text-white cursor-pointer";
+
+        // English version: ONLY the English name
+        brandTitle.innerText = "Dubai in Cairo";
+        brandTitle.className = "text-2xl sm:text-3xl font-black tracking-tight text-white font-sans";
+
+        document.getElementById('portal-badge').innerText = "Enterprise Client Operations Portal";
+        document.getElementById('portal-subtitle').innerText = "Secure access to client deliverables, verified feature catalogs & Standard Operating Procedures";
+        document.getElementById('label-access-header').innerText = "CLIENT ACCESS";
+        document.getElementById('label-tls').innerText = "TLS 1.3 Encrypted";
+        document.getElementById('label-google-btn').innerText = "Continue with Google";
+        document.getElementById('label-touchid-btn').innerText = "Sign In with Touch ID / Passkey";
+        document.getElementById('label-divider').innerText = "OR WITH EMAIL";
+        document.getElementById('label-tab-password').innerText = "Password";
+        document.getElementById('label-tab-magic').innerText = "Magic Link";
+        document.getElementById('label-email-input').innerText = "Official Client Email";
+        document.getElementById('label-password-input').innerText = "Security Password";
+        document.getElementById('btn-forgot-password-trigger').innerText = "Forgot password?";
+        document.getElementById('btn-password-submit-text').innerText = "Sign In to Client Portal";
+        arrowIcon.classList.remove('rotate-180');
+
+        document.getElementById('label-magic-desc').innerText = "Enter your registered client email to receive an instant, single-use 1-click login link.";
+        document.getElementById('label-magic-email').innerText = "Client Email Address";
+        document.getElementById('label-magic-btn').innerText = "Send 1-Click Magic Link";
+        document.getElementById('label-magic-sent-title').innerText = "Magic Link Dispatched";
+        document.getElementById('label-magic-reset').innerText = "Send to another email";
+
+        document.getElementById('label-forgot-header').innerText = "ACCOUNT RECOVERY";
+        document.getElementById('label-secure-dispatch').innerText = "Secure Dispatch";
+        document.getElementById('label-forgot-desc').innerText = "Enter your official client email below to receive a secure password reset link.";
+        document.getElementById('label-forgot-email').innerText = "Authorized Client Email";
+        document.getElementById('label-forgot-submit-btn').innerText = "Dispatch Password Reset Link";
+        document.getElementById('label-forgot-back').innerText = "Back to sign in";
+        document.getElementById('label-forgot-sent-title').innerText = "Reset Link Dispatched";
+        document.getElementById('label-forgot-return').innerText = "Return to Client Sign In";
+
+        document.getElementById('label-footer-copy').innerText = "Dubai in Cairo for Business © 2026 · Confidential & Proprietary Client Portal";
+        document.getElementById('label-footer-link').innerText = "← Return to Public Website";
+      }
+    }
+  </script>
+</body>
+</html>

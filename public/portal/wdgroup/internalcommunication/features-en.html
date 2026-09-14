@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Corporate Internal Communication Suite (Zoho Mail + Cliq) — Complete Features Catalog | WD Group</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #08090C;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 17, 23, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(20, 184, 166, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(20, 184, 166, 0.7); }
+
+    .glass-card {
+      background: rgba(15, 17, 23, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(20, 184, 166, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-nav {
+      background: rgba(8, 9, 12, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(20, 184, 166, 0.12), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .category-pill {
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.875rem;
+      border-radius: 0.875rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 17, 23, 0.7);
+      color: #94a3b8;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .category-pill:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: #f1f5f9;
+      transform: translateY(-1px);
+    }
+    .category-pill.active {
+      background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+      border-color: rgba(94, 234, 212, 0.6);
+      color: #ffffff;
+      box-shadow: 0 8px 20px -4px rgba(20, 184, 166, 0.45);
+      transform: translateY(-1px);
+    }
+    .category-pill .pill-badge {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      padding: 0.125rem 0.45rem;
+      border-radius: 9999px;
+      background: rgba(15, 17, 23, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.2s ease;
+    }
+    .category-pill.active .pill-badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body class="selection:bg-teal-600 selection:text-white pb-24">
+
+  <!-- Ambient Dynamic Glow Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-20 -left-40 w-[600px] h-[600px] bg-teal-600/10 rounded-full blur-[140px]"></div>
+    <div class="ambient-orb-2 absolute top-1/2 -right-40 w-[550px] h-[550px] bg-emerald-600/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <!-- STICKY HEADER -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Group Logo & Title -->
+      <div class="flex items-center gap-3.5">
+        <a href="/manuals/wdgroup#project-04" class="w-10 h-10 rounded-2xl bg-gradient-to-br from-teal-500 via-teal-600 to-emerald-800 flex items-center justify-center text-white font-black shadow-lg shadow-teal-500/25 border border-teal-400/40 hover:scale-105 transition-transform" title="Back to Main Portal">
+          WD
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-base sm:text-lg tracking-tight text-white">WD GROUP HOLDINGS</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/30 font-mono">
+              Project 04
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            Corporate Internal Communication Suite (Zoho Mail + Zoho Cliq + Zoho Clips)
+          </p>
+        </div>
+      </div>
+
+      <!-- Actions, Modals & Language -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/manuals/wdgroup#project-04" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700/80 transition">
+          <span>←</span>
+          <span>Portal Hub</span>
+        </a>
+        <a href="/manuals/wdgroup/internalcommunication/sops-en" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-teal-600/20 hover:bg-teal-600/30 text-xs font-bold text-teal-300 border border-teal-500/40 transition">
+          <span>Operating SOPs</span>
+          <span>→</span>
+        </a>
+        <a href="/manuals/wdgroup/internalcommunication/features-ar" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 font-mono transition" title="Arabic Version">
+          العربية
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+
+    <!-- HERO INTRO BANNER -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 relative overflow-hidden">
+      <div class="relative z-10 max-w-4xl space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-xs font-semibold text-teal-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
+          <span>40 Enterprise Capabilities across 8 Audited Operational Pillars</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+          Corporate Internal Communication Suite (<span class="font-mono text-teal-400">Zoho Mail + Cliq + Clips</span>)
+        </h1>
+        <p class="text-sm text-slate-300 leading-relaxed">
+          Comprehensive features catalog detailing the enterprise-grade unified communication architecture engineered for WD Group Holdings. Spanning 2048-bit cryptographic DKIM/DMARC domain hardening, multi-domain routing, collision-free shared inboxes, asynchronous video shift handovers, and audited real-time collaboration.
+        </p>
+      </div>
+    </div>
+
+    <!-- STICKY FILTER & SEARCH RAIL -->
+    <div class="sticky top-20 z-30 pt-2 pb-3 glass-nav border-y border-slate-800/80 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        
+        <!-- Scrollable Category Track -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1" id="category-filters">
+          <button onclick="filterCategory('all')" class="category-pill active" data-category="all">
+            <span>All Capabilities</span>
+            <span class="pill-badge">40</span>
+          </button>
+          <button onclick="filterCategory('pillar-1')" class="category-pill" data-category="pillar-1">
+            <span>1. Cryptographic Identity &amp; DNS</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-2')" class="category-pill" data-category="pillar-2">
+            <span>2. Mail Architecture &amp; Shared Inboxes</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-3')" class="category-pill" data-category="pillar-3">
+            <span>3. DLP, Compliance &amp; eDiscovery</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-4')" class="category-pill" data-category="pillar-4">
+            <span>4. Cliq Channels &amp; Real-Time Chat</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-5')" class="category-pill" data-category="pillar-5">
+            <span>5. Zoho Clips Async Video Engine</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-6')" class="category-pill" data-category="pillar-6">
+            <span>6. SSO, 2FA &amp; Endpoint Hygiene</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-7')" class="category-pill" data-category="pillar-7">
+            <span>7. Workflow Automation &amp; Webhooks</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-8')" class="category-pill" data-category="pillar-8">
+            <span>8. Onboarding &amp; Unified Signatures</span>
+            <span class="pill-badge">5</span>
+          </button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="relative w-48 sm:w-64 flex-shrink-0" id="search-container">
+          <input 
+            type="text" 
+            id="feature-search"
+            placeholder="Search capabilities..." 
+            oninput="handleSearch(this.value)"
+            class="w-full px-3.5 py-1.5 pl-9 rounded-xl bg-slate-900 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition"
+          >
+          <svg class="w-4 h-4 text-slate-500 absolute left-3 top-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Active Counter & Results Summary -->
+    <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+      <div class="flex items-center gap-2">
+        <span>Showing:</span>
+        <span id="active-category-label" class="font-bold text-white">All Capabilities</span>
+      </div>
+      <div class="font-mono">
+        <span id="filtered-count" class="font-bold text-teal-400">40</span> of 40 capabilities active
+      </div>
+    </div>
+
+    <!-- FEATURES LISTING (40 Features grouped by 8 Pillars) -->
+    <div class="space-y-12" id="features-container">
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 1: MULTI-DOMAIN IDENTITY & CRYPTOGRAPHIC DNS HARDENING (5 FEAT)      -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-1">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 1: Multi-Domain Identity &amp; Cryptographic DNS Hardening</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 Capabilities</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-01 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-01</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Email Cryptography</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">2048-Bit DKIM (DomainKeys Identified Mail) Cryptographic Key Signing</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Asymmetric cryptographic signing using 2048-bit RSA keys published in Cloudflare DNS TXT records. Every outbound email from any holding domain is stamped with a unique cryptographic signature in the <code class="font-mono text-[11px] text-teal-300">DKIM-Signature</code> header.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Guarantees message integrity during transmission. Eliminates recipient spam categorization by Google Workspace, Microsoft 365, and government mail servers, ensuring multi-million riyal commercial quotes land directly in client inboxes.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-02 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-02</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Sender Authorization</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Strict Multi-Domain SPF (Sender Policy Framework) Alignment</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                DNS TXT SPF records (<code class="font-mono text-[11px] text-teal-300">v=spf1 include:zoho.com ~all</code>) explicitly whitelisting authorized outbound IP subnets across all group domains (<code class="font-mono text-[11px]">wdgroup.online</code>, <code class="font-mono text-[11px]">swissbluehotels.com</code>, etc.).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Prevents malicious actors from forging employee email addresses to send unauthorized purchase orders or fake payment requests to corporate suppliers and banking partners.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-03 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-03</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Anti-Spoofing Policy</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">DMARC Policy Enforcement &amp; Forensic Deliverability Reporting</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Active DMARC record (<code class="font-mono text-[11px] text-teal-300">v=DMARC1; p=quarantine; rua=mailto:...</code>) enforcing alignment between SPF and DKIM identifiers, with automated XML forensic telemetry sent to IT security.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Provides executive brand immunity against CEO fraud and spoofing attacks. Automatically instructs receiving global mail servers to isolate unauthorized messages attempting to impersonate holding directors.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-04 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-04</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Mail Routing Redundancy</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">High-Availability MX Records &amp; Zero-Loss Dual-Redundant Routing</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Dual-tiered MX records (<code class="font-mono text-[11px]">mx.zoho.com</code> priority 10, <code class="font-mono text-[11px]">mx2.zoho.com</code> priority 20, <code class="font-mono text-[11px]">mx3.zoho.com</code> priority 50) backed by Cloudflare DNS Anycast routing.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Eliminates bounced emails and data loss during localized internet outages or maintenance windows, maintaining 99.9% business continuity for hotel bookings and factory logistics.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-05 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-05</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Holding Infrastructure</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Multi-Domain Holding Consolidation Under Single Administrative Tenant</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Unified Zoho Workplace organization managing multiple brand domains under a single administrative umbrella, with cross-domain user routing and shared infrastructure.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Reduces software licensing overhead by over 50% compared to maintaining isolated email tenants, while enabling holding executives to communicate seamlessly across all subsidiaries.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 2: CORPORATE EMAIL ARCHITECTURE & SHARED DEPARTMENT INBOXES (5 FEAT)-->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-2">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 2: Corporate Email Architecture &amp; Shared Department Inboxes</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 Capabilities</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-06 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-06</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Department Operations</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Centralized Shared Department Inboxes (<code class="font-mono text-xs text-teal-300">sales@</code>, <code class="font-mono text-xs text-teal-300">orders@</code>, <code class="font-mono text-xs text-teal-300">procurement@</code>)</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Role-based shared team mailboxes with granular read/write/reply permissions, centralized tagging, custom category folders, and audit logs tracking outbound responder identities.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Ensures zero client inquiry drop-off when individual employees are on annual leave or sick days. The entire department retains complete visibility of active quotation threads.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-07 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-07</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Collision Avoidance</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Real-Time Collision Prevention &amp; Active Thread Assignment Locks</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Visual presence indicators and live lock tokens showing when another teammate is currently viewing or drafting a reply to a shared email thread.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Eliminates embarrassing duplicate replies or conflicting price quotes sent to enterprise clients, protecting corporate professionalism.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-08 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-08</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Enterprise Directory</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Centralized Corporate Global Address List (GAL) &amp; Employee Directory</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                An auto-updating enterprise directory synchronized across all web, desktop, and mobile clients, listing employee names, departments, direct phone extensions, and plant assignments.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Allows factory foremen, hotel managers, and accountants to find and contact colleagues instantly without relying on fragmented personal phone contacts.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-09 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-09</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Distribution Lists</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Dynamic Email Aliasing &amp; Role-Based Distribution Groups</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Smart distribution lists (<code class="font-mono text-[11px]">engineers@wdgroup.online</code>, <code class="font-mono text-[11px]">plant1-leads@wdgroup.online</code>) with moderated submission policies and automated member syncing.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Broadcasting urgent operational bulletins or maintenance alerts across an entire department requires a single email, with zero risk of leaving out newly onboarded staff.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-10 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-10</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Webmail Client</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Zero-Ad High-Speed Webmail Suite with Offline Synchronization Mode</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                High-performance HTML5/PWA webmail client with local IndexedDB cache, keyboard shortcuts, integrated corporate calendar, personal task lists, and bookmarks.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Enables traveling executives and site engineers to search, read, and draft email responses during flights or in remote factory zones with intermittent cellular coverage.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 3: DATA LOSS PREVENTION (DLP), COMPLIANCE & EDISCOVERY (5 FEAT)      -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-3">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 3: Data Loss Prevention (DLP), Compliance &amp; eDiscovery Vault</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 Capabilities</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-11 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-11</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Compliance Search</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Centralized Regulatory eDiscovery &amp; Global Audit Search Engine</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Full-text indexed search across all active, archived, and deleted mailboxes with Boolean query parameters, date windows, and attachment keyword indexing.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Empowers corporate legal counsel to locate historical contract communications or vendor dispute records within seconds, ensuring rock-solid defensibility in commercial court.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-12 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-12</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Legal Retention</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Immutable Email Archival &amp; Automated Legal Retention Schedules</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Write-Once-Read-Many (WORM) compliant archival vault storing every inbound and outbound message with cryptographic timestamps, preventing user-initiated permanent deletion.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Protects corporate memory against intentional tampering or accidental deletion by disgruntled employees, complying with Saudi ZATCA and commercial retention laws.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-13 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-13</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Data Loss Prevention</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Outbound Data Loss Prevention (DLP) &amp; Financial Data Safeguards</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Regex inspection engines scanning outbound emails and attachments for sensitive data: Saudi National IDs (Iqama/NID), credit card numbers, IBANs, and confidential CAD files.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Intercepts accidental leaks of proprietary furniture manufacturing blueprints or employee payroll spreadsheets before messages leave the corporate perimeter.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-14 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-14</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Perimeter Security</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">IP-Restricted Console Access &amp; Geo-Fencing Login Safeguards</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Granular IP whitelist filters restricting administrative control panels to verified office and factory IP ranges, with geo-blocking flags for anomalous foreign logins.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Neutralizes credential-stuffing attacks and unauthorized admin logins originating from overseas hacker botnets.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-15 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-15</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Threat Defense</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">AI-Powered Anti-Phishing, Anti-Spam &amp; Zero-Day Sandbox Defense</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Multi-layer heuristics, machine learning sender profiling, real-time URL link rewriting, and cloud sandbox detuning of suspicious email attachments.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Prevents ransomware infections and deceptive phishing campaigns from executing on accounting or HR workstations.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 4: ZOHO CLIQ REAL-TIME COLLABORATION & STRUCTURED CHANNELS (5 FEAT) -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 4: Zoho Cliq Real-Time Collaboration &amp; Structured Channels</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 Capabilities</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-16 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-16</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Channel Architecture</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Hierarchical Enterprise Channel Topology (<code class="font-mono text-xs text-teal-300">#announcements</code>, <code class="font-mono text-xs text-teal-300">#plant-ops</code>)</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Structured channel topology separating Organization-wide read-only broadcasts, cross-department teams, dedicated plant production channels, and private direct chats.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Eliminates chaotic WhatsApp groups where official decisions were mixed with casual conversation, creating an audited, searchable corporate chat structure.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-17 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-17</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Access Segmentation</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Role-Protected Channel Membership &amp; Department Confidentiality Enclaves</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Membership security rules restricting access to sensitive channels (<code class="font-mono text-[11px]">#executive-board</code>, <code class="font-mono text-[11px]">#finance-payroll</code>) strictly to authorized job designations.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Prevents confidential financial statements, executive bonus discussions, or legal negotiation files from being visible to unauthorized plant or hotel staff.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-18 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-18</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Voice &amp; Video</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Zero-Latency Audio &amp; Video Huddles with Desktop Screen Sharing</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                WebRTC-powered instant voice/video bridges embedded directly inside Cliq channels, supporting 1-click audio huddles and full-screen technical presentations.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Replaces cumbersome Zoom/Teams invitations for quick 5-minute technical alignments between factory engineers and head office architects, resolving bottlenecks in real time.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-19 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-19</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Workforce Presence</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Dynamic Operational Presence Indicators &amp; Factory Shift Statuses</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Automated and manual status indicators (Available, In Factory Plant, Reviewing Drawings, On Site, Offline) integrated with active device sensors and calendar schedules.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Informs coordinators immediately whether a plant supervisor is reachable at their desk or currently walking noisy CNC production lines, preventing miscommunications.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-20 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-20</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Fast Search</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Universal Multi-Channel Search &amp; Instant File Retrieval Index</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Global search bar indexing messages, shared images, PDF specifications, DWG blueprints, and code snippets across all channels with sender and date filtering.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Locates a specific supplier specification or paint color code shared six months ago in less than 3 seconds, reclaiming hours of wasted search time.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 5: ASYNCHRONOUS VIDEO COLLABORATION VIA ZOHO CLIPS (5 FEAT)          -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 5: Asynchronous Video Collaboration via Zoho Clips</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 Capabilities</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-21 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-21</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Video Capture</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">1-Click Desktop Screen + Audio Recording Engine (1080p Full HD)</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Browser-native screen capture tool built directly into Cliq and Mail, recording entire screens, browser tabs, or specific application windows with crystal-clear voiceover narration.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Supervisors explain complex software bugs or engineering drawing modifications in a 60-second video walkthrough rather than typing lengthy, ambiguous paragraphs.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-22 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-22</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Personal Touch</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Picture-in-Picture (PIP) Executive &amp; Engineering Webcam Overlay</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Circular webcam video overlay in the corner of the screen recording, synchronized in real time with audio and cursor movements.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Adds executive presence and high visual engagement to departmental briefings, making training clips feel personal and authoritative.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-23 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-23</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Fast Sharing</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Automated Cloud Encoding &amp; Zero-Friction Internal Streaming Links</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Automatic server-side transcoding into adaptive bitrate video with instant playable preview embeds rendered inside chat streams and emails.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Recipients watch recordings inline with a single click without downloading massive 500 MB video files to their devices.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-24 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-24</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Industrial Diagnostics</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Visual Machine Defect Logging &amp; Technical Diagnostic Clips</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Mobile video recording protocol enabling factory floor operators to film machine error screens (e.g. CNC beam saw calibration faults) and post directly to maintenance channels.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Cuts machine downtime in half by providing external maintenance technicians with exact visual symptoms before they dispatch spare parts.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-25 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-25</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Content Protection</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Encrypted Enterprise Video Storage with Role-Restricted Playback</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Videos are encrypted at rest (AES-256) inside the organization's cloud perimeter; external sharing is strictly disabled unless explicitly authorized by a system administrator.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Protects proprietary manufacturing methods and confidential business walkthroughs from leaking to competitors or the public internet.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 6: SINGLE SIGN-ON (SSO), 2FA & ENDPOINT HYGIENE (5 FEAT)             -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 6: Single Sign-On (SSO), Two-Factor Authentication &amp; Endpoint Hygiene</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 Capabilities</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-26 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-26</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Multi-Factor Auth</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Mandatory Two-Factor Authentication (2FA) via Zoho OneAuth App</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Organization-wide policy enforcement mandating secondary authentication upon login, preventing any employee from accessing mail or chat with only a password.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Stops 99.9% of account takeover attempts, even if an employee falls victim to a credential-harvesting phishing site or uses a weak password.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-27 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-27</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Biometric Login</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Push-to-App Biometric Approvals &amp; Offline Time-Based OTP (TOTP)</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Frictionless authentication using phone push notifications (FaceID/Fingerprint approval) and standard 6-digit TOTP codes for offline environments.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Provides a seamless, modern login experience that employees love, eliminating the frustration of manual SMS verification codes.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-28 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-28</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Offboarding Hygiene</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">1-Click Centralized Account Termination &amp; Instant Access Revocation</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Centralized user lifecycle management enabling IT administrators to terminate active sessions, invalidate OAuth tokens, and redirect inboxes within 10 seconds.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Completely eliminates the risk of disgruntled departing employees retaining access to sensitive corporate records, client contacts, or confidential supplier chats.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-29 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-29</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Mobile Security</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Remote Mobile Device Sandbox Wipe for Lost or Stolen Endpoints</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Mobile Application Management (MAM) protocol enabling IT to wipe corporate email and chat data from iOS and Android devices without altering personal photos or personal apps.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                If a supervisor loses their smartphone on a construction site or taxi, corporate data is purged remotely before anyone can extract confidential holding records.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-30 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-30</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Password Hygiene</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Enterprise Password Complexity Policies &amp; Brute-Force Rate Limiting</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Enforced password entropy (minimum 10 characters, upper/lower/symbols/numbers), 90-day expiration schedules, historical password reuse prevention, and 5-attempt brute-force lockout.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Prevents lazy password practices (like using '123456' or company name) across factory floor and administrative staff.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 7: WORKFLOW AUTOMATION, WEBHOOKS & OPERATIONAL ALERT BOTS (5 FEAT)  -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-7">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 7: Workflow Automation, Webhooks &amp; Operational Alert Bots</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 Capabilities</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-31 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-31</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Lead Automation</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Automated B2B Lead Notification Bot for Website Inquiries</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Inbound webhook bridge parsing submissions from wdgroup.online and swissbluehotels.com contact forms, formatting client data, and posting instantly to the <code class="font-mono text-[11px]">#sales-leads</code> channel.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Slashes lead response time from 6 hours to under 8 minutes, dramatically increasing closing rates on high-value hospitality and contracting tenders.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-32 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-32</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">ERP Integration</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Odoo ERP Manufacturing &amp; Inventory Threshold Webhook Bot</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Automated webhook integration dispatching alerts from Odoo 19 ERP when factory raw material stocks (timber, PU lacquer, foam) drop below safe reorder thresholds.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Prevents sudden production line halts by alerting procurement officers directly inside Cliq before critical timber stocks run dry.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-33 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-33</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Incident Escalation</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">P1 Critical Incident Escalation Bot to Dubai in Cairo Support</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Integrated slash command (<code class="font-mono text-[11px]">/escalate-p1</code>) formatting structured emergency tickets and paging the Dubai in Cairo on-call engineering team via webhook.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Guarantees rapid response (&lt; 30 minutes) during mission-critical communications or booking engine anomalies without dialing phone trees.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-34 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-34</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Shift Automation</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Automated Multi-Plant Shift Handover Summary Generator</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Scheduled bot prompting outgoing shift supervisors at 15 minutes before shift end to submit structured production counts, machine statuses, and pending tasks.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Ensures incoming factory shifts take over with 100% operational awareness, eliminating 'he-said-she-said' disputes regarding machine maintenance states.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-35 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-35</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Calendar Intelligence</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Cross-Timezone Meeting Scheduling &amp; Smart Calendar Synchronization</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Centralized shared group calendars with free/busy schedule lookups, automatic Saudi Arabian time conversion, and Cliq reminder bots.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Coordinates board meetings and factory reviews effortlessly without endless email chains asking 'what time works for everyone?'.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 8: ENTERPRISE ONBOARDING, BRANDING & UNIFIED SIGNATURES (5 FEAT)     -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-8">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 8: Enterprise Onboarding, Corporate Branding &amp; Unified Signatures</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">5 Capabilities</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-COM-36 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-36</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Brand Governance</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Centralized HTML Corporate Email Signature Management Engine</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Administrator-enforced HTML email signature templates applied dynamically to all outbound messages, locking typography, logos, and corporate legal disclaimers.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Guarantees 100% brand consistency. Stops employees from using outdated logos, unapproved fonts, or unprofessional personal quotes in company correspondence.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-37 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-37</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Dynamic Fields</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Dynamic Employee Metadata Injection (Title, Branch, Direct Phone)</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Template variables (<code class="font-mono text-[11px] text-teal-300">${FirstName}</code>, <code class="font-mono text-[11px] text-teal-300">${JobTitle}</code>, <code class="font-mono text-[11px] text-teal-300">${Department}</code>) automatically populated from the directory into every signature.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                When an employee is promoted or changes office extension, their email signature updates automatically across all devices without requiring manual editing.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-38 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-38</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Multi-Platform</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Native Multi-Platform Deployment (Windows, macOS, iOS, Android)</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Dedicated desktop applications (Windows MSI, macOS PKG) and mobile apps with native push notifications, biometric unlocking, and offline cache.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Provides a seamless, familiar user experience across executive MacBooks, accounting Windows PCs, and factory floor tablets and smartphones.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-39 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-39</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Training &amp; Adoption</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Structured Staff Onboarding Playbooks &amp; Asynchronous Video Training</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Step-by-step documentation, interactive onboarding playbooks, and video walkthroughs teaching employees 2FA setup, Cliq etiquette, and Zoho Clips recording.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Accelerates new employee ramp-up time from weeks to 24 hours, ensuring new hires master corporate communication protocols on day one.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-COM-40 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">FEAT-COM-40</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Infrastructure Audit</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Quarterly Storage Optimization &amp; Inactive Mailbox Governance Audits</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">What is this capability?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Automated administrative reports identifying high-volume mailboxes, redundant large video attachments, and inactive licenses eligible for archiving.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Prevents cloud storage cost overruns and keeps the communication infrastructure lean, compliant, and cost-effective year after year.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="mt-16 pt-8 pb-12 border-t border-slate-800/80 text-center text-xs text-slate-500 space-y-3">
+      <div class="flex flex-wrap items-center justify-center gap-4 text-slate-400 font-medium">
+        <span>Watan Designs Ltd. (شركة تصاميم الوطن المحدودة)</span>
+        <span class="text-slate-700">•</span>
+        <span class="font-mono">CR: 5950011057</span>
+        <span class="text-slate-700">•</span>
+        <span class="font-mono">VAT: 300865965100003</span>
+      </div>
+      <p>King Abdulaziz Road, Al Khalidiya, Najran, Kingdom of Saudi Arabia</p>
+      <div class="flex justify-center gap-4 pt-2 text-[11px] text-slate-400">
+        <a href="https://mail.zoho.com" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 underline">Zoho Mail Console</a>
+        <span>•</span>
+        <a href="https://cliq.zoho.com" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 underline">Zoho Cliq Workspace</a>
+        <span>•</span>
+        <a href="/manuals/wdgroup#project-04" class="hover:text-teal-400 underline">Back to Operations Portal</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- SEARCH & FILTER JAVASCRIPT -->
+  <script>
+    const pillarTitles = {
+      'all': 'All Capabilities',
+      'pillar-1': '1. Cryptographic Identity & DNS',
+      'pillar-2': '2. Mail Architecture & Shared Inboxes',
+      'pillar-3': '3. DLP, Compliance & eDiscovery',
+      'pillar-4': '4. Cliq Channels & Real-Time Chat',
+      'pillar-5': '5. Zoho Clips Async Video Engine',
+      'pillar-6': '6. SSO, 2FA & Endpoint Hygiene',
+      'pillar-7': '7. Workflow Automation & Webhooks',
+      'pillar-8': '8. Onboarding & Unified Signatures'
+    };
+
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    function filterCategory(cat) {
+      activeCategory = cat;
+      
+      document.querySelectorAll('.category-pill').forEach(pill => {
+        pill.classList.toggle('active', pill.getAttribute('data-category') === cat);
+      });
+
+      document.getElementById('active-category-label').textContent = pillarTitles[cat] || 'All Capabilities';
+      applyFilters();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim().toLowerCase();
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const items = document.querySelectorAll('.feature-item');
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const itemPillar = item.getAttribute('data-pillar');
+        const itemText = item.textContent.toLowerCase();
+
+        const matchesCat = (activeCategory === 'all' || itemPillar === activeCategory);
+        const matchesSearch = (!searchQuery || itemText.includes(searchQuery));
+
+        if (matchesCat && matchesSearch) {
+          item.style.display = 'block';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      document.querySelectorAll('.pillar-section').forEach(sec => {
+        const secPillar = sec.getAttribute('data-pillar');
+        const hasVisible = Array.from(sec.querySelectorAll('.feature-item')).some(it => it.style.display !== 'none');
+        sec.style.display = hasVisible ? 'block' : 'none';
+      });
+
+      document.getElementById('filtered-count').textContent = visibleCount;
+    }
+
+    // Spotlight cursor effect
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+  </script>
+</body>
+</html>

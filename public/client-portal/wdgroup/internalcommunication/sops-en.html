@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corporate Internal Communication Suite (Zoho Mail + Cliq + Clips) — Standard Operating Procedures (SOPs) | WD Group</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      background-color: #08090C;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 17, 23, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(20, 184, 166, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(20, 184, 166, 0.7); }
+
+    /* Glassmorphism */
+    .glass-card {
+      background: rgba(15, 17, 23, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateZ(0);
+    }
+    .glass-card:hover {
+      border-color: rgba(20, 184, 166, 0.45);
+      transform: translateY(-3px) translateZ(0);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+    .glass-nav {
+      background: rgba(8, 9, 12, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Spotlight Card */
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(20, 184, 166, 0.14), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    /* Modal Animation */
+    @keyframes modalBackdrop { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalDialog {
+      0% { opacity: 0; transform: scale(0.95) translateY(12px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-backdrop-anim { animation: modalBackdrop 0.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .modal-dialog-anim { animation: modalDialog 0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    /* Ambient Floating Orbs */
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    /* Active Filter Tab */
+    .tab-btn.active {
+      background: rgba(20, 184, 166, 0.25);
+      border-color: rgba(45, 212, 191, 0.6);
+      color: #5eead4;
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Print Styles */
+    @media print {
+      body { background: #ffffff !important; color: #0f172a !important; }
+      .no-print, header, .ambient-orb-1, .ambient-orb-2, #modal-overlay, #filter-container, #sop-search-container { display: none !important; }
+      .glass-card { background: #ffffff !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid !important; }
+      .text-white { color: #0f172a !important; }
+      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+    }
+  </style>
+</head>
+<body class="selection:bg-teal-600 selection:text-white pb-24 relative">
+
+  <!-- Ambient Glow Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-20 -left-40 w-[550px] h-[550px] bg-teal-600/10 rounded-full blur-[140px]"></div>
+    <div class="ambient-orb-2 absolute top-1/3 -right-40 w-[600px] h-[600px] bg-emerald-600/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <!-- STICKY HEADER -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3.5">
+        <a href="/manuals/wdgroup#project-04" class="w-10 h-10 rounded-2xl bg-gradient-to-br from-teal-500 via-teal-600 to-emerald-800 flex items-center justify-center text-white font-black shadow-lg shadow-teal-500/25 border border-teal-400/40 hover:scale-105 transition-transform" title="Back to Main Portal">
+          WD
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-base sm:text-lg tracking-tight text-white">WD GROUP HOLDINGS</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/30 font-mono">
+              Project 04
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            Corporate Internal Communication Suite (Zoho Mail + Cliq + Clips) Runbooks
+          </p>
+        </div>
+      </div>
+
+      <!-- Navigation & Language Links -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/manuals/wdgroup#project-04" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700/80 transition">
+          <span>←</span>
+          <span>Portal Hub</span>
+        </a>
+        <a href="/manuals/wdgroup/internalcommunication/features-en" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-teal-600/20 hover:bg-teal-600/30 text-xs font-bold text-teal-300 border border-teal-500/40 transition">
+          <span>Features Catalog</span>
+          <span>→</span>
+        </a>
+        <a href="/manuals/wdgroup/internalcommunication/sops-ar" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 font-mono transition" title="Arabic Version">
+          العربية
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+
+    <!-- HERO BANNER -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 relative overflow-hidden">
+      <div class="relative z-10 max-w-4xl space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-xs font-semibold text-teal-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
+          <span>20 Interactive Standard Operating Procedures &amp; Admin Runbooks</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+          Enterprise Communication Runbooks (<span class="font-mono text-teal-400">internalcommunication</span>)
+        </h1>
+        <p class="text-sm text-slate-300 leading-relaxed">
+          Operational runbooks for systems engineers, department heads, factory foremen, and administrative staff governing holding email infrastructure, cryptographic multi-domain routing (DKIM/DMARC), collision-free shared inboxes, real-time Cliq channel topologies, and asynchronous Zoho Clips shift handovers. Click any card to launch the structured 6-section procedure modal.
+        </p>
+      </div>
+    </div>
+
+    <!-- STICKY FILTER & SEARCH RAIL -->
+    <div class="sticky top-20 z-30 pt-2 pb-3 glass-nav border-y border-slate-800/80 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8" id="filter-container">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        
+        <!-- Scrollable Category Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1" id="category-tabs">
+          <button onclick="setFilter('all')" class="tab-btn active px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>All Procedures</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">20</span>
+          </button>
+          <button onclick="setFilter('dns')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>DNS &amp; Cryptography</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">3</span>
+          </button>
+          <button onclick="setFilter('identity')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>Identity &amp; Access</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">4</span>
+          </button>
+          <button onclick="setFilter('shared')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>Shared Inboxes</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">3</span>
+          </button>
+          <button onclick="setFilter('cliq')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>Cliq Channels &amp; Huddles</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">4</span>
+          </button>
+          <button onclick="setFilter('clips')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>Asynchronous Clips</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">1</span>
+          </button>
+          <button onclick="setFilter('governance')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>Compliance &amp; DLP</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">3</span>
+          </button>
+          <button onclick="setFilter('operations')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
+            <span>Operations &amp; Support</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">2</span>
+          </button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="relative w-48 sm:w-64 flex-shrink-0" id="sop-search-container">
+          <input 
+            type="text" 
+            id="sop-search"
+            placeholder="Search procedures..." 
+            oninput="handleSearch(this.value)"
+            class="w-full px-3.5 py-1.5 pl-9 rounded-xl bg-slate-900 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition"
+          >
+          <svg class="w-4 h-4 text-slate-500 absolute left-3 top-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Active Count Summary -->
+    <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+      <div>
+        <span>Showing: </span>
+        <span id="active-category-label" class="font-bold text-white">All Procedures</span>
+      </div>
+      <div class="font-mono">
+        <span id="active-count" class="font-bold text-teal-400">20</span> of 20 active runbooks
+      </div>
+    </div>
+
+    <!-- SOP GRID (Populated by JavaScript) -->
+    <div id="sop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+    <!-- FOOTER -->
+    <footer class="mt-16 pt-8 pb-12 border-t border-slate-800/80 text-center text-xs text-slate-500 space-y-3">
+      <div class="flex flex-wrap items-center justify-center gap-4 text-slate-400 font-medium">
+        <span>Watan Designs Ltd. (شركة تصاميم الوطن المحدودة)</span>
+        <span class="text-slate-700">•</span>
+        <span class="font-mono">CR: 5950011057</span>
+        <span class="text-slate-700">•</span>
+        <span class="font-mono">VAT: 300865965100003</span>
+      </div>
+      <p>King Abdulaziz Road, Al Khalidiya, Najran, Kingdom of Saudi Arabia</p>
+      <div class="flex justify-center gap-4 pt-2 text-[11px] text-slate-400">
+        <a href="https://test.wdgroup.online" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 underline">Preview Gateway (test.wdgroup.online)</a>
+        <span>•</span>
+        <a href="https://wdgroup.online" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 underline">Production Site (wdgroup.online)</a>
+        <span>•</span>
+        <a href="/manuals/wdgroup#project-04" class="hover:text-teal-400 underline">Back to Operations Portal</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- INTERACTIVE POPUP MODAL (6-SECTION STANDARD) -->
+  <div id="modal-overlay" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6 overflow-y-auto modal-backdrop-anim">
+    <div class="glass-card spotlight-card w-full max-w-3xl rounded-3xl border border-slate-700/80 p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto relative modal-dialog-anim">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-800">
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="modal-sop-code" class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20"></span>
+            <span id="modal-sop-pillar" class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider"></span>
+            <span id="modal-sop-role" class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300"></span>
+          </div>
+          <h2 id="modal-sop-title" class="text-xl sm:text-2xl font-extrabold text-white leading-tight"></h2>
+        </div>
+
+        <!-- Close Button -->
+        <button onclick="closeSopModal()" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white transition shrink-0">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body (6 Structured Sections) -->
+      <div id="modal-sop-content" class="space-y-5 text-sm"></div>
+
+      <!-- Modal Footer -->
+      <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+        <div class="flex items-center gap-2">
+          <span>Corporate Standard:</span>
+          <span class="font-mono text-teal-400">WDG-COM-V1</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copyModalContent()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <span id="copy-btn-text">Copy Procedure</span>
+          </button>
+          <button onclick="closeSopModal()" class="px-4 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold transition">
+            Close
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    const sopsData = [
+      {
+        id: "sop-com-01",
+        code: "SOP-COM-01",
+        category: "dns",
+        pillarName: "DNS & Cryptographic Security",
+        role: "Lead Systems Administrator / Cloud Security Engineer",
+        title: "Multi-Domain DNS Cryptographic Health & DMARC Policy Auditing",
+        description: "Routine audit runbook for validating 2048-bit DKIM signatures, SPF inclusions, and progressive DMARC policy enforcement across holding domains.",
+        objective: "Maintain zero spoofing vulnerability, ensure 99.9% inbox deliverability, and satisfy stringent global anti-phishing requirements across wdgroup.online, swissbluehotels.com, and watandesigns.com.",
+        prerequisites: "Access to Cloudflare / Domain DNS registrar console; Zoho Mail Admin Console permissions with 'Super Administrator' or 'Security Administrator' role.",
+        steps: [
+          "Log in to the Cloudflare DNS management dashboard for the primary domain (wdgroup.online) and secondary domains (swissbluehotels.com, watandesigns.com).",
+          "Inspect SPF TXT record: Ensure value strictly reads 'v=spf1 include:zoho.com ~all' (or '-all' during active enforcement) without exceeding 10 DNS lookups.",
+          "Verify DKIM TXT record under selector 'zmail._domainkey': Confirm the 2048-bit RSA public key matches the public key string generated in the Zoho Admin Console.",
+          "Inspect DMARC record under '_dmarc': Verify policy 'v=DMARC1; p=quarantine; pct=100; rua=mailto:dmarc-reports@wdgroup.online; ruf=mailto:dmarc-forensics@wdgroup.online; sp=quarantine; aspf=r; adkim=r'.",
+          "Verify MX record priorities: Primary MX (mx.zoho.com, priority 10), Secondary MX (mx2.zoho.com, priority 20), Fallback MX (mx3.zoho.com, priority 50).",
+          "Run an external DNS verification query via terminal: 'dig +short TXT wdgroup.online' and 'dig +short TXT zmail._domainkey.wdgroup.online'.",
+          "Navigate to Zoho Mail Admin Console > Domains > Health Status, and confirm green checkmarks for MX, SPF, DKIM, and DMARC across all active domains."
+        ],
+        verification: "Transmit a signed test message to an external mail server (e.g. Gmail / Outlook). Inspect the raw email headers: 'Authentication-Results' must report spf=pass, dkim=pass, and dmarc=pass with 100% cryptographic alignment.",
+        caution: "Never modify MX or DKIM records during high-volume business hours. DNS TTL caching can lead to temporary mail delivery delays if records are misconfigured."
+      },
+      {
+        id: "sop-com-02",
+        code: "SOP-COM-02",
+        category: "identity",
+        pillarName: "Identity & Access Lifecycle",
+        role: "IT Operations Administrator / System Registrar",
+        title: "Provisioning New Employee Mailboxes & Department Group Allocation",
+        description: "End-to-end standard procedure for provisioning corporate email mailboxes, assigning storage quotas, and configuring department distribution groups.",
+        objective: "Equip new staff members with professional, hardened email accounts adhering strictly to corporate naming conventions, quota allocations, and organizational group memberships.",
+        prerequisites: "Signed Employee Onboarding Authorization from HR Department; Zoho Mail Admin Console access with 'User Management' privilege.",
+        steps: [
+          "Log in to the Zoho Mail Admin Console at https://mailadmin.zoho.com with your administrative credentials.",
+          "Navigate to 'User Management' in the sidebar and click the '+ Add User' button.",
+          "Enter employee details adhering to corporate naming standard: First Name, Last Name, and Primary Email Address in format 'first.last@wdgroup.online' (or appropriate hospitality/manufacturing domain).",
+          "Set the initial temporary password adhering to enterprise complexity (minimum 12 characters with uppercase, lowercase, numbers, and symbols) and check 'Force user to change password on first login'.",
+          "Assign storage tier: Standard Employee (10 GB), Department Supervisor (25 GB), or Executive Board / VIP (50 GB).",
+          "In the 'Groups' tab, automatically enroll the employee into mandatory organization-wide groups (#all-employees) and specific departmental groups (#riyadh-plant, #sales-team, or #finishing-dept).",
+          "Assign user mailbox permissions: Enable IMAP/POP access only if authorized, enforce webmail/mobile sync, and set corporate locale to Asia/Riyadh (GMT+3).",
+          "Dispatch the official Welcome Onboarding Kit containing initial login credentials and the mandatory 2FA enrollment instructions to the employee's personal contact."
+        ],
+        verification: "Log in as the newly created user in an incognito window. Verify that the mandatory password change prompt is triggered immediately and the default company signature and group folders appear.",
+        caution: "Never create generic employee mailboxes (e.g. 'worker1@', 'accountant@') without individual ownership. All employee mailboxes must trace to an identifiable personnel file."
+      },
+      {
+        id: "sop-com-03",
+        code: "SOP-COM-03",
+        category: "identity",
+        pillarName: "Identity & Access Lifecycle",
+        role: "All Employees / HR Onboarding Coordinator",
+        title: "Mandatory Two-Factor Authentication (2FA) & OneAuth Biometric Enrollment",
+        description: "Standard protocol for enrolling employee mobile devices into Zoho OneAuth with biometric push notifications and emergency recovery codes.",
+        objective: "Eliminate credential-stuffing and unauthorized account hijacking risks by enforcing mandatory multi-factor authentication across all desktop and mobile touchpoints.",
+        prerequisites: "Company-issued or personal smartphone (iOS 15+ or Android 10+); temporary login credentials provided by IT Operations.",
+        steps: [
+          "Download and install the official 'Zoho OneAuth' authenticator application from the Apple App Store or Google Play Store.",
+          "Open a secure desktop browser, navigate to https://mail.zoho.com, and sign in with your corporate email and temporary password.",
+          "Complete the initial password reset step, specifying a secure passphrase known only to you.",
+          "When prompted with the mandatory 'Two-Factor Authentication Setup' screen, select 'Zoho OneAuth' as the primary authentication method.",
+          "Launch Zoho OneAuth on your mobile phone, tap 'Add Account', and scan the dynamic QR code displayed on your desktop screen.",
+          "Authorize biometric security within OneAuth: Enable Face ID, Touch ID, or Fingerprint scanning for approving push requests.",
+          "The system displays 10 Emergency Recovery Passcodes: Copy these codes, print them, and store them securely offline. Do NOT store them on your phone or in unencrypted text files.",
+          "Perform a verification test: Approve the initial test push notification on your mobile screen to complete account binding."
+        ],
+        verification: "Log out from the desktop browser session and attempt to log in again. Verify that the prompt initiates an instantaneous biometric push notification to your phone and denies access until approved.",
+        caution: "Never share push notifications or TOTP codes with anyone, including IT staff. IT will never ask for your 2FA code under any circumstances."
+      },
+      {
+        id: "sop-com-04",
+        code: "SOP-COM-04",
+        category: "operations",
+        pillarName: "Corporate Branding & Templates",
+        role: "Marketing & Brand Governance Specialist",
+        title: "Deploying Unified Corporate HTML Email Signatures across Domains",
+        description: "Governance runbook for enforcing centralized, responsive HTML signatures with legal disclaimers and Vision 2030 branding across all outgoing emails.",
+        objective: "Guarantee unified visual identity, regulatory compliance (CR and VAT disclosure), and consistent corporate positioning across all holding email interactions.",
+        prerequisites: "Marketing Director approval for visual signature template; Zoho Mail Admin Console access with 'Mail Administration' role.",
+        steps: [
+          "Open Zoho Mail Admin Console > Organization Settings > Signatures / Disclaimer.",
+          "Click 'Add Global Signature' and select the target organization division (WD Group Holding, SwissBlue Hotels, or GreenWood Manufacturing).",
+          "Paste the pre-approved, responsive HTML signature markup containing corporate SVG vector logos, certified typography, and standardized layout.",
+          "Insert dynamic parameter tags to automatically populate sender information: ${User.DisplayName}, ${User.JobTitle}, ${User.Department}, ${User.MobileNumber}, and ${User.EmailAddress}.",
+          "Include mandatory legal footer: 'Watan Designs Ltd. (CR: 5950011057, VAT: 300865965100003). This communication contains confidential proprietary information intended solely for the addressee.'",
+          "Check the box: 'Lock user modifications' to prevent individual employees from changing colors, fonts, or removing legal disclaimers.",
+          "Set insertion rules: Append signature automatically to both 'New Messages' and 'Replies / Forwards'.",
+          "Click 'Deploy Organization-Wide' and select immediate enforcement."
+        ],
+        verification: "Instruct a team member to compose an email to an external address. Inspect the delivered message to confirm proper logo rendering, crisp font hierarchy, dynamic user metadata accuracy, and legal disclaimer presence.",
+        caution: "Do not embed oversized base64 raster images in signatures. All logo assets must be hosted on high-availability CDN endpoints to prevent email bloating."
+      },
+      {
+        id: "sop-com-05",
+        code: "SOP-COM-05",
+        category: "shared",
+        pillarName: "Shared Mailboxes & Inbox Operations",
+        role: "Sales & Support Triage Lead / Customer Service Coordinator",
+        title: "Triaging Inquiries in Shared Team Mailboxes with Zero Collision",
+        description: "Operational procedure for managing departmental inboxes (sales@, procurement@, support@) with collision detection, internal comments, and ticket assignment.",
+        objective: "Prevent duplicate customer responses, eliminate missed communications, and maintain complete internal visibility over multi-agent inbox workflows.",
+        prerequisites: "Assigned membership in the respective Shared Mailbox; Zoho Mail web application access.",
+        steps: [
+          "Open Zoho Mail web interface at https://mail.zoho.com and expand the 'Shared Mailboxes' section in the left folder navigation rail.",
+          "Select the target team inbox (e.g., 'sales@wdgroup.online' or 'procurement@wdgroup.online').",
+          "Inspect unassigned customer inquiries sorted chronologically by arrival timestamp.",
+          "Observe Real-Time Presence Indicator: If an eye icon or colleague's avatar is displayed next to an email, DO NOT reply \u2014 a colleague is currently viewing or actively drafting a response.",
+          "To claim an email, click the 'Assignee' drop-down and set yourself as the owner. The email status instantly updates to 'Assigned' for all other team members.",
+          "To discuss an inquiry before responding, use the 'Internal Comments' drawer on the right side. Type '@colleague-name' to ask internal questions without the client seeing.",
+          "Draft the response using the pre-approved Shared Email Template, verify pricing and contract terms, and click 'Send from Shared Address'.",
+          "Update the email status flag to 'Resolved' or 'Pending Client Reply' according to department SLA rules."
+        ],
+        verification: "Open the shared inbox from another team member's workstation. Confirm that the assignment avatar updates in real-time and internal comments appear instantaneously without page reload.",
+        caution: "Never reply to a client inquiry from your personal employee mailbox when triaging shared mailboxes. All correspondence must originate from the verified shared address."
+      },
+      {
+        id: "sop-com-06",
+        code: "SOP-COM-06",
+        category: "clips",
+        pillarName: "Asynchronous Video & Technical Clips",
+        role: "Plant Supervisors / Quality Control Engineers",
+        title: "Initiating Asynchronous Technical Video Clips for Factory & Machinery Defects",
+        description: "Standard workflow for recording, annotating, and dispatching high-resolution screen/webcam clips to explain complex CNC faults and quality defects asynchronously.",
+        objective: "Accelerate cross-plant troubleshooting, reduce unnecessary meetings, and provide permanent visual documentation of technical issues across Riyadh and Najran facilities.",
+        prerequisites: "Zoho Cliq desktop application installed with Zoho Clips extension enabled; operational webcam, microphone, and factory terminal access.",
+        steps: [
+          "Within the Zoho Cliq desktop client or web application, click the 'Clips' icon located in the bottom action dock.",
+          "Select recording scope: 'Screen + Camera', 'Screen Only', or 'Camera Only' based on the technical subject.",
+          "Select the target monitor displaying the CAD software, CNC controller telemetry, or ERP transaction screen, and verify audio microphone level.",
+          "Click 'Start Recording' (with 3-second visual countdown).",
+          "Demonstrate the fault clearly: Highlight the exact tooling error, cutting path deviation, or software mismatch while narrating key observations.",
+          "Use the built-in on-screen pen tool to circle defective joint alignments or parameter fields on the recorded screen.",
+          "Conclude the recording (maximum 5 minutes for technical issue triage) and click 'Finish Recording'.",
+          "Review the generated playback in the preview window. Add a descriptive title (e.g., 'CNC-Line-2-Router-Calibration-Drift-2026-09') and chapter timestamps if necessary.",
+          "Click 'Share to Channel', select '#plant-maintenance' or '#finishing-dept', and add a brief summary tag."
+        ],
+        verification: "Open the target Cliq channel from another workstation or mobile device. Confirm the video clip renders with crystal-clear 1080p resolution, audible audio track, and correct playback controls.",
+        caution: "Ensure confidential customer intellectual property, proprietary financial ledger data, or unauthorized factory floor footage is not inadvertently captured in the background."
+      },
+      {
+        id: "sop-com-07",
+        code: "SOP-COM-07",
+        category: "cliq",
+        pillarName: "Cliq Real-Time Channels & Huddles",
+        role: "Shift Foremen / Plant Production Leads",
+        title: "Executing Multi-Plant Shift Handover via Structured Cliq Channels",
+        description: "Daily protocol for logging shift completion, machine statuses, scrap tallies, and pending priority work orders between day and night shifts.",
+        objective: "Eliminate production downtime, maintain continuous quality tracking, and enforce accountability across timber milling, fabrication, and finishing departments.",
+        prerequisites: "Plant Shift Foreman role credentials; access to departmental Cliq channels (#shift-handover, #plant-1-timber, #plant-2-fabrication).",
+        steps: [
+          "At 30 minutes prior to shift conclusion, gather end-of-shift metrics: Total Units Finished, Active Machine Statuses, and Scrap Percentage.",
+          "Navigate to the designated Cliq shift channel (e.g., '#riyadh-shift-handover').",
+          "Click the '+ Handover Template' bot shortcut in the message composer to insert the standardized handover markdown table.",
+          "Fill in required fields: Outgoing Shift Lead, Incoming Shift Lead, Date & Shift Code (Day Shift A / Night Shift B).",
+          "Input numerical counters: Target Output vs. Actual Output, Machine Downtime Incidents (hours and reason), and Material Inventory Scarcity.",
+          "Highlight high-priority orders: Mention specific client projects (e.g., 'SwissBlue Jeddah Ballroom Doors \u2014 Batch 3 ready for priming').",
+          "Attach photo documentation of the clean factory floor and tooling racks.",
+          "Tag the incoming Shift Foreman (@username) and post the handover report.",
+          "The incoming Shift Foreman must review the post and respond with an official acknowledgment reaction or comment ('Shift Accepted - All Tooling Verified')."
+        ],
+        verification: "Verify that the handover log displays with complete formatting, the incoming foreman has confirmed acceptance, and the message is pinned to the channel header for 24 hours.",
+        caution: "A shift handover is not legally complete until the incoming supervisor acknowledges the message. Never leave the facility without verified digital handover sign-off."
+      },
+      {
+        id: "sop-com-08",
+        code: "SOP-COM-08",
+        category: "cliq",
+        pillarName: "Cliq Real-Time Channels & Huddles",
+        role: "Department Heads / Project Managers",
+        title: "Conducting Instant Zero-Friction Audio/Video Huddles across Factories",
+        description: "Standard operating procedure for launching spontaneous, zero-scheduling audio/video huddles inside Cliq channels for rapid problem-solving.",
+        objective: "Resolve urgent engineering and logistics bottlenecks within minutes, minimizing email turnaround and eliminating scheduling friction.",
+        prerequisites: "Zoho Cliq desktop application or mobile client; high-speed corporate network connection; noise-cancelling headset.",
+        steps: [
+          "Navigate to the relevant operational channel where the issue arose (e.g., '#finishing-dept' or '#contracting-site-team').",
+          "Click the 'Start Huddle' headphones icon at the top right of the channel header.",
+          "Choose huddle mode: 'Audio Only' (recommended for quick verbal check-ins) or 'Video + Screen Sharing' (recommended for drawing reviews).",
+          "Cliq sends an unobtrusive chime notification to active channel members with a 'Join Huddle' floating banner.",
+          "Once participants join, the host can click 'Share Screen' to present technical drawings, Odoo ERP orders, or architectural PDFs.",
+          "Enable 'Factory Noise Suppression' in Cliq audio settings to eliminate ambient CNC and machinery background noise.",
+          "Conduct the focused working session (recommended duration: 5 to 15 minutes).",
+          "At the end of the huddle, the host posts a brief bulleted summary of agreed action items directly in the channel thread.",
+          "Click 'Leave Huddle' to terminate the session."
+        ],
+        verification: "Check the channel activity log: Cliq automatically registers a huddle summary entry stating duration, participants present, and timestamps.",
+        caution: "Do not keep channel huddles running unmonitored. Always end the huddle session promptly to conserve holding network bandwidth."
+      },
+      {
+        id: "sop-com-09",
+        code: "SOP-COM-09",
+        category: "cliq",
+        pillarName: "Cliq Real-Time Channels & Huddles",
+        role: "Cliq System Administrator / IT Security Lead",
+        title: "Managing Role-Based Channel Permissions & Executive Team Rooms",
+        description: "Governance standard for provisioning public, private, and secret encrypted Cliq channels, managing participant access, and enforcing retention rules.",
+        objective: "Prevent sensitive corporate, financial, and legal communications from unauthorized exposure while maintaining frictionless departmental collaboration.",
+        prerequisites: "Zoho Cliq Administration Console access with 'Channel Administrator' or 'Super Admin' role.",
+        steps: [
+          "Access the Zoho Cliq Admin Console via https://cliq.zoho.com/admin.",
+          "Select 'Channels' from the governance menu and click '+ Create Channel'.",
+          "Define channel level: 'Organization' (open to all holding staff), 'Department' (auto-synced with HR records), 'Personal/Private' (invite-only), or 'Secret' (hidden from search).",
+          "Assign standardized naming syntax: Prefix with '#dept-' for departments, '#plant-' for manufacturing facilities, or '#exec-' for leadership enclaves.",
+          "For executive and legal rooms (e.g., '#exec-board'), toggle on: 'Encrypted Message History', 'Disable Guest Participation', and 'Prevent Message Forwarding'.",
+          "Configure Chat History Visibility for new members: Select whether historical messages are accessible or if visibility begins from the joining timestamp.",
+          "Set Message Retention Policy: Standard operational channels (365 days), Transient project rooms (90 days), Executive channels (Indefinite / Legal Hold).",
+          "Assign Channel Moderators and save settings."
+        ],
+        verification: "Log in with a non-executive employee test account. Verify that secret channels do not appear in channel search results and unauthorized invites are strictly blocked.",
+        caution: "Never add external third-party suppliers or contractors to internal holding channels. External collaborators must be restricted to dedicated guest channels with restricted permissions."
+      },
+      {
+        id: "sop-com-10",
+        code: "SOP-COM-10",
+        category: "shared",
+        pillarName: "Shared Mailboxes & Inbox Operations",
+        role: "Enterprise IT Administrator",
+        title: "Configuring Dynamic Department Distribution Lists & Smart Aliases",
+        description: "Standard procedure for establishing organizational broadcast lists, configuring moderation gateways, and mapping departmental email aliases.",
+        objective: "Ensure accurate enterprise messaging reach while preventing unauthorized mass-spam broadcasts and managing email traffic cleanly across group entities.",
+        prerequisites: "Zoho Mail Admin Console access with 'Group Administration' permissions; organizational hierarchy chart from HR.",
+        steps: [
+          "Open Zoho Mail Admin Console and navigate to 'Groups' > 'Distribution Lists'.",
+          "Click '+ Create Distribution List' and enter the canonical address (e.g., 'all-riyadh@wdgroup.online' or 'directors@swissbluehotels.com').",
+          "Set Membership Criteria: Select 'Dynamic Sync' to automatically include employees based on their active department and location attributes.",
+          "Configure Sender Access Permissions: Choose 'Moderated' for company-wide broadcast lists to prevent regular employees from broadcasting without HR/Exec approval.",
+          "Assign designated Group Moderators (e.g., HR Director and Executive Assistant).",
+          "Configure Anti-Spam Gateways: Block external internet senders from posting directly to internal distribution groups unless explicitly whitelisted.",
+          "Add functional aliases: Map secondary addresses (e.g., 'timber-support@', 'furniture-quote@') to route into the primary distribution queue.",
+          "Save changes and test group membership synchronization."
+        ],
+        verification: "Transmit a test email from an unauthorized internal account to the moderated distribution list. Confirm that the sender receives a notification that the message is held pending moderator approval.",
+        caution: "Never leave an all-company distribution list open to unrestricted sender access. Accidental 'Reply All' storms can cause severe operational disruption."
+      },
+      {
+        id: "sop-com-11",
+        code: "SOP-COM-11",
+        category: "governance",
+        pillarName: "Compliance, DLP & Legal Archival",
+        role: "Information Security Officer / Compliance Lead",
+        title: "Enforcing Data Loss Prevention (DLP) Rules on Sensitive Attachments",
+        description: "Security protocol for defining content scanning patterns, blocking unauthorized leakage of financial contracts, national IDs, and proprietary designs.",
+        objective: "Prevent inadvertent or malicious exfiltration of sensitive corporate records, trade secrets, and Vision 2030 commercial tenders via outgoing email.",
+        prerequisites: "Zoho Mail Admin Console access with 'Compliance & Security' administrator rights; corporate data classification policy.",
+        steps: [
+          "Navigate to Zoho Mail Admin Console > Security & Compliance > Data Loss Prevention (DLP).",
+          "Click 'Create DLP Policy' and assign the name 'Enterprise Sensitive Data Protection'.",
+          "Define detection patterns: Add regex rules for Saudi National ID (10 digits starting with 1 or 2), Saudi IBAN numbers ('SA[0-9]{22}'), and credit card formats.",
+          "Add keyword scanning dictionaries: Include proprietary terms ('Commercial Tender', 'Confidential Balance Sheet', 'CNC G-Code Proprietary', 'BOM Specification').",
+          "Define file extension filters: Scan for CAD drawing files (.dwg, .dxf, .step) and encrypted archives (.rar, .7z) sent to external personal email addresses.",
+          "Configure Enforcement Action: Select 'Quarantine and Notify Admin' for critical violations, or 'Block & Alert Sender' for confidential files.",
+          "Set customized sender warning notification: 'Your email has been flagged by WD Group DLP policy for containing sensitive corporate identifiers.'",
+          "Activate the policy and monitor the live incident dashboard."
+        ],
+        verification: "Attempt to transmit an external test email containing a simulated 10-digit Saudi National ID string. Confirm that the outbound email is blocked, placed into the admin quarantine queue, and an instant alert is triggered.",
+        caution: "Review DLP quarantine logs daily. Ensure legitimate business transactions with banking institutions and government authorities are not inadvertently hindered by overly aggressive rules."
+      },
+      {
+        id: "sop-com-12",
+        code: "SOP-COM-12",
+        category: "governance",
+        pillarName: "Compliance, DLP & Legal Archival",
+        role: "Legal Counsel / Compliance Administrator",
+        title: "Legal Hold Imposition & eDiscovery Email Archival Retrieval",
+        description: "Standard evidentiary preservation procedure for imposing immutable legal holds on custodian mailboxes and exporting cryptographically certified archives.",
+        objective: "Ensure total evidentiary integrity and regulatory compliance during legal proceedings, commercial arbitrations, or forensic financial audits.",
+        prerequisites: "Signed Executive or Legal Counsel directive; Zoho Mail eDiscovery & Compliance Administrator clearance.",
+        steps: [
+          "Open Zoho Mail Admin Console > eDiscovery & Archival portal.",
+          "Navigate to 'Legal Holds' and click '+ Create Legal Hold Case'.",
+          "Input Legal Case Reference: Enter court case number, arbitration identifier, or internal forensic audit code.",
+          "Designate Custodians: Select the specific employee mailboxes and shared inboxes subject to the investigation.",
+          "Define Date Range: Set start and end timestamps (or select 'Indefinite Preservation' for ongoing litigation).",
+          "Activate the hold: Once applied, the custodian cannot permanently delete, purge, or modify any emails \u2014 all deletions are silently retained in the tamper-evident legal repository.",
+          "To retrieve evidence, navigate to 'eDiscovery Search', define boolean query terms (e.g., 'Contract AND Najran AND Dispute'), and execute search across custodians.",
+          "Review search matches, create an export bundle, and select 'Cryptographic PST/EML Archive with SHA-256 Checksum'.",
+          "Download the password-protected archive bundle and log the chain of custody."
+        ],
+        verification: "Verify that the generated archive manifest includes the calculated SHA-256 hash string, matching the file properties upon download to verify zero data tampering.",
+        caution: "Imposing a Legal Hold is a strictly confidential legal procedure. Do not notify the custodian unless explicitly directed by the General Counsel."
+      },
+      {
+        id: "sop-com-13",
+        code: "SOP-COM-13",
+        category: "identity",
+        pillarName: "Identity & Access Lifecycle",
+        role: "IT Security Administrator / Systems Duty Officer",
+        title: "Rapid Account De-Provisioning & Remote Device Wipe for Offboarding",
+        description: "Emergency 15-minute offboarding runbook to revoke corporate access, wipe mobile email containers, and secure intellectual property upon staff departure.",
+        objective: "Prevent unauthorized post-departure system access, safeguard sensitive files, and cleanly transition ongoing business correspondence to department successors.",
+        prerequisites: "Formal Separation Directive from Human Resources; IT Security Administrator credentials.",
+        steps: [
+          "Upon notification timestamp from HR, immediately access Zoho Mail Admin Console > User Management.",
+          "Locate the departing employee's account and click the 'Emergency Lock' action button.",
+          "Select 'Terminate All Active Sessions': This immediately invalidates webmail sessions, mobile app tokens, and active Cliq connections.",
+          "Initiate Remote Device Wipe: Navigate to 'Mobile Device Management' > 'Enrolled Devices', select corporate profile, and execute 'Wipe Corporate Container' (removes corporate emails, chats, and files without touching employee personal photos).",
+          "Reset account password to an unguessable 32-character randomized key, disabling 2FA bypass codes.",
+          "Configure Email Forwarding: Route all incoming correspondence to the designated department manager or successor mailbox.",
+          "Set an internal auto-responder: 'This employee is no longer with WD Group Holding. For inquiries, please contact department-lead@wdgroup.online.'",
+          "Change mailbox type to 'Inactive Shared Archive' to preserve historical email threads without consuming an active enterprise license."
+        ],
+        verification: "Attempt to authenticate using the employee's old credentials on web and mobile apps. Confirm immediate refusal with 'Account Suspended / Access Denied' notification.",
+        caution: "Never permanently delete an offboarded employee mailbox immediately. Company policy requires preserving email archives for a minimum of 24 months for commercial warranty tracking."
+      },
+      {
+        id: "sop-com-14",
+        code: "SOP-COM-14",
+        category: "cliq",
+        pillarName: "Cliq Real-Time Channels & Huddles",
+        role: "DevOps Engineer / Systems Integration Specialist",
+        title: "Configuring ERP & Webhook Alert Bots in Operational Channels",
+        description: "Technical procedure for configuring incoming webhooks and automated alert bots from Odoo 19 ERP, eZee PMS, and GitHub into dedicated Cliq channels.",
+        objective: "Provide real-time operational visibility into production exceptions, booking anomalies, and deployment pipeline statuses directly inside team chat streams.",
+        prerequisites: "Cliq Bot / Webhook Developer permissions; target channel moderator rights; API access to external system (Odoo / eZee / GitHub).",
+        steps: [
+          "Open Zoho Cliq and navigate to 'Integrations' > 'Incoming Webhooks'.",
+          "Click '+ New Incoming Webhook', provide a descriptive name (e.g., 'Odoo-Production-Alerts-Bot'), and select the target channel (e.g., '#factory-ops').",
+          "Copy the uniquely generated Webhook Endpoint URL with authentication token.",
+          "In the external system (e.g. Odoo 19 automated action or Python connector webhook), configure the HTTP POST payload with formatted JSON.",
+          "Structure the JSON card payload with clear visual elements: 'title', 'theme' (modern-inline), 'badge' (Urgent / Warning / Info), and 'fields' (Order #, Machine ID, Timestamp).",
+          "Add interactive action buttons: Include a direct URL link button ('Inspect Order in Odoo') and an acknowledgment button ('Mark Acknowledged').",
+          "Execute a test payload from the external system to verify delivery.",
+          "Pin the integration documentation in the channel notes for ongoing maintenance reference."
+        ],
+        verification: "Trigger a test transaction in Odoo (e.g., a high-value purchase order or inventory stock alert). Confirm that the alert card appears in the Cliq channel within 2 seconds with formatted badges and functional buttons.",
+        caution: "Protect incoming webhook URLs as confidential secrets. Anyone with the URL can post unauthenticated messages into internal holding channels."
+      },
+      {
+        id: "sop-com-15",
+        code: "SOP-COM-15",
+        category: "identity",
+        pillarName: "Identity & Access Lifecycle",
+        role: "IT Helpdesk Technician / Level 1 Support",
+        title: "Resolving Employee Authentication Lockouts & TOTP Resynchronization",
+        description: "Standard support protocol for safely assisting employees locked out due to replaced phones, forgotten credentials, or TOTP authenticator time drift.",
+        objective: "Restore employee productivity rapidly while enforcing rigorous identity verification to prevent social engineering and SIM-swap account takeovers.",
+        prerequisites: "IT Helpdesk ticketing system access; Zoho Admin Console 'Helpdesk Administrator' role; verified out-of-band employee identity.",
+        steps: [
+          "When a lockout ticket is received, NEVER reset credentials via unverified text or chat. Initiate an Out-of-Band verification call to the employee's registered corporate phone number.",
+          "Verify identity by checking: Employee National ID/Iqama number, Department Manager name, and Employee ID badge number.",
+          "Once identity is 100% established, access Zoho Mail Admin Console > User Management.",
+          "Select the employee account, check login audit logs to determine the lockout cause (e.g. repeated invalid password attempts, TOTP clock drift, or lost mobile device).",
+          "If the issue is lost 2FA device: Click 'Generate One-Time Temporary Backup Code' (valid strictly for 15 minutes).",
+          "Communicate the temporary code verbally over the secure phone call.",
+          "Instruct the employee to log in, unbind their old device, and immediately re-enroll their new device using SOP-COM-03.",
+          "If the issue is TOTP clock drift: Have the user open Zoho OneAuth settings and tap 'Sync Time Now'.",
+          "Log full resolution notes in the IT helpdesk ticket and close the case."
+        ],
+        verification: "Monitor the admin audit log to confirm that the employee successfully authenticated using the new authenticator device and that the temporary code is invalidated.",
+        caution: "Strictly forbid bypassing 2FA permanently for any employee. If an employee cannot access their phone, only issue time-limited temporary bypass codes."
+      },
+      {
+        id: "sop-com-16",
+        code: "SOP-COM-16",
+        category: "dns",
+        pillarName: "DNS & Cryptographic Security",
+        role: "Cybersecurity Analyst / Email Security Specialist",
+        title: "Executive Mailbox VIP Protection & Advanced Anti-Spoofing Defense",
+        description: "Hardening runbook for securing C-suite mailboxes against Business Email Compromise (BEC), display name impersonation, and zero-day phishing attacks.",
+        objective: "Shield executive leadership (CEO, Chairman, General Managers) from sophisticated targeted cyber attacks, fraudulent wire transfer requests, and brand spoofing.",
+        prerequisites: "Zoho Mail Security & Threat Management administrator clearance; list of executive personnel and VIP mailbox endpoints.",
+        steps: [
+          "Access Zoho Mail Admin Console > Security & Compliance > Threat Protection.",
+          "Navigate to 'Anti-Spoofing & Display Name Protection' and click 'Add Protected VIP Entity'.",
+          "Register the full names and personal display names of all executive leaders (e.g., 'Mohammed Ali Saleh Al-Shaibani', 'Eng. Mohammed Al-Shaibani').",
+          "Configure Display Name Spoofing Rule: If an incoming external email contains a display name matching any VIP entity but originates from an external domain, trigger 'Immediate Quarantine'.",
+          "Enable External Sender Warning Banner: Inject a prominent top banner on all external messages: 'CAUTION: This email originated outside WD Group Holdings. Do not click links or wire funds without phone verification.'",
+          "Enforce Outbound Auto-Forwarding Restrictions: Strictly disable automatic forwarding rules to external personal addresses for all executive accounts.",
+          "Enable AI-powered Phishing & Impersonation Heuristics to detect linguistic indicators of urgency (e.g., 'Urgent wire transfer', 'Confidential CEO request').",
+          "Configure instantaneous SMS/Cliq alerts to SecOps if a VIP impersonation attempt is intercepted."
+        ],
+        verification: "Send a simulated spoofing test from an external free email service using the CEO's display name to an internal employee mailbox. Verify that the message is blocked and quarantined with an instant threat alert generated.",
+        caution: "Display name spoofing rules must be tested carefully to prevent false positives when executives legitimately communicate from approved external government or banking committees."
+      },
+      {
+        id: "sop-com-17",
+        code: "SOP-COM-17",
+        category: "shared",
+        pillarName: "Shared Mailboxes & Inbox Operations",
+        role: "All Employees / Executive Assistants",
+        title: "Setting Standard Corporate Out-of-Office Auto-Responders & Delegation",
+        description: "Protocol for configuring professional out-of-office automated notifications and delegating temporary access during annual leave or official business travel.",
+        objective: "Maintain seamless business operations, avoid unaddressed client requests, and project professional corporate communication during employee absence.",
+        prerequisites: "Approved leave request in HR portal; Zoho Mail web client access.",
+        steps: [
+          "In Zoho Mail webmail, click the 'Settings' gear icon at the top right and select 'Out of Office / Auto-Responder'.",
+          "Toggle 'Enable Auto-Responder' to Active.",
+          "Select the exact Date and Time Range: Set start timestamp to the beginning of your approved leave and end timestamp to your return time.",
+          "Configure distinct responses for Internal vs. External contacts:",
+          "External Response (Bilingual Arabic/English): 'Thank you for reaching out to WD Group Holding. I am currently out of the office on annual leave until [Date] with limited email access. For urgent procurement or sales inquiries, please contact [Name, Title, Email, Phone].'",
+          "Internal Response: Specify assigned team cover for ongoing factory batches, project files location on corporate cloud, and emergency mobile contact for urgent escalations.",
+          "If delegating inbox access to an assistant, navigate to Settings > Mail Accounts > Access Delegation, and grant temporary 'Read Only' or 'Delegate' rights.",
+          "Click 'Save and Activate'."
+        ],
+        verification: "Send a test message from a secondary address to confirm that the auto-responder triggers immediately with clean formatting and accurate alternate contact details.",
+        caution: "Never disclose confidential travel itineraries, vacation lodging details, or customer contract figures in out-of-office messages."
+      },
+      {
+        id: "sop-com-18",
+        code: "SOP-COM-18",
+        category: "dns",
+        pillarName: "DNS & Cryptographic Security",
+        role: "Email Systems Administrator / SecOps",
+        title: "Spam Quarantine Management & Enterprise Whitelisting Governance",
+        description: "Standard daily procedure for reviewing spam quarantines, analyzing false positive verdicts, and managing organization-wide whitelists for trusted partners.",
+        objective: "Ensure critical government, banking, and vendor correspondence is never lost while maintaining robust filtering against malware and phishing campaigns.",
+        prerequisites: "Zoho Mail Security Administrator role; daily quarantine audit schedule.",
+        steps: [
+          "Log in to the Zoho Mail Security Console > Spam Control & Quarantine at 09:00 and 15:00 daily.",
+          "Review the organization-wide quarantine queue, filtering by sender domain, score, and rejection reason.",
+          "Inspect quarantined messages: Examine email authentication headers (SPF result, DKIM signature validity, and DMARC alignment).",
+          "If a legitimate email from a verified banking or government entity (e.g. ZATCA, Ministry of Commerce) was trapped: Click 'Release & Learn' to deliver the message to the recipient and adjust heuristic scoring.",
+          "To permanently whitelist a trusted corporate partner: Navigate to 'Whitelisted Domains', add the validated domain (e.g., 'partner-bank.com.sa'), and enforce 'Require SPF Pass' to prevent spoofed whitelisting.",
+          "If a malicious zero-day phishing payload is discovered: Mark as 'Phishing & Blacklist', extract sender IP and domain, and propagate blacklist group-wide.",
+          "Archive the weekly quarantine log for executive cybersecurity reporting."
+        ],
+        verification: "Confirm that released messages appear in the recipient's inbox within 60 seconds with an audit tag indicating administrative release.",
+        caution: "Never whitelist free email providers (e.g. gmail.com, yahoo.com) across the entire organization. Whitelisting must strictly apply to authenticated corporate domain names."
+      },
+      {
+        id: "sop-com-19",
+        code: "SOP-COM-19",
+        category: "operations",
+        pillarName: "Operations Continuity & Escalation",
+        role: "Operations Duty Officer / Holding IT Lead",
+        title: "Emergency Severity-1 Communication Outage Escalation Protocol",
+        description: "Emergency incident protocol for managing catastrophic corporate email or messaging outages and activating Dubai in Cairo escalation channels.",
+        objective: "Restore critical holding communication channels within strict SLAs, maintain secondary command lines, and deliver transparent incident reporting.",
+        prerequisites: "Duty Officer authorization; access to emergency WhatsApp/SMS broadcast directory; Dubai in Cairo Level 3 support contact protocols.",
+        steps: [
+          "Upon confirmation of widespread mail delivery failure or Cliq disconnection (affecting >10 employees simultaneously), declare an active P1 Outage Incident.",
+          "Verify global cloud status: Check https://status.zoho.com and Cloudflare status dashboards to determine whether the issue is upstream or internal.",
+          "Execute terminal network diagnostics: Test DNS resolution ('dig +trace mx.zoho.com') and TCP port reachability ('nc -zv mx.zoho.com 25').",
+          "Activate Secondary Emergency Channel: Issue an executive broadcast via the secure WhatsApp Business VIP channel notifying department heads and plant supervisors.",
+          "Initiate Priority L3 Support Escalation to Dubai in Cairo via direct emergency hotline and emergency ticket system with complete diagnostic packet.",
+          "Provide operational workarounds to plants: Direct factory foremen to use pre-established offline production log sheets for shift continuity.",
+          "Monitor Dubai in Cairo engineering resolution progress and maintain 30-minute status updates to the Holding Chief Executive Officer.",
+          "Upon service restoration, conduct end-to-end verification, close the emergency incident, and publish a Root Cause Analysis (RCA) report within 24 hours."
+        ],
+        verification: "Verify successful end-to-end transmission of test messages across all 3 domains, verify Cliq WebSocket reconnectivity across desktop and mobile, and obtain duty officer sign-off.",
+        caution: "During a major email outage, never attempt uncoordinated DNS record changes without Dubai in Cairo senior systems engineering alignment."
+      },
+      {
+        id: "sop-com-20",
+        code: "SOP-COM-20",
+        category: "governance",
+        pillarName: "Compliance, DLP & Legal Archival",
+        role: "Enterprise Infrastructure Lead",
+        title: "Quarterly Storage Optimization, Quota Governance & Mailbox Archival",
+        description: "Capacity planning runbook for auditing holding mailbox storage quotas, optimizing large attachments, and archiving inactive data to cold storage.",
+        objective: "Prevent mailbox storage overages, eliminate unnecessary Zoho license expansion costs, and maintain optimal system responsiveness across all holding domains.",
+        prerequisites: "Zoho Mail Admin Console 'Storage Administrator' rights; holding quarterly capacity planning schedule.",
+        steps: [
+          "Access Zoho Mail Admin Console > Storage Management at the end of each fiscal quarter.",
+          "Generate the Organization Storage Consumption Report: Sort all active employee mailboxes by percentage utilization.",
+          "Identify mailboxes exceeding 85% of their allocated storage tier (e.g., >8.5 GB on standard 10 GB tiers).",
+          "Send automated cleanup notifications to affected users detailing attachment pruning procedures and recommending archiving older project threads.",
+          "For mailboxes containing massive uncompressed attachments (>25 MB), run the Zoho Attachment Optimization tool to compress image and document files.",
+          "Audit departed staff mailboxes: Export mailboxes older than 180 days to encrypted cloud cold archives and delete the active mailbox to reclaim the Zoho enterprise license.",
+          "Review Shared Mailbox allocations: Adjust quota buffers for high-volume shared mailboxes (e.g. sales@, procurement@).",
+          "Deliver the Quarterly Storage & Cost Efficiency Report to the Chief Technology Officer and Finance Director."
+        ],
+        verification: "Verify that organizational storage utilization drops below 70% threshold and reclaimed licenses are reflected in the available licensing pool.",
+        caution: "Never permanently purge employee archives without cross-referencing active Legal Holds (SOP-COM-12) to ensure compliance with legal evidence retention rules."
+      }
+    ];
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function renderSOPs() {
+      const grid = document.getElementById('sop-grid');
+      const filtered = sopsData.filter(sop => {
+        const matchesCategory = (currentFilter === 'all') || (sop.category === currentFilter);
+        const q = searchQuery.toLowerCase().trim();
+        const matchesSearch = !q || 
+          sop.title.toLowerCase().includes(q) ||
+          sop.code.toLowerCase().includes(q) ||
+          sop.pillarName.toLowerCase().includes(q) ||
+          sop.description.toLowerCase().includes(q) ||
+          sop.role.toLowerCase().includes(q);
+        return matchesCategory && matchesSearch;
+      });
+
+      document.getElementById('active-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mx-auto text-slate-500">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <p class="text-sm text-slate-400 font-medium">No operating procedures match your criteria.</p>
+            <button onclick="setFilter('all'); document.getElementById('sop-search').value=''; handleSearch('');" class="px-4 py-2 rounded-xl bg-teal-600/20 text-teal-300 border border-teal-500/30 text-xs font-semibold hover:bg-teal-600/30 transition">
+              Reset Filters
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(sop => `
+        <div onclick="openSopModal('${sop.id}')" class="glass-card spotlight-card rounded-2xl p-5 border border-slate-800/80 hover:border-teal-500/50 cursor-pointer flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20">
+                ${sop.code}
+              </span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider font-mono">
+                ${sop.pillarName}
+              </span>
+            </div>
+
+            <h3 class="text-base font-bold text-white group-hover:text-teal-300 transition-colors leading-snug">
+              ${sop.title}
+            </h3>
+
+            <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+              ${sop.description}
+            </p>
+          </div>
+
+          <div class="pt-4 mt-4 border-t border-slate-800/60 flex items-center justify-between text-xs">
+            <span class="text-[11px] text-slate-400 truncate max-w-[180px]">
+              <span class="text-slate-500">Role:</span> ${sop.role}
+            </span>
+            <span class="inline-flex items-center gap-1 text-teal-400 font-semibold group-hover:translate-x-0.5 transition-transform text-xs">
+              <span>View Runbook</span>
+              <span>→</span>
+            </span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setFilter(cat) {
+      currentFilter = cat;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.currentTarget.classList.add('active');
+      const labels = {
+        'all': 'All Procedures',
+        'dns': 'DNS & Cryptography',
+        'identity': 'Identity & Access',
+        'shared': 'Shared Inboxes',
+        'cliq': 'Cliq Channels & Huddles',
+        'clips': 'Asynchronous Clips',
+        'governance': 'Compliance & DLP',
+        'operations': 'Operations & Support'
+      };
+      document.getElementById('active-category-label').textContent = labels[cat] || 'All Procedures';
+      renderSOPs();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val;
+      renderSOPs();
+    }
+
+    function openSopModal(id) {
+      const sop = sopsData.find(s => s.id === id);
+      if (!sop) return;
+
+      document.getElementById('modal-sop-code').textContent = sop.code;
+      document.getElementById('modal-sop-pillar').textContent = sop.pillarName;
+      document.getElementById('modal-sop-role').textContent = "Role: " + sop.role;
+      document.getElementById('modal-sop-title').textContent = sop.title;
+
+      const stepsHtml = sop.steps.map((step, idx) => `
+        <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-teal-600 text-white font-bold text-[11px] shrink-0 mt-0.5">${idx + 1}</span>
+          <span class="leading-relaxed text-slate-300 text-xs">${step}</span>
+        </li>
+      `).join('');
+
+      document.getElementById('modal-sop-content').innerHTML = `
+        <div class="space-y-4">
+          <!-- Section 1: Objective & Scope -->
+          <div class="p-3.5 rounded-xl bg-teal-950/20 border border-teal-500/20">
+            <span class="text-teal-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">1. Operational Objective</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.objective}</p>
+          </div>
+
+          <!-- Section 2: Prerequisites -->
+          <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+            <span class="text-slate-400 font-bold block mb-1 uppercase tracking-wider text-[11px]">2. Prerequisites &amp; System Access</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.prerequisites}</p>
+          </div>
+
+          <!-- Section 3: Step-by-Step Procedure -->
+          <div class="space-y-2">
+            <span class="text-white font-bold block uppercase tracking-wider text-[11px]">3. Step-by-Step Execution Sequence</span>
+            <ul class="space-y-2">
+              ${stepsHtml}
+            </ul>
+          </div>
+
+          <!-- Section 4: Verification -->
+          <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/20">
+            <span class="text-emerald-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">4. Quality Verification &amp; Success Metric</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.verification}</p>
+          </div>
+
+          <!-- Section 5: Caution -->
+          <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/20">
+            <span class="text-rose-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">5. Operational Caution &amp; Risk Mitigation</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.caution}</p>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modal-overlay').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSopModal() {
+      document.getElementById('modal-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function copyModalContent() {
+      const title = document.getElementById('modal-sop-title').textContent;
+      const content = document.getElementById('modal-sop-content').innerText;
+      navigator.clipboard.writeText(title + "\n\n" + content).then(() => {
+        const btn = document.getElementById('copy-btn-text');
+        btn.textContent = "Copied to Clipboard!";
+        setTimeout(() => { btn.textContent = "Copy Procedure"; }, 2000);
+      });
+    }
+
+    // Spotlight Mouse Tracker
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSopModal();
+    });
+
+    // Close modal on click outside
+    document.getElementById('modal-overlay').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('modal-overlay')) closeSopModal();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSOPs();
+    });
+  </script>
+</body>
+</html>

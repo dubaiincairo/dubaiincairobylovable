@@ -1,12 +1,42 @@
 {
   "redirects": [
     {
-      "source": "/portal/login",
-      "destination": "/portal",
+      "source": "/manuals/wdgroup/digital_marketing_strategy(.html)?",
+      "destination": "/strategy",
       "permanent": true
     },
     {
-      "source": "/portal/login/",
+      "source": "/manuals/wdgroup/index(.html)?",
+      "destination": "/portal/wdgroup",
+      "permanent": true
+    },
+    {
+      "source": "/manuals/wdgroup/ar(.html)?",
+      "destination": "/portal/wdgroup/ar",
+      "permanent": true
+    },
+    {
+      "source": "/manuals/wdgroup",
+      "destination": "/portal/wdgroup",
+      "permanent": true
+    },
+    {
+      "source": "/manuals/wdgroup/:path*",
+      "destination": "/portal/wdgroup/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/manuals/:path*",
+      "destination": "/portal/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/digital_marketing_strategy(.html)?",
+      "destination": "/strategy",
+      "permanent": true
+    },
+    {
+      "source": "/portal/login",
       "destination": "/portal",
       "permanent": true
     },
@@ -16,22 +46,124 @@
       "permanent": true
     },
     {
-      "source": "/client/login/",
-      "destination": "/portal",
-      "permanent": true
-    },
-    {
       "source": "/manuals/login",
-      "destination": "/portal",
-      "permanent": true
-    },
-    {
-      "source": "/manuals/login/",
       "destination": "/portal",
       "permanent": true
     }
   ],
   "rewrites": [
+    {
+      "source": "/strategy",
+      "destination": "/digital_marketing_strategy.html"
+    },
+    {
+      "source": "/digital-marketing-strategy",
+      "destination": "/digital_marketing_strategy.html"
+    },
+    {
+      "source": "/portal/wdgroup/strategy",
+      "destination": "/digital_marketing_strategy.html"
+    },
+    {
+      "source": "/client-portal/wdgroup/strategy",
+      "destination": "/digital_marketing_strategy.html"
+    },
+    {
+      "source": "/portal/wdgroup",
+      "destination": "/portal/wdgroup/index.html"
+    },
+    {
+      "source": "/portal/wdgroup/ar",
+      "destination": "/portal/wdgroup/ar.html"
+    },
+    {
+      "source": "/client-portal/wdgroup",
+      "destination": "/portal/wdgroup/index.html"
+    },
+    {
+      "source": "/client-portal/wdgroup/ar",
+      "destination": "/portal/wdgroup/ar.html"
+    },
+    {
+      "source": "/portal/operations",
+      "destination": "/portal/operations.html"
+    },
+    {
+      "source": "/client-portal/operations",
+      "destination": "/portal/operations.html"
+    },
+    {
+      "source": "/portal/wdgroup/swissbluewebsite/features-en",
+      "destination": "/portal/wdgroup/swissbluewebsite/features-en.html"
+    },
+    {
+      "source": "/portal/wdgroup/swissbluewebsite/features-ar",
+      "destination": "/portal/wdgroup/swissbluewebsite/features-ar.html"
+    },
+    {
+      "source": "/portal/wdgroup/swissbluewebsite/sops-en",
+      "destination": "/portal/wdgroup/swissbluewebsite/sops-en.html"
+    },
+    {
+      "source": "/portal/wdgroup/swissbluewebsite/sops-ar",
+      "destination": "/portal/wdgroup/swissbluewebsite/sops-ar.html"
+    },
+    {
+      "source": "/portal/wdgroup/ezeeodooconnector/features-en",
+      "destination": "/portal/wdgroup/ezeeodooconnector/features-en.html"
+    },
+    {
+      "source": "/portal/wdgroup/ezeeodooconnector/features-ar",
+      "destination": "/portal/wdgroup/ezeeodooconnector/features-ar.html"
+    },
+    {
+      "source": "/portal/wdgroup/ezeeodooconnector/sops-en",
+      "destination": "/portal/wdgroup/ezeeodooconnector/sops-en.html"
+    },
+    {
+      "source": "/portal/wdgroup/ezeeodooconnector/sops-ar",
+      "destination": "/portal/wdgroup/ezeeodooconnector/sops-ar.html"
+    },
+    {
+      "source": "/portal/wdgroup/wdgroupwebsite/features-en",
+      "destination": "/portal/wdgroup/wdgroupwebsite/features-en.html"
+    },
+    {
+      "source": "/portal/wdgroup/wdgroupwebsite/features-ar",
+      "destination": "/portal/wdgroup/wdgroupwebsite/features-ar.html"
+    },
+    {
+      "source": "/portal/wdgroup/wdgroupwebsite/sops-en",
+      "destination": "/portal/wdgroup/wdgroupwebsite/sops-en.html"
+    },
+    {
+      "source": "/portal/wdgroup/wdgroupwebsite/sops-ar",
+      "destination": "/portal/wdgroup/wdgroupwebsite/sops-ar.html"
+    },
+    {
+      "source": "/portal/wdgroup/internalcommunication/features-en",
+      "destination": "/portal/wdgroup/internalcommunication/features-en.html"
+    },
+    {
+      "source": "/portal/wdgroup/internalcommunication/features-ar",
+      "destination": "/portal/wdgroup/internalcommunication/features-ar.html"
+    },
+    {
+      "source": "/portal/wdgroup/internalcommunication/sops-en",
+      "destination": "/portal/wdgroup/internalcommunication/sops-en.html"
+    },
+    {
+      "source": "/portal/wdgroup/internalcommunication/sops-ar",
+      "destination": "/portal/wdgroup/internalcommunication/sops-ar.html"
+    },
+    {
+      "source": "/portal/wdgroup/odooerp",
+      "destination": "/portal/wdgroup/odooerp/index.html"
+    },
+    {
+      "source": "/portal/wdgroup/odooerp/ar",
+      "destination": "/portal/wdgroup/odooerp/ar.html"
+    },
     {
       "source": "/saudihospitalityweb",
       "destination": "https://swissblue23may-git-codex-marketin-b957d5-dubaiincairos-projects.vercel.app/saudihospitalityweb"
@@ -73,196 +205,26 @@
       "destination": "/index.html"
     },
     {
-      "source": "/manuals/wdgroup",
-      "destination": "/manuals/wdgroup/index.html"
-    },
-    {
-      "source": "/manuals/wdgroup/",
-      "destination": "/manuals/wdgroup/index.html"
-    },
-    {
-      "source": "/manuals/wdgroup/ar",
-      "destination": "/manuals/wdgroup/ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/swissbluewebsite",
-      "destination": "/manuals/wdgroup/swissbluewebsite/index.html"
-    },
-    {
-      "source": "/manuals/wdgroup/swissbluewebsite/",
-      "destination": "/manuals/wdgroup/swissbluewebsite/index.html"
-    },
-    {
-      "source": "/manuals/wdgroup/swissbluewebsite/ar",
-      "destination": "/manuals/wdgroup/swissbluewebsite/ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/swissbluewebsite/features-en",
-      "destination": "/manuals/wdgroup/swissbluewebsite/features-en.html"
-    },
-    {
-      "source": "/manuals/wdgroup/swissbluewebsite/features-ar",
-      "destination": "/manuals/wdgroup/swissbluewebsite/features-ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/swissbluewebsite/sops-en",
-      "destination": "/manuals/wdgroup/swissbluewebsite/sops-en.html"
-    },
-    {
-      "source": "/manuals/wdgroup/swissbluewebsite/sops-ar",
-      "destination": "/manuals/wdgroup/swissbluewebsite/sops-ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/ezeeodooconnector",
-      "destination": "/manuals/wdgroup/index.html"
-    },
-    {
-      "source": "/manuals/wdgroup/ezeeodooconnector/",
-      "destination": "/manuals/wdgroup/index.html"
-    },
-    {
-      "source": "/manuals/wdgroup/ezeeodooconnector/ar",
-      "destination": "/manuals/wdgroup/ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/ezeeodooconnector/features-en",
-      "destination": "/manuals/wdgroup/ezeeodooconnector/features-en.html"
-    },
-    {
-      "source": "/manuals/wdgroup/ezeeodooconnector/features-ar",
-      "destination": "/manuals/wdgroup/ezeeodooconnector/features-ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/ezeeodooconnector/sops-en",
-      "destination": "/manuals/wdgroup/ezeeodooconnector/sops-en.html"
-    },
-    {
-      "source": "/manuals/wdgroup/ezeeodooconnector/sops-ar",
-      "destination": "/manuals/wdgroup/ezeeodooconnector/sops-ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/wdgroupwebsite",
-      "destination": "/manuals/wdgroup/index.html"
-    },
-    {
-      "source": "/manuals/wdgroup/wdgroupwebsite/",
-      "destination": "/manuals/wdgroup/index.html"
-    },
-    {
-      "source": "/manuals/wdgroup/wdgroupwebsite/ar",
-      "destination": "/manuals/wdgroup/ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/wdgroupwebsite/features-en",
-      "destination": "/manuals/wdgroup/wdgroupwebsite/features-en.html"
-    },
-    {
-      "source": "/manuals/wdgroup/wdgroupwebsite/features-ar",
-      "destination": "/manuals/wdgroup/wdgroupwebsite/features-ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/wdgroupwebsite/sops-en",
-      "destination": "/manuals/wdgroup/wdgroupwebsite/sops-en.html"
-    },
-    {
-      "source": "/manuals/wdgroup/wdgroupwebsite/sops-ar",
-      "destination": "/manuals/wdgroup/wdgroupwebsite/sops-ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/internalcommunication",
-      "destination": "/manuals/wdgroup/index.html"
-    },
-    {
-      "source": "/manuals/wdgroup/internalcommunication/",
-      "destination": "/manuals/wdgroup/index.html"
-    },
-    {
-      "source": "/manuals/wdgroup/internalcommunication/ar",
-      "destination": "/manuals/wdgroup/ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/internalcommunication/features-en",
-      "destination": "/manuals/wdgroup/internalcommunication/features-en.html"
-    },
-    {
-      "source": "/manuals/wdgroup/internalcommunication/features-ar",
-      "destination": "/manuals/wdgroup/internalcommunication/features-ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/internalcommunication/sops-en",
-      "destination": "/manuals/wdgroup/internalcommunication/sops-en.html"
-    },
-    {
-      "source": "/manuals/wdgroup/internalcommunication/sops-ar",
-      "destination": "/manuals/wdgroup/internalcommunication/sops-ar.html"
-    },
-    {
-      "source": "/manuals/wdgroup/odooerp",
-      "destination": "/manuals/wdgroup/odooerp/index.html"
-    },
-    {
-      "source": "/manuals/wdgroup/odooerp/",
-      "destination": "/manuals/wdgroup/odooerp/index.html"
-    },
-    {
-      "source": "/manuals/wdgroup/odooerp/ar",
-      "destination": "/manuals/wdgroup/odooerp/ar.html"
-    },
-    {
-      "source": "/manuals/swissbluewebsite",
-      "destination": "/manuals/wdgroup/swissbluewebsite/index.html"
-    },
-    {
-      "source": "/manuals/swissbluewebsite/",
-      "destination": "/manuals/wdgroup/swissbluewebsite/index.html"
-    },
-    {
-      "source": "/manuals/swissbluewebsite/:path*",
-      "destination": "/manuals/wdgroup/swissbluewebsite/:path*"
-    },
-    {
-      "source": "/manuals/ezeeodooconnector",
-      "destination": "/manuals/wdgroup/index.html"
-    },
-    {
-      "source": "/manuals/ezeeodooconnector/",
-      "destination": "/manuals/wdgroup/index.html"
-    },
-    {
-      "source": "/manuals/ezeeodooconnector/:path*",
-      "destination": "/manuals/wdgroup/ezeeodooconnector/:path*"
-    },
-    {
-      "source": "/manuals/internalcommunication",
-      "destination": "/manuals/wdgroup/index.html"
-    },
-    {
-      "source": "/manuals/internalcommunication/",
-      "destination": "/manuals/wdgroup/index.html"
-    },
-    {
-      "source": "/manuals/internalcommunication/:path*",
-      "destination": "/manuals/wdgroup/internalcommunication/:path*"
-    },
-    {
-      "source": "/manuals/:path*",
-      "destination": "/manuals/:path*"
-    },
-    {
-      "source": "/digital_marketing_strategy",
-      "destination": "/digital_marketing_strategy.html"
-    },
-    {
-      "source": "/digital_marketing_strategy.html",
-      "destination": "/digital_marketing_strategy.html"
-    },
-    {
       "source": "/06_Digital_Marketing_Growth_Strategy_Manual.md",
       "destination": "/06_Digital_Marketing_Growth_Strategy_Manual.md"
+    },
+    {
+      "source": "/portal/wdgroup/:path*",
+      "destination": "/portal/wdgroup/:path*"
+    },
+    {
+      "source": "/client-portal/:path*",
+      "destination": "/portal/:path*"
+    },
+    {
+      "source": "/portal/:path*",
+      "destination": "/portal/:path*"
     },
     {
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }

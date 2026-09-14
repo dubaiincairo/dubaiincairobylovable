@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>WD Group Holding Website (wd-group-website) — Complete Features Catalog | WD Group</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #08090C;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 17, 23, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(37, 99, 235, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(37, 99, 235, 0.7); }
+
+    .glass-card {
+      background: rgba(15, 17, 23, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(37, 99, 235, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-nav {
+      background: rgba(8, 9, 12, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(37, 99, 235, 0.12), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .category-pill {
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.875rem;
+      border-radius: 0.875rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 17, 23, 0.7);
+      color: #94a3b8;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .category-pill:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: #f1f5f9;
+      transform: translateY(-1px);
+    }
+    .category-pill.active {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      border-color: rgba(147, 197, 253, 0.6);
+      color: #ffffff;
+      box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.45);
+      transform: translateY(-1px);
+    }
+    .category-pill .pill-badge {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      padding: 0.125rem 0.45rem;
+      border-radius: 9999px;
+      background: rgba(15, 17, 23, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.2s ease;
+    }
+    .category-pill.active .pill-badge {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen text-slate-100 flex flex-col justify-between selection:bg-blue-600 selection:text-white pb-16">
+
+  <!-- Ambient Glow Background -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-600/15 rounded-full blur-[140px]"></div>
+    <div class="ambient-orb-2 absolute top-1/3 -right-40 w-[550px] h-[550px] bg-[#C9A86A]/15 rounded-full blur-[140px]"></div>
+    <div class="absolute -bottom-40 left-1/3 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[130px]"></div>
+  </div>
+
+  <!-- Sticky Top Navigation -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-4">
+        
+        <!-- Left: Brand / Title -->
+        <div class="flex items-center gap-3 min-w-0">
+          <a href="/manuals/wdgroup#project-03" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-[#C9A86A] flex items-center justify-center font-black text-white text-lg shadow-lg shadow-blue-500/25 group-hover:scale-105 transition-transform">
+              WD
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="font-extrabold text-sm sm:text-base text-white truncate tracking-tight">WD Group Website</span>
+                <span class="px-2 py-0.5 text-[10px] font-bold font-mono uppercase rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">wd-group-website</span>
+              </div>
+              <p class="text-xs text-slate-400 hidden sm:block truncate">Holding Portal &amp; Operations Admin Console (test.wdgroup.online)</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Right: Actions -->
+        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          <a href="/manuals/wdgroup" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold border border-slate-700 transition">
+            ← WD Group Portal
+          </a>
+          <a href="/manuals/wdgroup/wdgroupwebsite/sops-en" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition">
+            <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+            <span class="hidden sm:inline">Operations SOPs (20)</span>
+            <span class="sm:hidden">SOPs</span>
+          </a>
+
+          <a href="/manuals/wdgroup/wdgroupwebsite/features-ar" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 text-xs font-bold font-['IBM_Plex_Sans_Arabic'] transition">
+            العربية (RTL)
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 w-full space-y-8">
+    
+    <!-- Hero Banner -->
+    <div class="text-center max-w-3xl mx-auto space-y-3">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-xs font-semibold text-blue-400 uppercase tracking-wider">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Audited Production Platform · 46 Features Verified
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+        WD Group Holding <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-[#C9A86A] bg-clip-text text-transparent">Features Catalog</span>
+      </h1>
+      <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
+        Comprehensive inventory of all public corporate portal capabilities and administrative console modules across 8 strategic operational pillars, formatted in our strict dual-block operational standard.
+      </p>
+    </div>
+
+    <!-- Sticky Horizontal Scroll Rail for Categories -->
+    <div class="sticky top-20 z-30 pt-2 pb-3 glass-nav border-y border-slate-800/80 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        
+        <!-- Scrollable Category Track -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1" id="category-filters">
+          <button onclick="filterCategory('all')" class="category-pill active" data-category="all">
+            <span>All Features</span>
+            <span class="pill-badge">46</span>
+          </button>
+          <button onclick="filterCategory('pillar-1')" class="category-pill" data-category="pillar-1">
+            <span>1. Brand &amp; Architecture</span>
+            <span class="pill-badge">6</span>
+          </button>
+          <button onclick="filterCategory('pillar-2')" class="category-pill" data-category="pillar-2">
+            <span>2. Sectors Portfolio</span>
+            <span class="pill-badge">6</span>
+          </button>
+          <button onclick="filterCategory('pillar-3')" class="category-pill" data-category="pillar-3">
+            <span>3. Luxury Storefront</span>
+            <span class="pill-badge">6</span>
+          </button>
+          <button onclick="filterCategory('pillar-4')" class="category-pill" data-category="pillar-4">
+            <span>4. Admin Console &amp; Ops</span>
+            <span class="pill-badge">6</span>
+          </button>
+          <button onclick="filterCategory('pillar-5')" class="category-pill" data-category="pillar-5">
+            <span>5. CRM &amp; Lead Pipeline</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-6')" class="category-pill" data-category="pillar-6">
+            <span>6. HR &amp; Talent ATS</span>
+            <span class="pill-badge">5</span>
+          </button>
+          <button onclick="filterCategory('pillar-7')" class="category-pill" data-category="pillar-7">
+            <span>7. AI Concierge &amp; Comms</span>
+            <span class="pill-badge">6</span>
+          </button>
+          <button onclick="filterCategory('pillar-8')" class="category-pill" data-category="pillar-8">
+            <span>8. Security, SEO &amp; Infra</span>
+            <span class="pill-badge">6</span>
+          </button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="relative w-48 sm:w-64 flex-shrink-0" id="search-container">
+          <input 
+            type="text" 
+            id="feature-search"
+            placeholder="Search features..." 
+            oninput="handleSearch(this.value)"
+            class="w-full px-3.5 py-1.5 pl-9 rounded-xl bg-slate-900 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+          >
+          <svg class="w-4 h-4 text-slate-500 absolute left-3 top-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Active Counter & Results Summary -->
+    <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+      <div class="flex items-center gap-2">
+        <span>Showing:</span>
+        <span id="active-category-label" class="font-bold text-white">All Features</span>
+      </div>
+      <div class="font-mono">
+        <span id="filtered-count" class="font-bold text-blue-400">46</span> of 46 features active
+      </div>
+    </div>
+
+    <!-- FEATURES LISTING (46 Features grouped by 8 Pillars) -->
+    <div class="space-y-12" id="features-container">
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 1: CORPORATE BRAND & HOLDING ARCHITECTURE (6 FEATURES)             -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-1">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 1: Corporate Brand &amp; Holding Architecture</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">6 Features</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-01 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-01</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Holding UI / UX</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">High-Tech Dark Obsidian Visual Design System &amp; Ambient Video Hero</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                A custom Next.js design system utilizing an Obsidian canvas (<code class="font-mono text-[11px] text-blue-300">#08090C</code>, <code class="font-mono text-[11px] text-blue-300">#040507</code>, <code class="font-mono text-[11px] text-blue-300">#0F1117</code>), royal sapphire accents (<code class="font-mono text-[11px] text-blue-300">#2563EB</code>), golden camel tones (<code class="font-mono text-[11px] text-amber-300">#C9A86A</code>), backdrop blur filters, and a hardware-accelerated video background player (<code class="font-mono text-[11px]">/videos/hospitality.mp4</code>).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Instantly projects institutional authority and prestige. Elevates WD Group above generic holding templates, capturing the attention of institutional investors and sovereign entities aligned with Saudi Vision 2030.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-02 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-02</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Corporate Governance</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Official Legal Identity, CR 5950011057 &amp; ZATCA Tax Verification</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Dynamic bilingual footer and contact cards displaying verified Commercial Registration (<code class="font-mono text-[11px] text-blue-300">CR: 5950011057</code>), ZATCA 15-digit Tax Identification (<code class="font-mono text-[11px] text-blue-300">VAT: 300865965100003</code>), official entity name (<em class="text-slate-200">Watan Designs Ltd.</em>), and physical headquarters in King Abdulaziz Road, Najran, KSA.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Provides bulletproof transparency for corporate clients, banking partners, and government procurement committees conducting compliance due diligence, eliminating contract friction.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-03 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-03</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Executive Office</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Executive Leadership Governance &amp; CEO Statement Showcase</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                A dedicated executive component (<code class="font-mono text-[11px]">CEOQuote.tsx</code>) and administrative directory (<code class="font-mono text-[11px]">/admin/content/leadership</code>) presenting Chief Executive Officer Eng. Mohammed Ali Saleh Al-Shaibani, his strategic vision statement, and direct executive office communication channels (<code class="font-mono text-[11px]">ceo@wdgroup.online</code>).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Humanizes the corporate conglomerate with recognizable, accountable leadership. Establishes deep personal trust with commercial developers and high-net-worth real estate partners.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-04 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-04</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Strategic Pillars</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Corporate Values, Mission &amp; Vision 2030 Alignment Matrix</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                An interactive 4-quadrant strategic values grid (<code class="font-mono text-[11px]">VisionMissionValues.tsx</code>) articulating Quality &amp; Excellence, Continuous Innovation, Integrity &amp; Transparency, and National Responsibility, synchronized with Saudi Vision 2030 targets.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Articulates the holding company's core philosophy clearly to prospective enterprise partners and international brands seeking local Saudi joint-venture allies.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-05 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-05</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Business Synergy</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Cross-Sector Holding Synergy &amp; Circular Value Creation</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Visual circular economy component (<code class="font-mono text-[11px]">HoldingSynergy.tsx</code>) demonstrating how GreenWood Manufacturing (custom furniture), Watan Designs (contracting/fit-out), and SwissBlue (hotel hospitality) mutually reinforce operational supply lines.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Convinces property owners and developers to partner with WD Group by demonstrating that projects can be designed, furnished, built, and operated entirely in-house with zero third-party markups.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-06 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">FEAT-WDG-06</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Performance Data</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Real-Time Corporate Performance Metrics &amp; Animated Counters</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                A live animated statistics bar (<code class="font-mono text-[11px]">AnimatedCounter.tsx</code>) featuring viewport-triggered counters displaying: 6 Hospitality Properties, 3 Manufacturing Factories, 80+ Specialized Experts, and 74% Average Occupancy Rate.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Communicates real industrial capacity and hospitality volume dynamically, making a persuasive visual impact in the first 3 seconds of a user's visit.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 2: STRATEGIC BUSINESS SECTORS PORTFOLIO (6 FEATURES)               -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-2">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 2: Strategic Business Sectors Portfolio</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">6 Features</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-07 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-sky-500/10 text-sky-400 border border-sky-500/20">FEAT-WDG-07</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Hospitality Sector</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Hospitality Sector Hub &amp; SwissBlue 6-Property Showcase</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Dedicated sector portal (<code class="font-mono text-[11px]">/sectors/hospitality</code>) presenting SwissBlue Hotel Jeddah, SwissBlue Residence Jeddah East, SwissBlue Residence Jeddah West, SwissBlue Plaza Jazan, Vinas Riyadh, and Tulip Rawda Riyadh with photo galleries, amenities, and location maps.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Enables corporate travel buyers, government delegations, and individual guests to explore all 6 serviced hotels in one unified hub and book directly.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-08 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-sky-500/10 text-sky-400 border border-sky-500/20">FEAT-WDG-08</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Manufacturing Sector</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Industrial Manufacturing Hub &amp; GreenWood 3-Factory Showcase</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Manufacturing sector portal (<code class="font-mono text-[11px]">/sectors/manufacturing</code>) showcasing 3 specialized factories in Riyadh and Najran with automated CNC beam saws, PVC edge-banding, PU spray finishing booths, and upholstery production lines.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Reassures major commercial contractors of massive local fabrication capabilities, enabling them to award multi-million Riyal joinery packages with confidence.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-09 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-sky-500/10 text-sky-400 border border-sky-500/20">FEAT-WDG-09</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Contracting Sector</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Turnkey Contracting Hub &amp; Watan Designs Fit-Out Showcase</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Contracting sector portal (<code class="font-mono text-[11px]">/sectors/contracting</code>) highlighting turnkey engineering, architectural joinery installation, MEP services, and project management workflows from design inception to handover.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Positions Watan Designs as an elite general contracting powerhouse capable of executing luxury commercial fit-outs and hotel developments across the Kingdom.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-10 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-sky-500/10 text-sky-400 border border-sky-500/20">FEAT-WDG-10</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Interactive Navigation</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Interactive Sector Hub Navigation &amp; Dynamic Theme Switcher</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Interactive homepage sector component (<code class="font-mono text-[11px]">SectorsHub.tsx</code>) allowing instantaneous fluid switching between Hospitality (Navy), Manufacturing (Emerald), and Contracting (Bronze Gold) without reloading the page.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Keeps users engaged on the homepage, allowing board members and clients to digest all three operational pillars within a smooth, responsive single-page interaction.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-11 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-sky-500/10 text-sky-400 border border-sky-500/20">FEAT-WDG-11</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Brand Portfolio</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Multi-Brand Portfolio Carousel &amp; Brand Identity Badges</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Carousel component (<code class="font-mono text-[11px]">BrandPortfolio.tsx</code>) rendering high-resolution vector brand assets for SwissBlue, GreenWood Furniture, Watan Designs, and subsidiary trademarks with brand mottos.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Reinforces group synergy and brand recall, showcasing to commercial partners the broad ecosystem of specialized companies operating under the WD Group umbrella.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-12 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-sky-500/10 text-sky-400 border border-sky-500/20">FEAT-WDG-12</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Social Proof</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Client Endorsements &amp; Enterprise Testimonials Grid</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Interactive endorsement grid (<code class="font-mono text-[11px]">HomeTestimonials.tsx</code>) featuring verified reviews from hotel guests, commercial developers, and procurement executives with project details and ratings.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Builds immediate social proof and peer validation, removing skepticism for prospective clients contemplating large hospitality bookings or manufacturing orders.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 3: LUXURY FURNITURE E-COMMERCE & STOREFRONT (6 FEATURES)           -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-3">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#C9A86A]"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 3: Luxury Furniture E-Commerce &amp; Storefront</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-[#C9A86A]/10 text-[#C9A86A] border border-[#C9A86A]/20">6 Features</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-13 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-[#C9A86A]/10 text-[#C9A86A] border border-[#C9A86A]/20">FEAT-WDG-13</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Digital Showroom</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">GreenWood Luxury Furniture Online Catalog &amp; Digital Showroom</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Full-featured online furniture showroom (<code class="font-mono text-[11px]">/furniture</code>, <code class="font-mono text-[11px]">furnitureData.ts</code>) presenting bespoke collections such as The Al-Diriyah Modular Curved Sofa and The Najran Travertine Coffee Table with dimension specs and high-resolution galleries.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Transforms GreenWood into an accessible luxury retail and B2B brand, allowing architects and homeowners across Saudi Arabia to browse and order catalog pieces online.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-14 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-[#C9A86A]/10 text-[#C9A86A] border border-[#C9A86A]/20">FEAT-WDG-14</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Bespoke Customizer</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Custom Materials, Fabrics &amp; Finishing Options Configurator</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Material customizer enabling buyers to switch finishes between Solid Oak, American Walnut, Warm Beige Travertine, Italian Ivory Bouclé, and Tan Saddle Leather with real-time price updates.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Delivers an elite customized purchasing experience, empowering interior designers to match furniture finishes precisely with hotel or residential mood boards.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-15 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-[#C9A86A]/10 text-[#C9A86A] border border-[#C9A86A]/20">FEAT-WDG-15</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Spatial Visualization</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Interactive 3D &amp; Augmented Reality (AR) Furniture Preview</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Mobile WebAR integration allowing clients to launch spatial camera previews and place true-to-scale 3D models of sofas, credenzas, and tables directly onto their room floors.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Dramatically reduces ordering hesitations and return rates by letting VIP buyers verify dimensions, clearance, and aesthetic fit inside their actual spaces before buying.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-16 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-[#C9A86A]/10 text-[#C9A86A] border border-[#C9A86A]/20">FEAT-WDG-16</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Customer Tracking</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Real-Time Customer Order Tracking Portal by Reference &amp; Mobile</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Self-service order tracking page (<code class="font-mono text-[11px]">/furniture/track</code>) querying records by Order Reference (e.g., <code class="font-mono text-[11px] text-blue-300">WD-ORD-2026-8812</code>) and phone number, displaying step-by-step factory production milestones.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Reduces customer support call volume by 80%, providing clients with transparent, 24/7 visibility into their custom furniture craftsmanship and delivery schedule.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-17 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-[#C9A86A]/10 text-[#C9A86A] border border-[#C9A86A]/20">FEAT-WDG-17</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Checkout Logistics</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Multi-Step Checkout with White-Glove Delivery &amp; Wall Anchoring</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Enterprise checkout system (<code class="font-mono text-[11px]">/furniture/checkout</code>) supporting delivery date scheduling, morning/evening time slots, white-glove inside delivery, seismic wall anchoring, and promo voucher calculations.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Ensures heavy marble, travertine, and solid wood furniture pieces are delivered and installed safely by trained factory technicians, eliminating damage claims.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-18 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-[#C9A86A]/10 text-[#C9A86A] border border-[#C9A86A]/20">FEAT-WDG-18</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">ERP Integration</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Automated Odoo ERP Product, Price &amp; Stock Sync Pipeline</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Bi-directional XML-RPC connector (<code class="font-mono text-[11px]">lib/odoo/odooClient.ts</code>, <code class="font-mono text-[11px]">/api/odoo</code>) querying product master records, BOM specifications, stock counts, and sales orders from Odoo 19 Enterprise.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Eliminates manual catalog entry and inventory discrepancies, ensuring products and prices displayed online match active factory enterprise resource planning in real-time.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 4: EXECUTIVE ADMIN CONSOLE & OPERATIONS (6 FEATURES)               -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 4: Executive Administration Console &amp; Operations</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">6 Features</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-19 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">FEAT-WDG-19</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Access Control</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Role-Based Secure Admin Console Access &amp; Session Protection</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Dedicated management portal (<code class="font-mono text-[11px]">/admin/login</code>, <code class="font-mono text-[11px]">middleware.ts</code>) enforcing cryptographically signed session cookies, bcrypt password hashing, and role hierarchies (<code class="font-mono text-[11px]">owner</code>, <code class="font-mono text-[11px]">admin</code>, <code class="font-mono text-[11px]">editor</code>, <code class="font-mono text-[11px]">crm</code>, <code class="font-mono text-[11px]">hr</code>, <code class="font-mono text-[11px]">viewer</code>).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Prevents unauthorized tampering with public website content, confidential applicant resumes, and customer orders while giving departmental staff targeted operational access.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-20 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">FEAT-WDG-20</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Executive Overview</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Executive Operations KPI Dashboard &amp; Activity Feed</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Real-time operational cockpit (<code class="font-mono text-[11px]">/admin/page.tsx</code>, <code class="font-mono text-[11px]">StatCard.tsx</code>) aggregating total retail sales, open corporate RFPs, active career candidates, and live audit actions into clean visual status meters.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Gives the CEO and group general managers an instantaneous, high-level operational overview in under 10 seconds every morning.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-21 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">FEAT-WDG-21</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Store Operations</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Comprehensive 8-Tab E-Commerce Store Management Hub</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Integrated store administration suite (<code class="font-mono text-[11px]">/admin/ecommerce</code>) with 8 dedicated sub-consoles: Overview, Orders, Products, Inventory, Customers, Analytics, Marketing, and Settings.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Consolidates furniture operations, factory production orders, and customer management into one interface without requiring external Shopify or third-party subscriptions.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-22 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">FEAT-WDG-22</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Fulfillment Lifecycle</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Multi-Stage Order Lifecycle Tracking &amp; Factory Routing</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Order fulfillment console (<code class="font-mono text-[11px]">OrdersTab.tsx</code>) managing order progression (<code class="font-mono text-[11px]">pending</code> → <code class="font-mono text-[11px]">in_production</code> → <code class="font-mono text-[11px]">delivered</code>), assigning orders to Factory 1, 2, or 3, and designating lead installation engineers.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Bridges digital sales with physical factory work centers, preventing order mix-ups and ensuring custom furniture pieces are dispatched on schedule.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-23 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">FEAT-WDG-23</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Factory Inventory</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Factory Raw Material Stock Monitoring &amp; Threshold Alerts</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Inventory controller (<code class="font-mono text-[11px]">InventoryTab.tsx</code>) tracking raw timber slabs, travertine stone tiles, aluminum profiles, and fabric roll quantities, displaying dynamic low-stock alerts when levels dip below minimum thresholds.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Eliminates factory production delays caused by unexpected raw material shortages, maintaining unbroken manufacturing momentum in Riyadh and Najran.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-24 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">FEAT-WDG-24</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Logistics Documentation</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Printable Delivery Slips, Commercial Invoices &amp; Receipts</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Browser print module (<code class="font-mono text-[11px]">OrdersTab.tsx</code>) formatting order details into official corporate delivery slips complete with national address codes, customer signatures, line items, and VAT summaries.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Equips delivery drivers and warehouse dispatchers with professional physical paperwork for customer sign-off without manual document preparation.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 5: CRM, COMMERCIAL INQUIRIES & LEAD PIPELINE (5 FEATURES)          -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 5: CRM, Commercial Inquiries &amp; Lead Pipeline</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-blue-400/10 text-blue-400 border border-blue-400/20">5 Features</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-25 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-400/10 text-blue-400 border border-blue-400/20">FEAT-WDG-25</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Lead Intake</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Multi-Sector B2B Commercial Inquiry Form &amp; Intelligent Router</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Smart inquiry intake component (<code class="font-mono text-[11px]">/contact</code>, <code class="font-mono text-[11px]">ContactCTA.tsx</code>) capturing client organization, target sector (Hospitality, Manufacturing, Contracting), project requirements, and estimated project budget.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Filters and directs incoming commercial opportunities automatically to the proper business division, reducing response latency from days to hours.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-26 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-400/10 text-blue-400 border border-blue-400/20">FEAT-WDG-26</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">VIP Routing</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Strategic Routing of High-Value Inquiries to CEO Office</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Automated triage rules (<code class="font-mono text-[11px]">/api/contact</code>, <code class="font-mono text-[11px]">crm/inquiries</code>) identifying high-value government tenders and multi-property hotel partnerships, flagging them directly for the executive office (<code class="font-mono text-[11px]">ceo@wdgroup.online</code>).
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Guarantees that high-impact strategic deals receive immediate executive sponsorship and senior attention, boosting win rates for major institutional tenders.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-27 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-400/10 text-blue-400 border border-blue-400/20">FEAT-WDG-27</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">CRM Pipeline</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">CRM Inquiry Status Lifecycle &amp; Pipeline Management</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Administrative lead console (<code class="font-mono text-[11px]">/admin/crm/inquiries</code>) managing lead stages (<code class="font-mono text-[11px]">new</code> → <code class="font-mono text-[11px]">contacted</code> → <code class="font-mono text-[11px]">in_review</code> → <code class="font-mono text-[11px]">won</code> → <code class="font-mono text-[11px]">closed</code>) with assigned sales representatives.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Prevents commercial inquiries from being neglected, ensuring clear accountability across sales managers and increasing quarterly deal closures.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-28 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-400/10 text-blue-400 border border-blue-400/20">FEAT-WDG-28</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Internal Collaboration</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Lead Detail Drawer with Internal Staff Collaboration Notes</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Slide-over drawer component (<code class="font-mono text-[11px]">LeadDetailDrawer.tsx</code>) providing full client context and threaded internal notes tagged with author email, timestamp, and action history.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Centralizes institutional memory on client meetings and quote negotiations, enabling team members to collaborate smoothly without scattered emails.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-29 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-400/10 text-blue-400 border border-blue-400/20">FEAT-WDG-29</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Automated Notification</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Automated Multi-Channel Email Dispatch via Resend &amp; Brevo</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Transactional email pipeline (<code class="font-mono text-[11px]">lib/email/</code>, <code class="font-mono text-[11px]">/api/contact</code>) sending branded confirmation emails to clients and instant lead alert summaries to operational teams via Resend or Brevo.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Guarantees prospective clients immediate professional confirmation while alerting sales executives in real-time, even when away from their desks.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 6: HUMAN CAPITAL & TALENT ACQUISITION (ATS) (5 FEATURES)           -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 6: Human Capital &amp; Talent Acquisition (ATS)</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20">5 Features</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-30 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">FEAT-WDG-30</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Careers Portal</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Public Career Vacancies Portal with Department Filtering</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Public job board (<code class="font-mono text-[11px]">/careers</code>) categorizing openings across Hospitality, Manufacturing, Contracting, and Executive Management with location and experience badges.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Attracts elite Saudi and international talent, reinforcing WD Group's reputation as a progressive employer of choice in Najran, Riyadh, and Jeddah.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-31 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">FEAT-WDG-31</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Job Management</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Online Job Opening Publisher &amp; Requirements Manager</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                HR job editor (<code class="font-mono text-[11px]">/admin/hr/jobs</code>) enabling recruitment specialists to create, edit, activate, or archive job postings with rich descriptions, responsibilities, and qualifications.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Empowers HR staff to publish new job vacancies instantly without depending on external web development agencies or incurring third-party job board fees.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-32 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">FEAT-WDG-32</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">ATS Talent Pool</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Applicant Tracking System (ATS) &amp; Talent Pool Console</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Centralized candidate dashboard (<code class="font-mono text-[11px]">/admin/hr/applications</code>) aggregating job applications with direct filters for job title, application date, and recruitment stage.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Eliminates cluttered email inboxes, organizing hundreds of applicant resumes into a clean, searchable institutional talent database.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-33 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">FEAT-WDG-33</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Candidate Evaluation</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Candidate Evaluation Drawer with 5-Star Ratings &amp; Notes</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Candidate assessment drawer (<code class="font-mono text-[11px]">CandidateDrawer.tsx</code>) supporting recruitment stages (<code class="font-mono text-[11px]">new</code> → <code class="font-mono text-[11px]">reviewing</code> → <code class="font-mono text-[11px]">interview</code> → <code class="font-mono text-[11px]">hired</code>), 1-to-5 star candidate scoring, and interview feedback notes.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Standardizes candidate evaluations across hiring managers, accelerating interview scheduling and ensuring top-tier talent is hired rapidly.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-34 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">FEAT-WDG-34</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Cloud Storage</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Encrypted Cloud Storage for PDF Resumes &amp; Portfolios</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Secure file upload handler (<code class="font-mono text-[11px]">/api/careers</code>, Supabase Storage bucket <code class="font-mono text-[11px]">resumes</code>) enforcing PDF/DOCX MIME validation, 10MB size caps, and unique UUID storage paths.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Protects applicant privacy while enabling hiring managers to open and review candidate portfolios and CVs instantly from any device.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 7: OMNICHANNEL AI CONCIERGE & COMMS (6 FEATURES)                   -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-7">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 7: Omnichannel AI Executive Concierge &amp; Communications</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">6 Features</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-35 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">FEAT-WDG-35</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">AI Assistant</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">OpenAI ChatKit AI Executive Concierge Integration</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Embedded conversational AI assistant widget (<code class="font-mono text-[11px]">components/chat/</code>, <code class="font-mono text-[11px]">/api/chatkit</code>) powered by OpenAI ChatKit, answering visitor inquiries about WD Group sectors, properties, and furniture collections.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Delivers 24/7 instant client support, qualifying prospective leads and answering inquiries around the clock while human office staff are off-duty.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-36 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">FEAT-WDG-36</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Knowledge Tuning</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Dynamic Holding Knowledge Base Tuning &amp; Custom Prompts</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Administrative system prompt editor (<code class="font-mono text-[11px]">IntegrationsSecretsCard.tsx</code>, <code class="font-mono text-[11px]">lib/admin/secrets.ts</code>) enabling executive staff to update AI tone, response boundaries, and ground-truth corporate data without editing code.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Ensures AI conversational outputs adhere strictly to company policy and Vision 2030 branding, preventing hallucinations or unauthorized commitments.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-37 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">FEAT-WDG-37</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Email Branding</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">System Email Template Editor &amp; Live Preview Console</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Administrative template editor (<code class="font-mono text-[11px]">/admin/system/emails</code>) allowing live visual editing and instant previewing of automated HTML emails for customer receipts, lead acknowledgments, and candidate notices.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Maintains consistent luxury corporate branding across all outgoing automated customer touchpoints, reflecting high professional standards.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-38 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">FEAT-WDG-38</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Instant Messaging</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">WhatsApp Cloud API Instant Alerts for High-Value Leads</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Messaging webhook integration (<code class="font-mono text-[11px]">IntegrationsSecretsCard.tsx</code>, <code class="font-mono text-[11px]">/api/contact</code>) supporting WhatsApp Cloud API, Twilio, or UltraMsg to dispatch instant mobile WhatsApp alerts to managers upon receiving major RFPs.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Slashes lead response times down to minutes, allowing sales executives to reach out while the prospective client is still actively browsing the website.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-39 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">FEAT-WDG-39</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Treasury &amp; Wire</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Corporate Bank Accounts Registry &amp; Wire Transfer Instructions</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Centralized banking registry (<code class="font-mono text-[11px]">/api/banking</code>, <code class="font-mono text-[11px]">BankAccountRecord</code>) displaying verified IBANs, bank names (Al Rajhi, SNB, Riyad Bank), and SWIFT codes for corporate wire transfers.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Streamlines large B2B contract deposits and furniture wire transfers, eliminating payment delays and erroneous bank routing.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-40 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">FEAT-WDG-40</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Digital Assets (DAM)</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Digital Asset Manager (DAM) &amp; Media Library Console</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Centralized cloud media repository (<code class="font-mono text-[11px]">/admin/media</code>, <code class="font-mono text-[11px]">MediaUploader.tsx</code>) supporting drag-and-drop uploads, file tagging, preview thumbnails, and instant URL copying for facility photography and logos.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Organizes brand media across sectors, preventing broken image links and ensuring approved high-resolution marketing assets are reused across all web pages.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PILLAR 8: SECURITY, SEO & INFRASTRUCTURE GOVERNANCE (6 FEATURES)          -->
+      <!-- ========================================================================= -->
+      <section class="space-y-4 pillar-section" data-pillar="pillar-8">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            <h2 class="text-xl font-bold text-white tracking-tight">Pillar 8: System Security, SEO &amp; Infrastructure Governance</h2>
+            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">6 Features</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- FEAT-WDG-41 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">FEAT-WDG-41</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Access Gating</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Site-Wide Password Gate for Staging &amp; Pre-Launch Previews</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Edge middleware access gate (<code class="font-mono text-[11px]">middleware.ts</code>, <code class="font-mono text-[11px]">lib/site-access.ts</code>) checking for an encrypted token cookie when <code class="font-mono text-[11px]">SITE_PASSWORD</code> is enabled in environment variables.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Allows executive leadership and board members to inspect the complete website in private staging before making it publicly accessible to the market.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-42 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">FEAT-WDG-42</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Audit Security</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Comprehensive Security Audit Trail Logging &amp; IP Tracking</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Immutable security ledger (<code class="font-mono text-[11px]">/admin/system/audit-logs</code>, <code class="font-mono text-[11px]">lib/admin/audit.ts</code>) recording every admin login, status change, and content edit with actor email, timestamp, and IP address.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Guarantees complete operational accountability and forensic security traceability, fulfilling enterprise data governance standards.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-43 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">FEAT-WDG-43</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Secrets Vault</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Encrypted API Credentials &amp; Secrets Management Vault</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Sensitive keys administration console (<code class="font-mono text-[11px]">IntegrationsSecretsCard.tsx</code>) masking API keys (OpenAI, Resend, Brevo, Supabase, Odoo) with real-time toggle visibility and encrypted backend persistence.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Eliminates risky manual edits to server environment files, allowing authorized administrators to rotate third-party API keys safely through the user interface.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-44 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">FEAT-WDG-44</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Search Optimization</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Search Engine Optimization (SEO), OpenGraph &amp; JSON-LD Schemas</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Dynamic SEO generator (<code class="font-mono text-[11px]">/admin/seo</code>, <code class="font-mono text-[11px]">components/seo/</code>) rendering canonical links, multilingual meta descriptions, OpenGraph cards, and Schema.org corporate JSON-LD markup.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Dominates Google and Bing search results for holding companies, luxury furniture manufacturing, and hospitality serviced apartments in Saudi Arabia.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-45 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">FEAT-WDG-45</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Web Crawling</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Dynamic Sitemap &amp; Automated Robots.txt Controller</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Next.js programmatic sitemap (<code class="font-mono text-[11px]">app/sitemap.ts</code>) and crawler instructions (<code class="font-mono text-[11px]">app/robots.ts</code>) dynamically parsing all sector pages, public furniture SKUs, and career openings with priority weights.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Accelerates search engine indexing of new products and sector projects while strictly blocking web crawlers from indexing private administrative consoles.
+              </p>
+            </div>
+          </div>
+
+          <!-- FEAT-WDG-46 -->
+          <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 feature-item" data-pillar="pillar-8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">FEAT-WDG-46</span>
+              <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">System Health</span>
+            </div>
+            <h3 class="text-lg font-bold text-white leading-snug">Real-Time System Health Monitor &amp; Latency Diagnostic Engine</h3>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">What is this feature?</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Diagnostics console (<code class="font-mono text-[11px]">/admin/system/health</code>) pinging Supabase PostgreSQL, edge caches, storage buckets, and external API latencies with real-time green/amber/red status badges.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1.5">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Real Life Benefit</span>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Alerts system administrators to performance degradation or database connectivity drops before clients or executive leadership notice.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <script>
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    function filterCategory(cat) {
+      activeCategory = cat;
+      document.querySelectorAll('.category-pill').forEach(pill => {
+        pill.classList.toggle('active', pill.getAttribute('data-category') === cat);
+      });
+
+      const labelMap = {
+        'all': 'All Features',
+        'pillar-1': 'Pillar 1: Brand & Architecture',
+        'pillar-2': 'Pillar 2: Sectors Portfolio',
+        'pillar-3': 'Pillar 3: Luxury Storefront',
+        'pillar-4': 'Pillar 4: Admin Console & Ops',
+        'pillar-5': 'Pillar 5: CRM & Lead Pipeline',
+        'pillar-6': 'Pillar 6: HR & Talent ATS',
+        'pillar-7': 'Pillar 7: AI Concierge & Comms',
+        'pillar-8': 'Pillar 8: Security, SEO & Infra',
+      };
+      document.getElementById('active-category-label').textContent = labelMap[cat] || 'All Features';
+
+      applyFilters();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim().toLowerCase();
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const items = document.querySelectorAll('.feature-item');
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const itemPillar = item.getAttribute('data-pillar');
+        const matchesCat = activeCategory === 'all' || itemPillar === activeCategory;
+        const text = item.textContent.toLowerCase();
+        const matchesSearch = !searchQuery || text.includes(searchQuery);
+
+        if (matchesCat && matchesSearch) {
+          item.style.display = 'block';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      document.getElementById('filtered-count').textContent = visibleCount;
+
+      document.querySelectorAll('.pillar-section').forEach(section => {
+        const pillar = section.getAttribute('data-pillar');
+        const visibleSectionItems = section.querySelectorAll('.feature-item[style*="display: block"]');
+        if (activeCategory !== 'all' && activeCategory !== pillar) {
+          section.style.display = 'none';
+        } else if (visibleSectionItems.length === 0 && searchQuery) {
+          section.style.display = 'none';
+        } else {
+          section.style.display = 'block';
+        }
+      });
+    }
+
+    // Spotlight cursor effect
+    document.querySelectorAll('.spotlight-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+  </script>
+</body>
+</html>

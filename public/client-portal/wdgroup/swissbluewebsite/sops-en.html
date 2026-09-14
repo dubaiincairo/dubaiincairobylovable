@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiss Blue Hotel Website — Website Standard Operating Procedures (SOPs)</title>
+  
+  <!-- Tailwind CSS allowlisted in Antigravity -->
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  
+  <style>
+    *, *::before, *::after {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.7); }
+
+    /* Glassmorphism */
+    .glass-card {
+      background: rgba(19, 29, 46, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateZ(0);
+    }
+    .glass-card:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      transform: translateY(-3px) translateZ(0);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5);
+    }
+    .glass-nav {
+      background: rgba(11, 17, 29, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Spotlight Card */
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.16), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    /* Modal Animation */
+    @keyframes modalBackdrop { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalDialog {
+      0% { opacity: 0; transform: scale(0.95) translateY(12px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-backdrop-anim { animation: modalBackdrop 0.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .modal-dialog-anim { animation: modalDialog 0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    /* Ambient Floating Orbs */
+    @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -30px) scale(1.08); } }
+    @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.06); } }
+    .ambient-orb-1 { animation: orbFloat1 20s ease-in-out infinite; will-change: transform; }
+    .ambient-orb-2 { animation: orbFloat2 25s ease-in-out infinite; will-change: transform; }
+
+    /* Active Filter Tab */
+    .tab-btn.active {
+      background: rgba(37, 99, 235, 0.25);
+      border-color: rgba(59, 130, 246, 0.6);
+      color: #93c5fd;
+    }
+
+    /* Print Styles */
+    @media print {
+      body { background: #ffffff !important; color: #0f172a !important; }
+      .no-print, header, .ambient-orb-1, .ambient-orb-2, #modal-overlay, #filter-container, #sop-search-container { display: none !important; }
+      .glass-card { background: #ffffff !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid !important; }
+      .text-white { color: #0f172a !important; }
+      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+    }
+  </style>
+</head>
+<body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-blue-600 selection:text-white pb-20 relative">
+
+  <!-- Ambient Glow Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-20 -left-40 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+    <div class="ambient-orb-2 absolute top-1/3 -right-40 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <!-- STICKY HEADER -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-800 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/25 border border-blue-400/40">
+          SB
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white">SWISS BLUE HOTELS</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/30">
+              Website SOPs
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            Web Platform Standard Operating Procedures &amp; Content Governance Protocols
+          </p>
+        </div>
+      </div>
+
+      <!-- Navigation & Language Links -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/manuals/wdgroup/swissbluewebsite/features-en" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition">
+          Switch to Features →
+        </a>
+        <a href="/manuals/wdgroup/swissbluewebsite/sops-ar" class="px-3 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-xs font-bold text-blue-300 border border-blue-500/30 transition">
+          العربية (100% RTL)
+        </a>
+        <a href="/manuals/wdgroup/swissbluewebsite" class="hidden md:inline-flex px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white transition shadow-lg shadow-blue-500/20">
+          Swiss Blue Hub
+        </a>
+        <a href="/manuals/wdgroup" class="hidden lg:inline-flex px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition">
+          WD Group Portal
+        </a>
+        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="Print PDF">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN VIEWPORT -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8 relative z-10">
+
+    <!-- HERO EXECUTIVE BANNER -->
+    <section class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-6 sm:p-10 shadow-2xl">
+      <div class="space-y-4 max-w-4xl">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-300 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+          <span>WEBSITE OPERATIONS &amp; CONTENT GOVERNANCE • 20 VERIFIED PROCEDURES</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          Website Standard Operating Procedures (SOPs)
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          Actionable procedural workflows for marketing managers, content editors, sales coordinators, HR officers, and IT administrators. Focused strictly on website content governance, AI concierge management, media asset optimization, back-office lead triage, and edge delivery.
+        </p>
+      </div>
+
+      <!-- Live Search & Stats Filter -->
+      <div class="mt-8 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4" id="sop-search-container">
+        <div class="relative w-full sm:w-96">
+          <input type="text" id="sop-search" oninput="handleSearch(this.value)" placeholder="Search procedure by title, role, or keyword..." class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-blue-500 transition">
+        </div>
+        <div class="flex items-center gap-4 text-xs font-mono">
+          <div class="px-3 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700">
+            <span class="text-slate-400">Total Procedures:</span>
+            <span class="text-blue-400 font-bold ml-1.5" id="active-count">20</span>
+          </div>
+          <div class="text-slate-400 hidden md:block">
+            <span>CMS:</span>
+            <span class="text-cyan-400 font-bold ml-1">Sanity Studio v3</span>
+            <span class="text-slate-600 mx-1.5">|</span>
+            <span>Edge:</span>
+            <span class="text-purple-400 font-bold ml-1">Vercel CDN</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HORIZONTAL PILLAR FILTER RAIL -->
+    <section class="space-y-2 no-print" id="filter-container">
+      <div class="flex items-center justify-between">
+        <span class="text-xs uppercase tracking-wider font-bold text-slate-400">Filter by Operational Pillar</span>
+        <span class="text-[11px] text-slate-500">Scroll horizontally for more</span>
+      </div>
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="pillar-tabs">
+        <button onclick="setFilter('all')" class="tab-btn active shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          All Pillars (20)
+        </button>
+        <button onclick="setFilter('ai')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          1. AI Concierge &amp; Knowledge Base (3)
+        </button>
+        <button onclick="setFilter('media')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          2. Visual Media &amp; Assets (2)
+        </button>
+        <button onclick="setFilter('cms')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          3. Sanity CMS &amp; Marketing (3)
+        </button>
+        <button onclick="setFilter('admin')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          4. Back-Office Admin Triage (4)
+        </button>
+        <button onclick="setFilter('notify')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          5. Notification Routing &amp; APIs (3)
+        </button>
+        <button onclick="setFilter('security')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          6. Security, Edge Cache &amp; Compliance (5)
+        </button>
+      </div>
+    </section>
+
+    <!-- SOP CARDS GRID (Populated dynamically via JavaScript) -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="sops-grid">
+      <!-- Injected via JavaScript -->
+    </section>
+
+  </main>
+
+  <!-- PROFESSIONAL POP-UP MODAL -->
+  <div id="modal-overlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden modal-backdrop-anim">
+    <div class="glass-card modal-dialog-anim rounded-2xl max-w-2xl w-full p-6 sm:p-8 space-y-6 border border-slate-700 bg-slate-900/95 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-blue-500/20 text-blue-300" id="modal-sop-code">SOP-SB-WEB-01</span>
+            <span class="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-300" id="modal-sop-pillar">Pillar</span>
+            <span class="text-xs text-slate-400 block sm:inline" id="modal-sop-role">Role: Specialist</span>
+          </div>
+          <h2 class="text-xl font-extrabold text-white mt-2" id="modal-sop-title">Procedure Title</h2>
+        </div>
+        <button onclick="closeSopModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body (Formatted Professional Sections) -->
+      <div class="space-y-5 text-xs text-slate-300" id="modal-sop-content">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- Modal Footer Controls -->
+      <div class="flex items-center justify-between pt-4 border-t border-slate-800">
+        <button onclick="copyModalContent()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs flex items-center gap-1.5 transition">
+          <svg class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+          <span id="copy-btn-text">Copy Procedure</span>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button onclick="window.print()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition">
+            Print SOP
+          </button>
+          <button onclick="closeSopModal()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-lg shadow-blue-500/25">
+            Close
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // 20 Website-Centric Standard Operating Procedures
+    const sopsData = [
+      {
+        id: 0,
+        code: "SOP-SB-WEB-01",
+        category: "ai",
+        pillarName: "AI Concierge & Knowledge Base",
+        role: "Marketing Specialist / Operations Coordinator",
+        title: "Updating the Multilingual AI Knowledge Base & Hotel FAQs",
+        description: "Maintain and synchronize factual hotel policy guidelines, operational hours, amenities, and local travel advice within the AI Concierge context without code changes.",
+        objective: "Ensure the multilingual AI concierge (OpenAI gpt-4o & Google Gemini) delivers accurate, up-to-date hotel information 24/7 without hallucinations.",
+        prerequisites: "Authorized corporate Google Workspace credentials to access Sanity Studio v3 at https://swissblue.sa/studio.",
+        steps: [
+          "Navigate to https://swissblue.sa/studio in Google Chrome and authenticate using your corporate Google account.",
+          "In the Studio sidebar, click on 'AI Knowledge Base' or 'Site FAQs'.",
+          "Select the target property (e.g. Tulip Alrawdah Serviced Apartments or Vinas Riyadh).",
+          "Update policy guidelines in both English and Arabic tabs simultaneously (e.g. Standard Check-In: 15:00, Check-Out: 12:00, Airport Shuttle terms, Parking availability).",
+          "If an amenity is temporarily closed or updated, modify the factual answer so the AI never misinforms prospective guests.",
+          "Click the green 'Publish' button in the bottom right corner.",
+          "Open the live chat widget on swissblue.sa in an Incognito window and ask a test prompt to confirm the AI responds with the newly updated policy."
+        ],
+        verification: "The AI Concierge answers guest inquiries on both English and Arabic chat channels with 100% factual accuracy matching the published updates.",
+        caution: "Never include internal confidential financial margins, employee personal phone numbers, or unverified promises in the AI prompt context."
+      },
+      {
+        id: 1,
+        code: "SOP-SB-WEB-02",
+        category: "ai",
+        pillarName: "AI Concierge & Knowledge Base",
+        role: "Guest Relations Lead / Quality Assurance",
+        title: "Auditing AI Chat Transcripts & Correcting Misleading Answers",
+        description: "Systematically review real guest chat conversations, detect ambiguous answers or edge cases, and patch knowledge gaps.",
+        objective: "Continuously enhance conversational quality and eliminate knowledge gaps that lead to repeated clarification questions or guest drop-offs.",
+        prerequisites: "Access to the `/admin/submissions/chat-leads` portal and Sanity Studio editorial permissions.",
+        steps: [
+          "Log into the Swiss Blue Admin Portal at swissblue.sa/admin.",
+          "Navigate to 'Chat Leads & Inquiries' to inspect recent conversation threads and guest queries.",
+          "Filter for conversations where the guest repeated their question or requested human agent intervention.",
+          "Identify the missing policy or misunderstood terminology (e.g. pet policy details, extra bed charges, deposit refund terms).",
+          "Draft the authoritative hotel response approved by General Management.",
+          "Log into Sanity Studio and add the question-and-answer pair into the property's FAQ / Knowledge Base schema.",
+          "Publish the change to immediately update the system prompt context across OpenAI and Gemini endpoints."
+        ],
+        verification: "Future queries regarding the identified topic receive precise, authoritative responses from the automated concierge.",
+        caution: "Ensure sensitive guest inquiries regarding disputes or refunds are escalated to human duty managers rather than automated bots."
+      },
+      {
+        id: 2,
+        code: "SOP-SB-WEB-03",
+        category: "ai",
+        pillarName: "AI Concierge & Knowledge Base",
+        role: "IT Systems Administrator / DevOps",
+        title: "Managing AI Chat Rate Limiting & Abuse Protection",
+        description: "Monitor and configure Upstash Redis distributed rate limits to prevent automated API quota drainage and DoS attacks.",
+        objective: "Protect the website from runaway AI billing expenses and bot scraping while guaranteeing instant response times for genuine guests.",
+        prerequisites: "Administrative access to Upstash Redis console and Vercel environment variables.",
+        steps: [
+          "Open the Upstash Redis console and inspect the REST API request telemetry for `/api/chat`.",
+          "Verify that the standard per-IP rate limiter (20 messages per minute) is functioning correctly.",
+          "If legitimate corporate office IP addresses trigger false-positive 429 errors during testing, add the corporate CIDR range to the bypass list in middleware.",
+          "If malicious automated bot IP clusters attempt to drain tokens, block the attacking subnet at the Vercel Edge Firewall layer.",
+          "Check monthly OpenAI and Gemini token consumption dashboards to confirm spend remains within budgeted quotas."
+        ],
+        verification: "Chat widget delivers smooth, responsive conversation for genuine guests while instantly rejecting scraping bots with HTTP 429.",
+        caution: "Never completely disable rate limiting on public endpoints; doing so leaves the backend vulnerable to rapid API billing overages."
+      },
+      {
+        id: 3,
+        code: "SOP-SB-WEB-04",
+        category: "media",
+        pillarName: "Visual Media & Assets",
+        role: "Marketing Officer / Graphic Designer",
+        title: "Uploading & Updating Hotel & Room Photography in Sanity",
+        description: "Upload high-fidelity room and property photography while maintaining strict web optimization standards to preserve sub-2-second page speeds.",
+        objective: "Maintain luxury brand presentation across all room categories while enforcing strict compression standards to ensure Core Web Vitals compliance.",
+        prerequisites: "Access to Sanity Studio v3 and Adobe Photoshop / Squoosh image compression tool.",
+        steps: [
+          "Obtain approved architectural room and exterior photography from the executive photographer.",
+          "Convert all source assets to WebP format, enforcing maximum file sizes strictly below 350 KB per image.",
+          "Crop desktop hero assets to 1920x1080 (16:9) and mobile gallery thumbnails to 1080x1080 (1:1).",
+          "Log into Sanity Studio at swissblue.sa/studio ➔ Hotels ➔ Select Target Property (e.g. Swiss Blue Jeddah).",
+          "Navigate to the Room Galleries section; remove outdated or low-resolution images and upload the compressed WebP assets.",
+          "Provide descriptive Alt Text in both English and Arabic for accessibility and Google Image SEO.",
+          "Click 'Publish' and verify responsive rendering across smartphone, tablet, and widescreen monitors."
+        ],
+        verification: "Images render crisply across all viewports while Google Lighthouse Core Web Vitals maintains an LCP (Largest Contentful Paint) score under 2.2 seconds.",
+        caution: "Never upload raw JPEG/PNG files straight from digital cameras (> 3 MB); large files severely degrade mobile loading speed and increase bounce rates."
+      },
+      {
+        id: 4,
+        code: "SOP-SB-WEB-05",
+        category: "media",
+        pillarName: "Visual Media & Assets",
+        role: "Content Creator / Marketing Administrator",
+        title: "Publishing Video Reels, Virtual Tours & Background Media",
+        description: "Deploy immersive property showcase video reels and 360-degree virtual tour embeds without causing mobile layout shifts or audio disruptions.",
+        objective: "Elevate brand storytelling and luxury visual appeal through seamless looping video reels and interactive virtual tour embeds.",
+        prerequisites: "Access to Sanity Studio media fields and compressed H.264/H.265 MP4 video assets under 5 MB.",
+        steps: [
+          "Prepare short property highlight clips (10-15 seconds maximum duration, compressed to under 5 MB, with audio tracks stripped out).",
+          "Log into Sanity Studio ➔ Site Content or Property Details ➔ Hero Media.",
+          "Upload the video asset or paste the secure CDN/Vimeo embed URL into the designated field.",
+          "Ensure HTML5 playback attributes are configured: `autoplay`, `muted`, `loop`, `playsinline`.",
+          "Upload a high-quality WebP fallback poster frame to display on low-bandwidth mobile connections.",
+          "Click 'Publish' and test playback in iOS Safari and Android Chrome in battery-saver mode."
+        ],
+        verification: "Video loops seamlessly in background with zero audio playback and automatically falls back to poster image on weak cellular connections.",
+        caution: "Never enable unmuted autoplay audio on website media; mobile browsers will block playback and it severely diminishes user experience."
+      },
+      {
+        id: 5,
+        code: "SOP-SB-WEB-06",
+        category: "cms",
+        pillarName: "Sanity CMS & Marketing",
+        role: "Marketing Officer / Website Administrator",
+        title: "Publishing Seasonal Hero Banners & Campaign Sliders",
+        description: "Launch holiday, national day, and promotional discount campaigns across website hero sections without requiring developer intervention.",
+        objective: "Enable the marketing team to deploy bilingual promotional campaigns, countdown timers, and discount ribbons with zero code redeployments.",
+        prerequisites: "Sanity Studio access and approved bilingual marketing copy.",
+        steps: [
+          "Authenticate into Sanity Studio at swissblue.sa/studio.",
+          "In the sidebar, navigate to 'Site Content (Singleton)' ➔ 'Promotional Banners'.",
+          "Input promotional headlines, sub-copy, and CTA button labels in both English and Arabic tabs to ensure bilingual alignment.",
+          "Set the Primary Action destination link (e.g. `/apartments` or `/contact?promo=EID2026`).",
+          "Configure promotional countdown timers or display badges (e.g. 'National Day Special - 20% Off').",
+          "Set the campaign start timestamp and automated sunset expiry date.",
+          "Click 'Publish' and test live rendering in both LTR (English) and RTL (Arabic) viewports."
+        ],
+        verification: "Promotional banner displays seamlessly on desktop and mobile in both languages with functional CTA redirects.",
+        caution: "Always review Arabic typography for layout wrapping; ensure promotional headlines fit gracefully on narrow smartphone screens."
+      },
+      {
+        id: 6,
+        code: "SOP-SB-WEB-07",
+        category: "cms",
+        pillarName: "Sanity CMS & Marketing",
+        role: "Marketing Administrator / Operations Assistant",
+        title: "Updating Property Amenities & Status Badges (Soon / قريباً)",
+        description: "Maintain precise property amenity listings and ensure newly announced facilities carry clear operational readiness disclaimers.",
+        objective: "Prevent guest check-in disputes and false advertising complaints regarding unavailable hotel facilities.",
+        prerequisites: "Access to Sanity Studio Hotels schema.",
+        steps: [
+          "Open Sanity Studio ➔ Hotels ➔ Select Target Property.",
+          "Scroll to the Amenities checklist (e.g. Free High-Speed Wi-Fi, Kitchenette, Valet Parking, Daily Housekeeping).",
+          "Check or uncheck amenities according to current property operational capabilities.",
+          "Mandatory Dining Rule for Tulip Alrawdah and Vinas Riyadh: Ensure dine-in restaurant tags remain delisted. If breakfast buffet is displayed, strictly append '(Soon)' in English and '(قريباً)' in Arabic.",
+          "Verify that the amenity normalizer dynamically injects the blue status badge on the frontend card.",
+          "Click 'Publish'."
+        ],
+        verification: "The website displays verified amenity chips and properly badged pending services, eliminating guest ambiguity.",
+        caution: "Never list facilities that do not physically exist on property; misrepresenting dining or wellness facilities leads to guest disputes upon arrival."
+      },
+      {
+        id: 7,
+        code: "SOP-SB-WEB-08",
+        category: "cms",
+        pillarName: "Sanity CMS & Marketing",
+        role: "Operations Director / Senior Marketing Lead",
+        title: "Adding a New Hotel Property or Branch to the Web Portfolio",
+        description: "Deploy a complete new hotel or serviced apartment property page into the live web navigation tree with zero code changes.",
+        objective: "Enable instant zero-code portfolio expansion as Swiss Blue acquires or manages new hospitality properties across Saudi Arabia.",
+        prerequisites: "Sanity Studio credentials, property specs, room details, and verified photography.",
+        steps: [
+          "Navigate to Sanity Studio ➔ Hotels ➔ Click 'Create New Document'.",
+          "Enter Property Name (Arabic & English), City (Riyadh, Jeddah, Jazan), and URL Slug (e.g. `swiss-blue-al-malqa`).",
+          "Enter front-desk phone numbers, WhatsApp concierge line, physical national address, and Google Maps embed coordinates.",
+          "Create nested Room Types (Room Name, Bed Setup, Square Footage, Maximum Occupancy, and Key Amenities).",
+          "Upload hero cover photography and interior room carousels.",
+          "Fill in property-specific FAQs and local neighborhood landmark distances.",
+          "Click 'Publish'; the Next.js App Router automatically generates the dynamic route `/hotels/[slug]` and updates navigation menus."
+        ],
+        verification: "The new hotel listing is accessible at its canonical URL in both Arabic RTL and English LTR with full booking inquiry hooks.",
+        caution: "Confirm URL slug uses lowercase hyphenated syntax without spaces or special characters to maintain clean SEO URLs."
+      },
+      {
+        id: 8,
+        code: "SOP-SB-WEB-09",
+        category: "admin",
+        pillarName: "Back-Office Admin Triage",
+        role: "Commercial Sales Coordinator / B2B Lead",
+        title: "Triaging B2B Corporate & Event RFPs (/admin/submissions/b2b)",
+        description: "Process incoming corporate room block, conference, and banquet event inquiries from the website with a guaranteed 2-hour SLA.",
+        objective: "Maximize commercial group booking closing rates by enforcing structured sales response times and verifying corporate tax IDs.",
+        prerequisites: "Access to `/admin/submissions/b2b` and corporate sales quotation templates.",
+        steps: [
+          "Receive automated email alert from Brevo and WhatsApp ping indicating a new B2B submission.",
+          "Log into swissblue.sa/admin and navigate to 'B2B Submissions'.",
+          "Review client details: Company Name, ZATCA Commercial Tax ID, Event Dates, Attendee Count, and Setup Requirements.",
+          "Verify the company's ZATCA VAT registration on the official Saudi tax portal.",
+          "Click 'Mark In Progress' in the admin panel to claim ownership and prevent duplicate outreach by team members.",
+          "Prepare official Swiss Blue corporate proposal and transmit to the client via email/phone within 2 hours.",
+          "Update submission status to 'Converted' or 'Archived' once finalized."
+        ],
+        verification: "Submission status transitions from Pending to Converted with full audit timestamp in the admin log.",
+        caution: "Always cross-check corporate tax numbers to protect against fraudulent corporate credit or deferred billing requests."
+      },
+      {
+        id: 9,
+        code: "SOP-SB-WEB-10",
+        category: "admin",
+        pillarName: "Back-Office Admin Triage",
+        role: "HR Coordinator / Talent Acquisition Specialist",
+        title: "Processing Careers Applications & Serverless PDF Resumes",
+        description: "Screen inbound job applicant profiles submitted via `/careers`, inspect attached PDF resumes securely, and maintain applicant pipelines.",
+        objective: "Eliminate reliance on third-party recruitment agencies by centralizing talent acquisition directly within the proprietary back-office.",
+        prerequisites: "Corporate login to `/admin/submissions/careers` and access to `careers@swissblue.sa`.",
+        steps: [
+          "Open `/admin/submissions/careers` to view newly submitted candidate profiles.",
+          "Inspect candidate details: Full Name, Contact Number, Desired Department (Front Office, Housekeeping, Engineering, Sales), and Experience Summary.",
+          "Click the secure resume link to open the candidate's PDF CV (automatically converted and attached via serverless function).",
+          "Evaluate qualifications against open property job requisitions.",
+          "Click 'Reply' on the Brevo email notification to invite qualified candidates for an interview or send standardized polite rejection.",
+          "Update candidate status in admin to 'Shortlisted', 'Interviewed', or 'Archived'."
+        ],
+        verification: "Applicant record is categorized with timestamped status and resume archived in compliance with HR guidelines.",
+        caution: "Never export candidate personal resumes or contact info to personal external storage or unauthorized devices."
+      },
+      {
+        id: 10,
+        code: "SOP-SB-WEB-11",
+        category: "admin",
+        pillarName: "Back-Office Admin Triage",
+        role: "Executive Secretary / Business Development Manager",
+        title: "Triaging Investor & Hotel Partnership Inquiries",
+        description: "Manage sensitive property management and investment inquiries submitted by real estate owners and institutional investors.",
+        objective: "Accelerate Swiss Blue hotel management and lease expansion by fast-tracking high-value partnership proposals directly to C-suite leadership.",
+        prerequisites: "Executive access to `/admin/submissions/investors` and `/admin/submissions/partner`.",
+        steps: [
+          "Monitor the investor submissions queue in the back-office admin.",
+          "Extract property asset details: City/District location, total room count, current operating status, and ownership documentation.",
+          "Perform initial brand viability assessment against Swiss Blue expansion guidelines.",
+          "Flag record as 'Under Executive Review'.",
+          "Compile executive summary dossier and dispatch directly to the Chairman's Office and WD Group holding leadership.",
+          "Issue formal Swiss Blue Non-Disclosure Agreement (NDA) and Management Pitch Deck to the investor."
+        ],
+        verification: "Inquiry is logged, acknowledged within 24 hours, and escalated to executive board review.",
+        caution: "Maintain strict commercial confidentiality; never disclose proprietary Swiss Blue RevPAR or financial yield metrics without a signed NDA."
+      },
+      {
+        id: 11,
+        code: "SOP-SB-WEB-12",
+        category: "admin",
+        pillarName: "Back-Office Admin Triage",
+        role: "Duty Manager / Quality Assurance Lead",
+        title: "Managing Guest Feedback & Support Inquiries",
+        description: "Triage and resolve general contact inquiries and post-stay guest feedback submitted through the web platform within 1 hour.",
+        objective: "Intercept negative guest experiences and resolve customer inquiries before they escalate to public reviews or social complaints.",
+        prerequisites: "Access to `/admin/submissions/support` and `/admin/submissions/contact`.",
+        steps: [
+          "Inspect incoming tickets in the Support and Contact queues.",
+          "Categorize inquiry type: General Question, Lost & Found, Bill Request, or Stay Experience Complaint.",
+          "For service recovery tickets, immediately contact the guest via phone or WhatsApp within 60 minutes.",
+          "Liaise with the respective property General Manager to execute remedial measures (e.g. folio adjustment, apology letter, welcome perk on next visit).",
+          "Document root cause and corrective action in the ticket notes.",
+          "Mark ticket as 'Resolved' in the admin panel."
+        ],
+        verification: "Ticket is marked Resolved with documented guest satisfaction confirmation.",
+        caution: "Never dismiss negative guest feedback; prompt resolution on web support channels prevents damaging 1-star public reviews."
+      },
+      {
+        id: 12,
+        code: "SOP-SB-WEB-13",
+        category: "notify",
+        pillarName: "Notification Routing & APIs",
+        role: "IT Systems Administrator",
+        title: "Managing Brevo Transactional Email Notification Routing",
+        description: "Configure and maintain Brevo (Sendinblue) transactional email delivery pipelines and departmental recipient inboxes.",
+        objective: "Guarantee 100% email delivery rates for customer form leads and booking inquiries without spam classification.",
+        prerequisites: "Administrative access to app.brevo.com and Vercel environment variables.",
+        steps: [
+          "Log into Vercel Project Settings ➔ Environment Variables.",
+          "Verify destination inboxes: `RESERVATIONS_EMAIL`, `CAREERS_EMAIL`, `B2B_SALES_EMAIL`.",
+          "Open app.brevo.com ➔ Senders & Domains; verify `notifications@swissblue.sa` shows verified SPF, DKIM, and DMARC status.",
+          "Verify transactional templates in Brevo have dynamic merge tags matching Next.js payload structures (`{{ params.name }}`, `{{ params.phone }}`, `{{ params.message }}`).",
+          "Submit test form on staging environment to verify email arrives within 5 seconds with accurate reply-to headers."
+        ],
+        verification: "Email delivered instantaneously with SPF/DKIM pass, zero spam flagging, and functional reply-to routing.",
+        caution: "Never modify API keys in production during peak business hours; test all credential changes on staging first."
+      },
+      {
+        id: 13,
+        code: "SOP-SB-WEB-14",
+        category: "notify",
+        pillarName: "Notification Routing & APIs",
+        role: "IT Support Desk / Operations Tech",
+        title: "Meta WhatsApp Cloud API Template & Handset Routing",
+        description: "Maintain the WhatsApp alert engine dispatching instantaneous lead pings to front-desk mobile terminals.",
+        objective: "Deliver instant mobile audible alerts to duty managers within 3 seconds of web inquiry submission.",
+        prerequisites: "Meta Developers Console access and Vercel environment variable controls.",
+        steps: [
+          "Navigate to Meta Business Suite ➔ WhatsApp Manager ➔ Message Templates.",
+          "Confirm that utility template `new_form_submission` is in 'Approved' state.",
+          "Verify that the template payload strictly receives 5 parameters: `{{1}}` Type, `{{2}}` Name, `{{3}}` Email, `{{4}}` Phone, `{{5}}` Summary.",
+          "Confirm `WHATSAPP_TO` environment variable contains the duty phone number in raw E.164 digits without `+` or spaces (e.g. `9665XXXXXXXX`).",
+          "Trigger test dispatch from the website and verify front-desk handset sounds alert within 3 seconds."
+        ],
+        verification: "Test form submission triggers instant WhatsApp notification with all 5 template variables rendered cleanly.",
+        caution: "Never edit approved WhatsApp template text without submitting for Meta re-approval; unapproved templates fail immediately with error 132000."
+      },
+      {
+        id: 14,
+        code: "SOP-SB-WEB-15",
+        category: "notify",
+        pillarName: "Notification Routing & APIs",
+        role: "IT Systems Specialist",
+        title: "Diagnosing Brevo 401 & Delivery Drop Troubleshooting",
+        description: "Quickly identify and resolve delivery drop incidents across Brevo email and Meta WhatsApp pipelines.",
+        objective: "Eliminate downtime in automated inquiry routing caused by serverless IP rotation or parameter schema mismatches.",
+        prerequisites: "Brevo administrative credentials and Vercel runtime logs access.",
+        steps: [
+          "If lead notifications suddenly stop arriving, open Vercel Runtime Logs and filter by `/api/forms/*`.",
+          "If logs display `Brevo 401 Unauthorized: unrecognised IP address`: Log into app.brevo.com ➔ Security ➔ Authorized IPs.",
+          "Confirm that 'Authorized IPs' is strictly DISABLED (Vercel executes functions on dynamic rotating IP pools; whitelisting blocks serverless dispatches).",
+          "If WhatsApp logs show `Error 132000`: Verify the payload variable count strictly equals 5.",
+          "Submit a live test inquiry on `/contact` to confirm end-to-end delivery recovery."
+        ],
+        verification: "Test submission yields HTTP 200 with both email and WhatsApp messages delivered successfully.",
+        caution: "Do not re-enable IP restrictions in Brevo under any circumstance while hosted on serverless infrastructure."
+      },
+      {
+        id: 15,
+        code: "SOP-SB-WEB-16",
+        category: "security",
+        pillarName: "Security, Edge Cache & Compliance",
+        role: "General Manager / Systems Administrator",
+        title: "Provisioning & Deprovisioning Website Admin Accounts",
+        description: "Enforce strict identity and access management for website back-office and Sanity Studio editorial users.",
+        objective: "Prevent unauthorized content modifications and safeguard sensitive corporate inquiry data through strict role-based access control.",
+        prerequisites: "Master admin credentials for `/admin` portal and Sanity organization admin.",
+        steps: [
+          "Create new user account tied exclusively to the employee's official `@swissblue.sa` email address.",
+          "Assign strict role permissions: `Editor` (Content & Media only), `Sales` (B2B triage), or `Admin` (Full system access).",
+          "Mandate strong passwords and enable Two-Factor Authentication (2FA).",
+          "During employee offboarding or departmental transfer, immediately deprovision accounts within 60 minutes of departure.",
+          "Audit active user roster monthly to prune stale sessions."
+        ],
+        verification: "Deprovisioned user cannot authenticate; active user access strictly matches job role boundaries.",
+        caution: "Never share generic or communal login credentials among multiple staff members; individual accountability is required."
+      },
+      {
+        id: 16,
+        code: "SOP-SB-WEB-17",
+        category: "security",
+        pillarName: "Security, Edge Cache & Compliance",
+        role: "IT Support Specialist / Webmaster",
+        title: "Purging Vercel Edge CDN Cache (On-Demand Revalidation)",
+        description: "Force instant edge cache revalidation when Sanity CMS content updates do not immediately appear on live CDN nodes.",
+        objective: "Guarantee that urgent rate updates, holiday announcements, or emergency banners propagate to global edge CDN nodes instantly.",
+        prerequisites: "Revalidation secret token and access to `/api/revalidate` endpoint.",
+        steps: [
+          "Inspect the live page on `swissblue.sa` using an Incognito window.",
+          "If newly published Sanity copy or photos fail to render, check Sanity Webhook logs for delivery errors.",
+          "Trigger an on-demand revalidation request: `curl -X POST https://swissblue.sa/api/revalidate?secret=[TOKEN]&path=/hotels`.",
+          "Alternatively, initiate a fast instant redeployment in the Vercel dashboard without rebuilding source code.",
+          "Hard-refresh the target browser page (Cmd+Shift+R or Ctrl+F5) to verify edge node cache purge."
+        ],
+        verification: "Edge response header reflects `x-vercel-cache: MISS` then `HIT` with fresh published content.",
+        caution: "Avoid bulk indiscriminate cache purging during peak direct-booking traffic hours to preserve serverless edge performance."
+      },
+      {
+        id: 17,
+        code: "SOP-SB-WEB-18",
+        category: "security",
+        pillarName: "Security, Edge Cache & Compliance",
+        role: "Marketing Assistant / Brand Specialist",
+        title: "Publishing Curated Guest Testimonials & Reviews",
+        description: "Curate, verify, and publish high-converting guest reviews and star ratings onto hotel showcase pages.",
+        objective: "Lift direct booking conversion rates by showcasing authentic guest sentiment and verified Google star ratings.",
+        prerequisites: "Access to Sanity Studio ➔ Testimonials schema.",
+        steps: [
+          "Select authentic 5-star reviews from verified Google Business Profile and direct post-stay feedback.",
+          "Open Sanity Studio ➔ 'Testimonials' ➔ 'Add New Review'.",
+          "Enter Guest Name, City/Country of Origin, Stay Property, Star Rating, and Quote text.",
+          "Provide both Arabic and English translations to maintain bilingual social proof.",
+          "Attach reviewer photo or national flag avatar if available.",
+          "Click 'Publish' and verify placement in the social proof slider on property pages."
+        ],
+        verification: "Testimonial carousel dynamically renders new review card with correct typography and star rating icons.",
+        caution: "Never fabricate fictional guest reviews; consumer protection regulations mandate authentic consumer feedback."
+      },
+      {
+        id: 18,
+        code: "SOP-SB-WEB-19",
+        category: "security",
+        pillarName: "Security, Edge Cache & Compliance",
+        role: "Legal Counsel / Quality Compliance Officer",
+        title: "Updating Ministry of Tourism Licenses & Legal Policies",
+        description: "Ensure statutory compliance with Saudi Ministry of Tourism licensing regulations and Saudi Personal Data Protection Law (PDPL).",
+        objective: "Protect the hotel brand from municipal regulatory fines, tourism license suspensions, and data protection violations.",
+        prerequisites: "Sanity Studio access to Legal & Footer singleton.",
+        steps: [
+          "Review official Ministry of Tourism license renewal certificates for all 6 Swiss Blue properties.",
+          "Log into Sanity Studio ➔ Site Settings ➔ Legal Disclosures.",
+          "Verify that active Ministry License numbers, Commercial Registration (CR) numbers, and VAT identification numbers appear in all localized page footers.",
+          "Audit Privacy Policy (`/privacy`) and Terms of Use (`/terms`) to ensure explicit data consent and cookies comply with Saudi PDPL regulations.",
+          "Click 'Publish' to propagate compliance updates across all global routes."
+        ],
+        verification: "Website footers display verified government license credentials and ZATCA compliance disclosures.",
+        caution: "Operating a hospitality web platform with expired or missing Ministry of Tourism license numbers incurs severe municipal fines."
+      },
+      {
+        id: 19,
+        code: "SOP-SB-WEB-20",
+        category: "security",
+        pillarName: "Security, Edge Cache & Compliance",
+        role: "Duty Manager / General Manager",
+        title: "Emergency Website Outage Escalation to Dubai in Cairo",
+        description: "Execute rapid incident reporting for platform downtime, SSL certificate expiration, or severe direct-inquiry failure.",
+        objective: "Engage contractual Dubai in Cairo 24/7 technical engineering SLA to restore platform uptime within under 2 hours.",
+        prerequisites: "Emergency contact details for Dubai in Cairo Technical Services.",
+        steps: [
+          "Verify that the issue is systemic across multiple devices, mobile cellular data, and Wi-Fi networks.",
+          "Confirm HTTP status code (e.g. 500 Internal Server Error, 502 Bad Gateway, or DNS failure).",
+          "Prepare emergency incident report specifying: Environment (Production), Priority (P1 Critical), Affected URLs, and timestamp.",
+          "Email `support@dubaiincairo.com` with subject: `[SWISS BLUE] - P1 CRITICAL - Website Outage`.",
+          "Call the emergency Dubai in Cairo 24/7 hotline to trigger the guaranteed 30-minute response SLA.",
+          "Notify internal hotel executive leadership and monitor support ticket resolution."
+        ],
+        verification: "Dubai in Cairo operations acknowledges incident within 30 minutes and initiates emergency remediation.",
+        caution: "Reserve P1 Critical escalation exclusively for total site downtime or core lead failure; non-urgent cosmetic edits must follow P3/P4 channels."
+      }
+    ];
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    // Render Cards
+    function renderSOPs() {
+      const grid = document.getElementById('sops-grid');
+      grid.innerHTML = '';
+
+      const filtered = sopsData.filter(sop => {
+        const matchesCat = currentFilter === 'all' || sop.category === currentFilter;
+        const q = searchQuery.toLowerCase().trim();
+        const matchesQuery = !q || 
+          sop.title.toLowerCase().includes(q) ||
+          sop.code.toLowerCase().includes(q) ||
+          sop.role.toLowerCase().includes(q) ||
+          sop.description.toLowerCase().includes(q) ||
+          sop.pillarName.toLowerCase().includes(q);
+        return matchesCat && matchesQuery;
+      });
+
+      document.getElementById('active-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full p-12 text-center glass-card rounded-2xl border border-slate-800">
+            <p class="text-sm text-slate-400 font-semibold mb-2">No standard operating procedures found matching your criteria.</p>
+            <button onclick="setFilter('all'); document.getElementById('sop-search').value=''; handleSearch('');" class="px-4 py-2 rounded-xl bg-blue-600/30 text-blue-300 text-xs font-bold border border-blue-500/40">
+              Reset Filters
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(sop => {
+        const card = document.createElement('div');
+        card.className = "glass-card spotlight-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer group hover:border-blue-500/50 transition-all duration-300";
+        card.onclick = () => openSopModal(sop.id);
+
+        let badgeColor = "bg-blue-500/10 text-blue-400 border-blue-500/20";
+        if (sop.category === 'ai') badgeColor = "bg-cyan-500/10 text-cyan-400 border-cyan-500/20";
+        if (sop.category === 'media') badgeColor = "bg-purple-500/10 text-purple-400 border-purple-500/20";
+        if (sop.category === 'cms') badgeColor = "bg-amber-500/10 text-amber-400 border-amber-500/20";
+        if (sop.category === 'admin') badgeColor = "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
+        if (sop.category === 'notify') badgeColor = "bg-indigo-500/10 text-indigo-400 border-indigo-500/20";
+        if (sop.category === 'security') badgeColor = "bg-rose-500/10 text-rose-400 border-rose-500/20";
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md border ${badgeColor}">
+                ${sop.code}
+              </span>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 truncate max-w-[180px]" title="${sop.role}">
+                ${sop.role}
+              </span>
+            </div>
+            <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">
+              ${sop.pillarName}
+            </div>
+            <h3 class="text-base font-bold text-white mb-2 group-hover:text-blue-300 transition-colors leading-snug">
+              ${sop.title}
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              ${sop.description}
+            </p>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-blue-400 font-semibold group-hover:translate-x-1 transition-transform">
+            <span>Click to Open Full Procedure</span>
+            <span>→</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Filter by Pillar
+    function setFilter(cat) {
+      currentFilter = cat;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(`'${cat}'`));
+      if (activeBtn) activeBtn.classList.add('active');
+      renderSOPs();
+    }
+
+    // Search Filter
+    function handleSearch(val) {
+      searchQuery = val;
+      renderSOPs();
+    }
+
+    // Open Modal
+    function openSopModal(id) {
+      const sop = sopsData.find(s => s.id === id);
+      if (!sop) return;
+
+      document.getElementById('modal-sop-code').textContent = sop.code;
+      document.getElementById('modal-sop-pillar').textContent = sop.pillarName;
+      document.getElementById('modal-sop-role').textContent = "Role: " + sop.role;
+      document.getElementById('modal-sop-title').textContent = sop.title;
+
+      const stepsHtml = sop.steps.map((step, idx) => `
+        <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80">
+          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white font-bold text-[11px] shrink-0 mt-0.5">${idx + 1}</span>
+          <span class="leading-relaxed text-slate-300 text-xs">${step}</span>
+        </li>
+      `).join('');
+
+      document.getElementById('modal-sop-content').innerHTML = `
+        <div class="space-y-4">
+          <!-- Section 1: Objective & Scope -->
+          <div class="p-3.5 rounded-xl bg-blue-950/20 border border-blue-500/20">
+            <span class="text-blue-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">1. Operational Objective</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.objective}</p>
+          </div>
+
+          <!-- Section 2: Prerequisites -->
+          <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+            <span class="text-slate-400 font-bold block mb-1 uppercase tracking-wider text-[11px]">2. Prerequisites &amp; System Access</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.prerequisites}</p>
+          </div>
+
+          <!-- Section 3: Step-by-Step Procedure -->
+          <div class="space-y-2">
+            <span class="text-white font-bold block uppercase tracking-wider text-[11px]">3. Step-by-Step Execution Sequence</span>
+            <ul class="space-y-2">
+              ${stepsHtml}
+            </ul>
+          </div>
+
+          <!-- Section 4: Verification -->
+          <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/20">
+            <span class="text-emerald-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">4. Quality Verification &amp; Success Metric</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.verification}</p>
+          </div>
+
+          <!-- Section 5: Caution -->
+          <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/20">
+            <span class="text-rose-300 font-bold block mb-1 uppercase tracking-wider text-[11px]">5. Operational Caution &amp; Risk Mitigation</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${sop.caution}</p>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modal-overlay').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSopModal() {
+      document.getElementById('modal-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // Copy Content
+    function copyModalContent() {
+      const title = document.getElementById('modal-sop-title').textContent;
+      const content = document.getElementById('modal-sop-content').innerText;
+      navigator.clipboard.writeText(title + "\n\n" + content).then(() => {
+        const btn = document.getElementById('copy-btn-text');
+        btn.textContent = "Copied to Clipboard!";
+        setTimeout(() => { btn.textContent = "Copy Procedure"; }, 2000);
+      });
+    }
+
+    // Spotlight Mouse Tracker
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSopModal();
+    });
+
+    // Initial Render
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSOPs();
+    });
+  </script>
+</body>
+</html>
