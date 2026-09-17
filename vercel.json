@@ -211,11 +211,11 @@
     },
     {
       "source": "/portal",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/portal/",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/06_Digital_Marketing_Growth_Strategy_Manual.md",
@@ -235,7 +235,7 @@
     },
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ],
   "cleanUrls": true,
