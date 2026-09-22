@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>منظومة تخطيط الموارد الصناعية أودو (3 مصانع أثاث) — بوابة العمليات | مجموعة دبليو دي</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+
   <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,14 +20,16 @@
     .glass-card { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
     .glass-card:hover { border-color: rgba(59, 130, 246, 0.45); transform: translateY(-3px); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6); }
     .glow-orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
+    .video-card.active { border-color: rgba(245, 158, 11, 0.8); background: rgba(30, 41, 59, 0.9); }
   </style>
   <base href="/portal/wdgroup/odooerp/">
 </head>
 <body class="relative flex flex-col justify-between py-10 px-4 sm:px-6 lg:px-8">
   <div class="glow-orb w-96 h-96 -top-20 -right-20 bg-blue-600/20"></div>
-  <div class="glow-orb w-96 h-96 top-1/2 -left-20 bg-purple-600/15"></div>
+  <div class="glow-orb w-96 h-96 top-1/3 -left-20 bg-purple-600/15"></div>
+  <div class="glow-orb w-96 h-96 bottom-20 -right-20 bg-amber-600/15"></div>
 
-  <main class="relative z-10 max-w-5xl mx-auto w-full space-y-8">
+  <main class="relative z-10 max-w-6xl mx-auto w-full space-y-12">
     <!-- شريط التنقل العلوي -->
     <nav class="flex items-center justify-between flex-wrap gap-4 text-xs text-slate-400 border-b border-slate-800/80 pb-4">
       <div class="flex items-center gap-2">
@@ -32,7 +40,7 @@
         <span class="text-white font-medium">منظومة أودو الصناعية (ERP)</span>
       </div>
       <div class="flex items-center gap-3">
-        <a href="/portal/wdgroup/odooerp/" class="px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 transition font-bold font-sans">
+        <a href="/portal/wdgroup/odooerp/" class="px-3 py-1.5 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 transition font-bold font-sans">
           English (100% LTR)
         </a>
         <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono font-bold">
@@ -45,13 +53,13 @@
     <header class="text-center space-y-3">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-xs font-semibold text-blue-400 uppercase tracking-wider">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        مشروع دبليو دي 1.5 &middot; المنظومة الصناعية الموحدة والتصنيع المتقدم (MRP II)
+        مشروع دبليو دي 1.5 &middot; المنظومة الصناعية الموحدة والتصنيع المتقدم (15 وحدة صناعية)
       </div>
       <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white space-y-2">
         <span class="block text-xl sm:text-2xl md:text-3xl text-blue-400 font-bold">منصة مجموعة دبليو دي السعودية للأعمال</span>
         <span class="block text-2xl sm:text-4xl lg:text-5xl bg-gradient-to-l from-blue-400 via-amber-300 to-purple-400 bg-clip-text text-transparent font-extrabold">منظومة أودو لتخطيط موارد 3 مصانع أثاث</span>
       </h1>
-      <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+      <p class="text-slate-400 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed">
         البيئة الصناعية السحابية المتكاملة المنفذة على أودو 19 إنتربرايز، لربط مصنع الأخشاب الخضراء والحجر (نجران)، والمصنع الوطني للأثاث والألومنيوم (الرياض)، ومصنع تصاميم الوطن للنجارة والتنجيد (الرياض).
       </p>
     </header>
@@ -78,13 +86,13 @@
     <!-- شبكة الخيارات الرئيسية (المميزات وإجراءات التشغيل) -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <!-- 1. استعراض الخصائص والمميزات (عربي) -->
-      <a href="/portal/wdgroup/odooerp/features-ar" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-right border-amber-500/30">
+      <a href="/portal/wdgroup/odooerp/features-ar" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-right border-amber-500/30 hover:border-amber-500/60">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="px-3 py-1 text-xs font-semibold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
               دليل الخصائص والمميزات
             </span>
-            <span class="text-xs text-slate-500 font-mono font-bold">300 خاصية صناعية &middot; 10 وحدات</span>
+            <span class="text-xs text-slate-500 font-mono font-bold">+300 خاصية &middot; 15 وحدة صناعية</span>
           </div>
           <h2 class="text-2xl font-bold text-white group-hover:text-amber-400 transition-colors mb-2">
             استعراض الخصائص والمميزات
@@ -99,13 +107,13 @@
       </a>
 
       <!-- 2. إجراءات التشغيل القياسية SOPs (عربي) -->
-      <a href="/portal/wdgroup/odooerp/sops-ar" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-right border-purple-500/30">
+      <a href="/portal/wdgroup/odooerp/sops-ar" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-right border-purple-500/30 hover:border-purple-500/60">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="px-3 py-1 text-xs font-semibold rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
               نوافذ تفاعلية للطباعة والنسخ
             </span>
-            <span class="text-xs text-slate-500 font-mono font-bold">300 إجراء قياسي &middot; تشغيل متعدد المصانع</span>
+            <span class="text-xs text-slate-500 font-mono font-bold">+300 إجراء &middot; تشغيل متعدد المصانع</span>
           </div>
           <h2 class="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors mb-2">
             إجراءات التشغيل القياسية (SOPs)
@@ -120,29 +128,528 @@
       </a>
     </div>
 
-    <!-- الركائز والوحدات العشر -->
-    <div class="glass-card rounded-2xl p-6 space-y-4 text-right border-slate-800">
-      <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold text-white">وحدات أودو العشر لمصانع الأثاث</h3>
-        <span class="text-xs text-slate-500 font-mono">أودو 19 إنتربرايز (Odoo.sh)</span>
+    <!-- القسم 1: سلسلة المرئيات التدريبية المعتمدة (8 فيديوهات CANVA) -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1.5">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            المرئيات التدريبية المعتمدة
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">سلسلة شروحات الفيديو التفاعلية لمنظومة أودو</h2>
+          <p class="text-xs sm:text-sm text-slate-400">8 شروحات تفاعلية عالية الدقة مخصصة لمديري المصانع، مهندسي التخطيط، مشرفي الإنتاج، والقيادات التنفيذية.</p>
+        </div>
+        <div class="text-xs font-mono text-slate-500">
+          8 وحدات تدريبية مرئية &middot; استضافة سحابية
+        </div>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 text-xs text-slate-300">
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-center">1. التصنيع والهندسة (MRP)</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-center">2. المخازن وساحات الأخشاب</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-center">3. المبيعات والتسعير (CPQ)</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-center">4. المشتريات والتوريد الدولي</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-center">5. توكيد وضبط الجودة</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-center">6. الصيانة الوقائية (TPM)</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-center">7. التكاليف الصناعية والزكاة</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-center">8. دورة حياة المنتج (PLM)</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-center">9. شاشات صالات المصانع</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-center">10. الشحن الفاخر والتركيب</div>
+
+      <!-- مشغل الفيديو التفاعلي الرئيسي -->
+      <div class="glass-card rounded-2xl p-4 sm:p-6 border-slate-800 space-y-4">
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <div class="flex items-center gap-2.5">
+            <span id="player-video-badge" class="px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 font-mono text-xs font-bold border border-amber-500/30">
+              الفيديو 01
+            </span>
+            <h3 id="player-video-title" class="text-base sm:text-lg font-bold text-white">
+              البنية التأسيسية وإعداد الشركات المتعددة والتنقل
+            </h3>
+          </div>
+          <a id="player-external-link" href="https://www.canva.com/d/17mG3gcgZDxRWyQ" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 hover:border-amber-500/50 transition text-xs font-semibold flex items-center gap-1.5">
+            <span>مشاهدة بملء الشاشة على Canva</span>
+            <span>&nwarr;</span>
+          </a>
+        </div>
+
+        <!-- إطار العرض 16:9 المتجاوب -->
+        <div class="relative w-full rounded-xl overflow-hidden border border-slate-800 bg-slate-950 shadow-2xl" style="padding-top: 56.25%;">
+          <iframe 
+            id="main-video-frame"
+            src="https://www.canva.com/d/17mG3gcgZDxRWyQ" 
+            title="فيديو تدريب أودو"
+            class="absolute top-0 left-0 w-full h-full border-0"
+            allowfullscreen 
+            allow="autoplay; fullscreen">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- قائمة الفيديوهات الثمانية التفاعلية -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="video-playlist-grid">
+        <!-- الفيديو 01 -->
+        <div onclick="selectVideo(1, 'البنية التأسيسية وإعداد الشركات المتعددة والتنقل', 'https://www.canva.com/d/17mG3gcgZDxRWyQ')" class="video-card active glass-card rounded-xl p-4 text-right cursor-pointer transition border-amber-500/40">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px] font-bold">الفيديو 01</span>
+            <span class="text-[10px] text-slate-500 font-mono">البنية التأسيسية</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">إعداد الكيانات المتعددة والصلاحيات</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">هيكلية المصانع، التبديل بين الشركات، ضبط الصلاحيات وواجهات تشغيل صالات الإنتاج.</p>
+          <div class="flex items-center justify-between text-[11px] text-amber-400 font-semibold">
+            <span>&bull; معروض بالمشغل</span>
+            <a href="https://www.canva.com/d/17mG3gcgZDxRWyQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="فتح مباشرة">&nwarr;</a>
+          </div>
+        </div>
+
+        <!-- الفيديو 02 -->
+        <div onclick="selectVideo(2, 'إدارة المبيعات وعروض الأسعار التفصيلية للأثاث (CPQ)', 'https://www.canva.com/d/jETNz8QD1Cxh3Hx')" class="video-card glass-card rounded-xl p-4 text-right cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono text-[10px] font-bold">الفيديو 02</span>
+            <span class="text-[10px] text-slate-500 font-mono">المبيعات</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">دورة المبيعات والتسعير البارامتري</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">تسعير الأثاث حسب الأبعاد، هوامش الربح للمشاريع، إدارة النسخ واعتمادات العملاء.</p>
+          <div class="flex items-center justify-between text-[11px] text-blue-400 font-semibold">
+            <span>تشغيل الفيديو &larr;</span>
+            <a href="https://www.canva.com/d/jETNz8QD1Cxh3Hx" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="فتح مباشرة">&nwarr;</a>
+          </div>
+        </div>
+
+        <!-- الفيديو 03 -->
+        <div onclick="selectVideo(3, 'أوامر التصنيع وأشجار المنتجات الهرمية ومراكز العمل', 'https://www.canva.com/d/QXoHLqk9CsVaM4d')" class="video-card glass-card rounded-xl p-4 text-right cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono text-[10px] font-bold">الفيديو 03</span>
+            <span class="text-[10px] text-slate-500 font-mono">التصنيع MRP</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">أوامر الإنتاج وشجرة المكونات (BOM)</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">قوائم قص الخشب، توجيه مراكز العمل، جدولة التجميعات الفرعية وسجلات الإنجاز.</p>
+          <div class="flex items-center justify-between text-[11px] text-purple-400 font-semibold">
+            <span>تشغيل الفيديو &larr;</span>
+            <a href="https://www.canva.com/d/QXoHLqk9CsVaM4d" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="فتح مباشرة">&nwarr;</a>
+          </div>
+        </div>
+
+        <!-- الفيديو 04 -->
+        <div onclick="selectVideo(4, 'إدارة ساحات الأخشاب ومسارات التخزين والباركود', 'https://www.canva.com/d/BLCn9PWZNwXw8Jn')" class="video-card glass-card rounded-xl p-4 text-right cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">الفيديو 04</span>
+            <span class="text-[10px] text-slate-500 font-mono">المخازن</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">ساحات الأخشاب وتتبع الشحنات</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">حسابات الأمتار المكعبة، ألواح الرخام والترافرتين، مسح الباركود، والتحويلات الداخلية.</p>
+          <div class="flex items-center justify-between text-[11px] text-emerald-400 font-semibold">
+            <span>تشغيل الفيديو &larr;</span>
+            <a href="https://www.canva.com/d/BLCn9PWZNwXw8Jn" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="فتح مباشرة">&nwarr;</a>
+          </div>
+        </div>
+
+        <!-- الفيديو 05 -->
+        <div onclick="selectVideo(5, 'نقاط تفتيش الجودة وضبط العيوب ومحاضر عدم المطابقة (NCR)', 'https://www.canva.com/d/Zilf9k87_bpR-uR')" class="video-card glass-card rounded-xl p-4 text-right cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono text-[10px] font-bold">الفيديو 05</span>
+            <span class="text-[10px] text-slate-500 font-mono">الجودة</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">بوابات الجودة ومحاضر عدم المطابقة</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">نقاط الفحص المرحلي، قياس رطوبة الأخشاب، محاضر العيوب (NCR) ومسارات إعادة التشغيل.</p>
+          <div class="flex items-center justify-between text-[11px] text-rose-400 font-semibold">
+            <span>تشغيل الفيديو &larr;</span>
+            <a href="https://www.canva.com/d/Zilf9k87_bpR-uR" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="فتح مباشرة">&nwarr;</a>
+          </div>
+        </div>
+
+        <!-- الفيديو 06 -->
+        <div onclick="selectVideo(6, 'الصيانة الوقائية للماكينات ومعدات التصنيع (TPM)', 'https://www.canva.com/d/-nymnrbEQ5casWu')" class="video-card glass-card rounded-xl p-4 text-right cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 font-mono text-[10px] font-bold">الفيديو 06</span>
+            <span class="text-[10px] text-slate-500 font-mono">الصيانة TPM</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">صيانة الماكينات والمعايرة الدورية</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">جداول الصيانة لماكينات الـ CNC، تنظيف أحواض غراء الـ PUR، وفحص حساسات أفران التجفيف.</p>
+          <div class="flex items-center justify-between text-[11px] text-orange-400 font-semibold">
+            <span>تشغيل الفيديو &larr;</span>
+            <a href="https://www.canva.com/d/-nymnrbEQ5casWu" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="فتح مباشرة">&nwarr;</a>
+          </div>
+        </div>
+
+        <!-- الفيديو 07 -->
+        <div onclick="selectVideo(7, 'التكاليف الصناعية وتقييم الإنتاج قيد التشغيل (WIP) والفوترة', 'https://www.canva.com/d/Nd3z6EkmpUSWhrz')" class="video-card glass-card rounded-xl p-4 text-right cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-violet-500/20 text-violet-300 font-mono text-[10px] font-bold">الفيديو 07</span>
+            <span class="text-[10px] text-slate-500 font-mono">المالية</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">محاسبة التكاليف والإنتاج قيد التشغيل</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">توزيع المصاريف الإضافية للأخشاب المستوردة، قيود تقييم WIP اللحظية، والربط الزكوي.</p>
+          <div class="flex items-center justify-between text-[11px] text-violet-400 font-semibold">
+            <span>تشغيل الفيديو &larr;</span>
+            <a href="https://www.canva.com/d/Nd3z6EkmpUSWhrz" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="فتح مباشرة">&nwarr;</a>
+          </div>
+        </div>
+
+        <!-- الفيديو 08 -->
+        <div onclick="selectVideo(8, 'إدارة المشاريع الفندقية الكبرى والتسليم الميداني', 'https://www.canva.com/d/BdIpOfwDDw_9L6T')" class="video-card glass-card rounded-xl p-4 text-right cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 font-mono text-[10px] font-bold">الفيديو 08</span>
+            <span class="text-[10px] text-slate-500 font-mono">التسليم</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">المشاريع المتكاملة والتجهيز الميداني</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">مراحل تجهيز الغرف الفندقية، جداول التوريد للمواقع، محاضر الفحص والتسليم النهائي.</p>
+          <div class="flex items-center justify-between text-[11px] text-teal-400 font-semibold">
+            <span>تشغيل الفيديو &larr;</span>
+            <a href="https://www.canva.com/d/BdIpOfwDDw_9L6T" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="فتح مباشرة">&nwarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- القسم 2: حقيبة الكتيبات التدريبية المعتمدة (النسخة العربية - 7 كتيبات موثقة) -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-semibold text-emerald-400 uppercase tracking-wider mb-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            حقيبة الوثائق التدريبية المعتمدة
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">الكتيبات الإرشادية والتشغيلية المعتمدة (النسخة العربية)</h2>
+          <p class="text-xs sm:text-sm text-slate-400">7 كتيبات تدريبية مفصلة. يمكنك قراءتها مباشرة عبر نافذة العرض المدمجة أو تحميلها للأجهزة اللوحية والمصانع.</p>
+        </div>
+        <div class="text-xs font-mono text-slate-500">
+          7 كتيبات عربية معتمدة &middot; أدلة تشغيل مصانع الأثاث
+        </div>
+      </div>
+
+      <!-- شبكة الكتيبات العربية السبعة -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- كتيب 1: المبيعات -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-blue-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-blue-500/20 text-blue-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                كتيب تدريب PDF
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">823 ك.ب</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">ملفات التدريب (المبيعات)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              دليل عملي شامل لتسجيل مسار العملاء، إعداد عروض الأسعار المفصلة للأثاث الفندقي والمكتبي، سياسات الخصم، وتأكيد العقود.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%A8%D9%8A%D8%B9%D8%A7%D8%AA).pdf', 'ملفات التدريب (المبيعات)')" class="flex-1 px-3 py-2 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 text-xs font-semibold transition border border-blue-500/30 flex items-center justify-center gap-1">
+              <span>معاينة الكتيب</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%A8%D9%8A%D8%B9%D8%A7%D8%AA).pdf" download="ملفات التدريب (المبيعات).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>تحميل</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- كتيب 2: الموارد البشرية -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-emerald-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                كتيب تدريب PDF
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">1.02 م.ب</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">ملفات التدريب (الموارد البشرية)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              إدارة عمالة المصانع، ورديات التشغيل، الحضور الذكي بالبصمة، متابعة الإقامات والشهادات الصحية، مسيرات الرواتب WPS، وتوزيع تكلفة العمل.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%B1%D8%AF%20%D8%A7%D9%84%D8%A8%D8%B4%D8%B1%D9%8A%D8%A9).pdf', 'ملفات التدريب (الموارد البشرية)')" class="flex-1 px-3 py-2 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 text-xs font-semibold transition border border-emerald-500/30 flex items-center justify-center gap-1">
+              <span>معاينة الكتيب</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%B1%D8%AF%20%D8%A7%D9%84%D8%A8%D8%B4%D8%B1%D9%8A%D8%A9).pdf" download="ملفات التدريب (الموارد البشرية).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>تحميل</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- كتيب 3: المخازن -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-amber-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                كتيب تدريب PDF
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">711 ك.ب</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">ملفات التدريب (المخازن)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              إدارة ساحات الأخشاب وجرد الكتل بالمتر المكعب، ترقيم ألواح الرخام والحجر، مسح الباركود السريع، والتحويل بين المصانع والمستودعات.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%AE%D8%A7%D8%B2%D9%86).pdf', 'ملفات التدريب (المخازن)')" class="flex-1 px-3 py-2 rounded-lg bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 text-xs font-semibold transition border border-amber-500/30 flex items-center justify-center gap-1">
+              <span>معاينة الكتيب</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%AE%D8%A7%D8%B2%D9%86).pdf" download="ملفات التدريب (المخازن).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>تحميل</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- كتيب 4: التصنيع -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-purple-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-purple-500/20 text-purple-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-purple-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                كتيب تدريب PDF
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">720 ك.ب</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">ملفات التدريب (التصنيع)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              هندسة التصنيع وتوجيه مسارات مراكز العمل، بناء أشجار المنتجات الهرمية (BOM)، أوامر التشغيل، واحتساب الفواقد ونسب الهالك.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D8%AA%D8%B5%D9%86%D9%8A%D8%B9).pdf', 'ملفات التدريب (التصنيع)')" class="flex-1 px-3 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 text-xs font-semibold transition border border-purple-500/30 flex items-center justify-center gap-1">
+              <span>معاينة الكتيب</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D8%AA%D8%B5%D9%86%D9%8A%D8%B9).pdf" download="ملفات التدريب (التصنيع).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>تحميل</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- كتيب 5: إدارة المشروعات -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-teal-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-teal-500/20 text-teal-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-teal-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                كتيب تدريب PDF
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">1.55 م.ب</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">ملفات التدريب (إدارة المشروعات)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              إدارة عقود التأثيث والتجهيز الفندقي، مخططات جانت الزمنية، الفوترة حسب نسب الإنجاز، وسجلات أوقات الفنيين في المواقع.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D8%A7%D8%AA).pdf', 'ملفات التدريب (إدارة المشروعات)')" class="flex-1 px-3 py-2 rounded-lg bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 text-xs font-semibold transition border border-teal-500/30 flex items-center justify-center gap-1">
+              <span>معاينة الكتيب</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D8%A7%D8%AA).pdf" download="ملفات التدريب (إدارة المشروعات).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>تحميل</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- كتيب 6: المشتريات -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-cyan-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                كتيب تدريب PDF
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">718 ك.ب</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">ملفات التدريب (المشتريات)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              استدراج عروض الأسعار الدولية للأخشاب، اتفاقيات الشراء، توزيع التكاليف الجمركية واللوجستية، وتوريد خامات الألومنيوم والإسفنج.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%B4%D8%AA%D8%B1%D9%8A%D8%A7%D8%AA).pdf', 'ملفات التدريب (المشتريات)')" class="flex-1 px-3 py-2 rounded-lg bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 text-xs font-semibold transition border border-cyan-500/30 flex items-center justify-center gap-1">
+              <span>معاينة الكتيب</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%B4%D8%AA%D8%B1%D9%8A%D8%A7%D8%AA).pdf" download="ملفات التدريب (المشتريات).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>تحميل</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- كتيب 7: رقابة الجودة -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-rose-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-rose-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                كتيب تدريب PDF
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">929 ك.ب</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">ملفات التدريب (رقابة الجودة)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              فحص رطوبة الأخشاب الصلبة، اختبارات لمعان الدهانات، محاضر عدم المطابقة (NCR)، مناطق الحجر والعزل، وتدقيق الجودة الشامل.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%B1%D9%82%D8%A7%D8%A8%D8%A9%20%D8%A7%D9%84%D8%AC%D9%88%D8%AF%D8%A9).pdf', 'ملفات التدريب (رقابة الجودة)')" class="flex-1 px-3 py-2 rounded-lg bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 text-xs font-semibold transition border border-rose-500/30 flex items-center justify-center gap-1">
+              <span>معاينة الكتيب</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%B1%D9%82%D8%A7%D8%A8%D8%A9%20%D8%A7%D9%84%D8%AC%D9%88%D8%AF%D8%A9).pdf" download="ملفات التدريب (رقابة الجودة).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>تحميل</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- القسم 3: وحدات أودو الخمس عشرة لمصانع الأثاث (تم التوسيع إلى 15 وحدة) -->
+    <div class="glass-card rounded-2xl p-6 sm:p-7 space-y-4 text-right border-slate-800">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <h3 class="text-lg font-bold text-white">وحدات أودو الخمس عشرة المتكاملة لمصانع الأثاث</h3>
+        <span class="text-xs text-slate-400 font-mono">أودو 19 إنتربرايز (Odoo.sh متعدد الشركات)</span>
+      </div>
+      <p class="text-xs text-slate-400">هيكلية تشغيلية متكاملة لربط مصنع خشب وحجر نجران، مصنع ألومنيوم وحديد الرياض، ومصنع تصاميم الوطن.</p>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs text-slate-300">
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-blue-400 font-bold">الوحدة 01</span>
+          <span class="font-semibold text-white mt-1">1. التصنيع والهندسة (MRP)</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">أشجار المنتجات ومراكز العمل</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-emerald-400 font-bold">الوحدة 02</span>
+          <span class="font-semibold text-white mt-1">2. المخازن وساحات الأخشاب</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">الأمتار المكعبة والباركود</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-amber-400 font-bold">الوحدة 03</span>
+          <span class="font-semibold text-white mt-1">3. المبيعات والتسعير (CPQ)</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">التسعير البارامتري الدقيق</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-cyan-400 font-bold">الوحدة 04</span>
+          <span class="font-semibold text-white mt-1">4. المشتريات والتوريد الدولي</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">توزيع التكاليف الاستيرادية</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-rose-400 font-bold">الوحدة 05</span>
+          <span class="font-semibold text-white mt-1">5. توكيد وضبط الجودة</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">محاضر عدم المطابقة (NCR)</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-orange-400 font-bold">الوحدة 06</span>
+          <span class="font-semibold text-white mt-1">6. الصيانة الوقائية (TPM)</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">صيانة الماكينات والمعايرة</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-violet-400 font-bold">الوحدة 07</span>
+          <span class="font-semibold text-white mt-1">7. التكاليف الصناعية والزكاة</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">تقييم WIP والربط المالي</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-indigo-400 font-bold">الوحدة 08</span>
+          <span class="font-semibold text-white mt-1">8. دورة حياة المنتج (PLM)</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">أوامر التعديل الهندسي (ECO)</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-teal-400 font-bold">الوحدة 09</span>
+          <span class="font-semibold text-white mt-1">9. شاشات صالات المصانع</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">محطات العمل اللوحية للمشغلين</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-sky-400 font-bold">الوحدة 10</span>
+          <span class="font-semibold text-white mt-1">10. الشحن الفاخر والتركيب</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">اللوجستيات والتسليم للموقع</span>
+        </div>
+        <!-- الوحدات الخمس الجديدة ذات الأولوية -->
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-emerald-500/40 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-emerald-300 font-bold">الوحدة 11 &middot; موسعة</span>
+          <span class="font-semibold text-white mt-1">11. الموارد البشرية والأجور</span>
+          <span class="text-[10px] text-emerald-400/90 mt-0.5">ورديات المصانع ورواتب WPS</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-blue-500/40 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-blue-300 font-bold">الوحدة 12 &middot; موسعة</span>
+          <span class="font-semibold text-white mt-1">12. إدارة المشاريع الفندقية</span>
+          <span class="text-[10px] text-blue-400/90 mt-0.5">مخططات جانت والتأثيث</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-amber-500/40 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-amber-300 font-bold">الوحدة 13 &middot; موسعة</span>
+          <span class="font-semibold text-white mt-1">13. الخدمات الميدانية والمواقع</span>
+          <span class="text-[10px] text-amber-400/90 mt-0.5">محاضر تسليم الغرف والضمان</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-purple-500/40 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-purple-300 font-bold">الوحدة 14 &middot; موسعة</span>
+          <span class="font-semibold text-white mt-1">14. إدارة الوثائق الهندسية CAD</span>
+          <span class="text-[10px] text-purple-400/90 mt-0.5">مخططات القص والتوقيع الرقمي</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-cyan-500/40 flex flex-col justify-between text-right">
+          <span class="font-mono text-[10px] text-cyan-300 font-bold">الوحدة 15 &middot; موسعة</span>
+          <span class="font-semibold text-white mt-1">15. الذكاء التحليلي ولوحات القيادة</span>
+          <span class="text-[10px] text-cyan-400/90 mt-0.5">مؤشرات الأداء للمصانع الثلاثة</span>
+        </div>
       </div>
     </div>
   </main>
 
+  <!-- نافذة المعاينة التفاعلية لملفات PDF -->
+  <div id="pdf-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4">
+    <div class="glass-card rounded-2xl w-full max-w-5xl h-[92vh] flex flex-col overflow-hidden border-slate-700">
+      <div class="flex items-center justify-between px-5 py-3.5 border-b border-slate-800 bg-slate-900/90">
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">قارئ PDF التفاعلي</span>
+          <h4 id="pdf-modal-title" class="text-sm font-bold text-white truncate max-w-md">معاينة الكتيب التدريبي</h4>
+        </div>
+        <div class="flex items-center gap-3">
+          <a id="pdf-modal-download" href="#" download class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>تحميل الكتيب</span>
+          </a>
+          <button onclick="closePdfModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+            &times;
+          </button>
+        </div>
+      </div>
+      <div class="flex-1 bg-slate-950 relative">
+        <iframe id="pdf-modal-iframe" src="" class="w-full h-full border-0"></iframe>
+      </div>
+    </div>
+  </div>
+
   <footer class="mt-12 text-center text-xs text-slate-500 py-4 border-t border-slate-800/80">
     منصة مجموعة دبليو دي السعودية للأعمال &middot; خدمات دبي إن كايرو التقنية &middot; دليل العمليات الصناعية المعتمد
   </footer>
+
+  <script>
+    // منطق اختيار وتشغيل الفيديوهات
+    function selectVideo(num, title, url) {
+      document.getElementById('player-video-badge').textContent = 'الفيديو 0' + num;
+      document.getElementById('player-video-title').textContent = title;
+      document.getElementById('player-external-link').href = url;
+      document.getElementById('main-video-frame').src = url;
+
+      // تحديث الحالة النشطة للبطاقات
+      const cards = document.querySelectorAll('.video-card');
+      cards.forEach((card, index) => {
+        if (index === num - 1) {
+          card.classList.add('active', 'border-amber-500/40');
+        } else {
+          card.classList.remove('active', 'border-amber-500/40');
+        }
+      });
+    }
+
+    // منطق معاينة ملفات PDF التفاعلية
+    function openPdfModal(pdfUrl, title) {
+      document.getElementById('pdf-modal-title').textContent = title;
+      document.getElementById('pdf-modal-download').href = pdfUrl;
+      document.getElementById('pdf-modal-download').setAttribute('download', title + '.pdf');
+      document.getElementById('pdf-modal-iframe').src = pdfUrl;
+      const modal = document.getElementById('pdf-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closePdfModal() {
+      const modal = document.getElementById('pdf-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.getElementById('pdf-modal-iframe').src = '';
+    }
+
+    // إغلاق النافذة المنبثقة بالضغط على زر الهروب Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePdfModal();
+    });
+  </script>
 </body>
 </html>

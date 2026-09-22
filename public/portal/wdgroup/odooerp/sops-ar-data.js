@@ -78,6 +78,46 @@ const odooModules = [
     "featuresCount": 30,
     "sopsCount": 30,
     "badgeColor": "border-sky-500/30 bg-sky-500/10 text-sky-400"
+  },
+  {
+    "id": "hr",
+    "nameEn": "Human Resources, Labor & Payroll",
+    "nameAr": "الموارد البشرية والأجور وتوزيع العمالة (HR)",
+    "featuresCount": 30,
+    "sopsCount": 30,
+    "badgeColor": "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+  },
+  {
+    "id": "project",
+    "nameEn": "Project Management & Fit-Out Delivery",
+    "nameAr": "إدارة المشاريع والتجهيزات الفندقية الكبرى (Project)",
+    "featuresCount": 30,
+    "sopsCount": 30,
+    "badgeColor": "border-blue-500/30 bg-blue-500/10 text-blue-400"
+  },
+  {
+    "id": "fieldservice",
+    "nameEn": "Field Service & Room Snagging",
+    "nameAr": "الخدمات الميدانية ومعالجة ملاحظات المواقع (Field Service)",
+    "featuresCount": 30,
+    "sopsCount": 30,
+    "badgeColor": "border-amber-500/30 bg-amber-500/10 text-amber-400"
+  },
+  {
+    "id": "documents",
+    "nameEn": "Engineering Documents, CAD & Sign",
+    "nameAr": "إدارة الوثائق الهندسية والاعتمادات الرقمية (Documents)",
+    "featuresCount": 30,
+    "sopsCount": 30,
+    "badgeColor": "border-purple-500/30 bg-purple-500/10 text-purple-400"
+  },
+  {
+    "id": "bi",
+    "nameEn": "Executive BI & Multi-Plant Analytics",
+    "nameAr": "لوحات القيادة والذكاء التحليلي الصناعي (BI & Analytics)",
+    "featuresCount": 30,
+    "sopsCount": 30,
+    "badgeColor": "border-cyan-500/30 bg-cyan-500/10 text-cyan-400"
   }
 ];
 

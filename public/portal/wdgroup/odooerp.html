@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Odoo ERP Multi-Plant Manufacturing (3 Factories) — Operations Portal | WD Group</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+
   <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,14 +20,16 @@
     .glass-card { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
     .glass-card:hover { border-color: rgba(59, 130, 246, 0.45); transform: translateY(-3px); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6); }
     .glow-orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
+    .video-card.active { border-color: rgba(245, 158, 11, 0.8); background: rgba(30, 41, 59, 0.9); }
   </style>
   <base href="/portal/wdgroup/odooerp/">
 </head>
 <body class="relative flex flex-col justify-between py-10 px-4 sm:px-6 lg:px-8">
   <div class="glow-orb w-96 h-96 -top-20 -left-20 bg-blue-600/20"></div>
-  <div class="glow-orb w-96 h-96 top-1/2 -right-20 bg-purple-600/15"></div>
+  <div class="glow-orb w-96 h-96 top-1/3 -right-20 bg-purple-600/15"></div>
+  <div class="glow-orb w-96 h-96 bottom-20 -left-20 bg-amber-600/15"></div>
 
-  <main class="relative z-10 max-w-5xl mx-auto w-full space-y-8">
+  <main class="relative z-10 max-w-6xl mx-auto w-full space-y-12">
     <!-- BREADCRUMBS & TOP NAV -->
     <nav class="flex items-center justify-between flex-wrap gap-4 text-xs text-slate-400 border-b border-slate-800/80 pb-4">
       <div class="flex items-center gap-2">
@@ -32,7 +40,7 @@
         <span class="text-white font-medium">Odoo ERP Implementation</span>
       </div>
       <div class="flex items-center gap-3">
-        <a href="/portal/wdgroup/odooerp/ar" class="px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition font-bold font-['IBM_Plex_Sans_Arabic']">
+        <a href="/portal/wdgroup/odooerp/ar" class="px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition font-bold font-['IBM_Plex_Sans_Arabic']">
           العربية (100% RTL)
         </a>
         <span class="px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono font-bold">
@@ -45,13 +53,13 @@
     <header class="text-center space-y-3">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-xs font-semibold text-blue-400 uppercase tracking-wider">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        WD Group Project 1.5 &middot; Industrial ERP &amp; MRP II Manufacturing Engine
+        WD Group Project 1.5 &middot; Industrial ERP &amp; MRP II Manufacturing Engine (15 Modules)
       </div>
       <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white space-y-2">
         <span class="block text-2xl sm:text-3xl md:text-4xl text-blue-400 font-bold">WD Saudi Group Platform</span>
         <span class="block text-2xl sm:text-4xl lg:text-5xl bg-gradient-to-r from-blue-400 via-amber-300 to-purple-400 bg-clip-text text-transparent font-extrabold">Odoo ERP for 3 Furniture Factories</span>
       </h1>
-      <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+      <p class="text-slate-400 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed">
         Enterprise multi-plant manufacturing ecosystem deployed on Odoo 19 Enterprise. Covers GreenWood Timber &amp; Stone (Najran), National Aluminum &amp; Metal (Riyadh), and Watan Designs Joinery &amp; Upholstery (Riyadh).
       </p>
     </header>
@@ -75,16 +83,16 @@
       </div>
     </div>
 
-    <!-- MODULES GRID (2 Options: Features & SOPs) -->
+    <!-- CORE HUBS GRID (Features & SOPs) -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <!-- 1. Features Showcase (English) -->
-      <a href="/portal/wdgroup/odooerp/features-en" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-left border-amber-500/30">
+      <a href="/portal/wdgroup/odooerp/features-en" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-left border-amber-500/30 hover:border-amber-500/60">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="px-3 py-1 text-xs font-semibold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
               Features Catalog
             </span>
-            <span class="text-xs text-slate-500 font-mono font-bold">300 Features &middot; 10 Modules</span>
+            <span class="text-xs text-slate-500 font-mono font-bold">300+ Features &middot; 15 Modules</span>
           </div>
           <h2 class="text-2xl font-bold text-white group-hover:text-amber-400 transition-colors mb-2">
             Features Showcase
@@ -99,13 +107,13 @@
       </a>
 
       <!-- 2. Standard Operating Procedures (English) -->
-      <a href="/portal/wdgroup/odooerp/sops-en" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-left border-purple-500/30">
+      <a href="/portal/wdgroup/odooerp/sops-en" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-left border-purple-500/30 hover:border-purple-500/60">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="px-3 py-1 text-xs font-semibold rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
               Interactive Modals
             </span>
-            <span class="text-xs text-slate-500 font-mono font-bold">300 SOPs &middot; Multi-Plant Operations</span>
+            <span class="text-xs text-slate-500 font-mono font-bold">300+ SOPs &middot; Multi-Plant Operations</span>
           </div>
           <h2 class="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors mb-2">
             Standard Operating Procedures (SOPs)
@@ -120,29 +128,528 @@
       </a>
     </div>
 
-    <!-- MODULE ARCHITECTURE PILLARS -->
-    <div class="glass-card rounded-2xl p-6 space-y-4 text-left border-slate-800">
-      <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold text-white">The 10 Furniture Manufacturing Modules</h3>
-        <span class="text-xs text-slate-500 font-mono">Odoo 19 Enterprise (Odoo.sh)</span>
+    <!-- SECTION 1: VIDEO MASTERCLASS SUITE (8 CANVA VIDEOS) -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1.5">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            Multimedia Learning
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">Official Odoo Video Masterclass Suite</h2>
+          <p class="text-xs sm:text-sm text-slate-400">8 High-Definition Video Walkthroughs engineered for factory floor supervisors, production heads, and executives.</p>
+        </div>
+        <div class="text-xs font-mono text-slate-500">
+          8 Curriculum Modules &middot; Cloud-Hosted
+        </div>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 text-xs text-slate-300">
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">1. Manufacturing (MRP)</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">2. Inventory &amp; Timber</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">3. Sales &amp; Bespoke CPQ</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">4. Raw Procurement</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">5. Quality Control</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">6. Equipment TPM</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">7. Cost Accounting</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">8. PLM &amp; ECO</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">9. Shop Floor Kiosks</div>
-        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">10. Logistics &amp; Install</div>
+
+      <!-- ACTIVE VIDEO PLAYER VIEWPORT -->
+      <div class="glass-card rounded-2xl p-4 sm:p-6 border-slate-800 space-y-4">
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <div class="flex items-center gap-2.5">
+            <span id="player-video-badge" class="px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 font-mono text-xs font-bold border border-amber-500/30">
+              VIDEO 01
+            </span>
+            <h3 id="player-video-title" class="text-base sm:text-lg font-bold text-white">
+              Odoo Core Architecture, Multi-Company Setup &amp; Navigation
+            </h3>
+          </div>
+          <a id="player-external-link" href="https://www.canva.com/d/17mG3gcgZDxRWyQ" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 hover:border-amber-500/50 transition text-xs font-semibold flex items-center gap-1.5">
+            <span>Watch Fullscreen on Canva</span>
+            <span>&nearr;</span>
+          </a>
+        </div>
+
+        <!-- 16:9 RESPONSIVE FRAME -->
+        <div class="relative w-full rounded-xl overflow-hidden border border-slate-800 bg-slate-950 shadow-2xl" style="padding-top: 56.25%;">
+          <iframe 
+            id="main-video-frame"
+            src="https://www.canva.com/d/17mG3gcgZDxRWyQ" 
+            title="Odoo Training Video"
+            class="absolute top-0 left-0 w-full h-full border-0"
+            allowfullscreen 
+            allow="autoplay; fullscreen">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- 8 VIDEO PLAYLIST GRID -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="video-playlist-grid">
+        <!-- Video 01 -->
+        <div onclick="selectVideo(1, 'Odoo Core Architecture, Multi-Company Setup & Navigation', 'https://www.canva.com/d/17mG3gcgZDxRWyQ')" class="video-card active glass-card rounded-xl p-4 text-left cursor-pointer transition border-amber-500/40">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px] font-bold">VIDEO 01</span>
+            <span class="text-[10px] text-slate-500 font-mono">Foundational</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">Multi-Company Architecture &amp; User Access</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">Group hierarchy, company switcher, user permissions &amp; industrial workstation interfaces.</p>
+          <div class="flex items-center justify-between text-[11px] text-amber-400 font-semibold">
+            <span>&bull; Active in Viewer</span>
+            <a href="https://www.canva.com/d/17mG3gcgZDxRWyQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="Open directly">&nearr;</a>
+          </div>
+        </div>
+
+        <!-- Video 02 -->
+        <div onclick="selectVideo(2, 'Bespoke Sales, CPQ Quotations & Commercial Pipelines', 'https://www.canva.com/d/jETNz8QD1Cxh3Hx')" class="video-card glass-card rounded-xl p-4 text-left cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono text-[10px] font-bold">VIDEO 02</span>
+            <span class="text-[10px] text-slate-500 font-mono">Commercial</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">Bespoke Sales &amp; Furniture CPQ</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">Custom dimensional pricing, contract margins, revision management &amp; client sign-offs.</p>
+          <div class="flex items-center justify-between text-[11px] text-blue-400 font-semibold">
+            <span>Play Video &rarr;</span>
+            <a href="https://www.canva.com/d/jETNz8QD1Cxh3Hx" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="Open directly">&nearr;</a>
+          </div>
+        </div>
+
+        <!-- Video 03 -->
+        <div onclick="selectVideo(3, 'Manufacturing Orders (MO), Multi-Level BOMs & Work Centers', 'https://www.canva.com/d/QXoHLqk9CsVaM4d')" class="video-card glass-card rounded-xl p-4 text-left cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono text-[10px] font-bold">VIDEO 03</span>
+            <span class="text-[10px] text-slate-500 font-mono">MRP II</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">Manufacturing Orders &amp; Multi-Tier BOM</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">Timber cut-lists, work center routing, sub-assembly scheduling &amp; production logs.</p>
+          <div class="flex items-center justify-between text-[11px] text-purple-400 font-semibold">
+            <span>Play Video &rarr;</span>
+            <a href="https://www.canva.com/d/QXoHLqk9CsVaM4d" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="Open directly">&nearr;</a>
+          </div>
+        </div>
+
+        <!-- Video 04 -->
+        <div onclick="selectVideo(4, 'Raw Timber Yard & Warehouse Multi-Location Routing', 'https://www.canva.com/d/BLCn9PWZNwXw8Jn')" class="video-card glass-card rounded-xl p-4 text-left cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">VIDEO 04</span>
+            <span class="text-[10px] text-slate-500 font-mono">Inventory</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">Timber Yards &amp; Warehouse Tracking</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">Cubic meter wood lots, stone slabs, barcode serialization &amp; multi-plant transfers.</p>
+          <div class="flex items-center justify-between text-[11px] text-emerald-400 font-semibold">
+            <span>Play Video &rarr;</span>
+            <a href="https://www.canva.com/d/BLCn9PWZNwXw8Jn" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="Open directly">&nearr;</a>
+          </div>
+        </div>
+
+        <!-- Video 05 -->
+        <div onclick="selectVideo(5, 'Quality Control Gates, Inspections & Defect NCRs', 'https://www.canva.com/d/Zilf9k87_bpR-uR')" class="video-card glass-card rounded-xl p-4 text-left cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono text-[10px] font-bold">VIDEO 05</span>
+            <span class="text-[10px] text-slate-500 font-mono">Quality</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">Quality Control Gates &amp; Defect NCRs</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">In-process tolerance gates, wood moisture checks, non-conformance reports &amp; rework loops.</p>
+          <div class="flex items-center justify-between text-[11px] text-rose-400 font-semibold">
+            <span>Play Video &rarr;</span>
+            <a href="https://www.canva.com/d/Zilf9k87_bpR-uR" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="Open directly">&nearr;</a>
+          </div>
+        </div>
+
+        <!-- Video 06 -->
+        <div onclick="selectVideo(6, 'Machine Maintenance & Total Productive Maintenance (TPM)', 'https://www.canva.com/d/-nymnrbEQ5casWu')" class="video-card glass-card rounded-xl p-4 text-left cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 font-mono text-[10px] font-bold">VIDEO 06</span>
+            <span class="text-[10px] text-slate-500 font-mono">TPM</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">Equipment Maintenance &amp; Calibration</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">CNC preventive intervals, edge-bander glue cleaning, vacuum kiln sensor checks.</p>
+          <div class="flex items-center justify-between text-[11px] text-orange-400 font-semibold">
+            <span>Play Video &rarr;</span>
+            <a href="https://www.canva.com/d/-nymnrbEQ5casWu" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="Open directly">&nearr;</a>
+          </div>
+        </div>
+
+        <!-- Video 07 -->
+        <div onclick="selectVideo(7, 'Standard Costing, Absorption & Real-Time WIP Valuation', 'https://www.canva.com/d/Nd3z6EkmpUSWhrz')" class="video-card glass-card rounded-xl p-4 text-left cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-violet-500/20 text-violet-300 font-mono text-[10px] font-bold">VIDEO 07</span>
+            <span class="text-[10px] text-slate-500 font-mono">Financial</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">Cost Accounting &amp; WIP Valuation</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">Work-in-progress absorption, landed costs for imported lumber, and real-time ledger entries.</p>
+          <div class="flex items-center justify-between text-[11px] text-violet-400 font-semibold">
+            <span>Play Video &rarr;</span>
+            <a href="https://www.canva.com/d/Nd3z6EkmpUSWhrz" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="Open directly">&nearr;</a>
+          </div>
+        </div>
+
+        <!-- Video 08 -->
+        <div onclick="selectVideo(8, 'Project Management, Timesheets & On-Site Fit-Out Delivery', 'https://www.canva.com/d/BdIpOfwDDw_9L6T')" class="video-card glass-card rounded-xl p-4 text-left cursor-pointer transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 font-mono text-[10px] font-bold">VIDEO 08</span>
+            <span class="text-[10px] text-slate-500 font-mono">Delivery</span>
+          </div>
+          <h4 class="text-xs sm:text-sm font-bold text-white mb-1.5 line-clamp-2">Turnkey Projects &amp; Site Delivery</h4>
+          <p class="text-[11px] text-slate-400 mb-3 line-clamp-2">Hospitality room milestones, site delivery schedules, installation sign-offs &amp; final handovers.</p>
+          <div class="flex items-center justify-between text-[11px] text-teal-400 font-semibold">
+            <span>Play Video &rarr;</span>
+            <a href="https://www.canva.com/d/BdIpOfwDDw_9L6T" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-slate-400 hover:text-white" title="Open directly">&nearr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: OFFICIAL TRAINING FIELD MANUALS & LOCALIZED PDFS (7 ENGLISH FILES) -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-xs font-semibold text-blue-400 uppercase tracking-wider mb-1.5">
+            <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+            Official PDF Documentation
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">Official Training Field Manuals (English Edition)</h2>
+          <p class="text-xs sm:text-sm text-slate-400">7 Comprehensive Industrial Guides. Read directly in our embedded viewer or download for offline plant distribution.</p>
+        </div>
+        <div class="text-xs font-mono text-slate-500">
+          7 Localized English Files &middot; Verified ERP Runbooks
+        </div>
+      </div>
+
+      <!-- 7 ENGLISH PDF MANUALS GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- PDF 1: CRM & Sales -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-blue-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-blue-500/20 text-blue-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                PDF MANUAL
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">901 KB</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">CRM &amp; Sales Module Training</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Comprehensive guide covering pipeline stages, bespoke architectural quotations, contract discounting rules, and customer CRM lifecycles.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/CRM%20%26%20Sales%20Module%20Training.pdf', 'CRM & Sales Module Training')" class="flex-1 px-3 py-2 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 text-xs font-semibold transition border border-blue-500/30 flex items-center justify-center gap-1">
+              <span>Preview PDF</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/CRM%20%26%20Sales%20Module%20Training.pdf" download="CRM & Sales Module Training.pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="Download to device">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Download</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- PDF 2: Human Resources -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-emerald-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                PDF MANUAL
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">1.38 MB</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">Human Resources Training</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Factory labor management, multi-shift scheduling, biometric attendance, Iqama &amp; health compliance, WPS payroll, and direct job costing.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/Human%20Resources%20Training.pdf', 'Human Resources Training')" class="flex-1 px-3 py-2 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 text-xs font-semibold transition border border-emerald-500/30 flex items-center justify-center gap-1">
+              <span>Preview PDF</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/Human%20Resources%20Training.pdf" download="Human Resources Training.pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="Download to device">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Download</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- PDF 3: Inventory Module -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-amber-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                PDF MANUAL
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">702 KB</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">Inventory Module Training</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Timber yards, raw logs cubic meter calculations, marble &amp; travertine slab lots, barcode scanning, and multi-warehouse push/pull routing.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/Inventory%20Module%20Training.pdf', 'Inventory Module Training')" class="flex-1 px-3 py-2 rounded-lg bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 text-xs font-semibold transition border border-amber-500/30 flex items-center justify-center gap-1">
+              <span>Preview PDF</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/Inventory%20Module%20Training.pdf" download="Inventory Module Training.pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="Download to device">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Download</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- PDF 4: Manufacturing Module -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-purple-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-purple-500/20 text-purple-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-purple-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                PDF MANUAL
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">885 KB</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">Manufacturing Module Training</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              MRP II work center routing, multi-level furniture bills of material (BOM), work orders (WO), scrap rate reporting, and machine operation kiosks.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/Manufacturing%20Module%20Training.pdf', 'Manufacturing Module Training')" class="flex-1 px-3 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 text-xs font-semibold transition border border-purple-500/30 flex items-center justify-center gap-1">
+              <span>Preview PDF</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/Manufacturing%20Module%20Training.pdf" download="Manufacturing Module Training.pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="Download to device">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Download</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- PDF 5: Project Management -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-teal-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-teal-500/20 text-teal-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-teal-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                PDF MANUAL
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">1.33 MB</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">Project Management Training</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Turnkey hotel fit-outs, contract furniture Gantt charts, milestone billing, field technician timesheets, and client handover punch lists.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/Project%20Management%20Training.pdf', 'Project Management Training')" class="flex-1 px-3 py-2 rounded-lg bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 text-xs font-semibold transition border border-teal-500/30 flex items-center justify-center gap-1">
+              <span>Preview PDF</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/Project%20Management%20Training.pdf" download="Project Management Training.pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="Download to device">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Download</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- PDF 6: Purchasing Module -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-cyan-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                PDF MANUAL
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">794 KB</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">Purchasing Module Training</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              International timber RFQs, purchase agreements, customs clearance landed costs, vendor 3-way matching, and raw foam &amp; aluminum procurement.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/Purchasing%20Module%20Training.pdf', 'Purchasing Module Training')" class="flex-1 px-3 py-2 rounded-lg bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 text-xs font-semibold transition border border-cyan-500/30 flex items-center justify-center gap-1">
+              <span>Preview PDF</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/Purchasing%20Module%20Training.pdf" download="Purchasing Module Training.pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="Download to device">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Download</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- PDF 7: Quality Module -->
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between border-slate-800 hover:border-rose-500/40">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-rose-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
+                PDF MANUAL
+              </span>
+              <span class="text-[11px] font-mono text-slate-400">999 KB</span>
+            </div>
+            <h3 class="text-base font-bold text-white mb-2">Quality Module Training</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Raw lumber moisture tolerance testing, finish coat gloss levels, Non-Conformance Reports (NCR), quarantine routing, and quality audit trails.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/Quality%20Module%20Training.pdf', 'Quality Module Training')" class="flex-1 px-3 py-2 rounded-lg bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 text-xs font-semibold transition border border-rose-500/30 flex items-center justify-center gap-1">
+              <span>Preview PDF</span>
+            </button>
+            <a href="/portal/wdgroup/odooerp/training-materials/Quality%20Module%20Training.pdf" download="Quality Module Training.pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="Download to device">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Download</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: THE 15 FURNITURE MANUFACTURING MODULES (EXPANDED TO 15 MODULES) -->
+    <div class="glass-card rounded-2xl p-6 sm:p-7 space-y-4 text-left border-slate-800">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <h3 class="text-lg font-bold text-white">The 15 Integrated Furniture Manufacturing Modules</h3>
+        <span class="text-xs text-slate-400 font-mono">Odoo 19 Enterprise (Odoo.sh Multi-Company)</span>
+      </div>
+      <p class="text-xs text-slate-400">Audited architecture covering Najran Wood/Stone, Riyadh Aluminum/Metal, and Watan Joinery/Upholstery.</p>
+      
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs text-slate-300">
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-blue-400 font-bold">MODULE 01</span>
+          <span class="font-semibold text-white mt-1">1. Manufacturing (MRP)</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">BOM &amp; Work Centers</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-emerald-400 font-bold">MODULE 02</span>
+          <span class="font-semibold text-white mt-1">2. Inventory &amp; Timber</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">Cubic Meters &amp; Lots</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-amber-400 font-bold">MODULE 03</span>
+          <span class="font-semibold text-white mt-1">3. Sales &amp; Bespoke CPQ</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">Dimensional Pricing</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-cyan-400 font-bold">MODULE 04</span>
+          <span class="font-semibold text-white mt-1">4. Raw Procurement</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">Landed Cost Proration</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-rose-400 font-bold">MODULE 05</span>
+          <span class="font-semibold text-white mt-1">5. Quality Control</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">Defect NCRs &amp; Gates</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-orange-400 font-bold">MODULE 06</span>
+          <span class="font-semibold text-white mt-1">6. Equipment TPM</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">Machine Maintenance</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-violet-400 font-bold">MODULE 07</span>
+          <span class="font-semibold text-white mt-1">7. Cost Accounting</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">WIP Ledgers &amp; ZATCA</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-indigo-400 font-bold">MODULE 08</span>
+          <span class="font-semibold text-white mt-1">8. PLM &amp; ECO</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">Engineering Changes</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-teal-400 font-bold">MODULE 09</span>
+          <span class="font-semibold text-white mt-1">9. Shop Floor Kiosks</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">Tablet Touch Workstations</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-sky-400 font-bold">MODULE 10</span>
+          <span class="font-semibold text-white mt-1">10. Logistics &amp; Install</span>
+          <span class="text-[10px] text-slate-400 mt-0.5">White-Glove Delivery</span>
+        </div>
+        <!-- 5 NEW HIGH-PRIORITY MODULES -->
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-emerald-500/40 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-emerald-300 font-bold">MODULE 11 &middot; EXPANDED</span>
+          <span class="font-semibold text-white mt-1">11. Human Resources (HR)</span>
+          <span class="text-[10px] text-emerald-400/90 mt-0.5">Shifts, Payroll &amp; Labor Cost</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-blue-500/40 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-blue-300 font-bold">MODULE 12 &middot; EXPANDED</span>
+          <span class="font-semibold text-white mt-1">12. Project Management</span>
+          <span class="text-[10px] text-blue-400/90 mt-0.5">Fit-Out Gantt &amp; Milestones</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-amber-500/40 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-amber-300 font-bold">MODULE 13 &middot; EXPANDED</span>
+          <span class="font-semibold text-white mt-1">13. Field Service &amp; Snags</span>
+          <span class="text-[10px] text-amber-400/90 mt-0.5">Room Sign-Off &amp; Warranty</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-purple-500/40 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-purple-300 font-bold">MODULE 14 &middot; EXPANDED</span>
+          <span class="font-semibold text-white mt-1">14. Documents &amp; CAD Sign</span>
+          <span class="text-[10px] text-purple-400/90 mt-0.5">Cut-Sheets &amp; E-Signature</span>
+        </div>
+        <div class="p-3 rounded-lg bg-slate-900/80 border border-cyan-500/40 flex flex-col justify-between">
+          <span class="font-mono text-[10px] text-cyan-300 font-bold">MODULE 15 &middot; EXPANDED</span>
+          <span class="font-semibold text-white mt-1">15. Executive BI &amp; Analytics</span>
+          <span class="text-[10px] text-cyan-400/90 mt-0.5">Multi-Plant Yield Cockpit</span>
+        </div>
       </div>
     </div>
   </main>
 
+  <!-- INTERACTIVE PDF PREVIEW MODAL -->
+  <div id="pdf-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4">
+    <div class="glass-card rounded-2xl w-full max-w-5xl h-[92vh] flex flex-col overflow-hidden border-slate-700">
+      <div class="flex items-center justify-between px-5 py-3.5 border-b border-slate-800 bg-slate-900/90">
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono text-[10px] font-bold">PDF VIEWER</span>
+          <h4 id="pdf-modal-title" class="text-sm font-bold text-white truncate max-w-md">Document Preview</h4>
+        </div>
+        <div class="flex items-center gap-3">
+          <a id="pdf-modal-download" href="#" download class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>Download PDF</span>
+          </a>
+          <button onclick="closePdfModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+            &times;
+          </button>
+        </div>
+      </div>
+      <div class="flex-1 bg-slate-950 relative">
+        <iframe id="pdf-modal-iframe" src="" class="w-full h-full border-0"></iframe>
+      </div>
+    </div>
+  </div>
+
   <footer class="mt-12 text-center text-xs text-slate-500 py-4 border-t border-slate-800/80">
     WD Saudi Group Platform &middot; Dubai in Cairo Technology Services &middot; Confidential Industrial Operations Manual
   </footer>
+
+  <script>
+    // Video selector logic
+    function selectVideo(num, title, url) {
+      document.getElementById('player-video-badge').textContent = 'VIDEO 0' + num;
+      document.getElementById('player-video-title').textContent = title;
+      document.getElementById('player-external-link').href = url;
+      document.getElementById('main-video-frame').src = url;
+
+      // Update active states
+      const cards = document.querySelectorAll('.video-card');
+      cards.forEach((card, index) => {
+        if (index === num - 1) {
+          card.classList.add('active', 'border-amber-500/40');
+        } else {
+          card.classList.remove('active', 'border-amber-500/40');
+        }
+      });
+    }
+
+    // PDF modal logic
+    function openPdfModal(pdfUrl, title) {
+      document.getElementById('pdf-modal-title').textContent = title;
+      document.getElementById('pdf-modal-download').href = pdfUrl;
+      document.getElementById('pdf-modal-download').setAttribute('download', title + '.pdf');
+      document.getElementById('pdf-modal-iframe').src = pdfUrl;
+      const modal = document.getElementById('pdf-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closePdfModal() {
+      const modal = document.getElementById('pdf-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.getElementById('pdf-modal-iframe').src = '';
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePdfModal();
+    });
+  </script>
 </body>
 </html>
