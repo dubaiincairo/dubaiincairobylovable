@@ -31,12 +31,14 @@
         <span class="text-emerald-400 font-semibold">بوابة عميل مجموعة دبليو دي للأعمال</span>
       </div>
       <div class="flex items-center gap-3">
-        <a href="/portal/login?redirect=/portal/wdgroup/ar" class="px-2.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-amber-500/50 hover:text-white transition font-medium flex items-center gap-1.5" title="تسجيل الدخول لبوابة العملاء">
-          <svg class="w-3.5 h-3.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-          </svg>
-          <span>تسجيل دخول العميل</span>
-        </a>
+        <div id="nav-auth-section" class="flex items-center gap-2">
+          <a href="/portal/login?redirect=/portal/wdgroup/ar" class="px-2.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-amber-500/50 hover:text-white transition font-medium flex items-center gap-1.5" title="تسجيل الدخول لبوابة العملاء">
+            <svg class="w-3.5 h-3.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+            </svg>
+            <span>تسجيل دخول العميل</span>
+          </a>
+        </div>
         <a href="/portal/wdgroup" class="px-3 py-1.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 transition font-bold font-mono flex items-center gap-1.5" dir="ltr">
           <span>English (100% LTR)</span>
         </a>
@@ -334,8 +336,60 @@
     <footer class="pt-8 pb-4 text-center text-xs text-slate-500 border-t border-slate-800/80 space-y-1">
       <p>مجموعة دبليو دي للأعمال · بوابة العمليات والمشاريع المعتمدة</p>
       <p class="text-slate-600">عزل صارم للبيانات والمشاريع لكل عميل · مدعوم بواسطة دبي في القاهرة</p>
+      <p class="pt-1.5">
+        <button type="button" onclick="handlePortalLogout()" class="text-rose-400/80 hover:text-rose-300 underline cursor-pointer text-xs transition-colors">
+          تسجيل الخروج من جلسة العميل
+        </button>
+      </p>
     </footer>
 
   </main>
+
+  <script>
+    function updateAuthNavbar() {
+      const container = document.getElementById('nav-auth-section');
+      if (!container) return;
+      let session = null;
+      try {
+        session = JSON.parse(localStorage.getItem('dubaiincairo_client_session') || '{}');
+      } catch(e){}
+
+      if (session && session.authenticated) {
+        const userEmail = session.email || 'ceo@watandesigns.sa';
+        container.innerHTML = `
+          <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-medium text-xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="font-mono text-[11px]">${userEmail}</span>
+          </div>
+          <button type="button" onclick="handlePortalLogout()" class="px-2.5 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 hover:border-rose-400 hover:text-white transition font-medium flex items-center gap-1.5 cursor-pointer text-xs" title="تسجيل الخروج">
+            <svg class="w-3.5 h-3.5 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            <span>تسجيل الخروج</span>
+          </button>
+        `;
+      } else {
+        container.innerHTML = `
+          <a href="/portal/login?redirect=/portal/wdgroup/ar" class="px-2.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-amber-500/50 hover:text-white transition font-medium flex items-center gap-1.5 text-xs" title="تسجيل الدخول لبوابة العملاء">
+            <svg class="w-3.5 h-3.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+            </svg>
+            <span>تسجيل دخول العميل</span>
+          </a>
+        `;
+      }
+    }
+
+    function handlePortalLogout() {
+      localStorage.removeItem('dubaiincairo_client_session');
+      sessionStorage.clear();
+      window.location.href = '/portal/login?logout=true&lang=ar';
+    }
+
+    document.addEventListener('DOMContentLoaded', updateAuthNavbar);
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+      updateAuthNavbar();
+    }
+  </script>
 </body>
 </html>

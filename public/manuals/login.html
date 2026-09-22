@@ -424,9 +424,15 @@
       <p id="label-footer-copy">
         Dubai in Cairo for Business © 2026 · Confidential &amp; Proprietary Client Portal
       </p>
-      <a href="/" id="label-footer-link" class="text-zinc-400 hover:text-white underline inline-block transition-colors">
-        ← Return to Public Website
-      </a>
+      <div class="flex items-center justify-center gap-3 text-[11px] pt-0.5">
+        <a href="/" id="label-footer-link" class="text-zinc-400 hover:text-white underline inline-block transition-colors">
+          ← Return to Public Website
+        </a>
+        <span class="text-zinc-600">·</span>
+        <button type="button" onclick="performManualLogout()" id="label-footer-logout" class="text-rose-400/80 hover:text-rose-300 underline cursor-pointer transition-colors">
+          Reset Session / Log Out
+        </button>
+      </div>
     </div>
 
   </div>
@@ -469,22 +475,48 @@
     let currentTab = 'password';
     let passwordVisible = false;
 
-    // Check existing session
-    const localSession = localStorage.getItem("dubaiincairo_client_session");
-    if (localSession) {
-      try {
-        const s = JSON.parse(localSession);
-        if (s?.authenticated) {
+    // Logout handling & Session Check
+    const isLogoutAction = urlParams.get('logout') === 'true';
+    if (isLogoutAction) {
+      localStorage.removeItem("dubaiincairo_client_session");
+      sessionStorage.clear();
+      supabaseClient.auth.signOut().catch(() => {});
+      window.addEventListener('DOMContentLoaded', () => {
+        showInfo(currentLang === 'ar' 
+          ? "تم تسجيل الخروج بنجاح. يمكنك تسجيل الدخول مجدداً الآن." 
+          : "You have been logged out successfully. You can sign in below.");
+      });
+    } else {
+      const localSession = localStorage.getItem("dubaiincairo_client_session");
+      if (localSession) {
+        try {
+          const s = JSON.parse(localSession);
+          if (s?.authenticated && !urlParams.has('switch')) {
+            window.location.href = getRedirectTarget();
+          }
+        } catch (e) {}
+      }
+
+      supabaseClient.auth.getSession().then(({ data: { session } }) => {
+        if (session?.user && !isLogoutAction && !urlParams.has('switch')) {
           window.location.href = getRedirectTarget();
         }
-      } catch (e) {}
+      });
     }
 
-    supabaseClient.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user) {
-        window.location.href = getRedirectTarget();
-      }
-    });
+    // Language sync
+    if (urlParams.get('lang') === 'ar') {
+      window.addEventListener('DOMContentLoaded', () => {
+        switchLanguage('ar');
+      });
+    }
+
+    function performManualLogout() {
+      localStorage.removeItem("dubaiincairo_client_session");
+      sessionStorage.clear();
+      supabaseClient.auth.signOut().catch(() => {});
+      showInfo(currentLang === 'ar' ? "تم تفريغ الجلسة وتسجيل الخروج بنجاح." : "Session cleared and logged out successfully.");
+    }
 
     // Alert Helpers
     function showError(msg) {
@@ -805,6 +837,7 @@
 
         document.getElementById('label-footer-copy').innerText = "دبي في القاهرة للأعمال © 2026 · بوابة العملاء السرية والمحمية";
         document.getElementById('label-footer-link').innerText = "← العودة إلى الموقع الرئيسي";
+        document.getElementById('label-footer-logout').innerText = "تسجيل الخروج / إعادة ضبط الجلسة";
       } else {
         html.setAttribute('dir', 'ltr');
         html.setAttribute('lang', 'en');
@@ -847,6 +880,7 @@
 
         document.getElementById('label-footer-copy').innerText = "Dubai in Cairo for Business © 2026 · Confidential & Proprietary Client Portal";
         document.getElementById('label-footer-link').innerText = "← Return to Public Website";
+        document.getElementById('label-footer-logout').innerText = "Reset Session / Log Out";
       }
     }
   </script>
