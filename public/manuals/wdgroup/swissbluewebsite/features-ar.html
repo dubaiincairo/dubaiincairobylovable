@@ -279,10 +279,8 @@
     </div>
   </header>
 
-  <!-- المحتوى الرئيسي -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-12 space-y-8 relative z-10">
-
-    <!-- مقدمة الصفحة -->
+  <!-- مقدمة الصفحة -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-6 relative z-10">
     <section class="text-center max-w-4xl mx-auto space-y-4 sm:space-y-6">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-xs font-semibold text-blue-400">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -295,10 +293,11 @@
         تم توثيق كل ميزة بتقسيم ثنائي دقيق يوضح وظيفتها التقنية ومردودها المالي والتشغيلي المباشر. استخدم الفلاتر ومحرك البحث أدناه للتنقل السريع.
       </p>
     </section>
+  </div>
 
-    <!-- شريط البحث وفلاتر المحاور المثبت فائق التفاعل -->
-    <section class="sticky top-0 z-30 pt-4 pb-3 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 bg-[#0b0f19]/92 backdrop-blur-xl border-b border-slate-800/80 transition-all shadow-2xl shadow-black/40" id="controls-section">
-      <div class="max-w-7xl mx-auto space-y-3">
+  <!-- شريط البحث وفلاتر المحاور المثبت فائق التفاعل (كامل عرض الشاشة) -->
+  <section class="sticky top-16 sm:top-20 z-30 w-full bg-[#0b0f19]/95 backdrop-blur-xl border-y border-slate-800/80 transition-all shadow-2xl shadow-black/40" id="controls-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-3">
         
         <!-- صف البحث والمحدد المنسدل للشاشات الصغيرة -->
         <div class="flex items-center gap-3">
@@ -473,8 +472,11 @@
       </div>
     </section>
 
-    <!-- شبكة بطاقات الميزات الـ 55 المعتمدة -->
-    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="features-grid">
+    <!-- المحتوى الرئيسي -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 space-y-8 relative z-10">
+
+      <!-- شبكة بطاقات الميزات الـ 55 المعتمدة -->
+      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="features-grid">
 
       <!-- ==================== المحور 1: محرك الحجز المباشر (5) ==================== -->
       <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-blue-500/50 transition-all duration-300" data-category="cat-booking">

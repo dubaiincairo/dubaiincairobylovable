@@ -276,10 +276,8 @@
     </div>
   </header>
 
-  <!-- MAIN VIEWPORT -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-12 space-y-8 relative z-10">
-
-    <!-- HERO INTRO -->
+  <!-- HERO INTRO -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-6 relative z-10">
     <section class="text-center max-w-4xl mx-auto space-y-4 sm:space-y-6">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-xs font-semibold text-blue-400">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -292,10 +290,11 @@
         Every capability is paired with its precise architectural definition and real-life operational impact. Use the category pills and search bar below to filter.
       </p>
     </section>
+  </div>
 
-    <!-- STICKY SEARCH & CATEGORY CONTROLS -->
-    <section class="sticky top-0 z-30 pt-4 pb-3 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 bg-[#0b0f19]/92 backdrop-blur-xl border-b border-slate-800/80 transition-all shadow-2xl shadow-black/40" id="controls-section">
-      <div class="max-w-7xl mx-auto space-y-3">
+  <!-- STICKY SEARCH & CATEGORY CONTROLS (Full-Width Viewport Bar) -->
+  <section class="sticky top-16 sm:top-20 z-30 w-full bg-[#0b0f19]/95 backdrop-blur-xl border-y border-slate-800/80 transition-all shadow-2xl shadow-black/40" id="controls-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-3">
         
         <!-- Search Bar Row with Mobile Selector -->
         <div class="flex items-center gap-3">
@@ -470,8 +469,11 @@
       </div>
     </section>
 
-    <!-- 55 FEATURE CARDS GRID -->
-    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="features-grid">
+    <!-- MAIN VIEWPORT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 space-y-8 relative z-10">
+
+      <!-- 55 FEATURE CARDS GRID -->
+      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="features-grid">
 
       <!-- ==================== CATEGORY 1: DIRECT BOOKING (5) ==================== -->
       <div class="glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between feature-item group hover:border-blue-500/50 transition-all duration-300" data-category="cat-booking">
