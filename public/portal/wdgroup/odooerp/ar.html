@@ -26,6 +26,7 @@
     .glass-card:hover { border-color: rgba(59, 130, 246, 0.45); transform: translateY(-3px); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6); }
     .glow-orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
     .video-card.active { border-color: rgba(245, 158, 11, 0.8); background: rgba(30, 41, 59, 0.9); }
+    sup { font-weight: 400 !important; font-size: 0.55em !important; line-height: 0 !important; position: relative; vertical-align: baseline; top: -0.5em; opacity: 0.8; }
   </style>
   <base href="/portal/wdgroup/odooerp/">
 </head>
@@ -41,8 +42,8 @@
         <!-- هوية مجموعة دبليو دي مع الشعار -->
         <div class="flex items-center gap-3">
           <a href="/portal/wdgroup/ar" class="flex items-center gap-3 group">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-blue-500/50 flex items-center justify-center p-1.5 shadow-md transition-all">
-              <img src="/portal/wdgroup/assets/wd-logo-sky.png" alt="مجموعة دبليو دي للأعمال" class="h-6 w-auto object-contain">
+            <div class="h-11 px-3 py-1 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-blue-500/50 flex items-center justify-center shadow-md transition-all">
+              <img src="/portal/wdgroup/assets/wd-logo-sky.png" alt="مجموعة دبليو دي للأعمال" class="h-7 sm:h-8 w-auto object-contain">
             </div>
             <div class="flex flex-col">
               <div class="flex items-center gap-2">
@@ -56,13 +57,14 @@
 
         <!-- أزرار الإجراءات واللغة والمشروع -->
         <div class="flex items-center gap-2 sm:gap-3">
-          <a href="/portal/wdgroup/ar" class="text-xs bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-blue-500/50 rounded-xl px-3 py-1.5 text-slate-300 hover:text-white flex items-center gap-1.5 shadow-sm transition-all font-semibold">
-            <span>&rarr; العودة للبوابة الرئيسية</span>
+          <a href="/portal/wdgroup/ar" class="px-3 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700/90 text-slate-300 hover:text-white border border-slate-700/80 transition text-xs font-semibold flex items-center gap-1.5">
+            <span>&rarr;</span>
+            <span>البوابة الرئيسية</span>
           </a>
-          <a href="/portal/wdgroup/odooerp/" class="text-xs bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 rounded-xl px-3 py-1.5 text-blue-400 flex items-center gap-1.5 shadow-sm transition-all font-bold font-sans">
-            <span>English (LTR)</span>
+          <a href="/portal/wdgroup/odooerp/" class="px-3 py-1.5 rounded-lg bg-sky-950/60 hover:bg-sky-900/60 text-sky-400 border border-sky-800/50 transition text-xs font-bold font-mono">
+            English (LTR)
           </a>
-          <span class="px-2.5 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono font-bold text-xs shadow-sm">
+          <span class="px-2.5 py-1 rounded-lg bg-blue-950/80 text-blue-400 border border-blue-800/60 text-xs font-bold font-arabic tracking-wider">
             المشروع 05
           </span>
         </div>
@@ -78,8 +80,7 @@
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
         مشروع دبليو دي 1.5 &middot; المنظومة الصناعية الموحدة والتصنيع المتقدم (15 وحدة صناعية)
       </div>
-      <h1 class="text-3xl sm:text-5xl font-extrabold text-white space-y-2 py-1">
-        <span class="block text-xl sm:text-2xl md:text-3xl text-blue-400 font-bold pb-1">منصة مجموعة دبليو دي السعودية للأعمال</span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white">
         <span class="inline-block py-2.5 px-2 text-2xl sm:text-4xl lg:text-5xl bg-gradient-to-l from-blue-400 via-amber-300 to-purple-400 bg-clip-text text-transparent font-extrabold leading-[1.35]">منظومة تخطيط الموارد الصناعية (Odoo)</span>
       </h1>
       <p class="text-slate-400 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed mt-4">
@@ -180,6 +181,18 @@
           </div>
           <a id="player-external-link" href="https://canva.link/wdgroup-odoo-video01" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 hover:border-amber-500/50 transition text-xs font-semibold flex items-center gap-1.5">
             <span>مشاهدة بملء الشاشة على Canva</span>
+            <span>&nwarr;</span>
+          </a>
+        </div>
+
+        <!-- إشعار تشغيل سريع ومباشر -->
+        <div class="px-4 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs flex items-center justify-between gap-3 flex-wrap">
+          <div class="flex items-center gap-2">
+            <span class="text-amber-400 font-bold">⚡ نصيحة لتشغيل فوري:</span>
+            <span>في حال واجهت بطئًا أو تأخرًا في مزامنة الصوت داخل نافذة العرض، يمكنك فتح المشغل المباشر على كانفا بضغطة زر للتشغيل بأعلى جودة مع شريط التحكم الكامل.</span>
+          </div>
+          <a id="player-external-link-btn" href="https://canva.link/wdgroup-odoo-video01" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-3 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 text-xs font-bold border border-amber-500/30 transition flex items-center gap-1">
+            <span>فتح المشغل المباشر</span>
             <span>&nwarr;</span>
           </a>
         </div>
@@ -665,6 +678,8 @@
       document.getElementById('player-video-badge').textContent = 'الفيديو 0' + num;
       document.getElementById('player-video-title').textContent = title;
       document.getElementById('player-external-link').href = url;
+      const directBtn = document.getElementById('player-external-link-btn');
+      if (directBtn) directBtn.href = url;
       document.getElementById('main-video-frame').src = videoEmbedUrls[num] || url;
 
       // تحديث الحالة النشطة للبطاقات

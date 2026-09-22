@@ -14,6 +14,7 @@
     .glass-card { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
     .glass-card:hover { border-color: rgba(99, 102, 241, 0.45); transform: translateY(-3px); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6); }
     .glow-orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
+    sup { font-weight: 400 !important; font-size: 0.55em !important; line-height: 0 !important; position: relative; vertical-align: baseline; top: -0.5em; opacity: 0.8; }
   </style>
   <base href="/portal/wdgroup/ezeeodooconnector/">
 </head>
@@ -28,28 +29,29 @@
         <!-- Upper Left - WD Group Brand with Cursive Logo -->
         <div class="flex items-center gap-3">
           <a href="/portal/wdgroup" class="flex items-center gap-3 group">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-indigo-500/50 flex items-center justify-center p-1.5 shadow-md transition-all">
-              <img src="/portal/wdgroup/assets/wd-logo-sky.png" alt="WD Group" class="h-6 w-auto object-contain">
+            <div class="h-11 px-3 py-1 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-indigo-500/50 flex items-center justify-center shadow-md transition-all">
+              <img src="/portal/wdgroup/assets/wd-logo-sky.png" alt="WD Group" class="h-7 sm:h-8 w-auto object-contain">
             </div>
             <div class="flex flex-col">
               <div class="flex items-center gap-2">
                 <span class="text-xs sm:text-sm font-bold text-slate-100 group-hover:text-white transition-colors">WD Group</span>
                 <span class="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-slate-800/90 text-slate-400 border border-slate-700/80">Confidential</span>
               </div>
-              <span class="text-[11px] text-slate-400 font-medium tracking-tight">eZee-Odoo Connector (Ozoo™) <span class="text-slate-600">•</span> Operations Portal</span>
+              <span class="text-[11px] text-slate-400 font-medium tracking-tight">eZee-Odoo Connector (Ozoo<sup>™</sup>) <span class="text-slate-600">•</span> Operations Portal</span>
             </div>
           </a>
         </div>
 
         <!-- Right Header Actions -->
         <div class="flex items-center gap-2 sm:gap-3">
-          <a href="/portal/wdgroup" class="text-xs bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-indigo-500/50 rounded-xl px-3 py-1.5 text-slate-300 hover:text-white flex items-center gap-1.5 shadow-sm transition-all font-medium">
-            <span>&larr; WD Group Portal</span>
+          <a href="/portal/wdgroup" class="px-3 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700/90 text-slate-300 hover:text-white border border-slate-700/80 transition text-xs font-semibold flex items-center gap-1.5">
+            <span>&larr;</span>
+            <span>WD Group Portal</span>
           </a>
-          <a href="/portal/wdgroup/ezeeodooconnector/ar" class="text-xs bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-xl px-3 py-1.5 text-emerald-400 flex items-center gap-1.5 shadow-sm transition-all font-bold font-['IBM_Plex_Sans_Arabic']">
-            <span>العربية (100% RTL)</span>
+          <a href="/portal/wdgroup/ezeeodooconnector/ar" class="px-3 py-1.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/60 text-emerald-400 border border-emerald-800/50 transition text-xs font-bold font-arabic">
+            العربية (100% RTL)
           </a>
-          <span class="px-2.5 py-1.5 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-mono text-xs font-bold shadow-sm">
+          <span class="px-2.5 py-1 rounded-lg bg-indigo-950/80 text-indigo-400 border border-indigo-800/60 text-xs font-mono font-bold tracking-wider">
             PROJECT 02
           </span>
         </div>
@@ -65,9 +67,8 @@
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
         WD Group Project 1.2 · Hospitality Financial Integration
       </div>
-      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white space-y-2">
-        <span class="block text-2xl sm:text-3xl md:text-4xl text-indigo-400 font-bold">WD Saudi Group Platform</span>
-        <span class="block text-2xl sm:text-4xl lg:text-5xl bg-gradient-to-r from-indigo-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent font-extrabold">eZee-Odoo Automated Connector (Ozoo<sup>™</sup>)</span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+        <span class="block text-3xl sm:text-4xl lg:text-5xl bg-gradient-to-r from-indigo-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent font-extrabold">eZee-Odoo Automated Connector (Ozoo<sup class="font-normal text-[0.55em] font-sans opacity-80">™</sup>)</span>
       </h1>
       <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
         Automated daily general ledger reconciliation, city ledger sub-accounting, and POS duplicate invoice prevention connecting eZee Absolute PMS &amp; eZee Optimus POS with Odoo 19 Enterprise across 6 hospitality properties.
