@@ -106,27 +106,71 @@
 
     /* Print Styles */
     @media print {
-      body { background: #ffffff !important; color: #0f172a !important; }
+      html, body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        height: auto !important;
+        min-height: 100% !important;
+        overflow: visible !important;
+      }
       
       /* When printing active SOP modal */
-      body.print-modal-active > *:not(#modal-overlay) { display: none !important; }
+      body.print-modal-active {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+      body.print-modal-active > *:not(#modal-overlay) {
+        display: none !important;
+      }
       body.print-modal-active #modal-overlay {
         display: block !important;
         position: static !important;
-        background: #ffffff !important;
-        padding: 0 !important;
         inset: auto !important;
         width: 100% !important;
         height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        overflow-y: visible !important;
+        overflow-x: visible !important;
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        transform: none !important;
       }
-      body.print-modal-active #modal-overlay > div {
+      body.print-modal-active #modal-overlay > div,
+      body.print-modal-active #modal-dialog {
+        display: block !important;
+        position: static !important;
+        inset: auto !important;
         max-width: 100% !important;
         width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        overflow-y: visible !important;
+        overflow-x: visible !important;
         background: #ffffff !important;
         border: none !important;
         box-shadow: none !important;
         padding: 0 !important;
+        margin: 0 !important;
         color: #0f172a !important;
+        transform: none !important;
+        animation: none !important;
+      }
+      body.print-modal-active #modal-sop-content {
+        display: block !important;
+        max-height: none !important;
+        overflow: visible !important;
+        overflow-y: visible !important;
+        height: auto !important;
       }
       body.print-modal-active #modal-overlay .border-b,
       body.print-modal-active #modal-overlay .border-t,
@@ -134,7 +178,8 @@
         border-color: #cbd5e1 !important;
       }
       body.print-modal-active #modal-overlay button,
-      body.print-modal-active #modal-overlay .no-print {
+      body.print-modal-active #modal-overlay .no-print,
+      body.print-modal-active #modal-overlay .modal-no-print {
         display: none !important;
       }
       body.print-modal-active #modal-overlay svg {
@@ -142,8 +187,10 @@
       }
       body.print-modal-active #modal-overlay .text-white,
       body.print-modal-active #modal-overlay h2,
+      body.print-modal-active #modal-overlay h3,
       body.print-modal-active #modal-overlay span {
         color: #0f172a !important;
+        text-shadow: none !important;
       }
       body.print-modal-active #modal-overlay p,
       body.print-modal-active #modal-overlay li {
@@ -151,6 +198,20 @@
       }
       body.print-modal-active #modal-overlay [class*="bg-"] {
         background: #f8fafc !important;
+      }
+      body.print-modal-active #modal-overlay .bg-emerald-950\/20 {
+        background: #f0fdf4 !important;
+        border: 1px solid #bbf7d0 !important;
+      }
+      body.print-modal-active #modal-overlay .bg-rose-950\/20 {
+        background: #fff1f2 !important;
+        border: 1px solid #fecdd3 !important;
+      }
+      body.print-modal-active #modal-overlay li,
+      body.print-modal-active #modal-overlay .rounded-xl,
+      body.print-modal-active #modal-sop-content > div {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
       }
 
       /* Default SOP List printing (when modal is NOT open) */
@@ -1036,14 +1097,70 @@
       });
     }
 
-    // طباعة الإجراء المعروض حصرياً بسرعة ونقاء تام
+    // طباعة الإجراء المعروض حصرياً بدقة وبدون أي اقتطاع للنافذة المنبثقة
     function printSopModal() {
+      const overlay = document.getElementById('modal-overlay');
+      const dialog = overlay ? (overlay.querySelector('#modal-dialog') || overlay.querySelector('div')) : null;
+
+      // حفظ موضع التمرير الحالي حتى لا يفقده المستخدم بعد إغلاق الطباعة
+      const prevDialogScroll = dialog ? dialog.scrollTop : 0;
+      const prevOverlayScroll = overlay ? overlay.scrollTop : 0;
+      const prevBodyOverflow = document.body.style.overflow;
+      const prevHtmlOverflow = document.documentElement.style.overflow;
+
+      // تصفير موضع التمرير لضمان طباعة النافذة من البداية تماماً (الترويسة والأقسام 1 و 2)
+      if (dialog) dialog.scrollTop = 0;
+      if (overlay) overlay.scrollTop = 0;
+      window.scrollTo(0, 0);
+
+      // فك قفل التمرير الخاص بالجسم أثناء الطباعة لتمكين التنقل بين الصفحات
+      document.body.style.overflow = 'visible';
+      document.documentElement.style.overflow = 'visible';
       document.body.classList.add('print-modal-active');
-      window.print();
+
+      // حقن إعداد الصفحة الطولية Portrait بشكل مباشر
+      let styleTag = document.getElementById('sop-print-page-style');
+      if (!styleTag) {
+        styleTag = document.createElement('style');
+        styleTag.id = 'sop-print-page-style';
+        document.head.appendChild(styleTag);
+      }
+      styleTag.textContent = '@page { size: portrait; margin: 12mm 15mm; }';
+
+      setTimeout(() => {
+        window.print();
+      }, 50);
+
+      const restoreState = () => {
+        document.body.classList.remove('print-modal-active');
+        document.body.style.overflow = prevBodyOverflow || 'hidden';
+        document.documentElement.style.overflow = prevHtmlOverflow || '';
+        if (styleTag) styleTag.textContent = '';
+        if (dialog) dialog.scrollTop = prevDialogScroll;
+        if (overlay) overlay.scrollTop = prevOverlayScroll;
+        window.removeEventListener('afterprint', restoreState);
+      };
+      window.addEventListener('afterprint', restoreState);
     }
+
+    // دعم اختصار الطباعة من لوحة المفاتيح
+    window.addEventListener('beforeprint', () => {
+      const overlay = document.getElementById('modal-overlay');
+      if (overlay && !overlay.classList.contains('hidden')) {
+        document.body.classList.add('print-modal-active');
+        const dialog = overlay.querySelector('#modal-dialog') || overlay.querySelector('div');
+        if (dialog) dialog.scrollTop = 0;
+        if (overlay) overlay.scrollTop = 0;
+        document.body.style.overflow = 'visible';
+      }
+    });
 
     window.addEventListener('afterprint', () => {
       document.body.classList.remove('print-modal-active');
+      const overlay = document.getElementById('modal-overlay');
+      if (overlay && !overlay.classList.contains('hidden')) {
+        document.body.style.overflow = 'hidden';
+      }
     });
 
     // Spotlight Mouse Tracker
