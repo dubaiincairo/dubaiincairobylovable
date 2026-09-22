@@ -92,7 +92,7 @@
             <span class="px-3 py-1 text-xs font-semibold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
               Features Catalog
             </span>
-            <span class="text-xs text-slate-500 font-mono font-bold">300+ Features &middot; 15 Modules</span>
+            <span class="text-xs text-slate-500 font-mono font-bold">450+ Features &middot; 15 Modules</span>
           </div>
           <h2 class="text-2xl font-bold text-white group-hover:text-amber-400 transition-colors mb-2">
             Odoo ERP Features Catalog
@@ -113,7 +113,7 @@
             <span class="px-3 py-1 text-xs font-semibold rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
               Interactive Modals
             </span>
-            <span class="text-xs text-slate-500 font-mono font-bold">300+ SOPs &middot; Multi-Plant Operations</span>
+            <span class="text-xs text-slate-500 font-mono font-bold">450+ SOPs &middot; Multi-Plant Operations</span>
           </div>
           <h2 class="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors mb-2">
             Odoo ERP Standard Runbooks
@@ -165,7 +165,7 @@
         <div class="relative w-full rounded-xl overflow-hidden border border-slate-800 bg-slate-950 shadow-2xl" style="padding-top: 56.25%;">
           <iframe 
             id="main-video-frame"
-            src="https://canva.link/wdgroup-odoo-video01" 
+            src="https://www.canva.com/design/DAHPEv9auTA/4rfNkbUphX3BnL0IrasEfg/view?embed" 
             title="Odoo Training Video"
             class="absolute top-0 left-0 w-full h-full border-0"
             allowfullscreen 
@@ -624,12 +624,24 @@
   </footer>
 
   <script>
+    const videoEmbedUrls = {
+      1: "https://www.canva.com/design/DAHPEv9auTA/4rfNkbUphX3BnL0IrasEfg/view?embed",
+      2: "https://www.canva.com/design/DAHPFG61bLM/dwR8McKCK0LMju9lXRcylA/view?embed",
+      3: "https://www.canva.com/design/DAHPFOscMfk/ubQycxfHXpM7bDuiIyU9OA/view?embed",
+      4: "https://www.canva.com/design/DAHPFI1uN30/0YocIvXtzZJygOSJnUwaXw/view?embed",
+      5: "https://www.canva.com/design/DAHPFDUs91A/fw4jS2ryv1DOiGowgVkGDQ/view?embed",
+      6: "https://www.canva.com/design/DAHQLn7j6Bo/BnOOdsZvCPCFf698MQzo1g/view?embed",
+      7: "https://www.canva.com/design/DAHQLgkvkjA/VhHNkMiLnPiVFdzlXvZ8NQ/view?embed",
+      8: "https://www.canva.com/design/DAHQNUuk1CU/_9_-73WMmNFRjr-bRZDiTA/view?embed",
+      9: "https://www.canva.com/design/DAHQNZLPOj0/McsuNOOM0m2dxjAfS_dtsA/view?embed"
+    };
+
     // Video selector logic
     function selectVideo(num, title, url) {
       document.getElementById('player-video-badge').textContent = 'VIDEO 0' + num;
       document.getElementById('player-video-title').textContent = title;
       document.getElementById('player-external-link').href = url;
-      document.getElementById('main-video-frame').src = url;
+      document.getElementById('main-video-frame').src = videoEmbedUrls[num] || url;
 
       // Update active states
       const cards = document.querySelectorAll('.video-card');

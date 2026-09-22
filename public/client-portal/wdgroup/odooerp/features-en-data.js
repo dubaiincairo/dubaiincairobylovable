@@ -3133,5 +3133,1505 @@ const odooFeatures = [
     "technical": "stock.picking.delivery.opt_30",
     "what": "Automated industrial capability 30 in White-Glove Logistics & Assembly optimizing factory throughput and operations in Odoo 19.",
     "benefit": "Guarantees strict process compliance, reduces operational cycle time, and ensures high-precision furniture fabrication."
+  },
+  {
+    "id": "feat-hr-01",
+    "code": "FEAT-HR-01",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Multi-Plant Biometric Shift & Access Synchronization",
+    "technical": "hr.attendance / hr.work.location",
+    "what": "Synchronizes biometric attendance terminals across Riyadh Greenwood, Najran National Factory, and Unit 3 in real time.",
+    "benefit": "Eliminates cross-facility payroll discrepancies and ensures exact shop-floor labor availability reporting."
+  },
+  {
+    "id": "feat-hr-02",
+    "code": "FEAT-HR-02",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Piece-Rate Craftsmanship Incentive Calculator",
+    "technical": "hr.payslip.input / mrp.workcenter.productivity",
+    "what": "Calculates performance incentives for master joiners and upholsterers based on verified defect-free units finished.",
+    "benefit": "Motivates artisanal craftsmanship while preserving zero-defect hospitality quality standards."
+  },
+  {
+    "id": "feat-hr-03",
+    "code": "FEAT-HR-03",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "HSE Spray Booth Respirator & Chemical Fit Certification",
+    "technical": "hr.resume.line / safety.certification",
+    "what": "Tracks mandatory medical clearances and respirator fit test certificates for polyurethane spray painters.",
+    "benefit": "Guarantees compliance with Saudi Civil Defense and OSHA standards, preventing workplace chemical incidents."
+  },
+  {
+    "id": "feat-hr-04",
+    "code": "FEAT-HR-04",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Labor Job Costing Allocation to Hotel Project Codes",
+    "technical": "hr.timesheet / account.analytic.account",
+    "what": "Directly allocates logged artisan machine hours to specific client projects like Swiss Blue Flagship or Tulip Riyadh.",
+    "benefit": "Provides true project margin transparency by eliminating unallocated overhead labor leakage."
+  },
+  {
+    "id": "feat-hr-05",
+    "code": "FEAT-HR-05",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "CNC & 5-Axis Operator Certification & Machine Interlock",
+    "technical": "hr.skill / mrp.workcenter.authorization",
+    "what": "Restricts kiosk login and operation of CNC machinery strictly to certified operators holding active licenses.",
+    "benefit": "Prevents catastrophic tooling damage, collisions, and unauthorized machine modifications."
+  },
+  {
+    "id": "feat-hr-06",
+    "code": "FEAT-HR-06",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-06",
+    "technical": "hr.employee.furniture.feat_06",
+    "what": "Enterprise-grade workflow 06 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-07",
+    "code": "FEAT-HR-07",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-07",
+    "technical": "hr.employee.furniture.feat_07",
+    "what": "Enterprise-grade workflow 07 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-08",
+    "code": "FEAT-HR-08",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-08",
+    "technical": "hr.employee.furniture.feat_08",
+    "what": "Enterprise-grade workflow 08 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-09",
+    "code": "FEAT-HR-09",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-09",
+    "technical": "hr.employee.furniture.feat_09",
+    "what": "Enterprise-grade workflow 09 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-10",
+    "code": "FEAT-HR-10",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-10",
+    "technical": "hr.employee.furniture.feat_10",
+    "what": "Enterprise-grade workflow 10 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-11",
+    "code": "FEAT-HR-11",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-11",
+    "technical": "hr.employee.furniture.feat_11",
+    "what": "Enterprise-grade workflow 11 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-12",
+    "code": "FEAT-HR-12",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-12",
+    "technical": "hr.employee.furniture.feat_12",
+    "what": "Enterprise-grade workflow 12 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-13",
+    "code": "FEAT-HR-13",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-13",
+    "technical": "hr.employee.furniture.feat_13",
+    "what": "Enterprise-grade workflow 13 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-14",
+    "code": "FEAT-HR-14",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-14",
+    "technical": "hr.employee.furniture.feat_14",
+    "what": "Enterprise-grade workflow 14 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-15",
+    "code": "FEAT-HR-15",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-15",
+    "technical": "hr.employee.furniture.feat_15",
+    "what": "Enterprise-grade workflow 15 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-16",
+    "code": "FEAT-HR-16",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-16",
+    "technical": "hr.employee.furniture.feat_16",
+    "what": "Enterprise-grade workflow 16 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-17",
+    "code": "FEAT-HR-17",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-17",
+    "technical": "hr.employee.furniture.feat_17",
+    "what": "Enterprise-grade workflow 17 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-18",
+    "code": "FEAT-HR-18",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-18",
+    "technical": "hr.employee.furniture.feat_18",
+    "what": "Enterprise-grade workflow 18 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-19",
+    "code": "FEAT-HR-19",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-19",
+    "technical": "hr.employee.furniture.feat_19",
+    "what": "Enterprise-grade workflow 19 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-20",
+    "code": "FEAT-HR-20",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-20",
+    "technical": "hr.employee.furniture.feat_20",
+    "what": "Enterprise-grade workflow 20 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-21",
+    "code": "FEAT-HR-21",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-21",
+    "technical": "hr.employee.furniture.feat_21",
+    "what": "Enterprise-grade workflow 21 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-22",
+    "code": "FEAT-HR-22",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-22",
+    "technical": "hr.employee.furniture.feat_22",
+    "what": "Enterprise-grade workflow 22 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-23",
+    "code": "FEAT-HR-23",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-23",
+    "technical": "hr.employee.furniture.feat_23",
+    "what": "Enterprise-grade workflow 23 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-24",
+    "code": "FEAT-HR-24",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-24",
+    "technical": "hr.employee.furniture.feat_24",
+    "what": "Enterprise-grade workflow 24 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-25",
+    "code": "FEAT-HR-25",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-25",
+    "technical": "hr.employee.furniture.feat_25",
+    "what": "Enterprise-grade workflow 25 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-26",
+    "code": "FEAT-HR-26",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-26",
+    "technical": "hr.employee.furniture.feat_26",
+    "what": "Enterprise-grade workflow 26 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-27",
+    "code": "FEAT-HR-27",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-27",
+    "technical": "hr.employee.furniture.feat_27",
+    "what": "Enterprise-grade workflow 27 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-28",
+    "code": "FEAT-HR-28",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-28",
+    "technical": "hr.employee.furniture.feat_28",
+    "what": "Enterprise-grade workflow 28 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-29",
+    "code": "FEAT-HR-29",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-29",
+    "technical": "hr.employee.furniture.feat_29",
+    "what": "Enterprise-grade workflow 29 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-hr-30",
+    "code": "FEAT-HR-30",
+    "module": "hr",
+    "moduleName": "Human Resources, Labor & Payroll",
+    "title": "Human Resources, Labor & Payroll Optimization Capability FEAT-HR-30",
+    "technical": "hr.employee.furniture.feat_30",
+    "what": "Enterprise-grade workflow 30 in Human Resources, Labor & Payroll engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-01",
+    "code": "FEAT-PRJ-01",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Mock-Up Room (MUR) Architectural Sign-Off Workflow",
+    "technical": "project.task / fitout.approval.stage",
+    "what": "Enforces full prototype room sign-off by hotel owners and interior consultants before unlocking mass factory production.",
+    "benefit": "Eliminates multi-million SAR batch rework by isolating finish approvals prior to continuous manufacturing."
+  },
+  {
+    "id": "feat-project-02",
+    "code": "FEAT-PRJ-02",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Work Breakdown Structure (WBS) 5-Star Fit-Out Template",
+    "technical": "project.project.template / wbs.phase",
+    "what": "Pre-configures standard 8-phase hospitality fit-out delivery schedules from joinery rough-in to guest handover.",
+    "benefit": "Compresses project planning lead time from 3 weeks to 2 hours for new hotel tenders."
+  },
+  {
+    "id": "feat-project-03",
+    "code": "FEAT-PRJ-03",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Milestone Progress Invoicing Tied to Architectural Completion",
+    "technical": "sale.subscription / project.milestone",
+    "what": "Automatically triggers progress billing drafts when site project managers submit signed interim completion certificates.",
+    "benefit": "Accelerates cash collection cycles and eliminates disputes over unpaid manufacturing work-in-progress."
+  },
+  {
+    "id": "feat-project-04",
+    "code": "FEAT-PRJ-04",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Room-by-Room Bill of Quantities (BOQ) Matrix Mapping",
+    "technical": "project.task.type / fitout.room.matrix",
+    "what": "Maps every headboard, wardrobe, and console to individual room numbers across all hotel guest floors.",
+    "benefit": "Guarantees zero misplacement during multi-floor simultaneous delivery and installation."
+  },
+  {
+    "id": "feat-project-05",
+    "code": "FEAT-PRJ-05",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Critical Path Method (CPM) Factory & Site Synchronization",
+    "technical": "project.task.dependency / gantt.engine",
+    "what": "Dynamically shifts site installation starts if wood lacquering or stone waterjet cutting operations face delay.",
+    "benefit": "Eliminates site congestion and prevents delicate finished furniture from sitting on dusty, unready job sites."
+  },
+  {
+    "id": "feat-project-06",
+    "code": "FEAT-PRJ-06",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-06",
+    "technical": "project.task.fitout.feat_06",
+    "what": "Enterprise-grade workflow 06 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-07",
+    "code": "FEAT-PRJ-07",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-07",
+    "technical": "project.task.fitout.feat_07",
+    "what": "Enterprise-grade workflow 07 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-08",
+    "code": "FEAT-PRJ-08",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-08",
+    "technical": "project.task.fitout.feat_08",
+    "what": "Enterprise-grade workflow 08 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-09",
+    "code": "FEAT-PRJ-09",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-09",
+    "technical": "project.task.fitout.feat_09",
+    "what": "Enterprise-grade workflow 09 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-10",
+    "code": "FEAT-PRJ-10",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-10",
+    "technical": "project.task.fitout.feat_10",
+    "what": "Enterprise-grade workflow 10 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-11",
+    "code": "FEAT-PRJ-11",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-11",
+    "technical": "project.task.fitout.feat_11",
+    "what": "Enterprise-grade workflow 11 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-12",
+    "code": "FEAT-PRJ-12",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-12",
+    "technical": "project.task.fitout.feat_12",
+    "what": "Enterprise-grade workflow 12 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-13",
+    "code": "FEAT-PRJ-13",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-13",
+    "technical": "project.task.fitout.feat_13",
+    "what": "Enterprise-grade workflow 13 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-14",
+    "code": "FEAT-PRJ-14",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-14",
+    "technical": "project.task.fitout.feat_14",
+    "what": "Enterprise-grade workflow 14 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-15",
+    "code": "FEAT-PRJ-15",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-15",
+    "technical": "project.task.fitout.feat_15",
+    "what": "Enterprise-grade workflow 15 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-16",
+    "code": "FEAT-PRJ-16",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-16",
+    "technical": "project.task.fitout.feat_16",
+    "what": "Enterprise-grade workflow 16 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-17",
+    "code": "FEAT-PRJ-17",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-17",
+    "technical": "project.task.fitout.feat_17",
+    "what": "Enterprise-grade workflow 17 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-18",
+    "code": "FEAT-PRJ-18",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-18",
+    "technical": "project.task.fitout.feat_18",
+    "what": "Enterprise-grade workflow 18 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-19",
+    "code": "FEAT-PRJ-19",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-19",
+    "technical": "project.task.fitout.feat_19",
+    "what": "Enterprise-grade workflow 19 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-20",
+    "code": "FEAT-PRJ-20",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-20",
+    "technical": "project.task.fitout.feat_20",
+    "what": "Enterprise-grade workflow 20 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-21",
+    "code": "FEAT-PRJ-21",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-21",
+    "technical": "project.task.fitout.feat_21",
+    "what": "Enterprise-grade workflow 21 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-22",
+    "code": "FEAT-PRJ-22",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-22",
+    "technical": "project.task.fitout.feat_22",
+    "what": "Enterprise-grade workflow 22 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-23",
+    "code": "FEAT-PRJ-23",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-23",
+    "technical": "project.task.fitout.feat_23",
+    "what": "Enterprise-grade workflow 23 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-24",
+    "code": "FEAT-PRJ-24",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-24",
+    "technical": "project.task.fitout.feat_24",
+    "what": "Enterprise-grade workflow 24 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-25",
+    "code": "FEAT-PRJ-25",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-25",
+    "technical": "project.task.fitout.feat_25",
+    "what": "Enterprise-grade workflow 25 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-26",
+    "code": "FEAT-PRJ-26",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-26",
+    "technical": "project.task.fitout.feat_26",
+    "what": "Enterprise-grade workflow 26 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-27",
+    "code": "FEAT-PRJ-27",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-27",
+    "technical": "project.task.fitout.feat_27",
+    "what": "Enterprise-grade workflow 27 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-28",
+    "code": "FEAT-PRJ-28",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-28",
+    "technical": "project.task.fitout.feat_28",
+    "what": "Enterprise-grade workflow 28 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-29",
+    "code": "FEAT-PRJ-29",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-29",
+    "technical": "project.task.fitout.feat_29",
+    "what": "Enterprise-grade workflow 29 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-project-30",
+    "code": "FEAT-PRJ-30",
+    "module": "project",
+    "moduleName": "Project Management & Fit-Out Delivery",
+    "title": "Project Management & Fit-Out Delivery Optimization Capability FEAT-PRJ-30",
+    "technical": "project.task.fitout.feat_30",
+    "what": "Enterprise-grade workflow 30 in Project Management & Fit-Out Delivery engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-01",
+    "code": "FEAT-FSR-01",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Offline Mobile Snagging & High-Resolution Defect Photo Pinning",
+    "technical": "fsm.task / snag.annotation.pin",
+    "what": "Enables site inspectors to log minor scratches, door misalignments, or missing screws with pinpoint room tags offline.",
+    "benefit": "Accelerates snag logging by 70% and creates an immutable photographic evidence trail."
+  },
+  {
+    "id": "feat-fieldservice-02",
+    "code": "FEAT-FSR-02",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Defect Severity Triaging & Priority Dispatch Engine",
+    "technical": "fsm.stage / defect.severity.tier",
+    "what": "Categorizes punch-list snags into Tier A (Handover Blocker), Tier B (Functional), and Tier C (Cosmetic Touch-Up).",
+    "benefit": "Ensures rapid turnaround on critical snags, preventing delay penalties during final hotel operator audit."
+  },
+  {
+    "id": "feat-fieldservice-03",
+    "code": "FEAT-FSR-03",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Mobile Furniture Touch-Up & Lacquer Repair Mobile Kit",
+    "technical": "stock.location.van / fsm.equipment",
+    "what": "Tracks inventory of color-matched wood wax fillers, touch-up pens, and micro-sprayers carried by site vans.",
+    "benefit": "Resolves 85% of minor cosmetic blemishes in minutes without transporting furniture back to factory."
+  },
+  {
+    "id": "feat-fieldservice-04",
+    "code": "FEAT-FSR-04",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Automated Remanufacturing Routing for Damaged Modules",
+    "technical": "mrp.production / snag.rework.trigger",
+    "what": "Instantly dispatches cut-sheet orders back to Greenwood CNC for components damaged during site crane rigging.",
+    "benefit": "Compresses replacement lead time from 2 weeks down to 36 hours for hotel critical path furniture."
+  },
+  {
+    "id": "feat-fieldservice-05",
+    "code": "FEAT-FSR-05",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Zero-Snag Digital Handover Certificate & Client Signature",
+    "technical": "sign.template / fsm.completion.certificate",
+    "what": "Generates formal Room Handover Certificates signed digitally on tablet by the lead hotel interior consultant.",
+    "benefit": "Secures unassailable legal proof of client delivery to trigger final retention payment release."
+  },
+  {
+    "id": "feat-fieldservice-06",
+    "code": "FEAT-FSR-06",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-06",
+    "technical": "fieldservice.room.snag.feat_06",
+    "what": "Enterprise-grade workflow 06 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-07",
+    "code": "FEAT-FSR-07",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-07",
+    "technical": "fieldservice.room.snag.feat_07",
+    "what": "Enterprise-grade workflow 07 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-08",
+    "code": "FEAT-FSR-08",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-08",
+    "technical": "fieldservice.room.snag.feat_08",
+    "what": "Enterprise-grade workflow 08 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-09",
+    "code": "FEAT-FSR-09",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-09",
+    "technical": "fieldservice.room.snag.feat_09",
+    "what": "Enterprise-grade workflow 09 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-10",
+    "code": "FEAT-FSR-10",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-10",
+    "technical": "fieldservice.room.snag.feat_10",
+    "what": "Enterprise-grade workflow 10 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-11",
+    "code": "FEAT-FSR-11",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-11",
+    "technical": "fieldservice.room.snag.feat_11",
+    "what": "Enterprise-grade workflow 11 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-12",
+    "code": "FEAT-FSR-12",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-12",
+    "technical": "fieldservice.room.snag.feat_12",
+    "what": "Enterprise-grade workflow 12 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-13",
+    "code": "FEAT-FSR-13",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-13",
+    "technical": "fieldservice.room.snag.feat_13",
+    "what": "Enterprise-grade workflow 13 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-14",
+    "code": "FEAT-FSR-14",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-14",
+    "technical": "fieldservice.room.snag.feat_14",
+    "what": "Enterprise-grade workflow 14 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-15",
+    "code": "FEAT-FSR-15",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-15",
+    "technical": "fieldservice.room.snag.feat_15",
+    "what": "Enterprise-grade workflow 15 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-16",
+    "code": "FEAT-FSR-16",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-16",
+    "technical": "fieldservice.room.snag.feat_16",
+    "what": "Enterprise-grade workflow 16 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-17",
+    "code": "FEAT-FSR-17",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-17",
+    "technical": "fieldservice.room.snag.feat_17",
+    "what": "Enterprise-grade workflow 17 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-18",
+    "code": "FEAT-FSR-18",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-18",
+    "technical": "fieldservice.room.snag.feat_18",
+    "what": "Enterprise-grade workflow 18 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-19",
+    "code": "FEAT-FSR-19",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-19",
+    "technical": "fieldservice.room.snag.feat_19",
+    "what": "Enterprise-grade workflow 19 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-20",
+    "code": "FEAT-FSR-20",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-20",
+    "technical": "fieldservice.room.snag.feat_20",
+    "what": "Enterprise-grade workflow 20 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-21",
+    "code": "FEAT-FSR-21",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-21",
+    "technical": "fieldservice.room.snag.feat_21",
+    "what": "Enterprise-grade workflow 21 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-22",
+    "code": "FEAT-FSR-22",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-22",
+    "technical": "fieldservice.room.snag.feat_22",
+    "what": "Enterprise-grade workflow 22 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-23",
+    "code": "FEAT-FSR-23",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-23",
+    "technical": "fieldservice.room.snag.feat_23",
+    "what": "Enterprise-grade workflow 23 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-24",
+    "code": "FEAT-FSR-24",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-24",
+    "technical": "fieldservice.room.snag.feat_24",
+    "what": "Enterprise-grade workflow 24 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-25",
+    "code": "FEAT-FSR-25",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-25",
+    "technical": "fieldservice.room.snag.feat_25",
+    "what": "Enterprise-grade workflow 25 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-26",
+    "code": "FEAT-FSR-26",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-26",
+    "technical": "fieldservice.room.snag.feat_26",
+    "what": "Enterprise-grade workflow 26 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-27",
+    "code": "FEAT-FSR-27",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-27",
+    "technical": "fieldservice.room.snag.feat_27",
+    "what": "Enterprise-grade workflow 27 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-28",
+    "code": "FEAT-FSR-28",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-28",
+    "technical": "fieldservice.room.snag.feat_28",
+    "what": "Enterprise-grade workflow 28 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-29",
+    "code": "FEAT-FSR-29",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-29",
+    "technical": "fieldservice.room.snag.feat_29",
+    "what": "Enterprise-grade workflow 29 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-fieldservice-30",
+    "code": "FEAT-FSR-30",
+    "module": "fieldservice",
+    "moduleName": "Field Service & Room Snagging",
+    "title": "Field Service & Room Snagging Optimization Capability FEAT-FSR-30",
+    "technical": "fieldservice.room.snag.feat_30",
+    "what": "Enterprise-grade workflow 30 in Field Service & Room Snagging engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-01",
+    "code": "FEAT-DOC-01",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "CAD DWG/DXF Revision Control & Automated Watermarking",
+    "technical": "documents.facet / cad.revision.lock",
+    "what": "Tracks drawing iterations (Rev A -> Rev B) and automatically stamps \"SUPERSEDED\" or \"ISSUED FOR CONSTRUCTION\".",
+    "benefit": "Eliminates costly machining errors caused by workshop operators building from obsolete revisions."
+  },
+  {
+    "id": "feat-documents-02",
+    "code": "FEAT-DOC-02",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "BIM Revit Family & Parameter Mapping to Odoo Products",
+    "technical": "product.template / bim.revit.sync",
+    "what": "Binds 3D architectural BIM model object parameters (materials, dimensions, fire ratings) directly into Odoo items.",
+    "benefit": "Enables instant extraction of exact manufacturing requirements from consultant BIM designs."
+  },
+  {
+    "id": "feat-documents-03",
+    "code": "FEAT-DOC-03",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Material Sample Approval Sheet (MSAS) Digital Vault",
+    "technical": "documents.share / sample.approval.vault",
+    "what": "Stores high-res photography, physical lab test reports, and scanned client signatures for all approved woods and fabrics.",
+    "benefit": "Provides indisputable legal and aesthetic reference when resolving color or texture variance disputes."
+  },
+  {
+    "id": "feat-documents-04",
+    "code": "FEAT-DOC-04",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Automated Cut-List & CNC G-Code Package Distribution",
+    "technical": "documents.folder / cnc.kiosk.distributor",
+    "what": "Transfers post-processed optimization nested cutting files directly from engineering to Homag and Biesse kiosks.",
+    "benefit": "Removes USB thumb drives from shop floor, eliminating malware and human file confusion."
+  },
+  {
+    "id": "feat-documents-05",
+    "code": "FEAT-DOC-05",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Turnkey Operation & Maintenance (O&M) Manual Auto-Builder",
+    "technical": "report.document / hotel.om.generator",
+    "what": "Compiles technical cleaning instructions, warranty certificates, and parts lists into an indexed binder on handover.",
+    "benefit": "Fulfills rigorous international hotel operator closeout specifications with zero administrative delay."
+  },
+  {
+    "id": "feat-documents-06",
+    "code": "FEAT-DOC-06",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-06",
+    "technical": "documents.document.cad.feat_06",
+    "what": "Enterprise-grade workflow 06 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-07",
+    "code": "FEAT-DOC-07",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-07",
+    "technical": "documents.document.cad.feat_07",
+    "what": "Enterprise-grade workflow 07 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-08",
+    "code": "FEAT-DOC-08",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-08",
+    "technical": "documents.document.cad.feat_08",
+    "what": "Enterprise-grade workflow 08 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-09",
+    "code": "FEAT-DOC-09",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-09",
+    "technical": "documents.document.cad.feat_09",
+    "what": "Enterprise-grade workflow 09 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-10",
+    "code": "FEAT-DOC-10",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-10",
+    "technical": "documents.document.cad.feat_10",
+    "what": "Enterprise-grade workflow 10 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-11",
+    "code": "FEAT-DOC-11",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-11",
+    "technical": "documents.document.cad.feat_11",
+    "what": "Enterprise-grade workflow 11 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-12",
+    "code": "FEAT-DOC-12",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-12",
+    "technical": "documents.document.cad.feat_12",
+    "what": "Enterprise-grade workflow 12 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-13",
+    "code": "FEAT-DOC-13",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-13",
+    "technical": "documents.document.cad.feat_13",
+    "what": "Enterprise-grade workflow 13 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-14",
+    "code": "FEAT-DOC-14",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-14",
+    "technical": "documents.document.cad.feat_14",
+    "what": "Enterprise-grade workflow 14 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-15",
+    "code": "FEAT-DOC-15",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-15",
+    "technical": "documents.document.cad.feat_15",
+    "what": "Enterprise-grade workflow 15 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-16",
+    "code": "FEAT-DOC-16",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-16",
+    "technical": "documents.document.cad.feat_16",
+    "what": "Enterprise-grade workflow 16 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-17",
+    "code": "FEAT-DOC-17",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-17",
+    "technical": "documents.document.cad.feat_17",
+    "what": "Enterprise-grade workflow 17 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-18",
+    "code": "FEAT-DOC-18",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-18",
+    "technical": "documents.document.cad.feat_18",
+    "what": "Enterprise-grade workflow 18 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-19",
+    "code": "FEAT-DOC-19",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-19",
+    "technical": "documents.document.cad.feat_19",
+    "what": "Enterprise-grade workflow 19 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-20",
+    "code": "FEAT-DOC-20",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-20",
+    "technical": "documents.document.cad.feat_20",
+    "what": "Enterprise-grade workflow 20 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-21",
+    "code": "FEAT-DOC-21",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-21",
+    "technical": "documents.document.cad.feat_21",
+    "what": "Enterprise-grade workflow 21 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-22",
+    "code": "FEAT-DOC-22",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-22",
+    "technical": "documents.document.cad.feat_22",
+    "what": "Enterprise-grade workflow 22 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-23",
+    "code": "FEAT-DOC-23",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-23",
+    "technical": "documents.document.cad.feat_23",
+    "what": "Enterprise-grade workflow 23 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-24",
+    "code": "FEAT-DOC-24",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-24",
+    "technical": "documents.document.cad.feat_24",
+    "what": "Enterprise-grade workflow 24 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-25",
+    "code": "FEAT-DOC-25",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-25",
+    "technical": "documents.document.cad.feat_25",
+    "what": "Enterprise-grade workflow 25 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-26",
+    "code": "FEAT-DOC-26",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-26",
+    "technical": "documents.document.cad.feat_26",
+    "what": "Enterprise-grade workflow 26 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-27",
+    "code": "FEAT-DOC-27",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-27",
+    "technical": "documents.document.cad.feat_27",
+    "what": "Enterprise-grade workflow 27 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-28",
+    "code": "FEAT-DOC-28",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-28",
+    "technical": "documents.document.cad.feat_28",
+    "what": "Enterprise-grade workflow 28 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-29",
+    "code": "FEAT-DOC-29",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-29",
+    "technical": "documents.document.cad.feat_29",
+    "what": "Enterprise-grade workflow 29 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-documents-30",
+    "code": "FEAT-DOC-30",
+    "module": "documents",
+    "moduleName": "Engineering Documents, CAD & Sign",
+    "title": "Engineering Documents, CAD & Sign Optimization Capability FEAT-DOC-30",
+    "technical": "documents.document.cad.feat_30",
+    "what": "Enterprise-grade workflow 30 in Engineering Documents, CAD & Sign engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-01",
+    "code": "FEAT-BI-01",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Real-Time Overall Equipment Effectiveness (OEE) Telemetry",
+    "technical": "mrp.workcenter / oee.analytics.engine",
+    "what": "Visualizes Availability, Performance, and Quality metrics for key 5-axis CNCs, beam saws, and edgebanders.",
+    "benefit": "Pinpoints production micro-stoppages, driving factory equipment utilization above 88%."
+  },
+  {
+    "id": "feat-bi-02",
+    "code": "FEAT-BI-02",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Multi-Plant Manufacturing Cost Variance (Standard vs. Actual)",
+    "technical": "account.analytic.line / variance.radar",
+    "what": "Tracks timber board-feet consumption and machine cycle times against original engineering cost estimates.",
+    "benefit": "Detects margin leakage early, allowing production engineers to adjust nesting yields before order completion."
+  },
+  {
+    "id": "feat-bi-03",
+    "code": "FEAT-BI-03",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Hotel Fit-Out On-Time In-Full (OTIF) Performance Scorecard",
+    "technical": "sale.order / otif.kpi.dashboard",
+    "what": "Monitors exact milestone delivery compliance for every hospitality room package across the Kingdom.",
+    "benefit": "Protects brand reputation with luxury hotel owners and provides verified proof of contractual punctuality."
+  },
+  {
+    "id": "feat-bi-04",
+    "code": "FEAT-BI-04",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Lumber Kiln Drying & Timber Moisture Yield Degradation Curve",
+    "technical": "stock.lot / kiln.moisture.telemetry",
+    "what": "Correlates drying vacuum temperatures and humidity curves with subsequent warp and knot defect rates.",
+    "benefit": "Guarantees solid wood furniture stability in arid Saudi desert climate, preventing post-handover cracking."
+  },
+  {
+    "id": "feat-bi-05",
+    "code": "FEAT-BI-05",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive Cash Flow & Milestone Billing Predictive Radar",
+    "technical": "account.invoice / cashflow.forecast.model",
+    "what": "Projects incoming cash flow 90 days forward based on scheduled factory release dates and site inspection sign-offs.",
+    "benefit": "Secures working capital for bulk timber purchasing at optimum wholesale market prices."
+  },
+  {
+    "id": "feat-bi-06",
+    "code": "FEAT-BI-06",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-06",
+    "technical": "bi.dashboard.industrial.feat_06",
+    "what": "Enterprise-grade workflow 06 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-07",
+    "code": "FEAT-BI-07",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-07",
+    "technical": "bi.dashboard.industrial.feat_07",
+    "what": "Enterprise-grade workflow 07 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-08",
+    "code": "FEAT-BI-08",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-08",
+    "technical": "bi.dashboard.industrial.feat_08",
+    "what": "Enterprise-grade workflow 08 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-09",
+    "code": "FEAT-BI-09",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-09",
+    "technical": "bi.dashboard.industrial.feat_09",
+    "what": "Enterprise-grade workflow 09 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-10",
+    "code": "FEAT-BI-10",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-10",
+    "technical": "bi.dashboard.industrial.feat_10",
+    "what": "Enterprise-grade workflow 10 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-11",
+    "code": "FEAT-BI-11",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-11",
+    "technical": "bi.dashboard.industrial.feat_11",
+    "what": "Enterprise-grade workflow 11 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-12",
+    "code": "FEAT-BI-12",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-12",
+    "technical": "bi.dashboard.industrial.feat_12",
+    "what": "Enterprise-grade workflow 12 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-13",
+    "code": "FEAT-BI-13",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-13",
+    "technical": "bi.dashboard.industrial.feat_13",
+    "what": "Enterprise-grade workflow 13 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-14",
+    "code": "FEAT-BI-14",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-14",
+    "technical": "bi.dashboard.industrial.feat_14",
+    "what": "Enterprise-grade workflow 14 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-15",
+    "code": "FEAT-BI-15",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-15",
+    "technical": "bi.dashboard.industrial.feat_15",
+    "what": "Enterprise-grade workflow 15 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-16",
+    "code": "FEAT-BI-16",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-16",
+    "technical": "bi.dashboard.industrial.feat_16",
+    "what": "Enterprise-grade workflow 16 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-17",
+    "code": "FEAT-BI-17",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-17",
+    "technical": "bi.dashboard.industrial.feat_17",
+    "what": "Enterprise-grade workflow 17 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-18",
+    "code": "FEAT-BI-18",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-18",
+    "technical": "bi.dashboard.industrial.feat_18",
+    "what": "Enterprise-grade workflow 18 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-19",
+    "code": "FEAT-BI-19",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-19",
+    "technical": "bi.dashboard.industrial.feat_19",
+    "what": "Enterprise-grade workflow 19 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-20",
+    "code": "FEAT-BI-20",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-20",
+    "technical": "bi.dashboard.industrial.feat_20",
+    "what": "Enterprise-grade workflow 20 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-21",
+    "code": "FEAT-BI-21",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-21",
+    "technical": "bi.dashboard.industrial.feat_21",
+    "what": "Enterprise-grade workflow 21 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-22",
+    "code": "FEAT-BI-22",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-22",
+    "technical": "bi.dashboard.industrial.feat_22",
+    "what": "Enterprise-grade workflow 22 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-23",
+    "code": "FEAT-BI-23",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-23",
+    "technical": "bi.dashboard.industrial.feat_23",
+    "what": "Enterprise-grade workflow 23 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-24",
+    "code": "FEAT-BI-24",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-24",
+    "technical": "bi.dashboard.industrial.feat_24",
+    "what": "Enterprise-grade workflow 24 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-25",
+    "code": "FEAT-BI-25",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-25",
+    "technical": "bi.dashboard.industrial.feat_25",
+    "what": "Enterprise-grade workflow 25 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-26",
+    "code": "FEAT-BI-26",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-26",
+    "technical": "bi.dashboard.industrial.feat_26",
+    "what": "Enterprise-grade workflow 26 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-27",
+    "code": "FEAT-BI-27",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-27",
+    "technical": "bi.dashboard.industrial.feat_27",
+    "what": "Enterprise-grade workflow 27 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-28",
+    "code": "FEAT-BI-28",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-28",
+    "technical": "bi.dashboard.industrial.feat_28",
+    "what": "Enterprise-grade workflow 28 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-29",
+    "code": "FEAT-BI-29",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-29",
+    "technical": "bi.dashboard.industrial.feat_29",
+    "what": "Enterprise-grade workflow 29 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
+  },
+  {
+    "id": "feat-bi-30",
+    "code": "FEAT-BI-30",
+    "module": "bi",
+    "moduleName": "Executive BI & Multi-Plant Analytics",
+    "title": "Executive BI & Multi-Plant Analytics Optimization Capability FEAT-BI-30",
+    "technical": "bi.dashboard.industrial.feat_30",
+    "what": "Enterprise-grade workflow 30 in Executive BI & Multi-Plant Analytics engineered for high-capacity furniture fabrication and hotel fit-outs in Odoo 19.",
+    "benefit": "Enforces strict engineering tolerances, minimizes labor cycles, and guarantees luxury hospitality standards."
   }
 ];
