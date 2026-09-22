@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internal Communication Suite (Zoho) — Operations Portal | WD Group</title>
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body { background-color: #0b0f19; color: #f1f5f9; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+    .glass-card { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+    .glass-card:hover { border-color: rgba(20, 184, 166, 0.45); transform: translateY(-3px); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6); }
+    .glow-orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
+  </style>
+  <base href="/portal/wdgroup/internalcommunication/">
+</head>
+<body class="relative flex flex-col justify-between py-10 px-4 sm:px-6 lg:px-8">
+  <div class="glow-orb w-96 h-96 -top-20 -left-20 bg-teal-600/20"></div>
+  <div class="glow-orb w-96 h-96 top-1/2 -right-20 bg-emerald-600/15"></div>
+
+  <main class="relative z-10 max-w-5xl mx-auto w-full space-y-8">
+    <!-- BREADCRUMBS & TOP NAV -->
+    <nav class="flex items-center justify-between flex-wrap gap-4 text-xs text-slate-400 border-b border-slate-800/80 pb-4">
+      <div class="flex items-center gap-2">
+        <a href="/portal/wdgroup" class="text-teal-400 hover:text-teal-300 transition font-semibold flex items-center gap-1">
+          ← WD Group Portal
+        </a>
+        <span class="text-slate-600">/</span>
+        <span class="text-white font-medium">Internal Communication Suite (Zoho)</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="/portal/wdgroup/internalcommunication/ar" class="px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition font-bold font-['IBM_Plex_Sans_Arabic']">
+          العربية (100% RTL)
+        </a>
+        <span class="px-2.5 py-1 rounded-md bg-teal-500/10 text-teal-400 border border-teal-500/20 font-mono font-bold">
+          PROJECT 04
+        </span>
+      </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="text-center space-y-3">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-teal-500/30 bg-teal-500/10 text-xs font-semibold text-teal-400 uppercase tracking-wider">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        WD Group Project 1.4 · Enterprise Communication Infrastructure
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+        Internal Communication Suite (Zoho) <span class="bg-gradient-to-r from-teal-400 via-emerald-300 to-cyan-400 bg-clip-text text-transparent">Operations Suite</span>
+      </h1>
+      <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+        Enterprise cryptographic multi-domain mail routing (2048-bit DKIM, SPF, DMARC), collision-free shared department mailboxes, role-based Cliq real-time channel topologies, and asynchronous Zoho Clips shift handovers across holding facilities.
+      </p>
+    </header>
+
+    <!-- MODULES GRID (2 Options) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- 1. Features Showcase (English) -->
+      <a href="/portal/wdgroup/internalcommunication/features-en" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-left border-teal-500/30">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30">
+              Features Catalog
+            </span>
+            <span class="text-xs text-slate-500 font-mono">40 Features · 8 Pillars</span>
+          </div>
+          <h2 class="text-2xl font-bold text-white group-hover:text-teal-400 transition-colors mb-2">
+            Features Showcase
+          </h2>
+          <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+            Dual-block operational benefits, category filters, and instant live search across security policies, DNS records, and email dispatch topologies.
+          </p>
+        </div>
+        <div class="flex items-center text-sm font-semibold text-teal-400 group-hover:translate-x-1 transition-transform">
+          Open Features Showcase &rarr;
+        </div>
+      </a>
+
+      <!-- 2. Standard Operating Procedures (English) -->
+      <a href="/portal/wdgroup/internalcommunication/sops-en" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-left border-emerald-500/30">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              Interactive Modals
+            </span>
+            <span class="text-xs text-slate-500 font-mono">20 SOPs · Communication Governance</span>
+          </div>
+          <h2 class="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">
+            Standard Operating Procedures (SOPs)
+          </h2>
+          <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+            Interactive pop-up modals covering mailbox provisioning, collision-free dispatch, incident escalation, and archiving policies.
+          </p>
+        </div>
+        <div class="flex items-center text-sm font-semibold text-emerald-400 group-hover:translate-x-1 transition-transform">
+          Open Interactive SOPs &rarr;
+        </div>
+      </a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="text-center text-xs text-slate-500 border-t border-slate-800/80 pt-8">
+      <p>WD Group · Internal Communication Suite · Powered by Dubai in Cairo</p>
+    </footer>
+  </main>
+</body>
+</html>

@@ -130,6 +130,38 @@
       "destination": "/portal/operations.html"
     },
     {
+      "source": "/portal/wdgroup/swissbluewebsite",
+      "destination": "/portal/wdgroup/swissbluewebsite/index.html"
+    },
+    {
+      "source": "/portal/wdgroup/swissbluewebsite/ar",
+      "destination": "/portal/wdgroup/swissbluewebsite/ar.html"
+    },
+    {
+      "source": "/portal/wdgroup/ezeeodooconnector",
+      "destination": "/portal/wdgroup/ezeeodooconnector/index.html"
+    },
+    {
+      "source": "/portal/wdgroup/ezeeodooconnector/ar",
+      "destination": "/portal/wdgroup/ezeeodooconnector/ar.html"
+    },
+    {
+      "source": "/portal/wdgroup/wdgroupwebsite",
+      "destination": "/portal/wdgroup/wdgroupwebsite/index.html"
+    },
+    {
+      "source": "/portal/wdgroup/wdgroupwebsite/ar",
+      "destination": "/portal/wdgroup/wdgroupwebsite/ar.html"
+    },
+    {
+      "source": "/portal/wdgroup/internalcommunication",
+      "destination": "/portal/wdgroup/internalcommunication/index.html"
+    },
+    {
+      "source": "/portal/wdgroup/internalcommunication/ar",
+      "destination": "/portal/wdgroup/internalcommunication/ar.html"
+    },
+    {
       "source": "/portal/wdgroup/swissbluewebsite/features-en",
       "destination": "/portal/wdgroup/swissbluewebsite/features-en.html"
     },

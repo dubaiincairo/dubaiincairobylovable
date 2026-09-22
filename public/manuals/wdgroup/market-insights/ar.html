@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الذكاء الإحصائي للسوق السعودي — مؤشرات قطاعي الضيافة وتصنيع الأثاث | مجموعة دبليو دي للأعمال</title>
+    <meta name="description" content="إحصائيات حكومية رسمية موثقة ورسوم بيانية تفاعلية لقطاعي الضيافة الفندقية وتصنيع الأثاث في المملكة العربية السعودية (الهيئة العامة للإحصاء، البنك المركزي السعودي ساما، وزارة السياحة، وزارة الصناعة).">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 Pro CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Chart.js 4.4 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts: IBM Plex Sans Arabic & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: "#0B192C",
+                            dark: "#070F1E",
+                            card: "#0E2238",
+                            sky: "#38BDF8",
+                            emerald: "#10B981",
+                            amber: "#F59E0B",
+                            indigo: "#6366F1",
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['IBM Plex Sans Arabic', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        arabic: ['IBM Plex Sans Arabic', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: "IBM Plex Sans Arabic", sans-serif;
+            background-color: #070F1E;
+            color: #E2E8F0;
+            direction: rtl;
+            text-align: right;
+        }
+        ::-webkit-scrollbar { width: 7px; height: 7px; }
+        ::-webkit-scrollbar-track { background: #0B192C; }
+        ::-webkit-scrollbar-thumb { background: #1E3A5F; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #38BDF8; }
+        /* إخفاء شريط التمرير الافتراضي لشريط التبويبات بالكامل */
+        #tabScrollerWrapper {
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+        #tabScrollerWrapper::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        .glass-card {
+            background: rgba(14, 34, 56, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.25s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.35);
+            box-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.5);
+        }
+        .chart-container {
+            position: relative;
+            height: 320px;
+            width: 100%;
+        }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 260px;
+            }
+        }
+        .tab-nav-btn {
+            white-space: nowrap;
+            user-select: none;
+            cursor: pointer;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .glass-card { border: 1px solid #ccc !important; background: white !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-sky-500 selection:text-slate-950">
+
+    <!-- شريط التنقل العلوي الموحد -->
+    <header class="sticky top-0 z-50 bg-[#070F1E]/90 backdrop-blur-xl border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-3">
+                <a href="/portal/wdgroup/ar" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-sky-500/20 text-sm">
+                    WD
+                </a>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm sm:text-base font-extrabold text-white tracking-tight">مجموعة دبليو دي للأعمال</span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-300 border border-sky-500/30">
+                            الذكاء الإحصائي للسوق
+                        </span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 hidden sm:block">
+                        البيانات الإحصائية والتحليلات الرسمية لقطاعي الضيافة وتصنيع الأثاث في المملكة
+                    </p>
+                </div>
+            </div>
+
+            <!-- أزرار الإجراءات واللغة -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="/portal/wdgroup/strategy" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 text-xs font-semibold transition">
+                    <i class="fa-solid fa-compass text-amber-400 text-xs"></i>
+                    <span>استراتيجية النمو التجاري</span>
+                </a>
+                <a href="/portal/wdgroup/ar" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 text-xs font-semibold transition">
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                    <span>بوابة العميل</span>
+                </a>
+                <a href="/portal/wdgroup/market-insights" class="px-3 py-1.5 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/30 hover:bg-sky-500/20 transition text-xs font-bold font-mono flex items-center gap-1.5" dir="ltr" title="Switch to English">
+                    <span>English (100% LTR)</span>
+                </a>
+                <button onclick="window.print()" class="no-print p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-sky-400 border border-slate-800 transition" title="طباعة التقرير">
+                    <i class="fa-solid fa-print text-sm"></i>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي للمنصة -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8 flex-grow w-full">
+
+        <!-- ترويسة الصفحة والتوثيق الحكومي -->
+        <div class="space-y-3">
+            <div class="flex items-center justify-between flex-wrap gap-2 text-xs text-slate-400">
+                <div class="flex items-center gap-2">
+                    <a href="/portal/wdgroup/ar" class="hover:text-white transition">بوابة عميل مجموعة دبليو دي للأعمال</a>
+                    <span class="text-slate-600">/</span>
+                    <span class="text-sky-400 font-semibold">المشروع 06: الذكاء الإحصائي للسوق السعودي</span>
+                </div>
+                <div class="flex items-center gap-2 font-mono text-[11px] text-slate-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>الهيئة العامة للإحصاء · البنك المركزي السعودي · وزارة السياحة · وزارة الصناعة</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-6 sm:p-8 border-slate-800 bg-gradient-to-l from-slate-950/80 via-[#0B192C]/80 to-[#070F1E]/90 relative overflow-hidden">
+                <div class="absolute -left-10 -bottom-10 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="relative z-10 max-w-4xl space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-xs font-semibold text-sky-300">
+                        <i class="fa-solid fa-shield-halved text-xs"></i>
+                        <span>بيانات حكومية رسمية موثقة ومعتمدة</span>
+                        <span class="text-slate-500">|</span>
+                        <span>تحديث الربع الرابع 2025</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight leading-tight">
+                        الذكاء الإحصائي والتحليلات الرسمية للسوق السعودي
+                    </h1>
+                    <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">
+                        لوحة تحليلات استراتيجية موحدة مستندة بالكامل إلى أحدث البيانات الرسمية الصادرة عن الهيئة العامة للإحصاء (GASTAT)، البنك المركزي السعودي (ساما)، وزارة السياحة، ووزارة الصناعة والثروة المعدنية. تدعم القرارات الاستثمارية والتشغيلية لوحدات مجموعة دبليو دي (فنادق سويس بلو، مصنع جرين وود للأثاث، والمصنع الوطني للمطابخ).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- بطاقات المؤشرات الكبرى الستة مع عدادات رقمية تصاعدية سلسة -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+            
+            <!-- مؤشر 1 -->
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-sky-500/50 group transition-all duration-300 hover:-translate-y-1">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-mono uppercase text-[10px] text-sky-400 font-bold">إنفاق السياحة</span>
+                    <i class="fa-solid fa-money-bill-wave text-slate-500 group-hover:text-sky-400 transition-colors"></i>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1 flex items-baseline">
+                    <span class="text-sky-400 ml-1 text-base font-bold">مليار ر.س</span>
+                    <span class="kpi-counter font-mono" data-target="304">0</span>
+                </div>
+                <div class="text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-trend-up"></i> +19.2% نمو سنوي
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 border-t border-slate-800/80 pt-1 font-mono">
+                    المصدر: وزارة السياحة 2025
+                </div>
+            </div>
+
+            <!-- مؤشر 2 -->
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-emerald-500/50 group transition-all duration-300 hover:-translate-y-1">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-mono uppercase text-[10px] text-emerald-400 font-bold">إجمالي الزوار</span>
+                    <i class="fa-solid fa-users text-slate-500 group-hover:text-emerald-400 transition-colors"></i>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1 flex items-baseline">
+                    <span class="kpi-counter font-mono" data-target="123">0</span>
+                    <span class="text-emerald-400 mr-1 text-base font-bold">مليون زائر</span>
+                </div>
+                <div class="text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-trend-up"></i> +6.0% وافد ومحلي
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 border-t border-slate-800/80 pt-1 font-mono">
+                    المصدر: الهيئة العامة للإحصاء
+                </div>
+            </div>
+
+            <!-- مؤشر 3 -->
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-amber-500/50 group transition-all duration-300 hover:-translate-y-1">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-mono uppercase text-[10px] text-amber-400 font-bold">الفنادق المرخصة</span>
+                    <i class="fa-solid fa-hotel text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1 flex items-baseline">
+                    <span class="kpi-counter font-mono" data-target="5937" data-format="comma">0</span>
+                    <span class="text-amber-400 mr-1 text-base font-bold">فندق</span>
+                </div>
+                <div class="text-[11px] text-amber-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-trend-up"></i> +34.2% نمو سنوي
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 border-t border-slate-800/80 pt-1 font-mono">
+                    المصدر: نشرة الإحصاء Q4
+                </div>
+            </div>
+
+            <!-- مؤشر 4 -->
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-indigo-500/50 group transition-all duration-300 hover:-translate-y-1">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-mono uppercase text-[10px] text-indigo-400 font-bold">مبيعات الأثاث POS</span>
+                    <i class="fa-solid fa-couch text-slate-500 group-hover:text-indigo-400 transition-colors"></i>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1 flex items-baseline">
+                    <span class="text-indigo-400 ml-1 text-base font-bold">مليار ر.س</span>
+                    <span class="kpi-counter font-mono" data-target="18.2" data-decimals="1">0.0</span>
+                </div>
+                <div class="text-[11px] text-indigo-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-trend-up"></i> 85% مدفوعات رقمية
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 border-t border-slate-800/80 pt-1 font-mono">
+                    المصدر: تقرير ساما السنوي
+                </div>
+            </div>
+
+            <!-- مؤشر 5 -->
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-teal-500/50 group transition-all duration-300 hover:-translate-y-1">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-mono uppercase text-[10px] text-teal-400 font-bold">مساكن سكني</span>
+                    <i class="fa-solid fa-door-open text-slate-500 group-hover:text-teal-400 transition-colors"></i>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1 flex items-baseline">
+                    <span class="text-teal-400 ml-0.5 text-base font-bold">+</span>
+                    <span class="kpi-counter font-mono" data-target="93000" data-format="comma">0</span>
+                    <span class="text-teal-400 mr-1 text-base font-bold">أسرة</span>
+                </div>
+                <div class="text-[11px] text-teal-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-check"></i> مساكن مأهولة جديدة
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 border-t border-slate-800/80 pt-1 font-mono">
+                    المصدر: برنامج سكني / الإسكان
+                </div>
+            </div>
+
+            <!-- مؤشر 6 -->
+            <div class="glass-card rounded-2xl p-4 flex flex-col justify-between border-slate-800 hover:border-pink-500/50 group transition-all duration-300 hover:-translate-y-1">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-mono uppercase text-[10px] text-pink-400 font-bold">مصانع الأخشاب</span>
+                    <i class="fa-solid fa-gears text-slate-500 group-hover:text-pink-400 transition-colors"></i>
+                </div>
+                <div class="text-xl sm:text-2xl font-black text-white tracking-tight my-1 flex items-baseline">
+                    <span class="text-pink-400 ml-0.5 text-base font-bold">+</span>
+                    <span class="kpi-counter font-mono" data-target="1200" data-format="comma">0</span>
+                    <span class="text-pink-400 mr-1 text-base font-bold">مصنع</span>
+                </div>
+                <div class="text-[11px] text-pink-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-industry"></i> ترخيص صناعي نشط
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1 border-t border-slate-800/80 pt-1 font-mono">
+                    المصدر: وزارة الصناعة
+                </div>
+            </div>
+
+        </div>
+
+        <!-- شريط التبويبات مع حركة الإشارة التوضيحية الفاخرة (2 سم) ومؤشرات التلاشي الجانبي وبدون مسطرة التمرير -->
+        <div class="relative sticky top-16 sm:top-18 z-40 bg-[#070F1E]/95 backdrop-blur-md py-3 -mx-4 px-4 sm:mx-0 sm:px-0 border-b border-slate-800 no-print">
+            <div id="scrollHintRight" class="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#070F1E] to-transparent z-10 opacity-0 transition-opacity duration-300"></div>
+            <div id="scrollHintLeft" class="pointer-events-none absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#070F1E] to-transparent z-10 opacity-100 transition-opacity duration-300"></div>
+
+            <div id="tabScrollerWrapper" class="overflow-x-auto select-none" style="scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch;">
+                <div class="flex items-center gap-2.5 min-w-max pb-1">
+                    <button onclick="switchSection('section-hospitality', this)" id="btn-section-hospitality" 
+                        class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center gap-2 bg-sky-500 text-slate-950 border-sky-400 shadow-lg shadow-sky-500/20 cursor-pointer">
+                        <i class="fa-solid fa-hotel text-xs"></i>
+                        <span>اقتصاديات الفنادق والضيافة</span>
+                        <span class="tab-badge text-[10px] px-1.5 py-0.5 rounded-full bg-slate-950 text-sky-200 border border-slate-900 font-mono font-bold shadow-sm" data-color="text-sky-300 border border-slate-700">الإحصاء</span>
+                    </button>
+
+                    <button onclick="switchSection('section-furniture', this)" id="btn-section-furniture" 
+                        class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700 cursor-pointer">
+                        <i class="fa-solid fa-couch text-xs text-amber-400"></i>
+                        <span>تصنيع الأثاث والمطابخ</span>
+                        <span class="tab-badge text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-amber-300 border border-slate-700 font-mono font-medium" data-color="text-amber-300 border border-slate-700">ساما</span>
+                    </button>
+
+                    <button onclick="switchSection('section-synergies', this)" id="btn-section-synergies" 
+                        class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700 cursor-pointer">
+                        <i class="fa-solid fa-arrows-split-up-and-left text-xs text-emerald-400"></i>
+                        <span>مصفوفة التكامل بين القطاعات</span>
+                        <span class="tab-badge text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-emerald-300 border border-slate-700 font-mono font-medium" data-color="text-emerald-300 border border-slate-700">B2B / B2C</span>
+                    </button>
+
+                    <button onclick="switchSection('section-sources', this)" id="btn-section-sources" 
+                        class="tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700 cursor-pointer">
+                        <i class="fa-solid fa-book-bookmark text-xs text-indigo-400"></i>
+                        <span>النشرات الرسمية والمنهجية</span>
+                        <span class="tab-badge text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 text-indigo-300 border border-slate-700 font-mono font-medium" data-color="text-indigo-300 border border-slate-700">المصادر</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- القسم 1: اقتصاديات الفنادق والضيافة -->
+        <!-- ================================================================= -->
+        <section id="section-hospitality" class="section-pane space-y-8">
+            
+            <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-xl bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </span>
+                        تحليلات قطاع الضيافة السعودي وحركية الإشغال الفندقي
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                        بيانات استرشادية رسمية من الهيئة العامة للإحصاء ونشرات وزارة السياحة السعودية لعام 2025
+                    </p>
+                </div>
+                <div class="text-xs font-mono text-slate-400 bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-800">
+                    الجهة المصدرة: الهيئة العامة للإحصاء · وزارة السياحة
+                </div>
+            </div>
+
+            <!-- شبكة الرسوم البيانية 1 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- الرسم 1: نمو السياحة والإنفاق الإجمالي -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
+                                نمو إنفاق السياحة وأعداد الزوار في المملكة
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">مقارنة سنوية بين إجمالي الإنفاق السياحي (مليار ريال) وإجمالي الزيارات (مليون)</p>
+                        </div>
+                        <div class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-[11px]">
+                            <button onclick="toggleTourismDataset('all', this)" class="btn-tourism-filter px-2.5 py-1 rounded-lg font-bold bg-sky-500/20 text-sky-300 border border-sky-500/40 transition-all cursor-pointer">الكل</button>
+                            <button onclick="toggleTourismDataset('spend', this)" class="btn-tourism-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">الإنفاق</button>
+                            <button onclick="toggleTourismDataset('visits', this)" class="btn-tourism-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">الزوار</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="tourismGrowthChart"></canvas>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-sky-400 mt-0.5"></i>
+                        <div><strong>خلاصة تنفيذية:</strong> حققت المملكة مستهدف 100 مليون زائر قبل 7 سنوات من الموعد المحدد في رؤية 2030، مع بلوغ الإنفاق <strong>304 مليار ريال</strong>، مما يستوجب تركيز فنادق سويس بلو على الإقامات المؤسسية الممتدة.</div>
+                    </div>
+                </div>
+
+                <!-- الرسم 2: نسب الإشغال حسب المناطق -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                                نسب إشغال الفنادق والشقق المخدومة حسب المدن الرئيسية
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">معدلات الإشغال الفعلية للربع الأخير 2025 في أهم الوجهات السعودية</p>
+                        </div>
+                        <div class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-[11px]">
+                            <button onclick="toggleOccupancyDataset('all', this)" class="btn-occupancy-filter px-2.5 py-1 rounded-lg font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition-all cursor-pointer">الكل</button>
+                            <button onclick="toggleOccupancyDataset('hotels', this)" class="btn-occupancy-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">الفنادق</button>
+                            <button onclick="toggleOccupancyDataset('apartments', this)" class="btn-occupancy-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">الشقق المخدومة</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="occupancyByCityChart"></canvas>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-emerald-400 mt-0.5"></i>
+                        <div><strong>توصية التوسع:</strong> تسجل الرياض والمدينة المنورة أعلى نسب إشغال (تتجاوز 70% إلى 81%)، مما يؤكد جدوى نموذج سويس بلو للشقق الفندقية المفروشة في مواكبة تدفق الشركات والفعاليات العالمية.</div>
+                    </div>
+                </div>
+
+                <!-- الرسم 3: مزيج إنفاق السياحة حسب الغرض -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div>
+                        <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                            توزيع إنفاق السياحة حسب نوع الزيارة
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">الحصص النسبية لمصادر الإنفاق السياحي بالمملكة</p>
+                    </div>
+                    <div class="chart-container flex items-center justify-center">
+                        <canvas id="spendMixChart"></canvas>
+                    </div>
+                    <div class="text-[11px] text-slate-400 border-t border-slate-800 pt-3 space-y-1">
+                        <div class="flex justify-between"><span>السياحة الترفيهية والفعاليات:</span><span class="font-bold text-white font-mono">38% (SAR 115.5B)</span></div>
+                        <div class="flex justify-between"><span>السياحة الداخلية والاستجمام:</span><span class="font-bold text-white font-mono">34% (SAR 103.3B)</span></div>
+                        <div class="flex justify-between"><span>السياحة الدينية والزيارة:</span><span class="font-bold text-white font-mono">18% (SAR 54.7B)</span></div>
+                        <div class="flex justify-between"><span>المؤتمرات والأعمال المؤسسية (MICE):</span><span class="font-bold text-white font-mono">10% (SAR 30.4B)</span></div>
+                    </div>
+                </div>
+
+                <!-- الرسم 4: مسار متوسط السعر اليومي للغرفة (ADR) -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div>
+                        <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-indigo-400"></span>
+                            المسار الربعي لمتوسط السعر اليومي للغرفة (ADR)
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">تطور معدل السعر اليومي عبر فصول 2024 و2025 بالريال السعودي</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="adrTrendChart"></canvas>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-indigo-400 mt-0.5"></i>
+                        <div><strong>ديناميكية التسعير:</strong> تبلغ الأسعار ذروتها في الربعين الأول والثاني (موسم الرياض ورمضان والمعارض الدولية)، بينما تستقر صيفاً عند 340-390 ريال، ما يبرز أهمية العقود المؤسسية المضمونة.</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- القسم 2: تصنيع الأثاث والمطابخ -->
+        <!-- ================================================================= -->
+        <section id="section-furniture" class="section-pane hidden space-y-8">
+            
+            <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-couch"></i>
+                        </span>
+                        بيانات تصنيع الأثاث وتجهيز المساكن والمطابخ (ساما والصناعة)
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                        إحصائيات المعاملات المالية لنقاط البيع (ساما)، تراخيص المصانع، وتسليمات الإسكان الوطنية
+                    </p>
+                </div>
+                <div class="text-xs font-mono text-slate-400 bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-800">
+                    الجهات: البنك المركزي السعودي · وزارة الصناعة · برنامج سكني
+                </div>
+            </div>
+
+            <!-- شبكة الرسوم البيانية 2 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- الرسم 5: مبيعات نقاط البيع للأثاث ونسبة الدفع الإلكتروني -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                                مبيعات نقاط البيع للأثاث ونسبة الدفع الإلكتروني
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">قيمة المعاملات السنوية عبر نقاط البيع (مليار ريال) ومعدل التحول الرقمي</p>
+                        </div>
+                        <div class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-[11px]">
+                            <button onclick="togglePosDataset('all', this)" class="btn-pos-filter px-2.5 py-1 rounded-lg font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 transition-all cursor-pointer">الكل</button>
+                            <button onclick="togglePosDataset('value', this)" class="btn-pos-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">مبيعات نقاط البيع</button>
+                            <button onclick="togglePosDataset('digital', this)" class="btn-pos-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">نسبة الدفع الرقمي</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="furniturePosChart"></canvas>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-amber-400 mt-0.5"></i>
+                        <div><strong>رؤية المستهلك:</strong> مع بلوغ نسبة المدفوعات الرقمية بالتجزئة <strong>85% في 2025</strong>، أصبح شراء المطابخ والأثاث المخصص يتطلب قنوات دفع رقمية وتقسيط آلي متقدم (مدى، أبل باي، وتمارا وتابي).</div>
+                    </div>
+                </div>
+
+                <!-- الرسم 6: تسليم مساكن سكني وحجم الطلب على المطابخ المدمجة -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-teal-400"></span>
+                                تسليم المساكن الجديدة والطلب على المطابخ المجهزة
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">عدد الوحدات السكنية المسلمة سنوياً وحجم الطلب المتولد على أعمال النجارة والمطابخ (بالآلاف)</p>
+                        </div>
+                        <div class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-[11px]">
+                            <button onclick="toggleHousingDataset('all', this)" class="btn-housing-filter px-2.5 py-1 rounded-lg font-bold bg-teal-500/20 text-teal-300 border border-teal-500/40 transition-all cursor-pointer">الكل</button>
+                            <button onclick="toggleHousingDataset('homes', this)" class="btn-housing-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">مساكن مأهولة</button>
+                            <button onclick="toggleHousingDataset('kitchens', this)" class="btn-housing-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">مطابخ جديدة</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="housingCompletionsChart"></canvas>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-teal-400 mt-0.5"></i>
+                        <div><strong>فرصة نمو المصانع:</strong> انتقلت أكثر من <strong>93,000 أسرة سعودية</strong> لمساكن جديدة خلال 2024-2025، وتمثل كل وحدة عقداً فورياً لتجهيز مطبخ وخزائن بقيمة تتراوح بين 45,000 و95,000 ريال.</div>
+                    </div>
+                </div>
+
+                <!-- الرسم 7: الحصة السوقية لمبيعات الأثاث حسب المناطق -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+                    <div>
+                        <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
+                            الحصة السوقية لمبيعات الأثاث حسب المناطق
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">توزيع مدفوعات البطاقات ونقاط البيع الإقليمية لمبيعات الأثاث (ساما)</p>
+                    </div>
+                    <div class="chart-container flex items-center justify-center">
+                        <canvas id="regionalDemandChart"></canvas>
+                    </div>
+                    <div class="text-[11px] text-slate-400 border-t border-slate-800 pt-3 space-y-1">
+                        <div class="flex justify-between"><span>منطقة الرياض:</span><span class="font-bold text-white font-mono">42% (SAR 7.6B)</span></div>
+                        <div class="flex justify-between"><span>مكة المكرمة / جدة:</span><span class="font-bold text-white font-mono">28% (SAR 5.1B)</span></div>
+                        <div class="flex justify-between"><span>المنطقة الشرقية:</span><span class="font-bold text-white font-mono">16% (SAR 2.9B)</span></div>
+                        <div class="flex justify-between"><span>المنطقة الجنوبية:</span><span class="font-bold text-white font-mono">14% (SAR 2.6B)</span></div>
+                    </div>
+                </div>
+
+                <!-- الرسم 8: التوزيع الجغرافي للمصانع المرخصة -->
+                <div class="glass-card rounded-2xl p-5 sm:p-6 space-y-4 lg:col-span-2">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+                                التوزيع الجغرافي لمصانع الخشب والأثاث المرخصة
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">سجل وزارة الصناعة والثروة المعدنية لأكثر من 1,200 منشأة تصنيع قائمة</p>
+                        </div>
+                        <span class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/30">وزارة الصناعة 2025</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="factoryDistributionChart"></canvas>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-cyan-400 mt-0.5"></i>
+                        <div><strong>الميزة التنافسية الإقليمية:</strong> في حين تتركز كثافة المنافسة في الرياض وجدة، تحظى <strong>المنطقة الجنوبية</strong> بكثافة مصانع منخفضة (120 مصنعاً) رغم فورة المشاريع السكنية، مما يمنح المصنع الوطني قوة تسعيرية محمية إقليمياً.</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- القسم 3: مصفوفة التكامل بين القطاعات -->
+        <!-- ================================================================= -->
+        <section id="section-synergies" class="section-pane hidden space-y-8">
+            
+            <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm">
+                            <i class="fa-solid fa-arrows-split-up-and-left"></i>
+                        </span>
+                        مصفوفة التكامل الاستراتيجي والوفورات التشغيلية لمجموعة دبليو دي
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                        نموذج تحويل الطلب الفندقي والسكني الخارجي إلى إيرادات تصنيع وتوفير داخلي مستدام
+                    </p>
+                </div>
+                <div class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/30">
+                    B2B & B2C وفورات متكاملة
+                </div>
+            </div>
+
+            <!-- ركائز التكامل -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- ركيزة 1: توريد الضيافة الداخلية -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 border-r-4 border-r-sky-500">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono font-bold uppercase tracking-wider text-sky-400">ركيزة التكامل الأولى</span>
+                        <span class="px-2 py-0.5 rounded bg-sky-500/10 text-sky-300 text-[11px] font-semibold">فنادق سويس بلو &larr; مصنع جرين وود</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">سلسلة توريد الأثاث الفندقي الداخلي</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        بدلاً من التعاقد مع موردين خارجيين لتأثيث توسعات شقق وفنادق سويس بلو بتكاليف مستوردة مرتفعة، يتولى مصنع جرين وود تصنيع وتوريد كافة غرف النزلاء، الأبواب، والمطابخ التحضيرية ومكاتب الاستقبال بأسعار التكلفة الصناعية المباشرة.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3 pt-2 text-xs font-mono">
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-slate-400 text-[10px]">التوفير المباشر لكل مفتاح:</div>
+                            <div class="text-emerald-400 font-bold text-base mt-0.5">34.5% توفير مالي</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-slate-400 text-[10px]">اختصار دورة التوريد:</div>
+                            <div class="text-sky-400 font-bold text-base mt-0.5">65 يوماً مقابل 180 يوماً</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ركيزة 2: منصة المطابخ السكنية المباشرة للأفراد -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 border-r-4 border-r-amber-500">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono font-bold uppercase tracking-wider text-amber-400">ركيزة التكامل الثانية</span>
+                        <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 text-[11px] font-semibold">المصنع الوطني للمطابخ &larr; المستهلكون</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">منصة المطابخ المجهزة المباشرة للأفراد</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        استفادة من انتقال أكثر من <strong>93,000 أسرة سعودية</strong> لمساكن سكني، يوفر المصنع الوطني للمطابخ أدوات محاكاة ثلاثية الأبعاد وربط التقسيط الفوري عبر تمارا وتابي (تقسيط 4 أشهر بدون فوائد) لاقتناص ملاك المنازل الجدد في خميس مشيط وأبها والرياض.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3 pt-2 text-xs font-mono">
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-slate-400 text-[10px]">متوسط قيمة الصفقة للأسرة:</div>
+                            <div class="text-amber-400 font-bold text-base mt-0.5">68,500 ريال</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-slate-400 text-[10px]">معدل التحويل عبر التقسيط:</div>
+                            <div class="text-emerald-400 font-bold text-base mt-0.5">+28% عملاء مؤهلين</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- حاسبة التكامل والتوفير التفاعلية لتوريد الفنادق -->
+            <div class="glass-card rounded-2xl p-6 border-slate-800 space-y-4 bg-gradient-to-bl from-slate-900/90 to-[#0B192C]">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-calculator"></i>
+                            </span>
+                            حاسبة التكامل والتوفير في توريد وتجهيز الفنادق
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1">حساب التوفير المالي المباشر عند تأثيث توسعات الفنادق عبر مصنع جرين وود الداخلي مقارنة بالتوريد المستورد</p>
+                    </div>
+                    <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/30">محاكاة تفاعلية فورية</span>
+                </div>
+                <div class="space-y-3 pt-3">
+                    <div class="flex items-center justify-between text-xs font-semibold">
+                        <span class="text-slate-300">حجم الغرف والأجنحة الفندقية المستهدفة للتأثيث:</span>
+                        <span id="roomCountLabel" class="text-sky-400 font-mono text-sm font-bold bg-sky-500/10 px-2.5 py-0.5 rounded border border-sky-500/30">120 غرفة</span>
+                    </div>
+                    <input type="range" id="roomCountSlider" min="20" max="600" step="10" value="120" oninput="updateSynergySimulator(this.value)" 
+                        class="w-full accent-sky-400 cursor-pointer h-2 bg-slate-800 rounded-lg">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 text-xs">
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-[10px] text-slate-400">تكلفة التوريد المستورد:</div>
+                            <div id="simImportCost" class="text-slate-200 font-bold text-sm sm:text-base font-mono mt-1">SAR 3,360,000</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-[10px] text-slate-400">تكلفة تصنيع جرين وود:</div>
+                            <div id="simLocalCost" class="text-sky-400 font-bold text-sm sm:text-base font-mono mt-1">SAR 2,220,000</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-emerald-500/40 bg-emerald-950/20">
+                            <div class="text-[10px] text-emerald-400 font-semibold">صافي التوفير الداخلي:</div>
+                            <div id="simSavings" class="text-emerald-400 font-bold text-sm sm:text-base font-mono mt-1">SAR 1,140,000 (34%)</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                            <div class="text-[10px] text-slate-400">فارق سرعة الإنجاز:</div>
+                            <div id="simTimeSaved" class="text-amber-400 font-bold text-sm sm:text-base font-mono mt-1">أسرع بـ 11 أسبوعاً</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- جدول المواءمة التشغيلية الاستراتيجية -->
+            <div class="glass-card rounded-2xl p-6 space-y-4 overflow-hidden">
+                <h3 class="text-base font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-table text-sky-400"></i>
+                    القدرات التشغيلية لمجموعة دبليو دي مقابل مؤشرات الطلب في السوق السعودي (2025–2027)
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-right text-slate-300 border border-slate-800">
+                        <thead class="bg-slate-900/90 text-slate-400 uppercase font-mono text-[10px] border-b border-slate-800">
+                            <tr>
+                                <th class="p-3.5">القطاع والنشاط</th>
+                                <th class="p-3.5">المؤشر الحكومي الرسمي</th>
+                                <th class="p-3.5">وحدة أعمال مجموعة دبليو دي</th>
+                                <th class="p-3.5">المهمة التشغيلية المعتمدة</th>
+                                <th class="p-3.5">المركز الجغرافي المستهدف</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 font-sans">
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3.5 font-bold text-white">الشقق الفندقية والفنادق</td>
+                                <td class="p-3.5 text-sky-400 font-mono">70.5% إشغال الرياض (الإحصاء)</td>
+                                <td class="p-3.5 font-semibold text-slate-200">فنادق سويس بلو</td>
+                                <td class="p-3.5">عقود الإقامة المؤسسية الممتدة وزيادة الحجوزات المباشرة</td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 text-sky-300 font-mono">الرياض وجدة</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3.5 font-bold text-white">أعمال النجارة والمقاولات الفندقية</td>
+                                <td class="p-3.5 text-emerald-400 font-mono">+34.2% فنادق مرخصة (السياحة)</td>
+                                <td class="p-3.5 font-semibold text-slate-200">مصنع جرين وود للأثاث</td>
+                                <td class="p-3.5">توريد B2B لغرف النزلاء، الأبواب، وأعمال الديكور الخشبي</td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300 font-mono">صناعية الرياض</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3.5 font-bold text-white">المطابخ السكنية المجهزة للأفراد</td>
+                                <td class="p-3.5 text-amber-400 font-mono">+93,000 مستفيد سكني (الإسكان)</td>
+                                <td class="p-3.5 font-semibold text-slate-200">المصنع الوطني للمطابخ</td>
+                                <td class="p-3.5">صالات عرض التجزئة، التصميم ثلاثي الأبعاد، والتقسيط المرن</td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 font-mono whitespace-nowrap">المركز الإقليمي الجنوبي</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3.5 font-bold text-white">التجارة الإلكترونية للأثاث المنزلي</td>
+                                <td class="p-3.5 text-indigo-400 font-mono">18.2 مليار ريال مبيعات نقاط البيع (ساما)</td>
+                                <td class="p-3.5 font-semibold text-slate-200">متجر دبليو دي الإلكتروني</td>
+                                <td class="p-3.5">متجر متكامل، بوابات دفع ميسر 3DS، وخدمة التركيب الاحترافي</td>
+                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 text-indigo-300 font-mono">كافة مناطق المملكة</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- القسم 4: النشرات الرسمية والمنهجية -->
+        <!-- ================================================================= -->
+        <section id="section-sources" class="section-pane hidden space-y-6">
+            
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-sm">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </span>
+                    المصادر الحكومية الرسمية ومنهجية استخراج البيانات
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                    توثيق المصادر الأصلية للبيانات المعتمدة في هذا التقرير لضمان الامتثال والدقة الإحصائية
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <!-- المصدر 1 -->
+                <div class="glass-card rounded-2xl p-5 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-sky-400">الهيئة العامة للإحصاء (GASTAT)</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20">نشرة السياحة Q4 2025</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        نشرات إحصاءات السياحة والمنشآت الفندقية، معدلات الإشغال الإقليمية، أعداد الغرف الفندقية المرخصة، والمسح الشامل لإنفاق السياحة الوافدة والداخلية.
+                    </p>
+                    <div class="text-[11px] font-mono text-slate-400 pt-1">
+                        الرابط الرسمي: <span class="text-sky-300">stats.gov.sa</span>
+                    </div>
+                </div>
+
+                <!-- المصدر 2 -->
+                <div class="glass-card rounded-2xl p-5 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-amber-400">البنك المركزي السعودي (ساما)</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">النشرة الإحصائية الشهرية</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        البيانات الشهرية والسنوية لعمليات أجهزة نقاط البيع (POS) لقطاع الأثاث والمفروشات المنزلية، نسب التجارة الإلكترونية والدفع الرقمي عبر بطاقات مدى والبطاقات الائتمانية.
+                    </p>
+                    <div class="text-[11px] font-mono text-slate-400 pt-1">
+                        الرابط الرسمي: <span class="text-amber-300">sama.gov.sa</span>
+                    </div>
+                </div>
+
+                <!-- المصدر 3 -->
+                <div class="glass-card rounded-2xl p-5 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-emerald-400">وزارة السياحة السعودية</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">التقرير السنوي للأداء السياحي</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        مؤشرات تحقيق أهداف الاستراتيجية الوطنية للسياحة، مؤشرات الإنفاق السياحي المباشر، وتصاريح مرافق الضيافة والشقق المخدومة المعتمدة في مختلف مدن المملكة.
+                    </p>
+                    <div class="text-[11px] font-mono text-slate-400 pt-1">
+                        الرابط الرسمي: <span class="text-emerald-300">mt.gov.sa</span>
+                    </div>
+                </div>
+
+                <!-- المصدر 4 -->
+                <div class="glass-card rounded-2xl p-5 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-indigo-400">وزارة الصناعة والثروة المعدنية</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">المركز الوطني للمعلومات الصناعية</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        دليل المصانع المنتجة المرخصة لنشاط صناعة المنتجات الخشبية والأثاث، التوزيع الجغرافي عبر المدن الصناعية (مدن)، وحجم الاستثمارات المباشرة في القطاع.
+                    </p>
+                    <div class="text-[11px] font-mono text-slate-400 pt-1">
+                        الرابط الرسمي: <span class="text-indigo-300">mim.gov.sa</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- التذييل الموحد -->
+    <footer class="mt-12 border-t border-slate-800/80 bg-[#050B14] py-8 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-white">مجموعة دبليو دي للأعمال</span>
+                <span class="text-slate-600">·</span>
+                <span>بوابة الذكاء الإحصائي للسوق السعودي</span>
+                <span class="text-slate-600">·</span>
+                <span>مدعوم بواسطة دبي في القاهرة</span>
+            </div>
+            <div class="flex items-center gap-4 text-slate-400">
+                <a href="/portal/wdgroup/ar" class="hover:text-sky-400 transition">بوابة عميل مجموعة دبليو دي للأعمال</a>
+                <span>·</span>
+                <a href="/portal/wdgroup/strategy" class="hover:text-sky-400 transition">استراتيجية النمو التجاري</a>
+                <span>·</span>
+                <a href="/portal/wdgroup/market-insights" class="hover:text-sky-400 transition font-mono" dir="ltr">English (LTR)</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- النصوص البرمجية التفاعلية وتهيئة الرسوم البيانية -->
+    <script>
+        // السجل العام للرسوم البيانية لإعادة التحجيم والحركات التفاعلية
+        window.charts = {};
+
+        // منطق تبديل الأقسام وتفعيل حركات الرسوم البيانية
+        function switchSection(sectionId, btn) {
+            document.querySelectorAll(".section-pane").forEach(pane => {
+                pane.classList.add("hidden");
+            });
+            const target = document.getElementById(sectionId);
+            if (target) {
+                target.classList.remove("hidden");
+            }
+
+            // تحديث تنسيقات الأزرار والشارات التوضيحية
+            document.querySelectorAll(".tab-nav-btn").forEach(b => {
+                b.className = "tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border transition-all flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800 hover:border-slate-700 cursor-pointer";
+                const badge = b.querySelector(".tab-badge");
+                if (badge) {
+                    const colorClasses = badge.getAttribute("data-color") || "text-slate-300 border border-slate-700";
+                    badge.className = `tab-badge text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 font-mono font-medium ${colorClasses}`;
+                }
+            });
+            btn.className = "tab-nav-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center gap-2 bg-sky-500 text-slate-950 border-sky-400 shadow-lg shadow-sky-500/20 cursor-pointer";
+            const activeBadge = btn.querySelector(".tab-badge");
+            if (activeBadge) {
+                activeBadge.className = "tab-badge text-[10px] px-1.5 py-0.5 rounded-full bg-slate-950 text-sky-200 border border-slate-900 font-mono font-bold shadow-sm";
+            }
+
+            // التمرير السلس للزر النشط لمنتصف شريط التمرير
+            try {
+                btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+            } catch (e) {}
+
+            // إعادة تنشيط وضبط أبعاد الرسوم البيانية
+            setTimeout(() => {
+                window.dispatchEvent(new Event("resize"));
+                Object.values(window.charts).forEach(chart => {
+                    if (chart && chart.canvas && chart.canvas.offsetParent !== null) {
+                        chart.resize();
+                        chart.reset();
+                        chart.update({
+                            duration: 1000,
+                            easing: "easeOutQuart"
+                        });
+                    }
+                });
+            }, 50);
+        }
+
+        // قالب حركة الإشارة التوضيحية الأفقية (المعيار الفاخر: إزاحة 2 سم = 76 بكسل)
+        function attachScrollerHintAnimation(target, options = {}) {
+            const scroller = typeof target === "string" ? document.querySelector(target) : target;
+            if (!scroller) return;
+
+            const {
+                distance = 76,         // 76 بكسل تعادل بالضبط 2 سم
+                initialDelay = 1600,   // تأخير بدئي 1.6 ثانية
+                glideDuration = 900,   // انزلاق سلس 900 ميلي ثانية
+                dwellDuration = 400,   // توقف لطيف في القمة 400 ميلي ثانية
+                returnDuration = 1000  // عودة هادئة 1000 ميلي ثانية
+            } = options;
+
+            let animId = null;
+            let timeoutId = null;
+            let userInteracted = false;
+
+            const abort = () => {
+                userInteracted = true;
+                if (animId) cancelAnimationFrame(animId);
+                if (timeoutId) clearTimeout(timeoutId);
+                events.forEach(evt => scroller.removeEventListener(evt, abort));
+            };
+
+            const events = ["touchstart", "pointerdown", "mousedown", "wheel"];
+            events.forEach(evt => scroller.addEventListener(evt, abort, { passive: true }));
+
+            // إدارة مؤشرات التلاشي الجانبي
+            const updateGradients = () => {
+                const rightFade = document.getElementById("scrollHintRight");
+                const leftFade = document.getElementById("scrollHintLeft");
+                if (!rightFade || !leftFade) return;
+
+                const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+                // في وضع RTL تكون القيم معكوسة أو سالبة حسب المتصفح
+                const currentScroll = Math.abs(scroller.scrollLeft);
+
+                rightFade.style.opacity = currentScroll > 15 ? "1" : "0";
+                leftFade.style.opacity = (maxScroll - currentScroll) > 15 ? "1" : "0";
+            };
+            scroller.addEventListener("scroll", updateGradients, { passive: true });
+            updateGradients();
+
+            // إتاحة السحب المكتبي بالماوس
+            let isDown = false;
+            let startX = 0;
+            let scrollLeftPos = 0;
+            scroller.addEventListener("mousedown", (e) => {
+                isDown = true;
+                scroller.classList.add("cursor-grabbing");
+                startX = e.pageX - scroller.offsetLeft;
+                scrollLeftPos = scroller.scrollLeft;
+            });
+            window.addEventListener("mouseup", () => {
+                isDown = false;
+                scroller.classList.remove("cursor-grabbing");
+            });
+            scroller.addEventListener("mousemove", (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - scroller.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                scroller.scrollLeft = scrollLeftPos - walk;
+            });
+
+            // دالة الانسياب الجيبي Sine Easing
+            const easeInOutSine = (t) => -(Math.cos(Math.PI * t) - 1) / 2;
+
+            timeoutId = setTimeout(() => {
+                if (userInteracted) return;
+                const startPos = scroller.scrollLeft;
+                const prevScrollBehavior = scroller.style.scrollBehavior;
+                scroller.style.scrollBehavior = "auto";
+
+                let phase = "glide"; // glide -> dwell -> return
+                let startTime = performance.now();
+
+                const step = (currentTime) => {
+                    if (userInteracted) {
+                        scroller.style.scrollBehavior = prevScrollBehavior;
+                        return;
+                    }
+
+                    const elapsed = currentTime - startTime;
+
+                    if (phase === "glide") {
+                        const progress = Math.min(1, elapsed / glideDuration);
+                        const eased = easeInOutSine(progress);
+                        // في وضع RTL نتحرك يساراً (طرح الإزاحة)
+                        scroller.scrollLeft = startPos - (distance * eased);
+
+                        if (progress >= 1) {
+                            phase = "dwell";
+                            startTime = performance.now();
+                        }
+                    } else if (phase === "dwell") {
+                        if (elapsed >= dwellDuration) {
+                            phase = "return";
+                            startTime = performance.now();
+                        }
+                    } else if (phase === "return") {
+                        const progress = Math.min(1, elapsed / returnDuration);
+                        const eased = easeInOutSine(progress);
+                        scroller.scrollLeft = (startPos - distance) + (distance * eased);
+
+                        if (progress >= 1) {
+                            scroller.scrollLeft = startPos;
+                            scroller.style.scrollBehavior = prevScrollBehavior;
+                            return;
+                        }
+                    }
+
+                    animId = requestAnimationFrame(step);
+                };
+
+                animId = requestAnimationFrame(step);
+            }, initialDelay);
+        }
+
+        // عدادات الأرقام التصاعدية الديناميكية
+        function initKpiCounters() {
+            const counters = document.querySelectorAll(".kpi-counter");
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute("data-target"));
+                const decimals = parseInt(counter.getAttribute("data-decimals") || "0", 10);
+                const format = counter.getAttribute("data-format");
+                const duration = 1400; // 1.4 ثانية
+                const startTime = performance.now();
+
+                const updateCount = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(1, elapsed / duration);
+                    // حركة تباطؤ سلسة (Exponential Ease-Out)
+                    const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                    const current = target * eased;
+
+                    let displayVal = decimals > 0 ? current.toFixed(decimals) : Math.round(current).toString();
+                    if (format === "comma") {
+                        displayVal = Math.round(current).toLocaleString();
+                    }
+                    counter.textContent = displayVal;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        let finalVal = decimals > 0 ? target.toFixed(decimals) : Math.round(target).toString();
+                        if (format === "comma") finalVal = Math.round(target).toLocaleString();
+                        counter.textContent = finalVal;
+                    }
+                };
+
+                requestAnimationFrame(updateCount);
+            });
+        }
+
+        // تصفية بيانات الرسم 1 (إنفاق وزوار السياحة)
+        function toggleTourismDataset(mode, btn) {
+            document.querySelectorAll(".btn-tourism-filter").forEach(b => {
+                b.className = "btn-tourism-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer";
+            });
+            btn.className = "btn-tourism-filter px-2.5 py-1 rounded-lg font-bold bg-sky-500/20 text-sky-300 border border-sky-500/40 transition-all cursor-pointer";
+
+            const chart = window.charts.tourismGrowth;
+            if (!chart) return;
+
+            if (mode === "all") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, true);
+            } else if (mode === "spend") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, false);
+            } else if (mode === "visits") {
+                chart.setDatasetVisibility(0, false);
+                chart.setDatasetVisibility(1, true);
+            }
+            chart.update();
+        }
+
+        // تصفية بيانات الرسم 2 (نسب الإشغال)
+        function toggleOccupancyDataset(mode, btn) {
+            document.querySelectorAll(".btn-occupancy-filter").forEach(b => {
+                b.className = "btn-occupancy-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer";
+            });
+            btn.className = "btn-occupancy-filter px-2.5 py-1 rounded-lg font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition-all cursor-pointer";
+
+            const chart = window.charts.occupancy;
+            if (!chart) return;
+
+            if (mode === "all") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, true);
+            } else if (mode === "hotels") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, false);
+            } else if (mode === "apartments") {
+                chart.setDatasetVisibility(0, false);
+                chart.setDatasetVisibility(1, true);
+            }
+            chart.update();
+        }
+
+        // تصفية بيانات الرسم 5 (مبيعات الأثاث POS)
+        function togglePosDataset(mode, btn) {
+            document.querySelectorAll(".btn-pos-filter").forEach(b => {
+                b.className = "btn-pos-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer";
+            });
+            btn.className = "btn-pos-filter px-2.5 py-1 rounded-lg font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 transition-all cursor-pointer";
+
+            const chart = window.charts.furniturePos;
+            if (!chart) return;
+
+            if (mode === "all") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, true);
+            } else if (mode === "value") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, false);
+            } else if (mode === "digital") {
+                chart.setDatasetVisibility(0, false);
+                chart.setDatasetVisibility(1, true);
+            }
+            chart.update();
+        }
+
+        // تصفية بيانات الرسم 6 (مساكن سكني)
+        function toggleHousingDataset(mode, btn) {
+            document.querySelectorAll(".btn-housing-filter").forEach(b => {
+                b.className = "btn-housing-filter px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer";
+            });
+            btn.className = "btn-housing-filter px-2.5 py-1 rounded-lg font-bold bg-teal-500/20 text-teal-300 border border-teal-500/40 transition-all cursor-pointer";
+
+            const chart = window.charts.housing;
+            if (!chart) return;
+
+            if (mode === "all") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, true);
+            } else if (mode === "homes") {
+                chart.setDatasetVisibility(0, true);
+                chart.setDatasetVisibility(1, false);
+            } else if (mode === "kitchens") {
+                chart.setDatasetVisibility(0, false);
+                chart.setDatasetVisibility(1, true);
+            }
+            chart.update();
+        }
+
+        // حاسبة التكامل والتوفير التفاعلية
+        function updateSynergySimulator(rooms) {
+            const roomCount = parseInt(rooms, 10);
+            const importPerRoom = 28000;
+            const localPerRoom = 18500;
+            const importTotal = roomCount * importPerRoom;
+            const localTotal = roomCount * localPerRoom;
+            const savingsTotal = importTotal - localTotal;
+            const savingsPercent = Math.round((savingsTotal / importTotal) * 100);
+
+            document.getElementById("roomCountLabel").textContent = roomCount + " غرفة";
+            document.getElementById("simImportCost").textContent = "SAR " + importTotal.toLocaleString();
+            document.getElementById("simLocalCost").textContent = "SAR " + localTotal.toLocaleString();
+            document.getElementById("simSavings").textContent = "SAR " + savingsTotal.toLocaleString() + " (" + savingsPercent + "%)";
+        }
+
+        // تهيئة كافة الرسوم البيانية بالحركات التفاعلية وتوحيد مساحات المستطيلات
+        function initCharts() {
+            Chart.defaults.color = "#94A3B8";
+            Chart.defaults.font.family = "'IBM Plex Sans Arabic', sans-serif";
+            Chart.defaults.plugins.tooltip.backgroundColor = "rgba(11, 25, 44, 0.95)";
+            Chart.defaults.plugins.tooltip.borderColor = "rgba(56, 189, 248, 0.4)";
+            Chart.defaults.plugins.tooltip.borderWidth = 1;
+            Chart.defaults.plugins.tooltip.padding = 10;
+            Chart.defaults.plugins.tooltip.titleFont = { weight: "bold", size: 12, family: "'IBM Plex Sans Arabic', sans-serif" };
+            Chart.defaults.plugins.tooltip.bodyFont = { size: 12, family: "'IBM Plex Sans Arabic', sans-serif" };
+
+            // توحيد مساحات مستطيلات مفتاح الرسم لتكون متطابقة هندسياً 100%
+            Chart.defaults.plugins.legend.labels.boxWidth = 28;
+            Chart.defaults.plugins.legend.labels.boxHeight = 12;
+            const defaultGenLabels = Chart.defaults.plugins.legend.labels.generateLabels;
+            Chart.defaults.plugins.legend.labels.generateLabels = function(chart) {
+                const items = defaultGenLabels.call(this, chart);
+                items.forEach(item => {
+                    item.lineWidth = 0;
+                    item.strokeStyle = "transparent";
+                });
+                return items;
+            };
+
+            // إعدادات الحركة التراكمية التدريجية
+            const progressiveAnimation = {
+                duration: 1200,
+                easing: "easeOutQuart",
+                delay: (context) => {
+                    let delay = 0;
+                    if (context.type === "data" && context.mode === "default") {
+                        delay = context.dataIndex * 80 + context.datasetIndex * 140;
+                    }
+                    return delay;
+                }
+            };
+
+            // 1. رسم نمو السياحة
+            const ctx1 = document.getElementById("tourismGrowthChart");
+            if (ctx1) {
+                window.charts.tourismGrowth = new Chart(ctx1, {
+                    type: "bar",
+                    data: {
+                        labels: ["2022", "2023", "2024", "2025 (رسمي)"],
+                        datasets: [
+                            {
+                                label: "إنفاق السياحة (مليار ر.س)",
+                                data: [185, 255, 280, 304],
+                                backgroundColor: "rgba(56, 189, 248, 0.75)",
+                                hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
+                                borderRadius: 8,
+                                yAxisID: "y",
+                                order: 2
+                            },
+                            {
+                                label: "إجمالي الزوار (مليون)",
+                                data: [77.8, 106.2, 116.0, 123.0],
+                                type: "line",
+                                borderColor: "#10B981",
+                                backgroundColor: "#10B981",
+                                borderWidth: 3,
+                                tension: 0.3,
+                                pointRadius: 6,
+                                pointHoverRadius: 9,
+                                pointBackgroundColor: "#10B981",
+                                pointBorderColor: "#FFFFFF",
+                                pointBorderWidth: 2,
+                                yAxisID: "y1",
+                                order: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: progressiveAnimation,
+                        interaction: { mode: "index", intersect: false },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    boxWidth: 28,
+                                    boxHeight: 12,
+                                    generateLabels: function(chart) {
+                                        const items = Chart.defaults.plugins.legend.labels.generateLabels.call(this, chart);
+                                        items.forEach(item => {
+                                            item.lineWidth = 0;
+                                            item.strokeStyle = "transparent";
+                                        });
+                                        return items;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                type: "linear",
+                                display: true,
+                                position: "right",
+                                grid: { color: "rgba(255, 255, 255, 0.06)" },
+                                title: { display: true, text: "مليار ريال سعودي" }
+                            },
+                            y1: {
+                                type: "linear",
+                                display: true,
+                                position: "left",
+                                grid: { drawOnChartArea: false },
+                                title: { display: true, text: "ملايين الزوار" }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // 2. رسم نسب الإشغال الإقليمية
+            const ctx2 = document.getElementById("occupancyByCityChart");
+            if (ctx2) {
+                window.charts.occupancy = new Chart(ctx2, {
+                    type: "bar",
+                    data: {
+                        labels: ["المدينة المنورة", "الرياض", "مكة المكرمة", "جدة", "المنطقة الشرقية", "المركز الجنوبي (عسير/جازان)"],
+                        datasets: [
+                            {
+                                label: "إشغال الفنادق %",
+                                data: [81.5, 67.6, 60.6, 58.2, 54.8, 51.4],
+                                backgroundColor: "rgba(56, 189, 248, 0.75)",
+                                hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
+                                borderRadius: 6
+                            },
+                            {
+                                label: "إشغال الشقق المخدومة %",
+                                data: [76.0, 70.5, 59.4, 57.0, 56.2, 52.8],
+                                backgroundColor: "rgba(16, 185, 129, 0.75)",
+                                hoverBackgroundColor: "rgba(16, 185, 129, 0.95)",
+                                borderRadius: 6
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: progressiveAnimation,
+                        scales: {
+                            y: {
+                                min: 40,
+                                max: 100,
+                                ticks: { callback: v => v + "%" },
+                                grid: { color: "rgba(255, 255, 255, 0.06)" }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // 3. رسم مزيج الإنفاق السياحي
+            const ctx3 = document.getElementById("spendMixChart");
+            if (ctx3) {
+                window.charts.spendMix = new Chart(ctx3, {
+                    type: "doughnut",
+                    data: {
+                        labels: ["ترفيه وفعاليات", "سياحة واستجمام داخلي", "عمرة وزيارة دينية", "مؤتمرات وأعمال"],
+                        datasets: [{
+                            data: [38, 34, 18, 10],
+                            backgroundColor: ["#38BDF8", "#10B981", "#F59E0B", "#818CF8"],
+                            hoverOffset: 8,
+                            borderColor: "#0B192C",
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true,
+                            duration: 1400,
+                            easing: "easeOutCirc"
+                        },
+                        plugins: {
+                            legend: { position: "bottom", labels: { boxWidth: 12, padding: 12 } }
+                        },
+                        cutout: "68%"
+                    }
+                });
+            }
+
+            // 4. مسار متوسط السعر اليومي للغرفة (ADR)
+            const ctx4 = document.getElementById("adrTrendChart");
+            if (ctx4) {
+                window.charts.adrTrend = new Chart(ctx4, {
+                    type: "line",
+                    data: {
+                        labels: ["Q1 2024", "Q2 2024", "Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025"],
+                        datasets: [{
+                            label: "متوسط السعر اليومي للغرفة (ريال)",
+                            data: [610, 725.5, 520, 440, 630, 532, 341, 389],
+                            borderColor: "#6366F1",
+                            backgroundColor: "rgba(99, 102, 241, 0.15)",
+                            fill: true,
+                            tension: 0.35,
+                            borderWidth: 3,
+                            pointRadius: 4,
+                            pointHoverRadius: 8,
+                            pointBackgroundColor: "#818CF8"
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: 1500,
+                            easing: "easeOutQuart"
+                        },
+                        scales: {
+                            y: {
+                                ticks: { callback: v => v + " ر.س" },
+                                grid: { color: "rgba(255, 255, 255, 0.06)" }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // 5. رسم مبيعات نقاط البيع للأثاث ونسبة الدفع الإلكتروني (مع العبارات المختصرة وتقديم الخط فوق الأعمدة)
+            const ctx5 = document.getElementById("furniturePosChart");
+            if (ctx5) {
+                window.charts.furniturePos = new Chart(ctx5, {
+                    type: "bar",
+                    data: {
+                        labels: ["2021", "2022", "2023", "2024", "2025 (رسمي)"],
+                        datasets: [
+                            {
+                                label: "إنفاق نقاط البيع (مليار ر.س)",
+                                data: [11.4, 13.8, 15.6, 17.1, 18.2],
+                                backgroundColor: "rgba(245, 158, 11, 0.75)",
+                                hoverBackgroundColor: "rgba(245, 158, 11, 0.95)",
+                                borderRadius: 8,
+                                yAxisID: "y",
+                                order: 2
+                            },
+                            {
+                                label: "نسبة الدفع الرقمي %",
+                                data: [57, 68, 74, 79, 85],
+                                type: "line",
+                                borderColor: "#38BDF8",
+                                backgroundColor: "#38BDF8",
+                                borderWidth: 3,
+                                pointRadius: 6,
+                                pointHoverRadius: 9,
+                                pointBackgroundColor: "#38BDF8",
+                                pointBorderColor: "#FFFFFF",
+                                pointBorderWidth: 2,
+                                yAxisID: "y1",
+                                order: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: progressiveAnimation,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    boxWidth: 28,
+                                    boxHeight: 12,
+                                    generateLabels: function(chart) {
+                                        const items = Chart.defaults.plugins.legend.labels.generateLabels.call(this, chart);
+                                        items.forEach(item => {
+                                            item.lineWidth = 0;
+                                            item.strokeStyle = "transparent";
+                                        });
+                                        return items;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                position: "right",
+                                ticks: { callback: v => v + " مليار ر.س" },
+                                grid: { color: "rgba(255, 255, 255, 0.06)" }
+                            },
+                            y1: {
+                                min: 40,
+                                max: 100,
+                                position: "left",
+                                ticks: { callback: v => v + "%" },
+                                grid: { drawOnChartArea: false }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // 6. رسم مساكن سكني والطلب على المطابخ
+            const ctx6 = document.getElementById("housingCompletionsChart");
+            if (ctx6) {
+                window.charts.housing = new Chart(ctx6, {
+                    type: "bar",
+                    data: {
+                        labels: ["2022", "2023", "2024", "2025"],
+                        datasets: [
+                            {
+                                label: "مساكن مأهولة (بالآلاف)",
+                                data: [75.0, 85.3, 93.0, 96.5],
+                                backgroundColor: "rgba(20, 184, 166, 0.8)",
+                                hoverBackgroundColor: "rgba(20, 184, 166, 0.95)",
+                                borderRadius: 6
+                            },
+                            {
+                                label: "مطابخ جديدة مدمجة مطلوبة (بالآلاف)",
+                                data: [68.0, 78.5, 87.2, 91.0],
+                                backgroundColor: "rgba(56, 189, 248, 0.8)",
+                                hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
+                                borderRadius: 6
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: progressiveAnimation,
+                        scales: {
+                            y: {
+                                ticks: { callback: v => v + " ألف" },
+                                grid: { color: "rgba(255, 255, 255, 0.06)" }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // 7. الحصة السوقية لمبيعات الأثاث حسب المناطق
+            const ctx7 = document.getElementById("regionalDemandChart");
+            if (ctx7) {
+                window.charts.regionalDemand = new Chart(ctx7, {
+                    type: "doughnut",
+                    data: {
+                        labels: ["منطقة الرياض", "مكة المكرمة / جدة", "المنطقة الشرقية", "المنطقة الجنوبية (عسير)"],
+                        datasets: [{
+                            data: [42, 28, 16, 14],
+                            backgroundColor: ["#F43F5E", "#38BDF8", "#10B981", "#F59E0B"],
+                            hoverOffset: 8,
+                            borderColor: "#0B192C",
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true,
+                            duration: 1400,
+                            easing: "easeOutCirc"
+                        },
+                        plugins: {
+                            legend: { position: "bottom", labels: { boxWidth: 12, padding: 12 } }
+                        },
+                        cutout: "65%"
+                    }
+                });
+            }
+
+            // 8. رسم التوزيع الجغرافي للمصانع
+            const ctx8 = document.getElementById("factoryDistributionChart");
+            if (ctx8) {
+                window.charts.factoryDistribution = new Chart(ctx8, {
+                    type: "bar",
+                    data: {
+                        labels: ["الرياض (مدن 1، 2، 3)", "جدة (الصناعية 1، 2)", "الدمام / الخبر", "المركز الجنوبي (عسير)", "القصيم / الشمال"],
+                        datasets: [{
+                            label: "مصانع الخشب والأثاث المرخصة العاملة",
+                            data: [495, 340, 185, 120, 80],
+                            backgroundColor: [
+                                "rgba(56, 189, 248, 0.85)",
+                                "rgba(99, 102, 241, 0.85)",
+                                "rgba(16, 185, 129, 0.85)",
+                                "rgba(245, 158, 11, 0.85)",
+                                "rgba(148, 163, 184, 0.85)"
+                            ],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: progressiveAnimation,
+                        scales: {
+                            y: {
+                                grid: { color: "rgba(255, 255, 255, 0.06)" },
+                                title: { display: true, text: "عدد المنشآت الصناعية المرخصة" }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+        }
+
+        // تشغيل البوابة وربط العناصر عند جاهزية الصفحة
+        function bootstrapDashboard() {
+            attachScrollerHintAnimation("#tabScrollerWrapper");
+            initKpiCounters();
+            initCharts();
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", bootstrapDashboard);
+        } else {
+            bootstrapDashboard();
+        }
+    </script>
+</body>
+</html>
