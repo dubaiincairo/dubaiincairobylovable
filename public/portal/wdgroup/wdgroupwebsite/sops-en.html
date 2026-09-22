@@ -294,78 +294,75 @@
   <!-- MAIN CONTAINER -->
   <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
 
-    <!-- HERO BANNER -->
-    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 relative overflow-hidden">
-      <div class="relative z-10 max-w-4xl space-y-3">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
-          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-          <span>20 Standard Operating Procedures with Interactive Step-by-Step Modals</span>
+    <!-- HERO EXECUTIVE BANNER -->
+    <section class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-6 sm:p-10 shadow-2xl">
+      <div class="space-y-4 max-w-4xl">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-300 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+          <span>FURNITURE PLATFORM OPERATIONS &amp; CONSOLE GOVERNANCE • 20 RUNBOOKS</span>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
-          Furniture Platform &amp; Console SOP Runbooks
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          Furniture Platform &amp; <span class="bg-gradient-to-r from-blue-400 via-sky-300 to-[#C9A86A] bg-clip-text text-transparent">Console SOP Runbooks</span>
         </h1>
-        <p class="text-sm text-slate-300 leading-relaxed">
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
           Comprehensive standard operating procedures for holding managers, e-commerce specialists, recruiters, and DevOps engineers managing the public storefront, GreenWood luxury furniture catalog, Odoo 19 ERP synchronization, and executive operations. Click any card to launch the structured 6-section procedure modal.
         </p>
       </div>
-    </div>
 
-    <!-- STICKY FILTER & SEARCH RAIL -->
-    <div class="sticky top-20 z-30 pt-2 pb-3 glass-nav border-y border-slate-800/80 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8" id="filter-container">
-      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        
-        <!-- Scrollable Category Tabs -->
-        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1" id="category-tabs">
-          <button onclick="setFilter('all')" class="tab-btn active px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
-            <span>All Procedures</span>
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">20</span>
-          </button>
-          <button onclick="setFilter('brand')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
-            <span>Brand &amp; Portfolio</span>
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">3</span>
-          </button>
-          <button onclick="setFilter('ecommerce')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
-            <span>E-Commerce &amp; Store</span>
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">5</span>
-          </button>
-          <button onclick="setFilter('crm')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
-            <span>Commercial B2B &amp; CRM</span>
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">2</span>
-          </button>
-          <button onclick="setFilter('hr')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
-            <span>HR &amp; Talent ATS</span>
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">3</span>
-          </button>
-          <button onclick="setFilter('media')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
-            <span>Media &amp; Assets</span>
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">1</span>
-          </button>
-          <button onclick="setFilter('finance')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
-            <span>Finance &amp; Banking</span>
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">1</span>
-          </button>
-          <button onclick="setFilter('system')" class="tab-btn px-3.5 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/60 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 shrink-0">
-            <span>System &amp; Security</span>
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">4</span>
-          </button>
+      <!-- Live Search & Stats Filter -->
+      <div class="mt-8 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4" id="sop-search-container">
+        <div class="relative w-full sm:w-96">
+          <input type="text" id="sop-search" oninput="handleSearch(this.value)" placeholder="Search procedure by title, role, or keyword..." class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-blue-500 transition">
         </div>
-
-        <!-- Search Bar -->
-        <div class="relative w-48 sm:w-64 flex-shrink-0" id="sop-search-container">
-          <input 
-            type="text" 
-            id="sop-search"
-            placeholder="Search procedures..." 
-            oninput="handleSearch(this.value)"
-            class="w-full px-3.5 py-1.5 pl-9 rounded-xl bg-slate-900 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
-          >
-          <svg class="w-4 h-4 text-slate-500 absolute left-3 top-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
+        <div class="flex items-center gap-4 text-xs font-mono">
+          <div class="px-3 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700">
+            <span class="text-slate-400">Total Procedures:</span>
+            <span class="text-blue-400 font-bold ml-1.5" id="active-count">20</span>
+          </div>
+          <div class="text-slate-400 hidden md:block">
+            <span>Platform:</span>
+            <span class="text-cyan-400 font-bold ml-1">Next.js 15 &amp; Tailwind</span>
+            <span class="text-slate-600 mx-1.5">|</span>
+            <span>ERP:</span>
+            <span class="text-amber-400 font-bold ml-1">Odoo 19 Enterprise</span>
+          </div>
         </div>
-
       </div>
-    </div>
+    </section>
+
+    <!-- HORIZONTAL PILLAR FILTER RAIL -->
+    <section class="space-y-2 no-print" id="filter-container">
+      <div class="flex items-center justify-between">
+        <span class="text-xs uppercase tracking-wider font-bold text-slate-400">Filter by Operational Category</span>
+        <span class="text-[11px] text-slate-500">Scroll horizontally for more</span>
+      </div>
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="pillar-tabs">
+        <button onclick="setFilter('all')" class="tab-btn active shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          All Procedures (20)
+        </button>
+        <button onclick="setFilter('brand')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          1. Brand &amp; Portfolio (3)
+        </button>
+        <button onclick="setFilter('ecommerce')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          2. E-Commerce &amp; Store (5)
+        </button>
+        <button onclick="setFilter('crm')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          3. Commercial B2B &amp; CRM (2)
+        </button>
+        <button onclick="setFilter('hr')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          4. HR &amp; Talent ATS (3)
+        </button>
+        <button onclick="setFilter('media')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          5. Media &amp; Assets (1)
+        </button>
+        <button onclick="setFilter('finance')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          6. Finance &amp; Banking (1)
+        </button>
+        <button onclick="setFilter('system')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-blue-500/50 transition">
+          7. System &amp; Security (4)
+        </button>
+      </div>
+    </section>
 
     <!-- Active Count Summary -->
     <div class="flex items-center justify-between text-xs text-slate-400 px-1">

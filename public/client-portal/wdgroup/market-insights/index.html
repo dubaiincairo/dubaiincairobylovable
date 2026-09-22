@@ -1578,19 +1578,21 @@
                 const chartObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            const canvasId = entry.target.id;
+                            const canvas = entry.target.querySelector("canvas") || entry.target;
+                            const canvasId = canvas ? canvas.id : entry.target.id;
                             if (window.chartInitializers && window.chartInitializers[canvasId]) {
                                 window.chartInitializers[canvasId]();
                                 observer.unobserve(entry.target);
                             }
                         }
                     });
-                }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+                }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
 
                 Object.keys(window.chartInitializers).forEach(id => {
                     const canvas = document.getElementById(id);
                     if (canvas) {
-                        chartObserver.observe(canvas);
+                        const target = canvas.closest(".chart-container") || canvas;
+                        chartObserver.observe(target);
                     }
                 });
             } else {
