@@ -17,29 +17,47 @@
   </style>
   <base href="/portal/wdgroup/wdgroupwebsite/">
 </head>
-<body class="relative flex flex-col justify-between py-10 px-4 sm:px-6 lg:px-8">
+<body class="bg-[#070F1E] text-slate-200 antialiased min-h-screen flex flex-col relative">
   <div class="glow-orb w-96 h-96 -top-20 -left-20 bg-blue-600/20"></div>
   <div class="glow-orb w-96 h-96 top-1/2 -right-20 bg-purple-600/15"></div>
 
-  <main class="relative z-10 max-w-5xl mx-auto w-full space-y-8">
-    <!-- BREADCRUMBS & TOP NAV -->
-    <nav class="flex items-center justify-between flex-wrap gap-4 text-xs text-slate-400 border-b border-slate-800/80 pb-4">
-      <div class="flex items-center gap-2">
-        <a href="/portal/wdgroup" class="text-blue-400 hover:text-blue-300 transition font-semibold flex items-center gap-1">
-          ← WD Group Portal
-        </a>
-        <span class="text-slate-600">/</span>
-        <span class="text-white font-medium">eCommerce Platform &amp; Executive Console</span>
+  <!-- Top Executive Banner -->
+  <header class="sticky top-0 z-50 bg-[#0B192C]/95 backdrop-blur-md border-b border-slate-800 shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-18 gap-4">
+        <!-- Upper Left - WD Group Brand with Cursive Logo -->
+        <div class="flex items-center gap-3">
+          <a href="/portal/wdgroup" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-sky-500/50 flex items-center justify-center p-1.5 shadow-md transition-all">
+              <img src="/portal/wdgroup/assets/wd-logo-sky.png" alt="WD Group" class="h-6 w-auto object-contain">
+            </div>
+            <div class="flex flex-col">
+              <div class="flex items-center gap-2">
+                <span class="text-xs sm:text-sm font-bold text-slate-100 group-hover:text-white transition-colors">WD Group</span>
+                <span class="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-slate-800/90 text-slate-400 border border-slate-700/80">Confidential</span>
+              </div>
+              <span class="text-[11px] text-slate-400 font-medium tracking-tight">eCommerce Platform &amp; Executive Console <span class="text-slate-600">•</span> Operations Portal</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Right Header Actions -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a href="/portal/wdgroup" class="text-xs bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-sky-500/50 rounded-xl px-3 py-1.5 text-slate-300 hover:text-white flex items-center gap-1.5 shadow-sm transition-all font-medium">
+            <span>&larr; WD Group Portal</span>
+          </a>
+          <a href="/portal/wdgroup/wdgroupwebsite/ar" class="text-xs bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-xl px-3 py-1.5 text-emerald-400 flex items-center gap-1.5 shadow-sm transition-all font-bold font-['IBM_Plex_Sans_Arabic']">
+            <span>العربية (100% RTL)</span>
+          </a>
+          <span class="px-2.5 py-1.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono text-xs font-bold shadow-sm">
+            PROJECT 03
+          </span>
+        </div>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="/portal/wdgroup/wdgroupwebsite/ar" class="px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition font-bold font-['IBM_Plex_Sans_Arabic']">
-          العربية (100% RTL)
-        </a>
-        <span class="px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono font-bold">
-          PROJECT 03
-        </span>
-      </div>
-    </nav>
+    </div>
+  </header>
+
+  <main class="relative z-10 max-w-5xl mx-auto w-full space-y-8 py-8 px-4 sm:px-6 lg:px-8 flex-1">
 
     <!-- HEADER -->
     <header class="text-center space-y-3">
