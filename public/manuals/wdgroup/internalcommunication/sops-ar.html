@@ -107,10 +107,78 @@
     /* Print Styles */
     @media print {
       body { background: #ffffff !important; color: #0f172a !important; }
-      .no-print, header, .ambient-orb-1, .ambient-orb-2, #modal-overlay, #filter-container, #sop-search-container { display: none !important; }
-      .glass-card { background: #ffffff !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid !important; }
-      .text-white { color: #0f172a !important; }
-      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+      
+      /* When printing active SOP modal */
+      body.print-modal-active > *:not(#modal-overlay) { display: none !important; }
+      body.print-modal-active #modal-overlay {
+        display: block !important;
+        position: static !important;
+        background: #ffffff !important;
+        padding: 0 !important;
+        inset: auto !important;
+        width: 100% !important;
+        height: auto !important;
+      }
+      body.print-modal-active #modal-overlay > div {
+        max-width: 100% !important;
+        width: 100% !important;
+        background: #ffffff !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        color: #0f172a !important;
+      }
+      body.print-modal-active #modal-overlay .border-b,
+      body.print-modal-active #modal-overlay .border-t,
+      body.print-modal-active #modal-overlay .border {
+        border-color: #cbd5e1 !important;
+      }
+      body.print-modal-active #modal-overlay button,
+      body.print-modal-active #modal-overlay .no-print {
+        display: none !important;
+      }
+      body.print-modal-active #modal-overlay svg {
+        display: none !important;
+      }
+      body.print-modal-active #modal-overlay .text-white,
+      body.print-modal-active #modal-overlay h2,
+      body.print-modal-active #modal-overlay span {
+        color: #0f172a !important;
+      }
+      body.print-modal-active #modal-overlay p,
+      body.print-modal-active #modal-overlay li {
+        color: #334155 !important;
+      }
+      body.print-modal-active #modal-overlay [class*="bg-"] {
+        background: #f8fafc !important;
+      }
+
+      /* Default SOP List printing (when modal is NOT open) */
+      body:not(.print-modal-active) .no-print,
+      body:not(.print-modal-active) .glass-nav,
+      body:not(.print-modal-active) header,
+      body:not(.print-modal-active) .ambient-orb-1,
+      body:not(.print-modal-active) .ambient-orb-2,
+      body:not(.print-modal-active) #modal-overlay,
+      body:not(.print-modal-active) #filter-container,
+      body:not(.print-modal-active) #sop-search-container {
+        display: none !important;
+      }
+      body:not(.print-modal-active) .glass-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        break-inside: avoid !important;
+        padding: 8px 10px !important;
+      }
+      body:not(.print-modal-active) #sop-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+      }
+      body:not(.print-modal-active) .text-white { color: #0f172a !important; }
+      body:not(.print-modal-active) .text-slate-300,
+      body:not(.print-modal-active) .text-slate-400 { color: #334155 !important; }
     }
   </style>
 </head>
@@ -308,7 +376,10 @@
             <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
-            <span id="copy-btn-text">نسخ نص الإجراء</span>
+            <span id="copy-btn-text">نسخ خطوات الإجراء</span>
+          </button>
+          <button onclick="printSopModal()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold transition">
+            طباعة الإجراء
           </button>
           <button onclick="closeSopModal()" class="px-4 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold transition">
             إغلاق
@@ -882,9 +953,12 @@
       renderSOPs();
     }
 
+    let activeSop = null;
+
     function openSopModal(id) {
       const sop = sopsData.find(s => s.id === id);
       if (!sop) return;
+      activeSop = sop;
 
       document.getElementById('modal-sop-code').textContent = sop.code;
       document.getElementById('modal-sop-pillar').textContent = sop.pillarName;
@@ -892,9 +966,9 @@
       document.getElementById('modal-sop-title').textContent = sop.title;
 
       const stepsHtml = sop.steps.map((step, idx) => `
-        <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80">
-          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-teal-600 text-white font-bold text-[11px] shrink-0 mt-0.5">${idx + 1}</span>
-          <span class="leading-relaxed text-slate-300 text-xs">${step}</span>
+        <li class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 text-xs text-slate-300 leading-relaxed">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-teal-600 text-white font-bold text-[11px] shrink-0 font-mono ml-2 align-middle">${idx + 1}</span>
+          <span class="align-middle">${step}</span>
         </li>
       `).join('');
 
@@ -943,15 +1017,34 @@
       document.body.style.overflow = '';
     }
 
+    // نسخ خطوات الإجراء بتنسيق منظم ومثالي
     function copyModalContent() {
-      const title = document.getElementById('modal-sop-title').textContent;
-      const content = document.getElementById('modal-sop-content').innerText;
-      navigator.clipboard.writeText(title + "\n\n" + content).then(() => {
+      if (!activeSop) return;
+      const stepsFormatted = activeSop.steps.map((st, i) => `${i + 1}. ${st}`).join('\n');
+      const copyText = `${activeSop.title} (${activeSop.code}) - ${activeSop.pillarName}\n` +
+        `المسؤول: ${activeSop.role}\n\n` +
+        `1. الهدف والنطاق التشغيلي:\n${activeSop.objective}\n\n` +
+        `2. المتطلبات المسبقة وصلاحيات النظام:\n${activeSop.prerequisites}\n\n` +
+        `3. تسلسل خطوات التنفيذ الإجرائية:\n${stepsFormatted}\n\n` +
+        `4. معايير التحقق وجودة الإنجاز:\n${activeSop.verification}\n\n` +
+        `5. المحاذير والمخاطر التشغيلية:\n${activeSop.caution}`;
+
+      navigator.clipboard.writeText(copyText).then(() => {
         const btn = document.getElementById('copy-btn-text');
-        btn.textContent = "تم النسخ للحافظة!";
-        setTimeout(() => { btn.textContent = "نسخ نص الإجراء"; }, 2000);
+        btn.textContent = "تم نسخ الإجراء بنجاح!";
+        setTimeout(() => { btn.textContent = "نسخ خطوات الإجراء"; }, 2000);
       });
     }
+
+    // طباعة الإجراء المعروض حصرياً بسرعة ونقاء تام
+    function printSopModal() {
+      document.body.classList.add('print-modal-active');
+      window.print();
+    }
+
+    window.addEventListener('afterprint', () => {
+      document.body.classList.remove('print-modal-active');
+    });
 
     // Spotlight Mouse Tracker
     document.addEventListener('mousemove', (e) => {

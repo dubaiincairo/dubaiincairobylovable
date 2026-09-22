@@ -106,10 +106,78 @@
     /* Print Styles */
     @media print {
       body { background: #ffffff !important; color: #0f172a !important; }
-      .no-print, header, .ambient-orb-1, .ambient-orb-2, #modal-overlay, #filter-container, #sop-search-container { display: none !important; }
-      .glass-card { background: #ffffff !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid !important; }
-      .text-white { color: #0f172a !important; }
-      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+      
+      /* When printing active SOP modal */
+      body.print-modal-active > *:not(#modal-overlay) { display: none !important; }
+      body.print-modal-active #modal-overlay {
+        display: block !important;
+        position: static !important;
+        background: #ffffff !important;
+        padding: 0 !important;
+        inset: auto !important;
+        width: 100% !important;
+        height: auto !important;
+      }
+      body.print-modal-active #modal-overlay > div {
+        max-width: 100% !important;
+        width: 100% !important;
+        background: #ffffff !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        color: #0f172a !important;
+      }
+      body.print-modal-active #modal-overlay .border-b,
+      body.print-modal-active #modal-overlay .border-t,
+      body.print-modal-active #modal-overlay .border {
+        border-color: #cbd5e1 !important;
+      }
+      body.print-modal-active #modal-overlay button,
+      body.print-modal-active #modal-overlay .no-print {
+        display: none !important;
+      }
+      body.print-modal-active #modal-overlay svg {
+        display: none !important;
+      }
+      body.print-modal-active #modal-overlay .text-white,
+      body.print-modal-active #modal-overlay h2,
+      body.print-modal-active #modal-overlay span {
+        color: #0f172a !important;
+      }
+      body.print-modal-active #modal-overlay p,
+      body.print-modal-active #modal-overlay li {
+        color: #334155 !important;
+      }
+      body.print-modal-active #modal-overlay [class*="bg-"] {
+        background: #f8fafc !important;
+      }
+
+      /* Default SOP List printing (when modal is NOT open) */
+      body:not(.print-modal-active) .no-print,
+      body:not(.print-modal-active) .glass-nav,
+      body:not(.print-modal-active) header,
+      body:not(.print-modal-active) .ambient-orb-1,
+      body:not(.print-modal-active) .ambient-orb-2,
+      body:not(.print-modal-active) #modal-overlay,
+      body:not(.print-modal-active) #filter-container,
+      body:not(.print-modal-active) #sop-search-container {
+        display: none !important;
+      }
+      body:not(.print-modal-active) .glass-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        break-inside: avoid !important;
+        padding: 8px 10px !important;
+      }
+      body:not(.print-modal-active) #sops-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+      }
+      body:not(.print-modal-active) .text-white { color: #0f172a !important; }
+      body:not(.print-modal-active) .text-slate-300,
+      body:not(.print-modal-active) .text-slate-400 { color: #334155 !important; }
     }
   </style>
 </head>
@@ -279,7 +347,7 @@
         </button>
 
         <div class="flex items-center gap-2">
-          <button onclick="window.print()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition">
+          <button onclick="printSopModal()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition">
             طباعة الإجراء
           </button>
           <button onclick="closeSopModal()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-lg shadow-blue-500/25">
@@ -372,7 +440,7 @@
           "استلام الصور المعمارية عالية الجودة المعتمدة من المصور الرسمي بعد اعتمادها من الإدارة.",
           "تحويل كافة الصور إلى صيغة WebP الحديثة مع التأكد الصارم من أن حجم الملف أقل من 350 كيلوبايت للصورة الواحدة.",
           "ضبط الأبعاد: 1920x1080 بكسل لواجهات العرض الرئيسية (Hero)، و 1080x1080 للصور المربعة ومعارض الغرف.",
-          "الدخول إلى Sanity Studio عبر swissblue.sa/studio ➔ قسم الفنادق ➔ اختيار الفندق المستهدف (مثل سويس بلو جدة).",
+          "الدخول إلى Sanity Studio عبر swissblue.sa/studio ← قسم الفنادق ← اختيار الفندق المستهدف (مثل سويس بلو جدة).",
           "الانتقال إلى معرض صور الغرف، حذف الصور القديمة أو المنخفضة الجودة، ورفع الصور الجديدة بصيغة WebP.",
           "كتابة النص البديل (Alt Text) باللغتين العربية والإنجليزية لتعزيز محركات البحث وتوافق إمكانية الوصول.",
           "النقر على زر النشر (Publish) ومعاينة تناسق الصور على شاشات الجوال والحواسيب."
@@ -392,7 +460,7 @@
         prerequisites: "صلاحية تعديل حقول الوسائط في Sanity Studio، ومقاطع فيديو MP4 مضغوطة بحجم أقل من 5 ميغابايت.",
         steps: [
           "تجهيز مقطع فيديو ترويجي قصير (مدة 10 إلى 15 ثانية كحد أقصى، بحجم أقل من 5 ميغابايت وبدون مسار صوتي مدمج).",
-          "تسجيل الدخول إلى Sanity Studio ➔ محتوى الموقع العام أو تفاصيل الفندق ➔ حقل وسائط الواجهة (Hero Media).",
+          "تسجيل الدخول إلى Sanity Studio ← محتوى الموقع العام أو تفاصيل الفندق ← حقل وسائط الواجهة (Hero Media).",
           "رفع ملف الفيديو المضغوط أو إدخال رابط العرض الآمن من شبكة CDN أو Vimeo.",
           "التأكد من تفعيل سمات التشغيل الآمن للفيديو الصامت: التشغيل التلقائي الصامت، التكرار، والتشغيل المضمن داخل الصفحة.",
           "رفع صورة غلاف بديلة (Poster Frame) عالية الجودة بصيغة WebP لتظهر عند بطء الاتصال بالإنترنت.",
@@ -413,7 +481,7 @@
         prerequisites: "صلاحية الدخول إلى Sanity Studio والنصوص التسويقية المعتمدة باللغتين.",
         steps: [
           "تسجيل الدخول إلى استوديو إدارة المحتوى عبر swissblue.sa/studio.",
-          "من القائمة الجانبية، الانتقال إلى 'محتوى الموقع العام' ➔ 'البنرات الترويجية والعروض'.",
+          "من القائمة الجانبية، الانتقال إلى 'محتوى الموقع العام' ← 'البنرات الترويجية والعروض'.",
           "إدخال العنوان الرئيسي، الوصف الإعلاني، ونص زر الإجراء باللغتين العربية والإنجليزية بالتوازي لضمان التوافق التام.",
           "تحديد مسار الرابط للزر الأساسي (مثل: صفحة الشقق المخدومة `/apartments` أو نموذج التواصل بكود الخصم).",
           "ضبط شارات العرض الترويجي والعد التنازلي (مثل: عرض اليوم الوطني - خصم 20%).",
@@ -434,7 +502,7 @@
         objective: "منع الخلافات مع النزلاء عند تسجيل الوصول ومنع الشكاوى المتعلقة بالإعلانات المضللة حول مرافق غير متوفرة.",
         prerequisites: "صلاحية تعديل مخطط الفنادق في Sanity Studio.",
         steps: [
-          "الدخول إلى Sanity Studio ➔ الفنادق ➔ اختيار الفندق المعني.",
+          "الدخول إلى Sanity Studio ← الفنادق ← اختيار الفندق المعني.",
           "التمرير إلى قائمة المرافق المعتمدة (مثل: إنترنت مجاني، مطبخ صغير، خدمة صف السيارات، تنظيف يومي).",
           "تحديد أو إلغاء تحديد المرافق وفقاً للجاهزية التشغيلية الفعلية للفندق في الوقت الحالي.",
           "قاعدة صارمة لفندقي توليب الروضة وفيناس الرياض: التأكد من عدم إدراج مطعم داخلي. وفي حال إظهار خدمة بوفيه الإفطار، يجب إلزامياً كتابة '(قريباً)' بالعربية و '(Soon)' بالإنجليزية.",
@@ -455,7 +523,7 @@
         objective: "التوسع الفوري وإتاحة الفروع الجديدة للحجز والاستفسار بمجرد استحواذ أو تشغيل سويس بلو لأي أصل فندقي جديد.",
         prerequisites: "بيانات الفندق الجديد، أنواع الغرف، أرقام التواصل الرسمية، والصور المعتمدة.",
         steps: [
-          "الدخول إلى Sanity Studio ➔ الفنادق ➔ النقر على زر 'إنشاء مستند جديد' (Create New Document).",
+          "الدخول إلى Sanity Studio ← الفنادق ← النقر على زر 'إنشاء مستند جديد' (Create New Document).",
           "إدخال اسم الفندق بالعربية والإنجليزية، وتحديد المدينة (الرياض، جدة، جازان)، والرابط المخصص (Slug).",
           "إدخال أرقام هواتف الاستقبال، رقم واتساب المعتمد، العنوان الوطني، وإحداثيات خريطة جوجل التفاعلية.",
           "إضافة فئات الغرف المتوفرة (اسم الغرفة، توزيع الأسرّة، المساحة بالمتر المربع، السعة القصوى، وأبرز المزايا).",
@@ -564,7 +632,7 @@
         steps: [
           "الدخول إلى إعدادات المتغيرات البيئية في مشروع Vercel.",
           "التحقق من بريد الوجهة لكل مسار: بريد الحجوزات، بريد التوظيف، وبريد مبيعات الشركات.",
-          "فتح لوحة Brevo ➔ قسم النطاقات والمرسلين، والتأكد من تفعيل سجلات التحقق SPF و DKIM و DMARC لنطاق swissblue.sa.",
+          "فتح لوحة Brevo ← قسم النطاقات والمرسلين، والتأكد من تفعيل سجلات التحقق SPF و DKIM و DMARC لنطاق swissblue.sa.",
           "التأكد من أن قوالب الرسائل البرمجية تحتوي على المتغيرات المتطابقة مع مخرجات الموقع (الاسم، الجوال، نص الرسالة).",
           "إرسال استمارة تجريبية على بيئة الاختبار للتأكد من وصول البريد خلال 5 ثوانٍ مع صحة عنوان الرد التلقائي (Reply-To)."
         ],
@@ -582,7 +650,7 @@
         objective: "إطلاق تنبيه صوتي فوري على أجهزة الاستقبال خلال 3 ثوانٍ فقط من إرسال أي استفسار على الموقع.",
         prerequisites: "صلاحية الدخول إلى بوابة مطوري Meta وإعدادات المتغيرات البيئية في Vercel.",
         steps: [
-          "الانتقال إلى Meta Business Suite ➔ مدير الواتساب ➔ قوالب الرسائل.",
+          "الانتقال إلى Meta Business Suite ← مدير الواتساب ← قوالب الرسائل.",
           "التأكد من أن القالب المعتمد `new_form_submission` يحمل حالة 'معتمد' (Approved).",
           "التحقق من أن حمولة البيانات تحتوي بدقة على 5 متغيرات مرتبة: النوع، الاسم، البريد، الجوال، وملخص الطلب.",
           "التأكد من أن رقم هاتف الاستقبال المعتمد في المتغير `WHATSAPP_TO` مكتوب بصيغة E.164 الدولية دون مسافات أو إشارة + (مثال: 9665XXXXXXXX).",
@@ -603,7 +671,7 @@
         prerequisites: "بيانات الدخول الإداري لـ Brevo وسجلات التشغيل الحية في Vercel.",
         steps: [
           "في حال توقف وصول الإشعارات فجأة، يتم فتح سجلات تشغيل Vercel وتصفية المسار بالبحث عن `/api/forms/*`.",
-          "إذا ظهر الخطأ `Brevo 401 Unauthorized: unrecognised IP address`: يتم تسجيل الدخول إلى app.brevo.com ➔ الأمان ➔ Authorized IPs.",
+          "إذا ظهر الخطأ `Brevo 401 Unauthorized: unrecognised IP address`: يتم تسجيل الدخول إلى app.brevo.com ← الأمان ← Authorized IPs.",
           "التأكد الصارم من أن خيار 'Authorized IPs' معطل تماماً (لأن Vercel يعمل عبر خوادم سحابية ذات عناوين IP متغيرة).",
           "إذا أظهرت سجلات الواتساب الخطأ `Error 132000`: يتم التحقق من أن عدد المتغيرات المرسلة يساوي 5 متغيرات بالضبط.",
           "إرسال طلب تجريبي عبر صفحة اتصل بنا للتأكد من استعادة عمل كافة الإشعارات."
@@ -663,7 +731,7 @@
         prerequisites: "صلاحية الوصول إلى تبويب 'آراء النزلاء' (Testimonials) في Sanity Studio.",
         steps: [
           "اختيار تقييمات 5 نجوم الحقيقية والمميزة من الملف الرسمي على خرائط جوجل ونماذج التقييم المعتمدة بعد الإقامة.",
-          "فتح Sanity Studio ➔ قسم 'آراء النزلاء' ➔ النقر على 'إضافة تقييم جديد'.",
+          "فتح Sanity Studio ← قسم 'آراء النزلاء' ← النقر على 'إضافة تقييم جديد'.",
           "إدخال اسم النزيل، المدينة أو الدولة، الفندق الذي أقام فيه، عدد النجوم، ونص التقييم.",
           "إدخال الترجمة باللغتين العربية والإنجليزية لضمان تكافؤ الظهور في كلا الواجهتين.",
           "إرفاق صورة النزيل أو علم دولته إن وُجد.",
@@ -684,7 +752,7 @@
         prerequisites: "صلاحية تعديل إعدادات التذييل والصفحات القانونية في Sanity Studio.",
         steps: [
           "مراجعة شهادات تجديد تراخيص وزارة السياحة الرسمية لكافة الفنادق والشقق الستة التابعة للمجموعة.",
-          "الدخول إلى Sanity Studio ➔ إعدادات الموقع ➔ الإفصاحات القانونية وتذييل الصفحة (Footer).",
+          "الدخول إلى Sanity Studio ← إعدادات الموقع ← الإفصاحات القانونية وتذييل الصفحة (Footer).",
           "التأكد من ظهور أرقام تراخيص وزارة السياحة السارية، رقم السجل التجاري، والرقم الضريبي في تذييل كافة الصفحات.",
           "مراجعة سياسة الخصوصية (`/privacy`) وشروط الاستخدام (`/terms`) ومطابقتها مع نظام حماية البيانات الشخصية (PDPL).",
           "النقر على نشر لتعميم التحديثات القانونية على كافة صفحات ومسارات الموقع عالمياً."
@@ -806,10 +874,13 @@
       renderSOPs();
     }
 
+    let activeSop = null;
+
     // فتح النافذة المنبثقة
     function openSopModal(id) {
       const sop = sopsData.find(s => s.id === id);
       if (!sop) return;
+      activeSop = sop;
 
       document.getElementById('modal-sop-code').textContent = sop.code;
       document.getElementById('modal-sop-pillar').textContent = sop.pillarName;
@@ -817,9 +888,9 @@
       document.getElementById('modal-sop-title').textContent = sop.title;
 
       const stepsHtml = sop.steps.map((step, idx) => `
-        <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80">
-          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white font-bold text-[11px] shrink-0 mt-0.5 font-mono">${idx + 1}</span>
-          <span class="leading-relaxed text-slate-300 text-xs">${step}</span>
+        <li class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 text-xs text-slate-300 leading-relaxed">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white font-bold text-[11px] shrink-0 font-mono ml-2 align-middle">${idx + 1}</span>
+          <span class="align-middle">${step}</span>
         </li>
       `).join('');
 
@@ -868,16 +939,34 @@
       document.body.style.overflow = '';
     }
 
-    // نسخ المحتوى
+    // نسخ خطوات الإجراء بتنسيق منظم ومثالي
     function copyModalContent() {
-      const title = document.getElementById('modal-sop-title').textContent;
-      const content = document.getElementById('modal-sop-content').innerText;
-      navigator.clipboard.writeText(title + "\n\n" + content).then(() => {
+      if (!activeSop) return;
+      const stepsFormatted = activeSop.steps.map((st, i) => `${i + 1}. ${st}`).join('\n');
+      const copyText = `${activeSop.title} (${activeSop.code}) - ${activeSop.pillarName}\n` +
+        `الدور المسؤول: ${activeSop.role}\n\n` +
+        `1. الهدف التشغيلي للإجراء:\n${activeSop.objective}\n\n` +
+        `2. المتطلبات والأنظمة المستخدمة:\n${activeSop.prerequisites}\n\n` +
+        `3. تسلسل خطوات التنفيذ المعتمدة:\n${stepsFormatted}\n\n` +
+        `4. معيار التحقق وضبط الجودة:\n${activeSop.verification}\n\n` +
+        `5. التنبيهات التشغيلية وإدارة المخاطر:\n${activeSop.caution}`;
+
+      navigator.clipboard.writeText(copyText).then(() => {
         const btn = document.getElementById('copy-btn-text');
         btn.textContent = "تم نسخ الإجراء بنجاح!";
         setTimeout(() => { btn.textContent = "نسخ خطوات الإجراء"; }, 2000);
       });
     }
+
+    // طباعة الإجراء المعروض حصرياً بسرعة ونقاء تام
+    function printSopModal() {
+      document.body.classList.add('print-modal-active');
+      window.print();
+    }
+
+    window.addEventListener('afterprint', () => {
+      document.body.classList.remove('print-modal-active');
+    });
 
     // تتبع حركة الفأرة للمؤثرات الضوئية
     document.addEventListener('mousemove', (e) => {

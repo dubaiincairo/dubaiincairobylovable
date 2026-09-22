@@ -90,6 +90,83 @@
       border-color: rgba(99, 102, 241, 0.6);
       color: #a5b4fc;
     }
+
+    /* Print Styles */
+    @media print {
+      body { background: #ffffff !important; color: #0f172a !important; }
+      
+      /* When printing active SOP modal */
+      body.print-modal-active > *:not(#modal-overlay) { display: none !important; }
+      body.print-modal-active #modal-overlay {
+        display: block !important;
+        position: static !important;
+        background: #ffffff !important;
+        padding: 0 !important;
+        inset: auto !important;
+        width: 100% !important;
+        height: auto !important;
+      }
+      body.print-modal-active #modal-overlay > div {
+        max-width: 100% !important;
+        width: 100% !important;
+        background: #ffffff !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        color: #0f172a !important;
+      }
+      body.print-modal-active #modal-overlay .border-b,
+      body.print-modal-active #modal-overlay .border-t,
+      body.print-modal-active #modal-overlay .border {
+        border-color: #cbd5e1 !important;
+      }
+      body.print-modal-active #modal-overlay button,
+      body.print-modal-active #modal-overlay .no-print {
+        display: none !important;
+      }
+      body.print-modal-active #modal-overlay svg {
+        display: none !important;
+      }
+      body.print-modal-active #modal-overlay .text-white,
+      body.print-modal-active #modal-overlay h2,
+      body.print-modal-active #modal-overlay span {
+        color: #0f172a !important;
+      }
+      body.print-modal-active #modal-overlay p,
+      body.print-modal-active #modal-overlay li {
+        color: #334155 !important;
+      }
+      body.print-modal-active #modal-overlay [class*="bg-"] {
+        background: #f8fafc !important;
+      }
+
+      /* Default SOP List printing (when modal is NOT open) */
+      body:not(.print-modal-active) .no-print,
+      body:not(.print-modal-active) .glass-nav,
+      body:not(.print-modal-active) header,
+      body:not(.print-modal-active) .ambient-orb-1,
+      body:not(.print-modal-active) .ambient-orb-2,
+      body:not(.print-modal-active) #modal-overlay,
+      body:not(.print-modal-active) #filter-container,
+      body:not(.print-modal-active) #sop-search-container {
+        display: none !important;
+      }
+      body:not(.print-modal-active) .glass-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        break-inside: avoid !important;
+        padding: 8px 10px !important;
+      }
+      body:not(.print-modal-active) #sops-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+      }
+      body:not(.print-modal-active) .text-white { color: #0f172a !important; }
+      body:not(.print-modal-active) .text-slate-300,
+      body:not(.print-modal-active) .text-slate-400 { color: #334155 !important; }
+    }
   </style>
 </head>
 <body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-indigo-600 selection:text-white pb-20 relative">
@@ -238,10 +315,20 @@
 
       <!-- Modal Footer -->
       <div class="pt-4 border-t border-slate-800 flex items-center justify-between shrink-0 text-xs">
-        <span class="text-slate-400 font-mono">WD Group Standard Operating Procedure · Ozoo Connector v4.0</span>
-        <button onclick="closeSopModal()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition">
-          Done Reviewing
+        <button onclick="copyModalContent()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold transition flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span id="copy-btn-text">Copy Procedure</span>
         </button>
+        <div class="flex items-center gap-2">
+          <button onclick="printSopModal()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold transition">
+            Print SOP
+          </button>
+          <button onclick="closeSopModal()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition">
+            Close
+          </button>
+        </div>
       </div>
 
     </div>
@@ -809,10 +896,13 @@
       renderSOPs();
     }
 
+    let activeSop = null;
+
     // Open Modal
     function openSopModal(id) {
       const sop = sopsData.find(s => s.id === id);
       if (!sop) return;
+      activeSop = sop;
 
       document.getElementById('modal-sop-code').textContent = sop.code;
       document.getElementById('modal-sop-pillar').textContent = sop.pillarName;
@@ -820,9 +910,9 @@
       document.getElementById('modal-sop-title').textContent = sop.title;
 
       const stepsHtml = sop.steps.map((step, idx) => `
-        <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800/80">
-          <span class="flex items-center justify-center w-5 h-5 rounded-full bg-indigo-600 text-white font-bold text-[11px] shrink-0 mt-0.5">${idx + 1}</span>
-          <span class="leading-relaxed text-slate-300 text-xs">${step}</span>
+        <li class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 text-xs text-slate-300 leading-relaxed">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-indigo-600 text-white font-bold text-[11px] shrink-0 font-mono mr-2 align-middle">${idx + 1}</span>
+          <span class="align-middle">${step}</span>
         </li>
       `).join('');
 
@@ -877,6 +967,36 @@
       document.getElementById('modal-overlay').classList.add('hidden');
       document.body.style.overflow = '';
     }
+
+    // Copy Content with structured formatting
+    function copyModalContent() {
+      if (!activeSop) return;
+      const stepsFormatted = activeSop.steps.map((st, i) => `${i + 1}. ${st}`).join('\n');
+      const copyText = `${activeSop.title} (${activeSop.code}) - ${activeSop.pillarName}\n` +
+        `Role: ${activeSop.role}\n\n` +
+        `1. Operational Objective:\n${activeSop.objective}\n\n` +
+        `2. Prerequisites & System Permissions:\n${activeSop.prerequisites}\n\n` +
+        `3. Step-by-Step Execution Sequence:\n${stepsFormatted}\n\n` +
+        `4. Expected Accounting Entries & Technical Records:\n${activeSop.entries}\n\n` +
+        `5. Quality Verification & Success Metric:\n${activeSop.verification}\n\n` +
+        `6. Operational Caution & Risk Mitigation:\n${activeSop.caution}`;
+
+      navigator.clipboard.writeText(copyText).then(() => {
+        const btn = document.getElementById('copy-btn-text');
+        btn.textContent = "Copied to Clipboard!";
+        setTimeout(() => { btn.textContent = "Copy Procedure"; }, 2000);
+      });
+    }
+
+    // Print active SOP modal in clean isolated document
+    function printSopModal() {
+      document.body.classList.add('print-modal-active');
+      window.print();
+    }
+
+    window.addEventListener('afterprint', () => {
+      document.body.classList.remove('print-modal-active');
+    });
 
     // Close on escape key
     document.addEventListener('keydown', (e) => {
