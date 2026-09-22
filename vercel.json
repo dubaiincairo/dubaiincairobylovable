@@ -26,18 +26,18 @@
       "permanent": true
     },
     {
-      "source": "/portal/login",
-      "destination": "/portal",
-      "permanent": true
-    },
-    {
       "source": "/client/login",
-      "destination": "/portal",
+      "destination": "/portal/login",
       "permanent": true
     },
     {
       "source": "/manuals/login",
-      "destination": "/portal",
+      "destination": "/portal/login",
+      "permanent": true
+    },
+    {
+      "source": "/login",
+      "destination": "/portal/login",
       "permanent": true
     },
     {
@@ -57,6 +57,30 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/portal/login",
+      "destination": "/portal/login.html"
+    },
+    {
+      "source": "/client-portal/login",
+      "destination": "/portal/login.html"
+    },
+    {
+      "source": "/portal",
+      "destination": "/portal/login.html"
+    },
+    {
+      "source": "/portal/",
+      "destination": "/portal/login.html"
+    },
+    {
+      "source": "/client-portal",
+      "destination": "/portal/login.html"
+    },
+    {
+      "source": "/client-portal/",
+      "destination": "/portal/login.html"
+    },
     {
       "source": "/portal/wdgroup/strategy",
       "destination": "/portal/wdgroup/strategy/index.html"
@@ -208,14 +232,6 @@
     {
       "source": "/proposals/yerkab/:path*",
       "destination": "/proposals/yerkab/:path*"
-    },
-    {
-      "source": "/portal",
-      "destination": "/"
-    },
-    {
-      "source": "/portal/",
-      "destination": "/"
     },
     {
       "source": "/06_Digital_Marketing_Growth_Strategy_Manual.md",

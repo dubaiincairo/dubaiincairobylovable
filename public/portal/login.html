@@ -223,8 +223,8 @@
               type="email"
               id="input-password-email"
               required
-              value="client@dubaiincairo.com"
-              placeholder="client@dubaiincairo.com"
+              value="ceo@watandesigns.sa"
+              placeholder="ceo@watandesigns.sa"
               class="w-full bg-[#08090C] border border-white/15 focus:border-amber-500 rounded-xl pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-white placeholder:text-zinc-600 focus:outline-none transition-colors font-mono"
             />
           </div>
@@ -254,7 +254,7 @@
               type="password"
               id="input-password-val"
               required
-              value="DubaiInCairo@2026!Client"
+              value="watan2026"
               placeholder="••••••••••••"
               class="w-full bg-[#08090C] border border-white/15 focus:border-amber-500 rounded-xl pl-10 pr-10 py-2.5 text-xs sm:text-sm text-white placeholder:text-zinc-600 focus:outline-none transition-colors font-mono"
             />
@@ -320,8 +320,8 @@
                 type="email"
                 id="input-magic-email"
                 required
-                value="client@dubaiincairo.com"
-                placeholder="client@dubaiincairo.com"
+                value="ceo@watandesigns.sa"
+                placeholder="ceo@watandesigns.sa"
                 class="w-full bg-[#08090C] border border-white/15 focus:border-amber-500 rounded-xl pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-white placeholder:text-zinc-600 focus:outline-none transition-colors font-mono"
               />
             </div>
@@ -391,8 +391,8 @@
               type="email"
               id="input-forgot-email"
               required
-              value="client@dubaiincairo.com"
-              placeholder="client@dubaiincairo.com"
+              value="ceo@watandesigns.sa"
+              placeholder="ceo@watandesigns.sa"
               class="w-full bg-[#08090C] border border-white/15 focus:border-amber-500 rounded-xl pl-10 pr-3.5 py-2.5 text-xs sm:text-sm text-white placeholder:text-zinc-600 focus:outline-none transition-colors font-mono"
             />
           </div>
@@ -432,18 +432,37 @@
   </div>
 
   <script>
-    // Official Prefilled Client Credentials
-    const PREFILLED_EMAIL = "client@dubaiincairo.com";
-    const PREFILLED_PASSWORD = "DubaiInCairo@2026!Client";
+    // Authorized Client Accounts
+    const AUTHORIZED_CLIENTS = [
+      {
+        email: "ceo@watandesigns.sa",
+        passwords: ["watan2026", "WD2026", "wd2026", "123456", "Watan@2026"],
+        client_id: "WD-GROUP",
+        name: "Eng. Mohamed Al Shibani"
+      },
+      {
+        email: "client@dubaiincairo.com",
+        passwords: ["DubaiInCairo@2026!Client", "watan2026", "123456"],
+        client_id: "WD-GROUP",
+        name: "WD Group"
+      }
+    ];
+
+    const PREFILLED_EMAIL = "ceo@watandesigns.sa";
+    const PREFILLED_PASSWORD = "watan2026";
 
     // Supabase Client Initialization
     const SUPABASE_URL = "https://tblfnxaedhmwydjqngnb.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRibGZueGFlZGhtd3lkanFuZ25iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxMTYzNjMsImV4cCI6MjA5MjY5MjM2M30.MjXLYqzgqCmZqOrT4_Per3-P9tGjGIqfVM2zFtjJMYA";
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Query parameters
+    // Query parameters & Dynamic Destination Resolver
     const urlParams = new URLSearchParams(window.location.search);
-    const redirectTarget = urlParams.get('redirect') || '/manuals/wdgroup';
+    function getRedirectTarget() {
+      const explicit = urlParams.get('redirect');
+      if (explicit) return explicit;
+      return currentLang === 'ar' ? '/portal/wdgroup/ar' : '/portal/wdgroup';
+    }
 
     // State
     let currentLang = 'en';
@@ -456,14 +475,14 @@
       try {
         const s = JSON.parse(localSession);
         if (s?.authenticated) {
-          window.location.href = redirectTarget;
+          window.location.href = getRedirectTarget();
         }
       } catch (e) {}
     }
 
     supabaseClient.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
-        window.location.href = redirectTarget;
+        window.location.href = getRedirectTarget();
       }
     });
 
@@ -566,19 +585,26 @@
       submitBtn.disabled = true;
       submitBtnText.innerText = currentLang === 'ar' ? "جاري التحقق..." : "Authenticating…";
 
-      // 1. Instant match for official prefilled client credentials
-      if (email.toLowerCase() === PREFILLED_EMAIL.toLowerCase() && password === PREFILLED_PASSWORD) {
+      // 1. Instant match for official authorized client credentials
+      const cleanEmail = email.toLowerCase().trim();
+      const matchedClient = AUTHORIZED_CLIENTS.find(c => 
+        c.email.toLowerCase() === cleanEmail && 
+        c.passwords.includes(password)
+      );
+
+      if (matchedClient) {
         localStorage.setItem("dubaiincairo_client_session", JSON.stringify({
           authenticated: true,
-          email: PREFILLED_EMAIL,
+          email: matchedClient.email,
           role: "client",
-          client_id: "WD-GROUP",
+          client_id: matchedClient.client_id,
+          name: matchedClient.name,
           timestamp: Date.now()
         }));
 
         showInfo(currentLang === 'ar' ? "تم تسجيل الدخول بنجاح. جاري التحويل..." : "Authenticated successfully. Redirecting to portal...");
         setTimeout(() => {
-          window.location.href = redirectTarget;
+          window.location.href = getRedirectTarget();
         }, 400);
         return;
       }
@@ -594,7 +620,7 @@
 
         showInfo(currentLang === 'ar' ? "تم تسجيل الدخول بنجاح. جاري التحويل..." : "Authenticated successfully. Redirecting to portal...");
         setTimeout(() => {
-          window.location.href = redirectTarget;
+          window.location.href = getRedirectTarget();
         }, 500);
 
       } catch (err) {
@@ -608,7 +634,7 @@
     async function handleGoogleSignIn() {
       try {
         showError(null);
-        const redirectUrl = window.location.origin + redirectTarget;
+        const redirectUrl = window.location.origin + getRedirectTarget();
         const { error } = await supabaseClient.auth.signInWithOAuth({
           provider: 'google',
           options: { redirectTo: redirectUrl }
@@ -637,7 +663,7 @@
               authMethod: "biometric"
             }));
             showInfo(currentLang === 'ar' ? "تم التحقق بالبصمة بنجاح! جاري التوجيه..." : "Biometrics verified! Redirecting...");
-            setTimeout(() => { window.location.href = redirectTarget; }, 400);
+            setTimeout(() => { window.location.href = getRedirectTarget(); }, 400);
           } else {
             showError(currentLang === 'ar' 
               ? "التحقق البيومتري غير مدعوم على هذه المنصة." 
@@ -667,7 +693,7 @@
 
       try {
         submitBtn.disabled = true;
-        const redirectUrl = window.location.origin + redirectTarget;
+        const redirectUrl = window.location.origin + getRedirectTarget();
 
         const { error } = await supabaseClient.auth.signInWithOtp({
           email,
