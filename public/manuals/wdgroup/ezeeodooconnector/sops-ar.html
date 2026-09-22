@@ -288,70 +288,78 @@
   <!-- MAIN CONTAINER -->
   <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 space-y-8">
     
-    <!-- Hero Banner -->
-    <div class="text-center max-w-3xl mx-auto space-y-3">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-xs font-semibold text-indigo-300 uppercase tracking-wider">
-        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-        كتيب إجراءات العمل المحاسبية والتشغيلية المعتمدة
+    <!-- HERO EXECUTIVE BANNER -->
+    <section class="relative rounded-3xl overflow-hidden border border-indigo-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-6 sm:p-10 shadow-2xl">
+      <div class="space-y-4 max-w-4xl">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+          <span>دليل التنفيذ المحاسبي والتشغيلي • 20 إجراء عمل معتمد</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-normal">
+          إجراءات تشغيل برنامج <span class="bg-gradient-to-l from-indigo-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent inline-block py-2 pb-3.5">أوزو المحاسبي الآلي</span>
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          خطوات إجرائية تفصيلية موجهة لمدراء المكاتب الأمامية، مراجعي الحسابات الليلية، المدراء الماليين، ومسؤولي الأنظمة. تركز حصرياً على المزامنة الآلية لدفتر الأستاذ العام، مطابقة الإغلاق الليلي اليومي، إدارة ذمم الشركات، وموازنة حسابات النزلاء بين نظامي إيزي وأودو 19 إنتربرايز.
+        </p>
       </div>
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-        <span class="bg-gradient-to-r from-indigo-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent">إجراءات التشغيل القياسية لبرنامج أوزو</span>
-      </h1>
-      <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
-        انقر على أي إجراء تشغيلي لفتح نافذة تفاعلية مركزة تستعرض الدور الوظيفي المسؤول، الخطوات التنفيذية خطوة بخطوة، القيود المحاسبية المتوقعة، معايير التحقق، وبروتوكولات الحد من المخاطر.
-      </p>
-    </div>
 
-    <!-- Filter & Search Toolbar -->
-    <div class="glass-card rounded-2xl p-4 border border-slate-800/80 shadow-xl space-y-4">
-      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
-        
-        <!-- Search Input -->
-        <div class="relative flex-1 max-w-md" id="sop-search-container">
+      <!-- Live Search & Stats Filter -->
+      <div class="mt-8 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4" id="sop-search-container">
+        <div class="relative w-full sm:w-96">
           <input 
             type="text" 
             id="sop-search"
             placeholder="ابحث برمز الإجراء، الدور الوظيفي، العنوان، أو الكلمة المفتاحية..."
             oninput="handleSearch(this.value)"
-            class="w-full px-4 py-2.5 pr-10 rounded-xl bg-slate-900 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+            class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition"
           >
-          <svg class="w-4 h-4 text-slate-500 absolute right-3.5 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
         </div>
-
-        <div class="text-xs text-slate-400 font-mono flex items-center gap-2">
-          <span>الإجراءات المتاحة:</span>
-          <span id="active-count" class="px-2 py-0.5 rounded-md bg-indigo-600/30 text-indigo-300 font-bold border border-indigo-500/40">20</span>
+        <div class="flex items-center gap-4 text-xs font-mono">
+          <div class="px-3 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700">
+            <span class="text-slate-400 font-sans">إجمالي الإجراءات:</span>
+            <span class="text-indigo-400 font-bold mr-1.5" id="active-count">20</span>
+          </div>
+          <div class="text-slate-400 hidden md:block">
+            <span>PMS:</span>
+            <span class="text-cyan-400 font-bold mr-1">eZee Absolute</span>
+            <span class="text-slate-600 mx-1.5">|</span>
+            <span>ERP:</span>
+            <span class="text-indigo-400 font-bold mr-1">Odoo 19 Ent</span>
+          </div>
         </div>
-
       </div>
+    </section>
 
-      <!-- Category Filter Tabs -->
-      <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar text-xs" id="filter-container">
-        <button onclick="setFilter('all')" class="tab-btn active px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+    <!-- HORIZONTAL PILLAR FILTER RAIL -->
+    <section class="space-y-2 no-print" id="filter-container">
+      <div class="flex items-center justify-between">
+        <span class="text-xs uppercase tracking-wider font-bold text-slate-400">تصفية حسب التصنيف التشغيلي</span>
+        <span class="text-[11px] text-slate-500">مرر أفقياً لاستعراض بقية التصنيفات</span>
+      </div>
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="pillar-tabs">
+        <button onclick="setFilter('all')" class="tab-btn active shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-indigo-500/50 transition whitespace-nowrap">
           جميع الإجراءات (20)
         </button>
-        <button onclick="setFilter('onboarding')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+        <button onclick="setFilter('onboarding')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-indigo-500/50 transition whitespace-nowrap">
           1. التهيئة والربط الأولي (4)
         </button>
-        <button onclick="setFilter('daily')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+        <button onclick="setFilter('daily')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-indigo-500/50 transition whitespace-nowrap">
           2. المراجعة الليلية والمطابقة اليومية (4)
         </button>
-        <button onclick="setFilter('city')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+        <button onclick="setFilter('city')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-indigo-500/50 transition whitespace-nowrap">
           3. ذمم الشركات والعملاء (3)
         </button>
-        <button onclick="setFilter('pos')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+        <button onclick="setFilter('pos')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-indigo-500/50 transition whitespace-nowrap">
           4. نقاط البيع وحماية الازدواج (3)
         </button>
-        <button onclick="setFilter('diagnostics')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
+        <button onclick="setFilter('diagnostics')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-indigo-500/50 transition whitespace-nowrap">
           5. التشخيص والتدقيق الجنائي (3)
         </button>
-        <button onclick="setFilter('admin')" class="tab-btn px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-900 text-slate-300 font-medium transition whitespace-nowrap">
-          6. الإدارة والتوطين والطباعة (3)
+        <button onclick="setFilter('admin')" class="tab-btn shrink-0 px-4 py-2 rounded-xl text-xs font-semibold border border-slate-700/80 bg-slate-900/60 text-slate-300 hover:border-indigo-500/50 transition whitespace-nowrap">
+          6. الإدارة والتوطين (3)
         </button>
       </div>
-    </div>
+    </section>
 
     <!-- SOP Cards Grid -->
     <div id="sop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

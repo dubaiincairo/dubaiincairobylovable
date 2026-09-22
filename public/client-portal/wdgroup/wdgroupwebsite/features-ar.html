@@ -289,95 +289,182 @@
   </header>
 
   <!-- الحاوية الرئيسية -->
-  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-12 w-full space-y-8">
 
     <!-- لافتة الترحيب والرؤية المؤسسية -->
-    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 relative overflow-hidden">
-      <div class="relative z-10 max-w-4xl space-y-3">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
-          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-          <span>46 ميزة تشغيلية عبر 8 ركائز استراتيجية متكاملة</span>
-        </div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
-          المرجع الشامل لميزات موقع ومنصة مجموعة دبليو دي للأعمال
-        </h1>
-        <p class="text-sm text-slate-300 leading-relaxed">
-          وثيقة تقنية وتشغيلية موحدة تستعرض كافة إمكانيات الواجهة المؤسسية الفاخرة، متجر أثاث جرين وود الراقي، لوحة القيادة التنفيذية، وإدارة مسار المبيعات واستقطاب الكفاءات، مبنية وفق أحدث معايير Next.js وربط Odoo 19 وقواعد بيانات Supabase الموثقة.
-        </p>
+    <div class="text-center max-w-3xl mx-auto space-y-4 sm:space-y-6">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-xs font-semibold text-blue-400 uppercase tracking-wider">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        منظومة الإنتاج الرقمي المعتمدة · 46 ميزة تشغيلية موثقة
       </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-normal">
+        منصة تجارة الأثاث والكونسول <span class="bg-gradient-to-l from-blue-400 via-indigo-300 to-[#C9A86A] bg-clip-text text-transparent inline-block py-2 pb-3.5">دليل الميزات والقدرات</span>
+      </h1>
+      <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+        وثيقة تقنية وتشغيلية موحدة تستعرض كافة إمكانيات الواجهة المؤسسية الفاخرة، متجر أثاث جرين وود الراقي، لوحة القيادة التنفيذية، وإدارة مسار المبيعات واستقطاب الكفاءات عبر 8 ركائز استراتيجية وفق المعيار التشغيلي المزدوج.
+      </p>
     </div>
 
     <!-- شريط التصفية والبحث الثابت -->
-    <div class="sticky top-20 z-30 pt-2 pb-3 glass-nav border-y border-slate-800/80 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+    <section class="sticky top-0 z-30 pt-4 pb-3 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 bg-[#0b0f19]/92 backdrop-blur-xl border-b border-slate-800/80 transition-all shadow-2xl shadow-black/40" id="controls-section">
+      <div class="max-w-7xl mx-auto space-y-3">
         
-        <!-- مسار الركائز القابل للتمرير الأفقي -->
-        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1" id="category-filters">
-          <button onclick="filterCategory('all')" class="category-pill active" data-category="all">
-            <span>كافة الميزات</span>
-            <span class="pill-badge">46</span>
-          </button>
-          <button onclick="filterCategory('pillar-1')" class="category-pill" data-category="pillar-1">
-            <span>1. الهوية المؤسسية والمعمارية</span>
-            <span class="pill-badge">6</span>
-          </button>
-          <button onclick="filterCategory('pillar-2')" class="category-pill" data-category="pillar-2">
-            <span>2. محفظة القطاعات الاستراتيجية</span>
-            <span class="pill-badge">6</span>
-          </button>
-          <button onclick="filterCategory('pillar-3')" class="category-pill" data-category="pillar-3">
-            <span>3. المتجر ومعرض الأثاث الفاخر</span>
-            <span class="pill-badge">6</span>
-          </button>
-          <button onclick="filterCategory('pillar-4')" class="category-pill" data-category="pillar-4">
-            <span>4. لوحة الإدارة والعمليات</span>
-            <span class="pill-badge">6</span>
-          </button>
-          <button onclick="filterCategory('pillar-5')" class="category-pill" data-category="pillar-5">
-            <span>5. طلبات B2B وإدارة الفرص</span>
-            <span class="pill-badge">5</span>
-          </button>
-          <button onclick="filterCategory('pillar-6')" class="category-pill" data-category="pillar-6">
-            <span>6. استقطاب الكفاءات والتوظيف</span>
-            <span class="pill-badge">5</span>
-          </button>
-          <button onclick="filterCategory('pillar-7')" class="category-pill" data-category="pillar-7">
-            <span>7. المساعد الذكي والاتصالات</span>
-            <span class="pill-badge">6</span>
-          </button>
-          <button onclick="filterCategory('pillar-8')" class="category-pill" data-category="pillar-8">
-            <span>8. الحوكمة والأمن والبنية التحتية</span>
-            <span class="pill-badge">6</span>
-          </button>
+        <!-- صف البحث والمحدد المنسدل للشاشات الصغيرة -->
+        <div class="flex items-center gap-3">
+          <div class="relative flex-1">
+            <input 
+              type="text" 
+              id="feature-search" 
+              placeholder="ابحث في الميزات بالاسم، الرمز (مثل BRAND-01)، أو الأثر المالي والتشغيلي..." 
+              oninput="handleSearch(this.value)"
+              class="w-full px-4 py-2.5 pr-11 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition shadow-inner font-['IBM_Plex_Sans_Arabic'] text-right"
+            >
+            <svg class="w-4 h-4 text-slate-400 absolute right-3.5 top-3 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+
+          <!-- قائمة منسدلة للشاشات الذكية (sm:hidden) -->
+          <div class="sm:hidden relative w-44 flex-shrink-0">
+            <select 
+              id="mobile-category-select" 
+              onchange="filterCategory(this.value)"
+              class="w-full appearance-none px-3 py-2.5 pl-8 rounded-xl bg-slate-800 border border-slate-700 text-xs font-semibold text-white focus:outline-none focus:border-blue-500 font-['IBM_Plex_Sans_Arabic']"
+            >
+              <option value="all">كافة الميزات (46)</option>
+              <option value="pillar-1">1. الهوية والمعمارية (6)</option>
+              <option value="pillar-2">2. محفظة القطاعات (6)</option>
+              <option value="pillar-3">3. المتجر ومعرض الأثاث (6)</option>
+              <option value="pillar-4">4. لوحة الإدارة والعمليات (6)</option>
+              <option value="pillar-5">5. مسار المبيعات B2B (5)</option>
+              <option value="pillar-6">6. استقطاب الكفاءات والتوظيف (5)</option>
+              <option value="pillar-7">7. المساعد الذكي والاتصالات (6)</option>
+              <option value="pillar-8">8. الحوكمة والأمن والبنية التحتية (6)</option>
+            </select>
+            <div class="pointer-events-none absolute left-2.5 top-3 text-slate-400">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+          </div>
         </div>
 
-        <!-- حقل البحث الفوري -->
-        <div class="relative w-48 sm:w-64 flex-shrink-0" id="search-container">
-          <input 
-            type="text" 
-            id="feature-search"
-            placeholder="ابحث في الميزات أو الأكواد..." 
-            oninput="handleSearch(this.value)"
-            class="w-full px-3.5 py-1.5 pr-9 rounded-xl bg-slate-900 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition text-right"
+        <!-- شريط التمرير الأفقي السلس للمحاور -->
+        <div class="relative flex items-center group">
+          <!-- سهم التمرير إلى اليمين -->
+          <button 
+            id="rail-scroll-right" 
+            onclick="scrollPillRail(220)" 
+            class="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-slate-900/95 border border-slate-700 items-center justify-center text-slate-300 hover:text-white hover:border-blue-500 shadow-xl backdrop-blur-md transition-all opacity-0 pointer-events-none"
+            title="تمرير لليمين"
           >
-          <svg class="w-4 h-4 text-slate-500 absolute right-3 top-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <!-- تدرج تلاشي اليمين -->
+          <div id="rail-fade-right" class="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0b0f19] to-transparent z-10 opacity-0 transition-opacity"></div>
+
+          <!-- مسار المحاور -->
+          <div 
+            id="category-rail" 
+            onscroll="updateRailScrollIndicators()" 
+            class="flex items-center gap-2 overflow-x-auto py-1 px-1 scroll-smooth no-scrollbar w-full"
+          >
+            <!-- الكل -->
+            <button onclick="filterCategory('all')" class="category-pill active" data-category="all">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+              <span>كافة الميزات</span>
+              <span class="pill-badge">46</span>
+            </button>
+
+            <!-- 1. الهوية المؤسسية والمعمارية -->
+            <button onclick="filterCategory('pillar-1')" class="category-pill" data-category="pillar-1">
+              <svg class="w-3.5 h-3.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+              <span>1. الهوية والمعمارية</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <!-- 2. محفظة القطاعات الاستراتيجية -->
+            <button onclick="filterCategory('pillar-2')" class="category-pill" data-category="pillar-2">
+              <svg class="w-3.5 h-3.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              <span>2. محفظة القطاعات</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <!-- 3. المتجر ومعرض الأثاث الفاخر -->
+            <button onclick="filterCategory('pillar-3')" class="category-pill" data-category="pillar-3">
+              <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+              <span>3. المتجر ومعرض الأثاث</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <!-- 4. لوحة الإدارة والعمليات -->
+            <button onclick="filterCategory('pillar-4')" class="category-pill" data-category="pillar-4">
+              <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+              <span>4. لوحة الإدارة والعمليات</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <!-- 5. طلبات B2B وإدارة الفرص -->
+            <button onclick="filterCategory('pillar-5')" class="category-pill" data-category="pillar-5">
+              <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              <span>5. مسار المبيعات B2B</span>
+              <span class="pill-badge">5</span>
+            </button>
+
+            <!-- 6. استقطاب الكفاءات والتوظيف -->
+            <button onclick="filterCategory('pillar-6')" class="category-pill" data-category="pillar-6">
+              <svg class="w-3.5 h-3.5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <span>6. استقطاب الكفاءات والتوظيف</span>
+              <span class="pill-badge">5</span>
+            </button>
+
+            <!-- 7. المساعد الذكي والاتصالات -->
+            <button onclick="filterCategory('pillar-7')" class="category-pill" data-category="pillar-7">
+              <svg class="w-3.5 h-3.5 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <span>7. المساعد الذكي والاتصالات</span>
+              <span class="pill-badge">6</span>
+            </button>
+
+            <!-- 8. الحوكمة والأمن والبنية التحتية -->
+            <button onclick="filterCategory('pillar-8')" class="category-pill" data-category="pillar-8">
+              <svg class="w-3.5 h-3.5 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              <span>8. الحوكمة والأمن والبنية</span>
+              <span class="pill-badge">6</span>
+            </button>
+          </div>
+
+          <!-- تدرج تلاشي اليسار -->
+          <div id="rail-fade-left" class="pointer-events-none absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0b0f19] to-transparent z-10 opacity-0 transition-opacity"></div>
+
+          <!-- سهم التمرير إلى اليسار -->
+          <button 
+            id="rail-scroll-left" 
+            onclick="scrollPillRail(-220)" 
+            class="hidden md:flex absolute -left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-slate-900/95 border border-slate-700 items-center justify-center text-slate-300 hover:text-white hover:border-blue-500 shadow-xl backdrop-blur-md transition-all opacity-100"
+            title="تمرير لليسار"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+        </div>
+
+        <!-- ملخص النتائج والعداد النشط -->
+        <div class="flex items-center justify-between text-xs text-slate-400 pt-1 px-1">
+          <div class="flex items-center gap-1.5">
+            <span>عرض الفئة:</span>
+            <span id="active-category-label" class="font-bold text-white">كافة الميزات</span>
+            <span class="text-slate-600">·</span>
+            <span class="px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono font-bold"><span id="filtered-count">46</span> من إجمالي 46 ميزة نشطة</span>
+          </div>
+          <button 
+            id="reset-filter-btn" 
+            onclick="resetFilters()" 
+            class="hidden text-xs text-blue-400 hover:text-blue-300 transition items-center gap-1"
+          >
+            إعادة تعيين التصفية ✕
+          </button>
         </div>
 
       </div>
-    </div>
-
-    <!-- ملخص النتائج والعداد النشط -->
-    <div class="flex items-center justify-between text-xs text-slate-400 px-1">
-      <div class="flex items-center gap-2">
-        <span>عرض الفئة:</span>
-        <span id="active-category-label" class="font-bold text-white">كافة الميزات</span>
-      </div>
-      <div class="font-mono">
-        <span id="filtered-count" class="font-bold text-blue-400">46</span> من إجمالي 46 ميزة نشطة
-      </div>
-    </div>
+    </section>
 
     <!-- شبكة الميزات (46 ميزة مقسمة على 8 ركائز وفق المعيار المزدوج) -->
     <div class="space-y-12" id="features-container">
@@ -1616,13 +1703,63 @@
     let activeCategory = 'all';
     let searchQuery = '';
 
+    function scrollPillRail(offset) {
+      const rail = document.getElementById('category-rail');
+      if (rail) {
+        rail.scrollBy({ left: offset, behavior: 'smooth' });
+        setTimeout(updateRailScrollIndicators, 320);
+      }
+    }
+
+    function updateRailScrollIndicators() {
+      const rail = document.getElementById('category-rail');
+      const rightBtn = document.getElementById('rail-scroll-right');
+      const leftBtn = document.getElementById('rail-scroll-left');
+      const rightFade = document.getElementById('rail-fade-right');
+      const leftFade = document.getElementById('rail-fade-left');
+      
+      if (!rail) return;
+      
+      const scrollPos = Math.abs(rail.scrollLeft);
+      const maxScroll = rail.scrollWidth - rail.clientWidth;
+      const atStart = scrollPos <= 5;
+      const atEnd = scrollPos >= maxScroll - 5;
+      
+      if (rightBtn) {
+        rightBtn.style.opacity = atStart ? '0' : '1';
+        rightBtn.style.pointerEvents = atStart ? 'none' : 'auto';
+      }
+      if (rightFade) rightFade.style.opacity = atStart ? '0' : '1';
+      
+      if (leftBtn) {
+        leftBtn.style.opacity = atEnd ? '0' : '1';
+        leftBtn.style.pointerEvents = atEnd ? 'none' : 'auto';
+      }
+      if (leftFade) leftFade.style.opacity = atEnd ? '0' : '1';
+    }
+
+    function resetFilters() {
+      document.getElementById('feature-search').value = '';
+      searchQuery = '';
+      filterCategory('all');
+    }
+
     function filterCategory(cat) {
       activeCategory = cat;
       
       // Update pills UI
       document.querySelectorAll('.category-pill').forEach(pill => {
-        pill.classList.toggle('active', pill.getAttribute('data-category') === cat);
+        const isActive = pill.getAttribute('data-category') === cat;
+        pill.classList.toggle('active', isActive);
+        if (isActive) {
+          pill.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+        }
       });
+
+      const mobileSelect = document.getElementById('mobile-category-select');
+      if (mobileSelect && mobileSelect.value !== cat) {
+        mobileSelect.value = cat;
+      }
 
       document.getElementById('active-category-label').textContent = pillarTitles[cat] || 'كافة الميزات';
       applyFilters();
@@ -1652,6 +1789,19 @@
         }
       });
 
+      document.getElementById('filtered-count').textContent = visibleCount;
+
+      const resetBtn = document.getElementById('reset-filter-btn');
+      if (resetBtn) {
+        if (activeCategory !== 'all' || searchQuery !== '') {
+          resetBtn.classList.remove('hidden');
+          resetBtn.classList.add('inline-flex');
+        } else {
+          resetBtn.classList.add('hidden');
+          resetBtn.classList.remove('inline-flex');
+        }
+      }
+
       const isAll = (activeCategory === 'all' && !searchQuery);
       const container = document.getElementById('features-container');
       if (container) {
@@ -1674,15 +1824,17 @@
         const hasVisible = Array.from(sec.querySelectorAll('.feature-item')).some(it => it.style.display !== 'none');
         sec.style.display = hasVisible ? 'block' : 'none';
       });
-
-      document.getElementById('filtered-count').textContent = visibleCount;
     }
 
     // Initial run on load to ensure continuous seamless grid without headers when 'All' is active
     if (document.readyState !== 'loading') {
       applyFilters();
+      updateRailScrollIndicators();
     } else {
-      document.addEventListener('DOMContentLoaded', applyFilters);
+      document.addEventListener('DOMContentLoaded', () => {
+        applyFilters();
+        updateRailScrollIndicators();
+      });
     }
 
     // Spotlight cursor effect
