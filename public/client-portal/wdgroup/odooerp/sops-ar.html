@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منظومة أودو الصناعية — إجراءات التشغيل القياسية (300 إجراء SOP) | مجموعة دبليو دي</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      background-color: #08090C;
+      color: #f1f5f9;
+      font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+      direction: rtl;
+      text-align: right;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 17, 23, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(37, 99, 235, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(37, 99, 235, 0.7); }
+
+    .glass-card {
+      background: rgba(15, 17, 23, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateZ(0);
+    }
+    .glass-card:hover {
+      border-color: rgba(37, 99, 235, 0.45);
+      transform: translateY(-3px) translateZ(0);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+    .glass-nav {
+      background: rgba(8, 9, 12, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .spotlight-card { position: relative; overflow: hidden; }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(37, 99, 235, 0.14), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    @keyframes modalBackdrop { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalDialog {
+      0% { opacity: 0; transform: scale(0.95) translateY(12px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-backdrop-anim { animation: modalBackdrop 0.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .modal-dialog-anim { animation: modalDialog 0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    .category-pill {
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.875rem;
+      border-radius: 0.875rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 17, 23, 0.7);
+      color: #94a3b8;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .category-pill:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: #f1f5f9;
+    }
+    .category-pill.active {
+      background: #7c3aed;
+      border-color: #8b5cf6;
+      color: #ffffff;
+      box-shadow: 0 0 16px -2px rgba(124, 58, 237, 0.6);
+    }
+
+    /* Print Isolation for Modal */
+    @media print {
+      body.print-modal-active > *:not(#modal-overlay) { display: none !important; }
+      body.print-modal-active #modal-overlay {
+        position: static !important;
+        background: transparent !important;
+        padding: 0 !important;
+        display: block !important;
+        direction: rtl !important;
+      }
+      body.print-modal-active #modal-dialog {
+        max-width: 100% !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        text-align: right !important;
+      }
+      body.print-modal-active #modal-dialog * {
+        color: #0f172a !important;
+        text-shadow: none !important;
+      }
+      body.print-modal-active .modal-no-print { display: none !important; }
+      body.print-modal-active .print-border { border: 1px solid #cbd5e1 !important; background: #f8fafc !important; }
+    }
+  </style>
+  <base href="/portal/wdgroup/odooerp/">
+</head>
+<body class="relative">
+  <!-- AMBIENT GLOW -->
+  <div class="fixed w-96 h-96 -top-20 -right-20 bg-purple-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+  <div class="fixed w-96 h-96 top-1/2 -left-20 bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <!-- STICKY TOP NAV -->
+  <nav class="sticky top-0 z-50 glass-nav px-4 sm:px-6 lg:px-8 py-3.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a href="/portal/wdgroup/odooerp/ar" class="text-xs text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1.5 transition">
+          &rarr; منصة أودو الصناعية
+        </a>
+        <span class="text-slate-600">/</span>
+        <span class="text-xs font-bold text-white tracking-wide">دليل إجراءات التشغيل القياسية (300 إجراء)</span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="/portal/wdgroup/odooerp/sops-en" class="px-3 py-1.5 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 text-xs font-bold transition font-sans">
+          English (100% LTR)
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <!-- ترويسة الصفحة بسطرين -->
+    <header class="text-center space-y-3">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-xs font-semibold text-purple-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        حوكمة تشغيل مصانع الأثاث &middot; دليل 300 إجراء تشغيل قياسي
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight space-y-2">
+        <span class="block text-xl sm:text-2xl text-blue-400 font-bold">منصة مجموعة دبليو دي السعودية للأعمال</span>
+        <span class="block bg-gradient-to-l from-blue-400 via-purple-300 to-amber-400 bg-clip-text text-transparent">دليل إجراءات التشغيل القياسية لمنظومة أودو</span>
+      </h1>
+      <p class="text-slate-400 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed">
+        أدلة تشغيل تفاعلية متكاملة خطوة بخطوة لمشغلي الماكينات، مهندسي التخطيط، مراقبي جودة الأخشاب، ومسؤولي التركيب الميداني بمصانع نجران والرياض.
+      </p>
+    </header>
+
+    <!-- أدوات البحث والتصنيف -->
+    <section class="space-y-4">
+      <!-- شريط البحث -->
+      <div class="relative max-w-2xl mx-auto">
+        <input 
+          type="text" 
+          id="sop-search"
+          placeholder="ابحث في 300 إجراء بالعنوان، الكود، الدور المسؤول، الهدف، أو التحذير..." 
+          oninput="handleSearch(this.value)"
+          class="w-full px-4 py-3 pr-11 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition"
+        >
+        <svg class="w-5 h-5 text-slate-500 absolute right-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      </div>
+
+      <!-- أشرطة التصفية الأفقية -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar" id="category-tabs">
+        <button class="category-pill active" onclick="setCategory('all')">
+          <span>جميع الوحدات (10 وحدات)</span>
+          <span class="px-1.5 py-0.5 rounded bg-white/20 text-[10px] font-bold">300</span>
+        </button>
+      </div>
+
+      <!-- مؤشر عدد النتائج -->
+      <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+        <span id="active-category-title" class="font-semibold text-slate-300">عرض كافة الإجراءات</span>
+        <span>يتم عرض <strong id="visible-count" class="text-purple-400">300</strong> من إجمالي 300 إجراء</span>
+      </div>
+    </section>
+
+    <!-- شبكة بطاقات الإجراءات -->
+    <div id="sop-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- يتم تحميلها عبر الجافاسكربت من ملف sops-ar-data.js -->
+    </div>
+  </main>
+
+  <!-- النافذة التفاعلية المنبثقة للإجراء -->
+  <div id="modal-overlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden modal-backdrop-anim">
+    <div id="modal-dialog" class="glass-card rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 border-slate-700 modal-dialog-anim text-right">
+      <!-- الشريط العلوي للنافذة -->
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-800">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2.5">
+            <span id="modal-sop-code" class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20"></span>
+            <span id="modal-sop-module" class="text-xs font-semibold text-slate-400"></span>
+          </div>
+          <h2 id="modal-sop-title" class="text-xl sm:text-2xl font-bold text-white leading-snug"></h2>
+          <div class="flex items-center gap-2 text-xs text-slate-400 pt-1">
+            <span>الدور المسؤول:</span>
+            <strong id="modal-sop-role" class="text-slate-200"></strong>
+          </div>
+        </div>
+
+        <button onclick="closeSopModal()" class="p-2 rounded-xl text-slate-400 hover:text-white bg-slate-800/80 hover:bg-slate-700 transition modal-no-print">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- محتوى الإجراء المتكامل -->
+      <div id="modal-sop-content" class="space-y-4 text-xs leading-relaxed"></div>
+
+      <!-- أزرار التحكم بالنافذة -->
+      <div class="flex items-center justify-between pt-4 border-t border-slate-800 modal-no-print flex-wrap gap-3">
+        <button onclick="copyModalContent()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs border border-slate-700 transition flex items-center gap-2">
+          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+          <span id="copy-btn-text">نسخ الإجراء</span>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button onclick="printSopModal()" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-lg shadow-purple-500/20 transition flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+            طباعة الإجراء فوراً
+          </button>
+          <button onclick="closeSopModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition">
+            إغلاق
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-16 text-center text-xs text-slate-500 py-6 border-t border-slate-800/80">
+    منصة مجموعة دبليو دي السعودية للأعمال &middot; خدمات دبي إن كايرو التقنية &middot; دليل إجراءات مصانع الأثاث
+  </footer>
+
+  <!-- تحميل ملف البيانات المعرب للإجراءات -->
+  <script src="/portal/wdgroup/odooerp/sops-ar-data.js"></script>
+
+  <!-- سكربت التحكم والتفاعل باللغة العربية -->
+  <script>
+    let activeModule = 'all';
+    let searchQuery = '';
+    let activeSop = null;
+
+    function initTabs() {
+      const tabsContainer = document.getElementById('category-tabs');
+      odooModules.forEach(mod => {
+        const btn = document.createElement('button');
+        btn.className = 'category-pill';
+        btn.setAttribute('data-module', mod.id);
+        btn.onclick = () => setCategory(mod.id);
+        btn.innerHTML = `
+          <span>${mod.nameAr}</span>
+          <span class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] font-bold">${mod.sopsCount}</span>
+        `;
+        tabsContainer.appendChild(btn);
+      });
+    }
+
+    function setCategory(modId) {
+      activeModule = modId;
+      document.querySelectorAll('.category-pill').forEach(pill => {
+        const target = pill.getAttribute('data-module') || 'all';
+        pill.classList.toggle('active', target === modId);
+      });
+
+      const activeMod = odooModules.find(m => m.id === modId);
+      document.getElementById('active-category-title').textContent = activeMod ? `الوحدة: ${activeMod.nameAr}` : 'عرض كافة الإجراءات';
+      renderSOPs();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim().toLowerCase();
+      renderSOPs();
+    }
+
+    function renderSOPs() {
+      const grid = document.getElementById('sop-grid');
+      grid.innerHTML = '';
+
+      const filtered = odooSops.filter(sop => {
+        const matchesMod = (activeModule === 'all' || sop.module === activeModule);
+        const matchesQuery = !searchQuery || 
+          sop.title.toLowerCase().includes(searchQuery) ||
+          sop.code.toLowerCase().includes(searchQuery) ||
+          sop.role.toLowerCase().includes(searchQuery) ||
+          sop.objective.toLowerCase().includes(searchQuery) ||
+          sop.caution.toLowerCase().includes(searchQuery);
+        return matchesMod && matchesQuery;
+      });
+
+      document.getElementById('visible-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full p-12 text-center glass-card rounded-2xl border border-slate-800">
+            <p class="text-sm text-slate-400 font-semibold mb-3">لم يتم العثور على أي إجراء تشغيلي مطابق.</p>
+            <button onclick="setCategory('all'); document.getElementById('sop-search').value=''; handleSearch('');" class="px-4 py-2 rounded-xl bg-purple-600 text-white text-xs font-bold">
+              إعادة ضبط الفلاتر
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(sop => {
+        const card = document.createElement('div');
+        card.className = "glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer group hover:border-purple-500/50 transition-all text-right";
+        card.onclick = () => openSopModal(sop.id);
+
+        card.innerHTML = `
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md border border-purple-500/30 bg-purple-500/10 text-purple-300">
+                ${sop.code}
+              </span>
+              <span class="text-[11px] font-semibold text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded truncate max-w-[170px]" title="${sop.role}">
+                ${sop.role}
+              </span>
+            </div>
+            <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+              ${sop.moduleName}
+            </div>
+            <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition-colors leading-snug">
+              ${sop.title}
+            </h3>
+            <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed">
+              ${sop.objective}
+            </p>
+          </div>
+
+          <div class="pt-3 mt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-purple-400 font-semibold group-hover:-translate-x-1 transition-transform">
+            <span>فتح الإجراء بالتفصيل</span>
+            <span>&larr;</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      initSpotlight();
+    }
+
+    function openSopModal(sopId) {
+      activeSop = odooSops.find(s => s.id === sopId);
+      if (!activeSop) return;
+
+      document.getElementById('modal-sop-code').textContent = activeSop.code;
+      document.getElementById('modal-sop-module').textContent = activeSop.moduleName;
+      document.getElementById('modal-sop-title').textContent = activeSop.title;
+      document.getElementById('modal-sop-role').textContent = activeSop.role;
+
+      const stepsHtml = activeSop.steps.map((st, i) => `
+        <li class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-slate-300 flex items-start gap-2.5 print-border">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-purple-600 text-white font-mono font-bold text-[11px] shrink-0">${i + 1}</span>
+          <span class="pt-0.5">${st}</span>
+        </li>
+      `).join('');
+
+      document.getElementById('modal-sop-content').innerHTML = `
+        <div class="space-y-4">
+          <!-- 1. الهدف -->
+          <div class="p-3.5 rounded-xl bg-blue-950/20 border border-blue-500/20 print-border">
+            <span class="text-blue-400 font-bold block mb-1 uppercase tracking-wider text-[11px]">1. الهدف التشغيلي للإجراء</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${activeSop.objective}</p>
+          </div>
+
+          <!-- 2. المتطلبات والأنظمة -->
+          <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 print-border">
+            <span class="text-slate-400 font-bold block mb-1 uppercase tracking-wider text-[11px]">2. المتطلبات والأنظمة المستخدمة</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${activeSop.prerequisites}</p>
+          </div>
+
+          <!-- 3. خطوات التنفيذ -->
+          <div class="space-y-2">
+            <span class="text-white font-bold block uppercase tracking-wider text-[11px]">3. تسلسل خطوات التنفيذ المعيارية</span>
+            <ul class="space-y-2">${stepsHtml}</ul>
+          </div>
+
+          <!-- 4. التحقق والجودة -->
+          <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/20 print-border">
+            <span class="text-emerald-400 font-bold block mb-1 uppercase tracking-wider text-[11px]">4. التحقق ومعايير الجودة والنجاح</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${activeSop.verification}</p>
+          </div>
+
+          <!-- 5. التحذيرات -->
+          <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/20 print-border">
+            <span class="text-rose-400 font-bold block mb-1 uppercase tracking-wider text-[11px]">5. محاذير التشغيل وإدارة المخاطر الصناعية</span>
+            <p class="text-slate-300 leading-relaxed text-xs">${activeSop.caution}</p>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modal-overlay').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSopModal() {
+      document.getElementById('modal-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function copyModalContent() {
+      if (!activeSop) return;
+      const stepsFormatted = activeSop.steps.map((st, i) => `${i + 1}. ${st}`).join('\n');
+      const text = `${activeSop.title} (${activeSop.code}) - ${activeSop.moduleName}\n` +
+        `الدور المسؤول: ${activeSop.role}\n\n` +
+        `1. الهدف التشغيلي للإجراء:\n${activeSop.objective}\n\n` +
+        `2. المتطلبات والأنظمة المستخدمة:\n${activeSop.prerequisites}\n\n` +
+        `3. تسلسل خطوات التنفيذ المعيارية:\n${stepsFormatted}\n\n` +
+        `4. التحقق ومعايير الجودة والنجاح:\n${activeSop.verification}\n\n` +
+        `5. محاذير التشغيل وإدارة المخاطر الصناعية:\n${activeSop.caution}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn-text');
+        btn.textContent = "تم النسخ للحافظة!";
+        setTimeout(() => { btn.textContent = "نسخ الإجراء"; }, 2000);
+      });
+    }
+
+    function printSopModal() {
+      document.body.classList.add('print-modal-active');
+      window.print();
+    }
+
+    window.addEventListener('afterprint', () => {
+      document.body.classList.remove('print-modal-active');
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeSopModal();
+    });
+
+    document.getElementById('modal-overlay').addEventListener('click', e => {
+      if (e.target === document.getElementById('modal-overlay')) closeSopModal();
+    });
+
+    function initSpotlight() {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+          card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initTabs();
+      renderSOPs();
+    });
+  </script>
+</body>
+</html>
