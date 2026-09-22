@@ -238,41 +238,38 @@
   </div>
 
   <!-- شريط التنقل العلوي -->
-  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80">
+    <!-- شريط الترويسة العلوي المعتمد لمجموعة دبليو دي -->
+  <header id="mainHeader" class="sticky top-0 z-50 w-full transition-all duration-300 bg-transparent border-b border-transparent">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
       
-      <div class="flex items-center gap-3.5">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-800 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/25 border border-blue-400/40 font-mono">
-          س ب
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white">فنادق سويس بلو</span>
-            <span class="text-[10px] font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/30">
-              55 ميزة معتمدة
-            </span>
+      <!-- اليمين: هوية مجموعة دبليو دي مع الشعار المعتمد -->
+      <div class="flex items-center gap-3 min-w-0">
+        <a href="/portal/wdgroup/ar" class="flex items-center gap-3 group">
+          <div class="h-11 px-3 py-1 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-sky-500/50 flex items-center justify-center shadow-md transition-all">
+            <img src="/portal/wdgroup/assets/wd-logo-sky.png" alt="مجموعة دبليو دي للأعمال" class="h-7 sm:h-8 w-auto object-contain">
           </div>
-          <p class="text-xs text-slate-400 hidden sm:block">
-            الدليل المرجعي الشامل للميزات الرقمية والمنافع التشغيلية
-          </p>
-        </div>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-white tracking-wide text-xs sm:text-sm group-hover:text-white transition-colors">مجموعة دبليو دي للأعمال</span>
+              <span class="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-slate-800/90 text-slate-400 border border-slate-700/80">سري ومحمي</span>
+            </div>
+            <span class="text-[11px] text-slate-400 font-medium tracking-tight truncate">موقع مجموعة سويس بلو المتكامل <span class="text-slate-600">•</span> بوابة العمليات</span>
+          </div>
+        </a>
       </div>
 
-      <!-- أزرار التنقل والتحويل -->
-      <div class="flex items-center gap-2 sm:gap-3">
+      <!-- روابط التنقل واللغات -->
+      <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
         <a href="/portal/wdgroup/swissbluewebsite/sops-ar" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition">
-          إجراءات العمل القياسية ←
+          الانتقال إلى SOPs ←
         </a>
-        <a href="/portal/wdgroup/swissbluewebsite/features-en" class="px-3 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-xs font-bold text-blue-300 border border-blue-500/30 transition font-mono">
+        <a href="/portal/wdgroup/swissbluewebsite/features-en" class="px-3 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-xs font-bold text-blue-300 border border-blue-500/30 transition font-mono" dir="ltr">
           English (100% LTR)
         </a>
-        <a href="/portal/wdgroup/swissbluewebsite/ar" class="hidden md:inline-flex px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white transition shadow-lg shadow-emerald-500/20">
-          منصة سويس بلو
+        <a href="/portal/wdgroup/ar" class="hidden sm:inline-flex px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition">
+          → بوابة مجموعة دبليو دي
         </a>
-        <a href="/portal/wdgroup/ar" class="hidden lg:inline-flex px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition">
-          بوابة مجموعة دبليو دي للأعمال
-        </a>
-        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="طباعة أو تصدير ملف">
+        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="طباعة">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
           </svg>

@@ -103,9 +103,34 @@
     });
   }
 
+  // Dynamic Glassmorphic Executive Header (Transparent at top -> Frosted translucent glass on scroll)
+  function initDynamicHeader() {
+    var header = document.getElementById('mainHeader') || document.querySelector('header.sticky') || document.querySelector('nav.sticky');
+    if (!header) return;
+
+    header.classList.add('transition-all', 'duration-300');
+
+    function updateHeader() {
+      if (window.scrollY > 20) {
+        header.classList.add('bg-[#0B192C]/85', 'backdrop-blur-md', 'border-slate-800/80', 'shadow-xl');
+        header.classList.remove('bg-transparent', 'border-transparent', 'shadow-none');
+      } else {
+        header.classList.remove('bg-[#0B192C]/85', 'backdrop-blur-md', 'border-slate-800/80', 'shadow-xl');
+        header.classList.add('bg-transparent', 'border-transparent', 'shadow-none');
+      }
+    }
+
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLuxuryScrollerHint);
+    document.addEventListener('DOMContentLoaded', function() {
+      initLuxuryScrollerHint();
+      initDynamicHeader();
+    });
   } else {
     initLuxuryScrollerHint();
+    initDynamicHeader();
   }
 })();

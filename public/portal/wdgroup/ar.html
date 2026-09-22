@@ -23,25 +23,26 @@
   </style>
   <base href="/portal/wdgroup/">
 </head>
-<body class="relative flex flex-col justify-between py-10 px-4 sm:px-6 lg:px-8">
+<body class="relative flex flex-col justify-between pt-0 pb-10 px-0 min-h-screen">
   <div class="glow-orb w-96 h-96 -top-20 -right-20 bg-emerald-600/20"></div>
   <div class="glow-orb w-96 h-96 top-1/2 -left-20 bg-blue-600/15"></div>
 
-  <main class="relative z-10 max-w-6xl mx-auto w-full space-y-10">
-
-    <!-- شريط التنقل العلوي وتبديل اللغة -->
-    <nav class="flex items-center justify-between flex-wrap gap-4 text-xs text-slate-400 border-b border-slate-800/80 pb-4">
+  <!-- STICKY TOP EXECUTIVE HEADER -->
+  <header id="mainHeader" class="sticky top-0 z-50 w-full transition-all duration-300 bg-transparent border-b border-transparent">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between flex-wrap gap-4 text-xs text-slate-400">
       <div class="flex items-center gap-3">
-        <div class="h-11 px-3 py-1 rounded-xl bg-slate-800/90 border border-slate-700/80 flex items-center justify-center shadow-md">
-          <img src="/portal/wdgroup/assets/wd-logo-sky.png" alt="مجموعة دبليو دي للأعمال" class="h-7 sm:h-8 w-auto object-contain">
-        </div>
-        <div class="flex flex-col">
-          <div class="flex items-center gap-2">
-            <span class="font-bold text-white tracking-wide">مجموعة دبليو دي للأعمال</span>
-            <span class="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-slate-800/90 text-slate-400 border border-slate-700/80">سري ومحمي</span>
+        <a href="/portal/wdgroup/ar" class="flex items-center gap-3 group">
+          <div class="h-11 px-3 py-1 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-sky-500/50 flex items-center justify-center shadow-md transition-all">
+            <img src="/portal/wdgroup/assets/wd-logo-sky.png" alt="مجموعة دبليو دي للأعمال" class="h-7 sm:h-8 w-auto object-contain">
           </div>
-          <span class="text-[11px] text-slate-400 font-medium">بوابة العمليات الرقمية &middot; دبي في القاهرة</span>
-        </div>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-white tracking-wide text-xs sm:text-sm group-hover:text-white transition-colors">مجموعة دبليو دي للأعمال</span>
+              <span class="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-slate-800/90 text-slate-400 border border-slate-700/80">سري ومحمي</span>
+            </div>
+            <span class="text-[11px] text-slate-400 font-medium">بوابة العمليات الرقمية &middot; دبي في القاهرة</span>
+          </div>
+        </a>
       </div>
       <div class="flex items-center gap-3">
         <div id="nav-auth-section" class="flex items-center gap-2">
@@ -59,10 +60,13 @@
           رمز العميل: مجموعة دبليو دي للأعمال
         </span>
       </div>
-    </nav>
+    </div>
+  </header>
+
+  <main class="relative z-10 max-w-6xl mx-auto w-full space-y-10 px-4 sm:px-6 lg:px-8 pt-4">
 
     <!-- ترويسة الصفحة وهوية العميل -->
-    <header class="text-center space-y-3">
+    <section class="text-center space-y-3">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
         بوابة العمليات الحصرية للعميل · 6 مشاريع معتمدة
@@ -73,7 +77,7 @@
       <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed mt-3">
         استعراض شامل ومباشر لكافة كتالوجات الميزات المعتمدة، وإجراءات العمل القياسية التفاعلية، والتوثيق المعماري لكافة مشاريع المجموعة.
       </p>
-    </header>
+    </section>
 
     <!-- شبكة المشاريع الخمسة الخاصة بمجموعة دبليو دي للأعمال حصراً -->
     <section class="space-y-6">
@@ -466,5 +470,6 @@
       updateAuthNavbar();
     }
   </script>
+<script src="/portal/wdgroup/js/scroller-hint.js" defer></script>
 </body>
 </html>

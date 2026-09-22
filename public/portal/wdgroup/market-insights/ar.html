@@ -99,7 +99,7 @@
 <body class="min-h-screen flex flex-col justify-between selection:bg-sky-500 selection:text-slate-950">
 
     <!-- شريط التنقل العلوي الموحد -->
-    <header class="sticky top-0 z-50 bg-[#070F1E]/90 backdrop-blur-xl border-b border-slate-800/80">
+    <header id=\"mainHeader\" class=\"sticky top-0 z-50 transition-all duration-300 bg-transparent border-b border-transparent shadow-none \">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-4">
             
             <div class="flex items-center gap-3">
@@ -1178,373 +1178,416 @@
                 }
             };
 
-            // 1. رسم نمو السياحة
-            const ctx1 = document.getElementById("tourismGrowthChart");
-            if (ctx1) {
-                window.charts.tourismGrowth = new Chart(ctx1, {
-                    type: "bar",
-                    data: {
-                        labels: ["2022", "2023", "2024", "2025 (رسمي)"],
-                        datasets: [
-                            {
-                                label: "إنفاق السياحة (مليار ر.س)",
-                                data: [185, 255, 280, 304],
-                                backgroundColor: "rgba(56, 189, 248, 0.75)",
-                                hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
-                                borderRadius: 8,
-                                yAxisID: "y",
-                                order: 2
-                            },
-                            {
-                                label: "إجمالي الزوار (مليون)",
-                                data: [77.8, 106.2, 116.0, 123.0],
-                                type: "line",
-                                borderColor: "#10B981",
-                                backgroundColor: "#10B981",
-                                borderWidth: 3,
-                                tension: 0.3,
-                                pointRadius: 6,
-                                pointHoverRadius: 9,
-                                pointBackgroundColor: "#10B981",
-                                pointBorderColor: "#FFFFFF",
-                                pointBorderWidth: 2,
-                                yAxisID: "y1",
-                                order: 1
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: progressiveAnimation,
-                        interaction: { mode: "index", intersect: false },
-                        plugins: {
-                            legend: {
-                                display: true,
-                                labels: {
-                                    boxWidth: 28,
-                                    boxHeight: 12,
-                                    generateLabels: function(chart) {
-                                        const items = Chart.defaults.plugins.legend.labels.generateLabels.call(this, chart);
-                                        items.forEach(item => {
-                                            item.lineWidth = 0;
-                                            item.strokeStyle = "transparent";
-                                        });
-                                        return items;
-                                    }
+                        window.chartInitializers = {
+                // tourismGrowthChart: // 1. رسم نمو السياحة
+                tourismGrowthChart: function() {
+                    // 1. رسم نمو السياحة
+                                const ctx1 = document.getElementById("tourismGrowthChart");
+                                if (ctx1 && !window.charts.tourismGrowth) {
+                                    window.charts.tourismGrowth = new Chart(ctx1, {
+                                        type: "bar",
+                                        data: {
+                                            labels: ["2022", "2023", "2024", "2025 (رسمي)"],
+                                            datasets: [
+                                                {
+                                                    label: "إنفاق السياحة (مليار ر.س)",
+                                                    data: [185, 255, 280, 304],
+                                                    backgroundColor: "rgba(56, 189, 248, 0.75)",
+                                                    hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
+                                                    borderRadius: 8,
+                                                    yAxisID: "y",
+                                                    order: 2
+                                                },
+                                                {
+                                                    label: "إجمالي الزوار (مليون)",
+                                                    data: [77.8, 106.2, 116.0, 123.0],
+                                                    type: "line",
+                                                    borderColor: "#10B981",
+                                                    backgroundColor: "#10B981",
+                                                    borderWidth: 3,
+                                                    tension: 0.3,
+                                                    pointRadius: 6,
+                                                    pointHoverRadius: 9,
+                                                    pointBackgroundColor: "#10B981",
+                                                    pointBorderColor: "#FFFFFF",
+                                                    pointBorderWidth: 2,
+                                                    yAxisID: "y1",
+                                                    order: 1
+                                                }
+                                            ]
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            animation: progressiveAnimation,
+                                            interaction: { mode: "index", intersect: false },
+                                            plugins: {
+                                                legend: {
+                                                    display: true,
+                                                    labels: {
+                                                        boxWidth: 28,
+                                                        boxHeight: 12,
+                                                        generateLabels: function(chart) {
+                                                            const items = Chart.defaults.plugins.legend.labels.generateLabels.call(this, chart);
+                                                            items.forEach(item => {
+                                                                item.lineWidth = 0;
+                                                                item.strokeStyle = "transparent";
+                                                            });
+                                                            return items;
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            scales: {
+                                                y: {
+                                                    type: "linear",
+                                                    display: true,
+                                                    position: "right",
+                                                    grid: { color: "rgba(255, 255, 255, 0.06)" },
+                                                    title: { display: true, text: "مليار ريال سعودي" }
+                                                },
+                                                y1: {
+                                                    type: "linear",
+                                                    display: true,
+                                                    position: "left",
+                                                    grid: { drawOnChartArea: false },
+                                                    title: { display: true, text: "ملايين الزوار" }
+                                                },
+                                                x: { grid: { display: false } }
+                                            }
+                                        }
+                                    });
                                 }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                type: "linear",
-                                display: true,
-                                position: "right",
-                                grid: { color: "rgba(255, 255, 255, 0.06)" },
-                                title: { display: true, text: "مليار ريال سعودي" }
-                            },
-                            y1: {
-                                type: "linear",
-                                display: true,
-                                position: "left",
-                                grid: { drawOnChartArea: false },
-                                title: { display: true, text: "ملايين الزوار" }
-                            },
-                            x: { grid: { display: false } }
-                        }
-                    }
-                });
-            }
-
-            // 2. رسم نسب الإشغال الإقليمية
-            const ctx2 = document.getElementById("occupancyByCityChart");
-            if (ctx2) {
-                window.charts.occupancy = new Chart(ctx2, {
-                    type: "bar",
-                    data: {
-                        labels: ["المدينة المنورة", "الرياض", "مكة المكرمة", "جدة", "المنطقة الشرقية", "المركز الجنوبي (عسير/جازان)"],
-                        datasets: [
-                            {
-                                label: "إشغال الفنادق %",
-                                data: [81.5, 67.6, 60.6, 58.2, 54.8, 51.4],
-                                backgroundColor: "rgba(56, 189, 248, 0.75)",
-                                hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
-                                borderRadius: 6
-                            },
-                            {
-                                label: "إشغال الشقق المخدومة %",
-                                data: [76.0, 70.5, 59.4, 57.0, 56.2, 52.8],
-                                backgroundColor: "rgba(16, 185, 129, 0.75)",
-                                hoverBackgroundColor: "rgba(16, 185, 129, 0.95)",
-                                borderRadius: 6
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: progressiveAnimation,
-                        scales: {
-                            y: {
-                                min: 40,
-                                max: 100,
-                                ticks: { callback: v => v + "%" },
-                                grid: { color: "rgba(255, 255, 255, 0.06)" }
-                            },
-                            x: { grid: { display: false } }
-                        }
-                    }
-                });
-            }
-
-            // 3. رسم مزيج الإنفاق السياحي
-            const ctx3 = document.getElementById("spendMixChart");
-            if (ctx3) {
-                window.charts.spendMix = new Chart(ctx3, {
-                    type: "doughnut",
-                    data: {
-                        labels: ["ترفيه وفعاليات", "سياحة واستجمام داخلي", "عمرة وزيارة دينية", "مؤتمرات وأعمال"],
-                        datasets: [{
-                            data: [38, 34, 18, 10],
-                            backgroundColor: ["#38BDF8", "#10B981", "#F59E0B", "#818CF8"],
-                            hoverOffset: 8,
-                            borderColor: "#0B192C",
-                            borderWidth: 3
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: {
-                            animateScale: true,
-                            animateRotate: true,
-                            duration: 1400,
-                            easing: "easeOutCirc"
-                        },
-                        plugins: {
-                            legend: { position: "bottom", labels: { boxWidth: 12, padding: 12 } }
-                        },
-                        cutout: "68%"
-                    }
-                });
-            }
-
-            // 4. مسار متوسط السعر اليومي للغرفة (ADR)
-            const ctx4 = document.getElementById("adrTrendChart");
-            if (ctx4) {
-                window.charts.adrTrend = new Chart(ctx4, {
-                    type: "line",
-                    data: {
-                        labels: ["Q1 2024", "Q2 2024", "Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025"],
-                        datasets: [{
-                            label: "متوسط السعر اليومي للغرفة (ريال)",
-                            data: [610, 725.5, 520, 440, 630, 532, 341, 389],
-                            borderColor: "#6366F1",
-                            backgroundColor: "rgba(99, 102, 241, 0.15)",
-                            fill: true,
-                            tension: 0.35,
-                            borderWidth: 3,
-                            pointRadius: 4,
-                            pointHoverRadius: 8,
-                            pointBackgroundColor: "#818CF8"
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: {
-                            duration: 1500,
-                            easing: "easeOutQuart"
-                        },
-                        scales: {
-                            y: {
-                                ticks: { callback: v => v + " ر.س" },
-                                grid: { color: "rgba(255, 255, 255, 0.06)" }
-                            },
-                            x: { grid: { display: false } }
-                        }
-                    }
-                });
-            }
-
-            // 5. رسم مبيعات نقاط البيع للأثاث ونسبة الدفع الإلكتروني (مع العبارات المختصرة وتقديم الخط فوق الأعمدة)
-            const ctx5 = document.getElementById("furniturePosChart");
-            if (ctx5) {
-                window.charts.furniturePos = new Chart(ctx5, {
-                    type: "bar",
-                    data: {
-                        labels: ["2021", "2022", "2023", "2024", "2025 (رسمي)"],
-                        datasets: [
-                            {
-                                label: "إنفاق نقاط البيع (مليار ر.س)",
-                                data: [11.4, 13.8, 15.6, 17.1, 18.2],
-                                backgroundColor: "rgba(245, 158, 11, 0.75)",
-                                hoverBackgroundColor: "rgba(245, 158, 11, 0.95)",
-                                borderRadius: 8,
-                                yAxisID: "y",
-                                order: 2
-                            },
-                            {
-                                label: "نسبة الدفع الرقمي %",
-                                data: [57, 68, 74, 79, 85],
-                                type: "line",
-                                borderColor: "#38BDF8",
-                                backgroundColor: "#38BDF8",
-                                borderWidth: 3,
-                                pointRadius: 6,
-                                pointHoverRadius: 9,
-                                pointBackgroundColor: "#38BDF8",
-                                pointBorderColor: "#FFFFFF",
-                                pointBorderWidth: 2,
-                                yAxisID: "y1",
-                                order: 1
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: progressiveAnimation,
-                        plugins: {
-                            legend: {
-                                display: true,
-                                labels: {
-                                    boxWidth: 28,
-                                    boxHeight: 12,
-                                    generateLabels: function(chart) {
-                                        const items = Chart.defaults.plugins.legend.labels.generateLabels.call(this, chart);
-                                        items.forEach(item => {
-                                            item.lineWidth = 0;
-                                            item.strokeStyle = "transparent";
-                                        });
-                                        return items;
-                                    }
+                },
+                // occupancyByCityChart: // 2. رسم نسب الإشغال الإقليمية
+                occupancyByCityChart: function() {
+                    // 2. رسم نسب الإشغال الإقليمية
+                                const ctx2 = document.getElementById("occupancyByCityChart");
+                                if (ctx2 && !window.charts.occupancy) {
+                                    window.charts.occupancy = new Chart(ctx2, {
+                                        type: "bar",
+                                        data: {
+                                            labels: ["المدينة المنورة", "الرياض", "مكة المكرمة", "جدة", "المنطقة الشرقية", "المركز الجنوبي (عسير/جازان)"],
+                                            datasets: [
+                                                {
+                                                    label: "إشغال الفنادق %",
+                                                    data: [81.5, 67.6, 60.6, 58.2, 54.8, 51.4],
+                                                    backgroundColor: "rgba(56, 189, 248, 0.75)",
+                                                    hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
+                                                    borderRadius: 6
+                                                },
+                                                {
+                                                    label: "إشغال الشقق المخدومة %",
+                                                    data: [76.0, 70.5, 59.4, 57.0, 56.2, 52.8],
+                                                    backgroundColor: "rgba(16, 185, 129, 0.75)",
+                                                    hoverBackgroundColor: "rgba(16, 185, 129, 0.95)",
+                                                    borderRadius: 6
+                                                }
+                                            ]
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            animation: progressiveAnimation,
+                                            scales: {
+                                                y: {
+                                                    min: 40,
+                                                    max: 100,
+                                                    ticks: { callback: v => v + "%" },
+                                                    grid: { color: "rgba(255, 255, 255, 0.06)" }
+                                                },
+                                                x: { grid: { display: false } }
+                                            }
+                                        }
+                                    });
                                 }
+                },
+                // spendMixChart: // 3. رسم مزيج الإنفاق السياحي
+                spendMixChart: function() {
+                    // 3. رسم مزيج الإنفاق السياحي
+                                const ctx3 = document.getElementById("spendMixChart");
+                                if (ctx3 && !window.charts.spendMix) {
+                                    window.charts.spendMix = new Chart(ctx3, {
+                                        type: "doughnut",
+                                        data: {
+                                            labels: ["ترفيه وفعاليات", "سياحة واستجمام داخلي", "عمرة وزيارة دينية", "مؤتمرات وأعمال"],
+                                            datasets: [{
+                                                data: [38, 34, 18, 10],
+                                                backgroundColor: ["#38BDF8", "#10B981", "#F59E0B", "#818CF8"],
+                                                hoverOffset: 8,
+                                                borderColor: "#0B192C",
+                                                borderWidth: 3
+                                            }]
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            animation: {
+                                                animateScale: true,
+                                                animateRotate: true,
+                                                duration: 1400,
+                                                easing: "easeOutCirc"
+                                            },
+                                            plugins: {
+                                                legend: { position: "bottom", labels: { boxWidth: 12, padding: 12 } }
+                                            },
+                                            cutout: "68%"
+                                        }
+                                    });
+                                }
+                },
+                // adrTrendChart: // 4. مسار متوسط السعر اليومي للغرفة (ADR)
+                adrTrendChart: function() {
+                    // 4. مسار متوسط السعر اليومي للغرفة (ADR)
+                                const ctx4 = document.getElementById("adrTrendChart");
+                                if (ctx4 && !window.charts.adrTrend) {
+                                    window.charts.adrTrend = new Chart(ctx4, {
+                                        type: "line",
+                                        data: {
+                                            labels: ["Q1 2024", "Q2 2024", "Q3 2024", "Q4 2024", "Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025"],
+                                            datasets: [{
+                                                label: "متوسط السعر اليومي للغرفة (ريال)",
+                                                data: [610, 725.5, 520, 440, 630, 532, 341, 389],
+                                                borderColor: "#6366F1",
+                                                backgroundColor: "rgba(99, 102, 241, 0.15)",
+                                                fill: true,
+                                                tension: 0.35,
+                                                borderWidth: 3,
+                                                pointRadius: 4,
+                                                pointHoverRadius: 8,
+                                                pointBackgroundColor: "#818CF8"
+                                            }]
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            animation: {
+                                                duration: 1500,
+                                                easing: "easeOutQuart"
+                                            },
+                                            scales: {
+                                                y: {
+                                                    ticks: { callback: v => v + " ر.س" },
+                                                    grid: { color: "rgba(255, 255, 255, 0.06)" }
+                                                },
+                                                x: { grid: { display: false } }
+                                            }
+                                        }
+                                    });
+                                }
+                },
+                // furniturePosChart: // 5. رسم مبيعات نقاط البيع للأثاث ونسبة الدفع الإلكتروني (مع العبارات المختصرة وتقديم الخط فوق الأعمدة)
+                furniturePosChart: function() {
+                    // 5. رسم مبيعات نقاط البيع للأثاث ونسبة الدفع الإلكتروني (مع العبارات المختصرة وتقديم الخط فوق الأعمدة)
+                                const ctx5 = document.getElementById("furniturePosChart");
+                                if (ctx5 && !window.charts.furniturePos) {
+                                    window.charts.furniturePos = new Chart(ctx5, {
+                                        type: "bar",
+                                        data: {
+                                            labels: ["2021", "2022", "2023", "2024", "2025 (رسمي)"],
+                                            datasets: [
+                                                {
+                                                    label: "إنفاق نقاط البيع (مليار ر.س)",
+                                                    data: [11.4, 13.8, 15.6, 17.1, 18.2],
+                                                    backgroundColor: "rgba(245, 158, 11, 0.75)",
+                                                    hoverBackgroundColor: "rgba(245, 158, 11, 0.95)",
+                                                    borderRadius: 8,
+                                                    yAxisID: "y",
+                                                    order: 2
+                                                },
+                                                {
+                                                    label: "نسبة الدفع الرقمي %",
+                                                    data: [57, 68, 74, 79, 85],
+                                                    type: "line",
+                                                    borderColor: "#38BDF8",
+                                                    backgroundColor: "#38BDF8",
+                                                    borderWidth: 3,
+                                                    pointRadius: 6,
+                                                    pointHoverRadius: 9,
+                                                    pointBackgroundColor: "#38BDF8",
+                                                    pointBorderColor: "#FFFFFF",
+                                                    pointBorderWidth: 2,
+                                                    yAxisID: "y1",
+                                                    order: 1
+                                                }
+                                            ]
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            animation: progressiveAnimation,
+                                            plugins: {
+                                                legend: {
+                                                    display: true,
+                                                    labels: {
+                                                        boxWidth: 28,
+                                                        boxHeight: 12,
+                                                        generateLabels: function(chart) {
+                                                            const items = Chart.defaults.plugins.legend.labels.generateLabels.call(this, chart);
+                                                            items.forEach(item => {
+                                                                item.lineWidth = 0;
+                                                                item.strokeStyle = "transparent";
+                                                            });
+                                                            return items;
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            scales: {
+                                                y: {
+                                                    position: "right",
+                                                    ticks: { callback: v => v + " مليار ر.س" },
+                                                    grid: { color: "rgba(255, 255, 255, 0.06)" }
+                                                },
+                                                y1: {
+                                                    min: 40,
+                                                    max: 100,
+                                                    position: "left",
+                                                    ticks: { callback: v => v + "%" },
+                                                    grid: { drawOnChartArea: false }
+                                                },
+                                                x: { grid: { display: false } }
+                                            }
+                                        }
+                                    });
+                                }
+                },
+                // housingCompletionsChart: // 6. رسم مساكن سكني والطلب على المطابخ
+                housingCompletionsChart: function() {
+                    // 6. رسم مساكن سكني والطلب على المطابخ
+                                const ctx6 = document.getElementById("housingCompletionsChart");
+                                if (ctx6 && !window.charts.housing) {
+                                    window.charts.housing = new Chart(ctx6, {
+                                        type: "bar",
+                                        data: {
+                                            labels: ["2022", "2023", "2024", "2025"],
+                                            datasets: [
+                                                {
+                                                    label: "مساكن مأهولة (بالآلاف)",
+                                                    data: [75.0, 85.3, 93.0, 96.5],
+                                                    backgroundColor: "rgba(20, 184, 166, 0.8)",
+                                                    hoverBackgroundColor: "rgba(20, 184, 166, 0.95)",
+                                                    borderRadius: 6
+                                                },
+                                                {
+                                                    label: "مطابخ جديدة مدمجة مطلوبة (بالآلاف)",
+                                                    data: [68.0, 78.5, 87.2, 91.0],
+                                                    backgroundColor: "rgba(56, 189, 248, 0.8)",
+                                                    hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
+                                                    borderRadius: 6
+                                                }
+                                            ]
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            animation: progressiveAnimation,
+                                            scales: {
+                                                y: {
+                                                    ticks: { callback: v => v + " ألف" },
+                                                    grid: { color: "rgba(255, 255, 255, 0.06)" }
+                                                },
+                                                x: { grid: { display: false } }
+                                            }
+                                        }
+                                    });
+                                }
+                },
+                // regionalDemandChart: // 7. الحصة السوقية لمبيعات الأثاث حسب المناطق
+                regionalDemandChart: function() {
+                    // 7. الحصة السوقية لمبيعات الأثاث حسب المناطق
+                                const ctx7 = document.getElementById("regionalDemandChart");
+                                if (ctx7 && !window.charts.regionalDemand) {
+                                    window.charts.regionalDemand = new Chart(ctx7, {
+                                        type: "doughnut",
+                                        data: {
+                                            labels: ["منطقة الرياض", "مكة المكرمة / جدة", "المنطقة الشرقية", "المنطقة الجنوبية (عسير)"],
+                                            datasets: [{
+                                                data: [42, 28, 16, 14],
+                                                backgroundColor: ["#F43F5E", "#38BDF8", "#10B981", "#F59E0B"],
+                                                hoverOffset: 8,
+                                                borderColor: "#0B192C",
+                                                borderWidth: 3
+                                            }]
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            animation: {
+                                                animateScale: true,
+                                                animateRotate: true,
+                                                duration: 1400,
+                                                easing: "easeOutCirc"
+                                            },
+                                            plugins: {
+                                                legend: { position: "bottom", labels: { boxWidth: 12, padding: 12 } }
+                                            },
+                                            cutout: "65%"
+                                        }
+                                    });
+                                }
+                },
+                // factoryDistributionChart: // 8. رسم التوزيع الجغرافي للمصانع
+                factoryDistributionChart: function() {
+                    // 8. رسم التوزيع الجغرافي للمصانع
+                                const ctx8 = document.getElementById("factoryDistributionChart");
+                                if (ctx8 && !window.charts.factoryDistribution) {
+                                    window.charts.factoryDistribution = new Chart(ctx8, {
+                                        type: "bar",
+                                        data: {
+                                            labels: ["الرياض (مدن 1، 2، 3)", "جدة (الصناعية 1، 2)", "الدمام / الخبر", "المركز الجنوبي (عسير)", "القصيم / الشمال"],
+                                            datasets: [{
+                                                label: "مصانع الخشب والأثاث المرخصة العاملة",
+                                                data: [495, 340, 185, 120, 80],
+                                                backgroundColor: [
+                                                    "rgba(56, 189, 248, 0.85)",
+                                                    "rgba(99, 102, 241, 0.85)",
+                                                    "rgba(16, 185, 129, 0.85)",
+                                                    "rgba(245, 158, 11, 0.85)",
+                                                    "rgba(148, 163, 184, 0.85)"
+                                                ],
+                                                borderRadius: 6
+                                            }]
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            animation: progressiveAnimation,
+                                            scales: {
+                                                y: {
+                                                    grid: { color: "rgba(255, 255, 255, 0.06)" },
+                                                    title: { display: true, text: "عدد المنشآت الصناعية المرخصة" }
+                                                },
+                                                x: { grid: { display: false } }
+                                            }
+                                        }
+                                    });
+                                }
+                }
+            };
+
+            // Scroll-triggered viewport progressive animation via IntersectionObserver
+            if ("IntersectionObserver" in window) {
+                const chartObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const canvasId = entry.target.id;
+                            if (window.chartInitializers && window.chartInitializers[canvasId]) {
+                                window.chartInitializers[canvasId]();
+                                observer.unobserve(entry.target);
                             }
-                        },
-                        scales: {
-                            y: {
-                                position: "right",
-                                ticks: { callback: v => v + " مليار ر.س" },
-                                grid: { color: "rgba(255, 255, 255, 0.06)" }
-                            },
-                            y1: {
-                                min: 40,
-                                max: 100,
-                                position: "left",
-                                ticks: { callback: v => v + "%" },
-                                grid: { drawOnChartArea: false }
-                            },
-                            x: { grid: { display: false } }
                         }
-                    }
-                });
-            }
+                    });
+                }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
 
-            // 6. رسم مساكن سكني والطلب على المطابخ
-            const ctx6 = document.getElementById("housingCompletionsChart");
-            if (ctx6) {
-                window.charts.housing = new Chart(ctx6, {
-                    type: "bar",
-                    data: {
-                        labels: ["2022", "2023", "2024", "2025"],
-                        datasets: [
-                            {
-                                label: "مساكن مأهولة (بالآلاف)",
-                                data: [75.0, 85.3, 93.0, 96.5],
-                                backgroundColor: "rgba(20, 184, 166, 0.8)",
-                                hoverBackgroundColor: "rgba(20, 184, 166, 0.95)",
-                                borderRadius: 6
-                            },
-                            {
-                                label: "مطابخ جديدة مدمجة مطلوبة (بالآلاف)",
-                                data: [68.0, 78.5, 87.2, 91.0],
-                                backgroundColor: "rgba(56, 189, 248, 0.8)",
-                                hoverBackgroundColor: "rgba(56, 189, 248, 0.95)",
-                                borderRadius: 6
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: progressiveAnimation,
-                        scales: {
-                            y: {
-                                ticks: { callback: v => v + " ألف" },
-                                grid: { color: "rgba(255, 255, 255, 0.06)" }
-                            },
-                            x: { grid: { display: false } }
-                        }
+                Object.keys(window.chartInitializers).forEach(id => {
+                    const canvas = document.getElementById(id);
+                    if (canvas) {
+                        chartObserver.observe(canvas);
                     }
                 });
-            }
-
-            // 7. الحصة السوقية لمبيعات الأثاث حسب المناطق
-            const ctx7 = document.getElementById("regionalDemandChart");
-            if (ctx7) {
-                window.charts.regionalDemand = new Chart(ctx7, {
-                    type: "doughnut",
-                    data: {
-                        labels: ["منطقة الرياض", "مكة المكرمة / جدة", "المنطقة الشرقية", "المنطقة الجنوبية (عسير)"],
-                        datasets: [{
-                            data: [42, 28, 16, 14],
-                            backgroundColor: ["#F43F5E", "#38BDF8", "#10B981", "#F59E0B"],
-                            hoverOffset: 8,
-                            borderColor: "#0B192C",
-                            borderWidth: 3
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: {
-                            animateScale: true,
-                            animateRotate: true,
-                            duration: 1400,
-                            easing: "easeOutCirc"
-                        },
-                        plugins: {
-                            legend: { position: "bottom", labels: { boxWidth: 12, padding: 12 } }
-                        },
-                        cutout: "65%"
-                    }
-                });
-            }
-
-            // 8. رسم التوزيع الجغرافي للمصانع
-            const ctx8 = document.getElementById("factoryDistributionChart");
-            if (ctx8) {
-                window.charts.factoryDistribution = new Chart(ctx8, {
-                    type: "bar",
-                    data: {
-                        labels: ["الرياض (مدن 1، 2، 3)", "جدة (الصناعية 1، 2)", "الدمام / الخبر", "المركز الجنوبي (عسير)", "القصيم / الشمال"],
-                        datasets: [{
-                            label: "مصانع الخشب والأثاث المرخصة العاملة",
-                            data: [495, 340, 185, 120, 80],
-                            backgroundColor: [
-                                "rgba(56, 189, 248, 0.85)",
-                                "rgba(99, 102, 241, 0.85)",
-                                "rgba(16, 185, 129, 0.85)",
-                                "rgba(245, 158, 11, 0.85)",
-                                "rgba(148, 163, 184, 0.85)"
-                            ],
-                            borderRadius: 6
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: progressiveAnimation,
-                        scales: {
-                            y: {
-                                grid: { color: "rgba(255, 255, 255, 0.06)" },
-                                title: { display: true, text: "عدد المنشآت الصناعية المرخصة" }
-                            },
-                            x: { grid: { display: false } }
-                        }
-                    }
-                });
+            } else {
+                Object.values(window.chartInitializers).forEach(fn => fn());
             }
         }
 
