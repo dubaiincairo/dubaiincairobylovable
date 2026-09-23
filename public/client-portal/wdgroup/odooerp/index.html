@@ -185,29 +185,38 @@
           </a>
         </div>
 
-        <!-- High-Performance Playback Notice & Direct Launcher -->
-        <div class="px-4 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs flex items-center justify-between gap-3 flex-wrap">
-          <div class="flex items-center gap-2">
-            <span class="text-amber-400 font-bold">⚡ Performance Tip:</span>
-            <span>If Canva's embedded canvas slows or audio desyncs in your browser, launch Canva's native player directly for 100% full-speed playback with timeline scrubber.</span>
+        <!-- High-Speed Video Stream Controls & Format Notice -->
+        <div class="px-4 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 font-semibold text-xs whitespace-nowrap shrink-0 border border-amber-500/30">
+              ⚡ High-Speed Direct Stream
+            </span>
+            <span class="text-slate-300">1080p byte-range streaming enabled with timeline scrubber &amp; playback speed controls.</span>
           </div>
-          <a id="player-external-link-btn" href="https://canva.link/wdgroup-odoo-video01" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-3 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 text-xs font-bold border border-amber-500/30 transition flex items-center gap-1">
-            <span>Open Direct Player</span>
-            <span>&nearr;</span>
-          </a>
+          <div class="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+            <a id="player-download-btn" href="https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.01.mp4" download="WD-Group-Odoo-Video-01.mp4" class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-semibold border border-slate-700 transition flex items-center gap-1.5" title="Download MP4 for offline viewing">
+              <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Download MP4</span>
+            </a>
+            <a id="player-external-link-btn" href="https://canva.link/wdgroup-odoo-video01" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-3 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 text-xs font-bold border border-amber-500/30 transition flex items-center gap-1">
+              <span>Canva Player</span>
+              <span>&nearr;</span>
+            </a>
+          </div>
         </div>
 
-        <!-- 16:9 RESPONSIVE FRAME (Enhanced with Hardware Acceleration & Visible Timeline Scrubber Bar) -->
-        <div class="relative w-full rounded-xl overflow-hidden border border-slate-800 bg-slate-950 shadow-2xl" style="padding-top: 57.5%; min-height: 480px;">
-          <iframe 
-            id="main-video-frame"
-            src="https://www.canva.com/design/DAHPEv9auTA/4rfNkbUphX3BnL0IrasEfg/view?embed&v=2" 
-            title="Odoo Training Video"
-            class="absolute top-0 left-0 w-full h-full border-0"
-            allowfullscreen 
-            loading="eager"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen">
-          </iframe>
+        <!-- 16:9 RESPONSIVE NATIVE VIDEO PLAYER -->
+        <div class="relative w-full rounded-xl overflow-hidden border border-slate-800 bg-slate-950 shadow-2xl" style="padding-top: 56.25%;">
+          <video 
+            id="main-video-player"
+            controls 
+            playsinline 
+            preload="metadata"
+            class="absolute top-0 left-0 w-full h-full object-contain bg-black"
+            src="/api/video?id=1">
+            <source src="/api/video?id=1" type="video/mp4">
+            Your browser does not support HTML5 video streaming.
+          </video>
         </div>
       </div>
 
@@ -661,26 +670,38 @@
   </footer>
 
   <script>
-    const videoEmbedUrls = {
-      1: "https://www.canva.com/design/DAHPEv9auTA/4rfNkbUphX3BnL0IrasEfg/view?embed&v=2",
-      2: "https://www.canva.com/design/DAHPFG61bLM/dwR8McKCK0LMju9lXRcylA/view?embed&v=2",
-      3: "https://www.canva.com/design/DAHPFOscMfk/ubQycxfHXpM7bDuiIyU9OA/view?embed&v=2",
-      4: "https://www.canva.com/design/DAHPFI1uN30/0YocIvXtzZJygOSJnUwaXw/view?embed&v=2",
-      5: "https://www.canva.com/design/DAHPFDUs91A/fw4jS2ryv1DOiGowgVkGDQ/view?embed&v=2",
-      6: "https://www.canva.com/design/DAHQLn7j6Bo/BnOOdsZvCPCFf698MQzo1g/view?embed&v=2",
-      7: "https://www.canva.com/design/DAHQLgkvkjA/VhHNkMiLnPiVFdzlXvZ8NQ/view?embed&v=2",
-      8: "https://www.canva.com/design/DAHQNUuk1CU/_9_-73WMmNFRjr-bRZDiTA/view?embed&v=2",
-      9: "https://www.canva.com/design/DAHQNZLPOj0/McsuNOOM0m2dxjAfS_dtsA/view?embed&v=2"
+    const videoDownloadUrls = {
+      1: "https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.01.mp4",
+      2: "https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.02.mp4",
+      3: "https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.03.mp4",
+      4: "https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.04.mp4",
+      5: "https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.05.mp4",
+      6: "https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.06.mp4",
+      7: "https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.07.mp4",
+      8: "https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.08.mp4",
+      9: "https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.09.mp4"
     };
 
     // Video selector logic
-    function selectVideo(num, title, url) {
+    function selectVideo(num, title, canvaUrl) {
       document.getElementById('player-video-badge').textContent = 'VIDEO 0' + num;
       document.getElementById('player-video-title').textContent = title;
-      document.getElementById('player-external-link').href = url;
+      const extLink = document.getElementById('player-external-link');
+      if (extLink) extLink.href = canvaUrl;
       const directBtn = document.getElementById('player-external-link-btn');
-      if (directBtn) directBtn.href = url;
-      document.getElementById('main-video-frame').src = videoEmbedUrls[num] || url;
+      if (directBtn) directBtn.href = canvaUrl;
+      const downloadBtn = document.getElementById('player-download-btn');
+      if (downloadBtn) {
+        downloadBtn.href = videoDownloadUrls[num];
+        downloadBtn.setAttribute('download', 'WD-Group-Odoo-Video-0' + num + '.mp4');
+      }
+
+      const player = document.getElementById('main-video-player');
+      if (player) {
+        player.src = '/api/video?id=' + num;
+        player.load();
+        player.play().catch(() => {});
+      }
 
       // Update active states
       const cards = document.querySelectorAll('.video-card');
