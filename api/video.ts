@@ -3,7 +3,7 @@ export const config = {
 };
 
 const VIDEO_URLS: Record<string, string> = {
-  '1': 'https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.01.mp4',
+  '1': 'https://tblfnxaedhmwydjqngnb.supabase.co/storage/v1/object/public/portal-videos/odoo-video-01.mp4',
   '2': 'https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.02.mp4',
   '3': 'https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.03.mp4',
   '4': 'https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.04.mp4',
@@ -34,17 +34,28 @@ export default async function handler(req: Request): Promise<Response> {
     return new Response('Video not found', { status: 404 });
   }
 
-  const fetchHeaders: HeadersInit = {};
-  const range = req.headers.get('range');
-  if (range) {
-    fetchHeaders['range'] = range;
+  // Video 1 streams directly from Supabase Storage
+  if (id === '1') {
+    return Response.redirect(targetUrl, 307);
   }
 
+  const range = req.headers.get('range') || 'bytes=0-';
+
   try {
-    const upstream = await fetch(targetUrl, {
+    // Manual redirect resolution to prevent fetch from stripping Range header on cross-origin redirect
+    const headRes = await fetch(targetUrl, {
+      method: 'HEAD',
+      redirect: 'manual',
+    });
+
+    const location = headRes.headers.get('location');
+    const finalUrl = location || targetUrl;
+
+    const upstream = await fetch(finalUrl, {
       method: req.method === 'HEAD' ? 'HEAD' : 'GET',
-      headers: fetchHeaders,
-      redirect: 'follow',
+      headers: {
+        range: range,
+      },
     });
 
     const responseHeaders = new Headers();
@@ -52,7 +63,6 @@ export default async function handler(req: Request): Promise<Response> {
     responseHeaders.set('Accept-Ranges', 'bytes');
     responseHeaders.set('Access-Control-Allow-Origin', '*');
     responseHeaders.set('Access-Control-Expose-Headers', 'Content-Range, Content-Length, Accept-Ranges');
-    responseHeaders.set('Cache-Control', 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400');
 
     const contentRange = upstream.headers.get('content-range');
     if (contentRange) {

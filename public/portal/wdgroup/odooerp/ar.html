@@ -213,8 +213,8 @@
             playsinline 
             preload="metadata"
             class="absolute top-0 left-0 w-full h-full object-contain bg-black"
-            src="/api/video?id=1">
-            <source src="/api/video?id=1" type="video/mp4">
+            src="https://tblfnxaedhmwydjqngnb.supabase.co/storage/v1/object/public/portal-videos/odoo-video-01.mp4">
+            <source src="https://tblfnxaedhmwydjqngnb.supabase.co/storage/v1/object/public/portal-videos/odoo-video-01.mp4" type="video/mp4">
             متصفحك لا يدعم تشغيل الفيديو المباشر عبر HTML5.
           </video>
         </div>
@@ -682,6 +682,18 @@
       9: "https://github.com/dubaiincairo/dubaiincairobylovable/releases/download/v-odoo-training-videos/Odoo.s.Video.09.mp4"
     };
 
+    const videoStreamingUrls = {
+      1: "https://tblfnxaedhmwydjqngnb.supabase.co/storage/v1/object/public/portal-videos/odoo-video-01.mp4",
+      2: "/api/video?id=2",
+      3: "/api/video?id=3",
+      4: "/api/video?id=4",
+      5: "/api/video?id=5",
+      6: "/api/video?id=6",
+      7: "/api/video?id=7",
+      8: "/api/video?id=8",
+      9: "/api/video?id=9"
+    };
+
     // منطق اختيار وتشغيل الفيديوهات
     function selectVideo(num, title, canvaUrl) {
       document.getElementById('player-video-badge').textContent = 'الفيديو 0' + num;
@@ -698,7 +710,7 @@
 
       const player = document.getElementById('main-video-player');
       if (player) {
-        player.src = '/api/video?id=' + num;
+        player.src = videoStreamingUrls[num] || ('/api/video?id=' + num);
         player.load();
         player.play().catch(() => {});
       }
