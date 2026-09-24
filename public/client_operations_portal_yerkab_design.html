@@ -19,33 +19,12 @@
       -webkit-text-size-adjust: 100%;
     }
     body {
-      background-color: #070B14;
-      background-image: 
-        radial-gradient(rgba(56, 189, 248, 0.15) 1px, transparent 1px),
-        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
-      background-size: 24px 24px, 72px 72px, 72px 72px;
       min-height: 100vh;
       min-height: 100dvh;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
       overflow-x: hidden;
-    }
-    .opt2-spotlight {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background: radial-gradient(650px circle at var(--mouse-x, 50%) var(--mouse-y, 40%), rgba(6, 182, 212, 0.12), transparent 60%);
-      z-index: 1;
-    }
-    .opt2-contour {
-      position: fixed;
-      inset: 0;
-      opacity: 0.18;
-      pointer-events: none;
-      background-image: repeating-radial-gradient(circle at 80% 20%, transparent 0, transparent 40px, rgba(56, 189, 248, 0.2) 41px, transparent 42px);
-      z-index: 0;
     }
 
     /* Custom Scrollbar for Desktop */
@@ -201,11 +180,7 @@
     }
   </style>
 </head>
-<body class="text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-cyan-500 selection:text-slate-950 pb-20 relative">
-
-  <!-- Option 2 Background Architecture Layers -->
-  <div class="opt2-contour"></div>
-  <div class="opt2-spotlight"></div>
+<body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-blue-600 selection:text-white pb-20 relative">
 
   <!-- Ambient High-Tech Floating Interactive Glow Orbs -->
   <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
@@ -353,9 +328,9 @@
           <span>03. Ozoo Connector</span>
           <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">eZee ➔ Odoo</span>
         </button>
-        <button onclick="switchTab('zoho')" id="tab-btn-zoho" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-rose-400 hover:text-white hover:bg-rose-600/20 border border-rose-500/30">
+        <button onclick="switchTab('zoho')" id="tab-btn-zoho" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
           <span>04. Corporate Zoho Suite</span>
-          <span class="px-1.5 py-0.5 rounded-md bg-rose-500/20 text-[11px] text-rose-300">Mail &amp; Clips</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">Mail &amp; Clips</span>
         </button>
         <button onclick="switchTab('odoo')" id="tab-btn-odoo" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
           <span>05. Odoo 3 Factories</span>
@@ -664,142 +639,67 @@
       </div>
     </div>
 
-    <!-- ==================== TAB CONTENT 4: ZOHO COMMS (VIBRANT SPECTRUM) ==================== -->
+    <!-- ==================== TAB CONTENT 4: ZOHO COMMS ==================== -->
     <div id="tab-panel-zoho" class="tab-content hidden space-y-6">
       
-      <!-- Colorful Executive Banner -->
-      <div class="glass-card spotlight-card rounded-2xl p-6 sm:p-8 border-t-4 border-t-rose-500 bg-gradient-to-br from-slate-900/90 via-slate-900/70 to-[#181124] relative overflow-hidden">
-        <div class="absolute -top-20 -right-20 w-80 h-80 bg-rose-500/15 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-500/15 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div class="space-y-3">
-            <!-- Zoho Multi-Color Brand Chips -->
-            <div class="flex flex-wrap items-center gap-2">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/15 text-rose-300 border border-rose-500/30 text-xs font-bold">
-                <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
-                ZOHO WORKPLACE SUITE
-              </span>
-              <span class="px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/25 text-[11px] font-semibold">
-                Zoho Mail (DKIM 2048-bit)
-              </span>
-              <span class="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/25 text-[11px] font-semibold">
-                Zoho Cliq Channels
-              </span>
-              <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/25 text-[11px] font-semibold">
-                Zoho Clips (Async Video)
-              </span>
+      <div class="glass-card spotlight-card rounded-2xl p-6 border-t-4 border-t-purple-500">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/25 text-xs font-semibold">
+              ENTERPRISE UNIFIED COMMUNICATION &amp; ASYNCHRONOUS VIDEO COLLABORATION
             </div>
-
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Corporate Internal Communication &amp; <span class="bg-gradient-to-r from-rose-400 via-amber-300 to-emerald-400 bg-clip-text text-transparent">Collaborative Suite</span>
-            </h2>
-            <p class="text-sm text-slate-300 max-w-3xl leading-relaxed">
-              Unified enterprise communication ecosystem eliminating WhatsApp shadow IT risks. Cryptographically signed corporate email, structured department huddle channels, and 90-second high-resolution video shift handovers.
+            <h2 class="text-2xl font-bold text-white mt-2">Corporate Internal Communication Suite</h2>
+            <p class="text-sm text-slate-300 mt-1 max-w-3xl">
+              Centralized corporate mail (Zoho Mail), structured department channels (Zoho Cliq), and high-resolution screen/audio walkthroughs (Zoho Clips) eliminating shadow IT WhatsApp risks.
             </p>
-          </div>
-
-          <!-- Quick Access Link to Full Manual -->
-          <a href="04_Corporate_Internal_Communication_Zoho_Manual.md" class="shrink-0 px-4 py-2 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 border border-rose-500/40 text-rose-300 font-bold text-xs transition flex items-center gap-2 shadow-lg shadow-rose-500/15 self-start lg:self-center">
-            <span>Read Complete Manual</span>
-            <span>→</span>
-          </a>
-        </div>
-
-        <!-- 4 Operational Metrics Badges -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 mt-6 border-t border-slate-800/80 relative z-10">
-          <div class="p-3 rounded-xl bg-slate-900/80 border border-blue-500/30">
-            <div class="text-[10px] font-mono uppercase text-blue-400 font-semibold">Deliverability</div>
-            <div class="text-base sm:text-lg font-black text-white mt-0.5">99.8% Inbox</div>
-            <div class="text-[10px] text-slate-400">DKIM / SPF / DMARC</div>
-          </div>
-          <div class="p-3 rounded-xl bg-slate-900/80 border border-emerald-500/30">
-            <div class="text-[10px] font-mono uppercase text-emerald-400 font-semibold">Meeting Economy</div>
-            <div class="text-base sm:text-lg font-black text-white mt-0.5">18+ Hrs/Mo</div>
-            <div class="text-[10px] text-slate-400">Saved via Zoho Clips</div>
-          </div>
-          <div class="p-3 rounded-xl bg-slate-900/80 border border-amber-500/30">
-            <div class="text-[10px] font-mono uppercase text-amber-400 font-semibold">Cross-Dept Response</div>
-            <div class="text-base sm:text-lg font-black text-white mt-0.5">&lt; 12 Minutes</div>
-            <div class="text-[10px] text-slate-400">Live Cliq Bot Huddles</div>
-          </div>
-          <div class="p-3 rounded-xl bg-slate-900/80 border border-rose-500/30">
-            <div class="text-[10px] font-mono uppercase text-rose-400 font-semibold">Security Governance</div>
-            <div class="text-base sm:text-lg font-black text-white mt-0.5">Zero Leakage</div>
-            <div class="text-[10px] text-slate-400">1-Click Offboarding 2FA</div>
           </div>
         </div>
       </div>
 
-      <!-- Vibrant SOP Interactive Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        <!-- SOP 1: Zoho Clips (Emerald Accent) -->
-        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 cursor-pointer border border-emerald-500/30 hover:border-emerald-400/80 hover:shadow-lg hover:shadow-emerald-500/20 transition group" onclick="openModal('Recording a Zoho Clip for Visual Bug/Shift Handover', 'All Staff &amp; Supervisors', 'Click the Record Clip icon in any Cliq chat or Mail compose window. Choose Screen or Screen + Camera. Record up to 2-3 minutes explaining the machine setting, CAD detail, or ERP glitch. Click Send to embed playable video inline.')">
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 cursor-pointer" onclick="openModal('Recording a Zoho Clip for Visual Bug/Shift Handover', 'All Staff & Supervisors', 'Click the Record Clip icon in any Cliq chat or Mail compose window. Choose Screen or Screen + Camera. Record up to 2-3 minutes explaining the machine setting, CAD detail, or ERP glitch. Click Send to embed playable video inline.')">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">SOP-ZH-01</span>
-            <span class="text-xs text-slate-400 font-mono">Role: All Staff</span>
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-purple-500/20 text-purple-300">SOP-ZH-01</span>
+            <span class="text-xs text-slate-400">Role: All Staff</span>
           </div>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-              </svg>
-            </div>
-            <h3 class="text-base font-bold text-white group-hover:text-emerald-300 transition-colors">Zoho Clips Screen Walkthrough</h3>
-          </div>
+          <h3 class="text-base font-bold text-white">Zoho Clips Screen Walkthrough</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Record 60-to-90-second video walkthroughs with voiceover to report software bugs or explain factory floor machine defects without live meetings.
+            Record 60-to-90-second video walkthroughs with voiceover to report software bugs or explain factory floor machine defects.
           </p>
-          <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs text-emerald-400 font-semibold">
+          <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs text-purple-400 font-semibold">
             <span>Click to View Full SOP</span>
-            <span class="group-hover:translate-x-1 transition-transform">→</span>
+            <span>→</span>
           </div>
         </div>
 
-        <!-- SOP 2: Shift Handover (Royal Blue / Amber Accent) -->
-        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 cursor-pointer border border-blue-500/30 hover:border-blue-400/80 hover:shadow-lg hover:shadow-blue-500/20 transition group" onclick="openModal('Factory Shift Handover Protocol', 'Shift Supervisors', 'At 15 minutes before shift end, post structured update in #factory-plant-X channel: Units Produced, Machine Maintenance Status, Raw Materials Needed, and Urgent Orders. Attach 60s Zoho Clip if defect observed.')">
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 cursor-pointer" onclick="openModal('Factory Shift Handover Protocol', 'Shift Supervisors', 'At 15 minutes before shift end, post structured update in #factory-plant-X channel: Units Produced, Machine Maintenance Status, Raw Materials Needed, and Urgent Orders. Attach 60s Zoho Clip if defect observed.')">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-md bg-blue-500/20 text-blue-300 border border-blue-500/40">SOP-ZH-02</span>
-            <span class="text-xs text-slate-400 font-mono">Role: Plant Supervisors</span>
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-blue-500/20 text-blue-300">SOP-ZH-02</span>
+            <span class="text-xs text-slate-400">Role: Plant Supervisors</span>
           </div>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 font-bold group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-              </svg>
-            </div>
-            <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Shift Handover Protocol</h3>
-          </div>
+          <h3 class="text-base font-bold text-white">Shift Handover Protocol</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Structured, tamper-proof shift handovers inside dedicated factory channels to eliminate disputes and unrecorded directives.
+            Structured, tamper-proof shift handovers inside dedicated factory channels to eliminate disputes and lost directives.
           </p>
           <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs text-blue-400 font-semibold">
             <span>Click to View Full SOP</span>
-            <span class="group-hover:translate-x-1 transition-transform">→</span>
+            <span>→</span>
           </div>
         </div>
 
-        <!-- SOP 3: 2FA & Security (Zoho Crimson Accent) -->
-        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 cursor-pointer border border-rose-500/30 hover:border-rose-400/80 hover:shadow-lg hover:shadow-rose-500/20 transition group" onclick="openModal('Two-Factor Authentication &amp; Device Security', 'IT &amp; HR Team', 'Every staff account is safeguarded with Zoho OneAuth. If phone is replaced, staff must request verified 2FA reset from Internal IT. Leaving staff are deactivated with 1-click revocation to prevent data leakage.')">
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 cursor-pointer" onclick="openModal('Two-Factor Authentication & Device Security', 'IT & HR Team', 'Every staff account is safeguarded with Zoho OneAuth. If phone is replaced, staff must request verified 2FA reset from Internal IT. Leaving staff are deactivated with 1-click revocation to prevent data leakage.')">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/40">SOP-ZH-03</span>
-            <span class="text-xs text-slate-400 font-mono">Role: Security &amp; Admin</span>
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300">SOP-ZH-03</span>
+            <span class="text-xs text-slate-400">Role: Security &amp; Admin</span>
           </div>
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 font-bold group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-              </svg>
-            </div>
-            <h3 class="text-base font-bold text-white group-hover:text-rose-300 transition-colors">2FA &amp; Corporate Sovereignty</h3>
-          </div>
+          <h3 class="text-base font-bold text-white">2FA &amp; Corporate Sovereignty</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Enforcing mandatory multi-factor authentication, remote device sandboxing, and immediate 1-click offboarding data security.
+            Enforcing mandatory multi-factor authentication, remote device sandboxing, and immediate offboarding data security.
           </p>
-          <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs text-rose-400 font-semibold">
+          <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs text-emerald-400 font-semibold">
             <span>Click to View Full SOP</span>
-            <span class="group-hover:translate-x-1 transition-transform">→</span>
+            <span>→</span>
           </div>
         </div>
 
@@ -935,9 +835,9 @@
           </div>
           <div class="flex items-center gap-2">
             <a href="06_Digital_Marketing_Growth_Strategy_Manual.md" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition">
-              Read Manual
+              Read Strategy Guide
             </a>
-            <a href="digital_marketing_strategy.html" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white shadow-lg shadow-indigo-500/25 transition">
+            <a href="/portal/wdgroup/strategy" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white shadow-lg shadow-indigo-500/25 transition">
               Open Strategy Portal (10 Tabs) ↗
             </a>
           </div>
@@ -1248,12 +1148,6 @@
         }
       });
     }
-
-    // Option 2 dynamic spotlight mouse tracking
-    window.addEventListener('mousemove', (e) => {
-      document.body.style.setProperty('--mouse-x', e.clientX + 'px');
-      document.body.style.setProperty('--mouse-y', e.clientY + 'px');
-    });
   </script>
 </body>
 </html>

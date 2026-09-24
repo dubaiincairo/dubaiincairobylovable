@@ -6,9 +6,9 @@
   <title>منظومة تخطيط الموارد الصناعية (Odoo) — بوابة العمليات | مجموعة دبليو دي</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-  <link rel="alternate icon" href="../../favicon.ico">
-  <link rel="apple-touch-icon" href="../../favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.svg">
 
   <!-- Canva Performance Preconnect -->
   <link rel="preconnect" href="https://www.canva.com">
@@ -28,6 +28,7 @@
     .video-card.active { border-color: rgba(245, 158, 11, 0.8); background: rgba(30, 41, 59, 0.9); }
     sup { font-weight: 400 !important; font-size: 0.55em !important; line-height: 0 !important; position: relative; vertical-align: baseline; top: -0.5em; opacity: 0.8; }
   </style>
+  <base href="/portal/wdgroup/odooerp/">
 </head>
 <body class="bg-[#070F1E] text-slate-200 antialiased min-h-screen flex flex-col relative" dir="rtl" style="direction: rtl; text-align: right;">
   <div class="glow-orb w-96 h-96 -top-20 -right-20 bg-blue-600/20"></div>
@@ -40,9 +41,9 @@
       <div class="flex items-center justify-between h-16 sm:h-18 gap-4">
         <!-- هوية مجموعة دبليو دي مع الشعار -->
         <div class="flex items-center gap-3">
-          <a href="../ar.html" class="flex items-center gap-3 group">
+          <a href="/portal/wdgroup/ar" class="flex items-center gap-3 group">
             <div class="h-11 px-3 py-1 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-blue-500/50 flex items-center justify-center shadow-md transition-all">
-              <img src="../assets/wd-logo-sky.png" alt="مجموعة دبليو دي للأعمال" class="h-7 sm:h-8 w-auto object-contain">
+              <img src="/portal/wdgroup/assets/wd-logo-sky.png" alt="مجموعة دبليو دي للأعمال" class="h-7 sm:h-8 w-auto object-contain">
             </div>
             <div class="flex flex-col">
               <div class="flex items-center gap-2">
@@ -56,11 +57,11 @@
 
         <!-- أزرار الإجراءات واللغة والمشروع -->
         <div class="flex items-center gap-2 sm:gap-3">
-          <a href="../ar.html" class="px-3 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700/90 text-slate-300 hover:text-white border border-slate-700/80 transition text-xs font-semibold flex items-center gap-1.5">
+          <a href="/portal/wdgroup/ar" class="px-3 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700/90 text-slate-300 hover:text-white border border-slate-700/80 transition text-xs font-semibold flex items-center gap-1.5">
             <span>&rarr;</span>
             <span>البوابة الرئيسية</span>
           </a>
-          <a href="index.html" class="px-3 py-1.5 rounded-lg bg-sky-950/60 hover:bg-sky-900/60 text-sky-400 border border-sky-800/50 transition text-xs font-bold font-mono">
+          <a href="/portal/wdgroup/odooerp/" class="px-3 py-1.5 rounded-lg bg-sky-950/60 hover:bg-sky-900/60 text-sky-400 border border-sky-800/50 transition text-xs font-bold font-mono">
             English (LTR)
           </a>
           <span class="px-2.5 py-1 rounded-lg bg-blue-950/80 text-blue-400 border border-blue-800/60 text-xs font-bold font-arabic tracking-wider">
@@ -109,7 +110,7 @@
     <!-- شبكة الخيارات الرئيسية (المميزات وإجراءات التشغيل) -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <!-- 1. استعراض الخصائص والمميزات (عربي) -->
-      <a href="features-ar.html" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-right border-amber-500/30 hover:border-amber-500/60">
+      <a href="/portal/wdgroup/odooerp/features-ar" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-right border-amber-500/30 hover:border-amber-500/60">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="px-3 py-1 text-xs font-semibold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
@@ -130,7 +131,7 @@
       </a>
 
       <!-- 2. إجراءات التشغيل القياسية SOPs (عربي) -->
-      <a href="sops-ar.html" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-right border-purple-500/30 hover:border-purple-500/60">
+      <a href="/portal/wdgroup/odooerp/sops-ar" class="glass-card rounded-2xl p-7 flex flex-col justify-between group block text-right border-purple-500/30 hover:border-purple-500/60">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="px-3 py-1 text-xs font-semibold rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
@@ -383,10 +384,10 @@
             </p>
           </div>
           <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
-            <button onclick="openPdfModal('index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%A8%D9%8A%D8%B9%D8%A7%D8%AA).pdf', 'ملفات التدريب (المبيعات)')" class="flex-1 px-3 py-2 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 text-xs font-semibold transition border border-blue-500/30 flex items-center justify-center gap-1">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%A8%D9%8A%D8%B9%D8%A7%D8%AA).pdf', 'ملفات التدريب (المبيعات)')" class="flex-1 px-3 py-2 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 text-xs font-semibold transition border border-blue-500/30 flex items-center justify-center gap-1">
               <span>معاينة الكتيب</span>
             </button>
-            <a href="index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%A8%D9%8A%D8%B9%D8%A7%D8%AA).pdf" download="ملفات التدريب (المبيعات).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%A8%D9%8A%D8%B9%D8%A7%D8%AA).pdf" download="ملفات التدريب (المبيعات).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
               <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               <span>تحميل</span>
             </a>
@@ -409,10 +410,10 @@
             </p>
           </div>
           <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
-            <button onclick="openPdfModal('index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%B1%D8%AF%20%D8%A7%D9%84%D8%A8%D8%B4%D8%B1%D9%8A%D8%A9).pdf', 'ملفات التدريب (الموارد البشرية)')" class="flex-1 px-3 py-2 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 text-xs font-semibold transition border border-emerald-500/30 flex items-center justify-center gap-1">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%B1%D8%AF%20%D8%A7%D9%84%D8%A8%D8%B4%D8%B1%D9%8A%D8%A9).pdf', 'ملفات التدريب (الموارد البشرية)')" class="flex-1 px-3 py-2 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 text-xs font-semibold transition border border-emerald-500/30 flex items-center justify-center gap-1">
               <span>معاينة الكتيب</span>
             </button>
-            <a href="index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%B1%D8%AF%20%D8%A7%D9%84%D8%A8%D8%B4%D8%B1%D9%8A%D8%A9).pdf" download="ملفات التدريب (الموارد البشرية).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%B1%D8%AF%20%D8%A7%D9%84%D8%A8%D8%B4%D8%B1%D9%8A%D8%A9).pdf" download="ملفات التدريب (الموارد البشرية).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
               <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               <span>تحميل</span>
             </a>
@@ -435,10 +436,10 @@
             </p>
           </div>
           <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
-            <button onclick="openPdfModal('index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%AE%D8%A7%D8%B2%D9%86).pdf', 'ملفات التدريب (المخازن)')" class="flex-1 px-3 py-2 rounded-lg bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 text-xs font-semibold transition border border-amber-500/30 flex items-center justify-center gap-1">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%AE%D8%A7%D8%B2%D9%86).pdf', 'ملفات التدريب (المخازن)')" class="flex-1 px-3 py-2 rounded-lg bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 text-xs font-semibold transition border border-amber-500/30 flex items-center justify-center gap-1">
               <span>معاينة الكتيب</span>
             </button>
-            <a href="index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%AE%D8%A7%D8%B2%D9%86).pdf" download="ملفات التدريب (المخازن).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%AE%D8%A7%D8%B2%D9%86).pdf" download="ملفات التدريب (المخازن).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
               <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               <span>تحميل</span>
             </a>
@@ -461,10 +462,10 @@
             </p>
           </div>
           <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
-            <button onclick="openPdfModal('index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D8%AA%D8%B5%D9%86%D9%8A%D8%B9).pdf', 'ملفات التدريب (التصنيع)')" class="flex-1 px-3 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 text-xs font-semibold transition border border-purple-500/30 flex items-center justify-center gap-1">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D8%AA%D8%B5%D9%86%D9%8A%D8%B9).pdf', 'ملفات التدريب (التصنيع)')" class="flex-1 px-3 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 text-xs font-semibold transition border border-purple-500/30 flex items-center justify-center gap-1">
               <span>معاينة الكتيب</span>
             </button>
-            <a href="index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D8%AA%D8%B5%D9%86%D9%8A%D8%B9).pdf" download="ملفات التدريب (التصنيع).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D8%AA%D8%B5%D9%86%D9%8A%D8%B9).pdf" download="ملفات التدريب (التصنيع).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
               <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               <span>تحميل</span>
             </a>
@@ -487,10 +488,10 @@
             </p>
           </div>
           <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
-            <button onclick="openPdfModal('index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D8%A7%D8%AA).pdf', 'ملفات التدريب (إدارة المشروعات)')" class="flex-1 px-3 py-2 rounded-lg bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 text-xs font-semibold transition border border-teal-500/30 flex items-center justify-center gap-1">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D8%A7%D8%AA).pdf', 'ملفات التدريب (إدارة المشروعات)')" class="flex-1 px-3 py-2 rounded-lg bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 text-xs font-semibold transition border border-teal-500/30 flex items-center justify-center gap-1">
               <span>معاينة الكتيب</span>
             </button>
-            <a href="index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D8%A7%D8%AA).pdf" download="ملفات التدريب (إدارة المشروعات).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D8%A7%D8%AA).pdf" download="ملفات التدريب (إدارة المشروعات).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
               <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               <span>تحميل</span>
             </a>
@@ -513,10 +514,10 @@
             </p>
           </div>
           <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
-            <button onclick="openPdfModal('index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%B4%D8%AA%D8%B1%D9%8A%D8%A7%D8%AA).pdf', 'ملفات التدريب (المشتريات)')" class="flex-1 px-3 py-2 rounded-lg bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 text-xs font-semibold transition border border-cyan-500/30 flex items-center justify-center gap-1">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%B4%D8%AA%D8%B1%D9%8A%D8%A7%D8%AA).pdf', 'ملفات التدريب (المشتريات)')" class="flex-1 px-3 py-2 rounded-lg bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 text-xs font-semibold transition border border-cyan-500/30 flex items-center justify-center gap-1">
               <span>معاينة الكتيب</span>
             </button>
-            <a href="index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%B4%D8%AA%D8%B1%D9%8A%D8%A7%D8%AA).pdf" download="ملفات التدريب (المشتريات).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%A7%D9%84%D9%85%D8%B4%D8%AA%D8%B1%D9%8A%D8%A7%D8%AA).pdf" download="ملفات التدريب (المشتريات).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
               <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               <span>تحميل</span>
             </a>
@@ -539,10 +540,10 @@
             </p>
           </div>
           <div class="flex items-center gap-2 pt-3 border-t border-slate-800/80">
-            <button onclick="openPdfModal('index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%B1%D9%82%D8%A7%D8%A8%D8%A9%20%D8%A7%D9%84%D8%AC%D9%88%D8%AF%D8%A9).pdf', 'ملفات التدريب (رقابة الجودة)')" class="flex-1 px-3 py-2 rounded-lg bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 text-xs font-semibold transition border border-rose-500/30 flex items-center justify-center gap-1">
+            <button onclick="openPdfModal('/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%B1%D9%82%D8%A7%D8%A8%D8%A9%20%D8%A7%D9%84%D8%AC%D9%88%D8%AF%D8%A9).pdf', 'ملفات التدريب (رقابة الجودة)')" class="flex-1 px-3 py-2 rounded-lg bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 text-xs font-semibold transition border border-rose-500/30 flex items-center justify-center gap-1">
               <span>معاينة الكتيب</span>
             </button>
-            <a href="index.htmltraining-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%B1%D9%82%D8%A7%D8%A8%D8%A9%20%D8%A7%D9%84%D8%AC%D9%88%D8%AF%D8%A9).pdf" download="ملفات التدريب (رقابة الجودة).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
+            <a href="/portal/wdgroup/odooerp/training-materials/%D9%85%D9%84%D9%81%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20(%D8%B1%D9%82%D8%A7%D8%A8%D8%A9%20%D8%A7%D9%84%D8%AC%D9%88%D8%AF%D8%A9).pdf" download="ملفات التدريب (رقابة الجودة).pdf" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700 hover:border-slate-600 flex items-center gap-1" title="تحميل الكتيب">
               <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               <span>تحميل</span>
             </a>

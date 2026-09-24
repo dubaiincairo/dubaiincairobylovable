@@ -6,9 +6,9 @@
   <title>مجموعة دبليو دي للأعمال — بوابة العمليات والمشاريع المعتمدة | دبي في القاهرة</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-  <link rel="alternate icon" href="../favicon.ico">
-  <link rel="apple-touch-icon" href="../favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.svg">
   <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +21,7 @@
     .glow-orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
     sup { font-weight: 400 !important; font-size: 0.55em !important; line-height: 0 !important; position: relative; vertical-align: baseline; top: -0.5em; opacity: 0.8; }
   </style>
+  <base href="/portal/wdgroup/">
 </head>
 <body class="relative flex flex-col justify-between pt-0 pb-10 px-0 min-h-screen">
   <div class="glow-orb w-96 h-96 -top-20 -right-20 bg-emerald-600/20"></div>
@@ -30,9 +31,9 @@
   <header id="mainHeader" class="sticky top-0 z-50 w-full transition-all duration-300 bg-transparent border-b border-transparent">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between flex-wrap gap-4 text-xs text-slate-400">
       <div class="flex items-center gap-3">
-        <a href="ar.html" class="flex items-center gap-3 group">
+        <a href="/portal/wdgroup/ar" class="flex items-center gap-3 group">
           <div class="h-11 px-3 py-1 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-sky-500/50 flex items-center justify-center shadow-md transition-all">
-            <img src="assets/wd-logo-sky.png" alt="مجموعة دبليو دي للأعمال" class="h-7 sm:h-8 w-auto object-contain">
+            <img src="/portal/wdgroup/assets/wd-logo-sky.png" alt="مجموعة دبليو دي للأعمال" class="h-7 sm:h-8 w-auto object-contain">
           </div>
           <div class="flex flex-col">
             <div class="flex items-center gap-2">
@@ -45,14 +46,14 @@
       </div>
       <div class="flex items-center gap-3">
         <div id="nav-auth-section" class="flex items-center gap-2">
-          <a href="../../client_portal_login.html" class="px-2.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-amber-500/50 hover:text-white transition font-medium flex items-center gap-1.5" title="تسجيل الدخول لبوابة العملاء">
+          <a href="/portal/login?redirect=/portal/wdgroup/ar" class="px-2.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-amber-500/50 hover:text-white transition font-medium flex items-center gap-1.5" title="تسجيل الدخول لبوابة العملاء">
             <svg class="w-3.5 h-3.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
             </svg>
             <span>تسجيل دخول العميل</span>
           </a>
         </div>
-        <a href="index.html" class="px-3 py-1.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 transition font-bold font-mono flex items-center gap-1.5" dir="ltr">
+        <a href="/portal/wdgroup" class="px-3 py-1.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 transition font-bold font-mono flex items-center gap-1.5" dir="ltr">
           <span>English (100% LTR)</span>
         </a>
         <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700 font-bold text-[11px]">
@@ -87,7 +88,7 @@
           <div class="flex-1">
             <div class="flex items-center flex-wrap gap-2.5 mb-1.5">
               <span class="px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-bold">المشروع 01</span>
-              <a href="swissbluewebsite/ar.html" class="text-xl sm:text-2xl font-bold text-white hover:text-emerald-300 transition-colors inline-flex items-center gap-2 group/title">
+              <a href="/portal/wdgroup/swissbluewebsite/ar" class="text-xl sm:text-2xl font-bold text-white hover:text-emerald-300 transition-colors inline-flex items-center gap-2 group/title">
                 <h2>الموقع الإلكتروني لمجموعة سويس بلو للضيافة</h2>
                 <span class="text-emerald-400 text-sm font-normal group-hover/title:-translate-x-1 transition-transform">←</span>
               </a>
@@ -100,7 +101,7 @@
             </p>
           </div>
           <div>
-            <a href="swissbluewebsite/ar.html" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/50 text-emerald-300 text-xs font-semibold transition flex items-center gap-1.5 whitespace-nowrap shadow-sm">
+            <a href="/portal/wdgroup/swissbluewebsite/ar" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/50 text-emerald-300 text-xs font-semibold transition flex items-center gap-1.5 whitespace-nowrap shadow-sm">
               <span>صفحة خيارات المشروع (الميزات و SOPs)</span>
               <span>&larr;</span>
             </a>
@@ -109,7 +110,7 @@
 
         <!-- الوحدات التشغيلية لسويس بلو (عربي 100%) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-800">
-          <a href="swissbluewebsite/features-ar.html" class="p-4 rounded-xl bg-slate-800/80 hover:bg-emerald-600/20 border border-slate-700 hover:border-emerald-500/50 transition flex flex-col justify-between group/link">
+          <a href="/portal/wdgroup/swissbluewebsite/features-ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-emerald-600/20 border border-slate-700 hover:border-emerald-500/50 transition flex flex-col justify-between group/link">
             <div>
               <div class="flex items-center justify-between text-xs font-semibold text-emerald-400 mb-1.5">
                 <span>كتالوج الميزات</span>
@@ -121,7 +122,7 @@
             <span class="text-xs font-semibold text-emerald-400 mt-3 flex items-center justify-end gap-1">استعراض دليل الميزات &larr;</span>
           </a>
 
-          <a href="swissbluewebsite/sops-ar.html" class="p-4 rounded-xl bg-slate-800/80 hover:bg-amber-600/20 border border-slate-700 hover:border-amber-500/50 transition flex flex-col justify-between group/link">
+          <a href="/portal/wdgroup/swissbluewebsite/sops-ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-amber-600/20 border border-slate-700 hover:border-amber-500/50 transition flex flex-col justify-between group/link">
             <div>
               <div class="flex items-center justify-between text-xs font-semibold text-amber-400 mb-1.5">
                 <span>نوافذ تفاعلية منبثقة</span>
@@ -141,7 +142,7 @@
           <div class="flex-1">
             <div class="flex items-center flex-wrap gap-2.5 mb-1.5">
               <span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 text-xs font-mono font-bold">المشروع 02</span>
-              <a href="ezeeodooconnector/ar.html" class="text-xl sm:text-2xl font-bold text-white hover:text-indigo-300 transition-colors inline-flex items-center gap-2 group/title">
+              <a href="/portal/wdgroup/ezeeodooconnector/ar" class="text-xl sm:text-2xl font-bold text-white hover:text-indigo-300 transition-colors inline-flex items-center gap-2 group/title">
                 <h2>برنامج الجسر المحاسبي الآلي (Ozoo<sup>™</sup>)</h2>
                 <span class="text-indigo-400 text-sm font-normal group-hover/title:-translate-x-1 transition-transform">←</span>
               </a>
@@ -154,7 +155,7 @@
             </p>
           </div>
           <div>
-            <a href="ezeeodooconnector/ar.html" class="px-3.5 py-1.5 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 hover:border-indigo-500/50 text-indigo-300 text-xs font-semibold transition flex items-center gap-1.5 whitespace-nowrap shadow-sm">
+            <a href="/portal/wdgroup/ezeeodooconnector/ar" class="px-3.5 py-1.5 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 hover:border-indigo-500/50 text-indigo-300 text-xs font-semibold transition flex items-center gap-1.5 whitespace-nowrap shadow-sm">
               <span>صفحة خيارات المشروع (الميزات و SOPs)</span>
               <span>&larr;</span>
             </a>
@@ -163,7 +164,7 @@
 
         <!-- الوحدات التشغيلية لأوزو (عربي 100%) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-800">
-          <a href="ezeeodooconnector/features-ar.html" class="p-4 rounded-xl bg-slate-800/80 hover:bg-indigo-600/20 border border-slate-700 hover:border-indigo-500/50 transition flex flex-col justify-between group/link">
+          <a href="/portal/wdgroup/ezeeodooconnector/features-ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-indigo-600/20 border border-slate-700 hover:border-indigo-500/50 transition flex flex-col justify-between group/link">
             <div>
               <div class="flex items-center justify-between text-xs font-semibold text-indigo-400 mb-1.5">
                 <span>كتالوج الميزات</span>
@@ -175,7 +176,7 @@
             <span class="text-xs font-semibold text-indigo-400 mt-3 flex items-center justify-end gap-1">استعراض دليل الميزات &larr;</span>
           </a>
 
-          <a href="ezeeodooconnector/sops-ar.html" class="p-4 rounded-xl bg-slate-800/80 hover:bg-cyan-600/20 border border-slate-700 hover:border-cyan-500/50 transition flex flex-col justify-between group/link">
+          <a href="/portal/wdgroup/ezeeodooconnector/sops-ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-cyan-600/20 border border-slate-700 hover:border-cyan-500/50 transition flex flex-col justify-between group/link">
             <div>
               <div class="flex items-center justify-between text-xs font-semibold text-cyan-400 mb-1.5">
                 <span>نوافذ تفاعلية منبثقة</span>
@@ -195,7 +196,7 @@
           <div class="flex-1">
             <div class="flex items-center flex-wrap gap-2.5 mb-1.5">
               <span class="px-2.5 py-0.5 rounded-md bg-blue-500/20 text-blue-400 border border-blue-500/30 text-xs font-mono font-bold">المشروع 03</span>
-              <a href="wdgroupwebsite/ar.html" class="text-xl sm:text-2xl font-bold text-white hover:text-blue-300 transition-colors inline-flex items-center gap-2 group/title">
+              <a href="/portal/wdgroup/wdgroupwebsite/ar" class="text-xl sm:text-2xl font-bold text-white hover:text-blue-300 transition-colors inline-flex items-center gap-2 group/title">
                 <h2>منصة التجارة الرقمية والكونسول التنفيذي</h2>
                 <span class="text-blue-400 text-sm font-normal group-hover/title:-translate-x-1 transition-transform">←</span>
               </a>
@@ -208,7 +209,7 @@
             </p>
           </div>
           <div>
-            <a href="wdgroupwebsite/ar.html" class="px-3.5 py-1.5 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 hover:border-blue-500/50 text-blue-300 text-xs font-semibold transition flex items-center gap-1.5 whitespace-nowrap shadow-sm">
+            <a href="/portal/wdgroup/wdgroupwebsite/ar" class="px-3.5 py-1.5 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 hover:border-blue-500/50 text-blue-300 text-xs font-semibold transition flex items-center gap-1.5 whitespace-nowrap shadow-sm">
               <span>صفحة خيارات المشروع (الميزات و SOPs)</span>
               <span>&larr;</span>
             </a>
@@ -217,7 +218,7 @@
 
         <!-- الوحدات التشغيلية لمجموعة دبليو دي للأعمال (عربي 100%) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-800">
-          <a href="wdgroupwebsite/features-ar.html" class="p-4 rounded-xl bg-slate-800/80 hover:bg-amber-600/20 border border-slate-700 hover:border-amber-500/50 transition flex flex-col justify-between group/link">
+          <a href="/portal/wdgroup/wdgroupwebsite/features-ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-amber-600/20 border border-slate-700 hover:border-amber-500/50 transition flex flex-col justify-between group/link">
             <div>
               <div class="flex items-center justify-between text-xs font-semibold text-amber-400 mb-1.5">
                 <span>كتالوج الميزات</span>
@@ -229,7 +230,7 @@
             <span class="text-xs font-semibold text-amber-400 mt-3 flex items-center justify-end gap-1">استعراض دليل الميزات &larr;</span>
           </a>
 
-          <a href="wdgroupwebsite/sops-ar.html" class="p-4 rounded-xl bg-slate-800/80 hover:bg-purple-600/20 border border-slate-700 hover:border-purple-500/50 transition flex flex-col justify-between group/link">
+          <a href="/portal/wdgroup/wdgroupwebsite/sops-ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-purple-600/20 border border-slate-700 hover:border-purple-500/50 transition flex flex-col justify-between group/link">
             <div>
               <div class="flex items-center justify-between text-xs font-semibold text-purple-400 mb-1.5">
                 <span>نوافذ تفاعلية منبثقة</span>
@@ -249,7 +250,7 @@
           <div class="flex-1">
             <div class="flex items-center flex-wrap gap-2.5 mb-1.5">
               <span class="px-2.5 py-0.5 rounded-md bg-teal-500/20 text-teal-400 border border-teal-500/30 text-xs font-mono font-bold">المشروع 04</span>
-              <a href="internalcommunication/ar.html" class="text-xl sm:text-2xl font-bold text-white hover:text-teal-300 transition-colors inline-flex items-center gap-2 group/title">
+              <a href="/portal/wdgroup/internalcommunication/ar" class="text-xl sm:text-2xl font-bold text-white hover:text-teal-300 transition-colors inline-flex items-center gap-2 group/title">
                 <h2>منظومة التواصل المؤسسي (Zoho<sup>™</sup>)</h2>
                 <span class="text-teal-400 text-sm font-normal group-hover/title:-translate-x-1 transition-transform">←</span>
               </a>
@@ -262,7 +263,7 @@
             </p>
           </div>
           <div>
-            <a href="internalcommunication/ar.html" class="px-3.5 py-1.5 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 hover:border-teal-500/50 text-teal-300 text-xs font-semibold transition flex items-center gap-1.5 whitespace-nowrap shadow-sm">
+            <a href="/portal/wdgroup/internalcommunication/ar" class="px-3.5 py-1.5 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 hover:border-teal-500/50 text-teal-300 text-xs font-semibold transition flex items-center gap-1.5 whitespace-nowrap shadow-sm">
               <span>صفحة خيارات المشروع (الميزات و SOPs)</span>
               <span>&larr;</span>
             </a>
@@ -271,7 +272,7 @@
 
         <!-- الأقسام الفرعية لمنظومة التواصل الداخلي -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-800">
-          <a href="internalcommunication/features-ar.html" class="p-4 rounded-xl bg-slate-800/80 hover:bg-teal-600/20 border border-slate-700 hover:border-teal-500/50 transition flex flex-col justify-between group/link">
+          <a href="/portal/wdgroup/internalcommunication/features-ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-teal-600/20 border border-slate-700 hover:border-teal-500/50 transition flex flex-col justify-between group/link">
             <div>
               <div class="flex items-center justify-between text-xs font-semibold text-teal-400 mb-1.5">
                 <span>كتالوج المزايا الشامل</span>
@@ -283,7 +284,7 @@
             <span class="text-xs font-semibold text-teal-400 mt-3 flex items-center justify-end gap-1">استعراض دليل المزايا &larr;</span>
           </a>
 
-          <a href="internalcommunication/sops-ar.html" class="p-4 rounded-xl bg-slate-800/80 hover:bg-teal-600/20 border border-slate-700 hover:border-teal-500/50 transition flex flex-col justify-between group/link">
+          <a href="/portal/wdgroup/internalcommunication/sops-ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-teal-600/20 border border-slate-700 hover:border-teal-500/50 transition flex flex-col justify-between group/link">
             <div>
               <div class="flex items-center justify-between text-xs font-semibold text-teal-400 mb-1.5">
                 <span>نوافذ تفاعلية منبثقة</span>
@@ -303,7 +304,7 @@
           <div class="flex-1">
             <div class="flex items-center flex-wrap gap-2.5 mb-1.5">
               <span class="px-2.5 py-0.5 rounded-md bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-mono font-bold">المشروع 05</span>
-              <a href="odooerp/ar.html" class="text-xl sm:text-2xl font-bold text-white hover:text-cyan-300 transition-colors inline-flex items-center gap-2 group/title">
+              <a href="/portal/wdgroup/odooerp/ar" class="text-xl sm:text-2xl font-bold text-white hover:text-cyan-300 transition-colors inline-flex items-center gap-2 group/title">
                 <h2>منظومة تخطيط الموارد الصناعية (Odoo)</h2>
                 <span class="text-cyan-400 text-sm font-normal group-hover/title:-translate-x-1 transition-transform">←</span>
               </a>
@@ -316,7 +317,7 @@
             </p>
           </div>
           <div>
-            <a href="odooerp/ar.html" class="px-3.5 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-500/50 text-cyan-300 text-xs font-semibold transition flex items-center gap-1.5 whitespace-nowrap shadow-sm">
+            <a href="/portal/wdgroup/odooerp/ar" class="px-3.5 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-500/50 text-cyan-300 text-xs font-semibold transition flex items-center gap-1.5 whitespace-nowrap shadow-sm">
               <span>بوابة المشروع الشاملة (الخصائص والإجراءات)</span>
               <span>←</span>
             </a>
@@ -325,7 +326,7 @@
 
         <!-- روابط الموديولات التفاعلية -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-800">
-          <a href="odooerp/features-ar.html" class="p-4 rounded-xl bg-slate-800/80 hover:bg-amber-600/20 border border-slate-700 hover:border-amber-500/50 transition flex flex-col justify-between group/link">
+          <a href="/portal/wdgroup/odooerp/features-ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-amber-600/20 border border-slate-700 hover:border-amber-500/50 transition flex flex-col justify-between group/link">
             <div>
               <div class="flex items-center justify-between text-xs font-semibold text-amber-400 mb-1.5">
                 <span>كتالوج الخصائص والمواصفات</span>
@@ -337,7 +338,7 @@
             <span class="text-xs font-semibold text-amber-400 mt-3 flex items-center gap-1">استعراض دليل الخصائص ←</span>
           </a>
 
-          <a href="odooerp/sops-ar.html" class="p-4 rounded-xl bg-slate-800/80 hover:bg-purple-600/20 border border-slate-700 hover:border-purple-500/50 transition flex flex-col justify-between group/link">
+          <a href="/portal/wdgroup/odooerp/sops-ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-purple-600/20 border border-slate-700 hover:border-purple-500/50 transition flex flex-col justify-between group/link">
             <div>
               <div class="flex items-center justify-between text-xs font-semibold text-purple-400 mb-1.5">
                 <span>إجراءات التشغيل القياسية (SOPs)</span>
@@ -357,7 +358,7 @@
           <div class="flex-1">
             <div class="flex items-center flex-wrap gap-2.5 mb-1.5">
               <span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 text-xs font-mono font-bold">المشروع 06</span>
-              <a href="strategy/index.html" class="text-xl sm:text-2xl font-bold text-white hover:text-indigo-300 transition-colors inline-flex items-center gap-2 group/title">
+              <a href="/portal/wdgroup/strategy" class="text-xl sm:text-2xl font-bold text-white hover:text-indigo-300 transition-colors inline-flex items-center gap-2 group/title">
                 <h2>
                   <span class="bg-gradient-to-l from-indigo-400 via-sky-300 to-emerald-400 bg-clip-text text-transparent inline-block py-1 pb-2 leading-normal">استراتيجية النمو الرقمي لمجموعة دبليو دي للأعمال والذكاء الإحصائي للسوق السعودي</span>
                 </h2>
@@ -372,11 +373,11 @@
             </p>
           </div>
           <div class="flex items-center gap-2.5">
-            <a href="market-insights/ar.html" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-sky-400 border border-slate-700 hover:border-sky-500/50 transition flex items-center gap-1.5 shadow-sm">
+            <a href="/portal/wdgroup/market-insights/ar" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-sky-400 border border-slate-700 hover:border-sky-500/50 transition flex items-center gap-1.5 shadow-sm">
               <i class="fa-solid fa-chart-pie text-xs"></i>
               <span>الذكاء الإحصائي للسوق</span>
             </a>
-            <a href="strategy/index.html" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white shadow-lg shadow-indigo-500/25 transition flex items-center gap-1.5">
+            <a href="/portal/wdgroup/strategy" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white shadow-lg shadow-indigo-500/25 transition flex items-center gap-1.5">
               <span>فتح بوابة الاستراتيجية الرقمية</span> &larr;
             </a>
           </div>
@@ -384,7 +385,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-800">
           <!-- الخيار الأول: استراتيجية النمو التجاري والتسويق -->
-          <a href="strategy/index.html" class="p-4 rounded-xl bg-slate-800/80 hover:bg-indigo-600/20 border border-slate-700 hover:border-indigo-500/50 transition flex flex-col justify-between group/link">
+          <a href="/portal/wdgroup/strategy" class="p-4 rounded-xl bg-slate-800/80 hover:bg-indigo-600/20 border border-slate-700 hover:border-indigo-500/50 transition flex flex-col justify-between group/link">
             <div>
               <div class="flex items-center justify-between text-xs font-semibold text-indigo-400 mb-1.5">
                 <span>بوابة الاستراتيجية التنفيذية</span>
@@ -399,7 +400,7 @@
           </a>
 
           <!-- الخيار الثاني: الذكاء الإحصائي للسوق السعودي وبيانات القطاع الرسمية -->
-          <a href="market-insights/ar.html" class="p-4 rounded-xl bg-slate-800/80 hover:bg-sky-600/20 border border-slate-700 hover:border-sky-500/50 transition flex flex-col justify-between group/link">
+          <a href="/portal/wdgroup/market-insights/ar" class="p-4 rounded-xl bg-slate-800/80 hover:bg-sky-600/20 border border-slate-700 hover:border-sky-500/50 transition flex flex-col justify-between group/link">
             <div>
               <div class="flex items-center justify-between text-xs font-semibold text-sky-400 mb-1.5">
                 <span>التحليلات القطاعية الرسمية</span>
@@ -454,7 +455,7 @@
         `;
       } else {
         container.innerHTML = `
-          <a href="../../client_portal_login.html" class="px-2.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-amber-500/50 hover:text-white transition font-medium flex items-center gap-1.5 text-xs" title="تسجيل الدخول لبوابة العملاء">
+          <a href="/portal/login?redirect=/portal/wdgroup/ar" class="px-2.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-amber-500/50 hover:text-white transition font-medium flex items-center gap-1.5 text-xs" title="تسجيل الدخول لبوابة العملاء">
             <svg class="w-3.5 h-3.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
             </svg>
@@ -467,7 +468,7 @@
     function handlePortalLogout() {
       localStorage.removeItem('dubaiincairo_client_session');
       sessionStorage.clear();
-      window.location.href = '../../client_portal_login.html?logout=true&lang=ar';
+      window.location.href = '/portal/login?logout=true&lang=ar';
     }
 
     document.addEventListener('DOMContentLoaded', updateAuthNavbar);
@@ -475,6 +476,6 @@
       updateAuthNavbar();
     }
   </script>
-<script src="js/scroller-hint.js" defer></script>
+<script src="/portal/wdgroup/js/scroller-hint.js" defer></script>
 </body>
 </html>

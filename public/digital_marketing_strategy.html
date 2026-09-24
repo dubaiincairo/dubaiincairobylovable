@@ -104,7 +104,7 @@
                 
                 <!-- Enhanced Customer Name UI Composition (Upper Left - WD Group Only) -->
                 <div class="flex items-center gap-3">
-                    <a href="index.html#client-wd" class="flex items-center gap-3 group">
+                    <a href="/portal/wdgroup" class="flex items-center gap-3 group">
                         <div class="w-9 h-9 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-sky-500/50 flex items-center justify-center text-sky-400 font-extrabold text-xs tracking-wider shadow-md transition-all">
                             <span>WD</span>
                         </div>
@@ -118,25 +118,21 @@
                     </a>
                 </div>
 
-                <!-- Right Header Actions (Enhanced Custom Chapter Navigator, Language & Search) -->
+                <!-- Right Header Actions (Enhanced Custom Chapter Navigator & Search) -->
                 <div class="flex items-center gap-2 sm:gap-3">
-                    <!-- Arabic Switcher Button -->
-                    <a href="digital_marketing_strategy_ar.html" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 transition-all shadow-sm">
-                        <span>العربية (100% RTL)</span>
-                    </a>
-
-                    <!-- Market Intelligence Link -->
-                    <a href="saudi_market_intelligence.html" class="hidden sm:inline-flex px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-sky-500/40 text-slate-300 hover:text-sky-300 items-center gap-1.5 transition-all shadow-sm">
-                        <i class="fa-solid fa-chart-pie text-sky-400 text-xs"></i>
-                        <span>Market Intelligence</span>
-                    </a>
-
                     <!-- Live Search Input -->
-                    <div class="relative hidden lg:block w-52">
+                    <div class="relative hidden lg:block w-64">
                         <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                         <input type="text" id="liveSearchInput" placeholder="Search strategy, tables, metrics..." 
                             class="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl bg-slate-900/90 border border-slate-700 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 transition-all">
                     </div>
+
+                    <!-- Official Market Intelligence Link -->
+                    <a href="/portal/wdgroup/market-insights" 
+                        class="text-xs bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-sky-500/50 rounded-xl px-3 py-1.5 text-sky-400 hover:text-sky-300 flex items-center gap-1.5 shadow-sm transition-all">
+                        <i class="fa-solid fa-chart-pie text-[11px]"></i>
+                        <span class="font-medium hidden sm:inline">Market Intelligence</span>
+                    </a>
 
                     <!-- Custom Luxury Chapter Navigator Dropdown (Viewport Bounded & Inset Scrollbar) -->
                     <div class="relative" id="chapterDropdownContainer">
@@ -451,9 +447,9 @@
                     </button>
 
                     <!-- Back to Client Portal -->
-                    <a href="index.html" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 text-slate-200 hover:text-sky-300 flex items-center gap-1.5 transition-all" title="Back to Master Operations Portal">
+                    <a href="/portal/wdgroup" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 text-slate-200 hover:text-sky-300 flex items-center gap-1.5 transition-all" title="Back to WD Group Client Portal">
                         <i class="fa-solid fa-house text-[11px]"></i>
-                        <span class="hidden sm:inline">Operations Portal</span>
+                        <span class="hidden sm:inline">Client Portal</span>
                     </a>
                 </div>
             </div>
@@ -2789,7 +2785,7 @@
             <div class="flex items-center gap-4 text-xs text-slate-400">
                 <a href="06_Digital_Marketing_Growth_Strategy_Manual.md" class="hover:text-sky-400 underline font-medium">Full Markdown Manual</a>
                 <span>&bull;</span>
-                <a href="index.html" class="hover:text-sky-400 underline font-medium">Master Operations Portal</a>
+                <a href="/portal/wdgroup" class="hover:text-sky-400 underline font-medium">WD Group Client Portal</a>
             </div>
         </div>
     </footer>
