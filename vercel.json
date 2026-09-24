@@ -220,6 +220,14 @@
       "destination": "/portal/wdgroup/wdgroupwebsite/sops-ar.html"
     },
     {
+      "source": "/portal/wdgroup/wdgroupwebsite/whatsapp-meta-en",
+      "destination": "/portal/wdgroup/wdgroupwebsite/whatsapp-meta-en.html"
+    },
+    {
+      "source": "/portal/wdgroup/wdgroupwebsite/whatsapp-meta-ar",
+      "destination": "/portal/wdgroup/wdgroupwebsite/whatsapp-meta-ar.html"
+    },
+    {
       "source": "/portal/wdgroup/internalcommunication/features-en",
       "destination": "/portal/wdgroup/internalcommunication/features-en.html"
     },

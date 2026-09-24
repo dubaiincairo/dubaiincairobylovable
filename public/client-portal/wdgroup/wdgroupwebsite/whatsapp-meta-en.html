@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta WhatsApp Business Platform: Architectural Manual &amp; ID Mapping Guide | WD Group</title>
+  <meta name="description" content="Meta WhatsApp Business Platform Architectural Manual, ID Mapping, System Tokens, and Live Approved Templates for WD Group and SwissBlue Group.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+
+  <!-- Tailwind CSS -->
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #070B14;
+      background-image: 
+        radial-gradient(rgba(56, 189, 248, 0.15) 1px, transparent 1px),
+        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px, 72px 72px, 72px 72px;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.7); }
+
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(59, 130, 246, 0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-nav {
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    @media print {
+      body { background: #ffffff !important; color: #0f172a !important; }
+      .no-print, header, .glass-nav { display: none !important; }
+      .glass-card { background: #ffffff !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; }
+      .text-white { color: #0f172a !important; }
+      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+    }
+  </style>
+</head>
+<body class="selection:bg-blue-600 selection:text-white pb-20 relative">
+
+  <!-- Ambient Glow Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-10 -left-40 w-[550px] h-[550px] bg-emerald-600/10 rounded-full blur-[130px]"></div>
+    <div class="ambient-orb-2 absolute top-1/2 -right-40 w-[650px] h-[650px] bg-blue-600/10 rounded-full blur-[150px]"></div>
+  </div>
+
+  <!-- STICKY TOP EXECUTIVE HEADER -->
+  <header id="mainHeader" class="sticky top-0 z-50 w-full transition-all duration-300 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+      
+      <!-- Left: WD Group Brand -->
+      <div class="flex items-center gap-3 min-w-0">
+        <a href="/portal/wdgroup/wdgroupwebsite" class="flex items-center gap-3 group">
+          <div class="h-11 px-3 py-1 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-sky-500/50 flex items-center justify-center shadow-md transition-all">
+            <img src="/portal/wdgroup/assets/wd-logo-sky.png" alt="WD Group" class="h-7 sm:h-8 w-auto object-contain">
+          </div>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-white tracking-wide text-xs sm:text-sm group-hover:text-white transition-colors">WD Group</span>
+              <span class="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-slate-800/90 text-slate-400 border border-slate-700/80">Confidential</span>
+            </div>
+            <span class="text-[11px] text-slate-400 font-medium tracking-tight truncate">WhatsApp Business Platform Architecture <span class="text-slate-600">•</span> Operations Manual</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Right Navigation Actions -->
+      <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        <!-- Direct Sibling Toggle to Arabic Version -->
+        <a href="/portal/wdgroup/wdgroupwebsite/whatsapp-meta-ar" class="px-3 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-xs font-bold text-emerald-300 border border-emerald-500/30 transition font-['IBM_Plex_Sans_Arabic']" title="عرض النسخة العربية المعتمدة">
+          العربية (100% RTL)
+        </a>
+        <a href="/portal/wdgroup/wdgroupwebsite" class="hidden sm:inline-flex px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition">
+          ← WD Group Website
+        </a>
+        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="Print Manual">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN VIEWPORT -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 space-y-10 relative z-10">
+
+    <!-- HERO SECTION -->
+    <section class="glass-card rounded-3xl p-6 sm:p-10 border-t-4 border-t-emerald-500 relative overflow-hidden">
+      <div class="relative z-10 space-y-4 max-w-4xl">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Production Reference · Version 1.0.0
+          </span>
+          <span class="px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 text-xs font-mono">
+            Target: WD Group · SwissBlue Hotels · GreenWood · Watan Designs
+          </span>
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          Meta WhatsApp Business Platform
+          <span class="block text-xl sm:text-2xl lg:text-3xl bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent font-bold mt-1">
+            Architectural Manual &amp; ID Mapping Guide
+          </span>
+        </h1>
+
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">
+          Comprehensive enterprise technical reference documenting Meta's 6-layer WhatsApp hierarchy, live production credentials for SwissBlue and GreenWood, HTTP API payload construction, and live approved template catalogs.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-2 pt-2 text-xs font-mono text-slate-400">
+          <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800">https://wdgroup.online</span>
+          <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800">https://test.wdgroup.online</span>
+          <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-emerald-400">Meta Graph API v20.0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: THE CORE MENTAL MODEL -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center font-bold text-sm">01</div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">The Core Mental Model: The Meta WhatsApp Hierarchy</h2>
+      </div>
+      <p class="text-sm text-slate-400 max-w-3xl">
+        Meta enforces <strong>six distinct layers of identity</strong> across its business graph. None of them can be used interchangeably in API requests.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+        <div class="glass-card rounded-2xl p-5 border-l-4 border-l-blue-500">
+          <div class="text-xs font-mono uppercase text-blue-400 font-bold mb-1">Layer 1: Corporate Entity</div>
+          <h3 class="text-base font-bold text-white">Business Portfolio (BM)</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            The root enterprise account that legally owns all assets, payment methods, employee roles, and apps. Example: <em>Abdallah El Fouly Foundation</em> or <em>شركة تصاميم الوطن</em>.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-l-4 border-l-indigo-500">
+          <div class="text-xs font-mono uppercase text-indigo-400 font-bold mb-1">Layer 2: API Gateway</div>
+          <h3 class="text-base font-bold text-white">System User &amp; Meta App</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            Non-human bot user created in Business Settings. Generates permanent system tokens (<code class="text-indigo-300 text-[11px]">EAFZCklo...</code>) that never expire when staff change credentials.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-l-4 border-l-purple-500">
+          <div class="text-xs font-mono uppercase text-purple-400 font-bold mb-1">Layer 3: Account Container</div>
+          <h3 class="text-base font-bold text-white">WhatsApp Business Account (WABA)</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            Houses message templates, compliance checks, and phone assets. Example: <em>SwissBlue LLC</em> (<code class="text-purple-300 text-[11px]">881895264727770</code>).
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-l-4 border-l-emerald-500">
+          <div class="text-xs font-mono uppercase text-emerald-400 font-bold mb-1">Layer 4: API Target (Crucial)</div>
+          <h3 class="text-base font-bold text-white">Phone Number ID</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            Numeric internal Meta object ID (<code class="text-emerald-300 text-[11px]">978544632005886</code>). <strong>NOT the phone number itself</strong>. All HTTP POST calls must be sent directly to this ID's endpoint.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-l-4 border-l-teal-500">
+          <div class="text-xs font-mono uppercase text-teal-400 font-bold mb-1">Layer 5: End-User Identity</div>
+          <h3 class="text-base font-bold text-white">Verified Display Phone</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            The human-readable E.164 phone number (e.g. <code class="text-teal-300 text-[11px]">+966 50 707 4949</code>) shown on the recipient's mobile screen with the verified green badge.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-l-4 border-l-amber-500">
+          <div class="text-xs font-mono uppercase text-amber-400 font-bold mb-1">Layer 6: Message Formats</div>
+          <h3 class="text-base font-bold text-white">Approved Message Templates</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            Pre-registered, Meta-approved message structures (Utility / Marketing) with dynamic parameters (<code class="text-amber-300 text-[11px]">{{1}}</code>, <code class="text-amber-300 text-[11px]">{{2}}</code>) preventing spam penalties.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: DEFINITIVE GLOSSARY -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center font-bold text-sm">02</div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Definitive Glossary of Meta WhatsApp Identifiers</h2>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-slate-800">
+        <table class="w-full text-left text-xs sm:text-sm">
+          <thead class="bg-slate-900/90 text-slate-300 uppercase tracking-wider font-mono text-[11px] border-b border-slate-800">
+            <tr>
+              <th class="p-3.5 sm:p-4">Identifier Term</th>
+              <th class="p-3.5 sm:p-4">What Is It?</th>
+              <th class="p-3.5 sm:p-4">Why Meta Requires It?</th>
+              <th class="p-3.5 sm:p-4">Where Found in Meta Suite?</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/80 bg-slate-900/40 text-slate-300">
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono">Business ID (Portfolio)</td>
+              <td class="p-3.5 sm:p-4">The root corporate entity (<code class="text-sky-300 font-mono text-xs">410777319368963</code>).</td>
+              <td class="p-3.5 sm:p-4">Groups all assets, ad accounts, and WhatsApp accounts.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">Business Settings URL (<code class="text-slate-300">?business_id=...</code>) or Business Info.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono">Meta App ID</td>
+              <td class="p-3.5 sm:p-4">The software application in Meta for Developers (<code class="text-sky-300 font-mono text-xs">2707406719606944</code>).</td>
+              <td class="p-3.5 sm:p-4">Identifies the software API client making Graph calls; enforces rate limits.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">Meta Developers Console top banner.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono">Meta App Secret</td>
+              <td class="p-3.5 sm:p-4">Private 32-character hexadecimal key.</td>
+              <td class="p-3.5 sm:p-4">Used for server-to-server HMAC signature verification and webhook payload integrity.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">App Settings ➔ Basic ➔ App Secret.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono">System User</td>
+              <td class="p-3.5 sm:p-4">Non-human service account (e.g. <code class="text-emerald-300 font-mono text-xs">whatsappapiswissblue</code>).</td>
+              <td class="p-3.5 sm:p-4">Owns API tokens that never expire when employee passwords change.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">Business Settings ➔ Users ➔ System users.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono">Access Token (Bearer)</td>
+              <td class="p-3.5 sm:p-4">Permanent authorization string (<code class="text-amber-300 font-mono text-xs">EAFZCklo...</code>).</td>
+              <td class="p-3.5 sm:p-4">Passed in HTTP header (<code class="text-slate-300">Authorization: Bearer &lt;TOKEN&gt;</code>) to authenticate calls.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">Generated directly from System User page.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono">WABA ID</td>
+              <td class="p-3.5 sm:p-4">WhatsApp Business Account container (<code class="text-purple-300 font-mono text-xs">881895264727770</code>).</td>
+              <td class="p-3.5 sm:p-4">Houses templates, billing, payment methods, and compliance policies.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">Business Settings ➔ Accounts ➔ WhatsApp accounts.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition bg-emerald-950/20">
+              <td class="p-3.5 sm:p-4 font-bold text-emerald-300 font-mono">Phone Number ID (Target)</td>
+              <td class="p-3.5 sm:p-4 font-semibold text-white">Numeric internal Meta object ID (<code class="text-emerald-300 font-mono text-xs">978544632005886</code>). NOT the phone number.</td>
+              <td class="p-3.5 sm:p-4 text-emerald-200"><strong>The target API endpoint</strong>. All POST calls must target: <code class="text-xs">/v20.0/{PHONE_NUMBER_ID}/messages</code>.</td>
+              <td class="p-3.5 sm:p-4 text-slate-300">WhatsApp Accounts ➔ WhatsApp Manager ➔ Phone Numbers tab.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono">Display Phone Number</td>
+              <td class="p-3.5 sm:p-4">E.164 phone string (<code class="text-teal-300 font-mono text-xs">+966 50 707 4949</code>).</td>
+              <td class="p-3.5 sm:p-4">Shown to the customer in their WhatsApp mobile app with verified badge.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">Verified physical SIM or virtual number.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Warning Callout -->
+      <div class="rounded-2xl p-4 bg-amber-500/10 border border-amber-500/30 flex items-start gap-3">
+        <svg class="w-5 h-5 text-amber-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <div class="text-xs sm:text-sm text-amber-200 leading-relaxed">
+          <strong class="text-amber-100">Most Critical Technical Mistake:</strong> Developers often confuse the <strong>WABA ID</strong> with the <strong>Phone Number ID</strong>. If you send an API call to <code class="bg-amber-950/60 px-1 py-0.5 rounded font-mono text-xs text-amber-300">https://graph.facebook.com/v20.0/{WABA_ID}/messages</code>, Meta will reject it with HTTP 400 <em>"Unsupported post request"</em>. You must ALWAYS send messages directly to <code class="bg-amber-950/60 px-1 py-0.5 rounded font-mono text-xs text-amber-300">https://graph.facebook.com/v20.0/{PHONE_NUMBER_ID}/messages</code>.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: SIDE-BY-SIDE LIVE SETUP MAPPING -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center font-bold text-sm">03</div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Complete Side-by-Side Mapping of Your Two Live Setups</h2>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-slate-800 shadow-xl">
+        <table class="w-full text-left text-xs sm:text-sm">
+          <thead class="bg-slate-900 text-slate-300 uppercase tracking-wider font-mono text-[11px] border-b border-slate-800">
+            <tr>
+              <th class="p-3.5 sm:p-4 w-1/4">Identifier / Attribute</th>
+              <th class="p-3.5 sm:p-4 w-3/8 text-sky-400">Setup A: SwissBlue Group (Live Production)</th>
+              <th class="p-3.5 sm:p-4 w-3/8 text-emerald-400">Setup B: GreenWood / Watan Designs (Factory &amp; Living)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/80 bg-slate-900/50 text-slate-300">
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">Primary Brand Focus</td>
+              <td class="p-3.5 sm:p-4 font-semibold text-sky-200">SwissBlue Hotels &amp; Serviced Apartments</td>
+              <td class="p-3.5 sm:p-4 font-semibold text-emerald-200">GreenWood Furniture Factory &amp; Watan Contracting</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">Owning Meta Portfolio</td>
+              <td class="p-3.5 sm:p-4 font-mono text-xs">Abdallah El Fouly Foundation (<code class="text-sky-300">410777319368963</code>)</td>
+              <td class="p-3.5 sm:p-4 font-mono text-xs">شركة تصاميم الوطن المحدودة مختلطة (<code class="text-emerald-300">2735873883423694</code>)</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">Meta App Name &amp; ID</td>
+              <td class="p-3.5 sm:p-4 font-mono text-xs">SwissBlue Website</td>
+              <td class="p-3.5 sm:p-4 font-mono text-xs">Odoo Integration (<code class="text-emerald-300">2707406719606944</code>)</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">System User Name</td>
+              <td class="p-3.5 sm:p-4 font-mono text-xs">whatsappapiswissblue (<code class="text-slate-400 text-[11px]">122126139159342745</code>)</td>
+              <td class="p-3.5 sm:p-4 font-mono text-xs">odoointegrationwhatsApp (<code class="text-slate-400 text-[11px]">122118261765438033</code>)</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">WhatsApp Account (WABA)</td>
+              <td class="p-3.5 sm:p-4 font-bold text-white">SwissBlue LLC</td>
+              <td class="p-3.5 sm:p-4 font-bold text-white">Test WhatsApp Business Account</td>
+            </tr>
+            <tr class="bg-slate-800/30">
+              <td class="p-3.5 sm:p-4 font-bold text-white">WABA ID</td>
+              <td class="p-3.5 sm:p-4 font-mono font-bold text-sky-300 text-xs">881895264727770</td>
+              <td class="p-3.5 sm:p-4 font-mono font-bold text-emerald-300 text-xs">2072896399925199</td>
+            </tr>
+            <tr class="bg-emerald-950/20">
+              <td class="p-3.5 sm:p-4 font-bold text-emerald-300">Phone Number ID (Target)</td>
+              <td class="p-3.5 sm:p-4 font-mono font-black text-sky-400 text-sm">978544632005886</td>
+              <td class="p-3.5 sm:p-4 font-mono font-black text-emerald-400 text-sm">1147702245092804</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">Verified Display Phone</td>
+              <td class="p-3.5 sm:p-4 font-mono font-bold text-white">+966 50 707 4949 <span class="text-emerald-400 text-xs">(Official Saudi Line)</span></td>
+              <td class="p-3.5 sm:p-4 font-mono text-slate-300">+1 555-656-8316 <span class="text-slate-500">(Test)</span> / Dispatch: +966505725070</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">Quality Tier</td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold">GREEN (Cloud API Standard Tier)</span></td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 text-xs font-semibold">Sandbox Tier</span></td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">Current Access Token</td>
+              <td class="p-3.5 sm:p-4 font-mono text-[11px] text-sky-300">EAFZCkloPu7OoBSvgNVg... <span class="text-emerald-400">✓ Verified Active</span></td>
+              <td class="p-3.5 sm:p-4 font-mono text-[11px] text-emerald-300">EAAmeXzZCI4KABSrAf5l... <span class="text-emerald-400">✓ Verified Active</span></td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">Core Approved Use Cases</td>
+              <td class="p-3.5 sm:p-4 text-xs leading-relaxed text-slate-300">
+                • Hotel Room Booking Confirmation<br>
+                • PDF Booking Voucher Dispatch<br>
+                • T-2 Days &amp; Same-Day Self Check-In<br>
+                • Check-in Confirmation Navigator
+              </td>
+              <td class="p-3.5 sm:p-4 text-xs leading-relaxed text-slate-300">
+                • Factory Price Quotation Dispatch<br>
+                • Retail &amp; B2B Order Confirmation (<code class="text-xs">sale</code>)<br>
+                • ZATCA Tax Invoice Notifications<br>
+                • Payment Receipt Vouchers
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 4: HOW API REQUEST PAYLOAD USES THESE IDS -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 border border-teal-500/30 flex items-center justify-center font-bold text-sm">04</div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">How the API Request Payload Uses These IDs</h2>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 space-y-4">
+        <p class="text-sm text-slate-300 leading-relaxed">
+          When the platform sends an automated notification, the identifiers assemble into an authenticated Graph API HTTP request:
+        </p>
+
+        <div class="rounded-xl bg-slate-950 p-4 border border-slate-800 font-mono text-xs overflow-x-auto text-slate-200">
+          <div class="text-emerald-400 font-bold mb-1">POST https://graph.facebook.com/v20.0/<span class="text-amber-300">978544632005886</span>/messages</div>
+          <div class="text-sky-400 mb-3">Authorization: Bearer <span class="text-indigo-300">EAFZCkloPu7OoBSvgNVgXsWjcf...</span><br>Content-Type: application/json</div>
+<pre class="text-slate-300">{
+  <span class="text-blue-400">"messaging_product"</span>: <span class="text-amber-300">"whatsapp"</span>,
+  <span class="text-blue-400">"recipient_type"</span>: <span class="text-amber-300">"individual"</span>,
+  <span class="text-blue-400">"to"</span>: <span class="text-emerald-300">"966505725070"</span>,
+  <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"template"</span>,
+  <span class="text-blue-400">"template"</span>: {
+    <span class="text-blue-400">"name"</span>: <span class="text-amber-300">"guest_service_confirmation_experiment_4"</span>,
+    <span class="text-blue-400">"language"</span>: { <span class="text-blue-400">"code"</span>: <span class="text-amber-300">"en"</span> },
+    <span class="text-blue-400">"components"</span>: [
+      {
+        <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"body"</span>,
+        <span class="text-blue-400">"parameters"</span>: [
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"Abdallah El Fouly"</span> },
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"SB-RES-2026-99"</span> },
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"Royal Suite"</span> },
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"28 Sep 2026"</span> },
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"03 Oct 2026"</span> },
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"02:00 PM"</span> },
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"SwissBlue Hotel Riyadh"</span> }
+        ]
+      }
+    ]
+  }
+}</pre>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300 pt-2">
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <strong class="text-amber-300 font-mono">1. Phone Number ID:</strong> Target endpoint routing message dispatch directly through <code class="text-white">+966 50 707 4949</code>.
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <strong class="text-indigo-300 font-mono">2. Bearer Token:</strong> Permanent System User authorization key granting send rights.
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <strong class="text-emerald-300 font-mono">3. "to" Recipient:</strong> Destination client handset in E.164 without plus or spaces (<code class="text-white">966505725070</code>).
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <strong class="text-teal-300 font-mono">4. "name":</strong> Exact approved template name registered under WABA <code class="text-white">881895264727770</code>.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: LIVE APPROVED TEMPLATE CATALOG -->
+    <section class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center font-bold text-sm">05</div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Live Approved Template Catalog</h2>
+      </div>
+
+      <!-- Subsection A: SwissBlue -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-bold text-sky-300">A. SwissBlue Hospitality Templates (WABA: 881895264727770)</h3>
+          <span class="px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/30 text-xs font-mono">5 Templates Approved</span>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-slate-800">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-900 text-slate-300 uppercase tracking-wider font-mono text-[11px] border-b border-slate-800">
+              <tr>
+                <th class="p-3">Template Name</th>
+                <th class="p-3">Category</th>
+                <th class="p-3">Status</th>
+                <th class="p-3">Expected Variables</th>
+                <th class="p-3">Sample Message Body</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/80 bg-slate-900/40 text-slate-300">
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white">guest_service_confirmation_experiment_4</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400">{{1}}: Name, {{2}}: ID, {{3}}: Room, {{4}}: In, {{5}}: Out, {{6}}: Time, {{7}}: Hotel</td>
+                <td class="p-3 text-slate-300">Hi {{1}}, Your booking on {{7}} is confirmed. Booking ID: {{2}}, Room type: {{3}}... Tap below to start online check-in.</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white">guest_service_confirmation_voucher_experiment_4</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400">Same as above + PDF Document attachment in Header.</td>
+                <td class="p-3 text-slate-300">Same as above, but automatically delivers the generated booking confirmation PDF file.</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white">utility_guest_arrival_reminder_2days</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400">{{1}}: Guest Name, {{2}}: Hotel Name, {{3}}: Arrival Date</td>
+                <td class="p-3 text-slate-300">Hi {{1}} 👋, We’re getting everything ready for your stay at {{2}} starting {{3}} 🛎️. You can self check-in in advance!</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white">utility_guest_arrival_reminder_sameday</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400">{{1}}: Guest Name, {{2}}: Hotel Name, {{3}}: Check-in Time</td>
+                <td class="p-3 text-slate-300">Good day, {{1}} 🌞 Excited to welcome you to {{2}} today! Check-in starts at {{3}}.</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white">check_in_success_navigator</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400">{{1}}: Hotel Name</td>
+                <td class="p-3 text-slate-300">Thanks for completing your self check-in at {{1}}! 🛎️ If you need anything, just reply to this message.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Subsection B: GreenWood -->
+      <div class="space-y-3 pt-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-bold text-emerald-300">B. GreenWood Manufacturing &amp; Order Templates (WABA: 2072896399925199)</h3>
+          <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-mono">4 Templates Approved</span>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-slate-800">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-900 text-slate-300 uppercase tracking-wider font-mono text-[11px] border-b border-slate-800">
+              <tr>
+                <th class="p-3">Template Name</th>
+                <th class="p-3">Category</th>
+                <th class="p-3">Status</th>
+                <th class="p-3">Expected Variables</th>
+                <th class="p-3">Sample Message Body</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/80 bg-slate-900/40 text-slate-300">
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white">send_quotation</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono">MARKETING</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400">{{1}}: Client, {{2}}: Quotation No, {{3}}: Amount, {{4}}: Valid Date</td>
+                <td class="p-3 text-slate-300">Hello {{1}}, Your quotation {{2}} has been prepared by GreenWood Factory. Total: SAR {{3}}, Valid until: {{4}}.</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white">sale</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400">{{1}}: Name, {{2}}: Order Ref, {{3}}: Brand, {{4}}: Curr, {{5}}: Price, {{6}}: URL</td>
+                <td class="p-3 text-slate-300">Hello {{1}}, Congratulations! Your order {{2}} from {{3}} has been confirmed for a total of {{4}}{{5}}. Track: {{6}}.</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white">invoice</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400">{{1}}: Name, {{2}}: Inv Ref, {{3}}: Company, {{4}}: Curr, {{5}}: Amount, {{6}}: Link</td>
+                <td class="p-3 text-slate-300">Dear {{1}}, Here is your invoice {{2}} from {{3}} for a total of {{4}}{{5}}.</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white">payment_receipt</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400">{{1}}: Name, {{2}}: Receipt No, {{3}}: Entity, {{4}}: Curr, {{5}}: Amount</td>
+                <td class="p-3 text-slate-300">Dear {{1}}, Here is your payment receipt {{2}} from {{3}} amounting to {{4}}{{5}}.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: HOW TO MANAGE IN ADMIN CONSOLE -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold text-sm">06</div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">How to Manage &amp; Switch in the Admin Console</h2>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+          <div>
+            <div class="text-xs uppercase font-mono text-slate-400 font-semibold">Administrative Access URL</div>
+            <div class="text-lg font-bold text-white font-mono mt-0.5">https://test.wdgroup.online/admin/system/whatsapp</div>
+          </div>
+          <a href="https://test.wdgroup.online/admin/system/whatsapp" target="_blank" class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs transition flex items-center gap-1.5 shadow-lg shadow-sky-500/20 shrink-0">
+            <span>Open Admin Gateway Console</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+
+        <div class="space-y-4">
+          <h3 class="text-base font-bold text-white">One-Click Preset Switching:</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+              <div class="flex items-center gap-2 text-sky-400 font-bold text-xs">
+                <span>★ Preset 1: SwissBlue Group</span>
+                <span class="font-mono text-[10px] bg-sky-950 px-1.5 py-0.5 rounded text-sky-300">+966 50 707 4949</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Clicking this button automatically loads WABA ID <code class="text-sky-300 font-mono">881895264727770</code>, Phone ID <code class="text-sky-300 font-mono">978544632005886</code>, and the SwissBlue permanent token into the gateway.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+              <div class="flex items-center gap-2 text-emerald-400 font-bold text-xs">
+                <span>★ Preset 2: GreenWood / Watan Designs</span>
+                <span class="font-mono text-[10px] bg-emerald-950 px-1.5 py-0.5 rounded text-emerald-300">+966 50 572 5070</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Clicking this button automatically loads WABA ID <code class="text-emerald-300 font-mono">2072896399925199</code>, Phone ID <code class="text-emerald-300 font-mono">1147702245092804</code>, and the Odoo integration token.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 text-xs text-slate-300 leading-relaxed">
+            <strong class="text-white">Save Gateway Configuration:</strong> Click the blue save button to immediately persist the chosen gateway directly to the database. Any subsequent website order, checkout notice, or customer inquiry will instantly dispatch through that active channel.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-center text-xs text-slate-500 border-t border-slate-800/80 pt-8 space-y-1">
+      <p>WD Group · WhatsApp Business Platform Architectural Reference · Powered by Dubai in Cairo</p>
+      <p class="font-mono text-[11px] text-slate-600">Confidential Client Deliverable · Production Reference 1.0.0</p>
+    </footer>
+
+  </main>
+
+</body>
+</html>

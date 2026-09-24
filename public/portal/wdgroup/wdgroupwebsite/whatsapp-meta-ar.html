@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دليل هندسة منصة واتساب للأعمال من ميتا ودليل مطابقة المعرفات | مجموعة دبليو دي للأعمال</title>
+  <meta name="description" content="الدليل الهندسي المعماري لمنصة واتساب للأعمال من ميتا، ومطابقة المعرفات، ومفاتيح النظام الدائمة، وكتالوج القوالب المعتمدة لمجموعة دبليو دي ومجموعة سويس بلو.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+
+  <!-- Tailwind CSS -->
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #070B14;
+      background-image: 
+        radial-gradient(rgba(56, 189, 248, 0.15) 1px, transparent 1px),
+        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px, 72px 72px, 72px 72px;
+      color: #f1f5f9;
+      font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+      direction: rtl;
+      text-align: right;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.7); }
+
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(16, 185, 129, 0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-nav {
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    @media print {
+      body { background: #ffffff !important; color: #0f172a !important; }
+      .no-print, header, .glass-nav { display: none !important; }
+      .glass-card { background: #ffffff !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; }
+      .text-white { color: #0f172a !important; }
+      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+    }
+  </style>
+</head>
+<body class="selection:bg-emerald-600 selection:text-white pb-20 relative">
+
+  <!-- هالات الإضاءة المحيطية -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-10 -right-40 w-[550px] h-[550px] bg-emerald-600/10 rounded-full blur-[130px]"></div>
+    <div class="ambient-orb-2 absolute top-1/2 -left-40 w-[650px] h-[650px] bg-blue-600/10 rounded-full blur-[150px]"></div>
+  </div>
+
+  <!-- شريط الترويسة العلوي المعتمد لمجموعة دبليو دي -->
+  <header id="mainHeader" class="sticky top-0 z-50 w-full transition-all duration-300 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+      
+      <!-- اليمين: هوية مجموعة دبليو دي مع الشعار -->
+      <div class="flex items-center gap-3 min-w-0">
+        <a href="/portal/wdgroup/wdgroupwebsite/ar" class="flex items-center gap-3 group">
+          <div class="h-11 px-3 py-1 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-sky-500/50 flex items-center justify-center shadow-md transition-all">
+            <img src="/portal/wdgroup/assets/wd-logo-sky.png" alt="مجموعة دبليو دي للأعمال" class="h-7 sm:h-8 w-auto object-contain">
+          </div>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-white tracking-wide text-xs sm:text-sm group-hover:text-white transition-colors">مجموعة دبليو دي للأعمال</span>
+              <span class="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-slate-800/90 text-slate-400 border border-slate-700/80">سري ومحمي</span>
+            </div>
+            <span class="text-[11px] text-slate-400 font-medium tracking-tight truncate">دليل هندسة منصة واتساب للأعمال <span class="text-slate-600">•</span> بوابة العمليات</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- اليسار: أزرار التنقل واللغة -->
+      <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        <!-- التبديل المباشر إلى النسخة الإنجليزية -->
+        <a href="/portal/wdgroup/wdgroupwebsite/whatsapp-meta-en" class="px-3 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-xs font-bold text-blue-300 border border-blue-500/30 transition font-mono" dir="ltr" title="Switch to English Version">
+          English (100% LTR)
+        </a>
+        <a href="/portal/wdgroup/wdgroupwebsite/ar" class="hidden sm:inline-flex px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition">
+          → موقع مجموعة دبليو دي
+        </a>
+        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="طباعة الدليل">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- جسم الصفحة الرئيسي -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 space-y-10 relative z-10">
+
+    <!-- قسم البانر التعريفي -->
+    <section class="glass-card rounded-3xl p-6 sm:p-10 border-t-4 border-t-emerald-500 relative overflow-hidden">
+      <div class="relative z-10 space-y-4 max-w-4xl">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            مرجع إنتاجي معتمد · الإصدار 1.0.0
+          </span>
+          <span class="px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 text-xs font-mono" dir="ltr">
+            Entities: WD Group · SwissBlue Hotels · GreenWood · Watan Designs
+          </span>
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          منصة واتساب للأعمال من ميتا (Meta WhatsApp)
+          <span class="block text-xl sm:text-2xl lg:text-3xl bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent font-bold mt-1">
+            دليل البنية الهندسية وخريطة المعرفات التشغيلية
+          </span>
+        </h1>
+
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">
+          مرجع تقني وتشغيلي يوثق بدقة الطبقات الست الهرمية لمنظومة واتساب من ميتا، والبيانات المباشرة المعتمدة لمجموعتي سويس بلو وجرين وود، مع مواصفات حمولة طلبات الربط البرمجي (Graph API)، ودليل القوالب المعتمدة.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-2 pt-2 text-xs font-mono text-slate-400" dir="ltr">
+          <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800">https://wdgroup.online</span>
+          <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800">https://test.wdgroup.online</span>
+          <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-emerald-400">Meta Graph API v20.0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- الركيزة الأولى: النموذج الذهني الهرمي -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center font-bold text-sm">01</div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">النموذج الذهني: التسلسل الهرمي لمنظومة واتساب ميتا</h2>
+      </div>
+      <p class="text-sm text-slate-400 max-w-3xl">
+        تفرض شركة ميتا <strong>ست طبقات مميزة من الهوية التشغيلية</strong>. ولا يمكن استبدال أي طبقة بالأخرى في طلبات الربط البرمجي (API).
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+        <div class="glass-card rounded-2xl p-5 border-r-4 border-r-blue-500">
+          <div class="text-xs font-mono uppercase text-blue-400 font-bold mb-1">الطبقة 1: الكيان المؤسسي</div>
+          <h3 class="text-base font-bold text-white">محفظة الأعمال (Business Portfolio)</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            الكيان المؤسسي المالك قانونياً لجميع الأصول والصفحات والتطبيقات والحسابات الإعلانية وحسابات واتساب والموظفين. مثال: <em>مؤسسة عبد الله الفولي</em> أو <em>شركة تصاميم الوطن</em>.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-r-4 border-r-indigo-500">
+          <div class="text-xs font-mono uppercase text-indigo-400 font-bold mb-1">الطبقة 2: بوابة الربط البرمجي</div>
+          <h3 class="text-base font-bold text-white">مستخدم النظام والتطبيق (System User)</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            مستخدم برمجي داخل إعدادات الأعمال يمتلك مفاتيح وصول دائمة (<code class="text-indigo-300 text-[11px]" dir="ltr">EAFZCklo...</code>) لا تنتهي صلاحيتها عند تغيير كلمات مرور الموظفين.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-r-4 border-r-purple-500">
+          <div class="text-xs font-mono uppercase text-purple-400 font-bold mb-1">الطبقة 3: وعاء حساب واتساب</div>
+          <h3 class="text-base font-bold text-white">حساب واتساب للأعمال (WABA)</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            الوعاء الذي يضم القوالب، وطرق الدفع والفوترة، وسياسات الامتثال، وخطوط الاتصال. مثال: <em>SwissBlue LLC</em> (<code class="text-purple-300 text-[11px]" dir="ltr">881895264727770</code>).
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-r-4 border-r-emerald-500">
+          <div class="text-xs font-mono uppercase text-emerald-400 font-bold mb-1">الطبقة 4: نقطة الاستهداف البرمجي</div>
+          <h3 class="text-base font-bold text-white">معرّف رقم الهاتف (Phone Number ID)</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            معرف كائن رقمي داخلي في ميتا (<code class="text-emerald-300 text-[11px]" dir="ltr">978544632005886</code>). <strong>وليس رقم الهاتف نفسه</strong>. جميع طلبات الإرسال يجب أن توجه برمجياً لهذا المعرف حصراً.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-r-4 border-r-teal-500">
+          <div class="text-xs font-mono uppercase text-teal-400 font-bold mb-1">الطبقة 5: هوية العميل الظاهرة</div>
+          <h3 class="text-base font-bold text-white">رقم الهاتف الظاهر الموثق</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            رقم الهاتف بصيغة E.164 الدولية (مثال: <code class="text-teal-300 text-[11px]" dir="ltr">+966 50 707 4949</code>) الذي يظهر للمستلم في تطبيق واتساب مع شارة التوثيق الخضراء.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border-r-4 border-r-amber-500">
+          <div class="text-xs font-mono uppercase text-amber-400 font-bold mb-1">الطبقة 6: صياغة الرسائل</div>
+          <h3 class="text-base font-bold text-white">قوالب الرسائل المعتمدة</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            قوالب مسجلة ومعتمدة مسبقاً من ميتا (خدمية Utility أو تسويقية Marketing) بمتغيرات ديناميكية (<code class="text-amber-300 text-[11px]" dir="ltr">{{1}}</code>, <code class="text-amber-300 text-[11px]" dir="ltr">{{2}}</code>) تحمي من حظر الحسابات.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- الركيزة الثانية: القاموس الشامل للمعرفات -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center font-bold text-sm">02</div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">القاموس الشامل لمعرفات واتساب ميتا</h2>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-slate-800">
+        <table class="w-full text-right text-xs sm:text-sm">
+          <thead class="bg-slate-900/90 text-slate-300 uppercase tracking-wider font-mono text-[11px] border-b border-slate-800">
+            <tr>
+              <th class="p-3.5 sm:p-4">المصطلح والمعرّف</th>
+              <th class="p-3.5 sm:p-4">ما هو؟</th>
+              <th class="p-3.5 sm:p-4">لماذا تطلبه ميتا؟</th>
+              <th class="p-3.5 sm:p-4">أين تجده في منصة ميتا؟</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/80 bg-slate-900/40 text-slate-300">
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono" dir="ltr">Business ID (Portfolio ID)</td>
+              <td class="p-3.5 sm:p-4">الكيان المؤسسي الجذري (<code class="text-sky-300 font-mono text-xs" dir="ltr">410777319368963</code>).</td>
+              <td class="p-3.5 sm:p-4">تجميع كافة الأصول الإعلانية وحسابات واتساب والموظفين.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">في رابط إعدادات الأعمال (<code class="text-slate-300" dir="ltr">?business_id=...</code>) أو معلومات العمل.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono" dir="ltr">Meta App ID</td>
+              <td class="p-3.5 sm:p-4">تطبيق البرمجيات المسجل في Meta Developers (<code class="text-sky-300 font-mono text-xs" dir="ltr">2707406719606944</code>).</td>
+              <td class="p-3.5 sm:p-4">تحديد عميل API البرمجي وتطبيق حدود الاستهلاك وضبط Webhooks.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">في الشريط العلوي لـ Meta Developers Console.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono" dir="ltr">Meta App Secret</td>
+              <td class="p-3.5 sm:p-4">مفتاح سداسي عشري سري من 32 خانة.</td>
+              <td class="p-3.5 sm:p-4">التحقق من توقيع HMAC والتحقق من أمان حمولات Webhook.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">إعدادات التطبيق ➔ أساسي ➔ App Secret.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono" dir="ltr">System User</td>
+              <td class="p-3.5 sm:p-4">حساب نظام آلي مخصص للروبوتات البرمجية (<code class="text-emerald-300 font-mono text-xs" dir="ltr">whatsappapiswissblue</code>).</td>
+              <td class="p-3.5 sm:p-4">يمتلك مفاتيح API دائمة لا تنتهي عند تغيير موظفي الشركة لكلمات سرهم.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">إعدادات الأعمال ➔ المستخدمون ➔ System users.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono" dir="ltr">Access Token (Bearer)</td>
+              <td class="p-3.5 sm:p-4">رمز المصادقة الدائم الحامل للصلاحيات (<code class="text-amber-300 font-mono text-xs" dir="ltr">EAFZCklo...</code>).</td>
+              <td class="p-3.5 sm:p-4">يمرر في ترويسة الطلب (<code class="text-slate-300" dir="ltr">Authorization: Bearer &lt;TOKEN&gt;</code>) لاعتماد الإرسال.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">يولد مباشرة من صفحة مستخدم النظام System User.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono" dir="ltr">WABA ID</td>
+              <td class="p-3.5 sm:p-4">حساب واتساب للأعمال الحاضن للأصول (<code class="text-purple-300 font-mono text-xs" dir="ltr">881895264727770</code>).</td>
+              <td class="p-3.5 sm:p-4">يضم القوالب، وطرق الدفع والفوترة، وسياسات الامتثال.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">إعدادات الأعمال ➔ الحسابات ➔ WhatsApp accounts.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition bg-emerald-950/20">
+              <td class="p-3.5 sm:p-4 font-bold text-emerald-300 font-mono" dir="ltr">Phone Number ID (الهدف)</td>
+              <td class="p-3.5 sm:p-4 font-semibold text-white">معرف كائن رقمي داخلي في ميتا (<code class="text-emerald-300 font-mono text-xs" dir="ltr">978544632005886</code>). ليس رقم الهاتف.</td>
+              <td class="p-3.5 sm:p-4 text-emerald-200"><strong>نقطة نهاية الإرسال الفعلية</strong>. كافة طلبات POST توجه حصراً إلى: <code class="text-xs" dir="ltr">/v20.0/{PHONE_NUMBER_ID}/messages</code>.</td>
+              <td class="p-3.5 sm:p-4 text-slate-300">حسابات واتساب ➔ مدير واتساب ➔ تبويب Phone Numbers.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="p-3.5 sm:p-4 font-bold text-white font-mono" dir="ltr">Display Phone Number</td>
+              <td class="p-3.5 sm:p-4">رقم الهاتف الدولي المقروء (<code class="text-teal-300 font-mono text-xs" dir="ltr">+966 50 707 4949</code>).</td>
+              <td class="p-3.5 sm:p-4">يظهر للعميل النهائي في تطبيقه مع علامة التوثيق الخضراء.</td>
+              <td class="p-3.5 sm:p-4 text-slate-400">شريحة SIM الفعلية أو الخط الافتراضي المعتمد.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- تنبيه تحذيري حاسم -->
+      <div class="rounded-2xl p-4 bg-amber-500/10 border border-amber-500/30 flex items-start gap-3">
+        <svg class="w-5 h-5 text-amber-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <div class="text-xs sm:text-sm text-amber-200 leading-relaxed">
+          <strong class="text-amber-100">الخطأ الأكثر شيوعاً عند المطورين:</strong> يقوم بعض المطورين بالخلط بين <strong>WABA ID</strong> وبين <strong>Phone Number ID</strong>. إذا تم إرسال طلب إلى الرابط <code class="bg-amber-950/60 px-1 py-0.5 rounded font-mono text-xs text-amber-300" dir="ltr">https://graph.facebook.com/v20.0/{WABA_ID}/messages</code> ستعيد ميتا خطأ HTTP 400 <em>"Unsupported post request"</em>. يجب دوماً إرسال الرسائل إلى <code class="bg-amber-950/60 px-1 py-0.5 rounded font-mono text-xs text-amber-300" dir="ltr">https://graph.facebook.com/v20.0/{PHONE_NUMBER_ID}/messages</code>.
+        </div>
+      </div>
+    </section>
+
+    <!-- الركيزة الثالثة: جدول المقارنة المباشرة -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center font-bold text-sm">03</div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">جدول المطابقة الشامل للإعدادين الحيين</h2>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-slate-800 shadow-xl">
+        <table class="w-full text-right text-xs sm:text-sm">
+          <thead class="bg-slate-900 text-slate-300 uppercase tracking-wider font-mono text-[11px] border-b border-slate-800">
+            <tr>
+              <th class="p-3.5 sm:p-4 w-1/4">المعرّف / الخاصية</th>
+              <th class="p-3.5 sm:p-4 w-3/8 text-sky-400">الإعداد أ: مجموعة سويس بلو (الإنتاج الفعلي الحي)</th>
+              <th class="p-3.5 sm:p-4 w-3/8 text-emerald-400">الإعداد ب: جرين وود / تصاميم الوطن (المصانع والمقاولات)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/80 bg-slate-900/50 text-slate-300">
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">النشاط التجاري الرئيسي</td>
+              <td class="p-3.5 sm:p-4 font-semibold text-sky-200">فنادق وشقق سويس بلو المخدومة (قطاع الضيافة)</td>
+              <td class="p-3.5 sm:p-4 font-semibold text-emerald-200">مصنع جرين وود للأثاث ومقاولات تصاميم الوطن</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">محفظة الأعمال المالكة</td>
+              <td class="p-3.5 sm:p-4 font-mono text-xs">مؤسسة عبد الله الفولي (<code class="text-sky-300" dir="ltr">410777319368963</code>)</td>
+              <td class="p-3.5 sm:p-4 font-mono text-xs">شركة تصاميم الوطن المحدودة مختلطة (<code class="text-emerald-300" dir="ltr">2735873883423694</code>)</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">اسم ومعرّف التطبيق</td>
+              <td class="p-3.5 sm:p-4 font-mono text-xs">SwissBlue Website</td>
+              <td class="p-3.5 sm:p-4 font-mono text-xs">Odoo Integration (<code class="text-emerald-300" dir="ltr">2707406719606944</code>)</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">اسم مستخدم النظام</td>
+              <td class="p-3.5 sm:p-4 font-mono text-xs">whatsappapiswissblue (<code class="text-slate-400 text-[11px]" dir="ltr">122126139159342745</code>)</td>
+              <td class="p-3.5 sm:p-4 font-mono text-xs">odoointegrationwhatsApp (<code class="text-slate-400 text-[11px]" dir="ltr">122118261765438033</code>)</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">اسم حساب واتساب (WABA)</td>
+              <td class="p-3.5 sm:p-4 font-bold text-white">SwissBlue LLC</td>
+              <td class="p-3.5 sm:p-4 font-bold text-white">Test WhatsApp Business Account</td>
+            </tr>
+            <tr class="bg-slate-800/30">
+              <td class="p-3.5 sm:p-4 font-bold text-white">معرف WABA ID</td>
+              <td class="p-3.5 sm:p-4 font-mono font-bold text-sky-300 text-xs" dir="ltr">881895264727770</td>
+              <td class="p-3.5 sm:p-4 font-mono font-bold text-emerald-300 text-xs" dir="ltr">2072896399925199</td>
+            </tr>
+            <tr class="bg-emerald-950/20">
+              <td class="p-3.5 sm:p-4 font-bold text-emerald-300">معرف Phone Number ID (الهدف)</td>
+              <td class="p-3.5 sm:p-4 font-mono font-black text-sky-400 text-sm" dir="ltr">978544632005886</td>
+              <td class="p-3.5 sm:p-4 font-mono font-black text-emerald-400 text-sm" dir="ltr">1147702245092804</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">رقم الهاتف الظاهر المعتمد</td>
+              <td class="p-3.5 sm:p-4 font-mono font-bold text-white" dir="ltr">+966 50 707 4949 <span class="text-emerald-400 text-xs">(خط رسمي سعودي موثق)</span></td>
+              <td class="p-3.5 sm:p-4 font-mono text-slate-300" dir="ltr">+1 555-656-8316 <span class="text-slate-500">(تجريبي)</span> / خط الإرسال: +966505725070</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">مستوى الجودة التشغيلية</td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold">GREEN (مستوى سحابي قياسي مباشر)</span></td>
+              <td class="p-3.5 sm:p-4"><span class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 text-xs font-semibold">Sandbox Tier</span></td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">رمز الوصول النشط</td>
+              <td class="p-3.5 sm:p-4 font-mono text-[11px] text-sky-300" dir="ltr">EAFZCkloPu7OoBSvgNVg... <span class="text-emerald-400">✓ نشط وموثق</span></td>
+              <td class="p-3.5 sm:p-4 font-mono text-[11px] text-emerald-300" dir="ltr">EAAmeXzZCI4KABSrAf5l... <span class="text-emerald-400">✓ نشط وموثق</span></td>
+            </tr>
+            <tr>
+              <td class="p-3.5 sm:p-4 font-bold text-white">حالات الاستخدام المعتمدة</td>
+              <td class="p-3.5 sm:p-4 text-xs leading-relaxed text-slate-300">
+                • تأكيد حجوزات الغرف الفندقية الفورية<br>
+                • إرسال قسائم الحجز بصيغة PDF<br>
+                • تنبيهات تسجيل الوصول الذاتي (قبل يومين وفي نفس اليوم)<br>
+                • مساعد إتمام تسجيل الوصول الذاتي
+              </td>
+              <td class="p-3.5 sm:p-4 text-xs leading-relaxed text-slate-300">
+                • إرسال عروض الأسعار الصناعية للمشاريع<br>
+                • تأكيد طلبات البيع للأفراد والشركات (<code class="text-xs" dir="ltr">sale</code>)<br>
+                • إشعارات الفواتير الضريبية (زاتكا)<br>
+                • إيصالات سندات القبض والدفع
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- الركيزة الرابعة: مواصفات حمولة طلب الـ API -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 border border-teal-500/30 flex items-center justify-center font-bold text-sm">04</div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">حمولة الطلب وكيفية عمل API الإرسال</h2>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 space-y-4">
+        <p class="text-sm text-slate-300 leading-relaxed">
+          عندما تقوم المنظمة بإرسال إشعار فوري، تتجمع المعرفات في طلب HTTP معتمد عبر Graph API:
+        </p>
+
+        <div class="rounded-xl bg-slate-950 p-4 border border-slate-800 font-mono text-xs overflow-x-auto text-slate-200" dir="ltr">
+          <div class="text-emerald-400 font-bold mb-1">POST https://graph.facebook.com/v20.0/<span class="text-amber-300">978544632005886</span>/messages</div>
+          <div class="text-sky-400 mb-3">Authorization: Bearer <span class="text-indigo-300">EAFZCkloPu7OoBSvgNVgXsWjcf...</span><br>Content-Type: application/json</div>
+<pre class="text-slate-300">{
+  <span class="text-blue-400">"messaging_product"</span>: <span class="text-amber-300">"whatsapp"</span>,
+  <span class="text-blue-400">"recipient_type"</span>: <span class="text-amber-300">"individual"</span>,
+  <span class="text-blue-400">"to"</span>: <span class="text-emerald-300">"966505725070"</span>,
+  <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"template"</span>,
+  <span class="text-blue-400">"template"</span>: {
+    <span class="text-blue-400">"name"</span>: <span class="text-amber-300">"guest_service_confirmation_experiment_4"</span>,
+    <span class="text-blue-400">"language"</span>: { <span class="text-blue-400">"code"</span>: <span class="text-amber-300">"en"</span> },
+    <span class="text-blue-400">"components"</span>: [
+      {
+        <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"body"</span>,
+        <span class="text-blue-400">"parameters"</span>: [
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"Abdallah El Fouly"</span> },
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"SB-RES-2026-99"</span> },
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"Royal Suite"</span> },
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"28 Sep 2026"</span> },
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"03 Oct 2026"</span> },
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"02:00 PM"</span> },
+          { <span class="text-blue-400">"type"</span>: <span class="text-amber-300">"text"</span>, <span class="text-blue-400">"text"</span>: <span class="text-teal-300">"SwissBlue Hotel Riyadh"</span> }
+        ]
+      }
+    ]
+  }
+}</pre>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300 pt-2">
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <strong class="text-amber-300 font-mono">1. Phone Number ID:</strong> نقطة الاستهداف التي توجه الإرسال برمجياً عبر الرقم الموثق <code class="text-white" dir="ltr">+966 50 707 4949</code>.
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <strong class="text-indigo-300 font-mono">2. Bearer Token:</strong> رمز تفويض مستخدم النظام الدائم الذي يمنح صلاحيات الإرسال المباشرة.
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <strong class="text-emerald-300 font-mono">3. المستلم "to":</strong> رقم هاتف العميل بصيغة E.164 الدولية وبدون علامة زائد أو مسافات (<code class="text-white" dir="ltr">966505725070</code>).
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <strong class="text-teal-300 font-mono">4. اسم القالب "name":</strong> المطابقة التامة لاسم قالب معتمد ومسجل تحت حساب WABA <code class="text-white" dir="ltr">881895264727770</code>.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- الركيزة الخامسة: كتالوج القوالب الحية المعتمدة -->
+    <section class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center font-bold text-sm">05</div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">كتالوج القوالب الحية المعتمدة</h2>
+      </div>
+
+      <!-- القسم الفرعي أ: سويس بلو -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-bold text-sky-300">أ. قوالب قطاع الضيافة لسويس بلو (WABA: 881895264727770)</h3>
+          <span class="px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/30 text-xs font-mono">5 قوالب معتمدة</span>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-slate-800">
+          <table class="w-full text-right text-xs">
+            <thead class="bg-slate-900 text-slate-300 uppercase tracking-wider font-mono text-[11px] border-b border-slate-800">
+              <tr>
+                <th class="p-3">اسم القالب</th>
+                <th class="p-3">الفئة</th>
+                <th class="p-3">الحالة</th>
+                <th class="p-3">المتغيرات المطلوبة</th>
+                <th class="p-3">نص الرسالة النموذجية</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/80 bg-slate-900/40 text-slate-300">
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white" dir="ltr">guest_service_confirmation_experiment_4</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">خدمي UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">معتمد APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400" dir="ltr">{{1}}: Name, {{2}}: ID, {{3}}: Room, {{4}}: In, {{5}}: Out, {{6}}: Time, {{7}}: Hotel</td>
+                <td class="p-3 text-slate-300">مرحباً {{1}}، تم تأكيد حجزك في {{7}}. رقم الحجز: {{2}}، نوع الغرفة: {{3}}... اضغط أدناه لبدء تسجيل الوصول الذاتي.</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white" dir="ltr">guest_service_confirmation_voucher_experiment_4</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">خدمي UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">معتمد APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400">نفس السابق + إرفاق مستند PDF رسمي في ترويسة الرسالة.</td>
+                <td class="p-3 text-slate-300">نفس الرسالة السابقة مع تسليم تلقائي لقسيمة تأكيد الحجز بصيغة PDF.</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white" dir="ltr">utility_guest_arrival_reminder_2days</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">خدمي UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">معتمد APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400" dir="ltr">{{1}}: Guest Name, {{2}}: Hotel Name, {{3}}: Arrival Date</td>
+                <td class="p-3 text-slate-300">مرحباً {{1}} 👋، نجهز كل شيء لإقامتك في {{2}} بدءاً من {{3}} 🛎️. يمكنك تسجيل الوصول الذاتي مسبقاً!</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white" dir="ltr">utility_guest_arrival_reminder_sameday</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">خدمي UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">معتمد APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400" dir="ltr">{{1}}: Guest Name, {{2}}: Hotel Name, {{3}}: Check-in Time</td>
+                <td class="p-3 text-slate-300">يوم سعيد، {{1}} 🌞 متحمسون لاستقبالك في {{2}} اليوم! يبدأ تسجيل الوصول الساعة {{3}}.</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white" dir="ltr">check_in_success_navigator</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">خدمي UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">معتمد APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400" dir="ltr">{{1}}: Hotel Name</td>
+                <td class="p-3 text-slate-300">شكراً لإتمام تسجيل وصولك الذاتي في {{1}}! 🛎️ إذا احتجت لأي مساعدة، تفضل بالرد على هذه الرسالة.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- القسم الفرعي ب: جرين وود -->
+      <div class="space-y-3 pt-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-bold text-emerald-300">ب. قوالب مصانع جرين وود وتأكيد الطلبات (WABA: 2072896399925199)</h3>
+          <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-mono">4 قوالب معتمدة</span>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-slate-800">
+          <table class="w-full text-right text-xs">
+            <thead class="bg-slate-900 text-slate-300 uppercase tracking-wider font-mono text-[11px] border-b border-slate-800">
+              <tr>
+                <th class="p-3">اسم القالب</th>
+                <th class="p-3">الفئة</th>
+                <th class="p-3">الحالة</th>
+                <th class="p-3">المتغيرات المطلوبة</th>
+                <th class="p-3">نص الرسالة النموذجية</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/80 bg-slate-900/40 text-slate-300">
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white" dir="ltr">send_quotation</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono">تسويقي MARKETING</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">معتمد APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400" dir="ltr">{{1}}: Client, {{2}}: Quotation No, {{3}}: Amount, {{4}}: Valid Date</td>
+                <td class="p-3 text-slate-300">مرحباً {{1}}، تم تجهيز عرض السعر رقم {{2}} من مصنع جرين وود. الإجمالي: {{3}} ريال، صالح حتى: {{4}}.</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white" dir="ltr">sale</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">خدمي UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">معتمد APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400" dir="ltr">{{1}}: Name, {{2}}: Order Ref, {{3}}: Brand, {{4}}: Curr, {{5}}: Price, {{6}}: URL</td>
+                <td class="p-3 text-slate-300">مرحباً {{1}}، تهانينا! تم تأكيد طلبك {{2}} من {{3}} بإجمالي {{4}} {{5}}. لتتبع الشحنة: {{6}}.</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white" dir="ltr">invoice</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">خدمي UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">معتمد APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400" dir="ltr">{{1}}: Name, {{2}}: Inv Ref, {{3}}: Company, {{4}}: Curr, {{5}}: Amount, {{6}}: Link</td>
+                <td class="p-3 text-slate-300">عزيزنا {{1}}، مرفق فاتورتك الضريبية رقم {{2}} من {{3}} بإجمالي {{4}} {{5}}.</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3 font-mono font-bold text-white" dir="ltr">payment_receipt</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">خدمي UTILITY</span></td>
+                <td class="p-3"><span class="text-emerald-400 font-bold">معتمد APPROVED</span></td>
+                <td class="p-3 font-mono text-slate-400" dir="ltr">{{1}}: Name, {{2}}: Receipt No, {{3}}: Entity, {{4}}: Curr, {{5}}: Amount</td>
+                <td class="p-3 text-slate-300">عزيزنا {{1}}، مرفق سند القبض رقم {{2}} من {{3}} بمبلغ {{4}} {{5}}.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- الركيزة السادسة: الإدارة والتحكم في لوحة الإدارة -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold text-sm">06</div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">كيفية الإدارة والتبديل في لوحة التحكم الإدارية</h2>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+          <div>
+            <div class="text-xs uppercase font-mono text-slate-400 font-semibold">رابط الوصول الإداري المباشر</div>
+            <div class="text-lg font-bold text-white font-mono mt-0.5" dir="ltr">https://test.wdgroup.online/admin/system/whatsapp</div>
+          </div>
+          <a href="https://test.wdgroup.online/admin/system/whatsapp" target="_blank" class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs transition flex items-center gap-1.5 shadow-lg shadow-sky-500/20 shrink-0">
+            <span>فتح لوحة بوابة واتساب الإدارية</span>
+            <span>&larr;</span>
+          </a>
+        </div>
+
+        <div class="space-y-4">
+          <h3 class="text-base font-bold text-white">التبديل الفوري المسبق بنقرة واحدة (One-Click Presets):</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+              <div class="flex items-center gap-2 text-sky-400 font-bold text-xs">
+                <span>★ الضبط المسبق 1: مجموعة سويس بلو</span>
+                <span class="font-mono text-[10px] bg-sky-950 px-1.5 py-0.5 rounded text-sky-300" dir="ltr">+966 50 707 4949</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                النقر على هذا الخيار يقوم تلقائياً بملء WABA ID <code class="text-sky-300 font-mono" dir="ltr">881895264727770</code>، ومعرف الهاتف <code class="text-sky-300 font-mono" dir="ltr">978544632005886</code>، ورمز النظام الدائم لتطبيق سويس بلو.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+              <div class="flex items-center gap-2 text-emerald-400 font-bold text-xs">
+                <span>★ الضبط المسبق 2: جرين وود / تصاميم الوطن</span>
+                <span class="font-mono text-[10px] bg-emerald-950 px-1.5 py-0.5 rounded text-emerald-300" dir="ltr">+966 50 572 5070</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                النقر على هذا الخيار يقوم تلقائياً بملء WABA ID <code class="text-emerald-300 font-mono" dir="ltr">2072896399925199</code>، ومعرف الهاتف <code class="text-emerald-300 font-mono" dir="ltr">1147702245092804</code>، ورمز تكامل Odoo.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 text-xs text-slate-300 leading-relaxed">
+            <strong class="text-white">حفظ إعدادات البوابة (Save Gateway Configuration):</strong> اضغط على زر الحفظ الأزرق لتثبيت البوابة المختارة في قاعدة البيانات مباشرة. أي طلب متجر جديد أو حجز أو استفسار عميل سيتم إرساله فورا عبر القناة المعتمدة.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- تذييل الصفحة -->
+    <footer class="text-center text-xs text-slate-500 border-t border-slate-800/80 pt-8 space-y-1">
+      <p>مجموعة دبليو دي للأعمال · المرجع الهندسي لمنصة واتساب للأعمال · مدعوم بواسطة دبي في القاهرة</p>
+      <p class="font-mono text-[11px] text-slate-600" dir="ltr">Confidential Client Deliverable · Production Reference 1.0.0</p>
+    </footer>
+
+  </main>
+
+</body>
+</html>
