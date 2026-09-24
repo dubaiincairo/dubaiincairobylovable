@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dubai in Cairo — Portal Background Studio</title>
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #f8fafc;
+      transition: background 0.5s ease;
+    }
+
+    /* Studio Top Controller */
+    .studio-bar {
+      background: rgba(11, 15, 25, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Common Glass Card */
+    .portal-card {
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 1.25rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portal-card:hover {
+      transform: translateY(-3px);
+    }
+
+    /* ============================================================
+       OPTION 1: SOVEREIGN LUMINESCENCE (MULTI-HUE MESH AURORA)
+       ============================================================ */
+    body.theme-opt1 {
+      background: #05070B;
+    }
+    .opt1-orb-blue {
+      position: absolute;
+      top: 5%;
+      left: 10%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, rgba(37, 99, 235, 0) 70%);
+      filter: blur(80px);
+      animation: opt1Float1 18s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    .opt1-orb-emerald {
+      position: absolute;
+      top: 35%;
+      right: 8%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(16, 185, 129, 0) 70%);
+      filter: blur(90px);
+      animation: opt1Float2 22s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    .opt1-orb-amber {
+      position: absolute;
+      bottom: 5%;
+      left: 30%;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.18) 0%, rgba(245, 158, 11, 0) 70%);
+      filter: blur(85px);
+      animation: opt1Float3 20s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes opt1Float1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, 40px) scale(1.12); }
+    }
+    @keyframes opt1Float2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-50px, -30px) scale(1.08); }
+    }
+    @keyframes opt1Float3 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, -50px) scale(1.15); }
+    }
+    body.theme-opt1 .portal-card {
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+    }
+    body.theme-opt1 .portal-card:hover {
+      border-color: rgba(59, 130, 246, 0.45);
+      box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.25);
+    }
+
+    /* ============================================================
+       OPTION 2: ARCHITECTURAL TOPOGRAPHY & ISOMETRIC GRID MATRIX
+       ============================================================ */
+    body.theme-opt2 {
+      background-color: #070B14;
+      background-image: 
+        radial-gradient(rgba(56, 189, 248, 0.15) 1px, transparent 1px),
+        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px, 72px 72px, 72px 72px;
+    }
+    .opt2-spotlight {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(650px circle at var(--mouse-x, 50%) var(--mouse-y, 40%), rgba(6, 182, 212, 0.12), transparent 60%);
+      z-index: 1;
+    }
+    .opt2-contour {
+      position: absolute;
+      inset: 0;
+      opacity: 0.18;
+      pointer-events: none;
+      background-image: repeating-radial-gradient(circle at 80% 20%, transparent 0, transparent 40px, rgba(56, 189, 248, 0.2) 41px, transparent 42px);
+    }
+    body.theme-opt2 .portal-card {
+      background: rgba(11, 20, 36, 0.82);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+    }
+    body.theme-opt2 .portal-card:hover {
+      border-color: rgba(56, 189, 248, 0.6);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.25);
+    }
+
+    /* ============================================================
+       OPTION 3: DUBAI SKYLINE GOLDEN CONSTELLATION & GLASS HORIZON
+       ============================================================ */
+    body.theme-opt3 {
+      background: radial-gradient(ellipse at 50% 10%, #1c150b 0%, #080a10 70%, #040508 100%);
+    }
+    .opt3-horizon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 380px;
+      background: radial-gradient(50% 100% at 50% 0%, rgba(245, 158, 11, 0.16) 0%, rgba(217, 119, 6, 0.05) 50%, transparent 100%);
+      pointer-events: none;
+    }
+    .opt3-stars {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(1.5px 1.5px at 15% 20%, rgba(251, 191, 36, 0.8), transparent),
+        radial-gradient(1.5px 1.5px at 45% 12%, rgba(251, 191, 36, 0.6), transparent),
+        radial-gradient(2px 2px at 75% 25%, rgba(245, 158, 11, 0.9), transparent),
+        radial-gradient(1px 1px at 30% 65%, rgba(251, 191, 36, 0.5), transparent),
+        radial-gradient(1.5px 1.5px at 85% 75%, rgba(245, 158, 11, 0.7), transparent);
+      background-size: 300px 300px;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+    body.theme-opt3 .portal-card {
+      background: rgba(18, 19, 26, 0.85);
+      border: 1px solid rgba(245, 158, 11, 0.22);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+    }
+    body.theme-opt3 .portal-card:hover {
+      border-color: rgba(245, 158, 11, 0.6);
+      box-shadow: 0 0 35px rgba(245, 158, 11, 0.25);
+    }
+  </style>
+</head>
+<body class="theme-opt2 relative">
+
+  <!-- ==================== DYNAMIC BACKGROUND LAYERS ==================== -->
+  <!-- Option 1 Elements -->
+  <div id="layer-opt1" class="fixed inset-0 pointer-events-none z-0 hidden">
+    <div class="opt1-orb-blue"></div>
+    <div class="opt1-orb-emerald"></div>
+    <div class="opt1-orb-amber"></div>
+  </div>
+
+  <!-- Option 2 Elements (APPROVED) -->
+  <div id="layer-opt2" class="fixed inset-0 pointer-events-none z-0">
+    <div class="opt2-contour"></div>
+    <div class="opt2-spotlight"></div>
+  </div>
+
+  <!-- Option 3 Elements -->
+  <div id="layer-opt3" class="fixed inset-0 pointer-events-none z-0 hidden">
+    <div class="opt3-horizon"></div>
+    <div class="opt3-stars"></div>
+  </div>
+
+  <!-- ==================== STUDIO CONTROLLER HEADER ==================== -->
+  <header class="sticky top-0 z-50 studio-bar px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 via-sky-500 to-teal-600 flex items-center justify-center text-slate-950 font-black shadow-lg">
+        DiC
+      </div>
+      <div>
+        <h1 class="text-sm sm:text-base font-extrabold text-white tracking-tight flex items-center gap-2">
+          <span>Portal Background Visual Studio</span>
+          <span class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-mono font-semibold">Option 2 Approved</span>
+        </h1>
+        <p class="text-xs text-slate-400">Toggle between the 3 calibrated background options below</p>
+      </div>
+    </div>
+
+    <!-- Switcher Buttons -->
+    <div class="flex items-center gap-2 p-1.5 rounded-2xl bg-slate-900/90 border border-slate-700/80 shadow-inner">
+      <button 
+        id="btn-opt1" 
+        onclick="setTheme('opt1')" 
+        class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5"
+      >
+        <span class="w-2 h-2 rounded-full bg-blue-300"></span>
+        <span>Option 1: Sovereign Aurora</span>
+      </button>
+
+      <button 
+        id="btn-opt2" 
+        onclick="setTheme('opt2')" 
+        class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-cyan-600 text-white shadow-md shadow-cyan-500/30 flex items-center gap-1.5"
+      >
+        <span class="w-2 h-2 rounded-full bg-cyan-300"></span>
+        <span>Option 2: Topography &amp; Grid (Approved)</span>
+      </button>
+
+      <button 
+        id="btn-opt3" 
+        onclick="setTheme('opt3')" 
+        class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5"
+      >
+        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+        <span>Option 3: Gold Constellation</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== STUDIO PREVIEW VIEWPORT ==================== -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    
+    <!-- Hero Section -->
+    <div class="text-center space-y-3 max-w-3xl mx-auto">
+      <div id="option-badge" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/25 text-xs font-semibold">
+        Option 2: Architectural Topography &amp; Isometric Grid Matrix (Approved Standard)
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+        Client Operations <span id="brand-gradient-text" class="bg-gradient-to-r from-cyan-400 via-sky-300 to-teal-400 bg-clip-text text-transparent">Portal Experience</span>
+      </h2>
+      <p id="option-description" class="text-sm sm:text-base text-slate-400 leading-relaxed">
+        Precision 24px dot-matrix grid with subtle CAD topography contours and interactive cursor radial spotlight. Perfect for industrial engineering and holding governance.
+      </p>
+    </div>
+
+    <!-- Sample Portal Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+
+      <!-- Card 1: Swiss Blue -->
+      <div class="portal-card p-6 space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="px-2.5 py-1 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/30 text-xs font-bold font-mono">PROJECT 1.1</span>
+          <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1">● Ready for Review</span>
+        </div>
+        <h3 class="text-lg font-bold text-white">Swiss Blue Hotels Platform</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          55 verified platform features, dual-block operational benefits, and 6 interactive SOP workflows.
+        </p>
+        <div class="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-blue-400">
+          <span>Explore 55 Features</span>
+          <span>→</span>
+        </div>
+      </div>
+
+      <!-- Card 2: WD Group -->
+      <div class="portal-card p-6 space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold font-mono">PROJECT 1.2</span>
+          <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1">● Ready for Review</span>
+        </div>
+        <h3 class="text-lg font-bold text-white">WD Group eCommerce Hub</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Moyasar 3DS payment gateway, Tamara/Tabby BNPL, ZATCA Phase 2 e-invoicing, and customer portal.
+        </p>
+        <div class="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-amber-400">
+          <span>Explore 48 Features</span>
+          <span>→</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Digital Marketing -->
+      <div class="portal-card p-6 space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="px-2.5 py-1 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs font-bold font-mono">PROJECT 1.3</span>
+          <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1">● Ready for Review</span>
+        </div>
+        <h3 class="text-lg font-bold text-white">Commercial Growth Strategy</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Confidential 36-chapter growth strategy, 24 decision tables, 10 interactive modules, and 12-month roadmap.
+        </p>
+        <div class="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-indigo-400">
+          <span>Open Strategy Portal</span>
+          <span>→</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Active Selection Confirmation Box -->
+    <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-700/80 max-w-xl mx-auto text-center space-y-2">
+      <div class="text-xs text-slate-400 uppercase font-mono tracking-wider font-semibold">Active Studio Theme</div>
+      <div id="selection-label" class="text-base font-extrabold text-cyan-400">Option 2: Architectural Topography &amp; Isometric Grid Matrix (Approved Standard)</div>
+      <p class="text-xs text-emerald-400 font-semibold">
+        ✓ Approved &amp; Implemented across Master Portal Pages
+      </p>
+    </div>
+
+  </main>
+
+  <script>
+    // Track cursor for Option 2 spotlight
+    window.addEventListener('mousemove', (e) => {
+      document.body.style.setProperty('--mouse-x', e.clientX + 'px');
+      document.body.style.setProperty('--mouse-y', e.clientY + 'px');
+    });
+
+    function setTheme(theme) {
+      document.body.className = 'theme-' + theme + ' relative';
+      
+      // Hide all layers
+      document.getElementById('layer-opt1').classList.add('hidden');
+      document.getElementById('layer-opt2').classList.add('hidden');
+      document.getElementById('layer-opt3').classList.add('hidden');
+
+      // Reset button styles
+      ['opt1', 'opt2', 'opt3'].forEach(id => {
+        const btn = document.getElementById('btn-' + id);
+        btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5';
+      });
+
+      const activeBtn = document.getElementById('btn-' + theme);
+      const badge = document.getElementById('option-badge');
+      const desc = document.getElementById('option-description');
+      const grad = document.getElementById('brand-gradient-text');
+      const selLabel = document.getElementById('selection-label');
+
+      if (theme === 'opt1') {
+        document.getElementById('layer-opt1').classList.remove('hidden');
+        activeBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-blue-600 text-white shadow-md shadow-blue-500/30 flex items-center gap-1.5';
+        badge.className = 'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/25 text-xs font-semibold';
+        badge.innerText = 'Option 1: Sovereign Luminescence (Apple Pro Fluid Aurora)';
+        desc.innerText = 'Deep obsidian canvas with slow-drifting, GPU-accelerated blur orbs in sapphire royal blue, emerald green, and warm amber gold. Extremely soothing and modern.';
+        grad.className = 'bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent';
+        selLabel.innerText = 'Option 1: Sovereign Luminescence (Multi-Hue Mesh Aurora)';
+      } else if (theme === 'opt2') {
+        document.getElementById('layer-opt2').classList.remove('hidden');
+        activeBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-cyan-600 text-white shadow-md shadow-cyan-500/30 flex items-center gap-1.5';
+        badge.className = 'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/25 text-xs font-semibold';
+        badge.innerText = 'Option 2: Architectural Topography & Isometric Grid Matrix';
+        desc.innerText = 'Precision 24px dot-matrix grid with subtle CAD topography contours and interactive cursor radial spotlight. Perfect for industrial engineering and holding governance.';
+        grad.className = 'bg-gradient-to-r from-cyan-400 via-sky-300 to-teal-400 bg-clip-text text-transparent';
+        selLabel.innerText = 'Option 2: Architectural Topography & Isometric Grid Matrix';
+      } else if (theme === 'opt3') {
+        document.getElementById('layer-opt3').classList.remove('hidden');
+        activeBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-amber-500 text-slate-950 shadow-md shadow-amber-500/30 flex items-center gap-1.5';
+        badge.className = 'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/25 text-xs font-semibold';
+        badge.innerText = 'Option 3: Dubai Skyline Golden Constellation & Glass Horizon';
+        desc.innerText = 'Deep obsidian black-to-gold canvas with warm amber horizon luminescence and subtle gold constellation particles. Evokes Dubai luxury holding prestige.';
+        grad.className = 'bg-gradient-to-r from-amber-400 via-yellow-200 to-amber-500 bg-clip-text text-transparent';
+        selLabel.innerText = 'Option 3: Dubai Skyline Golden Constellation & Glass Horizon';
+      }
+    }
+  </script>
+</body>
+</html>

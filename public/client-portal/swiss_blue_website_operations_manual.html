@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiss Blue Hotels & Serviced Apartments — Enterprise Operations Manual</title>
+  
+  <!-- Tailwind CSS allowlisted in Antigravity -->
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  
+  <style>
+    /* Mobile Touch & Tap Normalization */
+    *, *::before, *::after {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #070B14;
+      background-image: 
+        radial-gradient(rgba(56, 189, 248, 0.15) 1px, transparent 1px),
+        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px, 72px 72px, 72px 72px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+    .opt2-spotlight {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(650px circle at var(--mouse-x, 50%) var(--mouse-y, 40%), rgba(6, 182, 212, 0.12), transparent 60%);
+      z-index: 1;
+    }
+    .opt2-contour {
+      position: fixed;
+      inset: 0;
+      opacity: 0.18;
+      pointer-events: none;
+      background-image: repeating-radial-gradient(circle at 80% 20%, transparent 0, transparent 40px, rgba(56, 189, 248, 0.2) 41px, transparent 42px);
+      z-index: 0;
+    }
+
+    /* Custom Scrollbar for Desktop */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(59, 130, 246, 0.4);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(59, 130, 246, 0.7);
+    }
+    
+    /* Modern Glassmorphism & GPU Acceleration from Yerkab Design System */
+    .glass-card {
+      background: rgba(19, 29, 46, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    .glass-card:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      transform: translateY(-3px) translateZ(0);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5);
+    }
+    .glass-card:active {
+      transform: translateY(-1px) scale(0.99) translateZ(0);
+    }
+    .glass-nav {
+      background: rgba(11, 17, 29, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+    }
+
+    /* 60fps Native Animations */
+    @keyframes tabEnter {
+      0% {
+        opacity: 0;
+        transform: translateY(12px) scale(0.995);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .tab-content:not(.hidden) {
+      animation: tabEnter 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+      will-change: opacity, transform;
+    }
+
+    /* Interactive Spotlight Card System */
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.16), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Ambient Floating Orbs */
+    @keyframes orbFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, -30px) scale(1.08); }
+    }
+    @keyframes orbFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, 35px) scale(1.06); }
+    }
+    @keyframes orbFloat3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(25px, 25px) scale(1.1); }
+    }
+    .ambient-orb-1 {
+      animation: orbFloat1 20s ease-in-out infinite;
+      will-change: transform;
+    }
+    .ambient-orb-2 {
+      animation: orbFloat2 25s ease-in-out infinite;
+      will-change: transform;
+    }
+    .ambient-orb-3 {
+      animation: orbFloat3 22s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Modal Animation */
+    @keyframes modalBackdrop { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalDialog {
+      0% { opacity: 0; transform: scale(0.94) translateY(14px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-backdrop-anim { animation: modalBackdrop 0.22s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .modal-dialog-anim { animation: modalDialog 0.3s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    /* RTL specific overrides */
+    html[dir="rtl"] {
+      text-align: right;
+    }
+
+    /* Publication-Grade Print Styles for A4 PDF */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+      }
+      .no-print, header, #scroll-progress-bar, .ambient-orb-1, .ambient-orb-2, .ambient-orb-3, #search-bar-wrap, .tab-nav-sticky {
+        display: none !important;
+      }
+      .glass-card, .spotlight-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        break-inside: avoid !important;
+      }
+      .text-white { color: #0f172a !important; }
+      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+      .tab-content { display: block !important; }
+    }
+  </style>
+</head>
+<body class="text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-cyan-500 selection:text-slate-950 pb-20 relative">
+
+  <!-- Option 2 Background Architecture Layers -->
+  <div class="opt2-contour"></div>
+  <div class="opt2-spotlight"></div>
+
+  <!-- Ambient High-Tech Floating Interactive Glow Orbs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="ambient-orb-1 absolute top-20 -left-40 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+    <div class="ambient-orb-2 absolute top-1/3 -right-40 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px]"></div>
+    <div class="ambient-orb-3 absolute bottom-20 left-1/3 w-[450px] h-[450px] bg-cyan-600/10 rounded-full blur-[120px]"></div>
+  </div>
+
+  <!-- TOP STICKY NAVIGATION BAR -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+      
+      <!-- Logo & Identity -->
+      <div class="flex items-center gap-3.5 shrink-0">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-800 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/25 border border-blue-400/40 relative group shrink-0">
+          <span class="text-base tracking-tighter">SB</span>
+          <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 border-2 border-slate-900 rounded-full" title="Platform Active"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white flex items-center gap-1.5" id="nav-brand-title">
+              <span>SWISS BLUE</span>
+              <span class="text-blue-400">•</span>
+              <span class="text-blue-200">سويس بلو</span>
+            </span>
+            <span class="hidden sm:inline-flex text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/30">
+              Operations Manual • دليل التشغيل
+            </span>
+          </div>
+          <p class="text-[11px] sm:text-xs text-slate-400 hidden sm:block">
+            Hotels &amp; Serviced Apartments Portfolio • Jeddah • Jazan • Riyadh
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Print / PDF -->
+        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="Print Manual / Export PDF">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+        </button>
+
+        <!-- Direct Sibling Language Switcher -->
+        <a href="swiss_blue_website_operations_manual_ar.html" class="px-3 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-xs font-bold text-emerald-300 border border-emerald-500/30 transition flex items-center gap-1.5 shadow-sm">
+          <span>العربية (100% RTL)</span>
+        </a>
+        <a href="index_en.html" class="hidden lg:inline-flex px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition">
+          Operations Portal
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress-bar" class="absolute bottom-0 left-0 h-[2.5px] bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 w-0 transition-[width] duration-75 ease-out shadow-[0_0_10px_rgba(56,189,248,0.8)] pointer-events-none"></div>
+  </header>
+
+  <!-- MAIN VIEWPORT -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8 relative z-10">
+
+    <!-- HERO SECTION -->
+    <section class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-6 sm:p-10 shadow-2xl">
+      <div class="absolute -right-20 -top-20 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-6">
+        <!-- Status Tags & Environment Links -->
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-300 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+            <span id="hero-tag">SWISS BLUE WEB ECOSYSTEM • VERIFIED REPOSITORY AUDIT</span>
+          </div>
+
+          <!-- Staging & Live Buttons -->
+          <div class="flex items-center gap-2 text-xs">
+            <a href="https://test.swissblue.sa" target="_blank" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1.5 font-mono">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+              <span>test.swissblue.sa</span>
+            </a>
+            <a href="https://swissblue.sa" target="_blank" class="px-3 py-1 rounded-full bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 flex items-center gap-1.5 font-mono">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span>swissblue.sa</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Headline & Description -->
+        <div class="space-y-3 max-w-4xl">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight" id="hero-title">
+            Swiss Blue Hotels &amp; Serviced Apartments
+          </h1>
+          <p class="text-lg sm:text-xl text-blue-300 font-medium" id="hero-sub">
+            Technical Operations Guide, Headless CMS Governance &amp; Multi-Channel Lead Pipeline
+          </p>
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed pt-1" id="hero-desc">
+            Complete employee handbook covering the 6 Saudi properties (Tulip Alrawdah, Vinas Riyadh, Jeddah, Jazan, Riyadh), direct booking engine operations, Brevo email + Meta WhatsApp notification channels, Sanity CMS content management, and emergency Dubai in Cairo SLA support.
+          </p>
+        </div>
+
+        <!-- 4 KPI Spotlight Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-blue-500/50 transition-all duration-300 cursor-pointer group">
+            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-1-title">Active Portfolio</div>
+            <div class="text-2xl font-black text-blue-400 mt-1">6 Properties</div>
+            <div class="text-xs text-slate-400 mt-0.5">Hotels &amp; Serviced Apartments</div>
+          </div>
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer group">
+            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-2-title">Lead Routing</div>
+            <div class="text-2xl font-black text-emerald-400 mt-1">&lt; 5 Seconds</div>
+            <div class="text-xs text-slate-400 mt-0.5">Brevo SMTP + Meta WhatsApp</div>
+          </div>
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-purple-500/50 transition-all duration-300 cursor-pointer group">
+            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-3-title">Tulip Alrawdah</div>
+            <div class="text-2xl font-black text-purple-400 mt-1">36 Units</div>
+            <div class="text-xs text-slate-400 mt-0.5">15 One-Bedroom Superiors</div>
+          </div>
+          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition-all duration-300 cursor-pointer group">
+            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-4-title">P1 Outage SLA</div>
+            <div class="text-2xl font-black text-amber-400 mt-1">&lt; 30 Mins</div>
+            <div class="text-xs text-slate-400 mt-0.5">Direct Dubai in Cairo Support</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STICKY TAB NAVIGATION -->
+    <div class="sticky top-20 z-40 bg-[#0b0f19]/90 backdrop-blur-md pt-2 pb-3 border-b border-slate-800 tab-nav-sticky">
+      <div class="flex items-center gap-2 overflow-x-auto scroll-touch pb-1">
+        <button onclick="switchTab('properties')" id="tab-btn-properties" class="tab-btn active px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-500/25">
+          <span>01. Properties &amp; Units</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-white/20 text-[11px]">6 Locations</span>
+        </button>
+        <button onclick="switchTab('booking')" id="tab-btn-booking" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>02. Direct Booking &amp; AI</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">WEB-DIRECT</span>
+        </button>
+        <button onclick="switchTab('notifications')" id="tab-btn-notifications" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>03. Forms &amp; WhatsApp</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">Meta + Brevo</span>
+        </button>
+        <button onclick="switchTab('sanity')" id="tab-btn-sanity" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>04. Sanity Studio CMS</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">Bilingual</span>
+        </button>
+        <button onclick="switchTab('sops')" id="tab-btn-sops" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>05. Employee SOPs</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">Workflows</span>
+        </button>
+        <button onclick="switchTab('support')" id="tab-btn-support" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-amber-400 hover:text-white hover:bg-amber-600/20 border border-amber-500/30">
+          <span>06. Diagnostics &amp; SLA</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-amber-500/20 text-[11px]">Support</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- LIVE SEARCH BAR -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 p-3 rounded-2xl bg-slate-900/60 border border-slate-800" id="search-bar-wrap">
+      <div class="relative w-full sm:w-80">
+        <input type="text" id="sop-search" oninput="filterCards()" placeholder="Search properties, rooms, SOPs, error codes..." class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-4 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-blue-500 transition">
+      </div>
+      <div class="flex items-center gap-2 text-xs text-slate-400 self-end sm:self-center">
+        <span>Verified Production Codebase: <code>dubaiincairo/swissblue23may</code></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 1: PROPERTIES & UNITS ==================== -->
+    <div id="tab-panel-properties" class="tab-content space-y-6">
+      
+      <div class="glass-card spotlight-card rounded-2xl p-6 border-t-4 border-t-blue-500">
+        <h2 class="text-2xl font-bold text-white">Swiss Blue Saudi Properties &amp; Unit Taxonomy</h2>
+        <p class="text-sm text-slate-300 mt-1">
+          Detailed breakdown of the 6 hotel and serviced apartment properties, specific unit room numbers, and verified amenity mappings.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Tulip Alrawdah -->
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300">Riyadh • Serviced Apts</span>
+            <span class="text-xs text-slate-400">36 Units Total</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Tulip Alrawdah (توليب الروضة)</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Premium extended-stay serviced apartments. Contains exactly <strong>15 One-Bedroom Superior Apartments</strong> across two floors.
+          </p>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 space-y-1">
+            <div class="text-purple-400 font-bold">Superior 1-BR Units (15):</div>
+            <div>203, 204, 204C, 205, 206, 208, 209, 209C, 301, 302, 303, 304, 304C, 306, 307</div>
+            <div class="text-slate-400 pt-1">Amenity: 24/7 Cafe • Breakfast Buffet (Soon)</div>
+          </div>
+        </div>
+
+        <!-- Vinas Riyadh -->
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300">Riyadh • Corporate</span>
+            <span class="text-xs text-slate-400">Business Suites</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Vinas Riyadh (فيناس الرياض)</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Tailored for corporate travelers and family relocations. No in-house restaurant; supported by 24/7 room service &amp; high-speed Wi-Fi.
+          </p>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 space-y-1">
+            <div class="text-blue-400 font-bold">Amenity Normalization:</div>
+            <div>• 24/7 Cafe (مقهى 24/7)</div>
+            <div>• Breakfast Buffet (Soon) (بوفيه إفطار قريباً)</div>
+            <div class="text-slate-400 pt-1">• In-house Concierge &amp; Business Lounge</div>
+          </div>
+        </div>
+
+        <!-- Jeddah & Jazan Urban Hotels -->
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300">Jeddah &amp; Jazan</span>
+            <span class="text-xs text-slate-400">Hotel &amp; Suites</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Jeddah &amp; Jazan Properties</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Urban hospitality hotels serving Red Sea business visitors and corporate travelers. Features International Restaurants and meeting rooms.
+          </p>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 space-y-1">
+            <div class="text-emerald-400 font-bold">Featured Amenities:</div>
+            <div>• International Restaurant (مطعم شرقي وعالمي)</div>
+            <div>• Fitness Gym &amp; Wellness Facilities</div>
+            <div>• Conference &amp; Event Halls</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2: DIRECT BOOKING & AI ==================== -->
+    <div id="tab-panel-booking" class="tab-content hidden space-y-6">
+      
+      <div class="glass-card spotlight-card rounded-2xl p-6 border-t-4 border-t-blue-500">
+        <h2 class="text-2xl font-bold text-white">Direct Booking Engine &amp; AI Concierge Integration</h2>
+        <p class="text-sm text-slate-300 mt-1">
+          Conversion-focused architecture modeled after Yanolja Cloud Solution (`letsbook.me`), customized into Swiss Blue brand tokens (`--primary #2b6fe8`).
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div class="glass-card p-6 space-y-4">
+          <h3 class="text-lg font-bold text-white">Direct Booking Flow &amp; PMS Synchronization</h3>
+          <ul class="text-xs text-slate-300 space-y-2.5">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">✔</span>
+              <span><strong>Source Code Attribution:</strong> Every direct inquiry and booking carries the PMS identifier <code>WEB-DIRECT</code> inside eZee Absolute.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">✔</span>
+              <span><strong>OTA Strikethrough Pricing:</strong> Compares direct member prices against OTA rates ("Save up to 20% by booking direct").</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">✔</span>
+              <span><strong>Sticky Combined Bar:</strong> Persistent top header widget allows instant date-range selection and guest count changes without reloading.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="glass-card p-6 space-y-4">
+          <h3 class="text-lg font-bold text-white">AI Concierge &amp; Upstash Redis Rate Limiting</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            The platform combines <strong>OpenAI gpt-4o</strong> with <strong>Google Gemini API</strong> for intelligent hotel recommendations.
+          </p>
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono space-y-1">
+            <div class="text-cyan-400 font-bold">Upstash Redis Protection Parameters:</div>
+            <div class="text-slate-300">• OPENAI_CHAT_IP_PER_MINUTE: Max 20 req/min/IP</div>
+            <div class="text-slate-300">• OPENAI_CHAT_DAILY_LIMIT: Strict daily token cap</div>
+            <div class="text-slate-300">• Fallback: Chatbase Widget (NEXT_PUBLIC_CHATBASE_ID)</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: FORMS & WHATSAPP ==================== -->
+    <div id="tab-panel-notifications" class="tab-content hidden space-y-6">
+      
+      <div class="glass-card spotlight-card rounded-2xl p-6 border-t-4 border-t-emerald-500">
+        <h2 class="text-2xl font-bold text-white">Dual-Channel Notification Engine (Email + WhatsApp)</h2>
+        <p class="text-sm text-slate-300 mt-1">
+          Implemented in <code>src/lib/notify.ts</code> using Next.js <code>after()</code> for zero-latency background execution.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Brevo SMTP Pipeline -->
+        <div class="glass-card p-6 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">Channel 1: Email</span>
+            <span class="text-xs text-slate-400">Brevo REST API</span>
+          </div>
+          <h3 class="text-base font-bold text-white">Brevo Transactional Dispatch</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Sends from authenticated domain <code>notifications@swissblue.sa</code>. Reply-To is automatically assigned to the applicant's or client's own email.
+          </p>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 space-y-1">
+            <div>• Careers: <code>careers@swissblue.sa</code> (PDF CV attached)</div>
+            <div>• B2B Requests: <code>reservations@swissblue.sa</code></div>
+            <div class="text-amber-400">⚠️ Security: Brevo Authorized IPs MUST be disabled for Vercel.</div>
+          </div>
+        </div>
+
+        <!-- Meta WhatsApp Cloud API -->
+        <div class="glass-card p-6 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Channel 2: WhatsApp</span>
+            <span class="text-xs text-slate-400">Meta Cloud Graph API v22.0</span>
+          </div>
+          <h3 class="text-base font-bold text-white">Instant WhatsApp Alerts</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Delivers an instantaneous WhatsApp alert to front desk / reservations handset using pre-approved template <code>new_form_submission</code>.
+          </p>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-emerald-300 space-y-1">
+            <div>Template Body:</div>
+            <div class="text-slate-300">"New {{1}} — Swiss Blue Hotel</div>
+            <div class="text-slate-300">Name: {{2}} | Email: {{3}} | Phone: {{4}}</div>
+            <div class="text-slate-300">Details: {{5}}"</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: SANITY STUDIO CMS ==================== -->
+    <div id="tab-panel-sanity" class="tab-content hidden space-y-6">
+      
+      <div class="glass-card spotlight-card rounded-2xl p-6 border-t-4 border-t-purple-500">
+        <h2 class="text-2xl font-bold text-white">Sanity Studio v3 Headless Content Governance</h2>
+        <p class="text-sm text-slate-300 mt-1">
+          Bilingual singleton schema (<code>siteContentType</code>) allowing marketing staff to update copy, room photography, and promotional banners in real time.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 space-y-4">
+        <h3 class="text-base font-bold text-white">Amenity Normalization &amp; Soon Badging Rules</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          The code in <code>src/components/feature-chip.tsx</code> automatically detects <code>(Soon)</code> and <code>(قريباً)</code> and renders high-visibility status pills:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+            <div class="text-xs text-slate-400 font-bold mb-2">English Rendering:</div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-950 text-sky-300 border border-sky-800 text-xs">
+              <span>Breakfast buffet</span>
+              <span class="px-1.5 py-0.5 rounded bg-sky-800 text-[10px] font-bold">Soon</span>
+            </div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800" dir="rtl">
+            <div class="text-xs text-slate-400 font-bold mb-2">Arabic Rendering:</div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-950 text-sky-300 border border-sky-800 text-xs">
+              <span>بوفيه إفطار</span>
+              <span class="px-1.5 py-0.5 rounded bg-sky-800 text-[10px] font-bold">قريباً</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: EMPLOYEE SOPS ==================== -->
+    <div id="tab-panel-sops" class="tab-content hidden space-y-6">
+      
+      <div class="glass-card spotlight-card rounded-2xl p-6 border-t-4 border-t-blue-500">
+        <h2 class="text-2xl font-bold text-white">Employee Standard Operating Procedures (SOPs)</h2>
+        <p class="text-sm text-slate-300 mt-1">
+          Click any workflow card below to launch the detailed step-by-step modal guide.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- SOP 1 -->
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 cursor-pointer" onclick="openModal('Direct Web Booking Processing (eZee Absolute)', 'Reservations Supervisor', '1. Notification arrives at reservations@swissblue.sa and front-desk WhatsApp.\n2. Open eZee Absolute PMS.\n3. Check requested dates against room category inventory.\n4. Create booking with Source Code: WEB-DIRECT to apply the direct rate discount.\n5. Click Reply on the Brevo notification email to send the confirmation voucher.\n6. Flag email as [CONFIRMED - PMS #XXXXX].')">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-blue-500/20 text-blue-300">SOP-SB-01</span>
+            <span class="text-xs text-slate-400">Reservations</span>
+          </div>
+          <h3 class="text-base font-bold text-white">Direct Booking Processing</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Capturing direct online guest leads, creating folios in eZee Absolute under WEB-DIRECT, and confirming rates.
+          </p>
+          <div class="pt-2 border-t border-slate-800 text-xs text-blue-400 font-semibold flex items-center justify-between">
+            <span>Open SOP Modal</span>
+            <span>→</span>
+          </div>
+        </div>
+
+        <!-- SOP 2 -->
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 cursor-pointer" onclick="openModal('Sanity CMS Promotional Banner Publishing', 'Marketing Administrator', '1. Authenticate at swissblue.sa/studio.\n2. Open Site Content (Singleton).\n3. Update seasonal headline and upload compressed WebP image (<350KB).\n4. Update English and Arabic copy simultaneously.\n5. Click green Publish button.\n6. Test in private window on https://swissblue.sa.')">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-purple-500/20 text-purple-300">SOP-SB-02</span>
+            <span class="text-xs text-slate-400">Marketing</span>
+          </div>
+          <h3 class="text-base font-bold text-white">Promotional Banner Updates</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Publishing seasonal holiday packages and rate offers across Arabic and English pages without code redeploys.
+          </p>
+          <div class="pt-2 border-t border-slate-800 text-xs text-purple-400 font-semibold flex items-center justify-between">
+            <span>Open SOP Modal</span>
+            <span>→</span>
+          </div>
+        </div>
+
+        <!-- SOP 3 -->
+        <div class="glass-card spotlight-card rounded-2xl p-6 space-y-4 cursor-pointer" onclick="openModal('Careers Form & PDF Resume Handling', 'HR Officer', '1. Inquiries arrive at careers@swissblue.sa.\n2. Open attached resume PDF (automatically converted and attached by serverless function).\n3. Evaluate candidate qualifications against hotel department vacancies.\n4. Hit Reply to communicate directly with candidate (Reply-To auto-configured).\n5. File resume in corporate HR drive.')">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300">SOP-SB-03</span>
+            <span class="text-xs text-slate-400">HR Team</span>
+          </div>
+          <h3 class="text-base font-bold text-white">Careers &amp; Resume Ingestion</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Reviewing candidate CVs attached directly to notification emails from the `/careers` application portal.
+          </p>
+          <div class="pt-2 border-t border-slate-800 text-xs text-emerald-400 font-semibold flex items-center justify-between">
+            <span>Open SOP Modal</span>
+            <span>→</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB 6: DIAGNOSTICS & SLA ==================== -->
+    <div id="tab-panel-support" class="tab-content hidden space-y-6">
+      
+      <div class="glass-card spotlight-card rounded-2xl p-6 border-t-4 border-t-amber-500">
+        <h2 class="text-2xl font-bold text-white">Diagnostics, Self-Healing &amp; Dubai in Cairo SLA</h2>
+        <p class="text-sm text-slate-300 mt-1">
+          Diagnostic checklists for common API errors and the formal Dubai in Cairo support escalation portal.
+        </p>
+      </div>
+
+      <!-- Diagnostic Table -->
+      <div class="glass-card rounded-2xl p-6 overflow-x-auto">
+        <h3 class="text-base font-bold text-white mb-3">Self-Service Diagnostic Matrix</h3>
+        <table class="w-full text-xs text-left border-collapse">
+          <thead>
+            <tr class="border-b border-slate-700 text-slate-400">
+              <th class="py-2.5 px-3">Error Symptom</th>
+              <th class="py-2.5 px-3">Root Cause</th>
+              <th class="py-2.5 px-3">Employee Resolution SOP</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800 text-slate-200 font-mono">
+            <tr>
+              <td class="py-3 px-3 text-rose-400 font-bold">Brevo 401 Unauthorized</td>
+              <td class="py-3 px-3">Brevo Authorized IPs enabled for dynamic Vercel IPs</td>
+              <td class="py-3 px-3 font-sans">Open app.brevo.com -> Security -> Authorized IPs -> Toggle OFF.</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 text-amber-400 font-bold">WhatsApp Error 132000</td>
+              <td class="py-3 px-3">Payload parameter count mismatch</td>
+              <td class="py-3 px-3 font-sans">Ensure template has exactly 5 variables: Type, Name, Email, Phone, Summary.</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 text-cyan-400 font-bold">AI Rate Limit 429</td>
+              <td class="py-3 px-3">Upstash Redis IP protection triggered</td>
+              <td class="py-3 px-3 font-sans">Wait 60 seconds; Redis automatically clears the rate-limited window.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- SLA Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-rose-500">
+          <div class="text-xs text-rose-400 font-bold uppercase">P1 - Critical</div>
+          <div class="text-xl font-black text-white mt-1">&lt; 30 Mins</div>
+          <p class="text-xs text-slate-400 mt-1">Website down, booking engine offline, SSL expired.</p>
+        </div>
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-amber-500">
+          <div class="text-xs text-amber-400 font-bold uppercase">P2 - High</div>
+          <div class="text-xl font-black text-white mt-1">&lt; 1 Hour</div>
+          <p class="text-xs text-slate-400 mt-1">Notification emails/WhatsApp failing, Sanity CMS locked.</p>
+        </div>
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-blue-500">
+          <div class="text-xs text-blue-400 font-bold uppercase">P3 - Medium</div>
+          <div class="text-xl font-black text-white mt-1">&lt; 4 Hours</div>
+          <p class="text-xs text-slate-400 mt-1">Typo on room page, image carousel misalignment.</p>
+        </div>
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-emerald-500">
+          <div class="text-xs text-emerald-400 font-bold uppercase">P4 - Low</div>
+          <div class="text-xl font-black text-white mt-1">&lt; 8 Hours</div>
+          <p class="text-xs text-slate-400 mt-1">Adding new property photos, new amenity icon request.</p>
+        </div>
+      </div>
+
+      <!-- Ticket Submission Box -->
+      <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-base font-bold text-white mb-2">Open a Support Ticket with Dubai in Cairo</h3>
+        <p class="text-xs text-slate-400 mb-3">Copy and transmit to <code>support@dubaiincairo.com</code>:</p>
+        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-cyan-300 space-y-1">
+          <div>TO: support@dubaiincairo.com</div>
+          <div>SUBJECT: [SWISS BLUE] - [P1/P2/P3/P4] - [Brief Summary]</div>
+          <div class="text-slate-500">-----------------------------------------------</div>
+          <div>1. Property: (Tulip Alrawdah / Vinas / Jeddah / Jazan / Riyadh)</div>
+          <div>2. URL: https://swissblue.sa/...</div>
+          <div>3. Priority: P1 Critical / P2 High / P3 Medium / P4 Low</div>
+          <div>4. Error Details: [Paste exact error message or screenshot]</div>
+          <div>5. Submitting Staff: [Name, Job Title, Direct Contact Number]</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- INTERACTIVE SOP MODAL -->
+  <div id="sop-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden modal-backdrop-anim">
+    <div class="glass-card modal-dialog-anim rounded-2xl max-w-xl w-full p-6 sm:p-8 space-y-6 border border-slate-700 bg-slate-900/95 relative shadow-2xl">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono font-bold text-cyan-400" id="modal-role">Role: Specialist</span>
+          <h3 class="text-xl font-extrabold text-white mt-1" id="modal-title">Standard Operating Procedure</h3>
+        </div>
+        <button onclick="closeModal()" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 leading-relaxed whitespace-pre-line" id="modal-body">
+        <!-- Dynamic content -->
+      </div>
+
+      <div class="flex justify-end gap-3 pt-2">
+        <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT ENGINE -->
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById('tab-panel-' + tabId).classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-500/25');
+        btn.classList.add('bg-slate-800/90', 'text-slate-400');
+      });
+
+      const activeBtn = document.getElementById('tab-btn-' + tabId);
+      activeBtn.classList.remove('bg-slate-800/90', 'text-slate-400');
+      activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-500/25');
+    }
+
+    function openModal(title, role, bodyText) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-role').textContent = 'Designated Role: ' + role;
+      document.getElementById('modal-body').textContent = bodyText;
+      document.getElementById('sop-modal').classList.remove('hidden');
+    }
+    function closeModal() {
+      document.getElementById('sop-modal').classList.add('hidden');
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('scroll-progress-bar').style.width = scrolled + '%';
+    });
+
+    function setLanguage(lang) {
+      const html = document.documentElement;
+      if (lang === 'ar') {
+        html.setAttribute('dir', 'rtl');
+        html.setAttribute('lang', 'ar');
+        document.getElementById('lang-ar').classList.add('bg-blue-600', 'text-white');
+        document.getElementById('lang-ar').classList.remove('text-slate-400');
+        document.getElementById('lang-en').classList.remove('bg-blue-600', 'text-white');
+        document.getElementById('lang-en').classList.add('text-slate-400');
+      } else {
+        html.setAttribute('dir', 'ltr');
+        html.setAttribute('lang', 'en');
+        document.getElementById('lang-en').classList.add('bg-blue-600', 'text-white');
+        document.getElementById('lang-en').classList.remove('text-slate-400');
+        document.getElementById('lang-ar').classList.remove('bg-blue-600', 'text-white');
+        document.getElementById('lang-ar').classList.add('text-slate-400');
+      }
+    }
+
+    function filterCards() {
+      const query = document.getElementById('sop-search').value.toLowerCase();
+      document.querySelectorAll('.tab-content:not(.hidden) .glass-card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(query)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Option 2 dynamic spotlight mouse tracking
+    window.addEventListener('mousemove', (e) => {
+      document.body.style.setProperty('--mouse-x', e.clientX + 'px');
+      document.body.style.setProperty('--mouse-y', e.clientY + 'px');
+    });
+  </script>
+</body>
+</html>

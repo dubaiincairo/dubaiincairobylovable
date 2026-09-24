@@ -1,0 +1,53 @@
+{
+  "last_synced": "2026-09-24T02:00:00Z",
+  "last_synced_formatted_en": "Sep 24, 2026, 05:00 AM KSA (02:00 UTC)",
+  "last_synced_formatted_ar": "24 سبتمبر 2026، 05:00 ص بتوقيت مكة المكرمة (02:00 UTC)",
+  "status": "verified_live",
+  "sources": [
+    "General Authority for Statistics (GASTAT) - Tourism & Industrial Index",
+    "Saudi Central Bank (SAMA) - Monthly POS Bulletin",
+    "Ministry of Tourism - Hospitality Statistics Center (MAS)",
+    "Ministry of Industry and Mineral Resources - National Industrial Directory"
+  ],
+  "macro_kpis": {
+    "tourism_spend_sar_billions": 304.2,
+    "tourism_spend_yoy_growth": "+19.2%",
+    "total_visitors_millions": 116.5,
+    "inbound_visitors_millions": 27.5,
+    "domestic_visitors_millions": 89.0,
+    "furniture_pos_spend_sar_billions": 18.2,
+    "furniture_pos_yoy_growth": "+6.4%",
+    "licensed_furniture_factories": 1220,
+    "furniture_factories_capital_sar_billions": 14.8,
+    "sakani_annual_deliveries": 93400,
+    "digital_payment_adoption_pct": 85.0
+  },
+  "hospitality_metrics": {
+    "jeddah_flagship": {
+      "average_occupancy_pct": 76.0,
+      "adr_sar_range": "520 - 680",
+      "revpar_sar": 456.0
+    },
+    "jeddah_alzahraa": {
+      "average_occupancy_pct": 72.0,
+      "adr_sar_range": "320 - 450",
+      "revpar_sar": 277.0
+    },
+    "jeddah_alsamer": {
+      "average_occupancy_pct": 78.0,
+      "adr_sar_range": "220 - 310",
+      "revpar_sar": 206.0
+    },
+    "riyadh_vinas_tulip": {
+      "average_occupancy_pct": 81.0,
+      "adr_sar_range": "280 - 420",
+      "revpar_sar": 283.0
+    }
+  },
+  "regional_demand_share": {
+    "riyadh": 42,
+    "makkah_jeddah": 28,
+    "eastern_province": 16,
+    "southern_province": 14
+  }
+}

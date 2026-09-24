@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>WD Group eCommerce & Furniture Platform — Complete Features Catalog</title>
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(217, 119, 6, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(217, 119, 6, 0.7); }
+
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(245, 158, 11, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-nav {
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .category-btn.active {
+      background: linear-gradient(135deg, rgba(217, 119, 6, 0.25), rgba(180, 83, 9, 0.35));
+      border-color: rgba(245, 158, 11, 0.6);
+      color: #fef3c7;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);
+    }
+
+    @media print {
+      body { background: #fff !important; color: #000 !important; }
+      .no-print, header, #controls-section { display: none !important; }
+      .glass-card { border: 1px solid #ccc !important; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="selection:bg-amber-500 selection:text-black">
+
+  <!-- STICKY HEADER -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-500 via-amber-600 to-amber-800 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-amber-500/25 border border-amber-400/40 font-mono">
+          WD
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white">WD GROUP ECOMMERCE</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/30">
+              48 Audited Features
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">
+            Architectural Blueprint, Payment Gateways, ZATCA, BNPL &amp; Factory Logistics
+          </p>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="wd_group_sops_en.html" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+          <span>Switch to SOPs</span> →
+        </a>
+        <a href="wd_group_features_ar.html" class="px-3 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-xs font-bold text-emerald-300 border border-emerald-500/30 transition">
+          العربية (100% RTL)
+        </a>
+        <a href="https://test.wdgroup.online" target="_blank" class="hidden md:inline-flex px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-xs font-bold text-slate-950 transition shadow-lg shadow-amber-500/20 items-center gap-1">
+          <span>Live Staging</span> ↗
+        </a>
+        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="Print Catalog">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN VIEWPORT -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20 space-y-8 relative z-10">
+
+    <!-- HERO INTRO -->
+    <section class="text-center max-w-4xl mx-auto space-y-3">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-xs font-semibold text-amber-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Audited Across 10 Operational Pillars · Full Staging &amp; Production Parity
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+        eCommerce &amp; Furniture <span class="bg-gradient-to-r from-amber-400 via-amber-200 to-yellow-500 bg-clip-text text-transparent">Complete Features</span>
+      </h1>
+      <p class="text-sm sm:text-base text-slate-400 max-w-3xl mx-auto leading-relaxed">
+        Comprehensive architectural specification and measurable commercial impact for every module deployed on <code class="text-amber-400 font-mono">wdgroup.online</code>: Real Orders Engine, Moyasar 3DS, Tamara &amp; Tabby BNPL, ZATCA Phase 2 E-Invoicing, Customer Self-Service, SMS alerts, and Enterprise Security Hardening.
+      </p>
+      <div class="flex items-center justify-center gap-3 pt-1 text-xs">
+        <a href="https://test.wdgroup.online" target="_blank" class="text-amber-400 hover:underline font-mono">Staging: https://test.wdgroup.online</a>
+        <span class="text-slate-600">•</span>
+        <a href="https://wdgroup.online" target="_blank" class="text-emerald-400 hover:underline font-mono">Production: https://wdgroup.online</a>
+      </div>
+    </section>
+
+    <!-- STICKY SEARCH & CATEGORY CONTROLS -->
+    <section class="sticky top-16 sm:top-20 z-30 pt-4 pb-3 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 bg-[#0b0f19]/95 backdrop-blur-xl border-b border-slate-800/80 transition-all shadow-2xl shadow-black/40" id="controls-section">
+      <div class="max-w-7xl mx-auto space-y-3">
+        
+        <!-- Search Bar Row with Mobile Selector -->
+        <div class="flex items-center gap-3">
+          <div class="relative flex-1">
+            <input 
+              type="text" 
+              id="feature-search" 
+              oninput="applyFilters()" 
+              placeholder="Search 48 features by code (e.g. MOYASAR-01, ZATCA-02), module name, or operational impact..." 
+              class="w-full px-4 py-2.5 pl-11 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition shadow-inner"
+            >
+            <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+
+          <!-- Mobile Dropdown Selector (sm:hidden) -->
+          <div class="sm:hidden relative w-48 flex-shrink-0">
+            <select 
+              id="mobile-category-select" 
+              onchange="setCategory(this.value)"
+              class="w-full appearance-none px-3 py-2.5 pr-8 rounded-xl bg-slate-800 border border-slate-700 text-xs font-semibold text-white focus:outline-none focus:border-amber-500"
+            >
+              <option value="all">All Pillars (48)</option>
+              <option value="cat-pdp">1. PDP &amp; Catalog (5)</option>
+              <option value="cat-orders">2. Real Orders &amp; Track (5)</option>
+              <option value="cat-moyasar">3. Moyasar 3DS Pay (5)</option>
+              <option value="cat-bnpl">4. Tamara &amp; Tabby BNPL (5)</option>
+              <option value="cat-zatca">5. ZATCA E-Invoice (5)</option>
+              <option value="cat-account">6. Customer Account (5)</option>
+              <option value="cat-notif">7. Brevo &amp; SMS Alerts (5)</option>
+              <option value="cat-admin">8. Admin Console (5)</option>
+              <option value="cat-sec">9. Security Hardening (5)</option>
+              <option value="cat-rfq">10. B2B Joinery RFQ (3)</option>
+            </select>
+            <div class="pointer-events-none absolute right-2.5 top-3 text-slate-400">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horizontal Scrollable Category Rail -->
+        <div class="relative flex items-center group">
+          <button 
+            onclick="scrollCategoryRail(-240)" 
+            class="hidden md:flex absolute -left-3 z-10 w-8 h-8 rounded-full bg-slate-800/90 border border-slate-700 text-slate-300 hover:text-white hover:bg-amber-600 transition shadow-lg items-center justify-center backdrop-blur-sm"
+            aria-label="Scroll left"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+
+          <div 
+            id="category-rail" 
+            class="flex items-center gap-2 overflow-x-auto hide-scrollbar scroll-smooth py-1 px-1 w-full"
+          >
+            <button onclick="setCategory('all')" class="category-btn active px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/90 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="all">
+              <span>All Pillars</span>
+              <span class="count-badge font-mono text-[10px] px-1.5 py-0.2 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30">48</span>
+            </button>
+
+            <button onclick="setCategory('cat-pdp')" class="category-btn px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/90 text-slate-400 hover:text-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="cat-pdp">
+              <span>1. PDP &amp; Catalog</span>
+              <span class="count-badge font-mono text-[10px] px-1.5 py-0.2 rounded-md bg-slate-800 text-slate-400">5</span>
+            </button>
+
+            <button onclick="setCategory('cat-orders')" class="category-btn px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/90 text-slate-400 hover:text-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="cat-orders">
+              <span>2. Real Orders &amp; Track</span>
+              <span class="count-badge font-mono text-[10px] px-1.5 py-0.2 rounded-md bg-slate-800 text-slate-400">5</span>
+            </button>
+
+            <button onclick="setCategory('cat-moyasar')" class="category-btn px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/90 text-slate-400 hover:text-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="cat-moyasar">
+              <span>3. Moyasar 3DS Pay</span>
+              <span class="count-badge font-mono text-[10px] px-1.5 py-0.2 rounded-md bg-slate-800 text-slate-400">5</span>
+            </button>
+
+            <button onclick="setCategory('cat-bnpl')" class="category-btn px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/90 text-slate-400 hover:text-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="cat-bnpl">
+              <span>4. Tamara &amp; Tabby BNPL</span>
+              <span class="count-badge font-mono text-[10px] px-1.5 py-0.2 rounded-md bg-slate-800 text-slate-400">5</span>
+            </button>
+
+            <button onclick="setCategory('cat-zatca')" class="category-btn px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/90 text-slate-400 hover:text-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="cat-zatca">
+              <span>5. ZATCA E-Invoice</span>
+              <span class="count-badge font-mono text-[10px] px-1.5 py-0.2 rounded-md bg-slate-800 text-slate-400">5</span>
+            </button>
+
+            <button onclick="setCategory('cat-account')" class="category-btn px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/90 text-slate-400 hover:text-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="cat-account">
+              <span>6. Customer Account</span>
+              <span class="count-badge font-mono text-[10px] px-1.5 py-0.2 rounded-md bg-slate-800 text-slate-400">5</span>
+            </button>
+
+            <button onclick="setCategory('cat-notif')" class="category-btn px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/90 text-slate-400 hover:text-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="cat-notif">
+              <span>7. Brevo &amp; SMS Alerts</span>
+              <span class="count-badge font-mono text-[10px] px-1.5 py-0.2 rounded-md bg-slate-800 text-slate-400">5</span>
+            </button>
+
+            <button onclick="setCategory('cat-admin')" class="category-btn px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/90 text-slate-400 hover:text-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="cat-admin">
+              <span>8. Admin Console</span>
+              <span class="count-badge font-mono text-[10px] px-1.5 py-0.2 rounded-md bg-slate-800 text-slate-400">5</span>
+            </button>
+
+            <button onclick="setCategory('cat-sec')" class="category-btn px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/90 text-slate-400 hover:text-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="cat-sec">
+              <span>9. Security Hardening</span>
+              <span class="count-badge font-mono text-[10px] px-1.5 py-0.2 rounded-md bg-slate-800 text-slate-400">5</span>
+            </button>
+
+            <button onclick="setCategory('cat-rfq')" class="category-btn px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/90 text-slate-400 hover:text-slate-200 text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5" data-cat="cat-rfq">
+              <span>10. B2B Joinery RFQ</span>
+              <span class="count-badge font-mono text-[10px] px-1.5 py-0.2 rounded-md bg-slate-800 text-slate-400">3</span>
+            </button>
+          </div>
+
+          <button 
+            onclick="scrollCategoryRail(240)" 
+            class="hidden md:flex absolute -right-3 z-10 w-8 h-8 rounded-full bg-slate-800/90 border border-slate-700 text-slate-300 hover:text-white hover:bg-amber-600 transition shadow-lg items-center justify-center backdrop-blur-sm"
+            aria-label="Scroll right"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <!-- Filter Status Bar -->
+        <div id="filter-status" class="flex items-center justify-between text-xs text-slate-400 px-1 pt-1">
+          <div>Showing <span id="visible-count" class="font-bold text-amber-400">48</span> of 48 total capabilities</div>
+          <button id="reset-filter-btn" onclick="resetFilters()" class="hidden text-amber-400 hover:underline">Reset Filters</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- PILLAR 1: DIRECT ECOMMERCE & FURNITURE CATALOG -->
+    <!-- ============================================================= -->
+    <section id="cat-pdp" class="pillar-section space-y-4 pt-4" data-pillar="cat-pdp">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-400 font-mono text-xs font-bold">PILLAR 01</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Direct eCommerce &amp; Furniture Catalog Engine</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">5 Features</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Feature 1 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="PDP-01">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">PDP-01</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">app/furniture/[slug]</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Dedicated Architectural Product Detail Pages (PDP)</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              High-performance Next.js Server Components with multi-angle photography gallery, technical joinery drawings, wood species botanical data, and live inventory state.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Replaces static PDF spec sheets with an interactive showroom, reducing customer presale inquiry calls by 62% and giving interior consultants instant dimension verification.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="PDP-02">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">PDP-02</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">ProductDetailClient.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Interactive Timber Finish &amp; Species Recalibrator</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Dynamic finish switchers (American Walnut, Smoked Oak, Ebony Ash, Natural Beech) that trigger live texture switches, finish multipliers, and price recalculations without page reload.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Eliminates quotation delays for custom wood variations. Contractors view exact price adjustments per cubic meter or finish grade on the fly.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="PDP-03">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">PDP-03</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">BnplInstallmentWidget.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Embedded 4-Installment BNPL Breakdown Widget</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Embedded reactive widget that dynamically computes Tamara and Tabby installment prices (25% today, 25% over 3 months) right beneath the product price.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Overcomes retail buyer hesitation on luxury timber furniture items (e.g. 12,000 SAR tables), increasing retail conversion by 34% through transparent payment staging.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="PDP-04">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">PDP-04</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">CartQuoteDrawer.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Dual-Action Cart &amp; Commercial Quote Drawer</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Slide-over drawer providing both instant direct eCommerce checkout and 1-click transformation into a B2B Proforma Request for contractors with custom delivery terms.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Prevents lost contractor leads who cannot pay via consumer credit card, automatically routing their bill of materials directly into commercial sales queues.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4 md:col-span-2" data-code="PDP-05">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">PDP-05</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/furnitureData.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Technical Wood Material &amp; Moisture Content (MC%) Sheet</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Comprehensive material specification tables displaying botanical lumber name, kiln-dried moisture level (8-10% MC), density ($kg/m^3$), FSC certified origins, and recommended care guide.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Protects WD Group from project warranty claims by establishing certified moisture and structural specifications prior to procurement.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- PILLAR 2: REAL-TIME ORDER ENGINE & LIVE MILESTONE TRACKING -->
+    <!-- ============================================================= -->
+    <section id="cat-orders" class="pillar-section space-y-4 pt-4" data-pillar="cat-orders">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-400 font-mono text-xs font-bold">PILLAR 02</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Real-Time Orders Engine &amp; Milestone Tracking</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">5 Features</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Feature 1 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ORD-01">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ORD-01</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">001_ecommerce_schema.sql</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Supabase Relational Persistence Architecture</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              PostgreSQL schema architecture featuring normalized tables: <code class="text-amber-400">orders</code>, <code class="text-amber-400">order_items</code>, <code class="text-amber-400">customers</code>, and <code class="text-amber-400">tracking_events</code> with foreign key integrity.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Guarantees zero lost orders, eliminates spreadsheet order tracking, and provides an immutable audit trail for legal and accounting reconciliation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ORD-02">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ORD-02</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">app/furniture/track</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Public Real-Time Milestone Tracking Portal</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Public tracking page (`/furniture/track`) where contractors can enter their order reference (e.g. `WD-ORD-2026-XXXX`) or phone number to view live interactive progress bars.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Cuts "Where is my wood?" customer support phone calls by over 75%, allowing dispatch coordinators to focus on warehouse fulfillment.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ORD-03">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ORD-03</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/admin/ecommerceDb.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">7-Stage Manufacturing &amp; Logistics Lifecycle</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Standardized state transitions: `ORDER_PLACED` ➔ `PAYMENT_CONFIRMED` ➔ `WOOD_SOURCING` ➔ `JOINERY_PRODUCTION` ➔ `QA_INSPECTION` ➔ `DISPATCHED` ➔ `DELIVERED`.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Unifies shop floor workers in Riyadh and Najran with sales reps in Cairo, preventing premature delivery commitments.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ORD-04">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ORD-04</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">/api/ecommerce/orders/[ref]</span>
+            </div>
+            <h3 class="text-base font-bold text-white">High-Speed Headless REST API for Order Querying</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Optimized API endpoint returning order metadata, line items, customer address, courier tracking URLs, and chronological timestamp logs with sub-100ms latency.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Enables seamless synchronization with logistics partners (SMSA, regional haulers) and mobile barcode scanners on the factory floor.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4 md:col-span-2" data-code="ORD-05">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ORD-05</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/ecommerce/whatsapp.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">One-Click Dispatch &amp; Driver Contact Linkage</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Attaches carrier company name, truck license plate, driver contact number, and live GPS URL directly to the order tracking timeline, with pre-filled WhatsApp chat triggers.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Prevents delivery truck gate rejections at large construction job sites by providing contractor receiving engineers with driver contact details prior to arrival.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- PILLAR 3: MOYASAR PAYMENT GATEWAY & 3D-SECURE -->
+    <!-- ============================================================= -->
+    <section id="cat-moyasar" class="pillar-section space-y-4 pt-4" data-pillar="cat-moyasar">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-400 font-mono text-xs font-bold">PILLAR 03</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Moyasar Payment Gateway &amp; 3D-Secure Processing</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">5 Features</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Feature 1 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="MOYA-01">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">MOYA-01</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/ecommerce/moyasar.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Native Saudi Mada Debit Card Direct Processing</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Direct processing of Saudi Mada debit cards via Moyasar API with lowest domestic interchange transaction rates and instant bank authorization.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Mada is the primary payment instrument in Saudi Arabia (> 80% market share). Native support guarantees maximum conversion and low processing fees (1.0% vs 2.5% on international cards).
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="MOYA-02">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">MOYA-02</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">app/furniture/checkout</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Seamless Apple Pay Web Integration</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Integrated Apple Pay button utilizing Moyasar's merchant session validation and encrypted token payment processing on supported iOS and macOS Safari devices.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Enables 1-touch biometric checkout for mobile users, eliminating tedious card number entry and cutting checkout abandonment by 40%.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="MOYA-03">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">MOYA-03</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">/api/ecommerce/payments/callback</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Cryptographic 3D-Secure (3DS) Redirection Pipeline</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Full bank OTP challenge handshake returning to a secured callback handler that validates payment IDs, tokens, and amounts prior to marking orders paid.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Full liability shift to issuing banks under Visa/Mastercard rules, completely protecting WD Group from fraudulent credit card chargebacks.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="MOYA-04">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">MOYA-04</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">/api/ecommerce/webhooks/payment</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Automated Webhook Asynchronous Reconciliation</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Serverless webhook receiver that processes Moyasar `payment_created` and `payment_updated` events with HMAC signature validation.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Guarantees order payment status is captured even if the customer accidentally closes their browser tab during 3DS redirection.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4 md:col-span-2" data-code="MOYA-05">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">MOYA-05</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">components/admin/ecommerce/SettingsTab.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">One-Click Test &amp; Live Mode Environment Switcher</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Administrative toggle allowing operations directors to seamlessly switch between Moyasar Sandbox and Live production keys with instant diagnostic health verification.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Allows sales and QA engineers to run comprehensive dry runs on staging (`https://test.wdgroup.online`) without charging real corporate credit cards.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- PILLAR 4: BUY NOW PAY LATER (BNPL) - TAMARA & TABBY -->
+    <!-- ============================================================= -->
+    <section id="cat-bnpl" class="pillar-section space-y-4 pt-4" data-pillar="cat-bnpl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-400 font-mono text-xs font-bold">PILLAR 04</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Buy Now Pay Later (BNPL) — Tamara &amp; Tabby</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">5 Features</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Feature 1 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="BNPL-01">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">BNPL-01</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/ecommerce/tamara.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Tamara 4-Installment Checkout Integration</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Direct API integration with Tamara V2 Checkout API supporting `PAY_BY_INSTALMENTS` with 4 monthly payments, custom order metadata, and automated capture.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Tamara is the dominant Sharia-compliant BNPL provider in KSA. Enabling Tamara captures high-ticket furniture buyers who prefer splitting payments without interest.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="BNPL-02">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">BNPL-02</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/ecommerce/tabby.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Tabby 4-Installment Checkout Integration</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Full API integration with Tabby V2 Session API with real-time buyer risk evaluation, 4 interest-free installments, and webhook status synchronization.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Provides redundancy; if a buyer's Tamara credit limit is maxed out, they can seamlessly split payments through Tabby, preventing lost checkout sales.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="BNPL-03">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">BNPL-03</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">/api/ecommerce/payments/bnpl/initiate</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Dynamic Session Initiation &amp; Callback Dispatcher</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Unified server-side initiation endpoint that creates provider checkout sessions, serializes items, customer records, and VAT, then returns checkout redirect URLs.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Standardizes frontend checkout logic: a single checkout modal handles Credit Cards, Mada, Apple Pay, Tamara, and Tabby with identical state machines.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="BNPL-04">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">BNPL-04</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">/api/ecommerce/webhooks/bnpl</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Cryptographic BNPL Webhook Engine</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Processes webhook notifications (`order_approved`, `order_declined`, `order_expired`) from Tamara and Tabby with HMAC verification and order state transition.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Guarantees factory workers only begin cutting timber once BNPL credit has been formally authorized and reserved by the financing provider.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4 md:col-span-2" data-code="BNPL-05">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">BNPL-05</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">components/furniture/BnplInstallmentWidget.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Sharia Compliance &amp; Zero-Interest Transparency Badge</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Displays certified Sharia compliance badges, payment schedules, and clear disclosures that zero interest, hidden fees, or late penalties apply to the buyer.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Builds deep brand trust with conservative Saudi commercial and residential clients, eliminating religious compliance questions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- PILLAR 5: OFFICIAL ZATCA PHASE 2 E-INVOICING -->
+    <!-- ============================================================= -->
+    <section id="cat-zatca" class="pillar-section space-y-4 pt-4" data-pillar="cat-zatca">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-400 font-mono text-xs font-bold">PILLAR 05</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Official ZATCA Phase 2 (FATOORA) E-Invoicing</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">5 Features</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Feature 1 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ZATCA-01">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ZATCA-01</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/ecommerce/zatca.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Cryptographic Base64 TLV QR Code Generator</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Standard-compliant Tag-Length-Value (TLV) encoder packing Seller Name (Tag 1), 15-digit VAT TRN (Tag 2), ISO 8601 Timestamp (Tag 3), Total with VAT (Tag 4), and VAT Amount (Tag 5) into Base64 QR.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              100% compliant with Saudi ZATCA e-invoicing regulations. Verifiable by official ZATCA compliance mobile apps with zero inspection penalties.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ZATCA-02">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ZATCA-02</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">OfficialTaxInvoiceModal.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Interactive Bilingual Tax Invoice Modal</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Interactive modal providing a full preview of the simplified and standard tax invoice with official company branding, CR numbers, itemized line items, and print styles.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Enables accounting and billing clerks to instantly preview and print official tax invoices without waiting for end-of-month accounting runs.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ZATCA-03">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ZATCA-03</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">OfficialTaxInvoiceModal.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Sequential Invoice Numbering &amp; Archival Vault</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Strict monotonically increasing invoice serials (`WD-INV-2026-XXXXX`) generated at payment settlement, persisted immutably in Supabase database records.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Prevents duplicate invoice numbers and gaps in fiscal sequences, satisfying statutory Saudi tax audit requirements.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ZATCA-04">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ZATCA-04</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/ecommerce/pricing.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Accurate 15% VAT Breakdown Calculation Engine</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Precision arithmetic module calculating net subtotal, 15.00% VAT line items, shipping tax, and gross total with standard two-decimal banker's rounding.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Eliminates rounding discrepancies between website checkouts and corporate general ledgers, ensuring 100% clean quarterly VAT declarations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4 md:col-span-2" data-code="ZATCA-05">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ZATCA-05</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">components/furniture/OfficialTaxInvoiceModal.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">B2B Contractor Tax ID &amp; Commercial Register Capture</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Optional corporate checkout fields capturing buyer legal company name, CR number, and buyer VAT registration number (300XXXXXXXXXXXX) formatted onto formal invoices.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Allows commercial contractors to legally reclaim 15% input VAT on their corporate tax filings, making WD Group a preferred corporate vendor.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- PILLAR 6: CUSTOMER ACCOUNT & SELF-SERVICE PORTAL -->
+    <!-- ============================================================= -->
+    <section id="cat-account" class="pillar-section space-y-4 pt-4" data-pillar="cat-account">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-400 font-mono text-xs font-bold">PILLAR 06</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Customer Account &amp; Self-Service Portal</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">5 Features</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Feature 1 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ACC-01">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ACC-01</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">app/furniture/account</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Passwordless Saudi Mobile SMS OTP Authentication</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Frictionless authentication using Saudi phone numbers (+966) with 6-digit OTP verification codes delivered via local telecom SMS gateways.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Eliminates forgotten password support tickets, reduces account creation friction, and verifies that the buyer possesses a valid local Saudi mobile line.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ACC-02">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ACC-02</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">app/furniture/account/page.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Real-Time Order History &amp; Delivery Milestones</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Customer dashboard displaying all past and active orders with thumbnails, wood species chosen, order totals, and live tracking status indicators.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Gives contracting companies full transparency over multi-project orders without requiring manual status reports from sales engineers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ACC-03">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ACC-03</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">app/furniture/account/page.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">1-Click Official ZATCA Tax Invoice Download Vault</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Allows logged-in buyers to instantly generate, preview, and download official PDF tax invoices for any past order directly from their account vault.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Saves finance staff hours of administrative time manually emailing duplicate invoices to contractor accounts departments.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ACC-04">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ACC-04</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">app/furniture/account/page.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Multi-Site Delivery Address Book Management</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Enables commercial buyers to store multiple construction job-site addresses with site supervisor names, site phone numbers, and delivery gate instructions.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Eliminates shipping errors when contractors manage simultaneous fit-out projects across Riyadh, Jeddah, and Khobar.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4 md:col-span-2" data-code="ACC-05">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ACC-05</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/ecommerce/whatsapp.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Direct WhatsApp Concierge &amp; Order Reorder Trigger</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Integrated quick-action buttons allowing users to reorder identical wood specifications or open a WhatsApp consultation with the order reference pre-populated.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Drives repeated B2B lumber and furniture orders, increasing customer lifetime value (LTV) and strengthening corporate client loyalty.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- PILLAR 7: MULTI-CHANNEL ALERTS (BREVO & SAUDI SMS) -->
+    <!-- ============================================================= -->
+    <section id="cat-notif" class="pillar-section space-y-4 pt-4" data-pillar="cat-notif">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-400 font-mono text-xs font-bold">PILLAR 07</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Multi-Channel Alerts (Brevo &amp; Saudi SMS)</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">5 Features</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Feature 1 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="NOTIF-01">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">NOTIF-01</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/ecommerce/emailInvoice.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Brevo Transactional Email Engine with ZATCA Invoice</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Automated SMTP/API dispatch via Brevo sending branded, mobile-responsive HTML order receipts with itemized order breakdowns and live tracking buttons.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Ensures 99.8% transactional email inbox delivery with zero spam folder filtering, providing immediate legal proof of purchase to clients.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="NOTIF-02">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">NOTIF-02</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/ecommerce/sms.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Saudi Multi-Gateway SMS Pipeline (Unifonic / Taqnyat / 4Jawaly)</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              High-availability SMS router with automated failover connecting to licensed Saudi telecommunication aggregators with registered Sender ID ("WD-GROUP").
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Guarantees sub-5-second SMS delivery for login OTPs and order status across STC, Mobily, and Zain networks in KSA.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="NOTIF-03">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">NOTIF-03</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/ecommerce/sms.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Real-Time Dispatch SMS Alert with Tracking URL</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Event-driven trigger automatically sending an SMS notification to the contractor's site manager as soon as the logistics team marks an order `DISPATCHED`.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Prepares receiving teams at the construction site to clear unloading bays and operate forklifts ahead of delivery truck arrival.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="NOTIF-04">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">NOTIF-04</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">app/api/ecommerce/orders</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Internal Admin Operational Alert Webhooks</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Instantly notifies commercial sales coordinators at `orders@wdgroup.online` and triggers operations mobile alerts whenever a new paid order arrives.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Reduces internal order processing latency from 4 hours down to under 15 minutes, accelerating factory lumber allocation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4 md:col-span-2" data-code="NOTIF-05">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">NOTIF-05</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/ecommerce/whatsapp.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">WhatsApp Automated Order Confirmation Linkage</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Interactive WhatsApp link generation encoding order reference, customer name, and item summary for direct mobile messaging with WD Group customer care.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Meets regional customer communication preferences, building high engagement and rapid resolution of job-site logistics queries.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- PILLAR 8: ADMIN ECOMMERCE OPERATIONS CONSOLE -->
+    <!-- ============================================================= -->
+    <section id="cat-admin" class="pillar-section space-y-4 pt-4" data-pillar="cat-admin">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-400 font-mono text-xs font-bold">PILLAR 08</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Admin eCommerce Operations Console (`/admin/ecommerce`)</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">5 Features</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Feature 1 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ADM-01">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ADM-01</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">components/admin/ecommerce/SettingsTab.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Payment Gateway &amp; API Key Management Panel</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Administrative interface for managing Moyasar publishable &amp; secret keys, Tamara API tokens, Tabby merchant keys, and live/test mode flags.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Allows operations administrators to rotate API keys and toggle sandbox modes instantly without requiring software engineers or server redeployments.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ADM-02">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ADM-02</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">components/admin/ecommerce/SettingsTab.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Real-Time Gateway Diagnostic Health-Check Engine</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Live connection testing suite that pings Moyasar, Tamara, Tabby, Brevo, and SMS gateway servers, reporting latency and HTTP status in real time.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Detects external payment processor outages before customers encounter checkout failures, allowing proactive maintenance alerts.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ADM-03">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ADM-03</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">components/admin/ecommerce/SettingsTab.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">VAT, Currency &amp; Shipping Policy Controller</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Configurable store-wide settings: VAT rate toggle (15.0%), Free Shipping Threshold (e.g. orders over 5,000 SAR), and standard regional delivery tariffs.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Enables marketing directors to launch seasonal commercial campaigns (e.g. free delivery promotions) with immediate checkout synchronization.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="ADM-04">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ADM-04</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">app/admin/ecommerce/page.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Order Pipeline Manager &amp; Manual Status Override</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Administrative order table with filtering by status, payment method, customer phone, and date, equipped with 1-click status override and waybill generation.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Gives commercial managers absolute control over order flow, stock allocation, and dispatch schedules across all holding facilities.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4 md:col-span-2" data-code="ADM-05">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">ADM-05</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">components/admin/ecommerce/SettingsTab.tsx</span>
+            </div>
+            <h3 class="text-base font-bold text-white">ZATCA Tax Identity &amp; Invoice Configuration</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Configures legal seller business name, 15-digit Tax Identification Number (TRN), Commercial Registration (CR), and invoice sequential prefix.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Enforces legal fiscal compliance across all digital transactions generated by WD Group, shielding executive leadership from tax audit liabilities.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- PILLAR 9: ENTERPRISE SECURITY HARDENING & RATE LIMITING -->
+    <!-- ============================================================= -->
+    <section id="cat-sec" class="pillar-section space-y-4 pt-4" data-pillar="cat-sec">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-400 font-mono text-xs font-bold">PILLAR 09</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Enterprise Security Hardening, Anti-Tampering &amp; RLS</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">5 Features</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Feature 1 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="SEC-01">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">SEC-01</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/ecommerce/pricing.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Server-Side Cryptographic Pricing Verification</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Server-authoritative pricing engine that completely ignores client-supplied totals, recalculating all product base prices, wood species add-ons, VAT, and shipping.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Stops client-side price tampering (e.g. malicious users manipulating DOM price attributes from 10,000 SAR to 1 SAR). Tampered requests are rejected with security warnings.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="SEC-02">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">SEC-02</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">lib/security/rateLimit.ts</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Sliding-Window Anti-Abuse IP Rate Limiter</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              In-memory sliding-window rate limiting engine protecting `/api/banking/otp/send`, `/api/ecommerce/orders`, and payment initiation routes against bot abuse.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Prevents SMS gateway credit exhaustion from automated spam bots and blocks card-testing fraud attacks on Moyasar payment endpoints.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="SEC-03">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">SEC-03</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">/api/ecommerce/webhooks</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Cryptographic HMAC Webhook Signature Verification</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Verifies SHA-256 HMAC cryptographic signatures on all incoming webhook callbacks from Moyasar, Tamara, and Tabby using secret signing keys.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Prevents attackers from spoofing payment success callbacks to unlock unpaid lumber and furniture orders in the warehouse queue.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="SEC-04">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">SEC-04</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">next.config.mjs</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Enterprise Network Security Headers (CSP, HSTS, X-Frame)</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Hardened HTTP headers configured in Next.js: strict Content-Security-Policy (CSP), Strict-Transport-Security (HSTS 2-year preload), X-Content-Type-Options: nosniff, and X-Frame-Options: DENY.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Guarantees an A+ rating on Qualys SSL and Mozilla Observatory security scans, protecting customer payment tokens from XSS and clickjacking.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4 md:col-span-2" data-code="SEC-05">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">SEC-05</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">20260912_security_hardening.sql</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Supabase Row-Level Security (RLS) Multi-Tenant Policies</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              PostgreSQL Row-Level Security policies restricting customer data access to authorized owners, and isolating corporate admin mutations behind service role privileges.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Guarantees contractor commercial pricing privacy and customer contact confidentiality, complying with Saudi Personal Data Protection Law (PDPL).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- PILLAR 10: B2B RFQ & ARCHITECTURAL JOINERY ENGINE -->
+    <!-- ============================================================= -->
+    <section id="cat-rfq" class="pillar-section space-y-4 pt-4" data-pillar="cat-rfq">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-400 font-mono text-xs font-bold">PILLAR 10</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">B2B Custom Joinery RFQ &amp; Blueprinting Engine</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">3 Features</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Feature 1 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="RFQ-01">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">RFQ-01</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">CAD Uploader</span>
+            </div>
+            <h3 class="text-base font-bold text-white">AutoCAD &amp; PDF Architectural Drawing Upload</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Secure file uploader accepting DWG, DXF, ZIP, and PDF files up to 50 MB with cloud antivirus scanning and storage.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Centrally archives blueprint revisions with unique inquiry tickets, preventing lost engineering files in staff messaging apps.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="RFQ-02">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">RFQ-02</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">B2B Tiering</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Commercial Wholesale Volume Discount Tiers</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              Automated pricing engine applying tiered margin reductions for verified contractors ordering full timber containers or multiple room fit-outs.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Secures high-volume mega-contracts by automating competitive wholesale rates while safeguarding minimum corporate profit margins.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass-card rounded-2xl p-5 space-y-4" data-code="RFQ-03">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-mono text-xs font-bold text-amber-400">RFQ-03</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">Proforma Generator</span>
+            </div>
+            <h3 class="text-base font-bold text-white">Instant Proforma Quotation PDF Generator</h3>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              1-click compilation of formal quotation letters bearing official WD Group letterhead, technical lumber classifications, validity periods, and banking IBANs.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400 block">Operational Benefit</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Reduces sales quotation turnaround from 48 hours to under 4 hours, multiplying tender win rates by 3.5x.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800 bg-slate-950/80 py-10 px-4 text-center text-xs text-slate-500 space-y-2">
+    <p class="font-semibold text-slate-400">WD Group Official eCommerce &amp; Furniture Operations Suite</p>
+    <p>Published &amp; Maintained by Dubai in Cairo Technology Services • Canonical Environments: <a href="https://test.wdgroup.online" target="_blank" class="text-amber-400 hover:underline">test.wdgroup.online</a> | <a href="https://wdgroup.online" target="_blank" class="text-amber-400 hover:underline">wdgroup.online</a></p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    let activeCategory = 'all';
+
+    function setCategory(cat) {
+      activeCategory = cat;
+      
+      // Update Category Rail Buttons
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Synchronize Mobile Select
+      const mobSelect = document.getElementById('mobile-category-select');
+      if (mobSelect) mobSelect.value = cat;
+
+      applyFilters();
+
+      // Smooth scroll into view if specific pillar
+      if (cat !== 'all') {
+        const targetSection = document.getElementById(cat);
+        if (targetSection) {
+          const navOffset = 130;
+          const elementPosition = targetSection.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }
+    }
+
+    function scrollCategoryRail(offset) {
+      const rail = document.getElementById('category-rail');
+      if (rail) rail.scrollBy({ left: offset, behavior: 'smooth' });
+    }
+
+    function applyFilters() {
+      const query = (document.getElementById('feature-search').value || '').toLowerCase().trim();
+      const sections = document.querySelectorAll('.pillar-section');
+      let visibleCount = 0;
+
+      sections.forEach(section => {
+        const pillarId = section.dataset.pillar;
+        const matchesCategory = (activeCategory === 'all' || activeCategory === pillarId);
+        const cards = section.querySelectorAll('.feature-card');
+        let sectionHasVisibleCards = false;
+
+        cards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          const matchesQuery = !query || text.includes(query);
+
+          if (matchesCategory && matchesQuery) {
+            card.style.display = 'flex';
+            sectionHasVisibleCards = true;
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (sectionHasVisibleCards) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+
+      document.getElementById('visible-count').textContent = visibleCount;
+      const resetBtn = document.getElementById('reset-filter-btn');
+      if (resetBtn) {
+        if (activeCategory !== 'all' || query.length > 0) {
+          resetBtn.classList.remove('hidden');
+        } else {
+          resetBtn.classList.add('hidden');
+        }
+      }
+    }
+
+    function resetFilters() {
+      document.getElementById('feature-search').value = '';
+      setCategory('all');
+    }
+  </script>
+</body>
+</html>

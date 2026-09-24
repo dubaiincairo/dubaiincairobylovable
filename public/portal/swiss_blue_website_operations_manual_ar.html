@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فنادق وشقق سويس بلو — دليل العمليات والتشغيل المؤسسي المعتمد</title>
+  
+  <!-- Tailwind CSS allowlisted in Antigravity -->
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Mobile Touch & Tap Normalization */
+    *, *::before, *::after {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      background-color: #070B14;
+      background-image: 
+        radial-gradient(rgba(56, 189, 248, 0.15) 1px, transparent 1px),
+        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px, 72px 72px, 72px 72px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .opt2-spotlight {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(650px circle at var(--mouse-x, 50%) var(--mouse-y, 40%), rgba(6, 182, 212, 0.12), transparent 60%);
+      z-index: 1;
+    }
+    .opt2-contour {
+      position: fixed;
+      inset: 0;
+      opacity: 0.18;
+      pointer-events: none;
+      background-image: repeating-radial-gradient(circle at 80% 20%, transparent 0, transparent 40px, rgba(56, 189, 248, 0.2) 41px, transparent 42px);
+      z-index: 0;
+    }
+
+    /* Custom Scrollbar for Desktop */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(59, 130, 246, 0.4);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(59, 130, 246, 0.7);
+    }
+    
+    /* Modern Glassmorphism & GPU Acceleration */
+    .glass-card {
+      background: rgba(11, 20, 36, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    .glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.6);
+      transform: translateY(-3px) translateZ(0);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.25);
+    }
+    .glass-card:active {
+      transform: translateY(-1px) scale(0.99) translateZ(0);
+    }
+    .glass-nav {
+      background: rgba(11, 17, 29, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+    }
+
+    /* 60fps Native Tab Transitions */
+    @keyframes tabEnter {
+      0% {
+        opacity: 0;
+        transform: translateY(12px) scale(0.995);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .tab-content:not(.hidden) {
+      animation: tabEnter 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+      will-change: opacity, transform;
+    }
+
+    /* Print Stylesheet for PDF Generation */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+      }
+      .no-print, header, #scroll-progress-bar, .ambient-orb-1, .ambient-orb-2, .ambient-orb-3, #search-bar-wrap, .opt2-spotlight, .opt2-contour {
+        display: none !important;
+      }
+      .glass-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        break-inside: avoid !important;
+      }
+      .text-white { color: #0f172a !important; }
+      .text-slate-300, .text-slate-400 { color: #334155 !important; }
+    }
+  </style>
+</head>
+<body class="text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-cyan-500 selection:text-slate-950 pb-20 relative">
+
+  <!-- طبقات شبكة التصميم الطبوغرافي المعماري (الخيار الثاني) -->
+  <div class="opt2-contour"></div>
+  <div class="opt2-spotlight"></div>
+
+  <!-- كرات الإضاءة المحيطية التفاعلية -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="absolute top-20 -right-40 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+    <div class="absolute top-1/3 -left-40 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px]"></div>
+    <div class="absolute bottom-20 right-1/3 w-[450px] h-[450px] bg-cyan-600/10 rounded-full blur-[120px]"></div>
+  </div>
+
+  <!-- شريط التنقل العلوي الثابت -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+      
+      <!-- شعار سويس بلو والهوية -->
+      <div class="flex items-center gap-3.5 shrink-0">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-800 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/25 border border-blue-400/40 relative group shrink-0">
+          <span class="text-base tracking-tighter">SB</span>
+          <span class="absolute -bottom-0.5 -left-0.5 w-3 h-3 bg-emerald-400 border-2 border-slate-900 rounded-full" title="المنصة نشطة"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white flex items-center gap-1.5" id="nav-brand-title">
+              <span>سويس بلو</span>
+              <span class="text-blue-400">•</span>
+              <span class="text-blue-200">SWISS BLUE</span>
+            </span>
+            <span class="hidden sm:inline-flex text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/30">
+              دليل العمليات والتشغيل • 2026
+            </span>
+          </div>
+          <p class="text-[11px] sm:text-xs text-slate-400 hidden sm:block">
+            محفظة الفنادق والشقق المخدومة الفاخرة • الرياض • جدة • جازان
+          </p>
+        </div>
+      </div>
+
+      <!-- أزرار الإجراءات السريعة والتحويل اللغوي المباشر -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- طباعة وتصدير PDF -->
+        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs transition" title="طباعة أو تصدير ملف بي دي إف">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+        </button>
+
+        <!-- زر التحويل إلى الإنجليزية (مسار نسبي مباشر متناظر) -->
+        <a href="swiss_blue_website_operations_manual_en.html" class="px-3 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-xs font-bold text-blue-300 border border-blue-500/30 transition flex items-center gap-1.5 shadow-sm font-mono" dir="ltr">
+          <span>English (100% LTR)</span>
+        </a>
+        <a href="index_ar.html" class="hidden lg:inline-flex px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition">
+          بوابة العمليات
+        </a>
+      </div>
+
+    </div>
+
+    <!-- مؤشر تمرير الصفحة المتحرك -->
+    <div id="scroll-progress-bar" class="absolute bottom-0 right-0 h-[2.5px] bg-gradient-to-l from-blue-500 via-cyan-400 to-emerald-400 w-0 transition-[width] duration-75 ease-out shadow-[0_0_10px_rgba(56,189,248,0.8)] pointer-events-none"></div>
+  </header>
+
+  <!-- مساحة العرض الرئيسية -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8 relative z-10">
+
+    <!-- قسم الواجهة الترحيبية -->
+    <section class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-6 sm:p-10 shadow-2xl">
+      <div class="absolute -left-20 -top-20 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-6">
+        <!-- وسوم الحالة وروابط البيئات المعتمدة -->
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-300 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+            <span>منظومة سويس بلو الرقمية • تدقيق الكود البرمجي المعتمد</span>
+          </div>
+
+          <!-- أزرار المعاينة والموقع الحي المعتمد -->
+          <div class="flex items-center gap-2 text-xs" dir="ltr">
+            <a href="https://test.swissbluehotels.com" target="_blank" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1.5 font-mono">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+              <span>test.swissbluehotels.com</span>
+            </a>
+            <a href="https://new.swissbluehotels.com" target="_blank" class="px-3 py-1 rounded-full bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 flex items-center gap-1.5 font-mono">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span>new.swissbluehotels.com</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- العنوان الرئيسي والوصف التنفيذي -->
+        <div class="space-y-3 max-w-4xl">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            فنادق وشقق سويس بلو المخدومة
+          </h1>
+          <p class="text-lg sm:text-xl text-blue-300 font-medium">
+            دليل العمليات التقنية، إدارة المحتوى عبر Sanity CMS، ومسار توجيه الحجوزات والعملاء
+          </p>
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed pt-1">
+            دليل تشغيلي متكامل لموظفي وإدارة الفنادق يغطي المواقع الستة في المملكة (توليب الروضة، فيناس الرياض، جدة، جازان)، تشغيل محرك الحجز المباشر، قنوات الإشعارات الفورية عبر Brevo SMTP و WhatsApp Cloud API، حوكمة وتعديل المحتوى عبر Sanity Studio v3، ومستويات الدعم الفني الطارئ من دبي في القاهرة.
+          </p>
+        </div>
+
+        <!-- بطاقات مؤشرات الأداء الأربعة -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+          <div class="glass-card p-4 rounded-2xl border-slate-700/60 hover:border-blue-500/50 transition-all duration-300 cursor-pointer">
+            <div class="text-xs text-slate-400 font-semibold">المحفظة النشطة</div>
+            <div class="text-2xl font-black text-blue-400 mt-1">6 مواقع فندقية</div>
+            <div class="text-xs text-slate-400 mt-0.5">فنادق وشقق مخدومة</div>
+          </div>
+          <div class="glass-card p-4 rounded-2xl border-slate-700/60 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer">
+            <div class="text-xs text-slate-400 font-semibold">سرعة توجيه الطلبات</div>
+            <div class="text-2xl font-black text-emerald-400 mt-1">&lt; 5 ثوانٍ</div>
+            <div class="text-xs text-slate-400 mt-0.5">Brevo SMTP + WhatsApp API</div>
+          </div>
+          <div class="glass-card p-4 rounded-2xl border-slate-700/60 hover:border-purple-500/50 transition-all duration-300 cursor-pointer">
+            <div class="text-xs text-slate-400 font-semibold">توليب الروضة بالرياض</div>
+            <div class="text-2xl font-black text-purple-400 mt-1">36 وحدة سكنية</div>
+            <div class="text-xs text-slate-400 mt-0.5">15 شقة سوبريور بغرفة نوم</div>
+          </div>
+          <div class="glass-card p-4 rounded-2xl border-slate-700/60 hover:border-amber-500/50 transition-all duration-300 cursor-pointer">
+            <div class="text-xs text-slate-400 font-semibold">زمن استجابة الطوارئ P1</div>
+            <div class="text-2xl font-black text-amber-400 mt-1">&lt; 30 دقيقة</div>
+            <div class="text-xs text-slate-400 mt-0.5">دعم دبي في القاهرة المباشر</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- شريط التبويبات الثابت -->
+    <div class="sticky top-20 z-40 bg-[#0b0f19]/90 backdrop-blur-md pt-2 pb-3 border-b border-slate-800">
+      <div class="flex items-center gap-2 overflow-x-auto pb-1">
+        <button onclick="switchTab('properties')" id="tab-btn-properties" class="tab-btn active px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-500/25">
+          <span>01. الفنادق والوحدات السكنية</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-white/20 text-[11px]">6 مواقع</span>
+        </button>
+        <button onclick="switchTab('booking')" id="tab-btn-booking" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>02. محرك الحجز والمساعد الذكي</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">WEB-DIRECT</span>
+        </button>
+        <button onclick="switchTab('notifications')" id="tab-btn-notifications" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>03. النماذج والواتساب</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">Meta + Brevo</span>
+        </button>
+        <button onclick="switchTab('sanity')" id="tab-btn-sanity" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>04. استوديو إدارة المحتوى Sanity</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">Bilingual</span>
+        </button>
+        <button onclick="switchTab('sops')" id="tab-btn-sops" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-slate-400 hover:text-white hover:bg-slate-700">
+          <span>05. إجراءات التشغيل القياسية</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-slate-700 text-[11px]">SOPs</span>
+        </button>
+        <button onclick="switchTab('support')" id="tab-btn-support" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-slate-800/90 text-amber-400 hover:text-white hover:bg-amber-600/20 border border-amber-500/30">
+          <span>06. التشخيص واتفاقية الدعم SLA</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-amber-500/20 text-[11px]">SLA Support</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- شريط البحث الفوري -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 p-3 rounded-2xl bg-slate-900/60 border border-slate-800" id="search-bar-wrap">
+      <div class="relative w-full sm:w-80">
+        <input type="text" id="sop-search" oninput="filterCards()" placeholder="بحث في الفنادق، الغرف، الإجراءات، أكواد الخطأ..." class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-4 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-blue-500 transition">
+      </div>
+      <div class="flex items-center gap-2 text-xs text-slate-400 self-end sm:self-center">
+        <span>الكود البرمجي المعتمد للإنتاج: <code class="font-mono text-cyan-300">dubaiincairo/swissblue23may</code></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+      </div>
+    </div>
+
+    <!-- ==================== التبويب 1: الفنادق والوحدات السكنية ==================== -->
+    <div id="tab-panel-properties" class="tab-content space-y-6">
+      <div class="glass-card rounded-2xl p-6 border-t-4 border-t-blue-500">
+        <h2 class="text-2xl font-bold text-white">فنادق ومحفظة سويس بلو في المملكة وتصنيف الوحدات</h2>
+        <p class="text-sm text-slate-300 mt-1">
+          تفصيل شامل للفنادق الستة والشقق الفندقية المخدومة، أرقام الغرف الدقيقة، وربط المرافق المعتمدة.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- توليب الروضة -->
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300">الرياض • شقق مخدومة</span>
+            <span class="text-xs text-slate-400">36 وحدة سكنية</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">توليب الروضة (Tulip Alrawdah)</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            شقق فندقية مخدومة مخصصة للإقامات الفاخرة والطويلة. تشتمل على <strong>15 شقة سوبريور بغرفة نوم واحدة</strong> موزعة على طابقين.
+          </p>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 space-y-1">
+            <div class="text-purple-400 font-bold">أرقام شقق السوبريور (15 وحدة):</div>
+            <div dir="ltr" class="text-right">203, 204, 204C, 205, 206, 208, 209, 209C, 301, 302, 303, 304, 304C, 306, 307</div>
+            <div class="text-slate-400 pt-1">المرافق: مقهى يعمل 24/7 • بوفيه إفطار (قريباً)</div>
+          </div>
+        </div>
+
+        <!-- فيناس الرياض -->
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300">الرياض • أعمال وعائلات</span>
+            <span class="text-xs text-slate-400">أجنحة تنفيذية</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">فيناس الرياض (Vinas Riyadh)</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            مصممة لرجال الأعمال والعائلات. خدمة غرف على مدار الساعة، وإنترنت فائق السرعة عبر الألياف البصرية.
+          </p>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 space-y-1">
+            <div class="text-blue-400 font-bold">تطبيع المرافق المعتمدة:</div>
+            <div>• مقهى يعمل 24/7 (24/7 Cafe)</div>
+            <div>• بوفيه إفطار قريباً (Breakfast Buffet - Soon)</div>
+            <div class="text-slate-400 pt-1">• مكتب كونسيرج وصالة أعمال تنفيذية</div>
+          </div>
+        </div>
+
+        <!-- فنادق جدة وجازان الحضرية -->
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300">جدة وجازان</span>
+            <span class="text-xs text-slate-400">فندق وأجنحة</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">فروع جدة وجازان</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            فنادق حضرية تخدم زوار الأعمال وساحل البحر الأحمر. تتميز بوجود مطاعم شرقية وعالمية وقاعات اجتماعات مجهزة.
+          </p>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 space-y-1">
+            <div class="text-emerald-400 font-bold">المرافق البارزة:</div>
+            <div>• مطعم شرقي وعالمي متكامل</div>
+            <div>• مركز لياقة بدنية ومرافق استجمام</div>
+            <div>• قاعات مؤتمرات وفعاليات مجهزة بالكامل</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== التبويب 2: محرك الحجز والمساعد الذكي ==================== -->
+    <div id="tab-panel-booking" class="tab-content hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 border-t-4 border-t-blue-500">
+        <h2 class="text-2xl font-bold text-white">محرك الحجز المباشر وتكامل المساعد الفندقي الذكي</h2>
+        <p class="text-sm text-slate-300 mt-1">
+          بنية برمجية تركز على رفع نسبة التحويل ومطابقة معيار Yanolja Cloud Solution مع ألوان وهوية سويس بلو المعتمدة (<code class="font-mono text-cyan-300">#2b6fe8</code>).
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="glass-card p-6 space-y-4">
+          <h3 class="text-lg font-bold text-white">مسار الحجز وتزامن نظام إدارة الفنادق (PMS)</h3>
+          <ul class="text-xs text-slate-300 space-y-2.5">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">✔</span>
+              <span><strong>معرّف المصدر المباشر:</strong> كل طلب حجز يحمل المعرف <code class="font-mono text-cyan-300">WEB-DIRECT</code> داخل نظام eZee Absolute لحساب العمولات.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">✔</span>
+              <span><strong>تسعير مقارن مع وكلاء السفر OTA:</strong> إظهار شطب الأسعار وإبراز خصم الحجز المباشر ("وفر حتى 20% عند الحجز المباشر").</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">✔</span>
+              <span><strong>شريط الحجز الثابت:</strong> ويدجت علوي يتيح اختيار التواريخ وعدد النزلاء والبحث الفوري دون إعادة تحميل الصفحة.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="glass-card p-6 space-y-4">
+          <h3 class="text-lg font-bold text-white">المساعد الذكي وحماية معدل الطلبات عبر Upstash Redis</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            المنصة تدمج بين نموذج <strong>OpenAI gpt-4o</strong> ونموذج <strong>Google Gemini API</strong> لتقديم توصيات الغرف الذكية للنزلاء.
+          </p>
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono space-y-1">
+            <div class="text-cyan-400 font-bold">إعدادات حماية الخادم ومعدل الاستهلاك:</div>
+            <div class="text-slate-300">• الحد الأقصى لكل IP: بحد أقصى 20 طلباً في الدقيقة</div>
+            <div class="text-slate-300">• سقف الاستهلاك اليومي: حماية صارمة لمنع استنزاف التوكنز</div>
+            <div class="text-slate-300">• الخيار البديل التلقائي: Chatbase Widget الاحتياطي</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== التبويب 3: النماذج والواتساب ==================== -->
+    <div id="tab-panel-notifications" class="tab-content hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 border-t-4 border-t-emerald-500">
+        <h2 class="text-2xl font-bold text-white">محرك الإشعارات المزدوج (البريد الإلكتروني + واتساب)</h2>
+        <p class="text-sm text-slate-300 mt-1">
+          تم تنفيذه في ملف <code class="font-mono text-cyan-300">src/lib/notify.ts</code> باستخدام تقنية <code class="font-mono text-cyan-300">after()</code> في Next.js لضمان سرعة استجابة فورية دون تأخير للعميل.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Brevo SMTP -->
+        <div class="glass-card p-6 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">القناة 1: البريد الإلكتروني</span>
+            <span class="text-xs text-slate-400 font-mono">Brevo REST API</span>
+          </div>
+          <h3 class="text-base font-bold text-white">إرسال البريد المؤسسي والمعاملات</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            يتم الإرسال من النطاق الموثق <code class="font-mono text-cyan-300">notifications@swissblue.sa</code>، ويتم تعيين الرد التلقائي (Reply-To) على بريد النزيل أو المتقدم مباشرة.
+          </p>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 space-y-1">
+            <div>• التوظيف: <code class="text-sky-300">careers@swissblue.sa</code> (إرفاق السيرة الذاتية PDF)</div>
+            <div>• حجوزات الشركات B2B: <code class="text-sky-300">reservations@swissblue.sa</code></div>
+            <div class="text-amber-400">⚠️ تنبيه أمني: يجب تعطيل حظر الـ IPs في Brevo لدعم خوادم Vercel الديناميكية.</div>
+          </div>
+        </div>
+
+        <!-- Meta WhatsApp Cloud API -->
+        <div class="glass-card p-6 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">القناة 2: واتساب الفوري</span>
+            <span class="text-xs text-slate-400 font-mono">Meta Graph API v22.0</span>
+          </div>
+          <h3 class="text-base font-bold text-white">إشعارات الواتساب الفورية لموظفي الاستقبال</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            إرسال إشعار فوري لهاتف قسم الاستقبال والحجوزات فور قيام العميل بتعبئة أي نموذج، باستخدام القالب المعتمد من ميتا <code class="font-mono text-emerald-300">new_form_submission</code>.
+          </p>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-emerald-300 space-y-1">
+            <div class="text-slate-400 font-bold">نموذج نص الإشعار:</div>
+            <div class="text-slate-200">"طلب جديد — فنادق سويس بلو</div>
+            <div class="text-slate-200">الاسم: {الاسم} | الجوال: {رقم الجوال}</div>
+            <div class="text-slate-200">نوع الطلب والتفاصيل: {تفاصيل الطلب}"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== التبويب 4: استوديو سانيتي ==================== -->
+    <div id="tab-panel-sanity" class="tab-content hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 border-t-4 border-t-purple-500">
+        <h2 class="text-2xl font-bold text-white">إدارة المحتوى وتعديل النصوص والصور عبر Sanity Studio v3</h2>
+        <p class="text-sm text-slate-300 mt-1">
+          مخطط بيانات أحادي ثنائي اللغة يتيح لفريق التسويق تعديل نصوص الموقع، وصور الغرف، والبانرات الترويجية لحظياً دون تدخل المبرمجين.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 space-y-4">
+        <h3 class="text-base font-bold text-white">تطبيع أسماء المرافق وقواعد شارة "قريباً" التلقائية</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          يقوم الكود البرمجي في <code class="font-mono text-cyan-300">src/components/feature-chip.tsx</code> برصد الكلمات <code class="font-mono text-cyan-300">(قريباً)</code> أو <code class="font-mono text-cyan-300">(Soon)</code> تلقائياً وتحويلها لشارة حالة بارزة:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+            <div class="text-xs text-slate-400 font-bold mb-2">طريقة الظهور باللغة العربية:</div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-950 text-sky-300 border border-sky-800 text-xs">
+              <span>بوفيه إفطار مفتوح</span>
+              <span class="px-1.5 py-0.5 rounded bg-sky-800 text-[10px] font-bold">قريباً</span>
+            </div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800" dir="ltr">
+            <div class="text-xs text-slate-400 font-bold mb-2">طريقة الظهور بالإنجليزية:</div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-950 text-sky-300 border border-sky-800 text-xs">
+              <span>Breakfast buffet</span>
+              <span class="px-1.5 py-0.5 rounded bg-sky-800 text-[10px] font-bold">Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== التبويب 5: إجراءات التشغيل القياسية ==================== -->
+    <div id="tab-panel-sops" class="tab-content hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 border-t-4 border-t-blue-500 flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-white">إجراءات التشغيل القياسية المعتمدة لموظفي سويس بلو</h2>
+          <p class="text-sm text-slate-300 mt-1">
+            6 إجراءات عمل قياسية شاملة تضمن أعلى معايير الجودة الفندقية وسرعة استجابة الاستقبال.
+          </p>
+        </div>
+        <a href="swiss_blue_sops_ar.html" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white transition flex items-center gap-1.5 shadow-lg shadow-blue-500/25">
+          <span>فتح دليل الـ SOPs التفاعلي المخصص</span> ←
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="glass-card p-5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-xs font-mono font-bold">SOP-SB-01</span>
+            <span class="text-xs text-emerald-400 font-semibold">● معتمد</span>
+          </div>
+          <h4 class="text-base font-bold text-white">إدارة الحجوزات المباشرة الواردة عبر الويب</h4>
+          <p class="text-xs text-slate-300">خطوات التحقق من معرف WEB-DIRECT داخل نظام eZee ومطابقة الدفع المسبق.</p>
+        </div>
+        <div class="glass-card p-5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-xs font-mono font-bold">SOP-SB-02</span>
+            <span class="text-xs text-emerald-400 font-semibold">● معتمد</span>
+          </div>
+          <h4 class="text-base font-bold text-white">الاستجابة لطلبات حجوزات الشركات B2B</h4>
+          <p class="text-xs text-slate-300">مسار مراجعة طلبات الشركات والرد بعرض السعر الرسمي خلال ساعتي عمل كحد أقصى.</p>
+        </div>
+        <div class="glass-card p-5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-xs font-mono font-bold">SOP-SB-03</span>
+            <span class="text-xs text-emerald-400 font-semibold">● معتمد</span>
+          </div>
+          <h4 class="text-base font-bold text-white">تحديث بيانات وصور الغرف عبر Sanity Studio</h4>
+          <p class="text-xs text-slate-300">إرشادات ضغط الصور بصيغة WebP والحفاظ على دقة الأبعاد قبل الرفع على الخادم.</p>
+        </div>
+        <div class="glass-card p-5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-xs font-mono font-bold">SOP-SB-04</span>
+            <span class="text-xs text-emerald-400 font-semibold">● معتمد</span>
+          </div>
+          <h4 class="text-base font-bold text-white">معالجة إشعارات الواتساب وقنوات التواصل الفوري</h4>
+          <p class="text-xs text-slate-300">بروتوكول التواصل مع العميل فور استلام إشعار الواتساب وتحويل المحادثة لحجز مؤكد.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== التبويب 6: التشخيص والدعم SLA ==================== -->
+    <div id="tab-panel-support" class="tab-content hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 border-t-4 border-t-amber-500">
+        <h2 class="text-2xl font-bold text-white">التشخيص البرمجي ومستويات اتفاقية الخدمة (SLA Support)</h2>
+        <p class="text-sm text-slate-300 mt-1">
+          قنوات الدعم التقني المؤسسي المباشر من فريق دبي في القاهرة للأعمال، وأرقام الطوارئ ومؤشرات الاستجابة.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card p-6 space-y-3">
+          <div class="text-xs font-bold text-amber-400 uppercase font-mono">أولوية أولى (P1 - Critical)</div>
+          <h4 class="text-lg font-bold text-white">توقف الموقع أو محرك الحجز</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            زمن الاستجابة: أقل من 30 دقيقة. يتم التدخل الفوري وتفعيل الخوادم الاحتياطية وإعادة التوجيه.
+          </p>
+          <div class="pt-2 text-xs font-mono text-cyan-300">قناة الاتصال: اتصال مباشر + خط ساخن</div>
+        </div>
+
+        <div class="glass-card p-6 space-y-3">
+          <div class="text-xs font-bold text-blue-400 uppercase font-mono">أولوية ثانية (P2 - Major)</div>
+          <h4 class="text-lg font-bold text-white">خلل في إشعارات Brevo أو WhatsApp</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            زمن الاستجابة: خلال ساعتين. مراجعة مفاتيح الربط وتجديد الـ Access Tokens وفحص السجلات.
+          </p>
+          <div class="pt-2 text-xs font-mono text-cyan-300">قناة الاتصال: بريد الدعم الفني المشترك</div>
+        </div>
+
+        <div class="glass-card p-6 space-y-3">
+          <div class="text-xs font-bold text-emerald-400 uppercase font-mono">أولوية ثالثة (P3 - Minor)</div>
+          <h4 class="text-lg font-bold text-white">طلبات تعديل المحتوى والإعدادات</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            زمن الاستجابة: خلال 24 ساعة عمل. تحديث نصوص إضافية، وتعديل بانرات، وضبط الصلاحيات.
+          </p>
+          <div class="pt-2 text-xs font-mono text-cyan-300">قناة الاتصال: تذاكر الدعم العادية</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- الفوتر التنفيذي الموحد -->
+  <footer class="mt-16 border-t border-slate-800/80 py-8 bg-[#070B14]/80 text-center text-xs text-slate-500 space-y-2">
+    <div class="flex items-center justify-center gap-4 text-xs text-slate-400">
+      <a href="swiss_blue_features_ar.html" class="hover:text-blue-400 underline font-medium">كتالوج الـ 55 ميزة لسويس بلو</a>
+      <span>&bull;</span>
+      <a href="swiss_blue_sops_ar.html" class="hover:text-blue-400 underline font-medium">إجراءات العمل القياسية (SOPs)</a>
+      <span>&bull;</span>
+      <a href="index_ar.html" class="hover:text-blue-400 underline font-medium">بوابة العمليات الرئيسية</a>
+    </div>
+    <p>فنادق وشقق سويس بلو المخدومة &copy; 2026 · منظومة تشغيل المنصة الرقمية الموحدة</p>
+    <p class="text-slate-600 font-mono text-[11px]">مستند رسمي محمي موثق من دبي في القاهرة للأعمال · تم التحقق بنسبة 100%</p>
+  </footer>
+
+  <script>
+    // تتبع حركة المؤشر لدائرة الإضاءة التفاعلية في الخلفية المعمارية
+    window.addEventListener('mousemove', (e) => {
+      document.body.style.setProperty('--mouse-x', e.clientX + 'px');
+      document.body.style.setProperty('--mouse-y', e.clientY + 'px');
+    });
+
+    // التنقل بين التبويبات الستة
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-blue-600', 'text-white', 'shadow-lg');
+        btn.classList.add('bg-slate-800/90', 'text-slate-400');
+      });
+
+      const activePanel = document.getElementById('tab-panel-' + tabId);
+      const activeBtn = document.getElementById('tab-btn-' + tabId);
+
+      if (activePanel) activePanel.classList.remove('hidden');
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'bg-blue-600', 'text-white', 'shadow-lg');
+        activeBtn.classList.remove('bg-slate-800/90', 'text-slate-400');
+      }
+    }
+
+    // تصفية البطاقات بالبحث الفوري
+    function filterCards() {
+      const query = document.getElementById('sop-search').value.toLowerCase();
+      document.querySelectorAll('.tab-content:not(.hidden) .glass-card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(query)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // شريط تقدم التمرير
+    window.addEventListener('scroll', () => {
+      const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollProgress = (window.scrollY / scrollTotal) * 100;
+      const bar = document.getElementById('scroll-progress-bar');
+      if (bar) bar.style.width = scrollProgress + '%';
+    });
+  </script>
+</body>
+</html>
