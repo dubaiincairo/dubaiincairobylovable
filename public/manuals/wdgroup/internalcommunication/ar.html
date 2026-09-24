@@ -10,7 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { background-color: #0b0f19; color: #f1f5f9; font-family: 'IBM Plex Sans Arabic', sans-serif; min-height: 100vh; overflow-x: hidden; direction: rtl; text-align: right; }
+    body { background-color: #070B14;
+      background-image: 
+        radial-gradient(rgba(56, 189, 248, 0.15) 1px, transparent 1px),
+        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px, 72px 72px, 72px 72px; color: #f1f5f9; font-family: 'IBM Plex Sans Arabic', sans-serif; min-height: 100vh; overflow-x: hidden; direction: rtl; text-align: right; }
     .glass-card { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
     .glass-card:hover { border-color: rgba(20, 184, 166, 0.45); transform: translateY(-3px); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6); }
     .glow-orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
