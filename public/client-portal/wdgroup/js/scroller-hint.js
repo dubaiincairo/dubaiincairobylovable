@@ -82,10 +82,13 @@
 
         var targetDelta = 76;
         if (isRTL) {
-          // Detect RTL scrollLeft direction convention
+          // Detect RTL scrollLeft direction convention safely without CSS smooth scroll lag
+          var prevBehavior = scroller.style.scrollBehavior;
+          scroller.style.scrollBehavior = 'auto';
           scroller.scrollLeft = -1;
           var supportsNegative = scroller.scrollLeft < 0;
           scroller.scrollLeft = 0;
+          scroller.style.scrollBehavior = prevBehavior;
           targetDelta = supportsNegative ? -76 : 76;
         }
 

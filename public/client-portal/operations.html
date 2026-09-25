@@ -315,7 +315,7 @@
 
     <!-- NAVIGATION TABS (IDENTICAL TO YERKAB TAB ARCHITECTURE) -->
     <div class="sticky top-20 z-40 bg-[#0b0f19]/90 backdrop-blur-md pt-2 pb-3 border-b border-slate-800" id="tabs-nav">
-      <div class="flex items-center gap-2 overflow-x-auto scroll-touch pb-1">
+      <div id="category-rail" class="flex items-center gap-2 overflow-x-auto scroll-touch pb-1">
         <button onclick="switchTab('swissblue')" id="tab-btn-swissblue" class="tab-btn active px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-500/25">
           <span>01. Swiss Blue Hotel</span>
           <span class="px-1.5 py-0.5 rounded-md bg-white/20 text-[11px]">SOP &amp; Web</span>
@@ -1149,6 +1149,7 @@
       });
     }
   </script>
+  <script src="/portal/wdgroup/js/scroller-hint.js" defer></script>
   <script src="/portal/wdgroup/js/instant-nav.js" defer></script>
 </body>
 </html>
