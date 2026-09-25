@@ -312,16 +312,7 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/portal/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800"
-        }
-      ]
-    },
-    {
-      "source": "/portal/wdgroup/js/(.*)",
+      "source": "/portal/wdgroup/js/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -330,7 +321,7 @@
       ]
     },
     {
-      "source": "/portal/wdgroup/odooerp/(.*data\\.js)",
+      "source": "/portal/wdgroup/assets/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -339,7 +330,7 @@
       ]
     },
     {
-      "source": "/portal/wdgroup/assets/(.*)",
+      "source": "/portal/wdgroup/odooerp/:path*.js",
       "headers": [
         {
           "key": "Cache-Control",
@@ -348,7 +339,7 @@
       ]
     },
     {
-      "source": "/portal/wdgroup/odooerp/training-materials/(.*)",
+      "source": "/portal/wdgroup/odooerp/training-materials/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -357,16 +348,7 @@
       ]
     },
     {
-      "source": "/js/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.(?:js|css|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|ttf|otf)",
+      "source": "/js/:path*",
       "headers": [
         {
           "key": "Cache-Control",
