@@ -10,12 +10,13 @@
   <link rel="alternate icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.svg">
   
-  <script src="/portal/wdgroup/js/tailwindcss.min.js"></script>
+  <script src="/portal/wdgroup/js/tailwindcss.min.js" defer></script>
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"></noscript>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -232,7 +233,7 @@
   </footer>
 
   <!-- LOAD COMPILED DATASET -->
-  <script src="/portal/wdgroup/odooerp/features-en-data.js"></script>
+  <script src="/portal/wdgroup/odooerp/features-en-data.js" defer></script>
 
   <!-- INTERACTIVE APPLICATION SCRIPT -->
   <script>

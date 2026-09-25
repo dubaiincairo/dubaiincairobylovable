@@ -312,6 +312,15 @@
   "trailingSlash": false,
   "headers": [
     {
+      "source": "/portal/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
       "source": "/portal/wdgroup/js/(.*)",
       "headers": [
         {
@@ -321,7 +330,7 @@
       ]
     },
     {
-      "source": "/js/(.*)",
+      "source": "/portal/wdgroup/odooerp/(.*data\\.js)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -348,11 +357,20 @@
       ]
     },
     {
-      "source": "/portal/(.*)",
+      "source": "/js/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800"
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(?:js|css|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|ttf|otf)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     }

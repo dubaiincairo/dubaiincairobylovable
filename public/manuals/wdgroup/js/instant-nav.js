@@ -31,10 +31,15 @@
   function prefetchUrl(url) {
     if (!url || prefetched.has(url)) return;
     prefetched.add(url);
-    var link = document.createElement('link');
-    link.rel = 'prefetch';
-    link.href = url;
-    document.head.appendChild(link);
+    try {
+      if (window.fetch) {
+        fetch(url, { priority: 'low' }).catch(function() {});
+      }
+      var link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = url;
+      document.head.appendChild(link);
+    } catch (e) {}
   }
 
   function handleInteraction(e) {
