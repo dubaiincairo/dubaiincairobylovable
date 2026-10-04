@@ -13,7 +13,17 @@ const Tech = () => {
   const { get } = useSiteContent();
   const { openContactModal } = useContactModal();
 
-  useSEO({ titleKey: "seo_tech_title", descriptionKey: "seo_tech_description", canonical: "/tech" });
+  useSEO({
+    titleKey: "seo_tech_title",
+    descriptionKey: "seo_tech_description",
+    defaultTitle: "Enterprise Tech Stack & ERP — Dubai in Cairo",
+    defaultDescription: "Modern technology stacks, cloud infrastructure, API engineering, and certified ERP integrations driving business automation.",
+    canonical: "/tech",
+    breadcrumbs: [
+      { name: "Home", path: "/" },
+      { name: "Tech Stack", path: "/tech" },
+    ],
+  });
 
   return (
     <PageTransition>

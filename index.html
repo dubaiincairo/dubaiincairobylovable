@@ -91,7 +91,12 @@
         "@type": "PostalAddress",
         "addressLocality": "Cairo",
         "addressCountry": "EG"
-      }
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/dubaiincairo",
+        "https://www.facebook.com/dubaiincairo",
+        "https://www.instagram.com/dubaiincairo"
+      ]
     }
     </script>
 
@@ -122,6 +127,11 @@
       "areaServed": [
         { "@type": "Country", "name": "Egypt" },
         { "@type": "Country", "name": "United Arab Emirates" }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/company/dubaiincairo",
+        "https://www.facebook.com/dubaiincairo",
+        "https://www.instagram.com/dubaiincairo"
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
@@ -162,6 +172,57 @@
         },
         "query-input": "required name=search_term_string"
       }
+    }
+    </script>
+
+    <!-- Structured Data: SiteNavigationElement (signals organic sitelinks hierarchy) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://dubaiincairo.com/#nav-studios",
+          "name": "Studios",
+          "description": "Digital marketing, brand creation, and creative media production studios.",
+          "url": "https://dubaiincairo.com/studios"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://dubaiincairo.com/#nav-cases",
+          "name": "Case Studies",
+          "description": "Client results, performance marketing metrics, and enterprise transformations.",
+          "url": "https://dubaiincairo.com/case-studies"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://dubaiincairo.com/#nav-tech",
+          "name": "Tech Stack & ERP",
+          "description": "Enterprise cloud architecture, Odoo ERP implementation, and digital automation.",
+          "url": "https://dubaiincairo.com/tech"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://dubaiincairo.com/#nav-partnerships",
+          "name": "Partnerships",
+          "description": "Official partner networks for Odoo ERP, Yanolja Cloud, and Zoho.",
+          "url": "https://dubaiincairo.com/partnerships"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://dubaiincairo.com/#nav-careers",
+          "name": "Careers",
+          "description": "Career opportunities and talent recruitment at Dubai in Cairo.",
+          "url": "https://dubaiincairo.com/careers"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "@id": "https://dubaiincairo.com/#nav-faq",
+          "name": "FAQ",
+          "description": "Frequently asked questions regarding our digital services, contracts, and delivery.",
+          "url": "https://dubaiincairo.com/faq"
+        }
+      ]
     }
     </script>
   </head>

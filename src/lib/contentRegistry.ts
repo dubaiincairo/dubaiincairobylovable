@@ -10,7 +10,7 @@ export interface ContentField {
 
 export const sectionOrder = [
   "nav", "hero", "stats", "about", "edges", "values", "services",
-  "founder", "clients", "tech", "legal", "contact", "footer",
+  "founder", "clients", "tech", "legal", "contact", "footer", "seo",
 ];
 
 export const sectionLabels: Record<string, string> = {
@@ -27,6 +27,7 @@ export const sectionLabels: Record<string, string> = {
   legal: "Legal & Registration",
   contact: "Contact Section",
   footer: "Footer",
+  seo: "SEO & Sitelinks Metadata",
 };
 
 export const contentRegistry: ContentField[] = [
@@ -148,4 +149,26 @@ export const contentRegistry: ContentField[] = [
   // ── Footer ──
   { section: "footer", key: "footer_tagline", label: "Footer Tagline", defaultValue: "From Dubai to Cairo, we transferred the scope, the challenges, and the quality." },
   { section: "footer", key: "footer_copyright", label: "Copyright Text", defaultValue: "© 2025 Dubai in Cairo for Digital Marketing & eBusiness Solutions LLC · All Rights Reserved" },
+
+  // ── SEO & Sitelinks ──
+  { section: "seo", key: "seo_home_title", label: "Home: Page Title", defaultValue: "Dubai in Cairo LLC — Digital Marketing and eBusiness Consultancy" },
+  { section: "seo", key: "seo_home_description", label: "Home: Meta Description", defaultValue: "Cairo's leading digital marketing and eBusiness solutions agency, delivering data-driven growth across Egypt and the Middle East." },
+  { section: "seo", key: "seo_home_og_image", label: "Home: Social Share Image URL", defaultValue: "https://dubaiincairo.com/og-image.jpg" },
+  { section: "seo", key: "seo_studios_title", label: "Studios: Page Title", defaultValue: "Marketing Studios — Dubai in Cairo" },
+  { section: "seo", key: "seo_studios_description", label: "Studios: Meta Description", defaultValue: "Full-suite creative branding, media production, and digital marketing studios delivering measurable growth." },
+  { section: "seo", key: "seo_cases_title", label: "Case Studies: Page Title", defaultValue: "Case Studies & Client Results — Dubai in Cairo" },
+  { section: "seo", key: "seo_cases_description", label: "Case Studies: Meta Description", defaultValue: "Verified client growth metrics, performance case studies, and digital transformations across Egypt and the Gulf." },
+  { section: "seo", key: "seo_tech_title", label: "Tech Stack: Page Title", defaultValue: "Enterprise Tech Stack & ERP — Dubai in Cairo" },
+  { section: "seo", key: "seo_tech_description", label: "Tech Stack: Meta Description", defaultValue: "Modern technology stacks, cloud infrastructure, API engineering, and certified ERP integrations." },
+  { section: "seo", key: "seo_odoo_title", label: "Odoo Partner: Page Title", defaultValue: "Official Odoo ERP Partner Egypt — Dubai in Cairo" },
+  { section: "seo", key: "seo_odoo_description", label: "Odoo Partner: Meta Description", defaultValue: "Certified Odoo ERP partner in Egypt. Enterprise solution design, customization, and seamless migration." },
+  { section: "seo", key: "seo_careers_title", label: "Careers: Page Title", defaultValue: "Careers & Open Positions — Dubai in Cairo" },
+  { section: "seo", key: "seo_careers_description", label: "Careers: Meta Description", defaultValue: "Join Dubai in Cairo's elite team of digital strategists, software engineers, and creative producers." },
+  { section: "seo", key: "seo_faq_title", label: "FAQ: Page Title", defaultValue: "Frequently Asked Questions — Dubai in Cairo" },
+  { section: "seo", key: "seo_faq_description", label: "FAQ: Meta Description", defaultValue: "Frequently asked questions regarding our digital marketing scopes, contracts, and delivery." },
+  { section: "seo", key: "seo_privacy_title", label: "Privacy Policy: Page Title", defaultValue: "Privacy Policy — Dubai in Cairo" },
+  { section: "seo", key: "seo_privacy_description", label: "Privacy Policy: Meta Description", defaultValue: "Privacy policy and client data protection terms for Dubai in Cairo LLC." },
+  { section: "seo", key: "seo_global_og_image", label: "Global: Default OG Image URL", defaultValue: "https://dubaiincairo.com/og-image.jpg" },
+  { section: "seo", key: "seo_ga4_id", label: "Analytics: Google Analytics 4 ID", defaultValue: "" },
+  { section: "seo", key: "seo_gsc_verification", label: "Analytics: Google Search Console Verification", defaultValue: "" },
 ];

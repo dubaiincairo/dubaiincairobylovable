@@ -305,7 +305,13 @@ const FAQ = () => {
   useSEO({
     titleKey: "seo_faq_title",
     descriptionKey: "seo_faq_description",
+    defaultTitle: "Frequently Asked Questions — Dubai in Cairo",
+    defaultDescription: "Frequently asked questions regarding our digital marketing scopes, Odoo ERP implementations, contracts, and delivery.",
     canonical: "/faq",
+    breadcrumbs: [
+      { name: "Home", path: "/" },
+      { name: "FAQ", path: "/faq" },
+    ],
   });
 
   const [activeCategory, setActiveCategory] = useState(CATEGORIES[0].id);

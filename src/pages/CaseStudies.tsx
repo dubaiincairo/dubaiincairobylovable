@@ -28,7 +28,17 @@ const CaseStudies = () => {
   const [filter, setFilter] = useState<string>("All");
   const [industries, setIndustries] = useState<string[]>([]);
 
-  useSEO({ titleKey: "seo_cases_title", descriptionKey: "seo_cases_description", canonical: "/case-studies" });
+  useSEO({
+    titleKey: "seo_cases_title",
+    descriptionKey: "seo_cases_description",
+    defaultTitle: "Case Studies & Client Results — Dubai in Cairo",
+    defaultDescription: "Verified client growth metrics, performance case studies, and digital transformations across Egypt and the Gulf.",
+    canonical: "/case-studies",
+    breadcrumbs: [
+      { name: "Home", path: "/" },
+      { name: "Case Studies", path: "/case-studies" },
+    ],
+  });
 
   useEffect(() => {
     supabase

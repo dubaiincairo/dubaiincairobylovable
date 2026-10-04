@@ -78,7 +78,18 @@ const OdooPartnerPage = () => {
   const { get } = useSiteContent();
   const { openContactModal } = useContactModal();
 
-  useSEO({ titleKey: "seo_odoo_title", descriptionKey: "seo_odoo_description", canonical: "/partnerships/odoo" });
+  useSEO({
+    titleKey: "seo_odoo_title",
+    descriptionKey: "seo_odoo_description",
+    defaultTitle: "Official Odoo ERP Partner Egypt — Dubai in Cairo",
+    defaultDescription: "Certified Odoo ERP partner in Egypt. Enterprise solution design, business analysis, customization, and seamless migration.",
+    canonical: "/partnerships/odoo",
+    breadcrumbs: [
+      { name: "Home", path: "/" },
+      { name: "Partnerships", path: "/partnerships" },
+      { name: "Odoo ERP", path: "/partnerships/odoo" },
+    ],
+  });
 
   const odooTags = Array.from({ length: 8 }, (_, i) =>
     get(`odoo_tag_${i + 1}`, [

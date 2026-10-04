@@ -13,7 +13,17 @@ const Studios = () => {
   const { get } = useSiteContent();
   const { openContactModal } = useContactModal();
 
-  useSEO({ titleKey: "seo_studios_title", descriptionKey: "seo_studios_description", canonical: "/studios" });
+  useSEO({
+    titleKey: "seo_studios_title",
+    descriptionKey: "seo_studios_description",
+    defaultTitle: "Marketing Studios — Dubai in Cairo",
+    defaultDescription: "Full-suite creative branding, media production, and digital marketing studios delivering measurable growth across Egypt and the GCC.",
+    canonical: "/studios",
+    breadcrumbs: [
+      { name: "Home", path: "/" },
+      { name: "Studios", path: "/studios" },
+    ],
+  });
 
   return (
     <PageTransition>

@@ -27,7 +27,14 @@ const HOMEPAGE_SECTIONS = [
 ];
 
 const Index = () => {
-  useSEO({ titleKey: "seo_home_title", descriptionKey: "seo_home_description", canonical: "/", ogImageKey: "seo_home_og_image" });
+  useSEO({
+    titleKey: "seo_home_title",
+    descriptionKey: "seo_home_description",
+    defaultTitle: "Dubai in Cairo LLC — Digital Marketing and eBusiness Consultancy",
+    defaultDescription: "Cairo's leading digital marketing and eBusiness solutions agency, delivering data-driven growth, branding, and Odoo ERP across Egypt and the Middle East.",
+    canonical: "/",
+    ogImageKey: "seo_home_og_image",
+  });
 
   return (
     <PageTransition>

@@ -1,12 +1,20 @@
 import { useEffect } from "react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 
+interface BreadcrumbItem {
+  name: string;
+  path: string;
+}
+
 interface SEOKeyProps {
   titleKey: string;
   descriptionKey: string;
   canonical: string;
   ogImageKey?: string;
   noindex?: boolean;
+  defaultTitle?: string;
+  defaultDescription?: string;
+  breadcrumbs?: BreadcrumbItem[];
   jsonLd?: object | object[];
 }
 
@@ -15,6 +23,7 @@ interface SEORawProps {
   description: string;
   canonical: string;
   noindex?: boolean;
+  breadcrumbs?: BreadcrumbItem[];
   jsonLd?: object | object[];
 }
 
@@ -49,14 +58,45 @@ export function useSEO(props: SEOProps) {
 
   const isKeyBased = "titleKey" in props;
 
-  const title       = isKeyBased ? get(props.titleKey, "Dubai in Cairo") : props.title;
-  const description = isKeyBased ? get(props.descriptionKey, "") : props.description;
+  const fallbackTitle = isKeyBased ? (props.defaultTitle || "Dubai in Cairo") : props.title;
+  const fallbackDesc = isKeyBased ? (props.defaultDescription || "") : props.description;
+
+  const dynamicTitle = isKeyBased ? get(props.titleKey, "") : "";
+  const dynamicDesc  = isKeyBased ? get(props.descriptionKey, "") : "";
+
+  const title       = (dynamicTitle && dynamicTitle.trim() !== "") ? dynamicTitle : fallbackTitle;
+  const description = (dynamicDesc && dynamicDesc.trim() !== "") ? dynamicDesc : fallbackDesc;
+
   const globalOg    = get("seo_global_og_image", `${BASE_URL}/og-image.jpg`);
   const pageOg      = isKeyBased && props.ogImageKey ? get(props.ogImageKey, "") : "";
   const image       = pageOg || globalOg || `${BASE_URL}/og-image.jpg`;
   const canonicalUrl = `${BASE_URL}${props.canonical}`;
   const noindex     = props.noindex ?? false;
-  const jsonLd      = props.jsonLd;
+
+  // Build BreadcrumbList schema if breadcrumbs are provided
+  const breadcrumbSchema = props.breadcrumbs && props.breadcrumbs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": props.breadcrumbs.map((b, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": b.name,
+      "item": `${BASE_URL}${b.path}`
+    }))
+  } : null;
+
+  // Combine breadcrumbs schema with any additional jsonLd provided
+  const schemas: object[] = [];
+  if (breadcrumbSchema) {
+    schemas.push(breadcrumbSchema);
+  }
+  if (props.jsonLd) {
+    if (Array.isArray(props.jsonLd)) {
+      schemas.push(...props.jsonLd);
+    } else {
+      schemas.push(props.jsonLd);
+    }
+  }
 
   useEffect(() => {
     document.title = title;
@@ -79,16 +119,16 @@ export function useSEO(props: SEOProps) {
     setLink("canonical", canonicalUrl);
 
     let scriptEl = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null;
-    if (jsonLd) {
+    if (schemas.length > 0) {
       if (!scriptEl) {
         scriptEl = document.createElement("script");
         scriptEl.id = SCRIPT_ID;
         scriptEl.type = "application/ld+json";
         document.head.appendChild(scriptEl);
       }
-      scriptEl.textContent = JSON.stringify(Array.isArray(jsonLd) ? jsonLd : [jsonLd]);
+      scriptEl.textContent = JSON.stringify(schemas.length === 1 ? schemas[0] : schemas);
     } else if (scriptEl) {
       scriptEl.remove();
     }
-  }, [title, description, canonicalUrl, image, noindex, jsonLd]);
+  }, [title, description, canonicalUrl, image, noindex, JSON.stringify(schemas)]);
 }
