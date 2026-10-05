@@ -47,6 +47,8 @@
     html {
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
+      overflow-x: clip;
+      max-width: 100vw;
     }
     body {
       min-height: 100vh;
@@ -54,14 +56,37 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
-      overflow-x: hidden;
+      overflow-x: clip;
+      max-width: 100vw;
+      width: 100%;
     }
 
-    /* iOS Safari Auto-Zoom Prevention */
+    /* iOS Safari Auto-Zoom Prevention & Input Normalization */
     @media (max-width: 640px) {
       input, select, textarea {
         font-size: 16px !important;
       }
+      #floating-feedback-trigger.floating-btn-collapsed button {
+        padding: 8px !important;
+        border-radius: 9999px !important;
+        opacity: 0.9;
+        transform: scale(0.92);
+      }
+      #floating-feedback-trigger.floating-btn-collapsed #btn-floating-feedback-text,
+      #floating-feedback-trigger.floating-btn-collapsed #btn-floating-feedback-text-mob {
+        display: none !important;
+      }
+    }
+
+    /* Tab Horizontal Scroll Rail */
+    #tabs-nav {
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-snap-type: x proximity;
+    }
+    #tabs-nav::-webkit-scrollbar {
+      display: none;
     }
 
     /* Momentum Touch Scrolling */
@@ -533,43 +558,44 @@
 
   <!-- TOP STICKY NAVIGATION BAR -->
   <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80 pt-[env(safe-area-inset-top)] relative">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2.5 sm:gap-4">
+    <div class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-1.5 sm:gap-4">
       <!-- Logo & Project Identity -->
-      <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
+      <div class="flex items-center gap-2 sm:gap-3.5 shrink min-w-0">
         <!-- Official Dubai in Cairo Gold Lettermark Emblem -->
-        <a href="https://www.dubaiincairo.com" target="_blank" class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-[#0a0f1e] flex items-center justify-center text-amber-400 font-serif font-black shadow-lg shadow-amber-500/15 border border-amber-500/30 relative group shrink-0" title="Dubai in Cairo">
-          <span class="text-lg sm:text-2xl font-bold tracking-tight text-[#e8a020]">D</span>
-          <span class="absolute bottom-1.5 right-1.5 sm:bottom-2 sm:right-2 w-1.5 h-1.5 bg-[#e8a020] rounded-full opacity-80"></span>
+        <a href="https://www.dubaiincairo.com" target="_blank" class="w-8 h-8 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-[#0a0f1e] flex items-center justify-center text-amber-400 font-serif font-black shadow-lg shadow-amber-500/15 border border-amber-500/30 relative group shrink-0" title="Dubai in Cairo">
+          <span class="text-base sm:text-2xl font-bold tracking-tight text-[#e8a020]">D</span>
+          <span class="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 w-1.5 h-1.5 bg-[#e8a020] rounded-full opacity-80"></span>
         </a>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="font-extrabold text-base sm:text-xl tracking-tight text-white flex items-center gap-1.5" id="brand-title">
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 min-w-0">
+            <span class="font-extrabold text-xs sm:text-base md:text-xl tracking-tight text-white flex items-center gap-1 min-w-0 truncate" id="brand-title">
               <span>DUBAI IN CAIRO</span>
               <span class="text-cyan-400">×</span>
               <span class="text-blue-300">ONEBANK</span>
             </span>
-            <span class="hidden sm:inline-flex text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30" id="brand-tag">
+            <span class="hidden md:inline-flex text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 shrink-0" id="brand-tag">
               Misr Digital Innovation (MDI)
             </span>
           </div>
-          <p class="text-[11px] sm:text-xs text-slate-400 hidden sm:block" id="brand-sub">
+          <p class="text-[11px] sm:text-xs text-slate-400 hidden lg:block truncate" id="brand-sub">
             Integrated Photography &amp; Video Production Package • Commercial Quotation (Launching)
           </p>
         </div>
       </div>
 
       <!-- Actions: Download Portfolio PDF CTA, Copy Link, Print, Language Switcher -->
-      <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+      <div class="flex items-center gap-1 sm:gap-2.5 shrink-0">
         <!-- High-Priority CTA: Direct Download Agency Portfolio PDF -->
-        <a href="/proposals/mdi/launching/Dubai_in_Cairo_Portfolio.pdf" download="Dubai_in_Cairo_Portfolio.pdf" class="px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-[11px] sm:text-xs flex items-center gap-1.5 sm:gap-2 shadow-lg shadow-amber-500/25 transition active:scale-95 touch-manipulation group cursor-pointer" id="btn-portfolio-cta" title="Download Official Dubai in Cairo Portfolio PDF">
-          <svg class="w-4 h-4 text-slate-950 group-hover:translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <a href="/proposals/mdi/launching/Dubai_in_Cairo_Portfolio.pdf" download="Dubai_in_Cairo_Portfolio.pdf" class="px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-[10px] sm:text-xs flex items-center gap-1 sm:gap-2 shadow-lg shadow-amber-500/25 transition active:scale-95 touch-manipulation group cursor-pointer shrink-0" id="btn-portfolio-cta" title="Download Official Dubai in Cairo Portfolio PDF">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-950 group-hover:translate-y-0.5 transition-transform shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
           </svg>
-          <span class="tracking-tight" id="btn-portfolio-text">Download Portfolio PDF</span>
+          <span class="hidden sm:inline tracking-tight whitespace-nowrap" id="btn-portfolio-text">Download Portfolio PDF</span>
+          <span class="sm:hidden tracking-tight whitespace-nowrap font-bold" id="btn-portfolio-text-mob">Portfolio PDF</span>
         </a>
 
         <!-- Copy Link Button -->
-        <button onclick="copyProposalLink()" class="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-slate-200 border border-slate-700 text-xs font-medium flex items-center gap-1.5 transition shadow-sm touch-manipulation" title="Copy Proposal URL">
+        <button onclick="copyProposalLink()" class="p-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-slate-200 border border-slate-700 text-xs font-medium flex items-center gap-1.5 transition shadow-sm touch-manipulation shrink-0" title="Copy Proposal URL">
           <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
           </svg>
@@ -577,25 +603,25 @@
         </button>
 
         <!-- Print / PDF Proposal Document -->
-        <a href="proposal_document.html" target="_blank" class="p-1.5 sm:p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-slate-300 border border-slate-700 text-xs transition touch-manipulation flex items-center justify-center" title="Print / Export PDF">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <a href="proposal_document.html" target="_blank" class="p-1.5 sm:p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-slate-300 border border-slate-700 text-xs transition touch-manipulation flex items-center justify-center shrink-0" title="Print / Export PDF">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
           </svg>
         </a>
 
         <!-- Admin Access Button -->
-        <button onclick="openAdminModal()" class="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800/90 hover:bg-amber-500/20 active:scale-95 text-amber-400 border border-amber-500/30 text-xs font-bold flex items-center gap-1.5 transition shadow-sm touch-manipulation" title="Admin Review Dashboard (Client Feedback)">
+        <button onclick="openAdminModal()" class="p-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800/90 hover:bg-amber-500/20 active:scale-95 text-amber-400 border border-amber-500/30 text-xs font-bold flex items-center gap-1 transition shadow-sm touch-manipulation shrink-0" title="Admin Review Dashboard (Client Feedback)">
           <span>🔐</span>
           <span class="hidden xl:inline" id="btn-admin-header">Admin</span>
         </button>
 
         <!-- Language Toggle -->
-        <div class="bg-slate-800/90 p-0.5 sm:p-1 rounded-xl border border-slate-700/80 flex items-center">
-          <button id="lang-en" onclick="setLanguage('en')" class="px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition bg-blue-600 text-white shadow-sm touch-manipulation">
-            English
+        <div class="bg-slate-800/90 p-0.5 sm:p-1 rounded-xl border border-slate-700/80 flex items-center shrink-0">
+          <button id="lang-en" onclick="setLanguage('en')" class="px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[10px] sm:text-xs font-bold transition bg-blue-600 text-white shadow-sm touch-manipulation whitespace-nowrap">
+            En
           </button>
-          <button id="lang-ar" onclick="setLanguage('ar')" class="px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition text-slate-400 hover:text-white touch-manipulation">
-            العربية
+          <button id="lang-ar" onclick="setLanguage('ar')" class="px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[10px] sm:text-xs font-bold transition text-slate-400 hover:text-white touch-manipulation whitespace-nowrap">
+            عربي
           </button>
         </div>
       </div>
@@ -810,25 +836,25 @@
     <!-- INTERACTIVE PRODUCT EXPLORER & TABS -->
     <section id="product-explorer-section" class="space-y-6 pt-4">
       <div class="border-b border-slate-800 pb-4 no-print">
-        <!-- Tab Navigation Buttons -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scroll-touch relative flex-wrap sm:flex-nowrap" role="tablist" id="tabs-nav">
-          <button onclick="switchTab('photography')" id="tab-btn-photography" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20 active:scale-95 touch-manipulation">
+        <!-- Tab Navigation Buttons — Fluid Horizontal Scroll Rail -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 scroll-touch relative flex-nowrap scrollbar-none snap-x" role="tablist" id="tabs-nav">
+          <button onclick="switchTab('photography')" id="tab-btn-photography" class="shrink-0 whitespace-nowrap snap-start px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20 active:scale-95 touch-manipulation">
             <span>📸</span>
             <span id="tab-label-photo">1. Photography Production (EGP 350K)</span>
           </button>
-          <button onclick="switchTab('video')" id="tab-btn-video" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95 touch-manipulation">
+          <button onclick="switchTab('video')" id="tab-btn-video" class="shrink-0 whitespace-nowrap snap-start px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95 touch-manipulation">
             <span>🎬</span>
             <span id="tab-label-video">2. Video Production (EGP 550K)</span>
           </button>
-          <button onclick="switchTab('payments')" id="tab-btn-payments" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95 touch-manipulation">
+          <button onclick="switchTab('payments')" id="tab-btn-payments" class="shrink-0 whitespace-nowrap snap-start px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95 touch-manipulation">
             <span>💳</span>
             <span id="tab-label-payments">3. Payment Terms &amp; Value</span>
           </button>
-          <button onclick="switchTab('matrix')" id="tab-btn-matrix" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95 touch-manipulation">
+          <button onclick="switchTab('matrix')" id="tab-btn-matrix" class="shrink-0 whitespace-nowrap snap-start px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95 touch-manipulation">
             <span>📊</span>
             <span id="tab-label-matrix">4. Unified Scope Matrix</span>
           </button>
-          <button onclick="switchTab('planner')" id="tab-btn-planner" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-900/40 active:scale-95 touch-manipulation">
+          <button onclick="switchTab('planner')" id="tab-btn-planner" class="shrink-0 whitespace-nowrap snap-start px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-900/40 active:scale-95 touch-manipulation">
             <span>⚡</span>
             <span id="tab-label-planner">5. Interactive Planner &amp; SLA</span>
           </button>
@@ -1517,14 +1543,21 @@
        FLOATING INTERACTIVE FEEDBACK TRIGGER FOR SARAH ASHRAF
        Eye-catching, pulsing luxury badge anchored in the corner
        ========================================================================= -->
-  <aside id="floating-feedback-trigger" aria-label="Feedback and Comments" class="fixed bottom-6 left-4 sm:left-6 z-40 no-print">
-    <button onclick="openFeedbackModal()" class="floating-feedback-btn px-4 py-3 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 text-white font-extrabold text-xs shadow-2xl flex items-center gap-2.5 transition active:scale-95 touch-manipulation border border-amber-400/30 group">
-      <span class="relative flex h-3 w-3">
+  <!-- =========================================================================
+       FLOATING INTERACTIVE FEEDBACK TRIGGER FOR SARAH ASHRAF
+       Eye-catching, pulsing luxury badge anchored in the corner
+       ========================================================================= -->
+  <aside id="floating-feedback-trigger" aria-label="Feedback and Comments" class="fixed bottom-4 sm:bottom-6 left-3 sm:left-6 rtl:left-auto rtl:right-3 sm:rtl:right-6 z-40 no-print transition-all duration-300">
+    <button onclick="openFeedbackModal()" class="floating-feedback-btn px-3 py-2 sm:px-4 sm:py-3 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 text-white font-extrabold text-[11px] sm:text-xs shadow-2xl flex items-center gap-1.5 sm:gap-2.5 transition active:scale-95 touch-manipulation border border-amber-400/30 group">
+      <span class="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-400"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-amber-400"></span>
       </span>
-      <span class="tracking-tight text-white group-hover:text-amber-200 transition-colors" id="btn-floating-feedback-text">
+      <span class="tracking-tight text-white group-hover:text-amber-200 transition-colors hidden sm:inline whitespace-nowrap" id="btn-floating-feedback-text">
         💬 Add Feedback, Sarah
+      </span>
+      <span class="tracking-tight text-white font-bold sm:hidden whitespace-nowrap" id="btn-floating-feedback-text-mob">
+        💬 Sarah
       </span>
     </button>
   </aside>
@@ -1532,19 +1565,19 @@
   <!-- =========================================================================
        MODAL 1: PERSONALIZED WELCOME MODAL FOR SARAH ASHRAF
        ========================================================================= -->
-  <div id="welcome-sarah-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 modal-backdrop-anim">
-    <div class="glass-card modal-dialog-anim rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-amber-500/40 relative space-y-5 text-center shadow-2xl max-h-[92dvh] overflow-y-auto">
+  <div id="welcome-sarah-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 modal-backdrop-anim">
+    <div class="glass-card modal-dialog-anim rounded-2xl sm:rounded-3xl max-w-lg w-full p-5 sm:p-8 border border-amber-500/40 relative space-y-4 sm:space-y-5 text-center shadow-2xl max-h-[88dvh] sm:max-h-[92dvh] overflow-y-auto">
       
       <!-- Welcome Visual Emblem -->
-      <div class="w-16 h-16 mx-auto rounded-2xl bg-[#0a0f1e] border-2 border-amber-400/50 flex items-center justify-center shadow-xl shadow-amber-500/20 animate-pop">
-        <span class="font-serif font-black text-2xl text-[#e8a020]">D</span>
+      <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-2xl bg-[#0a0f1e] border-2 border-amber-400/50 flex items-center justify-center shadow-xl shadow-amber-500/20 animate-pop">
+        <span class="font-serif font-black text-xl sm:text-2xl text-[#e8a020]">D</span>
       </div>
 
-      <div class="space-y-2">
-        <span class="text-xs font-bold uppercase tracking-widest text-amber-400 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 inline-block" id="welcome-pill">
+      <div class="space-y-1.5 sm:space-y-2">
+        <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-amber-400 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 inline-block" id="welcome-pill">
           Executive Presentation
         </span>
-        <h3 class="text-2xl sm:text-3xl font-black text-white" id="welcome-sarah-title">
+        <h3 class="text-xl sm:text-3xl font-black text-white" id="welcome-sarah-title">
           Welcome, Sarah Ashraf
         </h3>
         <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md mx-auto pt-1" id="welcome-sarah-desc">
@@ -1553,7 +1586,7 @@
       </div>
 
       <!-- Quick Highlights Card -->
-      <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs space-y-2 text-left">
+      <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs space-y-2 text-left">
         <div class="flex justify-between items-center">
           <span class="text-slate-400" id="welcome-lbl-client">Client:</span>
           <span class="font-bold text-white">OneBank (وان بنك) • MDI</span>
@@ -1569,7 +1602,7 @@
       </div>
 
       <!-- Main CTA Button -->
-      <button onclick="dismissWelcomeModal()" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 hover:from-blue-500 hover:to-amber-400 text-white font-extrabold text-sm shadow-xl shadow-blue-600/30 transition active:scale-95 touch-manipulation flex items-center justify-center gap-2 group" id="btn-welcome-cta">
+      <button onclick="dismissWelcomeModal()" class="w-full py-3 sm:py-3.5 px-6 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 hover:from-blue-500 hover:to-amber-400 text-white font-extrabold text-xs sm:text-sm shadow-xl shadow-blue-600/30 transition active:scale-95 touch-manipulation flex items-center justify-center gap-2 group" id="btn-welcome-cta">
         <span id="btn-welcome-cta-text">View Commercial Proposal</span>
         <span class="group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1">→</span>
       </button>
@@ -1579,26 +1612,26 @@
   <!-- =========================================================================
        MODAL 2: SARAH'S INTERACTIVE FEEDBACK & COMMENT WINDOW
        ========================================================================= -->
-  <div id="feedback-modal" onclick="if(event.target === this) closeFeedbackModal()" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 modal-backdrop-anim">
-    <div class="glass-card modal-dialog-anim rounded-3xl max-w-lg w-full p-6 sm:p-7 border border-blue-500/40 relative max-h-[92dvh] overflow-y-auto">
-      <button onclick="closeFeedbackModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-base w-9 h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 flex items-center justify-center transition active:scale-95 touch-manipulation" aria-label="Close">✕</button>
+  <div id="feedback-modal" onclick="if(event.target === this) closeFeedbackModal()" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-start sm:items-center justify-center p-2.5 sm:p-4 overflow-y-auto modal-backdrop-anim">
+    <div class="glass-card modal-dialog-anim rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-6 border border-blue-500/40 relative max-h-[88dvh] sm:max-h-[92dvh] flex flex-col my-auto shadow-2xl">
+      <button onclick="closeFeedbackModal()" class="absolute top-3 right-3 rtl:right-auto rtl:left-3 text-slate-400 hover:text-white text-base w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 flex items-center justify-center transition active:scale-95 touch-manipulation z-20" aria-label="Close">✕</button>
 
       <!-- FORM VIEW -->
-      <div id="feedback-form-view" class="space-y-4">
-        <div class="flex items-center gap-3">
-          <div class="p-2.5 rounded-xl bg-blue-500/20 text-blue-400 shrink-0">
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div id="feedback-form-view" class="flex flex-col flex-1 overflow-hidden space-y-3">
+        <div class="flex items-center gap-2.5 sm:gap-3 shrink-0 pr-8 rtl:pr-0 rtl:pl-8">
+          <div class="p-2 sm:p-2.5 rounded-xl bg-blue-500/20 text-blue-400 shrink-0">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
             </svg>
           </div>
           <div>
-            <h4 class="text-base sm:text-lg font-bold text-white" id="feedback-modal-title">Share Feedback &amp; Notes — Sarah Ashraf</h4>
-            <p class="text-xs text-slate-300" id="feedback-modal-sub">Submit comments directly to Abdalla Elfouly (Dubai in Cairo LLC).</p>
+            <h4 class="text-sm sm:text-base font-bold text-white leading-snug" id="feedback-modal-title">Share Feedback &amp; Notes — Sarah Ashraf</h4>
+            <p class="text-[11px] sm:text-xs text-slate-300" id="feedback-modal-sub">Submit comments directly to Abdalla Elfouly (Dubai in Cairo LLC).</p>
           </div>
         </div>
 
-        <!-- Input Form -->
-        <div class="space-y-3 pt-1 text-xs">
+        <!-- Scrollable Inputs Area -->
+        <div class="overflow-y-auto overscroll-contain flex-1 pr-1 space-y-2.5 text-xs">
           <div>
             <label class="block font-semibold text-slate-300 mb-1" id="feedback-lbl-section">Section Reference:</label>
             <select id="feedback-section" class="custom-select w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 cursor-pointer">
@@ -1612,37 +1645,35 @@
 
           <div>
             <label class="block font-semibold text-slate-300 mb-1" id="feedback-lbl-text">Your Comments / Inquiries:</label>
-            <textarea id="feedback-text" rows="4" placeholder="Write your notes, questions, or approval points here..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 placeholder-slate-500"></textarea>
+            <textarea id="feedback-text" rows="3" placeholder="Write your notes, questions, or approval points here..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 placeholder-slate-500"></textarea>
           </div>
 
           <!-- Direct Contact Assistance Box with International Number -->
-          <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-amber-500/30 text-xs space-y-2">
-            <div class="flex items-center gap-2 text-amber-400 font-bold">
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-amber-500/30 text-xs space-y-1.5">
+            <div class="flex items-center gap-1.5 text-amber-400 font-bold text-[11px]">
               <span>📞</span>
               <span id="feedback-direct-help-title">Direct Executive Support &amp; Instant WhatsApp:</span>
             </div>
-            <p class="text-[11px] text-slate-300 leading-relaxed" id="feedback-direct-help-desc">
-              You can also connect immediately with Abdalla Hassan Elfouly via phone, WhatsApp, or official email:
+            <p class="text-[10px] sm:text-[11px] text-slate-300 leading-relaxed" id="feedback-direct-help-desc">
+              You can also connect immediately with Abdalla Hassan Elfouly via phone or WhatsApp:
             </p>
-            <div class="flex flex-wrap items-center gap-3 pt-1">
-              <a href="https://wa.me/966595979064" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 transition font-mono font-bold">
+            <div class="flex flex-wrap items-center gap-2 pt-0.5">
+              <a href="https://wa.me/966595979064" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 transition font-mono font-bold text-[11px]">
                 <span id="fb-lbl-wa">💬 WhatsApp:</span>
                 <span>+966 59 597 9064</span>
               </a>
-              <a href="tel:+966595979064" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/30 hover:bg-blue-500/30 transition font-mono font-bold">
+              <a href="tel:+966595979064" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/30 hover:bg-blue-500/30 transition font-mono font-bold text-[11px]">
                 <span id="fb-lbl-mob">📞 Mobile:</span>
                 <span>+966 59 597 9064</span>
-              </a>
-              <a href="mailto:info@dubaiincairo.com" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 transition font-mono">
-                <span>✉️ info@dubaiincairo.com</span>
               </a>
             </div>
           </div>
         </div>
 
-        <div class="pt-2 flex items-center justify-end gap-2">
-          <button onclick="closeFeedbackModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white active:scale-95 touch-manipulation" id="feedback-btn-cancel">Cancel</button>
-          <button onclick="submitClientFeedback()" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition active:scale-95 touch-manipulation" id="feedback-btn-submit">
+        <!-- Sticky Footer Action Buttons -->
+        <div class="pt-2 border-t border-slate-800/90 flex items-center justify-end gap-2 shrink-0 bg-[#0c1222]/95 backdrop-blur-md mt-1">
+          <button onclick="closeFeedbackModal()" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white active:scale-95 touch-manipulation" id="feedback-btn-cancel">Cancel</button>
+          <button onclick="submitClientFeedback()" class="px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition active:scale-95 touch-manipulation whitespace-nowrap" id="feedback-btn-submit">
             Send Feedback to Dubai in Cairo
           </button>
         </div>
@@ -2082,8 +2113,10 @@
         brandTag: 'Misr Digital Innovation (MDI)',
         brandSub: 'Integrated Photography & Video Production Package • Commercial Quotation (Launching)',
         btnPortfolio: 'Download Portfolio PDF',
+        btnPortfolioMob: 'Portfolio PDF',
         btnCopy: 'Share Link',
         btnFloatingFeedback: '💬 Add Feedback, Sarah',
+        btnFloatingFeedbackMob: '💬 Sarah',
         btnAdminHeader: 'Admin',
         searchPlaceholder: 'Filter services or deliverables...',
         printDocSub: 'Prepared for: OneBank / Misr Digital Innovation (MDI) • Date: 5 October 2026',
@@ -2316,8 +2349,10 @@
         brandTag: 'مصر للابتكار الرقمي',
         brandSub: 'باقة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو • عرض سعر تجاري',
         btnPortfolio: 'تحميل ملف سابقة الأعمال',
+        btnPortfolioMob: 'ملف الأعمال',
         btnCopy: 'مشاركة الرابط',
         btnFloatingFeedback: '💬 أرسلي ملاحظاتك أ. سارة',
+        btnFloatingFeedbackMob: '💬 سارة',
         btnAdminHeader: 'لوحة الإدارة',
         searchPlaceholder: 'ابحث في الخدمات والمخرجات...',
         printDocSub: 'مُعد حصرياً إلى: وان بنك / شركة مصر للابتكار الرقمي • التاريخ: 5 أكتوبر 2026',
@@ -2572,8 +2607,10 @@
       setText('brand-tag', t.brandTag);
       setText('brand-sub', t.brandSub);
       setText('btn-portfolio-text', t.btnPortfolio);
+      setText('btn-portfolio-text-mob', t.btnPortfolioMob);
       setText('btn-copy-text', t.btnCopy);
       setText('btn-floating-feedback-text', t.btnFloatingFeedback);
+      setText('btn-floating-feedback-text-mob', t.btnFloatingFeedbackMob);
       setText('btn-admin-header', t.btnAdminHeader);
       setText('print-doc-sub', t.printDocSub);
 
@@ -3011,9 +3048,13 @@
         }
         if (btn) {
           if (t === tabId) {
-            btn.className = 'shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20 active:scale-95 touch-manipulation';
+            btn.className = 'shrink-0 whitespace-nowrap snap-start px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20 active:scale-95 touch-manipulation';
           } else {
-            btn.className = 'shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95 touch-manipulation';
+            if (t === 'planner') {
+              btn.className = 'shrink-0 whitespace-nowrap snap-start px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-900/40 active:scale-95 touch-manipulation';
+            } else {
+              btn.className = 'shrink-0 whitespace-nowrap snap-start px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95 touch-manipulation';
+            }
           }
         }
       });
@@ -3337,7 +3378,9 @@
       document.getElementById('feedback-success-view')?.classList.add('hidden');
       
       const textarea = document.getElementById('feedback-text');
-      if (textarea) textarea.focus();
+      if (textarea && window.innerWidth >= 640) {
+        setTimeout(() => textarea.focus(), 100);
+      }
     }
 
     function closeFeedbackModal() {
@@ -3713,6 +3756,29 @@
           });
         }, { threshold: 0.1 });
         observer.observe(kpiContainer);
+      }
+
+      // Mobile Floating Button Auto-Collapse on Scroll
+      let fbScrollTimer;
+      const feedbackTrigger = document.getElementById('floating-feedback-trigger');
+      window.addEventListener('scroll', () => {
+        if (feedbackTrigger && window.innerWidth < 640) {
+          feedbackTrigger.classList.add('floating-btn-collapsed');
+          clearTimeout(fbScrollTimer);
+          fbScrollTimer = setTimeout(() => {
+            feedbackTrigger.classList.remove('floating-btn-collapsed');
+          }, 450);
+        }
+      }, { passive: true });
+
+      // Mobile Virtual Keyboard Viewport Scroll for Feedback Modal
+      const fbTextarea = document.getElementById('feedback-text');
+      if (fbTextarea) {
+        fbTextarea.addEventListener('focus', () => {
+          setTimeout(() => {
+            fbTextarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 300);
+        });
       }
     }
 

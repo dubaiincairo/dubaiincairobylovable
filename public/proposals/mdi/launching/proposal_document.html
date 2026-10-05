@@ -46,11 +46,36 @@
       }
     }
 
-    /* Print Specific Layout & Page Breaking */
+    /* Print Specific Layout & Page Breaking — Strict Artifact Isolation */
     @media print {
       body {
         background-color: #ffffff !important;
         color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      /* Completely eradicate everything attached to body except the official document page */
+      body > *:not(.doc-page) {
+        display: none !important;
+        visibility: hidden !important;
+        position: absolute !important;
+        top: -99999px !important;
+        left: -99999px !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+      /* Suppress any floating widgets, browser extension buttons, or fixed overlays */
+      [style*="fixed"], [style*="position: fixed"], [style*="position:fixed"],
+      aside, nav, iframe, button, [class*="extension"], [id*="extension"],
+      [class*="widget"], [id*="widget"], [class*="floating"], [id*="floating"],
+      [class*="monica"], [id*="monica"], [class*="sider"], [id*="sider"],
+      [class*="deepl"], [id*="deepl"], [class*="liner"], [id*="liner"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
       }
       .no-print {
         display: none !important;
@@ -60,6 +85,8 @@
         max-width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
+        position: relative !important;
+        background: transparent !important;
       }
       .page-break {
         page-break-before: always !important;
@@ -72,7 +99,7 @@
       }
       @page {
         size: A4;
-        margin: 14mm 14mm 14mm 14mm;
+        margin: 12mm 14mm 14mm 14mm;
       }
     }
 
@@ -113,7 +140,7 @@
         </div>
 
         <!-- Print / Save as PDF Button -->
-        <button onclick="window.print()" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-lg shadow-blue-600/30 transition active:scale-95">
+        <button onclick="triggerCleanPrint()" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-lg shadow-blue-600/30 transition active:scale-95 cursor-pointer">
           <span>🖨️</span>
           <span id="btn-print-doc">Print / Save as PDF</span>
         </button>
@@ -1006,6 +1033,52 @@
         : 'Commercial Quotation Document — OneBank (MDI) × Dubai in Cairo LLC';
       localStorage.setItem('dic_lang', lang);
     }
+
+    function purgePrintArtifacts() {
+      // 1. Hide any top-level body element that is not .doc-page
+      document.querySelectorAll('body > *').forEach(node => {
+        if (!node.classList.contains('doc-page') && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+          node.setAttribute('data-print-purged', 'true');
+          node.style.setProperty('display', 'none', 'important');
+          node.style.setProperty('visibility', 'hidden', 'important');
+        }
+      });
+
+      // 2. Hide any fixed position element or injected floating widget in DOM
+      document.querySelectorAll('*').forEach(el => {
+        if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE' || el.tagName === 'HEAD' || el.tagName === 'HTML' || el.tagName === 'BODY') return;
+        if (el.classList.contains('doc-page') || el.closest('.doc-page')) {
+          const style = window.getComputedStyle(el);
+          if (style.position === 'fixed') {
+            el.setAttribute('data-print-purged-fixed', 'true');
+            el.style.setProperty('display', 'none', 'important');
+          }
+        } else {
+          el.setAttribute('data-print-purged-ext', 'true');
+          el.style.setProperty('display', 'none', 'important');
+        }
+      });
+    }
+
+    function restorePrintArtifacts() {
+      document.querySelectorAll('[data-print-purged], [data-print-purged-fixed], [data-print-purged-ext]').forEach(el => {
+        el.removeAttribute('data-print-purged');
+        el.removeAttribute('data-print-purged-fixed');
+        el.removeAttribute('data-print-purged-ext');
+        el.style.removeProperty('display');
+        el.style.removeProperty('visibility');
+      });
+    }
+
+    function triggerCleanPrint() {
+      purgePrintArtifacts();
+      setTimeout(() => {
+        window.print();
+      }, 60);
+    }
+
+    window.addEventListener('beforeprint', purgePrintArtifacts);
+    window.addEventListener('afterprint', restorePrintArtifacts);
 
     function initDoc() {
       const urlParams = new URLSearchParams(window.location.search);
