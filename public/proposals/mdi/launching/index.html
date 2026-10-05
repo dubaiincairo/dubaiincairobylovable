@@ -576,12 +576,11 @@
           <span class="hidden lg:inline" id="btn-copy-text">Share Link</span>
         </button>
 
-        <!-- Print / PDF Proposal -->
-        <button onclick="window.print()" class="p-1.5 sm:p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-slate-300 border border-slate-700 text-xs transition touch-manipulation" title="Print / Export PDF">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
-          </svg>
-        </button>
+        <!-- Official Print / PDF Document Link -->
+        <a href="proposal_document.html" target="_blank" class="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800/90 hover:bg-cyan-500/20 active:scale-95 text-cyan-300 border border-cyan-500/30 text-xs font-semibold flex items-center gap-1.5 transition shadow-sm touch-manipulation" title="Official Print Document & PDF Layout">
+          <span>📄</span>
+          <span class="hidden md:inline" id="btn-doc-header">Official Document (PDF)</span>
+        </a>
 
         <!-- Admin Access Button -->
         <button onclick="openAdminModal()" class="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800/90 hover:bg-amber-500/20 active:scale-95 text-amber-400 border border-amber-500/30 text-xs font-bold flex items-center gap-1.5 transition shadow-sm touch-manipulation" title="Admin Review Dashboard (Client Feedback)">
@@ -636,9 +635,9 @@
             <span id="hero-pill">OFFICIAL COMMERCIAL QUOTATION • PRODUCTION ROADMAP</span>
           </div>
 
-          <a href="https://dubaiincairo.com/proposals/mdi/launching" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 hover:text-cyan-300 transition group">
+          <a href="https://www.dubaiincairo.com" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 hover:text-cyan-300 transition group" title="Visit Dubai in Cairo Official Website">
             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span class="font-mono text-cyan-400">dubaiincairo.com/proposals/mdi/launching</span>
+            <span class="font-mono text-cyan-400">www.dubaiincairo.com</span>
             <span class="text-slate-400 group-hover:text-cyan-400">↗</span>
           </a>
         </div>
@@ -948,14 +947,35 @@
               <span class="text-xs px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 font-mono">Pre-Production</span>
             </div>
             <h4 class="text-base font-bold text-white" id="vphase-1-title">Creative &amp; Pre-Production</h4>
-            <ul class="text-xs text-slate-300 space-y-2 pt-1 list-disc list-inside" id="vphase-1-list">
-              <li>Creative concept development aligned with OneBank app communication goals.</li>
-              <li>Scriptwriting, scene planning &amp; storyboards / visual treatments.</li>
-              <li>Production scheduling &amp; multi-crew coordination with dedicated Account Manager.</li>
-              <li>Casting of 1 male model, 1 female model + 1 standby emergency model.</li>
-              <li>Studio selection, booking, rental &amp; permits.</li>
-              <li>Art direction, wardrobe coordination, styling, hair &amp; makeup.</li>
-              <li>Standard set dressing and props for approved lifestyle concepts.</li>
+            <ul class="text-xs text-slate-300 space-y-2.5 pt-1" id="vphase-1-list">
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Creative concept development aligned with OneBank app communication goals.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Scriptwriting, scene planning &amp; storyboards / visual treatments.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Production scheduling &amp; multi-crew coordination with dedicated Account Manager.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Casting of 1 male model, 1 female model + 1 standby emergency model.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Studio selection, booking, rental &amp; permits.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Art direction, wardrobe coordination, styling, hair &amp; makeup.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Standard set dressing and props for approved lifestyle concepts.</span>
+              </li>
             </ul>
           </div>
 
@@ -966,13 +986,31 @@
               <span class="text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300 font-mono">Production</span>
             </div>
             <h4 class="text-base font-bold text-white" id="vphase-2-title">Principal Studio Filming</h4>
-            <ul class="text-xs text-slate-300 space-y-2 pt-1 list-disc list-inside" id="vphase-2-list">
-              <li>Director, producer, camera crew, lighting crew &amp; production assistants.</li>
-              <li>High-end professional cameras, prime lenses, lighting, grip &amp; sound gear.</li>
-              <li>Studio filming execution and on-site production management.</li>
-              <li>Directorial management of cast models interacting with OneBank app screens.</li>
-              <li>Crew and heavy equipment transportation within Greater Cairo.</li>
-              <li>Execution of approved scripts strictly within the agreed shooting schedule.</li>
+            <ul class="text-xs text-slate-300 space-y-2.5 pt-1" id="vphase-2-list">
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Director, producer, camera crew, lighting crew &amp; production assistants.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">High-end professional cameras, prime lenses, lighting, grip &amp; sound gear.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Studio filming execution and on-site production management.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Directorial management of cast models interacting with OneBank app screens.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Crew and heavy equipment transportation within Greater Cairo.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Execution of approved scripts strictly within the agreed shooting schedule.</span>
+              </li>
             </ul>
           </div>
 
@@ -983,14 +1021,35 @@
               <span class="text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 font-mono">Post-Production</span>
             </div>
             <h4 class="text-base font-bold text-white" id="vphase-3-title">Post-Production &amp; Mastering</h4>
-            <ul class="text-xs text-slate-300 space-y-2 pt-1 list-disc list-inside" id="vphase-3-list">
-              <li>Offline &amp; online editing of 3 videos (~60 seconds each).</li>
-              <li>Cinematic colour correction and precise colour grading.</li>
-              <li>Integration of client-supplied final OneBank animations.</li>
-              <li>Sound engineering, dialogue cleanup, sound design &amp; final audio mix.</li>
-              <li>Licensed background music cleared for agreed channels.</li>
-              <li>Application of approved branding, titles, captions &amp; end cards.</li>
-              <li>Rigorous quality control and final digital delivery.</li>
+            <ul class="text-xs text-slate-300 space-y-2.5 pt-1" id="vphase-3-list">
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Offline &amp; online editing of 3 videos (~60 seconds each).</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Cinematic colour correction and precise colour grading.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Integration of client-supplied final OneBank animations.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Sound engineering, dialogue cleanup, sound design &amp; final audio mix.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Licensed background music cleared for agreed channels.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Application of approved branding, titles, captions &amp; end cards.</span>
+              </li>
+              <li class="flex items-start gap-2.5 group/item">
+                <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+                <span class="leading-relaxed">Rigorous quality control and final digital delivery.</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -1267,13 +1326,31 @@
             01
           </div>
           <h4 class="text-base font-bold text-white" id="gov-c1-t">Client Responsibilities</h4>
-          <ul class="text-xs text-slate-300 space-y-2 pt-1 list-disc list-inside" id="gov-c1-d">
-            <li>Supply brand guidelines, logos, approved messaging, and reference files.</li>
-            <li>Provide final approved animation assets and client-owned production materials.</li>
-            <li>Appoint a designated representative to consolidate feedback and sign off each stage.</li>
-            <li>Ensure access to premises, location permits, and staff availability.</li>
-            <li>Approve concepts, scripts, casting, wardrobe, and shot lists prior to shooting.</li>
-            <li>Provide approved digital app interface mockups and ensure participating bank personnel adhere to official corporate dress codes.</li>
+          <ul class="text-xs text-slate-300 space-y-2.5 pt-1" id="gov-c1-d">
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed">Supply brand guidelines, logos, approved messaging, and reference files.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed">Provide final approved animation assets and client-owned production materials.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed">Appoint a designated representative to consolidate feedback and sign off each stage.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed">Ensure access to premises, location permits, and staff availability.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed">Approve concepts, scripts, casting, wardrobe, and shot lists prior to shooting.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed">Provide approved digital app interface mockups and ensure participating bank personnel adhere to official corporate dress codes.</span>
+            </li>
           </ul>
         </div>
 
@@ -1283,13 +1360,31 @@
             02
           </div>
           <h4 class="text-base font-bold text-white" id="gov-c2-t">Production, Revisions &amp; Approvals</h4>
-          <ul class="text-xs text-slate-300 space-y-2 pt-1 list-disc list-inside" id="gov-c2-d">
-            <li><strong>Model &amp; Music Approval:</strong> All selected cast models and licensed music tracks must receive written approval from OneBank prior to the commencement of principal filming and video editing.</li>
-            <li><strong>Photography Revisions:</strong> 2 consolidated rounds for image selection and retouching.</li>
-            <li><strong>Video Revisions:</strong> 2 consolidated editing rounds per video.</li>
-            <li><strong>Feedback:</strong> Consolidated feedback provided through OneBank designated lead.</li>
-            <li><strong>Delivery:</strong> Digital delivery of high-resolution JPEGs and MP4 video masters.</li>
-            <li><strong>Exclusions:</strong> Raw footage, unedited photos, and project files excluded unless agreed.</li>
+          <ul class="text-xs text-slate-300 space-y-2.5 pt-1" id="gov-c2-d">
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed"><strong class="text-white">Model &amp; Music Approval:</strong> All selected cast models and licensed music tracks must receive written approval from OneBank prior to the commencement of principal filming and video editing.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed"><strong class="text-white">Photography Revisions:</strong> 2 consolidated rounds for image selection and retouching.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed"><strong class="text-white">Video Revisions:</strong> 2 consolidated editing rounds per video.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed"><strong class="text-white">Feedback:</strong> Consolidated feedback provided through OneBank designated lead.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed"><strong class="text-white">Delivery:</strong> Digital delivery of high-resolution JPEGs and MP4 video masters.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed"><strong class="text-white">Exclusions:</strong> Raw footage, unedited photos, and project files excluded unless agreed.</span>
+            </li>
           </ul>
         </div>
 
@@ -1299,12 +1394,27 @@
             03
           </div>
           <h4 class="text-base font-bold text-white" id="gov-c3-t">Usage, Rights &amp; Validity</h4>
-          <ul class="text-xs text-slate-300 space-y-2 pt-1 list-disc list-inside" id="gov-c3-d">
-            <li><strong>Production Commencement:</strong> Production scheduling and studio reservations commence immediately upon receipt of an explicit acceptance email from OneBank and full receipt of the required advance payment.</li>
-            <li><strong>Agency Portfolio Rights:</strong> Dubai in Cairo LLC reserves the right to include final delivered work in its agency portfolio and creative showcases 6 months after official public release by OneBank, without requiring additional prior written approval.</li>
-            <li>Strict confidentiality applied to OneBank-supplied and unreleased assets prior to official launch.</li>
-            <li><strong>Quotation Validity:</strong> 15 calendar days from quotation date (5 October 2026).</li>
-            <li>Client-requested cancellations or rescheduling incurs non-refundable supplier costs.</li>
+          <ul class="text-xs text-slate-300 space-y-2.5 pt-1" id="gov-c3-d">
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed"><strong class="text-white">Production Commencement:</strong> Production scheduling and studio reservations commence immediately upon receipt of an explicit acceptance email from OneBank and full receipt of the required advance payment.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed"><strong class="text-white">Agency Portfolio Rights:</strong> Dubai in Cairo LLC reserves the right to include final delivered work in its agency portfolio and creative showcases 6 months after official public release by OneBank, without requiring additional prior written approval.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed">Strict confidentiality applied to OneBank-supplied and unreleased assets prior to official launch.</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed"><strong class="text-white">Quotation Validity:</strong> 15 calendar days from quotation date (5 October 2026).</span>
+            </li>
+            <li class="flex items-start gap-2.5 group/item">
+              <span class="w-4 h-4 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+              <span class="leading-relaxed">Client-requested cancellations or rescheduling incurs non-refundable supplier costs.</span>
+            </li>
           </ul>
         </div>
       </div>
@@ -1344,7 +1454,7 @@
               <span class="text-slate-400 self-center" id="sign-lbl-sig1">Signature:</span>
               <div class="inline-flex items-center justify-center py-1">
                 <!-- Authentic Native Hand-drawn Signature of Abdalla Hassan Elfouly -->
-                <img src="/proposals/mdi/launching/signature-light.png" alt="Signature of Abdalla Hassan Elfouly" class="h-14 sm:h-16 w-auto max-w-[200px] object-contain select-none pointer-events-none filter drop-shadow-[0_2px_12px_rgba(255,255,255,0.12)] brightness-110" id="agency-signature-img">
+                <img src="signature-light.png" onerror="if(!this.dataset.fallback){this.dataset.fallback=1;this.src='/proposals/mdi/launching/signature-light.png';}" alt="Signature of Abdalla Hassan Elfouly" class="h-14 sm:h-16 w-auto max-w-[200px] object-contain select-none pointer-events-none filter drop-shadow-[0_2px_12px_rgba(255,255,255,0.15)] brightness-110" id="agency-signature-img">
               </div>
             </div>
             <div class="flex items-center justify-between pt-1">
@@ -1642,7 +1752,10 @@
       <div id="admin-comments-view" class="hidden space-y-4 pt-2 text-xs">
         <div class="flex items-center justify-between border-b border-slate-800 pb-2">
           <span class="font-bold text-white" id="admin-count-label">Received Comments: 0</span>
-          <button onclick="clearAllComments()" class="text-rose-400 hover:text-rose-300 text-[11px] underline">Clear All</button>
+          <div class="flex items-center gap-2">
+            <button onclick="handleAdminLogout()" class="px-2 py-0.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-bold transition">🔒 Lock Session</button>
+            <button onclick="clearAllComments()" class="text-rose-400 hover:text-rose-300 text-[11px] underline">Clear All</button>
+          </div>
         </div>
         <div id="admin-comments-list" class="space-y-3 max-h-64 overflow-y-auto pr-1">
           <!-- Comments injected via JS -->
@@ -2203,8 +2316,130 @@
 
       renderPhotoCards();
       renderMatrixTable();
+      renderPhaseAndGovLists(isAr);
       runAllNumberCounters();
       runProductionSimulation();
+    }
+
+    function renderPhaseAndGovLists(isAr) {
+      const v1 = document.getElementById('vphase-1-list');
+      const v2 = document.getElementById('vphase-2-list');
+      const v3 = document.getElementById('vphase-3-list');
+      const g1 = document.getElementById('gov-c1-d');
+      const g2 = document.getElementById('gov-c2-d');
+      const g3 = document.getElementById('gov-c3-d');
+
+      const v1Items = isAr ? [
+        'تطوير المفهوم الإبداعي بما يتماشى مع أهداف وتطبيق وان بنك.',
+        'كتابة السيناريو وتخطيط المشاهد واللوحات البصرية التوضيحية (Storyboards).',
+        'إعداد الجداول الزمنية للإنتاج وتنسيق فرق العمل بواسطة مدير الحسابات المخصص.',
+        'تجارب الأداء واختيار موديل رجل وموديل سيدة + موديل احتياطي للطوارئ.',
+        'اختيار استوديو التصوير وحجزه واستخراج التصاريح اللازمة.',
+        'الإشراف الفني وإدارة الملابس والمظهر وتنسيق الشعر والمكياج.',
+        'تجهيز الديكورات القياسية والإكسسوارات المعتمدة لمفاهيم أسلوب الحياة اليومي.'
+      ] : [
+        'Creative concept development aligned with OneBank app communication goals.',
+        'Scriptwriting, scene planning & storyboards / visual treatments.',
+        'Production scheduling & multi-crew coordination with dedicated Account Manager.',
+        'Casting of 1 male model, 1 female model + 1 standby emergency model.',
+        'Studio selection, booking, rental & permits.',
+        'Art direction, wardrobe coordination, styling, hair & makeup.',
+        'Standard set dressing and props for approved lifestyle concepts.'
+      ];
+
+      const v2Items = isAr ? [
+        'طاقم إخراج وإنتاج وتصوير وإضاءة ومساعدو إنتاج متكاملون.',
+        'كاميرات سينمائية احترافية وعدسات أساسية فاخرة ومعدات إضاءة وصوت متقدمة.',
+        'تنفيذ التصوير داخل الاستوديو وإدارة العمليات الإنتاجية الميدانية.',
+        'التوجيه الإخراجي لتفاعل الموديلز مع شاشات تطبيق وان بنك للهاتف المحمول.',
+        'نقل المعدات الثقيلة وطواقم العمل داخل القاهرة الكبرى.',
+        'تنفيذ السيناريوهات المعتمدة بدقة تامة ضمن الجدول الزمني المتفق عليه.'
+      ] : [
+        'Director, producer, camera crew, lighting crew & production assistants.',
+        'High-end professional cameras, prime lenses, lighting, grip & sound gear.',
+        'Studio filming execution and on-site production management.',
+        'Directorial management of cast models interacting with OneBank app screens.',
+        'Crew and heavy equipment transportation within Greater Cairo.',
+        'Execution of approved scripts strictly within the agreed shooting schedule.'
+      ];
+
+      const v3Items = isAr ? [
+        'المونتاج الأولي والنهائي لـ 3 مقاطع فيديو إعلانية (حوالي 60 ثانية لكل فيديو).',
+        'التصحيح والتلوين السينمائي الاحترافي الدقيق (Color Grading).',
+        'دمج وتكامل الرسوم المتحركة وشعار وان بنك المعتمدة والموردة من العميل.',
+        'هندسة الصوت ومعالجة الحوار والمؤثرات الصوتية والمكساج النهائي.',
+        'موسيقى تصويرية مرخصة ومصرح باستخدامها للقنوات المتفق عليها.',
+        'إدراج الهوية البصرية المعتمدة والعناوين والنصوص الختامية.',
+        'ضبط ومراقبة الجودة الفنية الصارمة والتسليم الرقمي النهائي.'
+      ] : [
+        'Offline & online editing of 3 videos (~60 seconds each).',
+        'Cinematic colour correction and precise colour grading.',
+        'Integration of client-supplied final OneBank animations.',
+        'Sound engineering, dialogue cleanup, sound design & final audio mix.',
+        'Licensed background music cleared for agreed channels.',
+        'Application of approved branding, titles, captions & end cards.',
+        'Rigorous quality control and final digital delivery.'
+      ];
+
+      const g1Items = isAr ? [
+        'تزويد الوكالة بدليل الهوية البصرية والشعارات والرسائل المعتمدة وملفات المراجع.',
+        'تزويد الوكالة بملفات الرسوم المتحركة النهائية المعتمدة ومواد الإنتاج الخاصة بالبنك.',
+        'تعيين ممثل رسمي مفوض لتوحيد الملاحظات واعتماد مراحل العمل.',
+        'تيسير الدخول للمقرات واستخراج تصاريح المواقع وتنسيق حضور الموظفين وأعضاء المجلس.',
+        'اعتماد المفاهيم والسيناريوهات واختيار الموديلز والملابس وقوائم اللقطات قبل بدء التصوير.',
+        'تزويد الوكالة بنماذج شاشات تطبيق الهاتف المحمول والتزام موظفي البنك المشاركين بالزي الرسمي المعتمد.'
+      ] : [
+        'Supply brand guidelines, logos, approved messaging, and reference files.',
+        'Provide final approved animation assets and client-owned production materials.',
+        'Appoint a designated representative to consolidate feedback and sign off each stage.',
+        'Ensure access to premises, location permits, and staff availability.',
+        'Approve concepts, scripts, casting, wardrobe, and shot lists prior to shooting.',
+        'Provide approved digital app interface mockups and ensure participating bank personnel adhere to official corporate dress codes.'
+      ];
+
+      const g2Items = isAr ? [
+        '<strong class="text-white">اعتماد الموديلز والموسيقى:</strong> اعتماد خطي مسبق من وان بنك لجميع الموديلز والمقطوعات الموسيقية المرخصة قبل بدء التصوير والمونتاج.',
+        '<strong class="text-white">تعديلات التصوير الفوتوغرافي:</strong> جولتان مجمعتان لاختيار الصور وإعادة المعالجة والرتوش.',
+        '<strong class="text-white">تعديلات الفيديو:</strong> جولتان مجمعتان من المونتاج لكل مقطع فيديو.',
+        '<strong class="text-white">الملاحظات التراكمية:</strong> تقدم الملاحظات مجمعة عبر الممثل المفوض من وان بنك.',
+        '<strong class="text-white">التسليم:</strong> تسليم رقمي لصور JPEG عالية الدقة وملفات الفيديو بصيغة MP4 Master.',
+        '<strong class="text-white">الاستثناءات:</strong> استبعاد اللقطات الخام والصور غير المعدلة وملفات العمل الأصلية ما لم يتم الاتفاق على خلاف ذلك.'
+      ] : [
+        '<strong class="text-white">Model & Music Approval:</strong> All selected cast models and licensed music tracks must receive written approval from OneBank prior to the commencement of principal filming and video editing.',
+        '<strong class="text-white">Photography Revisions:</strong> 2 consolidated rounds for image selection and retouching.',
+        '<strong class="text-white">Video Revisions:</strong> 2 consolidated editing rounds per video.',
+        '<strong class="text-white">Feedback:</strong> Consolidated feedback provided through OneBank designated lead.',
+        '<strong class="text-white">Delivery:</strong> Digital delivery of high-resolution JPEGs and MP4 video masters.',
+        '<strong class="text-white">Exclusions:</strong> Raw footage, unedited photos, and project files excluded unless agreed.'
+      ];
+
+      const g3Items = isAr ? [
+        '<strong class="text-white">بدء الإنتاج:</strong> يبدأ جدولة الإنتاج وحجوزات الاستوديو فور استلام بريد إلكتروني رسمي بالقبول من وان بنك وسداد الدفعة المقدمة كاملة.',
+        '<strong class="text-white">حقوق سابقة الأعمال:</strong> تحتفظ دبي في القاهرة بالحق في إدراج الأعمال المنجزة في سابقة أعمالها بعد 6 أشهر من إطلاقها الرسمي من وان بنك دون الحاجة لموافقة خطية مسبقة.',
+        'سرية تامة ومطلقة لجميع المواد والأصول غير المنشورة الخاصة بوان بنك قبل موعد الإطلاق الرسمي.',
+        '<strong class="text-white">صلاحية عرض السعر:</strong> 15 يوماً تقويمياً من تاريخ الإصدار (5 أكتوبر 2026).',
+        'في حال طلب العميل إلغاء أو إعادة جدولة مواعيد التصوير يتحمل التكاليف الفعلية غير القابلة للاسترداد.'
+      ] : [
+        '<strong class="text-white">Production Commencement:</strong> Production scheduling and studio reservations commence immediately upon receipt of an explicit acceptance email from OneBank and full receipt of the required advance payment.',
+        '<strong class="text-white">Agency Portfolio Rights:</strong> Dubai in Cairo LLC reserves the right to include final delivered work in its agency portfolio and creative showcases 6 months after official public release by OneBank, without requiring additional prior written approval.',
+        'Strict confidentiality applied to OneBank-supplied and unreleased assets prior to official launch.',
+        '<strong class="text-white">Quotation Validity:</strong> 15 calendar days from quotation date (5 October 2026).',
+        'Client-requested cancellations or rescheduling incurs non-refundable supplier costs.'
+      ];
+
+      const makeList = (items, colorClass, borderClass, textClass) => items.map(text => `
+        <li class="flex items-start gap-2.5 group/item">
+          <span class="w-4 h-4 rounded-md ${colorClass} ${borderClass} ${textClass} flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold group-hover/item:scale-110 transition-transform">✓</span>
+          <span class="leading-relaxed">${text}</span>
+        </li>
+      `).join('');
+
+      if (v1) v1.innerHTML = makeList(v1Items, 'bg-cyan-500/15', 'border border-cyan-500/30', 'text-cyan-400');
+      if (v2) v2.innerHTML = makeList(v2Items, 'bg-blue-500/15', 'border border-blue-500/30', 'text-blue-400');
+      if (v3) v3.innerHTML = makeList(v3Items, 'bg-purple-500/15', 'border border-purple-500/30', 'text-purple-400');
+      if (g1) g1.innerHTML = makeList(g1Items, 'bg-blue-500/15', 'border border-blue-500/30', 'text-blue-400');
+      if (g2) g2.innerHTML = makeList(g2Items, 'bg-purple-500/15', 'border border-purple-500/30', 'text-purple-400');
+      if (g3) g3.innerHTML = makeList(g3Items, 'bg-emerald-500/15', 'border border-emerald-500/30', 'text-emerald-400');
     }
 
     // =========================================================================
@@ -2514,6 +2749,8 @@
     // SARAH ASHRAF WELCOME POPUP LOGIC
     // =========================================================================
     function checkWelcomeModal() {
+      // Clear legacy localStorage to ensure fresh appearance on every new session
+      localStorage.removeItem('dic_sarah_welcomed');
       const welcomed = sessionStorage.getItem('dic_sarah_welcomed');
       if (!welcomed) {
         setTimeout(() => {
@@ -2649,6 +2886,8 @@
     // ADMIN PANEL LOGIC (FOR ABDALLA TO INSPECT RECEIVED COMMENTS)
     // =========================================================================
     function openAdminModal() {
+      // Guarantee no cross-session persistence
+      localStorage.removeItem('dic_admin_auth');
       const modal = document.getElementById('admin-modal');
       modal?.classList.remove('hidden');
       modal?.classList.add('flex');
@@ -2664,6 +2903,25 @@
       } else {
         loginView?.classList.remove('hidden');
         commentsView?.classList.add('hidden');
+        const passInput = document.getElementById('admin-pass-input');
+        if (passInput) {
+          passInput.value = '';
+          setTimeout(() => passInput.focus(), 150);
+        }
+      }
+    }
+
+    function handleAdminLogout() {
+      sessionStorage.removeItem('dic_admin_auth');
+      localStorage.removeItem('dic_admin_auth');
+      const loginView = document.getElementById('admin-login-view');
+      const commentsView = document.getElementById('admin-comments-view');
+      loginView?.classList.remove('hidden');
+      commentsView?.classList.add('hidden');
+      const passInput = document.getElementById('admin-pass-input');
+      if (passInput) {
+        passInput.value = '';
+        passInput.focus();
       }
     }
 
@@ -2727,6 +2985,122 @@
     });
 
     // =========================================================================
+    // STANDARD LUXURY HORIZONTAL SCROLLER HINT ANIMATION (DIC SPEC)
+    // 2.0 cm (76px) silky-smooth nudge with easeInOutSine easing & pause dwell
+    // Triggers dynamically precisely when the viewport reaches the bar
+    // =========================================================================
+    function attachScrollerHintAnimation(target, options = {}) {
+      const scroller = typeof target === 'string' ? document.querySelector(target) : target;
+      if (!scroller) return;
+
+      const {
+        distance = 76,       // Exactly 2.0 cm in standard screen metrics
+        forwardTime = 900,   // ms
+        pauseTime = 400,     // ms
+        returnTime = 1000    // ms
+      } = options;
+
+      let userInteracted = false;
+      const onUserGesture = () => { userInteracted = true; };
+
+      scroller.addEventListener('touchstart', onUserGesture, { passive: true });
+      scroller.addEventListener('mousedown', onUserGesture, { passive: true });
+      scroller.addEventListener('pointerdown', onUserGesture, { passive: true });
+      scroller.addEventListener('wheel', onUserGesture, { passive: true });
+
+      function easeInOutSine(t) {
+        return -(Math.cos(Math.PI * t) - 1) / 2;
+      }
+
+      function animateScroll(from, to, duration, callback) {
+        if (userInteracted) return;
+        const startTime = performance.now();
+        const initialBehavior = scroller.style.scrollBehavior;
+        scroller.style.scrollBehavior = 'auto';
+
+        function step(currentTime) {
+          if (userInteracted) {
+            scroller.style.scrollBehavior = initialBehavior;
+            return;
+          }
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = easeInOutSine(progress);
+
+          scroller.scrollLeft = from + (to - from) * eased;
+
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            scroller.scrollLeft = to;
+            scroller.style.scrollBehavior = initialBehavior;
+            if (callback) callback();
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      let hasTriggered = false;
+
+      function startHintMotion() {
+        if (hasTriggered || userInteracted) return;
+        hasTriggered = true;
+
+        setTimeout(() => {
+          if (userInteracted) return;
+
+          const isRtl = document.documentElement.dir === 'rtl';
+          const targetDist = isRtl ? -distance : distance;
+
+          // If container has horizontal scroll overflow (mobile/tablet/narrow screens)
+          if (scroller.scrollWidth > scroller.clientWidth) {
+            animateScroll(0, targetDist, forwardTime, () => {
+              setTimeout(() => {
+                if (userInteracted) return;
+                animateScroll(targetDist, 0, returnTime, () => {
+                  scroller.scrollLeft = 0;
+                });
+              }, pauseTime);
+            });
+          }
+
+          // In ALL viewports (including desktop), also apply the smooth physical 2cm horizontal translate nudge
+          const nudgeDist = isRtl ? -36 : 36;
+          scroller.style.transition = `transform ${forwardTime}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+          scroller.style.transform = `translate3d(${nudgeDist}px, 0, 0)`;
+
+          setTimeout(() => {
+            if (userInteracted) {
+              scroller.style.transform = 'translate3d(0, 0, 0)';
+              return;
+            }
+            scroller.style.transition = `transform ${returnTime}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+            scroller.style.transform = 'translate3d(0, 0, 0)';
+
+            setTimeout(() => {
+              scroller.style.transition = '';
+              scroller.style.transform = '';
+            }, returnTime + 50);
+          }, forwardTime + pauseTime);
+
+        }, 300);
+      }
+
+      // Trigger precisely as the viewport comes to it
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !hasTriggered) {
+              startHintMotion();
+            }
+          });
+        }, { threshold: 0.2 });
+        observer.observe(scroller);
+      } else {
+        setTimeout(startHintMotion, 1200);
+      }
+    }
+
     // =========================================================================
     // HARDWARE-COMPOSITED SCROLL REVEAL & PROGRESS ENGINE
     // =========================================================================
@@ -2794,10 +3168,12 @@
     function initApp() {
       renderPhotoCards();
       renderMatrixTable();
+      renderPhaseAndGovLists(currentLang === 'ar');
       initSpotlightCards();
       runAllNumberCounters();
       runProductionSimulation();
       initScrollEngine();
+      attachScrollerHintAnimation('#tabs-nav');
       checkWelcomeModal();
       if (window.location.hash === '#admin') {
         setTimeout(openAdminModal, 500);

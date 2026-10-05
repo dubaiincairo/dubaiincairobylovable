@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commercial Quotation Document — OneBank (MDI) × Dubai in Cairo LLC</title>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <link rel="icon" type="image/svg+xml" href="https://dubaiincairo.com/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="https://dubaiincairo.com/favicon.ico">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+    }
+    [dir="rtl"] body {
+      font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    /* Paper Document Container Simulation for Screen View */
+    .doc-page {
+      background: #ffffff;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+      padding: 48px 56px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    @media screen and (max-width: 768px) {
+      .doc-page {
+        padding: 24px 20px;
+      }
+    }
+
+    /* Print Specific Layout & Page Breaking */
+    @media print {
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .doc-page {
+        box-shadow: none !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .page-break {
+        page-break-before: always !important;
+        break-before: page !important;
+        padding-top: 24px !important;
+      }
+      .avoid-break {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      @page {
+        size: A4;
+        margin: 14mm 14mm 14mm 14mm;
+      }
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body class="min-h-screen py-0 sm:py-8">
+
+  <!-- TOP UTILITY ACTION BAR (Screen Only) -->
+  <aside aria-label="Document utilities" class="no-print sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md text-white border-b border-slate-800 py-3 px-4 shadow-xl">
+    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition font-semibold">
+          <span>←</span>
+          <span id="btn-back-portal">Interactive Proposal</span>
+        </a>
+        <div class="hidden sm:flex items-center gap-2 text-slate-400 font-mono text-[11px]">
+          <span>REF: DIC-MDI-2026-LAUNCHING</span>
+          <span>•</span>
+          <span>EGP 900,000</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- Language Switcher -->
+        <div class="flex items-center rounded-xl bg-slate-800 p-0.5 border border-slate-700 text-xs">
+          <button onclick="setDocLanguage('en')" id="doc-lang-en" class="px-2.5 py-1 rounded-lg font-bold bg-blue-600 text-white">English</button>
+          <button onclick="setDocLanguage('ar')" id="doc-lang-ar" class="px-2.5 py-1 rounded-lg font-bold text-slate-400 hover:text-white">العربية</button>
+        </div>
+
+        <!-- Print / Save as PDF Button -->
+        <button onclick="window.print()" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-lg shadow-blue-600/30 transition active:scale-95">
+          <span>🖨️</span>
+          <span id="btn-print-doc">Print / Save as PDF</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN DOCUMENT CONTAINER (Crisp Official Executive Publication) -->
+  <main class="doc-page space-y-8 my-0 sm:my-4">
+
+    <!-- =========================================================================
+         HEADER / LETTERHEAD BLOCK
+         ========================================================================= -->
+    <header class="border-b-2 border-slate-900 pb-6 space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <!-- Agency Letterhead -->
+        <div class="space-y-1">
+          <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 rounded-xl bg-[#0a0f1e] flex items-center justify-center text-amber-400 font-serif font-black shadow-md border border-amber-500/30 text-lg">
+              D
+            </div>
+            <div>
+              <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight" id="doc-header-agency">
+                DUBAI IN CAIRO LLC
+              </h1>
+              <p class="text-xs font-semibold text-slate-600 uppercase tracking-widest" id="doc-header-subagency">
+                Creative Production &amp; Digital Commercial Agency
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Document Reference Box -->
+        <div class="sm:text-right text-xs space-y-1 font-mono text-slate-700 bg-slate-100/90 p-3 rounded-xl border border-slate-200">
+          <div><strong class="text-slate-900" id="doc-lbl-ref">Quotation Reference:</strong> <span class="text-blue-700 font-bold">DIC-MDI-2026-LAUNCHING</span></div>
+          <div><strong class="text-slate-900" id="doc-lbl-date">Quotation Date:</strong> 05 October 2026</div>
+          <div><strong class="text-slate-900" id="doc-lbl-valid">Validity:</strong> 15 Calendar Days</div>
+        </div>
+      </div>
+
+      <!-- Formal Client Designation Strip -->
+      <div class="bg-gradient-to-r from-blue-900 via-slate-900 to-blue-950 text-white p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-amber-400 block" id="doc-client-pre">
+            PREPARED EXCLUSIVELY FOR
+          </span>
+          <h2 class="text-lg font-black tracking-tight mt-0.5 text-white" id="doc-client-name">
+            OneBank / Misr Digital Innovation (MDI) — وان بنك / مصر للابتكار الرقمي
+          </h2>
+          <p class="text-xs text-blue-200 mt-0.5" id="doc-client-rep">
+            Attn: Sarah Ashraf • Brand &amp; Marketing Operations
+          </p>
+        </div>
+        <div class="shrink-0 text-left md:text-right">
+          <span class="badge-pill bg-amber-400/20 text-amber-300 border border-amber-400/40" id="doc-badge-status">
+            Commercial Quotation (Launching)
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================================================================
+         SECTION 1: EXECUTIVE COMMERCIAL SUMMARY & FINANCIAL PILLARS
+         ========================================================================= -->
+    <section class="space-y-4">
+      <div class="space-y-1">
+        <span class="badge-pill bg-blue-100 text-blue-800 border border-blue-200" id="doc-sec1-badge">Section 1</span>
+        <h3 class="text-xl font-extrabold text-slate-900" id="doc-sec1-title">Executive Summary &amp; Commercial Structure</h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" id="doc-sec1-desc">
+          Dubai in Cairo LLC is pleased to submit this comprehensive commercial proposal for the official production launch of OneBank (Misr Digital Innovation - MDI). This package combines specialized high-end staff and Board photography with cinematic mobile app lifestyle video production into a unified, non-separable commercial agreement.
+        </p>
+      </div>
+
+      <!-- Core Financial Table -->
+      <div class="overflow-x-auto border border-slate-300 rounded-xl">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead class="bg-slate-100 text-slate-800 border-b border-slate-300">
+            <tr>
+              <th class="p-3.5 font-bold" id="doc-th-comp">Component Description</th>
+              <th class="p-3.5 font-bold" id="doc-th-scope">Production Scope</th>
+              <th class="p-3.5 font-bold text-center" id="doc-th-adv-pct">Advance %</th>
+              <th class="p-3.5 font-bold text-right" id="doc-th-adv-amt">Advance Tranche</th>
+              <th class="p-3.5 font-bold text-right" id="doc-th-total">Total Fee (Incl. 14% VAT)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 text-slate-700">
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-bold text-slate-900">
+                <span class="text-blue-600 font-bold block" id="doc-trow1-title">1. Photography Production</span>
+                <span class="text-[11px] font-normal text-slate-500">Employees, Teams &amp; Board of Directors</span>
+              </td>
+              <td class="p-3.5" id="doc-trow1-scope">500 final retouched photos across 3 shoot days (Maadi HQ &amp; Mivida)</td>
+              <td class="p-3.5 text-center font-mono font-bold text-blue-700">40%</td>
+              <td class="p-3.5 text-right font-mono font-bold text-slate-900">EGP 140,000</td>
+              <td class="p-3.5 text-right font-mono font-extrabold text-blue-700">EGP 350,000</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-bold text-slate-900">
+                <span class="text-purple-600 font-bold block" id="doc-trow2-title">2. Video Production</span>
+                <span class="text-[11px] font-normal text-slate-500">Mobile Banking App Lifestyle Campaigns</span>
+              </td>
+              <td class="p-3.5" id="doc-trow2-scope">3 lifestyle videos (~60s each), studio shoot, 2 models + 1 standby, Full HD / 4K</td>
+              <td class="p-3.5 text-center font-mono font-bold text-purple-700">50%</td>
+              <td class="p-3.5 text-right font-mono font-bold text-slate-900">EGP 275,000</td>
+              <td class="p-3.5 text-right font-mono font-extrabold text-purple-700">EGP 550,000</td>
+            </tr>
+            <tr class="bg-slate-900 text-white font-bold border-t-2 border-slate-900">
+              <td class="p-3.5" colspan="2" id="doc-trow3-total-lbl">TOTAL INTEGRATED PACKAGE (INCLUSIVE OF 14% VAT)</td>
+              <td class="p-3.5 text-center font-mono text-amber-400">46.11%</td>
+              <td class="p-3.5 text-right font-mono text-amber-400 text-sm">EGP 415,000</td>
+              <td class="p-3.5 text-right font-mono text-amber-400 text-base">EGP 900,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Cash Flow Tranche Boxes -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+        <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50 space-y-1">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-blue-900 uppercase tracking-wider" id="doc-tr1-title">Advance Tranche (Payable Upon Approval)</span>
+            <span class="font-mono font-bold text-blue-700 bg-blue-200/60 px-2 py-0.5 rounded">Tranche 1</span>
+          </div>
+          <div class="text-xl font-extrabold text-slate-900 font-mono">EGP 415,000</div>
+          <p class="text-xs text-slate-600 leading-relaxed" id="doc-tr1-desc">
+            Payable prior to commencing production. The video component requires a 50% advance due to mandatory commitments (studio booking, cast talent, crew, and technical rentals).
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50 space-y-1">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-emerald-900 uppercase tracking-wider" id="doc-tr2-title">Remaining Balance (Post-Delivery)</span>
+            <span class="font-mono font-bold text-emerald-700 bg-emerald-200/60 px-2 py-0.5 rounded">Tranche 2</span>
+          </div>
+          <div class="text-xl font-extrabold text-slate-900 font-mono">EGP 485,000</div>
+          <p class="text-xs text-slate-600 leading-relaxed" id="doc-tr2-desc">
+            Payable within a maximum of 30 calendar days following full delivery of all agreed photography and video assets upon final invoice issuance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 2: COMPONENT 1 — PHOTOGRAPHY PRODUCTION
+         ========================================================================= -->
+    <section class="page-break space-y-5 pt-4">
+      <div class="space-y-1">
+        <span class="badge-pill bg-blue-100 text-blue-800 border border-blue-200" id="doc-sec2-badge">Section 2</span>
+        <h3 class="text-xl font-extrabold text-slate-900" id="doc-sec2-title">Component 1: Photography Production (EGP 350,000)</h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" id="doc-sec2-desc">
+          Comprehensive photographic coverage dedicated exclusively to OneBank personnel, operational teams, executive management, and the Board of Directors of the bank (strictly no client or customer subjects).
+        </p>
+      </div>
+
+      <!-- Shoot Days Schedule Table -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider" id="doc-photo-sched-heading">Production Schedule &amp; Verified Locations (3 Shooting Days)</h4>
+        <div class="overflow-x-auto border border-slate-300 rounded-xl">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead class="bg-slate-100 text-slate-800 border-b border-slate-300">
+              <tr>
+                <th class="p-3 font-bold w-24" id="doc-th-day">Production Day</th>
+                <th class="p-3 font-bold w-52" id="doc-th-loc">Location</th>
+                <th class="p-3 font-bold" id="doc-th-focus">Coverage Focus &amp; Subjects</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr>
+                <td class="p-3 font-bold text-blue-700">Day 1</td>
+                <td class="p-3 font-semibold text-slate-900">OneBank HQ, Maadi</td>
+                <td class="p-3">Executive management, departmental employees, banking operations, and collaborative team setups.</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-blue-700">Day 2</td>
+                <td class="p-3 font-semibold text-slate-900">OneBank HQ, Maadi</td>
+                <td class="p-3">Technology and digital innovation teams, Board of Directors portraits, and modern digital banking culture.</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-blue-700">Day 3</td>
+                <td class="p-3 font-semibold text-slate-900">Mivida, Fifth Settlement</td>
+                <td class="p-3">New Cairo regional location shoots; official venue name and detailed address to be confirmed prior to call sheet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Detailed Photography Scope Inclusions -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider" id="doc-photo-spec-heading">Scope Specifications &amp; Included Services</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+          <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-2.5">
+            <span class="w-4 h-4 rounded-md bg-blue-100 text-blue-800 border border-blue-300 flex items-center justify-center shrink-0 mt-0.5 font-bold text-[10px]">✓</span>
+            <span class="leading-relaxed"><strong>500 Final Retouched Photos:</strong> Curated, colour-corrected, and retouched portraits and team compositions.</span>
+          </div>
+          <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-2.5">
+            <span class="w-4 h-4 rounded-md bg-blue-100 text-blue-800 border border-blue-300 flex items-center justify-center shrink-0 mt-0.5 font-bold text-[10px]">✓</span>
+            <span class="leading-relaxed"><strong>Prime Optics &amp; Lighting:</strong> Prime cinema lenses, strobe units, modifiers, and on-site calibration.</span>
+          </div>
+          <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-2.5">
+            <span class="w-4 h-4 rounded-md bg-blue-100 text-blue-800 border border-blue-300 flex items-center justify-center shrink-0 mt-0.5 font-bold text-[10px]">✓</span>
+            <span class="leading-relaxed"><strong>Dual-Resolution Deliverables:</strong> Full print-grade master JPEGs + web-optimised compressed versions.</span>
+          </div>
+          <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-2.5">
+            <span class="w-4 h-4 rounded-md bg-blue-100 text-blue-800 border border-blue-300 flex items-center justify-center shrink-0 mt-0.5 font-bold text-[10px]">✓</span>
+            <span class="leading-relaxed"><strong>Dedicated Account Manager:</strong> On-site coordinator managing shooting timelines, shot lists, and daily schedules.</span>
+          </div>
+          <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-2.5">
+            <span class="w-4 h-4 rounded-md bg-blue-100 text-blue-800 border border-blue-300 flex items-center justify-center shrink-0 mt-0.5 font-bold text-[10px]">✓</span>
+            <span class="leading-relaxed"><strong>Organised Archive Hierarchy:</strong> Digital delivery sorted by department, Board, teams, and shoot location.</span>
+          </div>
+          <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-2.5">
+            <span class="w-4 h-4 rounded-md bg-blue-100 text-blue-800 border border-blue-300 flex items-center justify-center shrink-0 mt-0.5 font-bold text-[10px]">✓</span>
+            <span class="leading-relaxed"><strong>Revisions Policy:</strong> 2 consolidated rounds of image selection and retouching feedback.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Operational Coordination Note -->
+      <div class="p-3.5 rounded-xl border border-blue-200 bg-blue-50/70 text-xs text-blue-900 leading-relaxed" id="doc-photo-note">
+        <strong>Operational Coordination Requirement:</strong> OneBank will provide premises access and coordinate staff availability. To maximize shooting time efficiency, OneBank will prepare a schedule specifying the shooting sequence for employees, teams, and Board members based on availability.
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 3: COMPONENT 2 — VIDEO PRODUCTION
+         ========================================================================= -->
+    <section class="page-break space-y-5 pt-4">
+      <div class="space-y-1">
+        <span class="badge-pill bg-purple-100 text-purple-800 border border-purple-200" id="doc-sec3-badge">Section 3</span>
+        <h3 class="text-xl font-extrabold text-slate-900" id="doc-sec3-title">Component 2: Video Production (EGP 550,000)</h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" id="doc-sec3-desc">
+          Production of 3 lifestyle campaign videos (~60 seconds each, Full HD / 4K) demonstrating how customers seamlessly interact with the OneBank mobile banking app in everyday life routines.
+        </p>
+      </div>
+
+      <!-- 3 Production Phases -->
+      <div class="space-y-3">
+        <!-- Phase 1 -->
+        <div class="p-4 rounded-xl border border-slate-300 bg-slate-50/80 space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-cyan-800 uppercase tracking-wider" id="doc-vphase1-title">Phase 1: Creative &amp; Pre-Production</span>
+            <span class="font-mono text-cyan-700 bg-cyan-100 px-2 py-0.5 rounded font-bold">Pre-Production</span>
+          </div>
+          <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+            <li>Creative concept development aligned with OneBank mobile banking strategic communication goals.</li>
+            <li>Scriptwriting, scene planning &amp; visual treatments (storyboards).</li>
+            <li>Production scheduling &amp; multi-crew coordination with dedicated Account Manager.</li>
+            <li>Casting of 1 male model, 1 female model + 1 standby emergency replacement model.</li>
+            <li>Studio selection, booking, rental &amp; permits.</li>
+            <li>Art direction, wardrobe coordination, styling, hair &amp; makeup.</li>
+          </ul>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="p-4 rounded-xl border border-slate-300 bg-slate-50/80 space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-blue-800 uppercase tracking-wider" id="doc-vphase2-title">Phase 2: Principal Studio Filming</span>
+            <span class="font-mono text-blue-700 bg-blue-100 px-2 py-0.5 rounded font-bold">Production</span>
+          </div>
+          <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+            <li>Director, producer, camera crew, lighting crew &amp; production assistants.</li>
+            <li>High-end professional cinema cameras, prime lenses, lighting, grip &amp; sound gear.</li>
+            <li>Directorial management of cast models interacting with OneBank app screens.</li>
+            <li>Crew and heavy equipment transportation within Greater Cairo.</li>
+            <li>Execution of approved scripts strictly within the agreed shooting schedule.</li>
+          </ul>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="p-4 rounded-xl border border-slate-300 bg-slate-50/80 space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-purple-800 uppercase tracking-wider" id="doc-vphase3-title">Phase 3: Post-Production &amp; Mastering</span>
+            <span class="font-mono text-purple-700 bg-purple-100 px-2 py-0.5 rounded font-bold">Post-Production</span>
+          </div>
+          <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+            <li>Offline &amp; online editing of 3 videos (~60 seconds each).</li>
+            <li>Cinematic colour correction and precise colour grading.</li>
+            <li>Integration of client-supplied final OneBank animations.</li>
+            <li>Sound engineering, dialogue cleanup, sound design &amp; final audio mix.</li>
+            <li>Licensed background music cleared for agreed channels.</li>
+            <li>Application of approved branding, titles, captions &amp; end cards.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Boundaries & Approval Note -->
+      <div class="p-3.5 rounded-xl border border-purple-200 bg-purple-50/70 text-xs text-purple-900 leading-relaxed" id="doc-video-note">
+        <strong>Model &amp; Music Approval Clause:</strong> All selected cast models and licensed background music tracks must receive written approval from OneBank prior to commencing filming and editing. OneBank will supply final animations in production formats; original animation creation is outside this scope.
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 4: OPERATIONAL GOVERNANCE, SLA & LEGAL TERMS
+         ========================================================================= -->
+    <section class="page-break space-y-5 pt-4">
+      <div class="space-y-1">
+        <span class="badge-pill bg-slate-200 text-slate-800 border border-slate-300" id="doc-sec4-badge">Section 4</span>
+        <h3 class="text-xl font-extrabold text-slate-900" id="doc-sec4-title">Operational Governance, SLA &amp; Commercial Terms</h3>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+        <!-- Card 1: Client Responsibilities -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+          <h4 class="font-bold text-slate-900 text-sm" id="doc-gov1-title">1. Client Responsibilities</h4>
+          <ul class="text-slate-600 space-y-1.5 list-disc list-inside">
+            <li>Supply brand guidelines, logos, approved messaging, and reference files.</li>
+            <li>Provide final approved animation assets and client-owned production materials.</li>
+            <li>Appoint a designated representative to consolidate feedback and sign off each stage.</li>
+            <li>Ensure access to premises, location permits, and staff availability.</li>
+            <li>Approve concepts, scripts, casting, wardrobe, and shot lists prior to shooting.</li>
+          </ul>
+        </div>
+
+        <!-- Card 2: Revisions & Exclusions -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+          <h4 class="font-bold text-slate-900 text-sm" id="doc-gov2-title">2. Production, Revisions &amp; Exclusions</h4>
+          <ul class="text-slate-600 space-y-1.5 list-disc list-inside">
+            <li><strong>Photography Revisions:</strong> 2 consolidated rounds for image selection and retouching.</li>
+            <li><strong>Video Revisions:</strong> 2 consolidated editing rounds per video.</li>
+            <li>Consolidated feedback provided through OneBank designated lead.</li>
+            <li>Digital delivery of high-resolution JPEGs and MP4 video masters.</li>
+            <li><strong>Exclusions:</strong> Raw camera footage, unedited photos, and project files excluded unless agreed.</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: Non-Separability -->
+        <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/70 space-y-2">
+          <h4 class="font-bold text-amber-900 text-sm" id="doc-gov3-title">3. Non-Separability Clause</h4>
+          <p class="text-amber-800 leading-relaxed" id="doc-gov3-desc">
+            The photography and video services are complementary components of one integrated, non-separable quotation. Itemised amounts are provided solely for cost transparency and payment calculation. Acceptance applies to the complete package. Neither component may be booked independently.
+          </p>
+        </div>
+
+        <!-- Card 4: Rights & Validity -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+          <h4 class="font-bold text-slate-900 text-sm" id="doc-gov4-title">4. Rights, Validity &amp; Confidentiality</h4>
+          <ul class="text-slate-600 space-y-1.5 list-disc list-inside">
+            <li><strong>Portfolio Rights:</strong> Dubai in Cairo LLC reserves the right to include final delivered work in its agency portfolio 6 months after public release by OneBank, without requiring additional prior written approval.</li>
+            <li>Strict confidentiality applied to OneBank-supplied unreleased assets prior to official launch.</li>
+            <li><strong>Quotation Validity:</strong> 15 calendar days from quotation date (5 October 2026).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 5: FORMAL ACCEPTANCE & AUTHORIZATION SIGNATURES
+         ========================================================================= -->
+    <section class="avoid-break space-y-5 pt-4 border-t-2 border-slate-900">
+      <div class="space-y-1">
+        <span class="badge-pill bg-amber-100 text-amber-900 border border-amber-300" id="doc-sec5-badge">Section 5</span>
+        <h3 class="text-xl font-extrabold text-slate-900" id="doc-sec5-title">Commercial Acceptance &amp; Formal Authorization</h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" id="doc-sec5-desc">
+          By signing below, both parties confirm acceptance of the complete integrated package, its scope, the total fee of EGP 900,000 inclusive of 14% VAT, and the stated advance payment terms.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
+        <!-- Agency Signature Block (Dubai in Cairo LLC) -->
+        <div class="p-5 rounded-2xl border-2 border-slate-800 bg-slate-50 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-300 pb-2">
+            <span class="text-xs font-bold text-blue-900 uppercase tracking-wider" id="doc-sign-agency-lbl">For Dubai in Cairo LLC</span>
+            <span class="text-[10px] font-mono text-slate-500">Authorized Signatory</span>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500" id="doc-sign-lbl-name1">Name:</span>
+              <span class="font-bold text-slate-900 font-mono text-sm" id="doc-sign-val-name1">Abdalla Hassan Elfouly</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500" id="doc-sign-lbl-title1">Title:</span>
+              <span class="font-semibold text-slate-800 font-mono" id="doc-sign-val-title1">Managing Director</span>
+            </div>
+            <div class="flex justify-between items-center pt-1">
+              <span class="text-slate-500" id="doc-sign-lbl-sig1">Signature:</span>
+              <div class="inline-flex items-center justify-center">
+                <!-- Native signature rendered in crisp dark ink -->
+                <img src="signature-dark.png" onerror="if(!this.dataset.fallback){this.dataset.fallback=1;this.src='signature-light.png';this.style.filter='invert(1)';}" alt="Signature of Abdalla Hassan Elfouly" class="h-14 w-auto max-w-[180px] object-contain select-none" id="doc-signature-img">
+              </div>
+            </div>
+            <div class="flex justify-between items-center pt-1 border-t border-slate-200">
+              <span class="text-slate-500" id="doc-sign-lbl-date1">Date:</span>
+              <span class="font-semibold text-slate-900 font-mono">05 / 10 / 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Client Signature Block (OneBank / MDI) -->
+        <div class="p-5 rounded-2xl border-2 border-slate-800 bg-slate-50 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-300 pb-2">
+            <span class="text-xs font-bold text-emerald-900 uppercase tracking-wider" id="doc-sign-client-lbl">For OneBank / Misr Digital Innovation (MDI)</span>
+            <span class="text-[10px] font-mono text-slate-500">Client Authorization</span>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500" id="doc-sign-lbl-name2">Name:</span>
+              <span class="font-semibold text-slate-800 font-mono">____________________________</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500" id="doc-sign-lbl-title2">Title:</span>
+              <span class="font-semibold text-slate-800 font-mono">____________________________</span>
+            </div>
+            <div class="flex justify-between items-center pt-2">
+              <span class="text-slate-500" id="doc-sign-lbl-sig2">Signature:</span>
+              <span class="font-semibold text-slate-800 font-mono">____________________________</span>
+            </div>
+            <div class="flex justify-between items-center pt-1 border-t border-slate-200">
+              <span class="text-slate-500" id="doc-sign-lbl-date2">Date:</span>
+              <span class="font-semibold text-slate-800 font-mono">____ / ____ / 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Executive Contact Footer -->
+      <footer class="pt-4 border-t border-slate-300 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 font-mono">
+        <div>
+          <span>Official Contact: </span>
+          <a href="https://wa.me/966595979064" target="_blank" rel="noopener noreferrer" class="font-bold text-slate-900 hover:text-blue-600">+966 59 597 9064</a>
+          <span> • </span>
+          <a href="mailto:info@dubaiincairo.com" class="text-slate-900 hover:text-blue-600">info@dubaiincairo.com</a>
+        </div>
+        <div>
+          <a href="https://www.dubaiincairo.com" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 font-bold">www.dubaiincairo.com</a>
+        </div>
+      </footer>
+    </section>
+
+  </main>
+
+  <script>
+    // Bilingual Localization for the Official Document
+    const docI18n = {
+      en: {
+        dir: 'ltr',
+        btnBack: 'Interactive Proposal',
+        btnPrint: 'Print / Save as PDF',
+        headerAgency: 'DUBAI IN CAIRO LLC',
+        headerSub: 'Creative Production & Digital Commercial Agency',
+        lblRef: 'Quotation Reference:',
+        lblDate: 'Quotation Date:',
+        lblValid: 'Validity:',
+        clientPre: 'PREPARED EXCLUSIVELY FOR',
+        clientName: 'OneBank / Misr Digital Innovation (MDI) — وان بنك / مصر للابتكار الرقمي',
+        clientRep: 'Attn: Sarah Ashraf • Brand & Marketing Operations',
+        badgeStatus: 'Commercial Quotation (Launching)',
+        sec1Badge: 'Section 1',
+        sec1Title: 'Executive Summary & Commercial Structure',
+        sec1Desc: 'Dubai in Cairo LLC is pleased to submit this comprehensive commercial proposal for the official production launch of OneBank (Misr Digital Innovation - MDI). This package combines specialized high-end staff and Board photography with cinematic mobile app lifestyle video production into a unified, non-separable commercial agreement.',
+        thComp: 'Component Description',
+        thScope: 'Production Scope',
+        thAdvPct: 'Advance %',
+        thAdvAmt: 'Advance Tranche',
+        thTotal: 'Total Fee (Incl. 14% VAT)',
+        trow1Title: '1. Photography Production',
+        trow1Scope: '500 final retouched photos across 3 shoot days (Maadi HQ & Mivida)',
+        trow2Title: '2. Video Production',
+        trow2Scope: '3 lifestyle videos (~60s each), studio shoot, 2 models + 1 standby, Full HD / 4K',
+        trow3Total: 'TOTAL INTEGRATED PACKAGE (INCLUSIVE OF 14% VAT)',
+        tr1Title: 'Advance Tranche (Payable Upon Approval)',
+        tr1Desc: 'Payable prior to commencing production. The video component requires a 50% advance due to mandatory commitments (studio booking, cast talent, crew, and technical rentals).',
+        tr2Title: 'Remaining Balance (Post-Delivery)',
+        tr2Desc: 'Payable within a maximum of 30 calendar days following full delivery of all agreed photography and video assets upon final invoice issuance.',
+        sec2Badge: 'Section 2',
+        sec2Title: 'Component 1: Photography Production (EGP 350,000)',
+        sec2Desc: 'Comprehensive photographic coverage dedicated exclusively to OneBank personnel, operational teams, executive management, and the Board of Directors of the bank (strictly no client or customer subjects).',
+        photoSchedHeading: 'Production Schedule & Verified Locations (3 Shooting Days)',
+        thDay: 'Production Day',
+        thLoc: 'Location',
+        thFocus: 'Coverage Focus & Subjects',
+        photoSpecHeading: 'Scope Specifications & Included Services',
+        photoNote: 'Operational Coordination Requirement: OneBank will provide premises access and coordinate staff availability. To maximize shooting time efficiency, OneBank will prepare a schedule specifying the shooting sequence for employees, teams, and Board members based on availability.',
+        sec3Badge: 'Section 3',
+        sec3Title: 'Component 2: Video Production (EGP 550,000)',
+        sec3Desc: 'Production of 3 lifestyle campaign videos (~60 seconds each, Full HD / 4K) demonstrating how customers seamlessly interact with the OneBank mobile banking app in everyday life routines.',
+        videoNote: 'Model & Music Approval Clause: All selected cast models and licensed background music tracks must receive written approval from OneBank prior to commencing filming and editing. OneBank will supply final animations in production formats; original animation creation is outside this scope.',
+        sec4Badge: 'Section 4',
+        sec4Title: 'Operational Governance, SLA & Commercial Terms',
+        gov1Title: '1. Client Responsibilities',
+        gov2Title: '2. Production, Revisions & Exclusions',
+        gov3Title: '3. Non-Separability Clause',
+        gov3Desc: 'The photography and video services are complementary components of one integrated, non-separable quotation. Itemised amounts are provided solely for cost transparency and payment calculation. Acceptance applies to the complete package. Neither component may be booked independently.',
+        gov4Title: '4. Rights, Validity & Confidentiality',
+        sec5Badge: 'Section 5',
+        sec5Title: 'Commercial Acceptance & Formal Authorization',
+        sec5Desc: 'By signing below, both parties confirm acceptance of the complete integrated package, its scope, the total fee of EGP 900,000 inclusive of 14% VAT, and the stated advance payment terms.',
+        signAgencyLbl: 'For Dubai in Cairo LLC',
+        signClientLbl: 'For OneBank / Misr Digital Innovation (MDI)',
+        signName1: 'Abdalla Hassan Elfouly',
+        signTitle1: 'Managing Director'
+      },
+      ar: {
+        dir: 'rtl',
+        btnBack: 'العودة للعرض التفاعلي',
+        btnPrint: 'طباعة / حفظ كملف PDF',
+        headerAgency: 'شركة دبي في القاهرة ذ.م.م',
+        headerSub: 'وكالة الإنتاج الإبداعي والتجاري الرقمي',
+        lblRef: 'رقم مرجع العرض:',
+        lblDate: 'تاريخ العرض:',
+        lblValid: 'مدة الصلاحية:',
+        clientPre: 'مُعد حصرياً إلى',
+        clientName: 'وان بنك / مصر للابتكار الرقمي (MDI)',
+        clientRep: 'عناية: أ. سارة أشرف • إدارة العمليات التسويقية والعلامة التجارية',
+        badgeStatus: 'عرض سعر تجاري رسمي (مرحلة الإطلاق)',
+        sec1Badge: 'القسم الأول',
+        sec1Title: 'الملخص التنفيذي والهيكل التجاري والمالي',
+        sec1Desc: 'يسر شركة دبي في القاهرة تقديم هذا العرض التجاري المتكامل للإطلاق الإنتاجي الرسمي لـ وان بنك (مصر للابتكار الرقمي). تجمع هذه الباقة بين الإنتاج الفوتوغرافي عالي التخصص لكوادر البنك ومجلس إدارته، وإنتاج مقاطع الفيديو السينمائية لتطبيق الهاتف المحمول، ضمن اتفاقية تجارية موحدة غير قابلة للتجزئة.',
+        thComp: 'بيان البند والخدمة',
+        thScope: 'النطاق الإنتاجي',
+        thAdvPct: 'نسبة المقدم',
+        thAdvAmt: 'الدفعة المقدمة',
+        thTotal: 'إجمالي القيمة (شاملة 14% ضريبة)',
+        trow1Title: '1. الإنتاج الفوتوغرافي',
+        trow1Scope: 'إنتاج 500 صورة نهائية معدلة عبر 3 أيام تصوير (المعادي وميفيدا)',
+        trow2Title: '2. إنتاج الفيديو',
+        trow2Scope: '3 فيديوهات أسلوب حياة (60 ثانية)، تصوير استوديو، موديلز، دقة Full HD / 4K',
+        trow3Total: 'إجمالي الباقة المتكاملة (شاملة ضريبة القيمة المضافة 14%)',
+        tr1Title: 'الدفعة المقدمة (تستحق عند الاعتماد)',
+        tr1Desc: 'تستحق السداد قبل بدء الإنتاج. يتطلب بند الفيديو دفعة مقدمة 50% نظراً للالتزامات المسبقة لحجز الاستوديو والموديلز وطواقم التصوير والمعدات.',
+        tr2Title: 'المبلغ المتبقي (بعد التسليم النهائي)',
+        tr2Desc: 'يستحق السداد خلال 30 يوماً تقويمياً كحد أقصى من التسليم النهائي الكامل لكافة الصور والفيديوهات المتفق عليها وصدور الفاتورة النهائية.',
+        sec2Badge: 'القسم الثاني',
+        sec2Title: 'البند الأول: إنتاج التصوير الفوتوغرافي (350,000 ج.م)',
+        sec2Desc: 'تغطية فوتوغرافية احترافية مخصصة حصرياً لكوادر وموظفي وان بنك وفرق العمل والإدارة التنفيذية ومجلس إدارة البنك (دون تصوير عملاء أو مراجعين).',
+        photoSchedHeading: 'جدول ومواقع التصوير المعتمدة (3 أيام تصوير)',
+        thDay: 'يوم التصوير',
+        thLoc: 'موقع التصوير',
+        thFocus: 'محور التغطية والأقسام المشمولة',
+        photoSpecHeading: 'مواصفات النطاق والمخرجات المشمولة',
+        photoNote: 'التنسيق والجدولة التنفيذية: يوفر وان بنك تصاريح الدخول وتنسيق حضور الموظفين. ولتحقيق أقصى كفاءة زمنية، يُعد وان بنك جدولاً مسبقاً يحدد تسلسل تصوير الموظفين وفرق العمل وأعضاء مجلس الإدارة وفقاً لجداول التواجد.',
+        sec3Badge: 'القسم الثالث',
+        sec3Title: 'البند الثاني: إنتاج الفيديو الإعلاني (550,000 ج.م)',
+        sec3Desc: 'إنتاج 3 مقاطع فيديو إعلانية بأسلوب حياة عصري (~60 ثانية لكل فيديو، Full HD / 4K) تبرز سهولة استخدام تطبيق وان بنك للهاتف المحمول في الحياة اليومية.',
+        videoNote: 'شرط اعتماد الموديلز والموسيقى: يتم اعتماد جميع الموديلز والمقطوعات الموسيقية المرخصة خطياً من وان بنك قبل بدء التصوير والمونتاج. يورد وان بنك الرسوم المتحركة النهائية؛ ولا يشمل النطاق تصميم رسوم جديدة.',
+        sec4Badge: 'القسم الرابع',
+        sec4Title: 'الحوكمة التشغيلية ومستوى الخدمة والشروط التجارية',
+        gov1Title: '1. مسؤوليات العميل',
+        gov2Title: '2. الإنتاج والتعديلات والاستثناءات',
+        gov3Title: '3. شرط عدم التجزئة للباقة',
+        gov3Desc: 'خدمات التصوير الفوتوغرافي والفيديو مكملة لبعضها ضمن عرض سعر متكامل وغير قابل للتجزئة. إدراج المبالغ المنفصلة هو للشفافية واحتساب الدفعات فقط، ولا يجوز حجز أي بند بشكل منفصل.',
+        gov4Title: '4. الحقوق والصلاحية والسرية',
+        sec5Badge: 'القسم الخامس',
+        sec5Title: 'الموافقة والاعتماد التجاري الرسمي',
+        sec5Desc: 'بالتوقيع أدناه، يؤكد الطرفان قبولهما الكامل للباقة المتكاملة ونطاقها وإجمالي القيمة 900,000 ج.م شاملة ضريبة القيمة المضافة وشروط السداد المحددة.',
+        signAgencyLbl: 'عن شركة دبي في القاهرة ذ.م.م',
+        signClientLbl: 'عن وان بنك / مصر للابتكار الرقمي (MDI)',
+        signName1: 'عبد الله حسن الفولي',
+        signTitle1: 'المدير التنفيذي'
+      }
+    };
+
+    function setDocLanguage(lang) {
+      const t = docI18n[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = t.dir;
+
+      const btnEn = document.getElementById('doc-lang-en');
+      const btnAr = document.getElementById('doc-lang-ar');
+      if (lang === 'ar') {
+        btnAr.className = 'px-2.5 py-1 rounded-lg font-bold bg-blue-600 text-white';
+        btnEn.className = 'px-2.5 py-1 rounded-lg font-bold text-slate-400 hover:text-white';
+      } else {
+        btnEn.className = 'px-2.5 py-1 rounded-lg font-bold bg-blue-600 text-white';
+        btnAr.className = 'px-2.5 py-1 rounded-lg font-bold text-slate-400 hover:text-white';
+      }
+
+      document.getElementById('btn-back-portal').innerText = t.btnBack;
+      document.getElementById('btn-print-doc').innerText = t.btnPrint;
+      document.getElementById('doc-header-agency').innerText = t.headerAgency;
+      document.getElementById('doc-header-subagency').innerText = t.headerSub;
+      document.getElementById('doc-lbl-ref').innerText = t.lblRef;
+      document.getElementById('doc-lbl-date').innerText = t.lblDate;
+      document.getElementById('doc-lbl-valid').innerText = t.lblValid;
+      document.getElementById('doc-client-pre').innerText = t.clientPre;
+      document.getElementById('doc-client-name').innerText = t.clientName;
+      document.getElementById('doc-client-rep').innerText = t.clientRep;
+      document.getElementById('doc-badge-status').innerText = t.badgeStatus;
+
+      document.getElementById('doc-sec1-badge').innerText = t.sec1Badge;
+      document.getElementById('doc-sec1-title').innerText = t.sec1Title;
+      document.getElementById('doc-sec1-desc').innerText = t.sec1Desc;
+      document.getElementById('doc-th-comp').innerText = t.thComp;
+      document.getElementById('doc-th-scope').innerText = t.thScope;
+      document.getElementById('doc-th-adv-pct').innerText = t.thAdvPct;
+      document.getElementById('doc-th-adv-amt').innerText = t.thAdvAmt;
+      document.getElementById('doc-th-total').innerText = t.thTotal;
+      document.getElementById('doc-trow1-title').innerText = t.trow1Title;
+      document.getElementById('doc-trow1-scope').innerText = t.trow1Scope;
+      document.getElementById('doc-trow2-title').innerText = t.trow2Title;
+      document.getElementById('doc-trow2-scope').innerText = t.trow2Scope;
+      document.getElementById('doc-trow3-total-lbl').innerText = t.trow3Total;
+      document.getElementById('doc-tr1-title').innerText = t.tr1Title;
+      document.getElementById('doc-tr1-desc').innerText = t.tr1Desc;
+      document.getElementById('doc-tr2-title').innerText = t.tr2Title;
+      document.getElementById('doc-tr2-desc').innerText = t.tr2Desc;
+
+      document.getElementById('doc-sec2-badge').innerText = t.sec2Badge;
+      document.getElementById('doc-sec2-title').innerText = t.sec2Title;
+      document.getElementById('doc-sec2-desc').innerText = t.sec2Desc;
+      document.getElementById('doc-photo-sched-heading').innerText = t.photoSchedHeading;
+      document.getElementById('doc-th-day').innerText = t.thDay;
+      document.getElementById('doc-th-loc').innerText = t.thLoc;
+      document.getElementById('doc-th-focus').innerText = t.thFocus;
+      document.getElementById('doc-photo-spec-heading').innerText = t.photoSpecHeading;
+      document.getElementById('doc-photo-note').innerHTML = t.photoNote;
+
+      document.getElementById('doc-sec3-badge').innerText = t.sec3Badge;
+      document.getElementById('doc-sec3-title').innerText = t.sec3Title;
+      document.getElementById('doc-sec3-desc').innerText = t.sec3Desc;
+      document.getElementById('doc-video-note').innerHTML = t.videoNote;
+
+      document.getElementById('doc-sec4-badge').innerText = t.sec4Badge;
+      document.getElementById('doc-sec4-title').innerText = t.sec4Title;
+      document.getElementById('doc-gov1-title').innerText = t.gov1Title;
+      document.getElementById('doc-gov2-title').innerText = t.gov2Title;
+      document.getElementById('doc-gov3-title').innerText = t.gov3Title;
+      document.getElementById('doc-gov3-desc').innerText = t.gov3Desc;
+      document.getElementById('doc-gov4-title').innerText = t.gov4Title;
+
+      document.getElementById('doc-sec5-badge').innerText = t.sec5Badge;
+      document.getElementById('doc-sec5-title').innerText = t.sec5Title;
+      document.getElementById('doc-sec5-desc').innerText = t.sec5Desc;
+      document.getElementById('doc-sign-agency-lbl').innerText = t.signAgencyLbl;
+      document.getElementById('doc-sign-client-lbl').innerText = t.signClientLbl;
+      document.getElementById('doc-sign-val-name1').innerText = t.signName1;
+      document.getElementById('doc-sign-val-title1').innerText = t.signTitle1;
+    }
+  </script>
+</body>
+</html>
