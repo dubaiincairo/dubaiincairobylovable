@@ -810,7 +810,7 @@
     <!-- INTERACTIVE PRODUCT EXPLORER & TABS -->
     <section id="product-explorer-section" class="space-y-6 pt-4">
       <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
-        <!-- Tab Navigation Buttons (Enhanced with Luxury 2cm Scroller Hint Animation) -->
+        <!-- Tab Navigation Buttons -->
         <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scroll-touch relative" role="tablist" id="tabs-nav">
           <button onclick="switchTab('photography')" id="tab-btn-photography" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20 active:scale-95 touch-manipulation">
             <span>📸</span>
@@ -2727,122 +2727,6 @@
     });
 
     // =========================================================================
-    // STANDARD LUXURY HORIZONTAL SCROLLER HINT ANIMATION (DIC CLIENT PORTAL SPEC)
-    // 2.0 cm (76px) silky-smooth nudge with easeInOutSine easing & pause dwell
-    // =========================================================================
-    function attachScrollerHintAnimation(target, options = {}) {
-      const scroller = typeof target === 'string' ? document.querySelector(target) : target;
-      if (!scroller) return;
-
-      const {
-        delay = 1600,
-        distance = 76,       // Exactly 2cm in standard screen metrics
-        forwardTime = 900,   // ms
-        pauseTime = 400,     // ms
-        returnTime = 1000    // ms
-      } = options;
-
-      let userInteracted = false;
-      const onUserGesture = () => { userInteracted = true; };
-
-      scroller.addEventListener('touchstart', onUserGesture, { passive: true });
-      scroller.addEventListener('mousedown', onUserGesture, { passive: true });
-      scroller.addEventListener('pointerdown', onUserGesture, { passive: true });
-      scroller.addEventListener('wheel', onUserGesture, { passive: true });
-
-      function easeInOutSine(t) {
-        return -(Math.cos(Math.PI * t) - 1) / 2;
-      }
-
-      function animateScroll(from, to, duration, callback) {
-        if (userInteracted) return;
-        const startTime = performance.now();
-        const initialBehavior = scroller.style.scrollBehavior;
-        scroller.style.scrollBehavior = 'auto';
-
-        function step(currentTime) {
-          if (userInteracted) {
-            scroller.style.scrollBehavior = initialBehavior;
-            return;
-          }
-          const elapsed = currentTime - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = easeInOutSine(progress);
-
-          scroller.scrollLeft = from + (to - from) * eased;
-
-          if (progress < 1) {
-            requestAnimationFrame(step);
-          } else {
-            scroller.scrollLeft = to;
-            scroller.style.scrollBehavior = initialBehavior;
-            if (callback) callback();
-          }
-        }
-        requestAnimationFrame(step);
-      }
-
-      let hasTriggered = false;
-
-      function startHintMotion() {
-        if (hasTriggered || userInteracted) return;
-        hasTriggered = true;
-
-        setTimeout(() => {
-          if (userInteracted) return;
-
-          const isRtl = document.documentElement.dir === 'rtl';
-          const targetDist = isRtl ? -distance : distance;
-
-          // If container has horizontal scroll overflow (mobile/tablet/narrow)
-          if (scroller.scrollWidth > scroller.clientWidth) {
-            animateScroll(0, targetDist, forwardTime, () => {
-              setTimeout(() => {
-                if (userInteracted) return;
-                animateScroll(targetDist, 0, returnTime, () => {
-                  scroller.scrollLeft = 0;
-                });
-              }, pauseTime);
-            });
-          }
-
-          // In ALL viewports (including desktop), also apply the smooth physical 2cm horizontal translate nudge
-          const nudgeDist = isRtl ? -36 : 36;
-          scroller.style.transition = `transform ${forwardTime}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-          scroller.style.transform = `translate3d(${nudgeDist}px, 0, 0)`;
-
-          setTimeout(() => {
-            if (userInteracted) {
-              scroller.style.transform = 'translate3d(0, 0, 0)';
-              return;
-            }
-            scroller.style.transition = `transform ${returnTime}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-            scroller.style.transform = 'translate3d(0, 0, 0)';
-
-            setTimeout(() => {
-              scroller.style.transition = '';
-              scroller.style.transform = '';
-            }, returnTime + 50);
-          }, forwardTime + pauseTime);
-
-        }, 350);
-      }
-
-      // Trigger precisely as the viewport comes to it
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting && !hasTriggered) {
-              startHintMotion();
-            }
-          });
-        }, { threshold: 0.2 });
-        observer.observe(scroller);
-      } else {
-        setTimeout(startHintMotion, 1200);
-      }
-    }
-
     // =========================================================================
     // HARDWARE-COMPOSITED SCROLL REVEAL & PROGRESS ENGINE
     // =========================================================================
@@ -2914,7 +2798,6 @@
       runAllNumberCounters();
       runProductionSimulation();
       initScrollEngine();
-      attachScrollerHintAnimation('#tabs-nav');
       checkWelcomeModal();
       if (window.location.hash === '#admin') {
         setTimeout(openAdminModal, 500);
