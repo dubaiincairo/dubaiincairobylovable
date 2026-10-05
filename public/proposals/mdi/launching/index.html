@@ -66,16 +66,6 @@
       input, select, textarea {
         font-size: 16px !important;
       }
-      #floating-feedback-trigger.floating-btn-collapsed button {
-        padding: 8px !important;
-        border-radius: 9999px !important;
-        opacity: 0.9;
-        transform: scale(0.92);
-      }
-      #floating-feedback-trigger.floating-btn-collapsed #btn-floating-feedback-text,
-      #floating-feedback-trigger.floating-btn-collapsed #btn-floating-feedback-text-mob {
-        display: none !important;
-      }
     }
 
     /* Tab Horizontal Scroll Rail */
@@ -569,9 +559,12 @@
         <div class="min-w-0">
           <div class="flex items-center gap-1.5 min-w-0">
             <span class="font-extrabold text-xs sm:text-base md:text-xl tracking-tight text-white flex items-center gap-1 min-w-0 truncate" id="brand-title">
-              <span>DUBAI IN CAIRO</span>
-              <span class="text-cyan-400">×</span>
-              <span class="text-blue-300">ONEBANK</span>
+              <span class="hidden sm:inline-flex items-center gap-1">
+                <span>DUBAI IN CAIRO</span>
+                <span class="text-cyan-400">×</span>
+                <span class="text-blue-300">ONEBANK</span>
+              </span>
+              <span class="sm:hidden font-bold tracking-tight whitespace-nowrap">Dubai in Cairo</span>
             </span>
             <span class="hidden md:inline-flex text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 shrink-0" id="brand-tag">
               Misr Digital Innovation (MDI)
@@ -591,7 +584,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
           </svg>
           <span class="hidden sm:inline tracking-tight whitespace-nowrap" id="btn-portfolio-text">Download Portfolio PDF</span>
-          <span class="sm:hidden tracking-tight whitespace-nowrap font-bold" id="btn-portfolio-text-mob">Portfolio PDF</span>
+          <span class="sm:hidden tracking-tight whitespace-nowrap font-bold" id="btn-portfolio-text-mob">Portfolio</span>
         </a>
 
         <!-- Copy Link Button -->
@@ -658,8 +651,9 @@
         <!-- Top Category Pill & Live Domain -->
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 text-xs font-semibold">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-            <span id="hero-pill">OFFICIAL COMMERCIAL QUOTATION • PRODUCTION ROADMAP</span>
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0"></span>
+            <span class="hidden sm:inline" id="hero-pill">OFFICIAL COMMERCIAL QUOTATION • PRODUCTION ROADMAP</span>
+            <span class="sm:hidden" id="hero-pill-mob">OFFICIAL COMMERCIAL QUOTATION</span>
           </div>
 
           <a href="https://www.dubaiincairo.com" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 hover:text-cyan-300 transition group" title="Visit Dubai in Cairo Official Website">
@@ -1549,11 +1543,11 @@
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
         <span class="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-amber-400"></span>
       </span>
-      <span class="tracking-tight text-white group-hover:text-amber-200 transition-colors hidden sm:inline whitespace-nowrap" id="btn-floating-feedback-text">
+      <span class="tracking-tight text-white group-hover:text-amber-200 transition-colors whitespace-nowrap" id="btn-floating-feedback-text">
         💬 Add Feedback, Sarah
       </span>
-      <span class="tracking-tight text-white font-bold sm:hidden whitespace-nowrap" id="btn-floating-feedback-text-mob">
-        💬 Sarah
+      <span class="hidden" id="btn-floating-feedback-text-mob">
+        💬 Add Feedback, Sarah
       </span>
     </button>
   </aside>
@@ -2105,18 +2099,19 @@
     // Language Dictionary (Pure mono-language with zero mixed words)
     const i18n = {
       en: {
-        brandTitle: `<span>DUBAI IN CAIRO</span><span class="text-cyan-400">×</span><span class="text-blue-300">ONEBANK</span>`,
+        brandTitle: `<span class="hidden sm:inline-flex items-center gap-1"><span>DUBAI IN CAIRO</span><span class="text-cyan-400">×</span><span class="text-blue-300">ONEBANK</span></span><span class="sm:hidden font-bold tracking-tight whitespace-nowrap">Dubai in Cairo</span>`,
         brandTag: 'Misr Digital Innovation (MDI)',
         brandSub: 'Integrated Photography & Video Production Package • Commercial Quotation (Launching)',
         btnPortfolio: 'Download Portfolio PDF',
-        btnPortfolioMob: 'Portfolio PDF',
+        btnPortfolioMob: 'Portfolio',
         btnCopy: 'Share Link',
         btnFloatingFeedback: '💬 Add Feedback, Sarah',
-        btnFloatingFeedbackMob: '💬 Sarah',
+        btnFloatingFeedbackMob: '💬 Add Feedback, Sarah',
         btnAdminHeader: 'Admin',
         searchPlaceholder: 'Filter services or deliverables...',
         printDocSub: 'Prepared for: OneBank / Misr Digital Innovation (MDI) • Date: 5 October 2026',
         heroPill: 'OFFICIAL COMMERCIAL QUOTATION • PRODUCTION ROADMAP',
+        heroPillMob: 'OFFICIAL COMMERCIAL QUOTATION',
         heroBrandBadge: 'PREPARED FOR: ONEBANK',
         heroRef: 'REF: DIC-MDI-2026-LAUNCH',
         heroDate: '5 October 2026',
@@ -2341,18 +2336,19 @@
         toastSub: 'dubaiincairo.com/proposals/mdi/launching'
       },
       ar: {
-        brandTitle: `<span>دبي في القاهرة</span><span class="text-cyan-400">×</span><span class="text-blue-300">وان بنك</span>`,
+        brandTitle: `<span class="hidden sm:inline-flex items-center gap-1"><span>دبي في القاهرة</span><span class="text-cyan-400">×</span><span class="text-blue-300">وان بنك</span></span><span class="sm:hidden font-bold tracking-tight whitespace-nowrap">دبي في القاهرة</span>`,
         brandTag: 'مصر للابتكار الرقمي',
         brandSub: 'باقة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو • عرض سعر تجاري',
         btnPortfolio: 'تحميل ملف سابقة الأعمال',
         btnPortfolioMob: 'ملف الأعمال',
         btnCopy: 'مشاركة الرابط',
         btnFloatingFeedback: '💬 أرسلي ملاحظاتك أ. سارة',
-        btnFloatingFeedbackMob: '💬 سارة',
+        btnFloatingFeedbackMob: '💬 أرسلي ملاحظاتك أ. سارة',
         btnAdminHeader: 'لوحة الإدارة',
         searchPlaceholder: 'ابحث في الخدمات والمخرجات...',
         printDocSub: 'مُعد حصرياً إلى: وان بنك / شركة مصر للابتكار الرقمي • التاريخ: 5 أكتوبر 2026',
         heroPill: 'عرض سعر رسمي معتمد • جدول الإنتاج التنفيذي',
+        heroPillMob: 'عرض سعر رسمي معتمد',
         heroBrandBadge: 'مُقدّم إلى: وان بنك',
         heroRef: 'المرجع: DIC-MDI-2026-LAUNCH',
         heroDate: '5 أكتوبر 2026',
@@ -2528,7 +2524,7 @@
         // Footer
         footCopy: 'شركة دبي في القاهرة ذ.م.م — باقة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديوهات الإرشادية',
         footClient: 'وان بنك / شركة مصر للابتكار الرقمي',
-        btnAdminNav: 'لوحة الإدارة 🔐',
+        btnAdminNav: 'لوحة الإدارة',
         // Welcome Modal
         welcomePill: 'عرض تنفيذي مخصص',
         welcomeSarahTitle: 'أهلاً بكِ أستاذة سارة أشرف',
@@ -2615,6 +2611,7 @@
 
       // Hero
       setText('hero-pill', t.heroPill);
+      setText('hero-pill-mob', t.heroPillMob);
       setText('hero-brand-badge', t.heroBrandBadge);
       setText('hero-ref', t.heroRef);
       setText('hero-date', t.heroDate);
@@ -3756,18 +3753,6 @@
         observer.observe(kpiContainer);
       }
 
-      // Mobile Floating Button Auto-Collapse on Scroll
-      let fbScrollTimer;
-      const feedbackTrigger = document.getElementById('floating-feedback-trigger');
-      window.addEventListener('scroll', () => {
-        if (feedbackTrigger && window.innerWidth < 640) {
-          feedbackTrigger.classList.add('floating-btn-collapsed');
-          clearTimeout(fbScrollTimer);
-          fbScrollTimer = setTimeout(() => {
-            feedbackTrigger.classList.remove('floating-btn-collapsed');
-          }, 450);
-        }
-      }, { passive: true });
 
       // Mobile Virtual Keyboard Viewport Scroll for Feedback Modal
       const fbTextarea = document.getElementById('feedback-text');
