@@ -430,6 +430,11 @@
         page-break-inside: avoid !important;
       }
 
+      /* Invert signature image to crisp black ink on white paper */
+      #agency-signature-img {
+        filter: invert(1) brightness(0) !important;
+      }
+
       /* Subtle shaded sub-boxes for clear hierarchy */
       .p-4.rounded-2xl,
       .p-3.rounded-xl,
@@ -576,6 +581,12 @@
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
           </svg>
+        </button>
+
+        <!-- Admin Access Button -->
+        <button onclick="openAdminModal()" class="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800/90 hover:bg-amber-500/20 active:scale-95 text-amber-400 border border-amber-500/30 text-xs font-bold flex items-center gap-1.5 transition shadow-sm touch-manipulation" title="Admin Review Dashboard (Client Feedback)">
+          <span>🔐</span>
+          <span class="hidden xl:inline" id="btn-admin-header">Admin</span>
         </button>
 
         <!-- Language Toggle -->
@@ -1329,13 +1340,11 @@
               <span class="text-slate-400" id="sign-lbl-title1">Title:</span>
               <span class="font-semibold text-slate-200 font-mono" id="sign-val-title1">Managing Director</span>
             </div>
-            <div class="flex items-center justify-between pt-1">
+            <div class="flex items-center justify-between pt-2">
               <span class="text-slate-400 self-center" id="sign-lbl-sig1">Signature:</span>
-              <div class="bg-slate-950/60 px-3 py-1.5 rounded-xl border border-slate-800 inline-flex items-center justify-center">
-                <!-- Professional Vector Cursive Signature of Abdalla Elfouly -->
-                <svg viewBox="0 0 240 70" class="h-12 w-44 text-cyan-400 select-none pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12,54 C24,20 34,12 44,18 C54,24 38,58 32,62 C42,62 52,44 60,42 C68,39 66,56 74,54 C82,52 90,40 96,46 C102,52 98,58 108,54 C114,50 118,34 124,30 M118,42 L132,42 M138,52 C142,24 150,14 158,20 C166,26 152,62 148,64 C158,60 170,44 178,42 C186,40 192,52 200,46 C208,40 216,36 230,40 M156,38 L170,38 M10,62 C50,60 130,59 232,56" />
-                </svg>
+              <div class="inline-flex items-center justify-center py-1">
+                <!-- Authentic Native Hand-drawn Signature of Abdalla Hassan Elfouly -->
+                <img src="/proposals/mdi/launching/signature-light.png" alt="Signature of Abdalla Hassan Elfouly" class="h-14 sm:h-16 w-auto max-w-[200px] object-contain select-none pointer-events-none filter drop-shadow-[0_2px_12px_rgba(255,255,255,0.12)] brightness-110" id="agency-signature-img">
               </div>
             </div>
             <div class="flex items-center justify-between pt-1">
@@ -1391,9 +1400,9 @@
         <span>/</span>
         <button onclick="setLanguage('ar')" class="hover:text-blue-400 transition font-medium">العربية</button>
         <span class="text-slate-700">|</span>
-        <button onclick="openAdminModal()" class="text-slate-500 hover:text-amber-400 transition flex items-center gap-1 text-[11px]" title="Admin Review Dashboard">
+        <button onclick="openAdminModal()" class="px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/25 text-amber-400 border border-amber-500/40 transition flex items-center gap-1.5 text-xs font-bold active:scale-95 touch-manipulation" title="Admin Review Dashboard (Client Feedback)">
           <span>🔐</span>
-          <span id="btn-admin-nav">Admin</span>
+          <span id="btn-admin-nav">Admin Dashboard</span>
         </button>
         <span class="text-slate-700">|</span>
         <span class="text-amber-400 font-mono font-bold" id="foot-total-val">Total: EGP 900,000</span>
@@ -1469,69 +1478,126 @@
        MODAL 2: SARAH'S INTERACTIVE FEEDBACK & COMMENT WINDOW
        ========================================================================= -->
   <div id="feedback-modal" onclick="if(event.target === this) closeFeedbackModal()" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 modal-backdrop-anim">
-    <div class="glass-card modal-dialog-anim rounded-3xl max-w-lg w-full p-6 sm:p-7 border border-blue-500/40 relative space-y-4 max-h-[92dvh] overflow-y-auto">
+    <div class="glass-card modal-dialog-anim rounded-3xl max-w-lg w-full p-6 sm:p-7 border border-blue-500/40 relative max-h-[92dvh] overflow-y-auto">
       <button onclick="closeFeedbackModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-base w-9 h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 flex items-center justify-center transition active:scale-95 touch-manipulation" aria-label="Close">✕</button>
 
-      <div class="flex items-center gap-3">
-        <div class="p-2.5 rounded-xl bg-blue-500/20 text-blue-400 shrink-0">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+      <!-- FORM VIEW -->
+      <div id="feedback-form-view" class="space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-xl bg-blue-500/20 text-blue-400 shrink-0">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+            </svg>
+          </div>
+          <div>
+            <h4 class="text-base sm:text-lg font-bold text-white" id="feedback-modal-title">Share Feedback &amp; Notes — Sarah Ashraf</h4>
+            <p class="text-xs text-slate-300" id="feedback-modal-sub">Submit comments directly to Abdalla Elfouly (Dubai in Cairo LLC).</p>
+          </div>
+        </div>
+
+        <!-- Input Form -->
+        <div class="space-y-3 pt-1 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1" id="feedback-lbl-section">Section Reference:</label>
+            <select id="feedback-section" class="custom-select w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 cursor-pointer">
+              <option value="general">General Commercial Proposal</option>
+              <option value="photography">1. Photography Production (500 Photos)</option>
+              <option value="video">2. Video Production (3 Lifestyle Videos)</option>
+              <option value="schedule">Shooting Schedule (Maadi &amp; Mivida)</option>
+              <option value="payments">Payment Terms &amp; Advance Tranche</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1" id="feedback-lbl-text">Your Comments / Inquiries:</label>
+            <textarea id="feedback-text" rows="4" placeholder="Write your notes, questions, or approval points here..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 placeholder-slate-500"></textarea>
+          </div>
+
+          <!-- Direct Contact Assistance Box with International Number -->
+          <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-amber-500/30 text-xs space-y-2">
+            <div class="flex items-center gap-2 text-amber-400 font-bold">
+              <span>📞</span>
+              <span id="feedback-direct-help-title">Direct Executive Support &amp; Instant WhatsApp:</span>
+            </div>
+            <p class="text-[11px] text-slate-300 leading-relaxed" id="feedback-direct-help-desc">
+              You can also connect immediately with Abdalla Hassan Elfouly via phone, WhatsApp, or official email:
+            </p>
+            <div class="flex flex-wrap items-center gap-3 pt-1">
+              <a href="https://wa.me/966595979064" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 transition font-mono font-bold">
+                <span>💬 WhatsApp:</span>
+                <span>+966 59 597 9064</span>
+              </a>
+              <a href="tel:+966595979064" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/30 hover:bg-blue-500/30 transition font-mono font-bold">
+                <span>📞 Mobile:</span>
+                <span>+966 59 597 9064</span>
+              </a>
+              <a href="mailto:info@dubaiincairo.com" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 transition font-mono">
+                <span>✉️ info@dubaiincairo.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-2">
+          <button onclick="closeFeedbackModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white active:scale-95 touch-manipulation" id="feedback-btn-cancel">Cancel</button>
+          <button onclick="submitClientFeedback()" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition active:scale-95 touch-manipulation" id="feedback-btn-submit">
+            Send Feedback to Dubai in Cairo
+          </button>
+        </div>
+      </div>
+
+      <!-- SUCCESS STATE VIEW (Appears in the exact same modal window) -->
+      <div id="feedback-success-view" class="hidden text-center space-y-5 py-4">
+        <!-- Success Icon -->
+        <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center shadow-xl shadow-emerald-500/20 animate-pop">
+          <svg class="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
           </svg>
         </div>
-        <div>
-          <h4 class="text-base sm:text-lg font-bold text-white" id="feedback-modal-title">Share Feedback &amp; Notes — Sarah Ashraf</h4>
-          <p class="text-xs text-slate-300" id="feedback-modal-sub">Submit comments directly to Abdalla Elfouly (Dubai in Cairo LLC).</p>
-        </div>
-      </div>
 
-      <!-- Input Form -->
-      <div class="space-y-3 pt-1 text-xs">
-        <div>
-          <label class="block font-semibold text-slate-300 mb-1" id="feedback-lbl-section">Section Reference:</label>
-          <select id="feedback-section" class="custom-select w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 cursor-pointer">
-            <option value="general">General Commercial Proposal</option>
-            <option value="photography">1. Photography Production (500 Photos)</option>
-            <option value="video">2. Video Production (3 Lifestyle Videos)</option>
-            <option value="schedule">Shooting Schedule (Maadi &amp; Mivida)</option>
-            <option value="payments">Payment Terms &amp; Advance Tranche</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block font-semibold text-slate-300 mb-1" id="feedback-lbl-text">Your Comments / Inquiries:</label>
-          <textarea id="feedback-text" rows="4" placeholder="Write your notes, questions, or approval points here..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 placeholder-slate-500"></textarea>
-        </div>
-
-        <!-- Direct Contact Assistance Box with International Number -->
-        <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-amber-500/30 text-xs space-y-2">
-          <div class="flex items-center gap-2 text-amber-400 font-bold">
-            <span>📞</span>
-            <span id="feedback-direct-help-title">Direct Executive Support &amp; Instant WhatsApp:</span>
-          </div>
-          <p class="text-[11px] text-slate-300 leading-relaxed" id="feedback-direct-help-desc">
-            You can also connect immediately with Abdalla Hassan Elfouly via phone, WhatsApp, or official email:
+        <div class="space-y-2">
+          <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 inline-block" id="feedback-success-pill">
+            DISPATCH CONFIRMED
+          </span>
+          <h4 class="text-2xl font-black text-white" id="feedback-success-title">
+            Feedback Received Successfully, Sarah!
+          </h4>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md mx-auto" id="feedback-success-desc">
+            Your notes have been recorded and forwarded directly to Abdalla Hassan Elfouly. We will review them immediately and coordinate with you.
           </p>
-          <div class="flex flex-wrap items-center gap-3 pt-1">
-            <a href="https://wa.me/966595979064" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 transition font-mono font-bold">
-              <span>💬 WhatsApp:</span>
-              <span>+966 59 597 9064</span>
-            </a>
-            <a href="tel:+966595979064" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/30 hover:bg-blue-500/30 transition font-mono font-bold">
-              <span>📞 Mobile:</span>
-              <span>+966 59 597 9064</span>
-            </a>
-            <a href="mailto:info@dubaiincairo.com" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 transition font-mono">
-              <span>✉️ info@dubaiincairo.com</span>
-            </a>
+        </div>
+
+        <!-- Feedback Summary Box -->
+        <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs text-left rtl:text-right space-y-2">
+          <div class="flex justify-between items-center text-slate-300">
+            <span class="text-slate-400" id="feedback-success-lbl-ref">Referenced Section:</span>
+            <span class="font-bold text-cyan-300" id="feedback-success-val-sec">General Commercial Proposal</span>
+          </div>
+          <div class="flex justify-between items-center text-slate-300">
+            <span class="text-slate-400" id="feedback-success-lbl-status">Submission Status:</span>
+            <span class="font-bold text-emerald-400 font-mono">Logged in Agency Dashboard ✓</span>
           </div>
         </div>
-      </div>
 
-      <div class="pt-2 flex items-center justify-end gap-2">
-        <button onclick="closeFeedbackModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white active:scale-95 touch-manipulation" id="feedback-btn-cancel">Cancel</button>
-        <button onclick="submitClientFeedback()" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition active:scale-95 touch-manipulation" id="feedback-btn-submit">
-          Send Feedback to Dubai in Cairo
-        </button>
+        <!-- Optional Direct WhatsApp Forwarding -->
+        <div class="p-3.5 rounded-2xl bg-slate-900/70 border border-emerald-500/30 text-xs space-y-2 text-center">
+          <p class="text-[11px] text-slate-300" id="feedback-success-wa-note">
+            Would you like to forward this message directly to Abdalla on WhatsApp as well?
+          </p>
+          <a id="feedback-success-wa-btn" href="https://wa.me/966595979064" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg transition active:scale-95">
+            <span>💬 Send via WhatsApp (+966 59 597 9064)</span>
+          </a>
+        </div>
+
+        <!-- Bottom Actions -->
+        <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button onclick="resetFeedbackForm()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition active:scale-95 touch-manipulation" id="feedback-btn-another">
+            Submit Another Note
+          </button>
+          <button onclick="closeFeedbackModal()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-600/30 transition active:scale-95 touch-manipulation" id="feedback-btn-done">
+            Continue Reviewing Proposal
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -2477,6 +2543,11 @@
       const modal = document.getElementById('feedback-modal');
       modal?.classList.remove('hidden');
       modal?.classList.add('flex');
+      
+      // Always ensure form view is visible, success view hidden
+      document.getElementById('feedback-form-view')?.classList.remove('hidden');
+      document.getElementById('feedback-success-view')?.classList.add('hidden');
+      
       const textarea = document.getElementById('feedback-text');
       if (textarea) textarea.focus();
     }
@@ -2485,6 +2556,16 @@
       const modal = document.getElementById('feedback-modal');
       modal?.classList.add('hidden');
       modal?.classList.remove('flex');
+    }
+
+    function resetFeedbackForm() {
+      document.getElementById('feedback-form-view')?.classList.remove('hidden');
+      document.getElementById('feedback-success-view')?.classList.add('hidden');
+      const textarea = document.getElementById('feedback-text');
+      if (textarea) {
+        textarea.value = '';
+        textarea.focus();
+      }
     }
 
     function submitClientFeedback() {
@@ -2513,11 +2594,51 @@
         console.error('Storage error:', err);
       }
 
-      closeFeedbackModal();
-      showToast(
-        currentLang === 'ar' ? 'تم استلام ملاحظاتك بنجاح أ. سارة!' : 'Feedback Received Successfully, Sarah!',
-        currentLang === 'ar' ? 'تم إرسال الملاحظات إلى عبد الله الفولي' : 'Forwarded directly to Abdalla Elfouly'
-      );
+      // Switch inside the exact same modal window to the centered success view
+      const formView = document.getElementById('feedback-form-view');
+      const successView = document.getElementById('feedback-success-view');
+      if (formView && successView) {
+        formView.classList.add('hidden');
+        successView.classList.remove('hidden');
+      }
+
+      // Update success view texts based on language
+      const isAr = currentLang === 'ar';
+      const pill = document.getElementById('feedback-success-pill');
+      const title = document.getElementById('feedback-success-title');
+      const desc = document.getElementById('feedback-success-desc');
+      const lblRef = document.getElementById('feedback-success-lbl-ref');
+      const valSec = document.getElementById('feedback-success-val-sec');
+      const lblStatus = document.getElementById('feedback-success-lbl-status');
+      const btnAnother = document.getElementById('feedback-btn-another');
+      const btnDone = document.getElementById('feedback-btn-done');
+      const waBtn = document.getElementById('feedback-success-wa-btn');
+      const waNote = document.getElementById('feedback-success-wa-note');
+
+      const sectionLabels = {
+        general: isAr ? 'العرض المالي والتجاري العام' : 'General Commercial Proposal',
+        photography: isAr ? 'إنتاج التصوير الفوتوغرافي (500 صورة)' : 'Photography Production (500 Photos)',
+        video: isAr ? 'إنتاج الفيديو الإعلاني (3 فيديوهات)' : 'Video Production (3 Lifestyle Videos)',
+        schedule: isAr ? 'جدول ومواقع التصوير (المعادي وميفيدا)' : 'Shooting Schedule (Maadi & Mivida)',
+        payments: isAr ? 'شروط الدفع والدفعة المقدمة' : 'Payment Terms & Advance Tranche'
+      };
+
+      if (pill) pill.innerText = isAr ? 'تم استلام وتوثيق الطلب بنجاح' : 'DISPATCH CONFIRMED';
+      if (title) title.innerText = isAr ? 'تم استلام ملاحظاتك بنجاح، أستاذة سارة!' : 'Feedback Received Successfully, Sarah!';
+      if (desc) desc.innerText = isAr ? 'تم توثيق ملاحظاتك وإرسالها مباشرة إلى أ. عبد الله حسن الفولي. سيتم مراجعتها ومتابعتها معكم على الفور.' : 'Your notes have been recorded and forwarded directly to Abdalla Hassan Elfouly. We will review them immediately and coordinate with you.';
+      if (lblRef) lblRef.innerText = isAr ? 'القسم المرجعي:' : 'Referenced Section:';
+      if (valSec) valSec.innerText = sectionLabels[section] || section;
+      if (lblStatus) lblStatus.innerText = isAr ? 'حالة التوثيق:' : 'Submission Status:';
+      if (btnAnother) btnAnother.innerText = isAr ? 'إرسال ملاحظة أخرى' : 'Submit Another Note';
+      if (btnDone) btnDone.innerText = isAr ? 'متابعة استعراض العرض' : 'Continue Reviewing Proposal';
+      if (waNote) waNote.innerText = isAr ? 'هل ترغبين أيضاً في إرسال نسخة مباشرة إلى أ. عبد الله عبر واتساب؟' : 'Would you like to forward this message directly to Abdalla on WhatsApp as well?';
+
+      if (waBtn) {
+        const waMsg = isAr
+          ? `مرحباً أ. عبد الله، ملاحظات من أ. سارة أشرف (OneBank) بخصوص العرض التجاري:\nالقسم: ${sectionLabels[section] || section}\nالملاحظات:\n${text}`
+          : `Hello Abdalla, feedback from Sarah Ashraf (OneBank) regarding the commercial proposal:\nSection: ${sectionLabels[section] || section}\nComments:\n${text}`;
+        waBtn.href = `https://wa.me/966595979064?text=${encodeURIComponent(waMsg)}`;
+      }
 
       // Reset textarea
       const textarea = document.getElementById('feedback-text');
@@ -2661,21 +2782,65 @@
         requestAnimationFrame(step);
       }
 
-      setTimeout(() => {
-        if (userInteracted || Math.abs(scroller.scrollLeft) > 5) return;
+      let hasTriggered = false;
 
-        const isRtl = document.documentElement.dir === 'rtl';
-        const targetDist = isRtl ? -distance : distance;
+      function startHintMotion() {
+        if (hasTriggered || userInteracted) return;
+        hasTriggered = true;
 
-        animateScroll(0, targetDist, forwardTime, () => {
-          setTimeout(() => {
-            if (userInteracted) return;
-            animateScroll(targetDist, 0, returnTime, () => {
-              scroller.scrollLeft = 0;
+        setTimeout(() => {
+          if (userInteracted) return;
+
+          const isRtl = document.documentElement.dir === 'rtl';
+          const targetDist = isRtl ? -distance : distance;
+
+          // If container has horizontal scroll overflow (mobile/tablet/narrow)
+          if (scroller.scrollWidth > scroller.clientWidth) {
+            animateScroll(0, targetDist, forwardTime, () => {
+              setTimeout(() => {
+                if (userInteracted) return;
+                animateScroll(targetDist, 0, returnTime, () => {
+                  scroller.scrollLeft = 0;
+                });
+              }, pauseTime);
             });
-          }, pauseTime);
-        });
-      }, delay);
+          }
+
+          // In ALL viewports (including desktop), also apply the smooth physical 2cm horizontal translate nudge
+          const nudgeDist = isRtl ? -36 : 36;
+          scroller.style.transition = `transform ${forwardTime}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+          scroller.style.transform = `translate3d(${nudgeDist}px, 0, 0)`;
+
+          setTimeout(() => {
+            if (userInteracted) {
+              scroller.style.transform = 'translate3d(0, 0, 0)';
+              return;
+            }
+            scroller.style.transition = `transform ${returnTime}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+            scroller.style.transform = 'translate3d(0, 0, 0)';
+
+            setTimeout(() => {
+              scroller.style.transition = '';
+              scroller.style.transform = '';
+            }, returnTime + 50);
+          }, forwardTime + pauseTime);
+
+        }, 350);
+      }
+
+      // Trigger precisely as the viewport comes to it
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !hasTriggered) {
+              startHintMotion();
+            }
+          });
+        }, { threshold: 0.2 });
+        observer.observe(scroller);
+      } else {
+        setTimeout(startHintMotion, 1200);
+      }
     }
 
     // =========================================================================
@@ -2751,6 +2916,9 @@
       initScrollEngine();
       attachScrollerHintAnimation('#tabs-nav');
       checkWelcomeModal();
+      if (window.location.hash === '#admin') {
+        setTimeout(openAdminModal, 500);
+      }
     }
 
     if (document.readyState === 'loading') {
