@@ -576,10 +576,11 @@
           <span class="hidden lg:inline" id="btn-copy-text">Share Link</span>
         </button>
 
-        <!-- Official Print / PDF Document Link -->
-        <a href="proposal_document.html" target="_blank" class="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800/90 hover:bg-cyan-500/20 active:scale-95 text-cyan-300 border border-cyan-500/30 text-xs font-semibold flex items-center gap-1.5 transition shadow-sm touch-manipulation" title="Official Print Document & PDF Layout">
-          <span>📄</span>
-          <span class="hidden md:inline" id="btn-doc-header">Official Document (PDF)</span>
+        <!-- Print / PDF Proposal Document -->
+        <a href="proposal_document.html" target="_blank" class="p-1.5 sm:p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-slate-300 border border-slate-700 text-xs transition touch-manipulation flex items-center justify-center" title="Print / Export PDF">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
         </a>
 
         <!-- Admin Access Button -->
@@ -808,9 +809,9 @@
 
     <!-- INTERACTIVE PRODUCT EXPLORER & TABS -->
     <section id="product-explorer-section" class="space-y-6 pt-4">
-      <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
+      <div class="border-b border-slate-800 pb-4 no-print">
         <!-- Tab Navigation Buttons -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scroll-touch relative" role="tablist" id="tabs-nav">
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scroll-touch relative flex-wrap sm:flex-nowrap" role="tablist" id="tabs-nav">
           <button onclick="switchTab('photography')" id="tab-btn-photography" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20 active:scale-95 touch-manipulation">
             <span>📸</span>
             <span id="tab-label-photo">1. Photography Production (EGP 350K)</span>
@@ -831,17 +832,6 @@
             <span>⚡</span>
             <span id="tab-label-planner">5. Interactive Planner &amp; SLA</span>
           </button>
-        </div>
-
-        <!-- Quick Keyword Search / Filter -->
-        <div class="relative w-full md:w-80 flex items-center gap-2" id="feature-search-container">
-          <div class="relative flex-1">
-            <input type="text" id="feature-search" oninput="filterFeatures()" placeholder="Filter services or deliverables..." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-4 pr-9 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30 transition text-left">
-            <span id="search-icon" class="absolute right-3 top-2.5 text-slate-400 text-xs pointer-events-none">🔍</span>
-          </div>
-          <span id="filter-count-badge" class="shrink-0 text-[11px] font-mono px-2.5 py-1.5 rounded-xl bg-blue-500/10 text-blue-300 border border-blue-500/25 font-bold transition-all duration-200">
-            9 / 9
-          </span>
         </div>
       </div>
 
