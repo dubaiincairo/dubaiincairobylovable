@@ -272,28 +272,40 @@
       "destination": "https://swissblue23may-git-codex-marketin-b957d5-dubaiincairos-projects.vercel.app/_next/:path*"
     },
     {
+      "source": "/proposals/mdi/launching",
+      "destination": "/proposals/mdi/launching/index.html"
+    },
+    {
+      "source": "/proposals/mdi/launching/",
+      "destination": "/proposals/mdi/launching/index.html"
+    },
+    {
+      "source": "/proposals/mdi/launching/:path*",
+      "destination": "/proposals/mdi/launching/:path*"
+    },
+    {
       "source": "/proposals/mdi/QT7",
-      "destination": "/proposals/mdi/QT7/index.html"
+      "destination": "/proposals/mdi/launching/index.html"
     },
     {
       "source": "/proposals/mdi/QT7/",
-      "destination": "/proposals/mdi/QT7/index.html"
+      "destination": "/proposals/mdi/launching/index.html"
     },
     {
       "source": "/proposals/mdi/QT7/:path*",
-      "destination": "/proposals/mdi/QT7/:path*"
+      "destination": "/proposals/mdi/launching/:path*"
     },
     {
       "source": "/proposals/mdi",
-      "destination": "/proposals/mdi/QT7/index.html"
+      "destination": "/proposals/mdi/launching/index.html"
     },
     {
       "source": "/proposals/mdi/",
-      "destination": "/proposals/mdi/QT7/index.html"
+      "destination": "/proposals/mdi/launching/index.html"
     },
     {
       "source": "/proposals/mdi/:path*",
-      "destination": "/proposals/mdi/QT7/:path*"
+      "destination": "/proposals/mdi/launching/:path*"
     },
     {
       "source": "/proposals/yerkab",

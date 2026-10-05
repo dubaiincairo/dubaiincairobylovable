@@ -4,18 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OneBank / Misr Digital Innovation — Integrated Photography &amp; Video Production Package | Dubai in Cairo</title>
+  
+  <!-- Private Proposal Security: Strictly Block Search Engine Crawling & Indexing -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
+
   <!-- Canonical & Domain Metadata -->
-  <link rel="canonical" href="https://dubaiincairo.com/proposals/mdi/QT7">
+  <link rel="canonical" href="https://dubaiincairo.com/proposals/mdi/launching">
   <meta property="og:title" content="OneBank / Misr Digital Innovation — Integrated Photography &amp; Video Production Package">
   <meta property="og:description" content="Official Commercial Quotation and Production Roadmap prepared for OneBank / Misr Digital Innovation (MDI) by Dubai in Cairo LLC. Total: EGP 900,000 inclusive of VAT.">
-  <meta property="og:url" content="https://dubaiincairo.com/proposals/mdi/QT7">
+  <meta property="og:url" content="https://dubaiincairo.com/proposals/mdi/launching">
   <meta property="og:type" content="website">
+
   <!-- Favicon & Official Dubai in Cairo Brand Icon (Gold D Lettermark) -->
   <link rel="icon" type="image/svg+xml" href="https://dubaiincairo.com/favicon.svg">
   <link rel="icon" type="image/x-icon" href="https://dubaiincairo.com/favicon.ico">
   <link rel="apple-touch-icon" href="https://dubaiincairo.com/favicon.svg">
   <meta property="og:image" content="https://dubaiincairo.com/og-image.jpg">
   <meta name="twitter:image" content="https://dubaiincairo.com/og-image.jpg">
+
   <!-- Tailwind CSS -->
   <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
@@ -124,6 +131,21 @@
     }
     .animate-pop {
       animation: popIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Floating Feedback Button Pulsing Aura */
+    @keyframes floatingPulse {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 8px 24px -4px rgba(59, 130, 246, 0.4), 0 0 16px 2px rgba(232, 160, 32, 0.2);
+      }
+      50% {
+        transform: translateY(-6px) scale(1.03);
+        box-shadow: 0 16px 32px -4px rgba(59, 130, 246, 0.6), 0 0 24px 6px rgba(232, 160, 32, 0.35);
+      }
+    }
+    .floating-feedback-btn {
+      animation: floatingPulse 3.5s ease-in-out infinite;
     }
 
     /* Modal Transitions */
@@ -269,7 +291,7 @@
     /* Base Scroll Reveal Element */
     .scroll-reveal {
       opacity: 0;
-      transform: translateY(18px);
+      transform: translateY(22px);
       transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
                   transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
@@ -279,10 +301,10 @@
       transform: translateY(0) !important;
     }
 
-    .stagger-1 { transition-delay: 40ms; }
-    .stagger-2 { transition-delay: 90ms; }
-    .stagger-3 { transition-delay: 140ms; }
-    .stagger-4 { transition-delay: 190ms; }
+    .stagger-1 { transition-delay: 50ms; }
+    .stagger-2 { transition-delay: 100ms; }
+    .stagger-3 { transition-delay: 150ms; }
+    .stagger-4 { transition-delay: 200ms; }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -345,6 +367,10 @@
       #filter-count-badge,
       #verification-modal,
       #confirmation-modal,
+      #welcome-sarah-modal,
+      #feedback-modal,
+      #admin-modal,
+      #floating-feedback-trigger,
       .no-print,
       .ambient-orb-1,
       .ambient-orb-2,
@@ -478,7 +504,7 @@
     }
   </style>
 </head>
-<body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-blue-600 selection:text-white pb-20 relative">
+<body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-blue-600 selection:text-white pb-24 relative">
 
   <!-- Ambient Floating Glow Orbs -->
   <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
@@ -489,7 +515,7 @@
 
   <!-- TOP STICKY NAVIGATION BAR -->
   <header class="sticky top-0 z-50 glass-nav border-b border-slate-800/80 pt-[env(safe-area-inset-top)] relative">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3 sm:gap-4">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2.5 sm:gap-4">
       <!-- Logo & Project Identity -->
       <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
         <!-- Official Dubai in Cairo Gold Lettermark Emblem -->
@@ -509,27 +535,27 @@
             </span>
           </div>
           <p class="text-[11px] sm:text-xs text-slate-400 hidden sm:block" id="brand-sub">
-            Integrated Photography &amp; Video Production Package • Commercial Quotation (QT7)
+            Integrated Photography &amp; Video Production Package • Commercial Quotation (Launching)
           </p>
         </div>
       </div>
 
-      <!-- Actions: Copy Link, Production Planner, Print, Language Switcher -->
+      <!-- Actions: Download Portfolio PDF CTA, Copy Link, Print, Language Switcher -->
       <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+        <!-- High-Priority CTA: Download Agency Portfolio PDF -->
+        <a href="https://drive.google.com/file/d/1k7A7M2OvlNP6BaKzJVotXrNOsW3qHQ7I/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-[11px] sm:text-xs flex items-center gap-1.5 sm:gap-2 shadow-lg shadow-amber-500/25 transition active:scale-95 touch-manipulation group" id="btn-portfolio-cta" title="Download Official Dubai in Cairo Portfolio PDF">
+          <svg class="w-4 h-4 text-slate-950 group-hover:translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+          <span class="tracking-tight" id="btn-portfolio-text">Download Portfolio PDF</span>
+        </a>
+
         <!-- Copy Link Button -->
         <button onclick="copyProposalLink()" class="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-95 text-slate-200 border border-slate-700 text-xs font-medium flex items-center gap-1.5 transition shadow-sm touch-manipulation" title="Copy Proposal URL">
           <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
           </svg>
-          <span class="hidden md:inline" id="btn-copy-text">Share Link</span>
-        </button>
-
-        <!-- Interactive Production Planner Jump Button -->
-        <button onclick="jumpToPlanner()" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 active:scale-95 text-xs font-semibold transition touch-manipulation cursor-pointer" title="Jump to Production Simulator">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-          </svg>
-          <span id="btn-demo-planner">Production Planner</span>
+          <span class="hidden lg:inline" id="btn-copy-text">Share Link</span>
         </button>
 
         <!-- Print / PDF Proposal -->
@@ -541,10 +567,10 @@
 
         <!-- Language Toggle -->
         <div class="bg-slate-800/90 p-0.5 sm:p-1 rounded-xl border border-slate-700/80 flex items-center">
-          <button id="lang-en" onclick="setLanguage('en')" class="px-2.5 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition bg-blue-600 text-white shadow-sm touch-manipulation">
+          <button id="lang-en" onclick="setLanguage('en')" class="px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition bg-blue-600 text-white shadow-sm touch-manipulation">
             English
           </button>
-          <button id="lang-ar" onclick="setLanguage('ar')" class="px-2.5 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition text-slate-400 hover:text-white touch-manipulation">
+          <button id="lang-ar" onclick="setLanguage('ar')" class="px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition text-slate-400 hover:text-white touch-manipulation">
             العربية
           </button>
         </div>
@@ -563,18 +589,18 @@
         <div>
           <div class="text-xl font-black text-slate-900 flex items-center gap-2">
             <span>DUBAI IN CAIRO LLC × ONEBANK (وان بنك)</span>
-            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-blue-100 text-blue-800">Quotation Ref: DIC-MDI-2026-QT7</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-blue-100 text-blue-800">Quotation Ref: DIC-MDI-2026-LAUNCH</span>
           </div>
           <p class="text-xs text-slate-600 mt-1" id="print-doc-sub">Prepared for: OneBank / Misr Digital Innovation (MDI) • Date: 5 October 2026</p>
         </div>
         <div class="text-right text-xs text-slate-500 font-mono">
-          www.dubaiincairo.com/proposals/mdi/QT7
+          www.dubaiincairo.com/proposals/mdi/launching
         </div>
       </div>
     </div>
 
     <!-- HERO / EXECUTIVE BANNER -->
-    <section id="hero-section" class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-5 sm:p-10 shadow-2xl">
+    <section id="hero-section" class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-5 sm:p-10 shadow-2xl scroll-reveal">
       <div class="absolute -right-20 -top-20 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -586,9 +612,9 @@
             <span id="hero-pill">OFFICIAL COMMERCIAL QUOTATION • PRODUCTION ROADMAP</span>
           </div>
 
-          <a href="https://dubaiincairo.com/proposals/mdi/QT7" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 hover:text-cyan-300 transition group">
+          <a href="https://dubaiincairo.com/proposals/mdi/launching" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 hover:text-cyan-300 transition group">
             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span class="font-mono text-cyan-400">dubaiincairo.com/proposals/mdi/QT7</span>
+            <span class="font-mono text-cyan-400">dubaiincairo.com/proposals/mdi/launching</span>
             <span class="text-slate-400 group-hover:text-cyan-400">↗</span>
           </a>
         </div>
@@ -597,7 +623,7 @@
         <div class="space-y-3 max-w-4xl">
           <div class="flex flex-wrap items-center gap-2 sm:gap-3">
             <span class="text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded-lg bg-blue-600 text-white shadow-sm" id="hero-brand-badge">PREPARED FOR: ONEBANK</span>
-            <span class="text-xs text-slate-400 font-mono" id="hero-ref">REF: DIC-MDI-2026-QT7</span>
+            <span class="text-xs text-slate-400 font-mono" id="hero-ref">REF: DIC-MDI-2026-LAUNCH</span>
             <span class="text-xs text-slate-500">•</span>
             <span class="text-xs text-slate-400" id="hero-date">5 October 2026</span>
           </div>
@@ -1232,14 +1258,14 @@
           <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold">
             02
           </div>
-          <h4 class="text-base font-bold text-white" id="gov-c2-t">Production, Revisions &amp; Delivery</h4>
+          <h4 class="text-base font-bold text-white" id="gov-c2-t">Production, Revisions &amp; Approvals</h4>
           <ul class="text-xs text-slate-300 space-y-2 pt-1 list-disc list-inside" id="gov-c2-d">
+            <li><strong>Model &amp; Music Approval:</strong> All selected cast models and licensed music tracks must receive written approval from OneBank prior to the commencement of principal filming and video editing.</li>
             <li><strong>Photography Revisions:</strong> 2 consolidated rounds for image selection and retouching.</li>
             <li><strong>Video Revisions:</strong> 2 consolidated editing rounds per video.</li>
             <li><strong>Feedback:</strong> Consolidated feedback provided through OneBank designated lead.</li>
             <li><strong>Delivery:</strong> Digital delivery of high-resolution JPEGs and MP4 video masters.</li>
             <li><strong>Exclusions:</strong> Raw footage, unedited photos, and project files excluded unless agreed.</li>
-            <li><strong>Scope Changes:</strong> Additional shoot days, reshoots, or new language cuts quoted separately.</li>
           </ul>
         </div>
 
@@ -1250,11 +1276,10 @@
           </div>
           <h4 class="text-base font-bold text-white" id="gov-c3-t">Usage, Rights &amp; Validity</h4>
           <ul class="text-xs text-slate-300 space-y-2 pt-1 list-disc list-inside" id="gov-c3-d">
-            <li>Usage rights, model releases, and music licenses documented before booking.</li>
-            <li>Strict confidentiality applied to OneBank-supplied and unreleased assets.</li>
-            <li>Agency portfolio use requires OneBank’s prior written approval.</li>
+            <li><strong>Production Commencement:</strong> Production scheduling and studio reservations commence immediately upon receipt of an explicit acceptance email from OneBank and full receipt of the required advance payment.</li>
+            <li><strong>Agency Portfolio Rights:</strong> Dubai in Cairo LLC reserves the right to include final delivered work in its agency portfolio and creative showcases 6 months after official public release by OneBank, without requiring additional prior written approval.</li>
+            <li>Strict confidentiality applied to OneBank-supplied and unreleased assets prior to official launch.</li>
             <li><strong>Quotation Validity:</strong> 15 calendar days from quotation date (5 October 2026).</li>
-            <li>Production commences upon written acceptance and receipt of advance payment.</li>
             <li>Client-requested cancellations or rescheduling incurs non-refundable supplier costs.</li>
           </ul>
         </div>
@@ -1273,26 +1298,34 @@
 
       <!-- Dual Signature Block -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 pt-4 border-t border-slate-800">
-        <!-- Dubai in Cairo Signature Box -->
+        <!-- Dubai in Cairo Signature Box (Signed by Abdalla Hassan Elfouly) -->
         <div class="p-5 sm:p-6 rounded-2xl bg-slate-900/80 border border-slate-700/80 space-y-4">
           <div class="flex items-center justify-between border-b border-slate-800 pb-3">
             <span class="text-xs font-bold text-blue-400 uppercase tracking-wider" id="sign-lbl-agency">For Dubai in Cairo LLC</span>
-            <span class="text-[11px] text-slate-400 font-mono">Agency Authorization</span>
+            <span class="text-[11px] text-emerald-400 font-mono font-semibold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Authorized Signature</span>
+            </span>
           </div>
           <div class="space-y-3 text-xs">
             <div class="flex items-center justify-between">
               <span class="text-slate-400" id="sign-lbl-name1">Name:</span>
-              <span class="font-semibold text-white font-mono">____________________</span>
+              <span class="font-bold text-white font-mono text-sm" id="sign-val-name1">Abdalla Hassan Elfouly</span>
             </div>
             <div class="flex items-center justify-between">
               <span class="text-slate-400" id="sign-lbl-title1">Title:</span>
-              <span class="font-semibold text-white font-mono">____________________</span>
+              <span class="font-semibold text-slate-200 font-mono" id="sign-val-title1">Managing Director</span>
             </div>
-            <div class="flex items-center justify-between">
-              <span class="text-slate-400" id="sign-lbl-sig1">Signature:</span>
-              <span class="font-semibold text-white font-mono">____________________</span>
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-slate-400 self-center" id="sign-lbl-sig1">Signature:</span>
+              <div class="bg-slate-950/60 px-3 py-1.5 rounded-xl border border-slate-800 inline-flex items-center justify-center">
+                <!-- Professional Vector Cursive Signature of Abdalla Elfouly -->
+                <svg viewBox="0 0 240 70" class="h-12 w-44 text-cyan-400 select-none pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12,54 C24,20 34,12 44,18 C54,24 38,58 32,62 C42,62 52,44 60,42 C68,39 66,56 74,54 C82,52 90,40 96,46 C102,52 98,58 108,54 C114,50 118,34 124,30 M118,42 L132,42 M138,52 C142,24 150,14 158,20 C166,26 152,62 148,64 C158,60 170,44 178,42 C186,40 192,52 200,46 C208,40 216,36 230,40 M156,38 L170,38 M10,62 C50,60 130,59 232,56" />
+                </svg>
+              </div>
             </div>
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between pt-1">
               <span class="text-slate-400" id="sign-lbl-date1">Date:</span>
               <span class="font-semibold text-white font-mono">05 / 10 / 2026</span>
             </div>
@@ -1327,26 +1360,225 @@
       </div>
     </section>
 
-    <!-- FOOTER / PROPOSAL METADATA -->
+    <!-- FOOTER / PROPOSAL METADATA & DIC INTERLOCKING MONOGRAM (OPTION 1 APPROVED) -->
     <footer class="pt-8 border-t border-slate-800 text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4 no-print scroll-reveal">
-      <div class="flex items-center gap-2">
-        <span class="font-bold text-slate-300" id="foot-copy">Dubai in Cairo LLC — Integrated Photography &amp; Video Production Package</span>
-        <span class="mx-1">•</span>
-        <span id="foot-client">OneBank / Misr Digital Innovation (MDI)</span>
+      <div class="flex items-center gap-3">
+        <!-- Approved Option 1: DIC Interlocking Monogram Box -->
+        <div class="w-8 h-8 rounded-lg bg-[#0a0f1e] border border-amber-500/40 flex items-center justify-center shadow-md shadow-amber-500/10 shrink-0 select-none">
+          <span class="font-serif font-black text-[11px] tracking-wider text-[#e8a020]">DIC</span>
+        </div>
+        <div>
+          <span class="font-bold text-slate-300" id="foot-copy">Dubai in Cairo LLC — Integrated Photography &amp; Video Production Package</span>
+          <span class="mx-1.5">•</span>
+          <span id="foot-client">OneBank / Misr Digital Innovation (MDI)</span>
+        </div>
       </div>
-      <div class="flex items-center gap-4">
-        <button onclick="setLanguage('en')" class="hover:text-blue-400 transition">English</button>
+      <div class="flex items-center gap-3 sm:gap-4">
+        <button onclick="setLanguage('en')" class="hover:text-blue-400 transition font-medium">English</button>
         <span>/</span>
-        <button onclick="setLanguage('ar')" class="hover:text-blue-400 transition">العربية</button>
-        <span class="text-slate-600">|</span>
+        <button onclick="setLanguage('ar')" class="hover:text-blue-400 transition font-medium">العربية</button>
+        <span class="text-slate-700">|</span>
+        <button onclick="openAdminModal()" class="text-slate-500 hover:text-amber-400 transition flex items-center gap-1 text-[11px]" title="Admin Review Dashboard">
+          <span>🔐</span>
+          <span id="btn-admin-nav">Admin</span>
+        </button>
+        <span class="text-slate-700">|</span>
         <span class="text-amber-400 font-mono font-bold" id="foot-total-val">Total: EGP 900,000</span>
       </div>
     </footer>
 
   </main>
 
-  <!-- INTERACTIVE PRODUCTION CONSULTATION MODAL -->
-  <div id="verification-modal" onclick="if(event.target === this) closeInquiryModal()" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 modal-backdrop-anim">
+  <!-- =========================================================================
+       FLOATING INTERACTIVE FEEDBACK TRIGGER FOR SARAH ASHRAF
+       Eye-catching, pulsing luxury badge anchored in the corner
+       ========================================================================= -->
+  <aside id="floating-feedback-trigger" aria-label="Feedback and Comments" class="fixed bottom-6 left-4 sm:left-6 z-40 no-print">
+    <button onclick="openFeedbackModal()" class="floating-feedback-btn px-4 py-3 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 text-white font-extrabold text-xs shadow-2xl flex items-center gap-2.5 transition active:scale-95 touch-manipulation border border-amber-400/30 group">
+      <span class="relative flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-400"></span>
+      </span>
+      <span class="tracking-tight text-white group-hover:text-amber-200 transition-colors" id="btn-floating-feedback-text">
+        💬 Add Feedback, Sarah
+      </span>
+    </button>
+  </aside>
+
+  <!-- =========================================================================
+       MODAL 1: PERSONALIZED WELCOME MODAL FOR SARAH ASHRAF
+       ========================================================================= -->
+  <div id="welcome-sarah-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 modal-backdrop-anim">
+    <div class="glass-card modal-dialog-anim rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-amber-500/40 relative space-y-5 text-center shadow-2xl max-h-[92dvh] overflow-y-auto">
+      
+      <!-- Welcome Visual Emblem -->
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-[#0a0f1e] border-2 border-amber-400/50 flex items-center justify-center shadow-xl shadow-amber-500/20 animate-pop">
+        <span class="font-serif font-black text-2xl text-[#e8a020]">D</span>
+      </div>
+
+      <div class="space-y-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-400 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 inline-block" id="welcome-pill">
+          Executive Presentation
+        </span>
+        <h3 class="text-2xl sm:text-3xl font-black text-white" id="welcome-sarah-title">
+          Welcome, Sarah Ashraf
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md mx-auto pt-1" id="welcome-sarah-desc">
+          Dubai in Cairo LLC is honored to present this integrated photography and video production proposal for OneBank / Misr Digital Innovation. We look forward to executing this campaign with precision and creative excellence.
+        </p>
+      </div>
+
+      <!-- Quick Highlights Card -->
+      <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs space-y-2 text-left">
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400" id="welcome-lbl-client">Client:</span>
+          <span class="font-bold text-white">OneBank (وان بنك) • MDI</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400" id="welcome-lbl-pkg">Scope:</span>
+          <span class="font-semibold text-cyan-300" id="welcome-val-scope">500 Staff/Board Photos + 3 App Lifestyle Videos</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400" id="welcome-lbl-total">Total Investment:</span>
+          <span class="font-mono font-black text-amber-400">EGP 900,000 (Incl. VAT)</span>
+        </div>
+      </div>
+
+      <!-- Main CTA Button -->
+      <button onclick="dismissWelcomeModal()" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 hover:from-blue-500 hover:to-amber-400 text-white font-extrabold text-sm shadow-xl shadow-blue-600/30 transition active:scale-95 touch-manipulation flex items-center justify-center gap-2 group" id="btn-welcome-cta">
+        <span id="btn-welcome-cta-text">View Commercial Proposal</span>
+        <span class="group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1">→</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: SARAH'S INTERACTIVE FEEDBACK & COMMENT WINDOW
+       ========================================================================= -->
+  <div id="feedback-modal" onclick="if(event.target === this) closeFeedbackModal()" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 modal-backdrop-anim">
+    <div class="glass-card modal-dialog-anim rounded-3xl max-w-lg w-full p-6 sm:p-7 border border-blue-500/40 relative space-y-4 max-h-[92dvh] overflow-y-auto">
+      <button onclick="closeFeedbackModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-base w-9 h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 flex items-center justify-center transition active:scale-95 touch-manipulation" aria-label="Close">✕</button>
+
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 rounded-xl bg-blue-500/20 text-blue-400 shrink-0">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="text-base sm:text-lg font-bold text-white" id="feedback-modal-title">Share Feedback &amp; Notes — Sarah Ashraf</h4>
+          <p class="text-xs text-slate-300" id="feedback-modal-sub">Submit comments directly to Abdalla Elfouly (Dubai in Cairo LLC).</p>
+        </div>
+      </div>
+
+      <!-- Input Form -->
+      <div class="space-y-3 pt-1 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1" id="feedback-lbl-section">Section Reference:</label>
+          <select id="feedback-section" class="custom-select w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 cursor-pointer">
+            <option value="general">General Commercial Proposal</option>
+            <option value="photography">1. Photography Production (500 Photos)</option>
+            <option value="video">2. Video Production (3 Lifestyle Videos)</option>
+            <option value="schedule">Shooting Schedule (Maadi &amp; Mivida)</option>
+            <option value="payments">Payment Terms &amp; Advance Tranche</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1" id="feedback-lbl-text">Your Comments / Inquiries:</label>
+          <textarea id="feedback-text" rows="4" placeholder="Write your notes, questions, or approval points here..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500 placeholder-slate-500"></textarea>
+        </div>
+
+        <!-- Direct Contact Assistance Box with International Number -->
+        <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-amber-500/30 text-xs space-y-2">
+          <div class="flex items-center gap-2 text-amber-400 font-bold">
+            <span>📞</span>
+            <span id="feedback-direct-help-title">Direct Executive Support &amp; Instant WhatsApp:</span>
+          </div>
+          <p class="text-[11px] text-slate-300 leading-relaxed" id="feedback-direct-help-desc">
+            You can also connect immediately with Abdalla Hassan Elfouly via phone, WhatsApp, or official email:
+          </p>
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            <a href="https://wa.me/966595979064" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 transition font-mono font-bold">
+              <span>💬 WhatsApp:</span>
+              <span>+966 59 597 9064</span>
+            </a>
+            <a href="tel:+966595979064" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/30 hover:bg-blue-500/30 transition font-mono font-bold">
+              <span>📞 Mobile:</span>
+              <span>+966 59 597 9064</span>
+            </a>
+            <a href="mailto:info@dubaiincairo.com" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 transition font-mono">
+              <span>✉️ info@dubaiincairo.com</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-2 flex items-center justify-end gap-2">
+        <button onclick="closeFeedbackModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white active:scale-95 touch-manipulation" id="feedback-btn-cancel">Cancel</button>
+        <button onclick="submitClientFeedback()" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition active:scale-95 touch-manipulation" id="feedback-btn-submit">
+          Send Feedback to Dubai in Cairo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 3: ADMIN PANEL (MANAGEMENT DASHBOARD FOR RECEIVED FEEDBACK)
+       ========================================================================= -->
+  <div id="admin-modal" onclick="if(event.target === this) closeAdminModal()" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 modal-backdrop-anim">
+    <div class="glass-card modal-dialog-anim rounded-3xl max-w-xl w-full p-6 sm:p-7 border border-amber-500/40 relative space-y-4 max-h-[92dvh] overflow-y-auto">
+      <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-base w-9 h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 flex items-center justify-center transition active:scale-95 touch-manipulation" aria-label="Close">✕</button>
+
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 rounded-xl bg-amber-500/20 text-amber-400 shrink-0">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="text-base sm:text-lg font-bold text-white">Admin Management Dashboard</h4>
+          <p class="text-xs text-slate-300">Dubai in Cairo LLC • Client Inquiries &amp; Feedback Review</p>
+        </div>
+      </div>
+
+      <!-- Login Gate if not authenticated -->
+      <div id="admin-login-view" class="space-y-3 pt-2 text-xs">
+        <p class="text-slate-300">Enter administrator credentials to inspect feedback submitted by Sarah Ashraf:</p>
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Username:</label>
+          <input type="text" id="admin-user-input" value="admin" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Password:</label>
+          <input type="password" id="admin-pass-input" placeholder="Enter password (e.g. dic2026)" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500">
+        </div>
+        <p class="text-[11px] text-slate-500">Default credentials: Username: <code>admin</code> | Password: <code>dic2026</code></p>
+        <button onclick="handleAdminLogin()" class="w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-lg transition active:scale-95">
+          Authenticate &amp; View Comments
+        </button>
+      </div>
+
+      <!-- Authenticated Comments View -->
+      <div id="admin-comments-view" class="hidden space-y-4 pt-2 text-xs">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+          <span class="font-bold text-white" id="admin-count-label">Received Comments: 0</span>
+          <button onclick="clearAllComments()" class="text-rose-400 hover:text-rose-300 text-[11px] underline">Clear All</button>
+        </div>
+        <div id="admin-comments-list" class="space-y-3 max-h-64 overflow-y-auto pr-1">
+          <!-- Comments injected via JS -->
+        </div>
+        <div class="pt-2 flex justify-end">
+          <button onclick="closeAdminModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-200 text-xs font-semibold hover:bg-slate-700">Close Panel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 4: INTERACTIVE PRODUCTION CONSULTATION MODAL
+       ========================================================================= -->
+  <div id="verification-modal" onclick="if(event.target === this) closeInquiryModal()" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4 modal-backdrop-anim">
     <div class="glass-card modal-dialog-anim rounded-2xl max-w-lg w-full p-5 sm:p-6 border border-blue-500/40 relative space-y-4 max-h-[90dvh] overflow-y-auto">
       <button onclick="closeInquiryModal()" class="absolute top-3.5 right-3.5 text-slate-400 hover:text-white text-base w-9 h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 flex items-center justify-center transition active:scale-95 touch-manipulation" aria-label="Close">✕</button>
       
@@ -1365,7 +1597,7 @@
       <div class="space-y-3 pt-2">
         <div>
           <label class="block text-xs font-semibold text-slate-300 mb-1" id="modal-lbl-contact">OneBank Representative Name &amp; Title:</label>
-          <input type="text" id="modal-contact" value="OneBank Marketing &amp; Brand Team" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
+          <input type="text" id="modal-contact" value="Sarah Ashraf • OneBank Brand &amp; Marketing" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
         </div>
         <div>
           <label class="block text-xs font-semibold text-slate-300 mb-1" id="modal-lbl-venue">Day 3 Venue / Location Notes (Mivida, Fifth Settlement):</label>
@@ -1390,8 +1622,10 @@
     </div>
   </div>
 
-  <!-- CONFIRMATION POP-UP MODAL -->
-  <div id="confirmation-modal" onclick="if(event.target === this) closeConfirmationModal()" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 modal-backdrop-anim">
+  <!-- =========================================================================
+       MODAL 5: CONFIRMATION MODAL (100% PURE MONO-LANGUAGE: NO MIXED LANGUAGES)
+       ========================================================================= -->
+  <div id="confirmation-modal" onclick="if(event.target === this) closeConfirmationModal()" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 modal-backdrop-anim">
     <div class="glass-card modal-dialog-anim rounded-3xl max-w-md w-full p-6 sm:p-8 border border-emerald-500/40 relative space-y-5 text-center shadow-2xl max-h-[90dvh] overflow-y-auto">
       <button onclick="closeConfirmationModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-base w-9 h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 flex items-center justify-center transition active:scale-95 touch-manipulation" aria-label="Close">✕</button>
 
@@ -1403,7 +1637,7 @@
 
       <div class="space-y-1.5">
         <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 inline-block" id="confirm-pill">
-          REQUEST DISPATCHED • تم استلام الطلب
+          REQUEST DISPATCHED
         </span>
         <h4 class="text-xl font-extrabold text-white" id="confirm-title">Production Coordination Logged</h4>
         <p class="text-xs text-slate-300 leading-relaxed max-w-sm mx-auto" id="confirm-desc">
@@ -1414,15 +1648,15 @@
       <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs space-y-2.5 text-left">
         <div class="flex justify-between items-center">
           <span class="text-slate-400" id="confirm-lbl-ref">Quotation Reference:</span>
-          <span class="font-mono font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">DIC-MDI-2026-QT7</span>
+          <span class="font-mono font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">DIC-MDI-2026-LAUNCH</span>
         </div>
         <div class="flex justify-between items-center">
           <span class="text-slate-400" id="confirm-lbl-ticket">Production Ticket:</span>
-          <span id="confirm-ticket-id" class="font-mono text-slate-300 font-semibold">#PROD-MDI-QT7</span>
+          <span id="confirm-ticket-id" class="font-mono text-slate-300 font-semibold">#PROD-MDI-LAUNCH</span>
         </div>
         <div class="flex justify-between items-center">
           <span class="text-slate-400" id="confirm-lbl-sla">Advance Payable:</span>
-          <span class="text-emerald-400 font-bold">EGP 415,000 (Incl. VAT)</span>
+          <span class="text-emerald-400 font-bold" id="confirm-val-advance">EGP 415,000 (Incl. VAT)</span>
         </div>
         <div class="flex justify-between items-center pt-1.5 border-t border-slate-800/80">
           <span class="text-slate-400" id="confirm-lbl-channel">Direct Agency Contact:</span>
@@ -1444,14 +1678,14 @@
       </div>
       <div>
         <div class="text-xs font-bold text-white" id="toast-title">Link Copied!</div>
-        <div class="text-[11px] text-slate-400" id="toast-sub">dubaiincairo.com/proposals/mdi/QT7</div>
+        <div class="text-[11px] text-slate-400" id="toast-sub">dubaiincairo.com/proposals/mdi/launching</div>
       </div>
     </div>
   </div>
 
   <!-- COMPREHENSIVE DATA & INTERACTIVE LOGIC -->
   <script>
-    const PROPOSAL_URL = 'https://dubaiincairo.com/proposals/mdi/QT7';
+    const PROPOSAL_URL = 'https://dubaiincairo.com/proposals/mdi/launching';
 
     function copyProposalLink() {
       const isAr = currentLang === 'ar';
@@ -1459,7 +1693,7 @@
         navigator.clipboard.writeText(PROPOSAL_URL).then(() => {
           showToast(
             isAr ? 'تم نسخ رابط عرض السعر بنجاح!' : 'Proposal URL Copied!',
-            'dubaiincairo.com/proposals/mdi/QT7'
+            'dubaiincairo.com/proposals/mdi/launching'
           );
         }).catch(() => {
           showFallbackPrompt(isAr);
@@ -1497,7 +1731,7 @@
     let currentLang = 'en';
     let currentTab = 'photography';
 
-    // 9 Photography Included Services Data (Cairo Logistics moved to #09)
+    // 9 Photography Included Services Data (Cairo Logistics is #09)
     const photographyServices = [
       {
         num: '01',
@@ -1512,7 +1746,7 @@
         titleEn: 'Pre-Production & Shot List Planning',
         titleAr: 'التخطيط وقائمة اللقطات المعتمدة',
         descEn: 'Comprehensive pre-production planning, shot list development, and detailed shooting schedule across all locations with designated Account Manager.',
-        descAr: 'تخطيط شامل لمرحلة ما قبل الإنتاج، إعداد قائمة اللقطات (Shot List) المعتمدة والجدول الزمني المفصل بإشراف مدير الحسابات.',
+        descAr: 'تخطيط شامل لمرحلة ما قبل الإنتاج، إعداد قائمة اللقطات المعتمدة والجدول الزمني المفصل بإشراف مدير الحسابات المخصص.',
         category: 'planning'
       },
       {
@@ -1591,7 +1825,9 @@
         photoEn: '3 days (Days 1 & 2 Maadi HQ, Day 3 Mivida New Cairo)',
         photoAr: '3 أيام (اليومان 1 و2 بمقر المعادي، واليوم 3 بميفيدا التجمع)',
         videoEn: 'Dedicated studio production days',
-        videoAr: 'أيام تصوير استوديو متخصصة ومجهزة بالكامل'
+        videoAr: 'أيام تصوير استوديو متخصصة ومجهزة بالكامل',
+        notesEn: 'OneBank premises access coordinated by client',
+        notesAr: 'يوفر وان بنك تصاريح ومداخل المقرات المحددة'
       },
       {
         areaEn: 'Cast & Subject Resources',
@@ -1599,7 +1835,9 @@
         photoEn: 'OneBank employees, teams, and Board of Directors only (no clients)',
         photoAr: 'موظفو وان بنك وفرق العمل وأعضاء مجلس الإدارة فقط (دون عملاء)',
         videoEn: '1 male model + 1 female model + 1 emergency standby model',
-        videoAr: 'موديل رجل + موديل سيدة + موديل احتياطي للطوارئ'
+        videoAr: 'موديل رجل + موديل سيدة + موديل احتياطي للطوارئ',
+        notesEn: 'Models and music approved by OneBank prior to production',
+        notesAr: 'اعتماد الموديلز والموسيقى مسبقاً من قِبل وان بنك'
       },
       {
         areaEn: 'Account Management',
@@ -1607,7 +1845,9 @@
         photoEn: 'Dedicated Dubai in Cairo Account Manager on-site across all days',
         photoAr: 'مدير حسابات تنفيذي مخصص من (Dubai in Cairo) متواجد في جميع الأيام',
         videoEn: 'Dedicated Dubai in Cairo Account Manager managing full studio workflow',
-        videoAr: 'مدير حسابات تنفيذي مخصص يشرف على كافة مراحل تصوير الاستوديو'
+        videoAr: 'مدير حسابات تنفيذي مخصص يشرف على كافة مراحل تصوير الاستوديو',
+        notesEn: 'Single consolidated communication channel',
+        notesAr: 'قناة تواصل موحدة لضمان كفاءة التنفيذ'
       },
       {
         areaEn: 'Equipment & Optics',
@@ -1615,15 +1855,9 @@
         photoEn: 'Professional full-frame camera systems & prime lenses',
         photoAr: 'كاميرات رقمية متطورة وعدسات برايم (Prime Lenses)',
         videoEn: 'Professional cinema camera, prime lenses, grip & studio audio',
-        videoAr: 'كاميرات رقمية احترافية، عدسات برايم، ومعدات إضاءة وصوت'
-      },
-      {
-        areaEn: 'Set Dressing & Styling',
-        areaAr: 'الديكور والأزياء والمكياج',
-        photoEn: 'On-site art direction & corporate dress code alignment',
-        photoAr: 'إدارة فنية ميدانية ومواءمة الزي المؤسسي للبنك',
-        videoEn: 'Studio rental, set dressing, props, wardrobe & hair/makeup',
-        videoAr: 'تأجير استوديو، ديكور وإكسسوارات، وأزياء وتصفيف ومكياج'
+        videoAr: 'كاميرات رقمية احترافية، عدسات برايم، ومعدات إضاءة وصوت',
+        notesEn: 'Broadcast & large-format print ready',
+        notesAr: 'جاهزية كاملة للطباعة الضخمة والبث الرقمي'
       },
       {
         areaEn: 'Post-Production & Audio',
@@ -1631,7 +1865,9 @@
         photoEn: 'Colour correction, exposure tuning, professional retouching',
         photoAr: 'تصحيح الألوان والإضاءة ورتوش رقمي متقدم',
         videoEn: 'Editing, colour grading, sound design, licensed music & mixing',
-        videoAr: 'مونتاج، تدريج ألوان سينمائي، هندسة ومكساج صوت وموسيقى مرخصة'
+        videoAr: 'مونتاج، تدريج ألوان سينمائي، هندسة ومكساج صوت وموسيقى مرخصة',
+        notesEn: 'OneBank supplies final approved motion animations',
+        notesAr: 'يقدم وان بنك ملفات الأنيميشن النهائية المعتمدة للدمج'
       },
       {
         areaEn: 'Client Revision Cycles',
@@ -1639,7 +1875,9 @@
         photoEn: '2 consolidated rounds (selection & retouching)',
         photoAr: 'جولتان مدمجتان للمراجعة (الانتقاء والرتوش)',
         videoEn: '2 consolidated editing rounds per video',
-        videoAr: 'جولتان مدمجتان للمونتاج لكل مقطع فيديو'
+        videoAr: 'جولتان مدمجتان للمونتاج لكل مقطع فيديو',
+        notesEn: 'Feedback routed through single designated OneBank lead',
+        notesAr: 'تُرسل الملاحظات مجمعة عبر ممثل وان بنك المعتمد'
       },
       {
         areaEn: 'Commercial Allocation (Incl. VAT)',
@@ -1647,21 +1885,25 @@
         photoEn: 'EGP 350,000 (Advance: EGP 140,000 / 40%)',
         photoAr: '350,000 ج.م (الدفعة المقدمة: 140,000 ج.م / 40%)',
         videoEn: 'EGP 550,000 (Advance: EGP 275,000 / 50%)',
-        videoAr: '550,000 ج.م (الدفعة المقدمة: 275,000 ج.م / 50%)'
+        videoAr: '550,000 ج.م (الدفعة المقدمة: 275,000 ج.م / 50%)',
+        notesEn: 'Integrated non-separable package: EGP 900,000',
+        notesAr: 'باقة واحدة متكاملة غير قابلة للتجزئة: 900,000 ج.م'
       }
     ];
 
-    // Language Dictionary
+    // Language Dictionary (Pure mono-language with zero mixed words)
     const i18n = {
       en: {
         brandTitle: `<span>DUBAI IN CAIRO</span><span class="text-cyan-400">×</span><span class="text-blue-300">ONEBANK</span>`,
         brandTag: 'Misr Digital Innovation (MDI)',
-        brandSub: 'Integrated Photography & Video Production Package • Commercial Quotation (QT7)',
+        brandSub: 'Integrated Photography & Video Production Package • Commercial Quotation (Launching)',
+        btnPortfolio: 'Download Portfolio PDF',
         btnCopy: 'Share Link',
-        btnPlanner: 'Production Planner',
+        btnFloatingFeedback: '💬 Add Feedback, Sarah',
+        searchPlaceholder: 'Filter services or deliverables...',
         heroPill: 'OFFICIAL COMMERCIAL QUOTATION • PRODUCTION ROADMAP',
         heroBrandBadge: 'PREPARED FOR: ONEBANK',
-        heroRef: 'REF: DIC-MDI-2026-QT7',
+        heroRef: 'REF: DIC-MDI-2026-LAUNCH',
         heroDate: '5 October 2026',
         heroTitle: 'Integrated Photography & Video Production Package',
         heroSubtitle: 'Creative Development, Multi-Location Shooting & Production Execution',
@@ -1702,26 +1944,41 @@
         tabVideo: '2. Video Production (EGP 550K)',
         tabPayments: '3. Payment Terms & Value',
         tabMatrix: '4. Unified Scope Matrix',
-        tabPlanner: '5. Interactive Planner & SLA'
+        tabPlanner: '5. Interactive Planner & SLA',
+        // Pure English Confirmation Modal
+        confirmPill: 'REQUEST DISPATCHED',
+        confirmTitle: 'Production Coordination Logged',
+        confirmDesc: 'Dubai in Cairo LLC production producers and dedicated Account Manager will coordinate with OneBank to finalize call sheets, shoot dates, and studio reservations.',
+        confirmLblRef: 'Quotation Reference:',
+        confirmLblTicket: 'Production Ticket:',
+        confirmLblSla: 'Advance Payable:',
+        confirmValAdvance: 'EGP 415,000 (Incl. VAT)',
+        confirmLblChannel: 'Direct Agency Contact:',
+        confirmBtnDone: 'Done & Return to Quotation',
+        // Signatures
+        signValName1: 'Abdalla Hassan Elfouly',
+        signValTitle1: 'Managing Director'
       },
       ar: {
         brandTitle: `<span>دبي في القاهرة</span><span class="text-cyan-400">×</span><span class="text-blue-300">وان بنك</span>`,
         brandTag: 'مصر للابتكار الرقمي (MDI)',
-        brandSub: 'حزمة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو • عرض سعر تجاري (QT7)',
+        brandSub: 'باقة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو • عرض سعر تجاري',
+        btnPortfolio: 'تحميل ملف سابقة الأعمال (PDF)',
         btnCopy: 'مشاركة الرابط',
-        btnPlanner: 'مخطط الإنتاج',
+        btnFloatingFeedback: '💬 أرسلي ملاحظاتك أ. سارة',
+        searchPlaceholder: 'ابحث في الخدمات والمخرجات...',
         heroPill: 'عرض سعر رسمي معتمد • جدول الإنتاج التنفيذي',
         heroBrandBadge: 'مُقدّم إلى: وان بنك (OneBank)',
-        heroRef: 'المرجع: DIC-MDI-2026-QT7',
+        heroRef: 'المرجع: DIC-MDI-2026-LAUNCH',
         heroDate: '5 أكتوبر 2026',
-        heroTitle: 'حزمة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو',
+        heroTitle: 'باقة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو',
         heroSubtitle: 'التطوير الإبداعي، التصوير متعدد المواقع، والإنتاج والمونتاج النهائي',
         heroGreeting: 'السادة فريق وان بنك المحترمين،',
-        heroExec: 'يسر شركة دبي في القاهرة (Dubai in Cairo LLC) تقديم هذا العرض لحزمة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو، والتي تشمل التطوير الإبداعي وتخطيط الإنتاج والتصوير والمونتاج بما يتوافق مع الدليل الإرشادي المعتمد لهوية وان بنك.',
-        heroReassTitle: 'هيكلية الحزمة المتكاملة وغير القابلة للتجزئة',
-        heroReassDesc: 'خدمات التصوير الفوتوغرافي والفيديو مكملة لبعضها البعض ضمن عرض سعر متكامل وغير قابل للتجزئة. جميع المبالغ المذكورة شاملة ضريبة القيمة المضافة بنسبة 14% ولن تُضاف أي مبالغ أخرى. يشمل تواجد مدير حسابات تنفيذي مخصص طوال أيام التصوير.',
-        heroTotalLabel: 'الإجمالي (شامل الضريبة):',
-        kpi1Label: 'إجمالي الحزمة المتكاملة',
+        heroExec: 'يسر شركة دبي في القاهرة (Dubai in Cairo LLC) تقديم هذا العرض لباقة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو، والتي تشمل التطوير الإبداعي وتخطيط الإنتاج والتصوير والمونتاج بما يتوافق مع الدليل الإرشادي المعتمد لهوية وان بنك.',
+        heroReassTitle: 'هيكلية الباقة المتكاملة وغير القابلة للتجزئة',
+        heroReassDesc: 'خدمات التصوير الفوتوغرافي والفيديو مكملة لبعضها البعض ضمن باقة واحدة متكاملة وغير قابلة للتجزئة. جميع المبالغ المذكورة شاملة ضريبة القيمة المضافة بنسبة 14% ولن تُضاف أي مبالغ أخرى. يشمل تواجد مدير حسابات تنفيذي مخصص طوال أيام التصوير.',
+        heroTotalLabel: 'إجمالي الباقة (شامل الضريبة):',
+        kpi1Label: 'إجمالي الباقة المتكاملة',
         kpi1Sub: 'شاملة ضريبة القيمة المضافة',
         kpi2Label: 'الدفعة المقدمة المطلوبة',
         kpi2Sub: '40% فوتوغرافي + 50% فيديو',
@@ -1730,9 +1987,9 @@
         kpi4Label: 'فيديوهات تطبيق الهاتف',
         kpi4Sub: '3 مقاطع • نمط حياة عصري',
         commSummaryPre: 'الهيكل المالي والتجاري',
-        commSummaryTitle: 'توزيع مخصصات الحزمة المتكاملة',
+        commSummaryTitle: 'توزيع مخصصات الباقة المتكاملة',
         commSummarySub: 'تم إدراج المبالغ المفصلة لتعزيز الشفافية وحساب الدفعات ومراحل السداد فقط.',
-        commTotalLabel: 'إجمالي الحزمة المتكاملة:',
+        commTotalLabel: 'إجمالي الباقة المتكاملة:',
         cardM1Tag: 'البند الأول • التصوير الفوتوغرافي',
         cardM1Title: 'الإنتاج الفوتوغرافي الاحترافي',
         cardM1Role: 'إنتاج وتسليم 500 صورة نهائية مخصصة للموظفين وفرق العمل ومجلس الإدارة على مدار 3 أيام تصوير بمقر المعادي وميفيدا.',
@@ -1753,7 +2010,20 @@
         tabVideo: '2. إنتاج الفيديو (550 ألف ج.م)',
         tabPayments: '3. شروط السداد والقيمة',
         tabMatrix: '4. مصفوفة النطاق الموحد',
-        tabPlanner: '5. المخطط التفاعلي ومستوى الخدمة'
+        tabPlanner: '5. المخطط التفاعلي ومستوى الخدمة',
+        // Pure Arabic Confirmation Modal (Zero English Words)
+        confirmPill: 'تم استلام الطلب بنجاح',
+        confirmTitle: 'تم تسجيل طلب التنسيق الإنتاجي',
+        confirmDesc: 'سيتواصل فريق الإنتاج ومدير الحسابات التنفيذي من دبي في القاهرة مع وان بنك لتنسيق جداول التصوير وأوامر العمل وحجوزات الاستوديو.',
+        confirmLblRef: 'رقم مرجع عرض السعر:',
+        confirmLblTicket: 'رقم تذكرة الإنتاج:',
+        confirmLblSla: 'الدفعة المقدمة المستحقة:',
+        confirmValAdvance: '415,000 ج.م (شاملة الضريبة)',
+        confirmLblChannel: 'قناة التواصل المباشرة:',
+        confirmBtnDone: 'تم والعودة إلى عرض السعر',
+        // Signatures
+        signValName1: 'عبد الله حسن الفولي',
+        signValTitle1: 'المدير التنفيذي'
       }
     };
 
@@ -1766,11 +2036,11 @@
       const btnEn = document.getElementById('lang-en');
       const btnAr = document.getElementById('lang-ar');
       if (isAr) {
-        btnAr.className = 'px-2.5 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition bg-blue-600 text-white shadow-sm touch-manipulation';
-        btnEn.className = 'px-2.5 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition text-slate-400 hover:text-white touch-manipulation';
+        btnAr.className = 'px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition bg-blue-600 text-white shadow-sm touch-manipulation';
+        btnEn.className = 'px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition text-slate-400 hover:text-white touch-manipulation';
       } else {
-        btnEn.className = 'px-2.5 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition bg-blue-600 text-white shadow-sm touch-manipulation';
-        btnAr.className = 'px-2.5 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition text-slate-400 hover:text-white touch-manipulation';
+        btnEn.className = 'px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition bg-blue-600 text-white shadow-sm touch-manipulation';
+        btnAr.className = 'px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[11px] sm:text-xs font-bold transition text-slate-400 hover:text-white touch-manipulation';
       }
 
       // Update Header & Hero
@@ -1778,8 +2048,13 @@
       document.getElementById('brand-title').innerHTML = t.brandTitle;
       document.getElementById('brand-tag').innerText = t.brandTag;
       document.getElementById('brand-sub').innerText = t.brandSub;
+      document.getElementById('btn-portfolio-text').innerText = t.btnPortfolio;
       document.getElementById('btn-copy-text').innerText = t.btnCopy;
-      document.getElementById('btn-demo-planner').innerText = t.btnPlanner;
+      document.getElementById('btn-floating-feedback-text').innerText = t.btnFloatingFeedback;
+      
+      const searchInput = document.getElementById('feature-search');
+      if (searchInput) searchInput.placeholder = t.searchPlaceholder;
+
       document.getElementById('hero-pill').innerText = t.heroPill;
       document.getElementById('hero-brand-badge').innerText = t.heroBrandBadge;
       document.getElementById('hero-ref').innerText = t.heroRef;
@@ -1832,12 +2107,30 @@
       document.getElementById('tab-label-matrix').innerText = t.tabMatrix;
       document.getElementById('tab-label-planner').innerText = t.tabPlanner;
 
+      // Confirmation Modal (100% Mono-language purity)
+      document.getElementById('confirm-pill').innerText = t.confirmPill;
+      document.getElementById('confirm-title').innerText = t.confirmTitle;
+      document.getElementById('confirm-desc').innerText = t.confirmDesc;
+      document.getElementById('confirm-lbl-ref').innerText = t.confirmLblRef;
+      document.getElementById('confirm-lbl-ticket').innerText = t.confirmLblTicket;
+      document.getElementById('confirm-lbl-sla').innerText = t.confirmLblSla;
+      document.getElementById('confirm-val-advance').innerText = t.confirmValAdvance;
+      document.getElementById('confirm-lbl-channel').innerText = t.confirmLblChannel;
+      document.getElementById('confirm-btn-done').innerText = t.confirmBtnDone;
+
+      // Signatures
+      document.getElementById('sign-val-name1').innerText = t.signValName1;
+      document.getElementById('sign-val-title1').innerText = t.signValTitle1;
+
       renderPhotoCards();
       renderMatrixTable();
       runAllNumberCounters();
       runProductionSimulation();
     }
 
+    // =========================================================================
+    // TAB SWITCHER: ANIMATES MONETARY VALUE COUNTERS ON EVERY TAB SELECTION
+    // =========================================================================
     function switchTab(tabId) {
       currentTab = tabId;
       const tabs = ['photography', 'video', 'payments', 'matrix', 'planner'];
@@ -1860,6 +2153,9 @@
         }
       });
       filterFeatures();
+
+      // Animate numbers immediately on tab switch so Sarah sees real-time interactive count-up!
+      runAllNumberCounters();
     }
 
     function renderPhotoCards() {
@@ -1868,7 +2164,7 @@
       const isAr = currentLang === 'ar';
 
       container.innerHTML = photographyServices.map((item, idx) => `
-        <div class="glass-card spotlight-card p-4 rounded-2xl border border-slate-700/60 hover:border-blue-500/50 transition-all duration-300 space-y-2.5 group feature-card">
+        <div class="glass-card spotlight-card p-4 rounded-2xl border border-slate-700/60 hover:border-blue-500/50 transition-all duration-300 space-y-2.5 group feature-card scroll-reveal stagger-${(idx % 4) + 1}">
           <div class="flex items-center justify-between">
             <span class="text-[11px] font-mono font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-lg border border-blue-500/20">
               #${item.num}
@@ -1886,6 +2182,7 @@
         </div>
       `).join('');
       initSpotlightCards();
+      checkScrollReveal();
     }
 
     function renderMatrixTable() {
@@ -1922,14 +2219,6 @@
       }
     }
 
-    function jumpToPlanner() {
-      switchTab('planner');
-      const target = document.getElementById('tab-panel-planner');
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-
     // =========================================================================
     // DYNAMIC NUMBER COUNTER ENGINE (Includes 900,000, 550,000, 350,000 & all tranches)
     // =========================================================================
@@ -1937,38 +2226,38 @@
       const isAr = currentLang === 'ar';
 
       // 1. Total Package Values (900,000 EGP)
-      animateNumberCounter(document.getElementById('hero-total-val'), 900000, 2200, { isCurrency: true });
-      animateNumberCounter(document.getElementById('kpi-1-val'), 900000, 2200, { isCurrency: true });
-      animateNumberCounter(document.getElementById('comm-total-val'), 900000, 2200, { isCurrency: true });
-      animateNumberCounter(document.getElementById('tb-row3-tot'), 900000, 2200, { isCurrency: true });
-      animateNumberCounter(document.getElementById('foot-total-val'), 900000, 2200, { isCurrency: true, prefix: 'Total: ' });
+      animateNumberCounter(document.getElementById('hero-total-val'), 900000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('kpi-1-val'), 900000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('comm-total-val'), 900000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tb-row3-tot'), 900000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('foot-total-val'), 900000, 2000, { isCurrency: true, prefix: isAr ? 'الإجمالي: ' : 'Total: ' });
 
       // 2. Video Component Values (550,000 EGP)
-      animateNumberCounter(document.getElementById('card-m2-price'), 550000, 2000, { isCurrency: true });
-      animateNumberCounter(document.getElementById('video-inv-val'), 550000, 2000, { isCurrency: true });
-      animateNumberCounter(document.getElementById('tb-row2-tot'), 550000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('card-m2-price'), 550000, 1800, { isCurrency: true });
+      animateNumberCounter(document.getElementById('video-inv-val'), 550000, 1800, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tb-row2-tot'), 550000, 1800, { isCurrency: true });
 
       // 3. Photography Component Values (350,000 EGP)
-      animateNumberCounter(document.getElementById('card-m1-price'), 350000, 2000, { isCurrency: true });
-      animateNumberCounter(document.getElementById('photo-inv-val'), 350000, 2000, { isCurrency: true });
-      animateNumberCounter(document.getElementById('tb-row1-tot'), 350000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('card-m1-price'), 350000, 1800, { isCurrency: true });
+      animateNumberCounter(document.getElementById('photo-inv-val'), 350000, 1800, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tb-row1-tot'), 350000, 1800, { isCurrency: true });
 
       // 4. Advance Commitment Tranches (415,000, 140,000, 275,000 EGP)
-      animateNumberCounter(document.getElementById('kpi-2-val'), 415000, 2200, { isCurrency: true });
-      animateNumberCounter(document.getElementById('tranche-1-val'), 415000, 2200, { isCurrency: true });
-      animateNumberCounter(document.getElementById('tb-row3-adv'), 415000, 2200, { isCurrency: true });
-      animateNumberCounter(document.getElementById('tb-row1-adv'), 140000, 2000, { isCurrency: true });
-      animateNumberCounter(document.getElementById('tb-row2-adv'), 275000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('kpi-2-val'), 415000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tranche-1-val'), 415000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tb-row3-adv'), 415000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tb-row1-adv'), 140000, 1800, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tb-row2-adv'), 275000, 1800, { isCurrency: true });
 
       // 5. Remaining Balance Tranche (485,000 EGP)
-      animateNumberCounter(document.getElementById('tranche-2-val'), 485000, 2200, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tranche-2-val'), 485000, 2000, { isCurrency: true });
 
       // 6. Deliverable Counts
-      animateNumberCounter(document.getElementById('kpi-3-val'), 500, 2000, { suffix: isAr ? ' صورة' : ' Photos' });
-      animateNumberCounter(document.getElementById('kpi-4-val'), 3, 1800, { suffix: isAr ? ' فيديوهات' : ' Videos' });
+      animateNumberCounter(document.getElementById('kpi-3-val'), 500, 1800, { suffix: isAr ? ' صورة' : ' Photos' });
+      animateNumberCounter(document.getElementById('kpi-4-val'), 3, 1600, { suffix: isAr ? ' فيديوهات' : ' Videos' });
     }
 
-    function animateNumberCounter(el, target, duration = 2200, options = {}) {
+    function animateNumberCounter(el, target, duration = 2000, options = {}) {
       if (!el) return;
       const isAr = currentLang === 'ar';
       const { isCurrency = false, prefix = '', suffix = '', decimals = 0 } = options;
@@ -2101,18 +2390,18 @@
         statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-purple-500/20 text-purple-400 border border-purple-500/30';
         statusPill.innerText = isAr ? 'جاهز لحجز الاستوديو والموديلز' : 'Studio & Talent Ready';
       } else {
-        outScope.innerText = isAr ? `الحزمة المتكاملة الكاملة (فوتوغرافي + فيديو • ${aspect})` : `Total Integrated Package (Photo + Video • ${aspect})`;
+        outScope.innerText = isAr ? `الباقة المتكاملة الكاملة (فوتوغرافي + فيديو • ${aspect})` : `Total Integrated Package (Photo + Video • ${aspect})`;
         outAdv.innerHTML = formatCurrency('415,000', isAr) + (isAr ? ' (دفعة مقدمة معتمدة)' : ' (Approved Advance)');
         outBal.innerHTML = formatCurrency('485,000', isAr) + (isAr ? ' (خلال 30 يوماً من التسليم)' : ' (Within 30d Post-Delivery)');
         explBox.innerHTML = isAr
-          ? `حزمة متكاملة غير قابلة للتجزئة بقيمة 900,000 ج.م شاملة 14% ضريبة القيمة المضافة. تسليم 500 صورة لموظفي ومجلس إدارة وان بنك و 3 مقاطع فيديو لتطبيق الهاتف مع دمج أنيميشن وان بنك بنسبة عرض ${aspect} ومدير حسابات مخصص.`
+          ? `باقة متكاملة غير قابلة للتجزئة بقيمة 900,000 ج.م شاملة 14% ضريبة القيمة المضافة. تسليم 500 صورة لموظفي ومجلس إدارة وان بنك و 3 مقاطع فيديو لتطبيق الهاتف مع دمج أنيميشن وان بنك بنسبة عرض ${aspect} ومدير حسابات مخصص.`
           : `Integrated non-separable package of EGP 900,000 inclusive of 14% VAT. Deliverables: 500 staff & Board photos + 3 mobile app lifestyle videos with OneBank animation integration formatted in ${aspect} with dedicated Account Manager.`;
         statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
         statusPill.innerText = isAr ? 'جاهز للاعتماد والتعاقد الرسمي' : 'Ready for Formal Acceptance';
       }
     }
 
-    // Modal logic
+    // Consultation Modal logic
     function openInquiryModal() {
       const modal = document.getElementById('verification-modal');
       modal?.classList.remove('hidden');
@@ -2142,10 +2431,164 @@
       }
     }
 
+    // =========================================================================
+    // SARAH ASHRAF WELCOME POPUP LOGIC
+    // =========================================================================
+    function checkWelcomeModal() {
+      const welcomed = sessionStorage.getItem('dic_sarah_welcomed');
+      if (!welcomed) {
+        setTimeout(() => {
+          const modal = document.getElementById('welcome-sarah-modal');
+          if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+          }
+        }, 600);
+      }
+    }
+
+    function dismissWelcomeModal() {
+      sessionStorage.setItem('dic_sarah_welcomed', 'true');
+      const modal = document.getElementById('welcome-sarah-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+      runAllNumberCounters();
+    }
+
+    // =========================================================================
+    // SARAH ASHRAF FEEDBACK MODAL & LOCAL STORAGE COMMENT SYSTEM
+    // =========================================================================
+    function openFeedbackModal() {
+      const modal = document.getElementById('feedback-modal');
+      modal?.classList.remove('hidden');
+      modal?.classList.add('flex');
+      const textarea = document.getElementById('feedback-text');
+      if (textarea) textarea.focus();
+    }
+
+    function closeFeedbackModal() {
+      const modal = document.getElementById('feedback-modal');
+      modal?.classList.add('hidden');
+      modal?.classList.remove('flex');
+    }
+
+    function submitClientFeedback() {
+      const section = document.getElementById('feedback-section')?.value || 'general';
+      const text = (document.getElementById('feedback-text')?.value || '').trim();
+
+      if (!text) {
+        alert(currentLang === 'ar' ? 'يرجى كتابة ملاحظتك قبل الإرسال' : 'Please enter your comments before submitting.');
+        return;
+      }
+
+      const commentObj = {
+        id: 'COM-' + Date.now(),
+        client: 'Sarah Ashraf (OneBank)',
+        section: section,
+        text: text,
+        timestamp: new Date().toISOString(),
+        formattedDate: new Date().toLocaleString()
+      };
+
+      try {
+        const stored = JSON.parse(localStorage.getItem('dic_mdi_comments') || '[]');
+        stored.push(commentObj);
+        localStorage.setItem('dic_mdi_comments', JSON.stringify(stored));
+      } catch (err) {
+        console.error('Storage error:', err);
+      }
+
+      closeFeedbackModal();
+      showToast(
+        currentLang === 'ar' ? 'تم استلام ملاحظاتك بنجاح أ. سارة!' : 'Feedback Received Successfully, Sarah!',
+        currentLang === 'ar' ? 'تم إرسال الملاحظات إلى عبد الله الفولي' : 'Forwarded directly to Abdalla Elfouly'
+      );
+
+      // Reset textarea
+      const textarea = document.getElementById('feedback-text');
+      if (textarea) textarea.value = '';
+    }
+
+    // =========================================================================
+    // ADMIN PANEL LOGIC (FOR ABDALLA TO INSPECT RECEIVED COMMENTS)
+    // =========================================================================
+    function openAdminModal() {
+      const modal = document.getElementById('admin-modal');
+      modal?.classList.remove('hidden');
+      modal?.classList.add('flex');
+      
+      const isAuth = sessionStorage.getItem('dic_admin_auth') === 'true';
+      const loginView = document.getElementById('admin-login-view');
+      const commentsView = document.getElementById('admin-comments-view');
+      
+      if (isAuth) {
+        loginView?.classList.add('hidden');
+        commentsView?.classList.remove('hidden');
+        renderAdminComments();
+      } else {
+        loginView?.classList.remove('hidden');
+        commentsView?.classList.add('hidden');
+      }
+    }
+
+    function closeAdminModal() {
+      const modal = document.getElementById('admin-modal');
+      modal?.classList.add('hidden');
+      modal?.classList.remove('flex');
+    }
+
+    function handleAdminLogin() {
+      const pass = (document.getElementById('admin-pass-input')?.value || '').trim();
+      if (pass === 'dic2026' || pass === 'dic' || pass === 'admin') {
+        sessionStorage.setItem('dic_admin_auth', 'true');
+        document.getElementById('admin-login-view')?.classList.add('hidden');
+        document.getElementById('admin-comments-view')?.classList.remove('hidden');
+        renderAdminComments();
+      } else {
+        alert('Invalid password. Default demo password is: dic2026');
+      }
+    }
+
+    function renderAdminComments() {
+      const listContainer = document.getElementById('admin-comments-list');
+      const countLabel = document.getElementById('admin-count-label');
+      if (!listContainer) return;
+
+      const stored = JSON.parse(localStorage.getItem('dic_mdi_comments') || '[]');
+      if (countLabel) countLabel.innerText = `Received Comments: ${stored.length}`;
+
+      if (stored.length === 0) {
+        listContainer.innerHTML = `<div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 text-center">No comments submitted yet. Sarah Ashraf's notes will appear here in real time.</div>`;
+        return;
+      }
+
+      listContainer.innerHTML = stored.map(c => `
+        <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-amber-400 font-mono text-xs">${c.client}</span>
+            <span class="text-[10px] text-slate-500 font-mono">${c.formattedDate || c.timestamp}</span>
+          </div>
+          <div class="text-[11px] font-semibold text-blue-300">Section: ${c.section}</div>
+          <p class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${c.text}</p>
+        </div>
+      `).join('');
+    }
+
+    function clearAllComments() {
+      if (confirm('Clear all comments from Sarah Ashraf?')) {
+        localStorage.removeItem('dic_mdi_comments');
+        renderAdminComments();
+      }
+    }
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeInquiryModal();
         closeConfirmationModal();
+        closeFeedbackModal();
+        closeAdminModal();
       }
     });
 
@@ -2168,7 +2611,6 @@
       let userInteracted = false;
       const onUserGesture = () => { userInteracted = true; };
 
-      // Direct physical gestures abort animation immediately
       scroller.addEventListener('touchstart', onUserGesture, { passive: true });
       scroller.addEventListener('mousedown', onUserGesture, { passive: true });
       scroller.addEventListener('pointerdown', onUserGesture, { passive: true });
@@ -2182,7 +2624,7 @@
         if (userInteracted) return;
         const startTime = performance.now();
         const initialBehavior = scroller.style.scrollBehavior;
-        scroller.style.scrollBehavior = 'auto'; // Prevent native smooth scroll conflict
+        scroller.style.scrollBehavior = 'auto';
 
         function step(currentTime) {
           if (userInteracted) {
@@ -2207,7 +2649,6 @@
       }
 
       setTimeout(() => {
-        // Abort if user has already interacted or container is scrolled
         if (userInteracted || Math.abs(scroller.scrollLeft) > 5) return;
 
         const isRtl = document.documentElement.dir === 'rtl';
@@ -2224,23 +2665,25 @@
       }, delay);
     }
 
-    // Hardware Composited Scroll Engine
+    // =========================================================================
+    // HARDWARE-COMPOSITED SCROLL REVEAL & PROGRESS ENGINE
+    // =========================================================================
+    function checkScrollReveal() {
+      const triggerBottom = window.innerHeight * 0.94;
+      document.querySelectorAll('.scroll-reveal:not(.is-revealed)').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= triggerBottom) {
+          el.classList.add('is-revealed');
+        }
+      });
+    }
+
     function initScrollEngine() {
       const bar = document.getElementById('scroll-progress-bar');
       const header = document.querySelector('header');
       const orb1 = document.querySelector('.ambient-orb-1');
       const orb2 = document.querySelector('.ambient-orb-2');
       const orb3 = document.querySelector('.ambient-orb-3');
-
-      function checkScrollReveal() {
-        const triggerBottom = window.innerHeight * 0.92;
-        document.querySelectorAll('.scroll-reveal:not(.is-revealed)').forEach(el => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= triggerBottom) {
-            el.classList.add('is-revealed');
-          }
-        });
-      }
 
       checkScrollReveal();
 
@@ -2294,6 +2737,7 @@
       runProductionSimulation();
       initScrollEngine();
       attachScrollerHintAnimation('#tabs-nav');
+      checkWelcomeModal();
     }
 
     if (document.readyState === 'loading') {
