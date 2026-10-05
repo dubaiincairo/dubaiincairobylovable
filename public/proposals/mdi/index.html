@@ -617,10 +617,10 @@
 
         <!-- Language Toggle -->
         <div class="bg-slate-800/90 p-0.5 sm:p-1 rounded-xl border border-slate-700/80 flex items-center shrink-0">
-          <button id="lang-en" onclick="setLanguage('en')" class="px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[10px] sm:text-xs font-bold transition bg-blue-600 text-white shadow-sm touch-manipulation whitespace-nowrap">
+          <button id="lang-en" onclick="setLanguage('en', true)" class="px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[10px] sm:text-xs font-bold transition bg-blue-600 text-white shadow-sm touch-manipulation whitespace-nowrap">
             En
           </button>
-          <button id="lang-ar" onclick="setLanguage('ar')" class="px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[10px] sm:text-xs font-bold transition text-slate-400 hover:text-white touch-manipulation whitespace-nowrap">
+          <button id="lang-ar" onclick="setLanguage('ar', true)" class="px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-[10px] sm:text-xs font-bold transition text-slate-400 hover:text-white touch-manipulation whitespace-nowrap">
             عربي
           </button>
         </div>
@@ -1524,9 +1524,9 @@
         </div>
       </div>
       <div class="flex items-center gap-3 sm:gap-4">
-        <button onclick="setLanguage('en')" class="hover:text-blue-400 transition font-medium">English</button>
+        <button onclick="setLanguage('en', true)" class="hover:text-blue-400 transition font-medium">English</button>
         <span>/</span>
-        <button onclick="setLanguage('ar')" class="hover:text-blue-400 transition font-medium">العربية</button>
+        <button onclick="setLanguage('ar', true)" class="hover:text-blue-400 transition font-medium">العربية</button>
         <span class="text-slate-700">|</span>
         <button onclick="openAdminModal()" class="px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/25 text-amber-400 border border-amber-500/40 transition flex items-center gap-1.5 text-xs font-bold active:scale-95 touch-manipulation" title="Admin Review Dashboard (Client Feedback)">
           <span>🔐</span>
@@ -1539,10 +1539,6 @@
 
   </main>
 
-  <!-- =========================================================================
-       FLOATING INTERACTIVE FEEDBACK TRIGGER FOR SARAH ASHRAF
-       Eye-catching, pulsing luxury badge anchored in the corner
-       ========================================================================= -->
   <!-- =========================================================================
        FLOATING INTERACTIVE FEEDBACK TRIGGER FOR SARAH ASHRAF
        Eye-catching, pulsing luxury badge anchored in the corner
@@ -2582,7 +2578,7 @@
       }
     };
 
-    function setLanguage(lang) {
+    function setLanguage(lang, userTriggered = false) {
       currentLang = lang;
       const isAr = lang === 'ar';
       document.documentElement.lang = lang;
@@ -2900,7 +2896,9 @@
       document.querySelectorAll('a[href*="proposal_document"]').forEach(a => {
         a.href = `proposal_document.html?lang=${lang}`;
       });
-      localStorage.setItem('dic_lang', lang);
+      if (userTriggered) {
+        localStorage.setItem('dic_user_selected_lang', lang);
+      }
 
       renderPhotoCards();
       renderMatrixTable();
@@ -3783,10 +3781,16 @@
     }
 
     function initApp() {
+      // Clear legacy forced Arabic preference to allow English default
+      localStorage.removeItem('dic_lang');
       const urlParams = new URLSearchParams(window.location.search);
       const urlLang = urlParams.get('lang');
-      const savedLang = localStorage.getItem('dic_lang');
-      const initialLang = (urlLang === 'ar' || urlLang === 'en') ? urlLang : (savedLang || 'ar');
+      const userSelectedLang = localStorage.getItem('dic_user_selected_lang');
+      
+      // Default website language is strictly English ('en') unless explicitly chosen
+      const initialLang = (urlLang === 'ar' || urlLang === 'en')
+        ? urlLang
+        : (userSelectedLang === 'ar' || userSelectedLang === 'en' ? userSelectedLang : 'en');
       setLanguage(initialLang);
 
       initSpotlightCards();

@@ -135,8 +135,8 @@
       <div class="flex items-center gap-2">
         <!-- Language Switcher -->
         <div class="flex items-center rounded-xl bg-slate-800 p-0.5 border border-slate-700 text-xs">
-          <button onclick="setDocLanguage('en')" id="doc-lang-en" class="px-2.5 py-1 rounded-lg font-bold bg-blue-600 text-white">English</button>
-          <button onclick="setDocLanguage('ar')" id="doc-lang-ar" class="px-2.5 py-1 rounded-lg font-bold text-slate-400 hover:text-white">العربية</button>
+          <button onclick="setDocLanguage('en', true)" id="doc-lang-en" class="px-2.5 py-1 rounded-lg font-bold bg-blue-600 text-white">English</button>
+          <button onclick="setDocLanguage('ar', true)" id="doc-lang-ar" class="px-2.5 py-1 rounded-lg font-bold text-slate-400 hover:text-white">العربية</button>
         </div>
 
         <!-- Print / Save as PDF Button -->
@@ -877,7 +877,7 @@
       }
     };
 
-    function setDocLanguage(lang) {
+    function setDocLanguage(lang, userTriggered = false) {
       const t = docI18n[lang];
       document.documentElement.lang = lang;
       document.documentElement.dir = t.dir;
@@ -1031,7 +1031,9 @@
       document.title = (lang === 'ar')
         ? 'وثيقة عرض السعر التجاري الرسمي — وان بنك (MDI) × شركة دبي في القاهرة'
         : 'Commercial Quotation Document — OneBank (MDI) × Dubai in Cairo LLC';
-      localStorage.setItem('dic_lang', lang);
+      if (userTriggered) {
+        localStorage.setItem('dic_user_selected_lang', lang);
+      }
     }
 
     function purgePrintArtifacts() {
@@ -1081,10 +1083,15 @@
     window.addEventListener('afterprint', restorePrintArtifacts);
 
     function initDoc() {
+      // Clear legacy forced Arabic preference to allow English default
+      localStorage.removeItem('dic_lang');
       const urlParams = new URLSearchParams(window.location.search);
       const urlLang = urlParams.get('lang');
-      const savedLang = localStorage.getItem('dic_lang');
-      const initialLang = (urlLang === 'ar' || urlLang === 'en') ? urlLang : (savedLang || 'ar');
+      const userSelectedLang = localStorage.getItem('dic_user_selected_lang');
+      // Default document language is strictly English ('en') unless explicitly chosen
+      const initialLang = (urlLang === 'ar' || urlLang === 'en')
+        ? urlLang
+        : (userSelectedLang === 'ar' || userSelectedLang === 'en' ? userSelectedLang : 'en');
       setDocLanguage(initialLang);
     }
 
