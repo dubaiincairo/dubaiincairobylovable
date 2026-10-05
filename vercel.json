@@ -272,16 +272,28 @@
       "destination": "https://swissblue23may-git-codex-marketin-b957d5-dubaiincairos-projects.vercel.app/_next/:path*"
     },
     {
+      "source": "/proposals/mdi/QT7",
+      "destination": "/proposals/mdi/QT7/index.html"
+    },
+    {
+      "source": "/proposals/mdi/QT7/",
+      "destination": "/proposals/mdi/QT7/index.html"
+    },
+    {
+      "source": "/proposals/mdi/QT7/:path*",
+      "destination": "/proposals/mdi/QT7/:path*"
+    },
+    {
       "source": "/proposals/mdi",
-      "destination": "/proposals/mdi/index.html"
+      "destination": "/proposals/mdi/QT7/index.html"
     },
     {
       "source": "/proposals/mdi/",
-      "destination": "/proposals/mdi/index.html"
+      "destination": "/proposals/mdi/QT7/index.html"
     },
     {
       "source": "/proposals/mdi/:path*",
-      "destination": "/proposals/mdi/:path*"
+      "destination": "/proposals/mdi/QT7/:path*"
     },
     {
       "source": "/proposals/yerkab",

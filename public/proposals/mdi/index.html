@@ -3,13 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OneBank / MDI — Integrated Photography &amp; Video Production Package | Dubai in Cairo</title>
+  <title>OneBank / Misr Digital Innovation — Integrated Photography &amp; Video Production Package | Dubai in Cairo</title>
   <!-- Canonical & Domain Metadata -->
-  <link rel="canonical" href="https://dubaiincairo.com/proposals/mdi">
-  <meta property="og:title" content="OneBank / MDI — Integrated Photography &amp; Video Production Package">
-  <meta property="og:description" content="Official Commercial Quotation and Production Roadmap prepared for OneBank / Misr Digital Innovations (MDI) by Dubai in Cairo. Total: EGP 900,000 inclusive of VAT.">
-  <meta property="og:url" content="https://dubaiincairo.com/proposals/mdi">
+  <link rel="canonical" href="https://dubaiincairo.com/proposals/mdi/QT7">
+  <meta property="og:title" content="OneBank / Misr Digital Innovation — Integrated Photography &amp; Video Production Package">
+  <meta property="og:description" content="Official Commercial Quotation and Production Roadmap prepared for OneBank / Misr Digital Innovation (MDI) by Dubai in Cairo LLC. Total: EGP 900,000 inclusive of VAT.">
+  <meta property="og:url" content="https://dubaiincairo.com/proposals/mdi/QT7">
   <meta property="og:type" content="website">
+  <!-- Favicon & Official Dubai in Cairo Brand Icon (Gold D Lettermark) -->
+  <link rel="icon" type="image/svg+xml" href="https://dubaiincairo.com/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="https://dubaiincairo.com/favicon.ico">
+  <link rel="apple-touch-icon" href="https://dubaiincairo.com/favicon.svg">
+  <meta property="og:image" content="https://dubaiincairo.com/og-image.jpg">
+  <meta name="twitter:image" content="https://dubaiincairo.com/og-image.jpg">
   <!-- Tailwind CSS -->
   <script src="https://gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
@@ -94,12 +100,6 @@
       transform: translateZ(0);
       -webkit-backface-visibility: hidden;
     }
-    .badge-glow {
-      box-shadow: 0 0 15px rgba(59, 130, 246, 0.25);
-    }
-    .gold-glow {
-      box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
-    }
 
     /* 60fps Native-Feel Animations */
     @keyframes tabEnter {
@@ -117,33 +117,10 @@
       will-change: opacity, transform;
     }
 
-    @keyframes cardFadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .card-animated {
-      animation: cardFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
-      will-change: transform, opacity;
-    }
-
     @keyframes popIn {
-      0% {
-        transform: scale(0.92);
-        opacity: 0.7;
-      }
-      50% {
-        transform: scale(1.03);
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+      0% { transform: scale(0.92); opacity: 0.7; }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); opacity: 1; }
     }
     .animate-pop {
       animation: popIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -155,14 +132,8 @@
       to { opacity: 1; }
     }
     @keyframes modalDialog {
-      0% {
-        opacity: 0;
-        transform: scale(0.94) translateY(14px);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
+      0% { opacity: 0; transform: scale(0.94) translateY(14px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
     .modal-backdrop-anim {
       animation: modalBackdrop 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -274,21 +245,6 @@
       will-change: transform;
     }
 
-    /* Section Dynamic Breathing Aura */
-    @keyframes strategicAura {
-      0%, 100% {
-        border-color: rgba(59, 130, 246, 0.25);
-        box-shadow: 0 0 40px -10px rgba(59, 130, 246, 0.12);
-      }
-      50% {
-        border-color: rgba(16, 185, 129, 0.35);
-        box-shadow: 0 0 50px -10px rgba(16, 185, 129, 0.15);
-      }
-    }
-    #strategic-thesis-section {
-      animation: strategicAura 6s ease-in-out infinite;
-    }
-
     /* Header Transition on Scroll */
     header {
       transition: background-color 0.35s ease,
@@ -344,12 +300,16 @@
       }
     }
 
-    /* Executive Print Styles (A4 Portrait Presentation) */
+    /* ==========================================================================
+       PUBLICATION-GRADE EXECUTIVE PRINT STYLES (PURE LIGHT CONTRAST ONLY)
+       Eliminates all dark backgrounds, dark gradients, and visual artifacts.
+       ========================================================================== */
     @media print {
       @page {
         margin: 12mm 10mm 12mm 10mm;
         size: A4 portrait;
       }
+      
       *, *::before, *::after {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
@@ -359,25 +319,25 @@
         transition: none !important;
         opacity: 1 !important;
         transform: none !important;
+        background-image: none !important;
       }
+
       body {
         background: #ffffff !important;
+        background-color: #ffffff !important;
         color: #0f172a !important;
-        font-size: 10pt !important;
-        line-height: 1.4 !important;
+        font-size: 9.5pt !important;
+        line-height: 1.45 !important;
         padding-bottom: 0 !important;
       }
-      .scroll-reveal,
-      .scroll-reveal.is-revealed,
-      [class*="stagger-"],
-      header.header-scrolled {
-        opacity: 1 !important;
-        transform: none !important;
-        filter: none !important;
-        transition: none !important;
-        animation: none !important;
-        box-shadow: none !important;
+
+      main {
+        padding-top: 0 !important;
+        max-width: 100% !important;
+        background: #ffffff !important;
       }
+
+      /* Hide interactive Web UI controls */
       header,
       #scroll-progress-bar,
       #tabs-nav,
@@ -393,82 +353,121 @@
       #toast-notification {
         display: none !important;
       }
+
+      /* Show formal letterhead */
       #print-doc-header {
         display: block !important;
+        border-bottom: 2px solid #0f172a !important;
+        padding-bottom: 12px !important;
+        margin-bottom: 16px !important;
       }
-      main {
-        padding-top: 0 !important;
-        max-width: 100% !important;
+
+      /* Strict elimination of dark backgrounds across all containers & cards */
+      section, div, article, table, tr, td, th {
+        background-image: none !important;
       }
-      section {
-        background: transparent !important;
-        border: none !important;
-        padding: 0 !important;
-        margin-bottom: 1.5rem !important;
-        break-inside: auto !important;
-        page-break-inside: auto !important;
-      }
+
+      /* Base card and section light reset */
       #hero-section,
       #commercial-structure-section,
       #strategic-thesis-section,
-      #acceptance-signature-section {
+      #acceptance-signature-section,
+      #governance-section,
+      .glass-card,
+      .spotlight-card,
+      [class*="bg-slate-"],
+      [class*="bg-blue-950"],
+      [class*="bg-purple-950"],
+      [class*="bg-emerald-950"],
+      [class*="bg-amber-950"],
+      [class*="bg-[#"] {
         background: #ffffff !important;
+        background-color: #ffffff !important;
         border: 1px solid #cbd5e1 !important;
-        border-radius: 14px !important;
-        padding: 1.25rem !important;
+        border-radius: 10px !important;
+        color: #0f172a !important;
+        box-shadow: none !important;
         break-inside: avoid !important;
         page-break-inside: avoid !important;
       }
-      h1, h2, h3, h4, h5, h6 {
+
+      /* Subtle shaded sub-boxes for clear hierarchy */
+      .p-4.rounded-2xl,
+      .p-3.rounded-xl,
+      .p-3\.5.rounded-xl,
+      .p-5.rounded-2xl,
+      .p-6.rounded-2xl {
+        background: #f8fafc !important;
+        background-color: #f8fafc !important;
+        border-color: #cbd5e1 !important;
+      }
+
+      /* Text readability overrides */
+      h1, h2, h3, h4, h5, h6, .text-white, .font-bold, .font-extrabold, .font-black {
         color: #0f172a !important;
         break-after: avoid !important;
       }
-      p, span, div, li, td, th {
+
+      p, span, div, li, td, th,
+      .text-slate-100, .text-slate-200, .text-slate-300 {
         color: #334155 !important;
       }
-      .spotlight-card, .glass-card {
-        background: #f8fafc !important;
-        border: 1px solid #cbd5e1 !important;
-        border-radius: 12px !important;
-        box-shadow: none !important;
-        transform: none !important;
-        break-inside: avoid !important;
-        page-break-inside: avoid !important;
+
+      .text-slate-400, .text-slate-500 {
+        color: #64748b !important;
       }
-      .text-white { color: #0f172a !important; }
-      .text-slate-100, .text-slate-200, .text-slate-300 { color: #1e293b !important; }
-      .text-slate-400 { color: #475569 !important; }
-      .text-amber-400 { color: #b45309 !important; font-weight: 800 !important; }
+
+      /* High-contrast metrics & accents */
+      .text-amber-400, .text-amber-300 { color: #b45309 !important; font-weight: 800 !important; }
       .text-blue-400, .text-blue-300 { color: #1d4ed8 !important; font-weight: 800 !important; }
       .text-emerald-400, .text-emerald-300 { color: #047857 !important; font-weight: 800 !important; }
-      .text-purple-400, .text-purple-300 { color: #6d28d9 !important; font-weight: 800 !important; }
+      .text-purple-400, .text-purple-300 { color: #7e22ce !important; font-weight: 800 !important; }
       .text-cyan-400, .text-cyan-300 { color: #0e7490 !important; font-weight: 800 !important; }
-      .text-rose-400, .text-rose-300 { color: #be123c !important; font-weight: 800 !important; }
 
-      .bg-slate-900, .bg-slate-900\/60, .bg-slate-900\/80, .bg-slate-800, .bg-slate-800\/60, .bg-slate-800\/90 {
+      /* Table styling */
+      table {
+        border: 1px solid #cbd5e1 !important;
+        width: 100% !important;
+        background: #ffffff !important;
+      }
+      th {
         background: #f1f5f9 !important;
-        border-color: #cbd5e1 !important;
+        color: #0f172a !important;
+        border-bottom: 2px solid #94a3b8 !important;
+        padding: 6px 10px !important;
       }
-      .bg-blue-950\/40, .bg-blue-950\/20, .bg-blue-500\/10, .bg-blue-500\/20 {
-        background: #eff6ff !important;
-        border-color: #bfdbfe !important;
+      td {
+        border-bottom: 1px solid #e2e8f0 !important;
+        color: #334155 !important;
+        padding: 5px 10px !important;
       }
-      .bg-emerald-500\/10, .bg-emerald-500\/20 {
-        background: #ecfdf5 !important;
-        border-color: #a7f3d0 !important;
+
+      /* Clean multi-column grids in print */
+      .grid.grid-cols-2.sm\:grid-cols-4 {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 8px !important;
       }
-      .bg-purple-500\/10, .bg-purple-500\/20 {
-        background: #faf5ff !important;
-        border-color: #e9d5ff !important;
+      .grid.grid-cols-1.md\:grid-cols-2 {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
       }
-      .bg-amber-500\/10, .bg-amber-500\/20 {
-        background: #fffbeb !important;
-        border-color: #fde68a !important;
+      .grid.grid-cols-1.md\:grid-cols-3 {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 10px !important;
       }
+
+      /* Ensure only relevant tabs print without bloat */
       .tab-content {
         display: block !important;
         break-inside: auto !important;
       }
+      #tab-panel-planner {
+        display: none !important;
+      }
+
       footer {
         break-inside: avoid !important;
         page-break-inside: avoid !important;
@@ -481,7 +480,7 @@
 </head>
 <body class="bg-[#0b0f19] text-[#f8fafc] font-sans antialiased min-h-screen selection:bg-blue-600 selection:text-white pb-20 relative">
 
-  <!-- Ambient Floating Interactive Glow Orbs -->
+  <!-- Ambient Floating Glow Orbs -->
   <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
     <div class="ambient-orb-1 absolute top-20 -left-40 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
     <div class="ambient-orb-2 absolute top-1/3 -right-40 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px]"></div>
@@ -493,26 +492,24 @@
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3 sm:gap-4">
       <!-- Logo & Project Identity -->
       <div class="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
-        <!-- Dubai in Cairo / OneBank Emblem -->
-        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-700 flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/25 border border-cyan-400/40 relative group shrink-0">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6 transform group-hover:scale-110 transition duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-          </svg>
-          <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 border-2 border-slate-900 rounded-full" title="Verified Quotation"></span>
-        </div>
+        <!-- Official Dubai in Cairo Gold Lettermark Emblem -->
+        <a href="https://www.dubaiincairo.com" target="_blank" class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-[#0a0f1e] flex items-center justify-center text-amber-400 font-serif font-black shadow-lg shadow-amber-500/15 border border-amber-500/30 relative group shrink-0" title="Dubai in Cairo">
+          <span class="text-lg sm:text-2xl font-bold tracking-tight text-[#e8a020]">D</span>
+          <span class="absolute bottom-1.5 right-1.5 sm:bottom-2 sm:right-2 w-1.5 h-1.5 bg-[#e8a020] rounded-full opacity-80"></span>
+        </a>
         <div>
           <div class="flex items-center gap-2">
-            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white flex items-center gap-1.5" id="brand-title">
+            <span class="font-extrabold text-base sm:text-xl tracking-tight text-white flex items-center gap-1.5" id="brand-title">
               <span>DUBAI IN CAIRO</span>
               <span class="text-cyan-400">×</span>
               <span class="text-blue-300">ONEBANK</span>
             </span>
             <span class="hidden sm:inline-flex text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30" id="brand-tag">
-              Misr Digital Innovations (MDI)
+              Misr Digital Innovation (MDI)
             </span>
           </div>
           <p class="text-[11px] sm:text-xs text-slate-400 hidden sm:block" id="brand-sub">
-            Integrated Photography &amp; Video Production Package • Commercial Quotation
+            Integrated Photography &amp; Video Production Package • Commercial Quotation (QT7)
           </p>
         </div>
       </div>
@@ -558,26 +555,26 @@
   </header>
 
   <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-10 relative z-10">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 space-y-8 sm:space-y-10 relative z-10">
 
     <!-- Dedicated Executive Letterhead for Printed PDF -->
     <div id="print-doc-header" class="hidden pb-4 mb-6 border-b-2 border-slate-900">
       <div class="flex items-center justify-between">
         <div>
           <div class="text-xl font-black text-slate-900 flex items-center gap-2">
-            <span>DUBAI IN CAIRO × ONEBANK</span>
-            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-blue-100 text-blue-800">Quotation Ref: DIC-MDI-2026-001</span>
+            <span>DUBAI IN CAIRO LLC × ONEBANK (وان بنك)</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-blue-100 text-blue-800">Quotation Ref: DIC-MDI-2026-QT7</span>
           </div>
-          <p class="text-xs text-slate-600 mt-1" id="print-doc-sub">Prepared for: OneBank / Misr Digital Innovations (MDI) • Date: 5 October 2026</p>
+          <p class="text-xs text-slate-600 mt-1" id="print-doc-sub">Prepared for: OneBank / Misr Digital Innovation (MDI) • Date: 5 October 2026</p>
         </div>
         <div class="text-right text-xs text-slate-500 font-mono">
-          www.dubaiincairo.com
+          www.dubaiincairo.com/proposals/mdi/QT7
         </div>
       </div>
     </div>
 
     <!-- HERO / EXECUTIVE BANNER -->
-    <section id="hero-section" class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-6 sm:p-10 shadow-2xl">
+    <section id="hero-section" class="relative rounded-3xl overflow-hidden border border-blue-500/20 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-[#0d1424] p-5 sm:p-10 shadow-2xl">
       <div class="absolute -right-20 -top-20 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -589,9 +586,9 @@
             <span id="hero-pill">OFFICIAL COMMERCIAL QUOTATION • PRODUCTION ROADMAP</span>
           </div>
 
-          <a href="https://www.dubaiincairo.com" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 hover:text-cyan-300 transition group">
+          <a href="https://dubaiincairo.com/proposals/mdi/QT7" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 hover:text-cyan-300 transition group">
             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span class="font-mono text-cyan-400">www.dubaiincairo.com</span>
+            <span class="font-mono text-cyan-400">dubaiincairo.com/proposals/mdi/QT7</span>
             <span class="text-slate-400 group-hover:text-cyan-400">↗</span>
           </a>
         </div>
@@ -600,20 +597,20 @@
         <div class="space-y-3 max-w-4xl">
           <div class="flex flex-wrap items-center gap-2 sm:gap-3">
             <span class="text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded-lg bg-blue-600 text-white shadow-sm" id="hero-brand-badge">PREPARED FOR: ONEBANK</span>
-            <span class="text-xs text-slate-400 font-mono" id="hero-ref">REF: DIC-MDI-2026-001</span>
+            <span class="text-xs text-slate-400 font-mono" id="hero-ref">REF: DIC-MDI-2026-QT7</span>
             <span class="text-xs text-slate-500">•</span>
             <span class="text-xs text-slate-400" id="hero-date">5 October 2026</span>
           </div>
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight" id="hero-title">
+          <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight" id="hero-title">
             Integrated Photography &amp; Video Production Package
           </h1>
-          <p class="text-lg sm:text-xl text-blue-300 font-medium" id="hero-subtitle">
+          <p class="text-base sm:text-xl text-blue-300 font-medium" id="hero-subtitle">
             Creative Development, Multi-Location Shooting &amp; Production Execution
           </p>
-          <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-xs sm:text-sm text-slate-300 leading-relaxed space-y-2 mt-2">
+          <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-slate-800 text-xs sm:text-sm text-slate-300 leading-relaxed space-y-2 mt-2">
             <p class="font-semibold text-white" id="hero-greeting">Dear OneBank Team,</p>
             <p id="hero-exec-overview">
-              Dubai in Cairo is pleased to submit this quotation for an integrated photography and video production package, covering creative development, production planning, shooting, and post-production in accordance with OneBank’s approved brand guidelines.
+              Dubai in Cairo LLC is pleased to submit this quotation for an integrated photography and video production package, covering creative development, production planning, shooting, and post-production in accordance with OneBank’s approved brand guidelines.
             </p>
           </div>
         </div>
@@ -629,7 +626,7 @@
             <div>
               <div class="text-sm font-bold text-white uppercase tracking-wider" id="hero-reassurance-title">Unified Integrated Package Structure</div>
               <p class="text-xs sm:text-sm text-slate-300 mt-0.5" id="hero-reassurance-desc">
-                The photography and video services are complementary components of one integrated, non-separable quotation. All amounts include 14% VAT; no additional VAT will be added.
+                The photography and video services are complementary components of one integrated, non-separable quotation. All amounts include 14% VAT; no additional VAT will be added. Includes dedicated on-site Account Manager across all production shoot days.
               </p>
             </div>
           </div>
@@ -640,30 +637,30 @@
         </div>
 
         <!-- KPI Summary Cards with Interactive Spotlight & Two-Phase Count-Up -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2" id="kpi-summary-container">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-2" id="kpi-summary-container">
           <!-- KPI 1 -->
-          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition-all duration-300 cursor-pointer group scroll-reveal stagger-1">
-            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-1-label">Total Integrated Package</div>
-            <div class="text-2xl font-black text-amber-400 mt-1 flex items-center" id="kpi-1-val">EGP 900,000</div>
-            <div class="text-xs text-slate-400 mt-0.5" id="kpi-1-sub">Inclusive of 14% VAT</div>
+          <div class="spotlight-card p-3.5 sm:p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition-all duration-300 cursor-pointer group scroll-reveal stagger-1">
+            <div class="text-[11px] sm:text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-1-label">Total Integrated Package</div>
+            <div class="text-xl sm:text-2xl font-black text-amber-400 mt-1 flex items-center" id="kpi-1-val">EGP 900,000</div>
+            <div class="text-[10px] sm:text-xs text-slate-400 mt-0.5" id="kpi-1-sub">Inclusive of 14% VAT</div>
           </div>
           <!-- KPI 2 -->
-          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-blue-500/50 transition-all duration-300 cursor-pointer group scroll-reveal stagger-2">
-            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-2-label">Advance Commitment</div>
-            <div class="text-2xl font-black text-blue-400 mt-1" id="kpi-2-val">EGP 415,000</div>
-            <div class="text-xs text-slate-400 mt-0.5" id="kpi-2-sub">40% Photo + 50% Video</div>
+          <div class="spotlight-card p-3.5 sm:p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-blue-500/50 transition-all duration-300 cursor-pointer group scroll-reveal stagger-2">
+            <div class="text-[11px] sm:text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-2-label">Advance Commitment</div>
+            <div class="text-xl sm:text-2xl font-black text-blue-400 mt-1" id="kpi-2-val">EGP 415,000</div>
+            <div class="text-[10px] sm:text-xs text-slate-400 mt-0.5" id="kpi-2-sub">40% Photo + 50% Video</div>
           </div>
           <!-- KPI 3 -->
-          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer group scroll-reveal stagger-3">
-            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-3-label">Photography Scope</div>
-            <div class="text-2xl font-black text-emerald-400 mt-1" id="kpi-3-val">500 Photos</div>
-            <div class="text-xs text-slate-400 mt-0.5" id="kpi-3-sub">3 Days • 2 Locations</div>
+          <div class="spotlight-card p-3.5 sm:p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer group scroll-reveal stagger-3">
+            <div class="text-[11px] sm:text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-3-label">Staff &amp; Board Photos</div>
+            <div class="text-xl sm:text-2xl font-black text-emerald-400 mt-1" id="kpi-3-val">500 Photos</div>
+            <div class="text-[10px] sm:text-xs text-slate-400 mt-0.5" id="kpi-3-sub">3 Days • Maadi &amp; Mivida</div>
           </div>
           <!-- KPI 4 -->
-          <div class="spotlight-card p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-purple-500/50 transition-all duration-300 cursor-pointer group scroll-reveal stagger-4">
-            <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-4-label">Video Scope</div>
-            <div class="text-2xl font-black text-purple-400 mt-1" id="kpi-4-val">3 Videos</div>
-            <div class="text-xs text-slate-400 mt-0.5" id="kpi-4-sub">60s Each • Full HD / 4K</div>
+          <div class="spotlight-card p-3.5 sm:p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-purple-500/50 transition-all duration-300 cursor-pointer group scroll-reveal stagger-4">
+            <div class="text-[11px] sm:text-xs text-slate-400 uppercase tracking-wider font-semibold" id="kpi-4-label">App Lifestyle Videos</div>
+            <div class="text-xl sm:text-2xl font-black text-purple-400 mt-1" id="kpi-4-val">3 Videos</div>
+            <div class="text-[10px] sm:text-xs text-slate-400 mt-0.5" id="kpi-4-sub">60s Each • Mobile Banking</div>
           </div>
         </div>
       </div>
@@ -684,9 +681,9 @@
       </div>
 
       <!-- 2 Major Component Cards (Interactive Shortcuts) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
         <!-- Component 1: Photography Production -->
-        <div onclick="switchTab('photography'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-blue-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-blue-500/10 scroll-reveal stagger-1">
+        <div onclick="switchTab('photography'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-5 sm:p-6 relative overflow-hidden border-t-4 border-t-blue-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-blue-500/10 scroll-reveal stagger-1">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30" id="card-m1-tag">Component 1 • Photography</span>
             <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center transition-transform group-hover:scale-110">
@@ -697,12 +694,12 @@
             </div>
           </div>
           <h3 class="text-xl font-bold text-white mt-4 group-hover:text-blue-300 transition-colors" id="card-m1-title">Photography Production</h3>
-          <p class="text-xs text-slate-400 mt-1" id="card-m1-role">Production and delivery of 500 final edited photographs across 3 shooting days and 2 locations.</p>
+          <p class="text-xs text-slate-400 mt-1" id="card-m1-role">500 final edited photos dedicated to employees, functional teams, and Board of Directors across 3 days (Maadi HQ &amp; Mivida).</p>
           
           <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-baseline justify-between">
             <div>
               <span class="text-xs text-slate-400 block" id="card-m1-time-label">Shooting Schedule</span>
-              <span class="text-sm font-semibold text-slate-200" id="card-m1-time">3 Days (Maadi HQ + Nividea)</span>
+              <span class="text-sm font-semibold text-slate-200" id="card-m1-time">3 Days (Maadi HQ + Mivida)</span>
             </div>
             <div class="text-right">
               <span class="text-xs text-slate-400 block" id="card-m1-invest-label">Cost Allocation (Incl. VAT)</span>
@@ -713,7 +710,7 @@
           <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400 flex items-center justify-between">
             <div class="flex items-center gap-1.5">
               <span class="text-emerald-400">✓</span>
-              <span id="card-m1-features-count">Advance: EGP 140,000 (40%)</span>
+              <span id="card-m1-features-count">Advance (40%): EGP 140,000</span>
             </div>
             <span class="text-[11px] text-blue-400 font-semibold group-hover:text-cyan-300 transition-colors flex items-center gap-1">
               <span id="card-m1-explore">View full scope</span>
@@ -723,7 +720,7 @@
         </div>
 
         <!-- Component 2: Video Production -->
-        <div onclick="switchTab('video'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-6 relative overflow-hidden border-t-4 border-t-purple-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-purple-500/10 scroll-reveal stagger-2">
+        <div onclick="switchTab('video'); document.getElementById('tabs-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });" class="glass-card spotlight-card rounded-2xl p-5 sm:p-6 relative overflow-hidden border-t-4 border-t-purple-500 cursor-pointer group hover:scale-[1.015] active:scale-[0.99] transition-all duration-300 shadow-lg hover:shadow-purple-500/10 scroll-reveal stagger-2">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30" id="card-m2-tag">Component 2 • Video Production</span>
             <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center transition-transform group-hover:scale-110">
@@ -733,7 +730,7 @@
             </div>
           </div>
           <h3 class="text-xl font-bold text-white mt-4 group-hover:text-purple-300 transition-colors" id="card-m2-title">Video Production</h3>
-          <p class="text-xs text-slate-400 mt-1" id="card-m2-role">Creative development, studio shoot, casting &amp; post-production of 3 short videos (~1 min each).</p>
+          <p class="text-xs text-slate-400 mt-1" id="card-m2-role">3 lifestyle campaign videos (~60s each) demonstrating how to use the OneBank mobile banking app in everyday scenarios.</p>
           
           <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-baseline justify-between">
             <div>
@@ -749,7 +746,7 @@
           <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400 flex items-center justify-between">
             <div class="flex items-center gap-1.5">
               <span class="text-emerald-400">✓</span>
-              <span id="card-m2-features-count">Advance: EGP 275,000 (50%)</span>
+              <span id="card-m2-features-count">Advance (50%): EGP 275,000</span>
             </div>
             <span class="text-[11px] text-purple-400 font-semibold group-hover:text-purple-300 transition-colors flex items-center gap-1">
               <span id="card-m2-explore">View full scope</span>
@@ -763,8 +760,8 @@
     <!-- INTERACTIVE PRODUCT EXPLORER & TABS -->
     <section id="product-explorer-section" class="space-y-6 pt-4">
       <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
-        <!-- Tab Navigation Buttons -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scroll-touch" role="tablist" id="tabs-nav">
+        <!-- Tab Navigation Buttons (Enhanced with Luxury 2cm Scroller Hint Animation) -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scroll-touch relative" role="tablist" id="tabs-nav">
           <button onclick="switchTab('photography')" id="tab-btn-photography" class="shrink-0 px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-600/20 active:scale-95 touch-manipulation">
             <span>📸</span>
             <span id="tab-label-photo">1. Photography Production (EGP 350K)</span>
@@ -804,16 +801,16 @@
         <!-- Strategic Advantage Banner -->
         <div class="p-5 rounded-2xl bg-gradient-to-r from-blue-950/70 to-slate-900 border border-blue-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div class="space-y-1">
-            <span class="text-xs font-bold uppercase tracking-wider text-blue-400" id="photo-strat-badge">Photography Scope &amp; Schedule</span>
-            <h4 class="text-lg font-bold text-white" id="photo-strat-title">500 Edited Photos • 3 Shooting Days • 2 Locations</h4>
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-400" id="photo-strat-badge">Staff &amp; Board Photography Scope</span>
+            <h4 class="text-lg font-bold text-white" id="photo-strat-title">500 Edited Photos • 3 Shooting Days • Maadi &amp; Mivida</h4>
             <p class="text-xs text-slate-300 max-w-3xl leading-relaxed" id="photo-strat-desc">
-              Production and delivery of 500 final, professionally edited photographs across OneBank headquarters in Maadi (Days 1 &amp; 2) and Nividea in New Cairo (Day 3), inclusive of full equipment, art direction, and high-end digital retouching.
+              Dedicated exclusively to OneBank employees, functional teams, executive management, and the Board of Directors of the bank (no client or customer subjects). Captured across OneBank Maadi Headquarters (Days 1 &amp; 2) and Mivida, Fifth Settlement (Day 3), with prime lenses, on-site art direction, and dedicated Account Manager.
             </p>
           </div>
           <div class="shrink-0 text-right bg-blue-900/30 px-4 py-2 rounded-xl border border-blue-500/20">
             <span class="text-xs text-blue-300 block font-semibold" id="photo-card-inv-label">Photography Allocation</span>
             <span class="text-xl font-extrabold text-white" id="photo-inv-val">EGP 350,000</span>
-            <span class="text-[10px] text-blue-200 block">Advance (40%): EGP 140,000</span>
+            <span class="text-[10px] text-blue-200 block" id="photo-advance-val">Advance (40%): EGP 140,000</span>
           </div>
         </div>
 
@@ -821,56 +818,56 @@
         <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider" id="photo-sched-badge">Shooting Schedule &amp; Locations</span>
-            <span class="text-xs text-slate-400 font-mono" id="photo-sched-days-label">3 Production Days</span>
+            <span class="text-xs text-slate-400 font-mono" id="photo-sched-days-label">3 Production Days • Dedicated Account Manager</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
             <div class="p-3.5 rounded-xl bg-slate-800/70 border border-slate-700/80 space-y-1">
               <span class="text-xs font-black text-blue-400 uppercase tracking-wider" id="sched-d1-tag">Day 1</span>
               <div class="text-sm font-bold text-white" id="sched-d1-loc">OneBank Headquarters, Maadi</div>
-              <p class="text-xs text-slate-400" id="sched-d1-desc">Executive workspaces, client engagement areas, banking operations &amp; employee portraits.</p>
+              <p class="text-xs text-slate-400" id="sched-d1-desc">Executive management, departmental employees, banking operations, and collaborative team environments.</p>
             </div>
             <div class="p-3.5 rounded-xl bg-slate-800/70 border border-slate-700/80 space-y-1">
               <span class="text-xs font-black text-blue-400 uppercase tracking-wider" id="sched-d2-tag">Day 2</span>
               <div class="text-sm font-bold text-white" id="sched-d2-loc">OneBank Headquarters, Maadi</div>
-              <p class="text-xs text-slate-400" id="sched-d2-desc">Technology hubs, collaboration zones, digital banking experience details &amp; architectural angles.</p>
+              <p class="text-xs text-slate-400" id="sched-d2-desc">Technology and innovation teams, Board of Directors portraits, and modern digital banking work culture.</p>
             </div>
             <div class="p-3.5 rounded-xl bg-slate-800/70 border border-slate-700/80 space-y-1">
               <span class="text-xs font-black text-cyan-400 uppercase tracking-wider" id="sched-d3-tag">Day 3</span>
-              <div class="text-sm font-bold text-white" id="sched-d3-loc">Nividea, Fifth Settlement</div>
-              <p class="text-xs text-slate-400" id="sched-d3-desc">New Cairo location shoots; official venue name and address to be confirmed prior to call sheet.</p>
+              <div class="text-sm font-bold text-white" id="sched-d3-loc">Mivida, Fifth Settlement</div>
+              <p class="text-xs text-slate-400" id="sched-d3-desc">New Cairo location shoots; official venue name and detailed address to be confirmed prior to production call sheet.</p>
             </div>
           </div>
         </div>
 
-        <!-- 9 Photography Services Cards Grid -->
+        <!-- 9 Photography Services Cards Grid (Reordered: Logistics is #09) -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="photo-features-grid">
           <!-- Injected via JavaScript -->
         </div>
 
-        <!-- Deliverables Summary Box -->
+        <!-- Deliverables Summary Box with Rephrased Employee Sequence Statement -->
         <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
-          <h4 class="text-sm font-bold text-white uppercase tracking-wider" id="photo-deliv-heading">Photography Deliverables</h4>
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider" id="photo-deliv-heading">Photography Deliverables &amp; Client Coordination</h4>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
             <div class="p-3 rounded-xl bg-slate-800/50 border border-slate-700/50">
               <span class="text-emerald-400 font-bold block mb-1">📸 500 Unique Final Photos</span>
-              <span class="text-slate-300" id="photo-del-1">Curated, colour-corrected and professionally retouched images.</span>
+              <span class="text-slate-300" id="photo-del-1">Curated, colour-corrected, and professionally retouched staff and Board photos.</span>
             </div>
             <div class="p-3 rounded-xl bg-slate-800/50 border border-slate-700/50">
               <span class="text-blue-400 font-bold block mb-1">🖨️ High-Resolution JPEG</span>
-              <span class="text-slate-300" id="photo-del-2">Full print-grade resolution suitable for large-format media and billboards.</span>
+              <span class="text-slate-300" id="photo-del-2">Full print-grade resolution suitable for large-format media, annual reports, and press.</span>
             </div>
             <div class="p-3 rounded-xl bg-slate-800/50 border border-slate-700/50">
               <span class="text-cyan-400 font-bold block mb-1">🌐 Web-Optimised Copies</span>
-              <span class="text-slate-300" id="photo-del-3">Optimised compression for fast page loads across digital channels and apps.</span>
+              <span class="text-slate-300" id="photo-del-3">Optimised compression for fast page loads across OneBank digital web and mobile apps.</span>
             </div>
             <div class="p-3 rounded-xl bg-slate-800/50 border border-slate-700/50">
               <span class="text-purple-400 font-bold block mb-1">📁 Organised Digital Delivery</span>
-              <span class="text-slate-300" id="photo-del-4">Structured hierarchy sorted by location, theme, and agreed content category.</span>
+              <span class="text-slate-300" id="photo-del-4">Structured hierarchy sorted by department, Board, teams, and shoot location.</span>
             </div>
           </div>
-          <p class="text-[11px] text-slate-400 pt-1" id="photo-del-note">
-            * OneBank will provide access to the stated premises and coordinate the availability of employees or other client-provided subjects. Any requirement for external photography models must be agreed during pre-production.
-          </p>
+          <div class="p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/20 text-xs text-blue-200 leading-relaxed mt-2" id="photo-del-note">
+            <strong>Operational Coordination Note:</strong> OneBank will provide premises access and coordinate staff availability. To maximize shooting time efficiency, OneBank will prepare a schedule specifying the shooting sequence for employees, teams, and Board members based on availability.
+          </div>
         </div>
       </div>
 
@@ -879,16 +876,16 @@
         <!-- Strategic Advantage Banner -->
         <div class="p-5 rounded-2xl bg-gradient-to-r from-purple-950/70 to-slate-900 border border-purple-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div class="space-y-1">
-            <span class="text-xs font-bold uppercase tracking-wider text-purple-400" id="video-strat-badge">Video Production Scope</span>
-            <h4 class="text-lg font-bold text-white" id="video-strat-title">3 Campaign Videos (~1 Minute Each) • End-to-End Production</h4>
+            <span class="text-xs font-bold uppercase tracking-wider text-purple-400" id="video-strat-badge">Mobile Banking Lifestyle Videos</span>
+            <h4 class="text-lg font-bold text-white" id="video-strat-title">3 Lifestyle Videos (~1 Minute Each) • Mobile App in Action</h4>
             <p class="text-xs text-slate-300 max-w-3xl leading-relaxed" id="video-strat-desc">
-              Comprehensive creative development, studio filming, talent casting (1 male, 1 female + 1 emergency standby model), art direction, professional crew, sound engineering, licensed music, and Full HD / 4K post-production.
+              Comprehensive creative development, studio filming, talent casting (1 male, 1 female + 1 emergency standby model), art direction, sound engineering, licensed music, and Full HD / 4K post-production showcasing everyday lifestyle use of the OneBank mobile banking app.
             </p>
           </div>
           <div class="shrink-0 text-right bg-purple-900/30 px-4 py-2 rounded-xl border border-purple-500/20">
             <span class="text-xs text-purple-300 block font-semibold" id="video-card-inv-label">Video Allocation</span>
             <span class="text-xl font-extrabold text-white" id="video-inv-val">EGP 550,000</span>
-            <span class="text-[10px] text-purple-200 block">Advance (50%): EGP 275,000</span>
+            <span class="text-[10px] text-purple-200 block" id="video-advance-val">Advance (50%): EGP 275,000</span>
           </div>
         </div>
 
@@ -902,13 +899,13 @@
             </div>
             <h4 class="text-base font-bold text-white" id="vphase-1-title">Creative &amp; Pre-Production</h4>
             <ul class="text-xs text-slate-300 space-y-2 pt-1 list-disc list-inside" id="vphase-1-list">
-              <li>Creative concept development aligned with OneBank objectives.</li>
+              <li>Creative concept development aligned with OneBank app communication goals.</li>
               <li>Scriptwriting, scene planning &amp; storyboards / visual treatments.</li>
-              <li>Production scheduling &amp; multi-crew coordination.</li>
+              <li>Production scheduling &amp; multi-crew coordination with dedicated Account Manager.</li>
               <li>Casting of 1 male model, 1 female model + 1 standby emergency model.</li>
               <li>Studio selection, booking, rental &amp; permits.</li>
               <li>Art direction, wardrobe coordination, styling, hair &amp; makeup.</li>
-              <li>Standard set dressing and props for approved scripts.</li>
+              <li>Standard set dressing and props for approved lifestyle concepts.</li>
             </ul>
           </div>
 
@@ -921,9 +918,9 @@
             <h4 class="text-base font-bold text-white" id="vphase-2-title">Principal Studio Filming</h4>
             <ul class="text-xs text-slate-300 space-y-2 pt-1 list-disc list-inside" id="vphase-2-list">
               <li>Director, producer, camera crew, lighting crew &amp; production assistants.</li>
-              <li>Cinema-grade cameras, prime lenses, lighting, grip &amp; sound gear.</li>
+              <li>High-end professional cameras, prime lenses, lighting, grip &amp; sound gear.</li>
               <li>Studio filming execution and on-site production management.</li>
-              <li>Directorial management of cast models and client subjects.</li>
+              <li>Directorial management of cast models interacting with OneBank app screens.</li>
               <li>Crew and heavy equipment transportation within Greater Cairo.</li>
               <li>Execution of approved scripts strictly within the agreed shooting schedule.</li>
             </ul>
@@ -940,7 +937,7 @@
               <li>Offline &amp; online editing of 3 videos (~60 seconds each).</li>
               <li>Cinematic colour correction and precise colour grading.</li>
               <li>Integration of client-supplied final OneBank animations.</li>
-              <li>Sound engineering, dialogue cleanup, sound design &amp; final mix.</li>
+              <li>Sound engineering, dialogue cleanup, sound design &amp; final audio mix.</li>
               <li>Licensed background music cleared for agreed channels.</li>
               <li>Application of approved branding, titles, captions &amp; end cards.</li>
               <li>Rigorous quality control and final digital delivery.</li>
@@ -953,8 +950,8 @@
           <h4 class="text-sm font-bold text-white uppercase tracking-wider" id="video-deliv-heading">Video Deliverables &amp; Technical Specifications</h4>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
             <div class="p-3 rounded-xl bg-slate-800/50 border border-slate-700/50">
-              <span class="text-purple-400 font-bold block mb-1">🎬 3 Approved Final Videos</span>
-              <span class="text-slate-300" id="video-del-1">Approximately 60 seconds each, crafted to OneBank communication goals.</span>
+              <span class="text-purple-400 font-bold block mb-1">🎬 3 Approved Lifestyle Videos</span>
+              <span class="text-slate-300" id="video-del-1">Approximately 60 seconds each, highlighting OneBank mobile app benefits.</span>
             </div>
             <div class="p-3 rounded-xl bg-slate-800/50 border border-slate-700/50">
               <span class="text-blue-400 font-bold block mb-1">📺 Full HD / 4K MP4</span>
@@ -1007,26 +1004,26 @@
                     <span class="text-blue-400">📸</span>
                     <span id="tb-row1-title">Photography Production</span>
                   </td>
-                  <td class="p-3 text-slate-400" id="tb-row1-desc">500 final photos, 3 shooting days, 2 locations, full equipment &amp; retouching</td>
+                  <td class="p-3 text-slate-400" id="tb-row1-desc">500 final photos (employees &amp; Board), 3 shoot days (Maadi &amp; Mivida), prime lenses &amp; retouching</td>
                   <td class="p-3 text-center font-mono font-bold text-blue-400">40%</td>
-                  <td class="p-3 text-right font-mono font-bold text-white">EGP 140,000</td>
-                  <td class="p-3 text-right font-mono font-extrabold text-blue-400">EGP 350,000</td>
+                  <td class="p-3 text-right font-mono font-bold text-white" id="tb-row1-adv">EGP 140,000</td>
+                  <td class="p-3 text-right font-mono font-extrabold text-blue-400" id="tb-row1-tot">EGP 350,000</td>
                 </tr>
                 <tr class="hover:bg-slate-800/40">
                   <td class="p-3 font-bold text-white flex items-center gap-2">
                     <span class="text-purple-400">🎬</span>
                     <span id="tb-row2-title">Video Production</span>
                   </td>
-                  <td class="p-3 text-slate-400" id="tb-row2-desc">3 x 60s videos, studio shoot, 2 models + 1 standby, post-production &amp; audio mixing</td>
+                  <td class="p-3 text-slate-400" id="tb-row2-desc">3 x 60s app lifestyle videos, studio shoot, 2 models + 1 standby, post-production &amp; audio mixing</td>
                   <td class="p-3 text-center font-mono font-bold text-purple-400">50%</td>
-                  <td class="p-3 text-right font-mono font-bold text-white">EGP 275,000</td>
-                  <td class="p-3 text-right font-mono font-extrabold text-purple-400">EGP 550,000</td>
+                  <td class="p-3 text-right font-mono font-bold text-white" id="tb-row2-adv">EGP 275,000</td>
+                  <td class="p-3 text-right font-mono font-extrabold text-purple-400" id="tb-row2-tot">EGP 550,000</td>
                 </tr>
                 <tr class="bg-slate-900/80 font-bold text-white border-t-2 border-slate-700">
                   <td class="p-3" colspan="2" id="tb-row3-title">TOTAL INTEGRATED PACKAGE</td>
                   <td class="p-3 text-center font-mono text-amber-400">46.11% (Avg)</td>
-                  <td class="p-3 text-right font-mono text-amber-400 text-sm">EGP 415,000</td>
-                  <td class="p-3 text-right font-mono text-amber-400 text-base">EGP 900,000</td>
+                  <td class="p-3 text-right font-mono text-amber-400 text-sm" id="tb-row3-adv">EGP 415,000</td>
+                  <td class="p-3 text-right font-mono text-amber-400 text-base" id="tb-row3-tot">EGP 900,000</td>
                 </tr>
               </tbody>
             </table>
@@ -1054,7 +1051,7 @@
               </div>
               <div class="text-2xl font-black text-white font-mono" id="tranche-2-val">EGP 485,000</div>
               <p class="text-xs text-slate-300 leading-relaxed" id="tranche-2-desc">
-                Payable within a maximum of 30 calendar days following delivery of the complete agreed photography and video package. Dubai in Cairo will issue the final balance invoice upon formal delivery of all agreed assets.
+                Payable within a maximum of 30 calendar days following delivery of the complete agreed photography and video package. Dubai in Cairo LLC will issue the final balance invoice upon formal delivery of all agreed assets.
               </p>
             </div>
           </div>
@@ -1115,7 +1112,7 @@
                   <select id="sim-component" onchange="runProductionSimulation()" class="custom-select w-full bg-slate-800/90 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 rounded-xl py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30 transition shadow-inner cursor-pointer">
                     <option value="integrated">Total Integrated Package (Photography + Video)</option>
                     <option value="photo-only">Component 1: Photography Production (3 Days / 500 Photos)</option>
-                    <option value="video-only">Component 2: Video Production (3 Videos / Studio + Cast)</option>
+                    <option value="video-only">Component 2: Video Production (3 Lifestyle Videos / Studio + Cast)</option>
                   </select>
                   <div class="select-arrow-container pointer-events-none absolute inset-y-0 flex items-center">
                     <div class="w-6 h-6 rounded-lg bg-slate-700/50 group-hover:bg-slate-700 group-focus-within:bg-emerald-500/20 flex items-center justify-center transition border border-slate-600/30 group-focus-within:border-emerald-500/40">
@@ -1187,7 +1184,7 @@
 
               <!-- Explanation Box -->
               <div id="sim-expl-box" class="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-xs text-emerald-200 leading-relaxed">
-                Full production resources reserved upon receipt of the EGP 415,000 advance. Covers studio bookings, 2 cast models + 1 standby model, professional photography across 3 days, and full post-production suites.
+                Full production resources reserved upon receipt of the EGP 415,000 advance. Covers studio bookings, 2 cast models + 1 standby model, professional staff/Board photography across 3 days, and full post-production suites.
               </div>
 
               <!-- Quick Specs Pill Row -->
@@ -1195,7 +1192,7 @@
                 <div class="flex items-center justify-between">
                   <div>
                     <div class="font-bold text-slate-200" id="sim-spec-title">Confirmed Production SLA:</div>
-                    <div class="text-slate-400 text-[11px] mt-0.5" id="sim-spec-sub">Photography &amp; Video Revisions: 2 consolidated rounds each</div>
+                    <div class="text-slate-400 text-[11px] mt-0.5" id="sim-spec-sub">Photography &amp; Video Revisions: 2 consolidated rounds each • Dedicated Account Manager</div>
                   </div>
                   <span class="px-2.5 py-1 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono font-bold" id="sim-diag-price">Total: EGP 900,000</span>
                 </div>
@@ -1213,9 +1210,9 @@
         <h3 class="text-2xl font-bold text-white mt-1" id="gov-title">Client Responsibilities, Revisions &amp; Confidentiality</h3>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
         <!-- Client Responsibilities Card -->
-        <div class="glass-card p-6 rounded-2xl border-t-4 border-t-blue-500 space-y-3">
+        <div class="glass-card p-5 sm:p-6 rounded-2xl border-t-4 border-t-blue-500 space-y-3">
           <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold">
             01
           </div>
@@ -1226,12 +1223,12 @@
             <li>Appoint a designated representative to consolidate feedback and sign off each stage.</li>
             <li>Ensure access to premises, location permits, and staff availability.</li>
             <li>Approve concepts, scripts, casting, wardrobe, and shot lists prior to shooting.</li>
-            <li>Sign off on banking claims, product details, disclosures, and dummy screens.</li>
+            <li>Provide approved digital app interface mockups and ensure participating bank personnel adhere to official corporate dress codes.</li>
           </ul>
         </div>
 
         <!-- Revisions & Scope Boundaries Card -->
-        <div class="glass-card p-6 rounded-2xl border-t-4 border-t-purple-500 space-y-3">
+        <div class="glass-card p-5 sm:p-6 rounded-2xl border-t-4 border-t-purple-500 space-y-3">
           <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold">
             02
           </div>
@@ -1247,7 +1244,7 @@
         </div>
 
         <!-- Usage Rights & Commercial Terms Card -->
-        <div class="glass-card p-6 rounded-2xl border-t-4 border-t-emerald-500 space-y-3">
+        <div class="glass-card p-5 sm:p-6 rounded-2xl border-t-4 border-t-emerald-500 space-y-3">
           <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">
             03
           </div>
@@ -1265,7 +1262,7 @@
     </section>
 
     <!-- FORMAL ACCEPTANCE & SIGNATURE BLOCK -->
-    <section id="acceptance-signature-section" class="relative rounded-3xl bg-gradient-to-br from-slate-900 via-blue-950/40 to-slate-900 border border-slate-800 p-6 sm:p-10 space-y-8 shadow-2xl">
+    <section id="acceptance-signature-section" class="relative rounded-3xl bg-gradient-to-br from-slate-900 via-blue-950/40 to-slate-900 border border-slate-800 p-5 sm:p-10 space-y-6 sm:space-y-8 shadow-2xl">
       <div class="space-y-2">
         <span class="text-xs font-bold uppercase tracking-wider text-amber-400" id="sign-badge">Commercial Acceptance &amp; Formal Authorization</span>
         <h3 class="text-2xl sm:text-3xl font-extrabold text-white" id="sign-title">Confirmation of Package Acceptance</h3>
@@ -1275,11 +1272,11 @@
       </div>
 
       <!-- Dual Signature Block -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-slate-800">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 pt-4 border-t border-slate-800">
         <!-- Dubai in Cairo Signature Box -->
-        <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-700/80 space-y-4">
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-900/80 border border-slate-700/80 space-y-4">
           <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-            <span class="text-xs font-bold text-blue-400 uppercase tracking-wider" id="sign-lbl-agency">For Dubai in Cairo</span>
+            <span class="text-xs font-bold text-blue-400 uppercase tracking-wider" id="sign-lbl-agency">For Dubai in Cairo LLC</span>
             <span class="text-[11px] text-slate-400 font-mono">Agency Authorization</span>
           </div>
           <div class="space-y-3 text-xs">
@@ -1303,9 +1300,9 @@
         </div>
 
         <!-- OneBank / MDI Signature Box -->
-        <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-700/80 space-y-4">
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-900/80 border border-slate-700/80 space-y-4">
           <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider" id="sign-lbl-client">For OneBank / Misr Digital Innovations (MDI)</span>
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider" id="sign-lbl-client">For OneBank / Misr Digital Innovation (MDI)</span>
             <span class="text-[11px] text-slate-400 font-mono">Client Authorization</span>
           </div>
           <div class="space-y-3 text-xs">
@@ -1332,17 +1329,17 @@
 
     <!-- FOOTER / PROPOSAL METADATA -->
     <footer class="pt-8 border-t border-slate-800 text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4 no-print scroll-reveal">
-      <div>
-        <span class="font-bold text-slate-300" id="foot-copy">Dubai in Cairo — Integrated Photography &amp; Video Production Package</span>
-        <span class="mx-2">•</span>
-        <span id="foot-client">Prepared for OneBank / Misr Digital Innovations (MDI)</span>
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-300" id="foot-copy">Dubai in Cairo LLC — Integrated Photography &amp; Video Production Package</span>
+        <span class="mx-1">•</span>
+        <span id="foot-client">OneBank / Misr Digital Innovation (MDI)</span>
       </div>
       <div class="flex items-center gap-4">
         <button onclick="setLanguage('en')" class="hover:text-blue-400 transition">English</button>
         <span>/</span>
         <button onclick="setLanguage('ar')" class="hover:text-blue-400 transition">العربية</button>
         <span class="text-slate-600">|</span>
-        <span class="text-amber-400 font-mono font-bold" id="foot-total-val">Total: EGP 900,000 (Incl. VAT)</span>
+        <span class="text-amber-400 font-mono font-bold" id="foot-total-val">Total: EGP 900,000</span>
       </div>
     </footer>
 
@@ -1361,7 +1358,7 @@
         </div>
         <div>
           <h4 class="text-base sm:text-lg font-bold text-white" id="modal-title">Production Consultation &amp; Briefing</h4>
-          <p class="text-xs text-slate-300" id="modal-sub">Confirm shoot dates, venue details, or casting preferences with Dubai in Cairo.</p>
+          <p class="text-xs text-slate-300" id="modal-sub">Confirm shoot dates, Mivida venue details, or casting preferences with Dubai in Cairo LLC.</p>
         </div>
       </div>
 
@@ -1371,12 +1368,12 @@
           <input type="text" id="modal-contact" value="OneBank Marketing &amp; Brand Team" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1" id="modal-lbl-venue">Day 3 Venue / Location Notes (Nividea Fifth Settlement):</label>
-          <input type="text" id="modal-venue" value="New Cairo Branch / Venue Name &amp; Full Address to be confirmed" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-blue-300 focus:outline-none focus:border-blue-500">
+          <label class="block text-xs font-semibold text-slate-300 mb-1" id="modal-lbl-venue">Day 3 Venue / Location Notes (Mivida, Fifth Settlement):</label>
+          <input type="text" id="modal-venue" value="Mivida New Cairo Venue / Branch Details to be confirmed" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-blue-300 focus:outline-none focus:border-blue-500">
         </div>
         <div>
           <label class="block text-xs font-semibold text-slate-300 mb-1" id="modal-lbl-notes">Creative / Production Priorities:</label>
-          <textarea id="modal-notes" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500">Focus on mobile digital banking interactions, branch atmosphere, and modern customer experience.</textarea>
+          <textarea id="modal-notes" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500">Focus on mobile banking lifestyle scenarios, staff sequence efficiency, and board portraits.</textarea>
         </div>
         <div class="p-3 rounded-xl bg-blue-950/40 border border-blue-500/20 text-xs text-blue-300 flex items-center gap-2">
           <span>📅</span>
@@ -1410,18 +1407,18 @@
         </span>
         <h4 class="text-xl font-extrabold text-white" id="confirm-title">Production Coordination Logged</h4>
         <p class="text-xs text-slate-300 leading-relaxed max-w-sm mx-auto" id="confirm-desc">
-          Dubai in Cairo production producers will coordinate with OneBank to finalize call sheets, shoot dates, and studio reservations.
+          Dubai in Cairo LLC production producers and dedicated Account Manager will coordinate with OneBank to finalize call sheets, shoot dates, and studio reservations.
         </p>
       </div>
 
       <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs space-y-2.5 text-left">
         <div class="flex justify-between items-center">
           <span class="text-slate-400" id="confirm-lbl-ref">Quotation Reference:</span>
-          <span class="font-mono font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">DIC-MDI-2026-001</span>
+          <span class="font-mono font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">DIC-MDI-2026-QT7</span>
         </div>
         <div class="flex justify-between items-center">
           <span class="text-slate-400" id="confirm-lbl-ticket">Production Ticket:</span>
-          <span id="confirm-ticket-id" class="font-mono text-slate-300 font-semibold">#PROD-MDI-9182</span>
+          <span id="confirm-ticket-id" class="font-mono text-slate-300 font-semibold">#PROD-MDI-QT7</span>
         </div>
         <div class="flex justify-between items-center">
           <span class="text-slate-400" id="confirm-lbl-sla">Advance Payable:</span>
@@ -1447,14 +1444,14 @@
       </div>
       <div>
         <div class="text-xs font-bold text-white" id="toast-title">Link Copied!</div>
-        <div class="text-[11px] text-slate-400" id="toast-sub">dubaiincairo.com/proposals/mdi</div>
+        <div class="text-[11px] text-slate-400" id="toast-sub">dubaiincairo.com/proposals/mdi/QT7</div>
       </div>
     </div>
   </div>
 
   <!-- COMPREHENSIVE DATA & INTERACTIVE LOGIC -->
   <script>
-    const PROPOSAL_URL = 'https://dubaiincairo.com/proposals/mdi';
+    const PROPOSAL_URL = 'https://dubaiincairo.com/proposals/mdi/QT7';
 
     function copyProposalLink() {
       const isAr = currentLang === 'ar';
@@ -1462,7 +1459,7 @@
         navigator.clipboard.writeText(PROPOSAL_URL).then(() => {
           showToast(
             isAr ? 'تم نسخ رابط عرض السعر بنجاح!' : 'Proposal URL Copied!',
-            'dubaiincairo.com/proposals/mdi'
+            'dubaiincairo.com/proposals/mdi/QT7'
           );
         }).catch(() => {
           showFallbackPrompt(isAr);
@@ -1500,79 +1497,79 @@
     let currentLang = 'en';
     let currentTab = 'photography';
 
-    // 9 Photography Included Services Data
+    // 9 Photography Included Services Data (Cairo Logistics moved to #09)
     const photographyServices = [
       {
         num: '01',
         titleEn: 'Creative Direction & Visual Approach',
         titleAr: 'الإشراف الإبداعي وتطوير الأسلوب البصري',
         descEn: 'Full creative direction and development of the photography approach aligned with OneBank’s approved brand guidelines.',
-        descAr: 'تطوير التوجه الإبداعي والأسلوب البصري للتصوير بما يتوافق بدقة مع الهوية المؤسسية المعتمدة لون بنك.',
+        descAr: 'تطوير التوجه الإبداعي والأسلوب البصري للتصوير بما يتوافق بدقة مع الهوية المؤسسية المعتمدة لوان بنك.',
         category: 'creative'
       },
       {
         num: '02',
         titleEn: 'Pre-Production & Shot List Planning',
         titleAr: 'التخطيط وقائمة اللقطات المعتمدة',
-        descEn: 'Comprehensive pre-production planning, shot list development, and detailed shooting schedule across all locations.',
-        descAr: 'تخطيط شامل لمرحلة ما قبل الإنتاج، إعداد قائمة اللقطات (Shot List) المعتمدة والجدول الزمني المفصل.',
+        descEn: 'Comprehensive pre-production planning, shot list development, and detailed shooting schedule across all locations with designated Account Manager.',
+        descAr: 'تخطيط شامل لمرحلة ما قبل الإنتاج، إعداد قائمة اللقطات (Shot List) المعتمدة والجدول الزمني المفصل بإشراف مدير الحسابات.',
         category: 'planning'
       },
       {
         num: '03',
         titleEn: 'Location Coordination & Site Management',
         titleAr: 'تنسيق المواقع وإدارة الإنتاج الميداني',
-        descEn: 'On-site production management, site scouts, and venue coordination between Maadi Headquarters and Nividea New Cairo.',
-        descAr: 'إدارة الإنتاج في موقع التصوير والتنسيق اللوجستي بين المقر الرئيسي في المعادي وموقع نيفيديا بالتجمع الخامس.',
+        descEn: 'On-site production management, site scouts, and venue coordination between Maadi Headquarters and Mivida, Fifth Settlement.',
+        descAr: 'إدارة الإنتاج في موقع التصوير والتنسيق اللوجستي بين المقر الرئيسي في المعادي وموقع ميفيدا بالتجمع الخامس.',
         category: 'logistics'
       },
       {
         num: '04',
         titleEn: 'Professional Photographer & Dedicated Crew',
-        titleAr: 'المصورون المعتمدون وفريق العمل الفني',
-        descEn: 'Professional master photographer, certified photography assistants, and high-level production supervision.',
-        descAr: 'مصور رئيسي محترف، مساعدو تصوير متخصصون، وإشراف إنتاجي تنفيذي متكامل طوال أيام التصوير الثلاثة.',
+        titleAr: 'المصور الرئيسي وفريق العمل الفني المساعد',
+        descEn: 'Professional master photographer, skilled photography assistants, and dedicated executive production supervision on all shoot days.',
+        descAr: 'مصور رئيسي محترف، مساعدو تصوير متخصصون، وإشراف إنتاجي تنفيذي متكامل طوال أيام التصوير الثلاثة دون انقطاع.',
         category: 'crew'
       },
       {
         num: '05',
-        titleEn: 'High-End Cameras, Lenses & Lighting',
-        titleAr: 'معدات التصوير والإضاءة والعدسات الفاخرة',
-        descEn: 'Flagship full-frame cameras, cinema/prime lenses, comprehensive lighting gear, and specialized supporting equipment.',
-        descAr: 'كاميرات رقمية فائقة الدقة، عدسات احترافية متقدمة، ومعدات إضاءة متكاملة لكافة بيئات العمل والمقرات.',
+        titleEn: 'High-End Cameras & Prime Lenses',
+        titleAr: 'كاميرات رقمية متطورة وعدسات برايم',
+        descEn: 'Flagship full-frame camera systems, prime lenses, comprehensive lighting gear, and specialized supporting equipment.',
+        descAr: 'كاميرات رقمية متطورة، عدسات برايم (Prime Lenses) فائقة النقاء، ومعدات إضاءة متكاملة لكافة المقرات وبيئات العمل.',
         category: 'equipment'
       },
       {
         num: '06',
-        titleEn: 'On-Site Art Direction & Subject Coordination',
-        titleAr: 'الإدارة الفنية وتنسيق ظهور الموظفين',
-        descEn: 'On-site art direction, aesthetic composition, and professional coordination of OneBank-approved staff and participants.',
-        descAr: 'إدارة فنية ميدانية مباشرة لتوجيه الموظفين والعناصر البشرية المشاركة لضمان مظهر مؤسسي راقٍ.',
+        titleEn: 'On-Site Art Direction & Staff/Board Coordination',
+        titleAr: 'الإدارة الفنية وتنسيق ظهور الموظفين ومجلس الإدارة',
+        descEn: 'On-site art direction, aesthetic composition, and professional coordination of OneBank staff, teams, and Board of Directors members.',
+        descAr: 'إدارة فنية ميدانية مباشرة لتوجيه كوادر وان بنك وفرق العمل وأعضاء مجلس الإدارة لضمان مظهر مؤسسي راقٍ.',
         category: 'creative'
       },
       {
         num: '07',
-        titleEn: 'Cairo Logistics & Crew Transportation',
-        titleAr: 'النقل واللوجستيات داخل القاهرة الكبرى',
-        descEn: 'Complete crew transportation and production logistics covering Maadi, Fifth Settlement, and Greater Cairo.',
-        descAr: 'تحمل كامل تكاليف انتقالات الطاقم الفني ونقل المعدات الثقيلة واللوجستيات داخل نطاق القاهرة الكبرى.',
-        category: 'logistics'
+        titleEn: 'Image Selection, Grading & Retouching',
+        titleAr: 'انتقاء الصور والتصحيح اللوني والرتوش',
+        descEn: 'Careful image curation, colour correction, exposure adjustment, skin/surface retouching, and premium finishing for 500 final images.',
+        descAr: 'فرز وتصفية الصور، موازنة التعريض، تدريج وتصحيح الألوان الاحترافي، والرتوش الرقمي لكافة الصور الـ 500 المسلمة.',
+        category: 'post-production'
       },
       {
         num: '08',
-        titleEn: 'Image Selection, Grading & Retouching',
-        titleAr: 'انتقاء الصور والتصحيح اللوني والرتوش',
-        descEn: 'Careful image curation, colour correction, exposure adjustment, skin/surface retouching, and premium finishing.',
-        descAr: 'فرز وتصفية الصور، موازنة التعريض، تدريج وتصحيح الألوان الاحترافي، والرتوش الرقمي لكافة الصور النهائية.',
+        titleEn: 'Visual Cleanup & Cohesive Image Library',
+        titleAr: 'تنقية الشوائب وتوحيد المكتبة البصرية',
+        descEn: 'Removal of minor visual distractions, background cleanup, and ensuring consistent treatment across the 500-image bank library.',
+        descAr: 'إزالة أي مشتتات بصرية غير مرغوبة، وتطبيق معالجة موحدة ومتناغمة على مكتبة الـ 500 صورة المخصصة للبنك.',
         category: 'post-production'
       },
       {
         num: '09',
-        titleEn: 'Visual Cleanup & Cohesive Image Library',
-        titleAr: 'تنقية الشوائب وتوحيد المكتبة البصرية',
-        descEn: 'Removal of minor visual distractions, wire/artifact cleanup, and ensuring consistent treatment across the 500-image library.',
-        descAr: 'إزالة أي مشتتات بصرية غير مرغوبة، وتطبيق معالجة موحدة ومتناغمة على مكتبة الـ 500 صورة المسلمة.',
-        category: 'post-production'
+        titleEn: 'Cairo Logistics & Crew Transportation',
+        titleAr: 'النقل واللوجستيات داخل القاهرة الكبرى',
+        descEn: 'Complete crew transportation and production logistics covering Maadi, Fifth Settlement (Mivida), and Greater Cairo.',
+        descAr: 'تحمل كامل تكاليف انتقالات الطاقم الفني ونقل المعدات الثقيلة واللوجستيات داخل نطاق القاهرة الكبرى وميفيدا.',
+        category: 'logistics'
       }
     ];
 
@@ -1581,42 +1578,52 @@
       {
         areaEn: 'Primary Deliverables',
         areaAr: 'المخرجات الرئيسية',
-        photoEn: '500 final retouched photos (High-Res & Web)',
-        photoAr: '500 صورة نهائية معدلة باحترافية (عالية الدقة وللواب)',
-        videoEn: '3 campaign videos (~60 seconds each)',
-        videoAr: '3 مقاطع فيديو إعلانية وترويجية (نحو 60 ثانية لكل فيديو)',
+        photoEn: '500 final retouched photos (Staff, Teams & Board)',
+        photoAr: '500 صورة نهائية معدلة (للموظفين والفرق ومجلس الإدارة)',
+        videoEn: '3 app lifestyle campaign videos (~60 seconds each)',
+        videoAr: '3 مقاطع فيديو ترويجية لأسلوب الحياة وتطبيق الهاتف (~60 ثانية)',
         notesEn: 'High-res JPEGs + MP4 4K/Full HD digital delivery',
         notesAr: 'تسليم رقمي عالي الدقة لكافة الملفات المعتمدة'
       },
       {
         areaEn: 'Shooting Locations & Schedule',
         areaAr: 'المواقع والجدول الزمني',
-        photoEn: '3 days (Days 1 & 2 Maadi HQ, Day 3 Nividea New Cairo)',
-        photoAr: '3 أيام (اليومان 1 و2 بمقر المعادي، واليوم 3 بنيفيديا التجمع)',
+        photoEn: '3 days (Days 1 & 2 Maadi HQ, Day 3 Mivida New Cairo)',
+        photoAr: '3 أيام (اليومان 1 و2 بمقر المعادي، واليوم 3 بميفيدا التجمع)',
         videoEn: 'Dedicated studio production days',
-        videoAr: 'أيام تصوير استوديو متخصصة ومجهزة بالكامل',
-        notesEn: 'OneBank premises access coordinated by client',
-        notesAr: 'يوفر ون بنك تصاريح ومداخل المقرات المحددة'
+        videoAr: 'أيام تصوير استوديو متخصصة ومجهزة بالكامل'
       },
       {
         areaEn: 'Cast & Subject Resources',
         areaAr: 'العناصر البشرية ونماذج التمثيل',
-        photoEn: 'OneBank employees & client-approved subjects',
-        photoAr: 'موظفو ون بنك والعناصر البشرية المعتمدة من البنك',
+        photoEn: 'OneBank employees, teams, and Board of Directors only (no clients)',
+        photoAr: 'موظفو وان بنك وفرق العمل وأعضاء مجلس الإدارة فقط (دون عملاء)',
         videoEn: '1 male model + 1 female model + 1 emergency standby model',
-        videoAr: 'موديل رجل + موديل سيدة + موديل احتياطي للطوارئ',
-        notesEn: 'Additional photo models require prior pre-production agreement',
-        notesAr: 'أي طلب لموديلز للتصوير الفوتوغرافي يتم الاتفاق عليه مسبقاً'
+        videoAr: 'موديل رجل + موديل سيدة + موديل احتياطي للطوارئ'
       },
       {
-        areaEn: 'Set Dressing, Wardrobe & Styling',
+        areaEn: 'Account Management',
+        areaAr: 'إدارة الحسابات والتنسيق',
+        photoEn: 'Dedicated Dubai in Cairo Account Manager on-site across all days',
+        photoAr: 'مدير حسابات تنفيذي مخصص من (Dubai in Cairo) متواجد في جميع الأيام',
+        videoEn: 'Dedicated Dubai in Cairo Account Manager managing full studio workflow',
+        videoAr: 'مدير حسابات تنفيذي مخصص يشرف على كافة مراحل تصوير الاستوديو'
+      },
+      {
+        areaEn: 'Equipment & Optics',
+        areaAr: 'المعدات والعدسات',
+        photoEn: 'Professional full-frame camera systems & prime lenses',
+        photoAr: 'كاميرات رقمية متطورة وعدسات برايم (Prime Lenses)',
+        videoEn: 'Professional cinema camera, prime lenses, grip & studio audio',
+        videoAr: 'كاميرات رقمية احترافية، عدسات برايم، ومعدات إضاءة وصوت'
+      },
+      {
+        areaEn: 'Set Dressing & Styling',
         areaAr: 'الديكور والأزياء والمكياج',
-        photoEn: 'On-site art direction & basic styling guidance',
-        photoAr: 'إدارة فنية ميدانية وإرشادات المظهر المؤسسي',
+        photoEn: 'On-site art direction & corporate dress code alignment',
+        photoAr: 'إدارة فنية ميدانية ومواءمة الزي المؤسسي للبنك',
         videoEn: 'Studio rental, set dressing, props, wardrobe & hair/makeup',
-        videoAr: 'تأجير استوديو، ديكور وإكسسوارات، وأزياء وتصفيف ومكياج',
-        notesEn: 'Standard props included; complex custom sets quoted separately',
-        notesAr: 'يشمل الديكور المعياري؛ الإنشاءات الخاصة تتطلب موافقة منفصلة'
+        videoAr: 'تأجير استوديو، ديكور وإكسسوارات، وأزياء وتصفيف ومكياج'
       },
       {
         areaEn: 'Post-Production & Audio',
@@ -1624,9 +1631,7 @@
         photoEn: 'Colour correction, exposure tuning, professional retouching',
         photoAr: 'تصحيح الألوان والإضاءة ورتوش رقمي متقدم',
         videoEn: 'Editing, colour grading, sound design, licensed music & mixing',
-        videoAr: 'مونتاج، تدريج ألوان سينمائي، هندسة ومكساج صوت وموسيقى مرخصة',
-        notesEn: 'OneBank supplies final approved motion animations',
-        notesAr: 'يقدم ون بنك ملفات الأنيميشن النهائية المعتمدة للدمج'
+        videoAr: 'مونتاج، تدريج ألوان سينمائي، هندسة ومكساج صوت وموسيقى مرخصة'
       },
       {
         areaEn: 'Client Revision Cycles',
@@ -1634,9 +1639,7 @@
         photoEn: '2 consolidated rounds (selection & retouching)',
         photoAr: 'جولتان مدمجتان للمراجعة (الانتقاء والرتوش)',
         videoEn: '2 consolidated editing rounds per video',
-        videoAr: 'جولتان مدمجتان للمونتاج لكل مقطع فيديو',
-        notesEn: 'Feedback routed through single designated OneBank lead',
-        notesAr: 'تُرسل الملاحظات مجمعة عبر ممثل ون بنك المعتمد'
+        videoAr: 'جولتان مدمجتان للمونتاج لكل مقطع فيديو'
       },
       {
         areaEn: 'Commercial Allocation (Incl. VAT)',
@@ -1644,9 +1647,7 @@
         photoEn: 'EGP 350,000 (Advance: EGP 140,000 / 40%)',
         photoAr: '350,000 ج.م (الدفعة المقدمة: 140,000 ج.م / 40%)',
         videoEn: 'EGP 550,000 (Advance: EGP 275,000 / 50%)',
-        videoAr: '550,000 ج.م (الدفعة المقدمة: 275,000 ج.م / 50%)',
-        notesEn: 'Complementary non-separable integrated package: EGP 900,000',
-        notesAr: 'حزمة واحدة متكاملة غير قابلة للتجزئة: 900,000 ج.م'
+        videoAr: '550,000 ج.م (الدفعة المقدمة: 275,000 ج.م / 50%)'
       }
     ];
 
@@ -1654,48 +1655,48 @@
     const i18n = {
       en: {
         brandTitle: `<span>DUBAI IN CAIRO</span><span class="text-cyan-400">×</span><span class="text-blue-300">ONEBANK</span>`,
-        brandTag: 'Misr Digital Innovations (MDI)',
-        brandSub: 'Integrated Photography & Video Production Package • Commercial Quotation',
+        brandTag: 'Misr Digital Innovation (MDI)',
+        brandSub: 'Integrated Photography & Video Production Package • Commercial Quotation (QT7)',
         btnCopy: 'Share Link',
         btnPlanner: 'Production Planner',
         heroPill: 'OFFICIAL COMMERCIAL QUOTATION • PRODUCTION ROADMAP',
         heroBrandBadge: 'PREPARED FOR: ONEBANK',
-        heroRef: 'REF: DIC-MDI-2026-001',
+        heroRef: 'REF: DIC-MDI-2026-QT7',
         heroDate: '5 October 2026',
         heroTitle: 'Integrated Photography & Video Production Package',
         heroSubtitle: 'Creative Development, Multi-Location Shooting & Production Execution',
         heroGreeting: 'Dear OneBank Team,',
-        heroExec: 'Dubai in Cairo is pleased to submit this quotation for an integrated photography and video production package, covering creative development, production planning, shooting, and post-production in accordance with OneBank’s approved brand guidelines.',
+        heroExec: 'Dubai in Cairo LLC is pleased to submit this quotation for an integrated photography and video production package, covering creative development, production planning, shooting, and post-production in accordance with OneBank’s approved brand guidelines.',
         heroReassTitle: 'Unified Integrated Package Structure',
-        heroReassDesc: 'The photography and video services are complementary components of one integrated, non-separable quotation. All amounts include 14% VAT; no additional VAT will be added.',
+        heroReassDesc: 'The photography and video services are complementary components of one integrated, non-separable quotation. All amounts include 14% VAT; no additional VAT will be added. Includes dedicated on-site Account Manager across all production shoot days.',
         heroTotalLabel: 'Total Fee (Incl. VAT):',
         kpi1Label: 'Total Integrated Package',
         kpi1Sub: 'Inclusive of 14% VAT',
         kpi2Label: 'Advance Commitment',
         kpi2Sub: '40% Photo + 50% Video',
-        kpi3Label: 'Photography Scope',
-        kpi3Sub: '3 Days • 2 Locations',
-        kpi4Label: 'Video Scope',
-        kpi4Sub: '60s Each • Full HD / 4K',
+        kpi3Label: 'Staff & Board Photos',
+        kpi3Sub: '3 Days • Maadi & Mivida',
+        kpi4Label: 'App Lifestyle Videos',
+        kpi4Sub: '60s Each • Mobile Banking',
         commSummaryPre: 'Commercial Structure',
         commSummaryTitle: 'Integrated Package Allocations',
         commSummarySub: 'Itemised amounts are provided solely for cost transparency and payment calculation.',
         commTotalLabel: 'Total Integrated Package:',
         cardM1Tag: 'Component 1 • Photography',
         cardM1Title: 'Photography Production',
-        cardM1Role: 'Production and delivery of 500 final edited photographs across 3 shooting days and 2 locations.',
+        cardM1Role: '500 final edited photos dedicated to employees, functional teams, and Board of Directors across 3 days (Maadi HQ & Mivida).',
         cardM1TimeLabel: 'Shooting Schedule',
-        cardM1Time: '3 Days (Maadi HQ + Nividea)',
+        cardM1Time: '3 Days (Maadi HQ + Mivida)',
         cardM1InvestLabel: 'Cost Allocation (Incl. VAT)',
-        cardM1Count: 'Advance: EGP 140,000 (40%)',
+        cardM1Count: 'Advance (40%): EGP 140,000',
         cardM1Explore: 'View full scope',
         cardM2Tag: 'Component 2 • Video Production',
         cardM2Title: 'Video Production',
-        cardM2Role: 'Creative development, studio shoot, casting & post-production of 3 short videos (~1 min each).',
+        cardM2Role: '3 lifestyle campaign videos (~60s each) demonstrating how to use the OneBank mobile banking app in everyday scenarios.',
         cardM2TimeLabel: 'Deliverables',
         cardM2Time: '3 x 60s Videos (Full HD / 4K)',
         cardM2InvestLabel: 'Cost Allocation (Incl. VAT)',
-        cardM2Count: 'Advance: EGP 275,000 (50%)',
+        cardM2Count: 'Advance (50%): EGP 275,000',
         cardM2Explore: 'View full scope',
         tabPhoto: '1. Photography Production (EGP 350K)',
         tabVideo: '2. Video Production (EGP 550K)',
@@ -1704,49 +1705,49 @@
         tabPlanner: '5. Interactive Planner & SLA'
       },
       ar: {
-        brandTitle: `<span>دبي في القاهرة</span><span class="text-cyan-400">×</span><span class="text-blue-300">ون بنك</span>`,
+        brandTitle: `<span>دبي في القاهرة</span><span class="text-cyan-400">×</span><span class="text-blue-300">وان بنك</span>`,
         brandTag: 'مصر للابتكار الرقمي (MDI)',
-        brandSub: 'حزمة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو • عرض سعر تجاري',
+        brandSub: 'حزمة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو • عرض سعر تجاري (QT7)',
         btnCopy: 'مشاركة الرابط',
         btnPlanner: 'مخطط الإنتاج',
         heroPill: 'عرض سعر رسمي معتمد • جدول الإنتاج التنفيذي',
-        heroBrandBadge: 'مُقدّم إلى: ون بنك (OneBank)',
-        heroRef: 'المرجع: DIC-MDI-2026-001',
+        heroBrandBadge: 'مُقدّم إلى: وان بنك (OneBank)',
+        heroRef: 'المرجع: DIC-MDI-2026-QT7',
         heroDate: '5 أكتوبر 2026',
         heroTitle: 'حزمة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو',
         heroSubtitle: 'التطوير الإبداعي، التصوير متعدد المواقع، والإنتاج والمونتاج النهائي',
-        heroGreeting: 'السادة فريق ون بنك المحترمين،',
-        heroExec: 'يسر "دبي في القاهرة" تقديم هذا العرض لحزمة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو، والتي تشمل التطوير الإبداعي وتخطيط الإنتاج والتصوير والمونتاج بما يتوافق مع الدليل الإرشادي المعتمد لهوية ون بنك.',
+        heroGreeting: 'السادة فريق وان بنك المحترمين،',
+        heroExec: 'يسر شركة دبي في القاهرة (Dubai in Cairo LLC) تقديم هذا العرض لحزمة الإنتاج المتكامل للتصوير الفوتوغرافي والفيديو، والتي تشمل التطوير الإبداعي وتخطيط الإنتاج والتصوير والمونتاج بما يتوافق مع الدليل الإرشادي المعتمد لهوية وان بنك.',
         heroReassTitle: 'هيكلية الحزمة المتكاملة وغير القابلة للتجزئة',
-        heroReassDesc: 'خدمات التصوير الفوتوغرافي والفيديو مكملة لبعضها البعض ضمن عرض سعر متكامل وغير قابل للتجزئة. جميع المبالغ المذكورة شاملة ضريبة القيمة المضافة بنسبة 14% ولن تُضاف أي مبالغ أخرى.',
+        heroReassDesc: 'خدمات التصوير الفوتوغرافي والفيديو مكملة لبعضها البعض ضمن عرض سعر متكامل وغير قابل للتجزئة. جميع المبالغ المذكورة شاملة ضريبة القيمة المضافة بنسبة 14% ولن تُضاف أي مبالغ أخرى. يشمل تواجد مدير حسابات تنفيذي مخصص طوال أيام التصوير.',
         heroTotalLabel: 'الإجمالي (شامل الضريبة):',
         kpi1Label: 'إجمالي الحزمة المتكاملة',
         kpi1Sub: 'شاملة ضريبة القيمة المضافة',
         kpi2Label: 'الدفعة المقدمة المطلوبة',
         kpi2Sub: '40% فوتوغرافي + 50% فيديو',
-        kpi3Label: 'نطاق التصوير الفوتوغرافي',
-        kpi3Sub: '3 أيام تصوير • موقعان',
-        kpi4Label: 'نطاق إنتاج الفيديو',
-        kpi4Sub: '3 مقاطع • نحو 60 ثانية لكل فيديو',
+        kpi3Label: 'صور الموظفين ومجلس الإدارة',
+        kpi3Sub: '3 أيام • المعادي وميفيدا',
+        kpi4Label: 'فيديوهات تطبيق الهاتف',
+        kpi4Sub: '3 مقاطع • نمط حياة عصري',
         commSummaryPre: 'الهيكل المالي والتجاري',
         commSummaryTitle: 'توزيع مخصصات الحزمة المتكاملة',
         commSummarySub: 'تم إدراج المبالغ المفصلة لتعزيز الشفافية وحساب الدفعات ومراحل السداد فقط.',
         commTotalLabel: 'إجمالي الحزمة المتكاملة:',
         cardM1Tag: 'البند الأول • التصوير الفوتوغرافي',
         cardM1Title: 'الإنتاج الفوتوغرافي الاحترافي',
-        cardM1Role: 'إنتاج وتسليم 500 صورة نهائية معدلة باحترافية على مدار 3 أيام تصوير وموقعين.',
+        cardM1Role: 'إنتاج وتسليم 500 صورة نهائية مخصصة للموظفين وفرق العمل ومجلس الإدارة على مدار 3 أيام تصوير بمقر المعادي وميفيدا.',
         cardM1TimeLabel: 'جدول أيام التصوير',
-        cardM1Time: '3 أيام (مقر المعادي + نيفيديا التجمع)',
+        cardM1Time: '3 أيام (مقر المعادي + ميفيدا التجمع)',
         cardM1InvestLabel: 'المخصص المالي (شامل الضريبة)',
-        cardM1Count: 'الدفعة المقدمة: 140,000 ج.م (40%)',
+        cardM1Count: 'الدفعة المقدمة (40%): 140,000 ج.م',
         cardM1Explore: 'عرض كامل التفاصيل',
         cardM2Tag: 'البند الثاني • إنتاج الفيديو',
         cardM2Title: 'إنتاج مقاطع الفيديو الإعلانية',
-        cardM2Role: 'التطوير الإبداعي، تصوير الاستوديو، اختيار الموديلز، والمونتاج لـ 3 مقاطع (~دقيقة لكل فيديو).',
+        cardM2Role: '3 مقاطع فيديو ترويجية بأسلوب حياة عصري تبرز تجربة استخدام تطبيق وان بنك للهاتف المحمول.',
         cardM2TimeLabel: 'المخرجات النهائية',
         cardM2Time: '3 فيديوهات 60 ثانية (Full HD / 4K)',
         cardM2InvestLabel: 'المخصص المالي (شامل الضريبة)',
-        cardM2Count: 'الدفعة المقدمة: 275,000 ج.م (50%)',
+        cardM2Count: 'الدفعة المقدمة (50%): 275,000 ج.م',
         cardM2Explore: 'عرض كامل التفاصيل',
         tabPhoto: '1. التصوير الفوتوغرافي (350 ألف ج.م)',
         tabVideo: '2. إنتاج الفيديو (550 ألف ج.م)',
@@ -1790,7 +1791,6 @@
       document.getElementById('hero-reassurance-title').innerText = t.heroReassTitle;
       document.getElementById('hero-reassurance-desc').innerText = t.heroReassDesc;
       document.getElementById('hero-total-label').innerText = t.heroTotalLabel;
-      document.getElementById('hero-total-val').innerHTML = formatCurrency('900,000', isAr);
 
       // KPI Labels
       document.getElementById('kpi-1-label').innerText = t.kpi1Label;
@@ -1834,7 +1834,7 @@
 
       renderPhotoCards();
       renderMatrixTable();
-      runNumberCounters();
+      runAllNumberCounters();
       runProductionSimulation();
     }
 
@@ -1874,7 +1874,7 @@
               #${item.num}
             </span>
             <span class="text-[10px] uppercase font-bold text-slate-400">
-              ${isAr ? 'خدمة معتمدة' : 'Verified Scope'}
+              ${isAr ? 'نطاق الخدمة' : 'Verified Scope'}
             </span>
           </div>
           <h5 class="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
@@ -1898,7 +1898,7 @@
           <td class="p-3 font-bold text-white">${isAr ? row.areaAr : row.areaEn}</td>
           <td class="p-3 text-center text-blue-300">${isAr ? row.photoAr : row.photoEn}</td>
           <td class="p-3 text-center text-purple-300">${isAr ? row.videoAr : row.videoEn}</td>
-          <td class="p-3 text-slate-400">${isAr ? row.notesAr : row.notesEn}</td>
+          <td class="p-3 text-slate-400">${isAr ? (row.notesAr || '') : (row.notesEn || '')}</td>
         </tr>
       `).join('');
     }
@@ -1930,29 +1930,42 @@
       }
     }
 
-    // Number Counting Animation (Two-Phase System)
-    function runNumberCounters() {
+    // =========================================================================
+    // DYNAMIC NUMBER COUNTER ENGINE (Includes 900,000, 550,000, 350,000 & all tranches)
+    // =========================================================================
+    function runAllNumberCounters() {
       const isAr = currentLang === 'ar';
-      const kpi1 = document.getElementById('kpi-1-val');
-      if (kpi1) animateNumberCounter(kpi1, 900000, 2200, { isCurrency: true });
 
-      const kpi2 = document.getElementById('kpi-2-val');
-      if (kpi2) animateNumberCounter(kpi2, 415000, 2200, { isCurrency: true });
+      // 1. Total Package Values (900,000 EGP)
+      animateNumberCounter(document.getElementById('hero-total-val'), 900000, 2200, { isCurrency: true });
+      animateNumberCounter(document.getElementById('kpi-1-val'), 900000, 2200, { isCurrency: true });
+      animateNumberCounter(document.getElementById('comm-total-val'), 900000, 2200, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tb-row3-tot'), 900000, 2200, { isCurrency: true });
+      animateNumberCounter(document.getElementById('foot-total-val'), 900000, 2200, { isCurrency: true, prefix: 'Total: ' });
 
-      const kpi3 = document.getElementById('kpi-3-val');
-      if (kpi3) animateNumberCounter(kpi3, 500, 2000, { suffix: isAr ? ' صورة' : ' Photos' });
+      // 2. Video Component Values (550,000 EGP)
+      animateNumberCounter(document.getElementById('card-m2-price'), 550000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('video-inv-val'), 550000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tb-row2-tot'), 550000, 2000, { isCurrency: true });
 
-      const kpi4 = document.getElementById('kpi-4-val');
-      if (kpi4) animateNumberCounter(kpi4, 3, 1800, { suffix: isAr ? ' مقاطع فيديو' : ' Videos' });
+      // 3. Photography Component Values (350,000 EGP)
+      animateNumberCounter(document.getElementById('card-m1-price'), 350000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('photo-inv-val'), 350000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tb-row1-tot'), 350000, 2000, { isCurrency: true });
 
-      const m1 = document.getElementById('card-m1-price');
-      if (m1) animateNumberCounter(m1, 350000, 2000, { isCurrency: true });
+      // 4. Advance Commitment Tranches (415,000, 140,000, 275,000 EGP)
+      animateNumberCounter(document.getElementById('kpi-2-val'), 415000, 2200, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tranche-1-val'), 415000, 2200, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tb-row3-adv'), 415000, 2200, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tb-row1-adv'), 140000, 2000, { isCurrency: true });
+      animateNumberCounter(document.getElementById('tb-row2-adv'), 275000, 2000, { isCurrency: true });
 
-      const m2 = document.getElementById('card-m2-price');
-      if (m2) animateNumberCounter(m2, 550000, 2000, { isCurrency: true });
+      // 5. Remaining Balance Tranche (485,000 EGP)
+      animateNumberCounter(document.getElementById('tranche-2-val'), 485000, 2200, { isCurrency: true });
 
-      const commTotal = document.getElementById('comm-total-val');
-      if (commTotal) animateNumberCounter(commTotal, 900000, 2200, { isCurrency: true });
+      // 6. Deliverable Counts
+      animateNumberCounter(document.getElementById('kpi-3-val'), 500, 2000, { suffix: isAr ? ' صورة' : ' Photos' });
+      animateNumberCounter(document.getElementById('kpi-4-val'), 3, 1800, { suffix: isAr ? ' فيديوهات' : ' Videos' });
     }
 
     function animateNumberCounter(el, target, duration = 2200, options = {}) {
@@ -1985,7 +1998,7 @@
           : Number(current).toLocaleString('en-US');
 
         if (isCurrency) {
-          el.innerHTML = formatCurrency(formattedVal, isAr);
+          el.innerHTML = `${prefix}${formatCurrency(formattedVal, isAr)}${suffix}`;
         } else {
           el.innerText = `${prefix}${formattedVal}${suffix}`;
         }
@@ -1994,7 +2007,7 @@
           el._animFrame = requestAnimationFrame(step);
         } else {
           if (isCurrency) {
-            el.innerHTML = formatCurrency(target.toLocaleString('en-US'), isAr);
+            el.innerHTML = `${prefix}${formatCurrency(target.toLocaleString('en-US'), isAr)}${suffix}`;
           } else {
             el.innerText = `${prefix}${decimals > 0 ? target.toFixed(decimals) : target.toLocaleString('en-US')}${suffix}`;
           }
@@ -2012,20 +2025,32 @@
           el._animFrame = null;
         }
       });
-      const kpi1 = document.getElementById('kpi-1-val');
-      if (kpi1) kpi1.innerHTML = formatCurrency('900,000', isAr);
-      const kpi2 = document.getElementById('kpi-2-val');
-      if (kpi2) kpi2.innerHTML = formatCurrency('415,000', isAr);
-      const kpi3 = document.getElementById('kpi-3-val');
-      if (kpi3) kpi3.innerText = isAr ? '500 صورة' : '500 Photos';
-      const kpi4 = document.getElementById('kpi-4-val');
-      if (kpi4) kpi4.innerText = isAr ? '3 مقاطع فيديو' : '3 Videos';
-      const m1 = document.getElementById('card-m1-price');
-      if (m1) m1.innerHTML = formatCurrency('350,000', isAr);
-      const m2 = document.getElementById('card-m2-price');
-      if (m2) m2.innerHTML = formatCurrency('550,000', isAr);
-      const commTotal = document.getElementById('comm-total-val');
-      if (commTotal) commTotal.innerHTML = formatCurrency('900,000', isAr);
+      const ids = [
+        ['hero-total-val', '900,000'],
+        ['kpi-1-val', '900,000'],
+        ['comm-total-val', '900,000'],
+        ['tb-row3-tot', '900,000'],
+        ['card-m2-price', '550,000'],
+        ['video-inv-val', '550,000'],
+        ['tb-row2-tot', '550,000'],
+        ['card-m1-price', '350,000'],
+        ['photo-inv-val', '350,000'],
+        ['tb-row1-tot', '350,000'],
+        ['kpi-2-val', '415,000'],
+        ['tranche-1-val', '415,000'],
+        ['tb-row3-adv', '415,000'],
+        ['tb-row1-adv', '140,000'],
+        ['tb-row2-adv', '275,000'],
+        ['tranche-2-val', '485,000']
+      ];
+      ids.forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = formatCurrency(val, isAr);
+      });
+      const k3 = document.getElementById('kpi-3-val');
+      if (k3) k3.innerText = isAr ? '500 صورة' : '500 Photos';
+      const k4 = document.getElementById('kpi-4-val');
+      if (k4) k4.innerText = isAr ? '3 فيديوهات' : '3 Videos';
     }
     window.addEventListener('beforeprint', finalizeCountersForPrint);
 
@@ -2058,21 +2083,21 @@
       if (!outScope || !outAdv || !outBal || !explBox) return;
 
       if (comp === 'photo-only') {
-        outScope.innerText = isAr ? 'البند الأول: التصوير الفوتوغرافي (500 صورة)' : 'Component 1: Photography Production (500 Photos)';
+        outScope.innerText = isAr ? 'البند الأول: التصوير الفوتوغرافي (500 صورة للموظفين ومجلس الإدارة)' : 'Component 1: Photography Production (500 Staff & Board Photos)';
         outAdv.innerHTML = formatCurrency('140,000', isAr) + (isAr ? ' (دفعة 40%)' : ' (40% Advance)');
         outBal.innerHTML = formatCurrency('210,000', isAr) + (isAr ? ' (متبقي 60%)' : ' (60% Balance)');
         explBox.innerHTML = isAr 
-          ? 'تغطي الدفعة المقدمة البالغة 140,000 ج.م حجز الطواقم الاحترافية، المعدات والعدسات المتطورة، وتجهيز جدول أيام التصوير الثلاثة بمقر المعادي وموقع نيفيديا بالتجمع الخامس.'
-          : 'Advance of EGP 140,000 reserves principal photographers, assistants, camera/lighting setups, and production logistics across Maadi Headquarters and Nividea New Cairo.';
+          ? 'تغطي الدفعة المقدمة البالغة 140,000 ج.م حجز المصورين المحترفين ومساعدي التصوير، كاميرات الفول فريم وعدسات البرايم، ومدير الحسابات المخصص عبر مقري المعادي وميفيدا.'
+          : 'Advance of EGP 140,000 reserves principal photographers, assistants, full-frame cameras, prime lenses, and dedicated on-site Account Manager across Maadi HQ and Mivida.';
         statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-blue-500/20 text-blue-400 border border-blue-500/30';
         statusPill.innerText = isAr ? 'جاهز لحجز أيام التصوير' : 'Photo Shoot Scheduling Ready';
       } else if (comp === 'video-only') {
-        outScope.innerText = isAr ? `البند الثاني: إنتاج الفيديو (3 مقاطع • ${aspect})` : `Component 2: Video Production (3 Videos • ${aspect})`;
+        outScope.innerText = isAr ? `البند الثاني: مقاطع أسلوب الحياة وتطبيق وان بنك (3 مقاطع • ${aspect})` : `Component 2: Video Production (3 Lifestyle Videos • ${aspect})`;
         outAdv.innerHTML = formatCurrency('275,000', isAr) + (isAr ? ' (دفعة 50%)' : ' (50% Advance)');
         outBal.innerHTML = formatCurrency('275,000', isAr) + (isAr ? ' (متبقي 50%)' : ' (50% Balance)');
         explBox.innerHTML = isAr
-          ? `تتطلب مخصصات الفيديو دفعة مقدمة 50% (275,000 ج.م) نظراً لتكاليف الحجز المسبق للاستوديو، التعاقد مع الموديلز (رجل + سيدة + احتياطي)، طاقم الإخراج والإضاءة، وتجهيز الديكور بالنسبة البصرية المحددة (${aspect}).`
-          : `Video production mandates a 50% advance (EGP 275,000) for substantial upfront commitments: studio booking, talent casting (1 male, 1 female + 1 standby), director/crew retainers, and set styling formatted in ${aspect}.`;
+          ? `تتطلب مخصصات الفيديو دفعة مقدمة 50% (275,000 ج.م) لحجز الاستوديو، موديلز تمثيل نمط الحياة (رجل + سيدة + احتياطي)، طاقم الإخراج والإضاءة، وتجهيز سيناريوهات استخدام تطبيق وان بنك بنسبة (${aspect}).`
+          : `Video production mandates a 50% advance (EGP 275,000) for studio rental, talent casting (1 male, 1 female + 1 standby), director/crew retainers, and lifestyle scenarios highlighting the OneBank mobile app in ${aspect}.`;
         statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-purple-500/20 text-purple-400 border border-purple-500/30';
         statusPill.innerText = isAr ? 'جاهز لحجز الاستوديو والموديلز' : 'Studio & Talent Ready';
       } else {
@@ -2080,8 +2105,8 @@
         outAdv.innerHTML = formatCurrency('415,000', isAr) + (isAr ? ' (دفعة مقدمة معتمدة)' : ' (Approved Advance)');
         outBal.innerHTML = formatCurrency('485,000', isAr) + (isAr ? ' (خلال 30 يوماً من التسليم)' : ' (Within 30d Post-Delivery)');
         explBox.innerHTML = isAr
-          ? `حزمة متكاملة غير قابلة للتجزئة بقيمة 900,000 ج.م شاملة 14% ضريبة القيمة المضافة. تسليم 500 صورة نهائية و 3 مقاطع فيديو متكاملة مع دمج أنيميشن ون بنك بنسبة عرض ${aspect}.`
-          : `Integrated non-separable package of EGP 900,000 inclusive of 14% VAT. Full deliverables: 500 final retouched photos + 3 campaign videos with OneBank animation integration formatted in ${aspect}.`;
+          ? `حزمة متكاملة غير قابلة للتجزئة بقيمة 900,000 ج.م شاملة 14% ضريبة القيمة المضافة. تسليم 500 صورة لموظفي ومجلس إدارة وان بنك و 3 مقاطع فيديو لتطبيق الهاتف مع دمج أنيميشن وان بنك بنسبة عرض ${aspect} ومدير حسابات مخصص.`
+          : `Integrated non-separable package of EGP 900,000 inclusive of 14% VAT. Deliverables: 500 staff & Board photos + 3 mobile app lifestyle videos with OneBank animation integration formatted in ${aspect} with dedicated Account Manager.`;
         statusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
         statusPill.innerText = isAr ? 'جاهز للاعتماد والتعاقد الرسمي' : 'Ready for Formal Acceptance';
       }
@@ -2123,6 +2148,81 @@
         closeConfirmationModal();
       }
     });
+
+    // =========================================================================
+    // STANDARD LUXURY HORIZONTAL SCROLLER HINT ANIMATION (DIC CLIENT PORTAL SPEC)
+    // 2.0 cm (76px) silky-smooth nudge with easeInOutSine easing & pause dwell
+    // =========================================================================
+    function attachScrollerHintAnimation(target, options = {}) {
+      const scroller = typeof target === 'string' ? document.querySelector(target) : target;
+      if (!scroller) return;
+
+      const {
+        delay = 1600,
+        distance = 76,       // Exactly 2cm in standard screen metrics
+        forwardTime = 900,   // ms
+        pauseTime = 400,     // ms
+        returnTime = 1000    // ms
+      } = options;
+
+      let userInteracted = false;
+      const onUserGesture = () => { userInteracted = true; };
+
+      // Direct physical gestures abort animation immediately
+      scroller.addEventListener('touchstart', onUserGesture, { passive: true });
+      scroller.addEventListener('mousedown', onUserGesture, { passive: true });
+      scroller.addEventListener('pointerdown', onUserGesture, { passive: true });
+      scroller.addEventListener('wheel', onUserGesture, { passive: true });
+
+      function easeInOutSine(t) {
+        return -(Math.cos(Math.PI * t) - 1) / 2;
+      }
+
+      function animateScroll(from, to, duration, callback) {
+        if (userInteracted) return;
+        const startTime = performance.now();
+        const initialBehavior = scroller.style.scrollBehavior;
+        scroller.style.scrollBehavior = 'auto'; // Prevent native smooth scroll conflict
+
+        function step(currentTime) {
+          if (userInteracted) {
+            scroller.style.scrollBehavior = initialBehavior;
+            return;
+          }
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = easeInOutSine(progress);
+
+          scroller.scrollLeft = from + (to - from) * eased;
+
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            scroller.scrollLeft = to;
+            scroller.style.scrollBehavior = initialBehavior;
+            if (callback) callback();
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      setTimeout(() => {
+        // Abort if user has already interacted or container is scrolled
+        if (userInteracted || Math.abs(scroller.scrollLeft) > 5) return;
+
+        const isRtl = document.documentElement.dir === 'rtl';
+        const targetDist = isRtl ? -distance : distance;
+
+        animateScroll(0, targetDist, forwardTime, () => {
+          setTimeout(() => {
+            if (userInteracted) return;
+            animateScroll(targetDist, 0, returnTime, () => {
+              scroller.scrollLeft = 0;
+            });
+          }, pauseTime);
+        });
+      }, delay);
+    }
 
     // Hardware Composited Scroll Engine
     function initScrollEngine() {
@@ -2178,7 +2278,7 @@
           entries.forEach(entry => {
             if (entry.isIntersecting && !triggered) {
               triggered = true;
-              runNumberCounters();
+              runAllNumberCounters();
             }
           });
         }, { threshold: 0.1 });
@@ -2190,9 +2290,10 @@
       renderPhotoCards();
       renderMatrixTable();
       initSpotlightCards();
-      runNumberCounters();
+      runAllNumberCounters();
       runProductionSimulation();
       initScrollEngine();
+      attachScrollerHintAnimation('#tabs-nav');
     }
 
     if (document.readyState === 'loading') {
