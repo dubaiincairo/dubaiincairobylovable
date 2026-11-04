@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/privacy-policy",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
       "source": "/portal/index(.html)?",
       "destination": "/portal/wdgroup",
       "permanent": true

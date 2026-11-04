@@ -11,6 +11,7 @@ import {
   UserCheck,
   Cookie,
   Mail,
+  Megaphone,
 } from "lucide-react";
 import PageTransition from "@/components/PageTransition";
 import { useSEO } from "@/hooks/useSEO";
@@ -18,7 +19,7 @@ import { fadeUp, staggerContainer, cardFadeUp, viewportOnce } from "@/lib/animat
 
 /* ─────────────────────────────────────────────────────── */
 
-const LAST_UPDATED = "13 May 2025";
+const LAST_UPDATED = "4 November 2026";
 
 const SECTIONS = [
   {
@@ -74,6 +75,16 @@ const SECTIONS = [
       "We do not sell your personal data. We do not share it with advertisers, data brokers, or any third party whose primary business is marketing to other people's audiences.",
       "We share data only in the following narrow circumstances: with technology service providers who help us operate the Site (hosting, email, CRM, analytics), where those providers are contractually bound to handle data only on our instructions; with professional advisers (lawyers, accountants) under confidentiality obligations when the situation requires it; and with authorities when required by applicable law.",
       "All service providers we use are evaluated for data security practices before we engage them. Data transferred outside Egypt is subject to appropriate contractual safeguards.",
+    ],
+  },
+  {
+    id: "social-media",
+    Icon: Megaphone,
+    title: "Social Media Pages",
+    body: [
+      "We manage the Dubai in Cairo LinkedIn Page through LinkedIn's official API, using an application registered to Dubai in Cairo. We use it only to publish and manage posts on our own Page and to read basic statistics about those posts.",
+      "We do not collect or store the personal profiles of LinkedIn members, we do not send messages through the API, and we do not sell or share any LinkedIn data with third parties. Access to the application is limited to our team and its credentials are stored securely.",
+      "LinkedIn's own handling of your data is described at linkedin.com/legal/privacy-policy. For questions about data related to our LinkedIn Page, email info@dubaiincairo.com with the subject line 'Privacy Request'.",
     ],
   },
   {
