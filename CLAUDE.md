@@ -17,7 +17,15 @@ git checkout staging
 git pull origin staging
 ```
 
-…then make changes, commit, and push to `staging`. Stop there. **Do not open a PR or merge to `main`** — the owner does that step manually after reviewing the staging preview URL.
+…then make changes, commit, and push to `staging`. Stop there **unless the owner explicitly asks for the
+merge** in the conversation ("merge it", "deploy to production", or equally explicit words). A request to make a
+change is not a request to publish it. When the owner asks, Claude may merge (rule granted by the owner, 5 Nov 2026):
+
+1. Check that `staging` holds only the intended commits: `git log --oneline origin/main..origin/staging`.
+   If `staging` is behind `main`, fast-forward it to `main` before committing (never force-push over others' work).
+2. Confirm the Vercel preview of `staging` is READY.
+3. Open a PR `staging` → `main` and merge it with a **merge commit** (not squash/rebase).
+4. Wait for the production deployment, then verify the change on https://dubaiincairo.com and report the result.
 
 If multiple Claude Code sessions run in parallel and the push fails because the
 remote moved, `git pull --rebase origin staging` then push again. Resolve any
@@ -26,7 +34,8 @@ conflicts locally before pushing.
 ## Ship to production
 
 1. Owner reviews the staging preview URL.
-2. When happy, owner clicks **"Sync branch"** or opens a PR from `staging` → `main` on GitHub and merges it.
+2. When happy, owner clicks **"Sync branch"** or opens a PR from `staging` → `main` on GitHub and merges it —
+   or tells Claude "merge it" and Claude does steps 1–4 above.
 3. Vercel rebuilds `main` → production updates in ~1–2 min.
 
 ## CMS / Sanity + Supabase
@@ -79,7 +88,7 @@ code-level fallback in `get(key, fallback)`.
 
 ## Things to avoid
 
-- Don't push to `main` directly — always go through `staging`.
+- Don't push to `main` directly — always go through `staging` and a PR (merged only on the owner's explicit words).
 - Don't create new long-lived branches.
 - Don't introduce magic-number durations/easings in motion code — use the `MOTION` tokens in `src/lib/animations.ts`.
 - Don't commit `package-lock.json` changes unless dependencies were intentionally added/removed in the same commit.
